@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import {
   Car,
   Disc,
@@ -29,6 +30,7 @@ export default function Services() {
       icon: ShieldCheck,
       span: 'lg:col-span-4',
       featured: true,
+      href: '/services/preventative-maintenance-englewood-co',
     },
     {
       title: 'Battery & Electrical',
@@ -36,6 +38,7 @@ export default function Services() {
       description: 'Cold weather is hard on batteries. We test battery health, check charging systems, and ensure your vehicle starts reliably all winter long.',
       icon: BatteryCharging,
       span: 'lg:col-span-2',
+      href: '/services/battery-testing-englewood-co',
     },
     {
       title: 'Brake Service & Repair',
@@ -43,6 +46,7 @@ export default function Services() {
       description: 'Complete brake system inspection, pad replacement, rotor resurfacing, and brake fluid service. Critical for safe winter driving.',
       icon: Disc,
       span: 'lg:col-span-2',
+      href: '/services/brake-repair-englewood-co',
     },
     {
       title: 'Engine Diagnostics & Repair',
@@ -50,6 +54,7 @@ export default function Services() {
       description: 'Advanced diagnostic equipment to identify and repair engine issues quickly and accurately. Keep your engine running strong.',
       icon: Car,
       span: 'lg:col-span-4',
+      href: '/services/engine-diagnostics-englewood-co',
     },
     {
       title: 'Oil Changes & Fluid Service',
@@ -57,6 +62,7 @@ export default function Services() {
       description: 'Regular oil changes and complete fluid maintenance to keep your vehicle running smoothly through all seasons.',
       icon: Droplets,
       span: 'lg:col-span-2',
+      href: '/services/oil-changes-englewood-co',
     },
     {
       title: 'Air Conditioning & Heating',
@@ -64,6 +70,7 @@ export default function Services() {
       description: 'A/C recharge, heating system repair, and climate control diagnostics. Stay warm this winter.',
       icon: Snowflake,
       span: 'lg:col-span-2',
+      href: '/services/heating-ac-englewood-co',
     },
     {
       title: 'Transmission Service',
@@ -71,6 +78,7 @@ export default function Services() {
       description: 'Transmission diagnostics, repairs, and fluid changes for automatic and manual transmissions.',
       icon: Cog,
       span: 'lg:col-span-2',
+      href: '/services/transmission-services-englewood-co',
     },
     {
       title: 'Suspension & Steering',
@@ -78,6 +86,7 @@ export default function Services() {
       description: 'Suspension inspection, shock and strut replacement, and steering system repair for safe handling.',
       icon: Gauge,
       span: 'lg:col-span-2',
+      href: '/services/suspension-steering-englewood-co',
     },
     {
       title: 'Exhaust System Service',
@@ -85,13 +94,15 @@ export default function Services() {
       description: 'Muffler replacement, catalytic converter service, and exhaust leak repair.',
       icon: Wind,
       span: 'lg:col-span-2',
+      href: '/services/exhaust-system-englewood-co',
     },
     {
-      title: 'Pre-Purchase Inspections',
-      label: 'Smart Buying',
-      description: 'Comprehensive vehicle inspection before you buy to identify potential issues and avoid costly surprises.',
-      icon: ClipboardCheck,
+      title: 'Electrical System',
+      label: 'Electronics',
+      description: 'Electrical diagnostics, wiring repair, alternator and starter service. Modern vehicles demand expert electrical service.',
+      icon: BatteryCharging,
       span: 'lg:col-span-3',
+      href: '/services/electrical-system-englewood-co',
     },
     {
       title: 'Check Engine Light Diagnostics',
@@ -99,6 +110,7 @@ export default function Services() {
       description: 'Advanced scan tools to diagnose check engine lights and emission problems quickly.',
       icon: AlertTriangle,
       span: 'lg:col-span-3',
+      href: '/services/check-engine-light-englewood-co',
     },
   ];
 
@@ -161,20 +173,25 @@ export default function Services() {
               const isFirst = index === 0;
               return (
                 <div key={index} className={`flex p-px ${service.span || 'lg:col-span-2'}`}>
-                  <div className="w-full overflow-hidden rounded-lg bg-white shadow-sm outline outline-black/5">
-                    <div className="p-10">
-                      <div className="flex items-center gap-3 mb-4">
-                        <IconComponent className="w-8 h-8 text-primary-green flex-shrink-0" strokeWidth={1.5} />
-                        <h3 className="text-sm/4 font-semibold text-gray-500">{service.label}</h3>
+                  <Link href={service.href} className="w-full group">
+                    <div className="w-full h-full overflow-hidden rounded-lg bg-white shadow-sm outline outline-black/5 group-hover:shadow-md group-hover:outline-primary-green/20 transition-all">
+                      <div className="p-10">
+                        <div className="flex items-center gap-3 mb-4">
+                          <IconComponent className="w-8 h-8 text-primary-green flex-shrink-0 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                          <h3 className="text-sm/4 font-semibold text-gray-500">{service.label}</h3>
+                        </div>
+                        <p className={`${isFirst ? 'text-2xl' : 'text-lg'} font-medium tracking-tight text-gray-900 group-hover:text-primary-green transition-colors`}>
+                          {service.title}
+                        </p>
+                        <p className={`mt-2 ${isFirst ? 'max-w-2xl' : 'max-w-lg'} text-sm/6 text-gray-600`}>
+                          {service.description}
+                        </p>
+                        <span className="mt-4 inline-flex items-center text-sm font-semibold text-primary-green group-hover:underline">
+                          Learn more →
+                        </span>
                       </div>
-                      <p className={`${isFirst ? 'text-2xl' : 'text-lg'} font-medium tracking-tight text-gray-900`}>
-                        {service.title}
-                      </p>
-                      <p className={`mt-2 ${isFirst ? 'max-w-2xl' : 'max-w-lg'} text-sm/6 text-gray-600`}>
-                        {service.description}
-                      </p>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               );
             })}
