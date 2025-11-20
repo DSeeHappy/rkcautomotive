@@ -11,12 +11,8 @@ import {
   ClipboardCheck,
   ShieldCheck,
   AlertTriangle,
-  Calendar,
-  FileText,
-  AlertCircle,
   MapPin,
-  Award,
-  Star
+  Award
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -110,7 +106,7 @@ export default function Services() {
     <div>
       {/* Hero Header */}
       <div>
-        <div className="h-32 w-full bg-gradient-to-br from-primary-blue via-primary-blue-dark to-primary-green lg:h-48" />
+        <div className="h-32 w-full bg-primary-blue lg:h-48" />
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
             <div className="flex">
@@ -151,83 +147,6 @@ export default function Services() {
           </div>
         </div>
       </div>
-
-      {/* Quick Actions */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <a
-            href="tel:+17207493965"
-            className="group relative bg-white border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-green"
-          >
-            <div>
-              <span className="inline-flex rounded-lg p-3 bg-green-50 text-primary-green">
-                <Calendar className="w-6 h-6" />
-              </span>
-            </div>
-            <div className="mt-8">
-              <h3 className="text-base font-semibold text-gray-900">
-                Schedule an Appointment
-              </h3>
-              <p className="mt-2 text-sm text-gray-500">
-                Call us today to schedule your service. We offer flexible appointment times to fit your schedule.
-              </p>
-            </div>
-            <span className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400">
-              <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-                <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
-              </svg>
-            </span>
-          </a>
-
-          <a
-            href="tel:+17207493965"
-            className="group relative bg-white border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-blue"
-          >
-            <div>
-              <span className="inline-flex rounded-lg p-3 bg-blue-50 text-primary-blue">
-                <FileText className="w-6 h-6" />
-              </span>
-            </div>
-            <div className="mt-8">
-              <h3 className="text-base font-semibold text-gray-900">
-                Get a Free Quote
-              </h3>
-              <p className="mt-2 text-sm text-gray-500">
-                Need an estimate? Call or visit us for a free, honest quote on any service or repair.
-              </p>
-            </div>
-            <span className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400">
-              <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-                <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
-              </svg>
-            </span>
-          </a>
-
-          <a
-            href="tel:+17207493965"
-            className="group relative bg-white border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-red-600"
-          >
-            <div>
-              <span className="inline-flex rounded-lg p-3 bg-red-50 text-red-600">
-                <AlertCircle className="w-6 h-6" />
-              </span>
-            </div>
-            <div className="mt-8">
-              <h3 className="text-base font-semibold text-gray-900">
-                Emergency Service
-              </h3>
-              <p className="mt-2 text-sm text-gray-500">
-                Car trouble? We're here to help. Call us right away for prompt, professional emergency service.
-              </p>
-            </div>
-            <span className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400">
-              <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-                <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
-              </svg>
-            </span>
-          </a>
-        </div>
-      </section>
 
       {/* Services Grid */}
       <section className="py-24 sm:py-32 bg-gray-50">
