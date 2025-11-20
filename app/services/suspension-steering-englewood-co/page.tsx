@@ -115,10 +115,10 @@ export default function SuspensionSteeringPage() {
               Professional Suspension & Steering Service Near You
             </h2>
             <p className="text-lg text-gray-700 mb-6">
-              Your vehicle's suspension and steering systems work together to provide a smooth, controlled ride and precise
-              handling. When these systems wear out, you'll experience poor ride quality, uneven tire wear, and potentially
+              Your vehicle&#39;s suspension and steering systems work together to provide a smooth, controlled ride and precise
+              handling. When these systems wear out, you&#39;ll experience poor ride quality, uneven tire wear, and potentially
               dangerous handling issues. At RKC Automotive in Englewood, we diagnose and repair all suspension and steering
-              problems to restore your vehicle's ride and safety.
+              problems to restore your vehicle&#39;s ride and safety.
             </p>
 
             <div className="bg-gray-50 rounded-lg p-8 mb-8">
@@ -264,7 +264,7 @@ export default function SuspensionSteeringPage() {
               </h3>
               <p className="text-gray-700">
                 Most shocks and struts should be replaced around 50,000-100,000 miles. However, harsh road conditions,
-                potholes, and Colorado's variable terrain can accelerate wear. If you notice bouncing, poor handling,
+                potholes, and Colorado&#39;s variable terrain can accelerate wear. If you notice bouncing, poor handling,
                 or nose-diving during braking, have your suspension inspected at RKC Automotive.
               </p>
             </div>
@@ -290,12 +290,12 @@ export default function SuspensionSteeringPage() {
             </div>
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                What's the difference between shocks and struts?
+                what&#39;s the difference between shocks and struts?
               </h3>
               <p className="text-gray-700">
                 Both dampen suspension movement, but struts are structural components that support vehicle weight and
                 affect alignment. Not all vehicles have both - some have four struts, others have struts in front and
-                shocks in rear, or shocks all around. We'll inspect your specific vehicle's suspension configuration.
+                shocks in rear, or shocks all around. We&#39;ll inspect your specific vehicle&#39;s suspension configuration.
               </p>
             </div>
           </div>

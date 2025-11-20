@@ -115,7 +115,7 @@ export default function OilChangesPage() {
               Professional Oil Change Service Near You
             </h2>
             <p className="text-lg text-gray-700 mb-6">
-              Regular oil changes are the single most important maintenance service for your vehicle's engine. Fresh oil
+              Regular oil changes are the single most important maintenance service for your vehicle&#39;s engine. Fresh oil
               lubricates engine components, reduces friction, removes contaminants, and helps your engine run efficiently.
               At RKC Automotive in Englewood, we provide fast, professional oil change service using quality oil and filters.
             </p>
@@ -207,7 +207,7 @@ export default function OilChangesPage() {
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">Oil Change Light On</h3>
                     <p className="text-gray-600">
-                      Dashboard oil change reminder or maintenance light indicates it's time for service.
+                      Dashboard oil change reminder or maintenance light indicates it&#39;s time for service.
                     </p>
                   </div>
                 </div>
@@ -218,7 +218,7 @@ export default function OilChangesPage() {
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">Dark, Dirty Oil</h3>
                     <p className="text-gray-600">
-                      Clean oil is amber-colored. Dark, dirty oil means it's time for a change.
+                      Clean oil is amber-colored. Dark, dirty oil means it&#39;s time for a change.
                     </p>
                   </div>
                 </div>
@@ -263,7 +263,7 @@ export default function OilChangesPage() {
               </h3>
               <p className="text-gray-700">
                 It depends on your vehicle and oil type. Conventional oil typically needs changing every 3,000-5,000 miles.
-                Synthetic oil can last 7,500-10,000 miles. Check your owner's manual for manufacturer recommendations.
+                Synthetic oil can last 7,500-10,000 miles. Check your owner&#39;s manual for manufacturer recommendations.
                 Severe driving conditions (short trips, extreme temperatures, towing) may require more frequent changes.
               </p>
             </div>
@@ -274,7 +274,7 @@ export default function OilChangesPage() {
               <p className="text-gray-700">
                 Synthetic oil provides better protection, especially for modern engines, extreme temperatures, and towing.
                 It lasts longer between changes and helps engines run cleaner. Conventional oil is fine for older vehicles
-                with normal use. We'll recommend the best option for your specific vehicle and driving habits.
+                with normal use. We&#39;ll recommend the best option for your specific vehicle and driving habits.
               </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6">
@@ -283,7 +283,7 @@ export default function OilChangesPage() {
               </h3>
               <p className="text-gray-700">
                 Conventional oil changes typically cost $40-$70. Synthetic oil changes run $70-$120 depending on your
-                vehicle's oil capacity. High-mileage and synthetic blend options fall in between. Call (720) 749-3965
+                vehicle&#39;s oil capacity. High-mileage and synthetic blend options fall in between. Call (720) 749-3965
                 for pricing on your specific vehicle.
               </p>
             </div>

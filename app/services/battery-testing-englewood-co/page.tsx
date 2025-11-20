@@ -101,7 +101,7 @@ export default function BatteryTestingPage() {
             <p className="text-gray-700">
               RKC Automotive provides free battery testing and professional battery replacement in Englewood, CO. We test
               battery health, charging system, and recommend replacement when needed. Quality batteries with warranty
-              included. Don't get stranded - get your battery tested. Located at 2120 W Evans Ave. Call (720) 749-3965.
+              included. don&#39;t get stranded - get your battery tested. Located at 2120 W Evans Ave. Call (720) 749-3965.
             </p>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function BatteryTestingPage() {
               Professional Battery Service Near You
             </h2>
             <p className="text-lg text-gray-700 mb-6">
-              Your car battery is essential for starting your engine and powering electrical systems. Colorado's extreme
+              Your car battery is essential for starting your engine and powering electrical systems. Colorado&#39;s extreme
               temperatures - from scorching summer heat to sub-zero winters - are especially hard on batteries, often
               shortening their lifespan to 2-4 years. At RKC Automotive in Englewood, we provide comprehensive battery
               testing and quality battery replacement to keep you reliably on the road.
@@ -172,7 +172,7 @@ export default function BatteryTestingPage() {
             <div className="bg-primary-blue text-white rounded-lg p-8">
               <h3 className="text-2xl font-bold mb-4">Why Colorado Is Hard on Batteries</h3>
               <p className="mb-4">
-                Colorado's climate extremes significantly shorten battery life compared to moderate climates:
+                Colorado&#39;s climate extremes significantly shorten battery life compared to moderate climates:
               </p>
               <ul className="space-y-2">
                 <li className="flex items-start">
@@ -221,7 +221,7 @@ export default function BatteryTestingPage() {
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">Battery Age 3+ Years</h3>
                     <p className="text-gray-600">
-                      In Colorado's climate, batteries typically last 3-5 years. Have it tested if it's over 3 years old.
+                      In Colorado&#39;s climate, batteries typically last 3-5 years. Have it tested if it&#39;s over 3 years old.
                     </p>
                   </div>
                 </div>
@@ -243,7 +243,7 @@ export default function BatteryTestingPage() {
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">Frequent Jump Starts</h3>
                     <p className="text-gray-600">
-                      Need jump starts regularly - battery can't hold a charge. Could also be alternator issue.
+                      Need jump starts regularly - battery can&#39;t hold a charge. Could also be alternator issue.
                     </p>
                   </div>
                 </div>
@@ -287,7 +287,7 @@ export default function BatteryTestingPage() {
                 How long do car batteries last in Englewood, CO?
               </h3>
               <p className="text-gray-700">
-                Car batteries typically last 3-5 years nationally, but Colorado's temperature extremes often shorten this
+                Car batteries typically last 3-5 years nationally, but Colorado&#39;s temperature extremes often shorten this
                 to 2-4 years. Hot summers accelerate battery degradation, while cold winters reduce capacity. We recommend
                 annual battery testing after year 2, and proactive replacement after 3-4 years to avoid being stranded.
               </p>
@@ -297,7 +297,7 @@ export default function BatteryTestingPage() {
                 How much does battery replacement cost in Englewood?
               </h3>
               <p className="text-gray-700">
-                Battery replacement typically costs $150-$300 depending on your vehicle's battery type and size. This
+                Battery replacement typically costs $150-$300 depending on your vehicle&#39;s battery type and size. This
                 includes the battery, professional installation, terminal cleaning, and old battery recycling. Premium
                 batteries with longer warranties cost more but provide better reliability. Call (720) 749-3965 for a quote.
               </p>
@@ -308,8 +308,8 @@ export default function BatteryTestingPage() {
               </h3>
               <p className="text-gray-700">
                 Yes! We provide free battery testing at RKC Automotive. Our computerized battery tester checks battery
-                health, cranking amps, and charging system performance. Testing takes just a few minutes and we'll provide
-                honest recommendations. No pressure to buy - we want you informed about your battery's condition.
+                health, cranking amps, and charging system performance. Testing takes just a few minutes and We&#39;ll provide
+                honest recommendations. No pressure to buy - we want you informed about your battery&#39;s condition.
               </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6">
@@ -318,18 +318,18 @@ export default function BatteryTestingPage() {
               </h3>
               <p className="text-gray-700">
                 Absolutely! Cold weather is the hardest test for your battery. If your battery is over 3 years old or
-                showing signs of weakness, replace it before winter arrives. It's much cheaper than an emergency tow on
+                showing signs of weakness, replace it before winter arrives. it&#39;s much cheaper than an emergency tow on
                 a freezing morning. We recommend fall battery testing for all Colorado drivers.
               </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                What's the difference between battery types?
+                what&#39;s the difference between battery types?
               </h3>
               <p className="text-gray-700">
                 Standard flooded batteries are most common and affordable. AGM (Absorbent Glass Mat) batteries are
                 premium options that last longer, perform better in extreme temperatures, and are required for some vehicles
-                with start-stop technology. We'll recommend the correct battery type for your vehicle and driving needs.
+                with start-stop technology. We&#39;ll recommend the correct battery type for your vehicle and driving needs.
               </p>
             </div>
           </div>
@@ -375,10 +375,10 @@ export default function BatteryTestingPage() {
       <section className="bg-primary-blue text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Don't Get Stranded - Test Your Battery Today
+            don&#39;t Get Stranded - Test Your Battery Today
           </h2>
           <p className="text-xl mb-8 text-white">
-            Free battery testing at RKC Automotive. Get peace of mind before you're stuck.
+            Free battery testing at RKC Automotive. Get peace of mind before you&#39;re stuck.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

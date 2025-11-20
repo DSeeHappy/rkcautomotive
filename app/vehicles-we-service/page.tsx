@@ -51,7 +51,7 @@ export default function VehiclesWeServicePage() {
               <h2 className="text-3xl font-bold mb-4">Foreign & Import Vehicles</h2>
               <p className="text-lg text-white">
                 We specialize in foreign and import vehicles. Our technicians are trained in the latest diagnostic and
-                repair procedures for Asian and European manufacturers. You don't need to go to the dealer for expert
+                repair procedures for Asian and European manufacturers. You don&#39;t need to go to the dealer for expert
                 service on your import vehicle.
               </p>
             </div>
@@ -99,7 +99,7 @@ export default function VehiclesWeServicePage() {
                 </ul>
                 <div className="mt-6 pt-6 border-t border-gray-300">
                   <p className="text-sm text-gray-600 italic">
-                    And more! If you don't see your vehicle manufacturer listed, give us a call. We service virtually
+                    And more! If you don&#39;t see your vehicle manufacturer listed, give us a call. We service virtually
                     all makes and models.
                   </p>
                 </div>
@@ -257,7 +257,7 @@ export default function VehiclesWeServicePage() {
                   <h3 className="font-bold text-lg mb-2 text-gray-900">Dealership Alternative</h3>
                   <p className="text-gray-700">
                     Get dealership-quality service at independent shop prices. We follow manufacturer specifications and
-                    won't void your warranty.
+                    won&#39;t void your warranty.
                   </p>
                 </div>
               </div>

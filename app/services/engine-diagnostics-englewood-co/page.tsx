@@ -192,7 +192,7 @@ export default function EngineDiagnosticsPage() {
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">Check Engine Light On</h3>
                     <p className="text-gray-600">
-                      The check engine light indicates your vehicle's computer has detected a problem. Don't ignore it -
+                      The check engine light indicates your vehicle&#39;s computer has detected a problem. don&#39;t ignore it -
                       get it diagnosed promptly.
                     </p>
                   </div>
@@ -313,7 +313,7 @@ export default function EngineDiagnosticsPage() {
                 What does an engine diagnostic test include?
               </h3>
               <p className="text-gray-700">
-                An engine diagnostic test uses a computerized scanner to read trouble codes from your vehicle's onboard
+                An engine diagnostic test uses a computerized scanner to read trouble codes from your vehicle&#39;s onboard
                 computer (ECU). We then interpret these codes, perform visual inspections, and conduct additional tests
                 to identify the root cause of the problem. This includes checking sensors, fuel system, ignition system,
                 and emissions components.
@@ -346,18 +346,18 @@ export default function EngineDiagnosticsPage() {
               </h3>
               <p className="text-gray-700">
                 Basic diagnostic scans take 30 minutes to 1 hour. More complex diagnosis requiring additional testing may
-                take 1-2 hours. We'll provide an accurate time estimate based on your vehicle's symptoms and what we find
+                take 1-2 hours. We&#39;ll provide an accurate time estimate based on your vehicle&#39;s symptoms and what we find
                 during the initial scan.
               </p>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Will diagnostics tell me exactly what's wrong?
+                Will diagnostics tell me exactly what&#39;s wrong?
               </h3>
               <p className="text-gray-700">
-                Diagnostic codes point us in the right direction, but they don't always tell the complete story. For example,
+                Diagnostic codes point us in the right direction, but they don&#39;t always tell the complete story. For example,
                 a code for an oxygen sensor could mean the sensor is bad, or it could indicate another problem affecting
-                the sensor's reading. Our experienced technicians use the codes as a starting point, then perform thorough
+                the sensor&#39;s reading. Our experienced technicians use the codes as a starting point, then perform thorough
                 testing to identify the actual cause.
               </p>
             </div>

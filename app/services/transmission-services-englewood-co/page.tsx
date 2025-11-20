@@ -183,7 +183,7 @@ export default function TransmissionServicesPage() {
               Signs You Need Transmission Service
             </h2>
             <p className="text-lg text-gray-700 mb-8 text-center">
-              Don't ignore these transmission warning signs. Contact RKC Automotive immediately if you experience:
+              don&#39;t ignore these transmission warning signs. Contact RKC Automotive immediately if you experience:
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg p-6 border-l-4 border-red-500">
@@ -192,7 +192,7 @@ export default function TransmissionServicesPage() {
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2">Slipping Gears</h3>
                     <p className="text-gray-600">
-                      Transmission slips out of gear or doesn't engage properly - a serious issue requiring immediate attention.
+                      Transmission slips out of gear or doesn&#39;t engage properly - a serious issue requiring immediate attention.
                     </p>
                   </div>
                 </div>
@@ -279,7 +279,7 @@ export default function TransmissionServicesPage() {
               </div>
               <h3 className="text-xl font-bold mb-3 text-gray-900">Honest Diagnosis</h3>
               <p className="text-gray-600">
-                We'll tell you if your transmission needs service, repair, or if it can wait. No unnecessary work.
+                We&#39;ll tell you if your transmission needs service, repair, or if it can wait. No unnecessary work.
               </p>
             </div>
             <div className="text-center">
@@ -309,7 +309,7 @@ export default function TransmissionServicesPage() {
               <p className="text-gray-700">
                 Most manufacturers recommend transmission fluid service every 30,000-60,000 miles for automatic transmissions.
                 Manual transmissions typically need service every 60,000-100,000 miles. However, severe driving conditions
-                (towing, mountains, city driving) may require more frequent service. Check your owner's manual for specific
+                (towing, mountains, city driving) may require more frequent service. Check your owner&#39;s manual for specific
                 recommendations.
               </p>
             </div>
@@ -330,7 +330,7 @@ export default function TransmissionServicesPage() {
               <p className="text-gray-700">
                 We recommend fluid exchange over traditional flushes for most vehicles. Fluid exchange removes old fluid
                 and replaces it with new fluid without using harsh chemicals or high pressure that could damage seals.
-                We'll recommend the best service for your specific vehicle.
+                We&#39;ll recommend the best service for your specific vehicle.
               </p>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-sm">

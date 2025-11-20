@@ -116,7 +116,7 @@ export default function ExhaustSystemPage() {
             </h2>
             <p className="text-lg text-gray-700 mb-6">
               Your exhaust system does more than just quiet your engine - it routes dangerous gases away from the cabin,
-              reduces emissions, and improves fuel efficiency. When your exhaust system fails, you'll notice loud noises,
+              reduces emissions, and improves fuel efficiency. When your exhaust system fails, you&#39;ll notice loud noises,
               reduced performance, and potentially dangerous fumes. At RKC Automotive in Englewood, we diagnose and repair
               all exhaust system problems to keep your vehicle running clean, quiet, and safe.
             </p>
@@ -273,7 +273,7 @@ export default function ExhaustSystemPage() {
                 Can I drive with an exhaust leak?
               </h3>
               <p className="text-gray-700">
-                You can technically drive short distances, but it's not safe. Exhaust leaks can allow dangerous carbon
+                You can technically drive short distances, but it&#39;s not safe. Exhaust leaks can allow dangerous carbon
                 monoxide into your cabin, reduce fuel efficiency, and cause the exhaust to get louder over time. Have
                 exhaust leaks repaired promptly for your safety.
               </p>
@@ -283,7 +283,7 @@ export default function ExhaustSystemPage() {
                 How long do mufflers last in Colorado?
               </h3>
               <p className="text-gray-700">
-                Mufflers typically last 5-7 years, but Colorado's road salt and moisture can accelerate rust and corrosion,
+                Mufflers typically last 5-7 years, but Colorado&#39;s road salt and moisture can accelerate rust and corrosion,
                 shortening lifespan to 3-5 years in some cases. Regular inspections help catch rust early before the muffler
                 fails completely.
               </p>

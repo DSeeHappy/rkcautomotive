@@ -388,7 +388,7 @@ export default function Home() {
               Why Choose RKC Automotive?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We're not just another auto shop. We're your neighbors committed to keeping you safe on Colorado roads.
+              We&#39;re not just another auto shop. We&#39;re your neighbors committed to keeping you safe on Colorado roads.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-10">
@@ -416,7 +416,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">Local & Trusted</h3>
               <p className="text-gray-600 leading-relaxed">
-                Family-owned and operated right here in Englewood. We're your neighbors, and we care about keeping your family safe on Colorado's challenging roads and weather.
+                Family-owned and operated right here in Englewood. We&#39;re your neighbors, and we care about keeping your family safe on Colorado&#39;s challenging roads and weather.
               </p>
             </div>
           </div>
@@ -461,10 +461,10 @@ export default function Home() {
       <section className="bg-primary-green text-white py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Don't Wait for a Breakdown
+            Don&#39;t Wait for a Breakdown
           </h2>
           <p className="text-xl mb-10 text-green-50">
-            Regular maintenance prevents costly repairs. Schedule your service today and keep your vehicle running reliably through Colorado's toughest conditions.
+            Regular maintenance prevents costly repairs. Schedule your service today and keep your vehicle running reliably through Colorado&#39;s toughest conditions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

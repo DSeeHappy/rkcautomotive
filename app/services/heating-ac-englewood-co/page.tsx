@@ -100,7 +100,7 @@ export default function HeatingACPage() {
             <h2 className="text-lg font-bold text-gray-900 mb-2">Quick Answer</h2>
             <p className="text-gray-700">
               RKC Automotive provides complete auto AC and heating repair in Englewood, CO. Services include AC recharge,
-              compressor replacement, heater core repair, and HVAC diagnostics for all makes and models. Beat Colorado's
+              compressor replacement, heater core repair, and HVAC diagnostics for all makes and models. Beat Colorado&#39;s
               summer heat and winter cold. Located at 2120 W Evans Ave. Call (720) 749-3965.
             </p>
           </div>
@@ -115,8 +115,8 @@ export default function HeatingACPage() {
               Expert AC & Heating Service Near You
             </h2>
             <p className="text-lg text-gray-700 mb-6">
-              Colorado's climate demands a reliable heating and air conditioning system. From scorching summer days to
-              freezing winter mornings, your vehicle's HVAC system keeps you comfortable year-round. At RKC Automotive
+              Colorado&#39;s climate demands a reliable heating and air conditioning system. From scorching summer days to
+              freezing winter mornings, your vehicle&#39;s HVAC system keeps you comfortable year-round. At RKC Automotive
               in Englewood, we diagnose and repair all AC and heating problems to restore comfort to your drive.
             </p>
 
@@ -262,8 +262,8 @@ export default function HeatingACPage() {
                 How much does AC recharge cost in Englewood?
               </h3>
               <p className="text-gray-700">
-                AC recharge typically costs $150-$300 depending on your vehicle and refrigerant type. However, if there's
-                a leak, simply recharging won't fix the problem long-term. We'll inspect for leaks and provide honest
+                AC recharge typically costs $150-$300 depending on your vehicle and refrigerant type. However, if there&#39;s
+                a leak, simply recharging won&#39;t fix the problem long-term. We&#39;ll inspect for leaks and provide honest
                 recommendations. Call (720) 749-3965 for a quote.
               </p>
             </div>
@@ -282,7 +282,7 @@ export default function HeatingACPage() {
                 Can I recharge my own car AC?
               </h3>
               <p className="text-gray-700">
-                While DIY AC recharge kits exist, we don't recommend them. Improper refrigerant levels can damage your AC
+                While DIY AC recharge kits exist, we don&#39;t recommend them. Improper refrigerant levels can damage your AC
                 system. Professional service ensures proper refrigerant amount, leak detection, and system inspection.
                 Plus, we recycle old refrigerant properly per EPA regulations.
               </p>
@@ -293,12 +293,12 @@ export default function HeatingACPage() {
               </h3>
               <p className="text-gray-700">
                 Simple AC recharge takes about 1 hour. Compressor replacement or heater core work can take 3-6 hours
-                depending on your vehicle. We'll provide an accurate time estimate when we diagnose your specific issue.
+                depending on your vehicle. We&#39;ll provide an accurate time estimate when we diagnose your specific issue.
               </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                When should I service my car's AC system?
+                When should I service my car&#39;s AC system?
               </h3>
               <p className="text-gray-700">
                 Get your AC system inspected before summer each year. If you notice weak cooling, strange odors, or unusual

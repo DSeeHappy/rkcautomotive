@@ -72,7 +72,7 @@ export default function CheckEngineLightPage() {
             Check Engine Light Diagnosis in Englewood, CO
           </h1>
           <p className="text-xl text-center text-white max-w-3xl mx-auto">
-            Don't ignore that warning light. Get expert diagnosis and repair today.
+            don&#39;t ignore that warning light. Get expert diagnosis and repair today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <a
@@ -116,8 +116,8 @@ export default function CheckEngineLightPage() {
               Expert Check Engine Light Diagnosis Near You
             </h2>
             <p className="text-lg text-gray-700 mb-6">
-              The check engine light is your vehicle's way of telling you something is wrong. It could be as simple as
-              a loose gas cap or as serious as catalytic converter failure. At RKC Automotive in Englewood, we don't just
+              The check engine light is your vehicle&#39;s way of telling you something is wrong. It could be as simple as
+              a loose gas cap or as serious as catalytic converter failure. At RKC Automotive in Englewood, we don&#39;t just
               read the code and clear the light - we diagnose the underlying problem and fix it right.
             </p>
             <p className="text-lg text-gray-700 mb-8">
@@ -133,7 +133,7 @@ export default function CheckEngineLightPage() {
                   <CheckCircle className="w-6 h-6 text-primary-green mr-3 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-1">1. Code Scanning</h4>
-                    <p className="text-gray-600 text-sm">Read diagnostic trouble codes from your vehicle's computer</p>
+                    <p className="text-gray-600 text-sm">Read diagnostic trouble codes from your vehicle&#39;s computer</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -209,7 +209,7 @@ export default function CheckEngineLightPage() {
               <div className="bg-white rounded-lg p-6">
                 <h3 className="font-bold text-gray-900 mb-2">Spark Plugs or Ignition Coils</h3>
                 <p className="text-gray-600">
-                  Worn spark plugs or failed coils cause misfires. You'll feel rough running, loss of power, and see
+                  Worn spark plugs or failed coils cause misfires. You&#39;ll feel rough running, loss of power, and see
                   the check engine light.
                 </p>
               </div>
@@ -279,7 +279,7 @@ export default function CheckEngineLightPage() {
                 Why did my check engine light come back on after being cleared?
               </h3>
               <p className="text-gray-700">
-                Simply clearing codes without fixing the underlying problem means the light will return. The vehicle's
+                Simply clearing codes without fixing the underlying problem means the light will return. The vehicle&#39;s
                 computer continuously monitors systems - when it detects the same issue again, the light comes back on.
                 Proper diagnosis and repair are necessary for a permanent fix.
               </p>
@@ -290,8 +290,8 @@ export default function CheckEngineLightPage() {
               </h3>
               <p className="text-gray-700">
                 Sometimes, if the problem was temporary (like a loose gas cap). After the issue is resolved, the light
-                may turn off after several drive cycles. However, don't assume the problem fixed itself - have it diagnosed
-                to ensure there's no underlying issue.
+                may turn off after several drive cycles. However, don&#39;t assume the problem fixed itself - have it diagnosed
+                to ensure there&#39;s no underlying issue.
               </p>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -350,7 +350,7 @@ export default function CheckEngineLightPage() {
             Check Engine Light On? Get Answers Today
           </h2>
           <p className="text-xl mb-8 text-white">
-            Don't ignore that warning light. Let RKC Automotive diagnose and fix the problem.
+            don&#39;t ignore that warning light. Let RKC Automotive diagnose and fix the problem.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

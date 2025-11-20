@@ -36,7 +36,7 @@ export default function AreasWeServePage() {
             </h2>
             <p className="text-lg text-gray-700">
               Located at 2120 W Evans Ave in Englewood, RKC Automotive is conveniently positioned to serve drivers
-              throughout the greater Denver metropolitan area. We're easily accessible from I-25 and US-285, making it
+              throughout the greater Denver metropolitan area. we&#39;re easily accessible from I-25 and US-285, making it
               simple to stop by for all your automotive service needs.
             </p>
           </div>
@@ -47,8 +47,8 @@ export default function AreasWeServePage() {
             <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-primary-green">
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Englewood, CO</h3>
               <p className="text-gray-700 mb-4">
-                Our home base! We're located right in the heart of Englewood, serving local residents and businesses with
-                honest, reliable auto repair. From routine oil changes to complex engine diagnostics, we're your neighborhood
+                Our home base! we&#39;re located right in the heart of Englewood, serving local residents and businesses with
+                honest, reliable auto repair. From routine oil changes to complex engine diagnostics, we&#39;re your neighborhood
                 automotive experts.
               </p>
               <div className="text-sm text-gray-600">
@@ -84,7 +84,7 @@ export default function AreasWeServePage() {
             <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-primary-green">
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Littleton, CO</h3>
               <p className="text-gray-700 mb-4">
-                Serving Littleton residents with the same honesty and expertise we're known for in Englewood. Conveniently
+                Serving Littleton residents with the same honesty and expertise we&#39;re known for in Englewood. Conveniently
                 located for a quick stop on your way through town.
               </p>
               <div className="text-sm text-gray-600">
@@ -102,8 +102,8 @@ export default function AreasWeServePage() {
             <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-primary-blue">
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Sheridan, CO</h3>
               <p className="text-gray-700 mb-4">
-                Our neighbors in Sheridan trust us for all their automotive needs. We're just a short drive away and offer
-                the personalized service you won't find at chain shops.
+                Our neighbors in Sheridan trust us for all their automotive needs. we&#39;re just a short drive away and offer
+                the personalized service you won&#39;t find at chain shops.
               </p>
               <div className="text-sm text-gray-600">
                 <p className="font-semibold mb-2">Why Sheridan Chooses Us:</p>
@@ -127,7 +127,7 @@ export default function AreasWeServePage() {
                 <p className="font-semibold mb-2">Serving These Areas:</p>
                 <ul className="list-disc list-inside space-y-1">
                   <li>Greenwood Village proper</li>
-                  <li>Fiddler's Green area</li>
+                  <li>Fiddler&#39;s Green area</li>
                   <li>DTC (Denver Tech Center)</li>
                   <li>Adjacent neighborhoods</li>
                 </ul>
@@ -249,7 +249,7 @@ export default function AreasWeServePage() {
             Serving Your Community Since Day One
           </h2>
           <p className="text-xl mb-8 text-white">
-            No matter where you're coming from, RKC Automotive is here to serve you with honest, quality auto repair.
+            No matter where you&#39;re coming from, RKC Automotive is here to serve you with honest, quality auto repair.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

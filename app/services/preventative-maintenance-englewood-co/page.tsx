@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Phone, MapPin, CheckCircle, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Phone, MapPin, CheckCircle, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Preventative Maintenance in Englewood, CO | Keep Your Car Running | RKC Automotive',
@@ -117,9 +117,9 @@ export default function PreventativeMaintenancePage() {
             </h2>
             <p className="text-lg text-gray-700 mb-6">
               An ounce of prevention is worth a pound of cure - especially with vehicles. Regular preventative maintenance
-              is the single best way to avoid expensive breakdowns, extend your vehicle's life, and maintain reliability.
+              is the single best way to avoid expensive breakdowns, extend your vehicle&#39;s life, and maintain reliability.
               At RKC Automotive in Englewood, we provide comprehensive maintenance services following manufacturer
-              recommendations and Colorado's unique driving conditions.
+              recommendations and Colorado&#39;s unique driving conditions.
             </p>
             <p className="text-lg text-gray-700 mb-8">
               Winter in Colorado is particularly demanding on vehicles. Cold starts, icy roads, and temperature fluctuations
@@ -228,7 +228,7 @@ export default function PreventativeMaintenancePage() {
               </ul>
               <div className="mt-6 bg-white/10 rounded-lg p-4">
                 <p className="font-bold text-lg">Schedule your winter maintenance check today!</p>
-                <p className="mt-2">Don't wait until you're stranded in a snowstorm. Call (720) 749-3965.</p>
+                <p className="mt-2">don&#39;t wait until you&#39;re stranded in a snowstorm. Call (720) 749-3965.</p>
               </div>
             </div>
           </div>
@@ -270,7 +270,7 @@ export default function PreventativeMaintenancePage() {
                 <h3 className="text-xl font-bold mb-3 text-gray-900">Extend Vehicle Life</h3>
                 <p className="text-gray-600">
                   Properly maintained vehicles last significantly longer. Regular oil changes, fluid services, and
-                  inspections can add years to your vehicle's life.
+                  inspections can add years to your vehicle&#39;s life.
                 </p>
               </div>
               <div className="bg-white rounded-lg p-6">
@@ -318,15 +318,15 @@ export default function PreventativeMaintenancePage() {
                 How often should I service my vehicle in Englewood?
               </h3>
               <p className="text-gray-700">
-                Follow your manufacturer's recommended maintenance schedule, typically found in your owner's manual. Most
-                vehicles need oil changes every 3,000-7,500 miles and major service every 30,000-60,000 miles. Colorado's
-                climate and driving conditions may require more frequent service. We'll help you create a maintenance
+                Follow your manufacturer&#39;s recommended maintenance schedule, typically found in your owner&#39;s manual. Most
+                vehicles need oil changes every 3,000-7,500 miles and major service every 30,000-60,000 miles. Colorado&#39;s
+                climate and driving conditions may require more frequent service. We&#39;ll help you create a maintenance
                 schedule based on your specific vehicle and driving habits.
               </p>
             </div>
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                What's included in a typical maintenance service?
+                what&#39;s included in a typical maintenance service?
               </h3>
               <p className="text-gray-700">
                 Basic maintenance includes oil and filter change, fluid level checks and top-offs, tire rotation, tire
@@ -352,8 +352,8 @@ export default function PreventativeMaintenancePage() {
               </h3>
               <p className="text-gray-700">
                 Basic oil changes run $40-$120 depending on oil type. Minor services (15K-30K) cost $150-$300. Major
-                services (60K-90K) range from $400-$800+ depending on what's included. While maintenance has a cost,
-                it's far cheaper than the $2,000-$5,000+ repairs that result from neglect. Call (720) 749-3965 for
+                services (60K-90K) range from $400-$800+ depending on what&#39;s included. While maintenance has a cost,
+                it&#39;s far cheaper than the $2,000-$5,000+ repairs that result from neglect. Call (720) 749-3965 for
                 specific pricing for your vehicle.
               </p>
             </div>

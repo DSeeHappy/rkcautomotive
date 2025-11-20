@@ -149,7 +149,7 @@ export default function BrakeRepairPage() {
               Professional Brake Service Near You
             </h2>
             <p className="text-lg text-gray-700 mb-6">
-              Your vehicle's braking system is the most critical safety feature. At RKC Automotive in Englewood,
+              Your vehicle&#39;s braking system is the most critical safety feature. At RKC Automotive in Englewood,
               our ASE-certified technicians provide comprehensive brake repair and maintenance services to keep you
               and your family safe on the road.
             </p>
@@ -218,7 +218,7 @@ export default function BrakeRepairPage() {
               Signs You Need Brake Repair
             </h2>
             <p className="text-lg text-gray-700 mb-8 text-center">
-              Don't ignore these warning signs. Contact RKC Automotive in Englewood immediately if you notice:
+              don&#39;t ignore these warning signs. Contact RKC Automotive in Englewood immediately if you notice:
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg p-6 border-l-4 border-red-500">
@@ -348,7 +348,7 @@ export default function BrakeRepairPage() {
                 How often should I replace my brake pads?
               </h3>
               <p className="text-gray-700">
-                Brake pads typically last 30,000-70,000 miles depending on driving habits and conditions. In Englewood's
+                Brake pads typically last 30,000-70,000 miles depending on driving habits and conditions. In Englewood&#39;s
                 stop-and-go traffic and hilly terrain, we recommend inspecting your brakes every 12,000 miles or annually.
                 Aggressive driving, frequent city driving, and mountain driving can wear pads faster.
               </p>
@@ -368,7 +368,7 @@ export default function BrakeRepairPage() {
                 Can I drive with squeaking brakes?
               </h3>
               <p className="text-gray-700">
-                While you can technically drive with squeaking brakes, we don't recommend it. Squealing usually indicates
+                While you can technically drive with squeaking brakes, we don&#39;t recommend it. Squealing usually indicates
                 worn brake pads. If ignored, the metal backing plate can damage your rotors, turning an affordable pad
                 replacement into a more expensive repair. Schedule service as soon as you hear unusual brake noises.
               </p>
@@ -379,12 +379,12 @@ export default function BrakeRepairPage() {
               </h3>
               <p className="text-gray-700">
                 Yes! RKC Automotive offers same-day brake service for most brake repairs in Englewood. Call us at
-                (720) 749-3965 before 2 PM and we'll do our best to get you in the same day. Your safety is our priority.
+                (720) 749-3965 before 2 PM and We&#39;ll do our best to get you in the same day. Your safety is our priority.
               </p>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                What's the difference between brake pads and brake rotors?
+                what&#39;s the difference between brake pads and brake rotors?
               </h3>
               <p className="text-gray-700">
                 Brake pads are the friction material that presses against the brake rotor (disc) to slow your vehicle.
@@ -399,7 +399,7 @@ export default function BrakeRepairPage() {
               </h3>
               <p className="text-gray-700">
                 A standard brake pad replacement typically takes 1-2 hours. If rotors need to be replaced or resurfaced,
-                allow 2-3 hours. More complex repairs involving calipers or brake lines may take longer. We'll provide an
+                allow 2-3 hours. More complex repairs involving calipers or brake lines may take longer. We&#39;ll provide an
                 accurate time estimate when you bring your vehicle in.
               </p>
             </div>
@@ -449,7 +449,7 @@ export default function BrakeRepairPage() {
             Need Brake Repair in Englewood, CO?
           </h2>
           <p className="text-xl mb-8 text-white">
-            Don't wait until it's too late. Contact RKC Automotive today for expert brake service.
+            don&#39;t wait until it&#39;s too late. Contact RKC Automotive today for expert brake service.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

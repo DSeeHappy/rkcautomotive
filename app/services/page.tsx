@@ -9,7 +9,6 @@ import {
   Snowflake,
   Gauge,
   Wind,
-  ClipboardCheck,
   ShieldCheck,
   AlertTriangle,
   MapPin,
@@ -233,7 +232,7 @@ export default function Services() {
               </div>
               <h3 className="text-xl font-bold mb-3 text-gray-900">Local & Trusted</h3>
               <p className="text-gray-600">
-                Family-owned and operated in Englewood. We're your neighbors, and we care about keeping your family safe on Colorado roads.
+                Family-owned and operated in Englewood. we&#39;re your neighbors, and we care about keeping your family safe on Colorado roads.
               </p>
             </div>
           </div>
@@ -244,10 +243,10 @@ export default function Services() {
       <section className="bg-primary-green text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Need Service? We're Here to Help
+            Need Service? we&#39;re Here to Help
           </h2>
           <p className="text-xl text-white mb-8">
-            Don't see the service you need listed? Give us a call - we handle a wide range of automotive repairs!
+            don&#39;t see the service you need listed? Give us a call - we handle a wide range of automotive repairs!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

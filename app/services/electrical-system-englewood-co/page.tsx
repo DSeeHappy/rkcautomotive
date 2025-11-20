@@ -184,7 +184,7 @@ export default function ElectricalSystemPage() {
                 <div className="flex items-start">
                   <AlertTriangle className="w-6 h-6 text-red-500 mr-3 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-2">Car Won't Start</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">Car won&#39;t Start</h3>
                     <p className="text-gray-600">
                       Engine cranks slowly or not at all - could be dead battery, bad alternator, or faulty starter.
                     </p>
@@ -263,7 +263,7 @@ export default function ElectricalSystemPage() {
                 How do I know if my alternator or battery is bad?
               </h3>
               <p className="text-gray-700">
-                If your car won't start after a jump, it's likely the alternator (not charging). If it starts but dies
+                If your car won&#39;t start after a jump, it&#39;s likely the alternator (not charging). If it starts but dies
                 again later, it could be the battery. We test both components to determine which needs replacement. Battery
                 warning lights, dimming lights while driving, or electrical accessories acting strangely suggest alternator
                 problems.
@@ -285,7 +285,7 @@ export default function ElectricalSystemPage() {
               </h3>
               <p className="text-gray-700">
                 Yes! Electrical diagnostics is one of our specialties. We use professional diagnostic equipment to trace
-                wiring issues, shorts, and parasitic drains. Whether it's a simple blown fuse or a complex wiring problem,
+                wiring issues, shorts, and parasitic drains. Whether it&#39;s a simple blown fuse or a complex wiring problem,
                 our technicians can diagnose and repair it.
               </p>
             </div>
@@ -294,7 +294,7 @@ export default function ElectricalSystemPage() {
                 How long do car batteries last in Colorado?
               </h3>
               <p className="text-gray-700">
-                Car batteries typically last 3-5 years, but Colorado's temperature extremes (hot summers, cold winters)
+                Car batteries typically last 3-5 years, but Colorado&#39;s temperature extremes (hot summers, cold winters)
                 can shorten battery life to 2-4 years. We recommend battery testing annually, especially before winter.
                 Preventative battery replacement is cheaper than emergency towing and a new battery.
               </p>
@@ -342,7 +342,7 @@ export default function ElectricalSystemPage() {
       <section className="bg-primary-blue text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Electrical Problems? We'll Find and Fix Them
+            Electrical Problems? We&#39;ll Find and Fix Them
           </h2>
           <p className="text-xl mb-8 text-white">
             Contact RKC Automotive for expert electrical diagnostics and repair.

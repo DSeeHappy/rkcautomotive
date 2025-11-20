@@ -30,7 +30,7 @@ export default function FAQPage() {
                 "name": "Do you offer same-day service in Englewood?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes! We offer same-day service for many repairs and maintenance. Call us at (720) 749-3965 before 2 PM and we'll do our best to get you in the same day. Some complex repairs may require overnight service depending on parts availability and diagnostic time."
+                  "text": "Yes! We offer same-day service for many repairs and maintenance. Call us at (720) 749-3965 before 2 PM and We&#39;ll do our best to get you in the same day. Some complex repairs may require overnight service depending on parts availability and diagnostic time."
                 }
               },
               {
@@ -54,7 +54,7 @@ export default function FAQPage() {
                 "name": "How long will my repair take?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Repair time varies depending on the service. Oil changes typically take 30-45 minutes. Brake jobs take 1-3 hours. More complex repairs may take a full day or require overnight service. We'll provide an accurate time estimate when you bring your vehicle in."
+                  "text": "Repair time varies depending on the service. Oil changes typically take 30-45 minutes. Brake jobs take 1-3 hours. More complex repairs may take a full day or require overnight service. We&#39;ll provide an accurate time estimate when you bring your vehicle in."
                 }
               },
               {
@@ -78,7 +78,7 @@ export default function FAQPage() {
                 "name": "Do you offer any warranties on your work?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes! All our repairs come with a warranty. Warranty terms vary by service and parts used - we'll explain the specific warranty coverage when we provide your estimate. We stand behind our work with confidence."
+                  "text": "Yes! All our repairs come with a warranty. Warranty terms vary by service and parts used - We&#39;ll explain the specific warranty coverage when we provide your estimate. We stand behind our work with confidence."
                 }
               },
               {
@@ -115,7 +115,7 @@ export default function FAQPage() {
               </h3>
               <p className="text-gray-700">
                 Yes! We offer same-day service for many repairs and maintenance. Call us at (720) 749-3965 before 2 PM
-                and we'll do our best to get you in the same day. Some complex repairs may require overnight service
+                and We&#39;ll do our best to get you in the same day. Some complex repairs may require overnight service
                 depending on parts availability and diagnostic time.
               </p>
             </div>
@@ -125,7 +125,7 @@ export default function FAQPage() {
                 Do you provide written estimates before starting work?
               </h3>
               <p className="text-gray-700">
-                Absolutely. We always provide detailed written estimates before beginning any repair work. You'll know
+                Absolutely. We always provide detailed written estimates before beginning any repair work. You&#39;ll know
                 exactly what needs to be done and how much it will cost before we start. No surprise charges - ever.
               </p>
             </div>
@@ -146,7 +146,7 @@ export default function FAQPage() {
               </h3>
               <p className="text-gray-700">
                 Repair time varies depending on the service. Oil changes typically take 30-45 minutes. Brake jobs take
-                1-3 hours. More complex repairs may take a full day or require overnight service. We'll provide an
+                1-3 hours. More complex repairs may take a full day or require overnight service. We&#39;ll provide an
                 accurate time estimate when you bring your vehicle in.
               </p>
             </div>
@@ -195,7 +195,7 @@ export default function FAQPage() {
                 Do you offer any warranties on your work?
               </h3>
               <p className="text-gray-700">
-                Yes! All our repairs come with a warranty. Warranty terms vary by service and parts used - we'll explain
+                Yes! All our repairs come with a warranty. Warranty terms vary by service and parts used - We&#39;ll explain
                 the specific warranty coverage when we provide your estimate. We stand behind our work with confidence.
               </p>
             </div>
@@ -206,7 +206,7 @@ export default function FAQPage() {
               </h3>
               <p className="text-gray-700">
                 Prices vary based on parts quality (OEM vs. aftermarket), labor rates, shop overhead, and technician
-                expertise. The cheapest option isn't always the best value. We balance quality parts, expert service,
+                expertise. The cheapest option isn&#39;t always the best value. We balance quality parts, expert service,
                 and fair pricing for the best overall value.
               </p>
             </div>
@@ -217,8 +217,8 @@ export default function FAQPage() {
               </h3>
               <p className="text-gray-700">
                 We prefer to supply parts ourselves to ensure quality and provide warranty coverage. Customer-supplied
-                parts often lack warranty protection, and we can't guarantee their quality. If a customer-supplied part
-                fails, we're unable to warranty the labor. For your protection, we recommend our parts sourcing.
+                parts often lack warranty protection, and we can&#39;t guarantee their quality. If a customer-supplied part
+                fails, we&#39;re unable to warranty the labor. For your protection, we recommend our parts sourcing.
               </p>
             </div>
           </div>
@@ -236,8 +236,8 @@ export default function FAQPage() {
               </h3>
               <p className="text-gray-700">
                 It depends on your vehicle and oil type. Conventional oil needs changing every 3,000-5,000 miles. Synthetic
-                oil lasts 7,500-10,000 miles. Colorado's extreme temperatures and altitude can stress engines, so we
-                recommend following the lower end of manufacturer recommendations. Check your owner's manual.
+                oil lasts 7,500-10,000 miles. Colorado&#39;s extreme temperatures and altitude can stress engines, so we
+                recommend following the lower end of manufacturer recommendations. Check your owner&#39;s manual.
               </p>
             </div>
 
@@ -269,8 +269,8 @@ export default function FAQPage() {
               </h3>
               <p className="text-gray-700">
                 We follow manufacturer maintenance schedules and only recommend services your vehicle actually needs.
-                We'll explain why a service is needed, show you the issue when possible, and provide written recommendations.
-                You're always free to get a second opinion - we want you to feel confident in our recommendations.
+                We&#39;ll explain why a service is needed, show you the issue when possible, and provide written recommendations.
+                you&#39;re always free to get a second opinion - we want you to feel confident in our recommendations.
               </p>
             </div>
           </div>
@@ -322,7 +322,7 @@ export default function FAQPage() {
               <p className="text-gray-700">
                 Absolutely. We diagnose and repair emissions-related problems including check engine lights, failed
                 catalytic converters, O2 sensor issues, and exhaust leaks. Once repairs are complete, your vehicle should
-                pass Colorado emissions testing. We'll verify repairs with our diagnostic equipment before you retest.
+                pass Colorado emissions testing. We&#39;ll verify repairs with our diagnostic equipment before you retest.
               </p>
             </div>
           </div>
@@ -350,8 +350,8 @@ export default function FAQPage() {
                 What areas do you serve?
               </h3>
               <p className="text-gray-700">
-                We're located in Englewood at 2120 W Evans Ave and serve Englewood, Denver, Littleton, Sheridan, Greenwood
-                Village, Cherry Hills Village, and surrounding areas. We're conveniently located near I-25 and US-285.
+                we&#39;re located in Englewood at 2120 W Evans Ave and serve Englewood, Denver, Littleton, Sheridan, Greenwood
+                Village, Cherry Hills Village, and surrounding areas. we&#39;re conveniently located near I-25 and US-285.
               </p>
             </div>
 
@@ -360,7 +360,7 @@ export default function FAQPage() {
                 What are your hours of operation?
               </h3>
               <p className="text-gray-700">
-                We're open Monday through Friday from 8:00 AM to 5:00 PM and Saturday from 8:00 AM to 12:00 PM. We're
+                we&#39;re open Monday through Friday from 8:00 AM to 5:00 PM and Saturday from 8:00 AM to 12:00 PM. we&#39;re
                 closed on Sundays. Call (720) 749-3965 to schedule an appointment during business hours.
               </p>
             </div>
@@ -371,7 +371,7 @@ export default function FAQPage() {
               </h3>
               <p className="text-gray-700">
                 Yes, we have a comfortable waiting area if you prefer to wait for your vehicle. For longer repairs, many
-                customers prefer to drop off their vehicle and we'll call when it's ready.
+                customers prefer to drop off their vehicle and We&#39;ll call when it&#39;s ready.
               </p>
             </div>
           </div>
@@ -385,7 +385,7 @@ export default function FAQPage() {
             Still Have Questions?
           </h2>
           <p className="text-xl mb-8 text-white">
-            We're here to help! Call us or stop by our shop in Englewood.
+            we&#39;re here to help! Call us or stop by our shop in Englewood.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

@@ -26,7 +26,7 @@ export default function About() {
             <p className="text-lg text-gray-700 leading-relaxed">
               RKC Automotive has been serving the Englewood community with honest, reliable automotive
               repair and maintenance services. We understand that your vehicle is a significant investment,
-              and keeping it running smoothly is essential to your daily life. That's why we're committed
+              and keeping it running smoothly is essential to your daily life. That&#39;s why we&#39;re committed
               to providing quality service at fair prices.
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function About() {
               <h3 className="text-xl font-bold text-center mb-3">Honesty & Integrity</h3>
               <p className="text-gray-600 text-center">
                 We believe in transparent communication and honest recommendations.
-                We'll never suggest unnecessary repairs or services.
+                We&#39;ll never suggest unnecessary repairs or services.
               </p>
             </div>
 
@@ -151,7 +151,7 @@ export default function About() {
               <div className="ml-4">
                 <h3 className="text-xl font-bold mb-2">Convenient Location & Hours</h3>
                 <p className="text-gray-600">
-                  Located in Englewood with convenient hours Monday through Saturday. We're here when you need us.
+                  Located in Englewood with convenient hours Monday through Saturday. We&#39;re here when you need us.
                 </p>
               </div>
             </div>
