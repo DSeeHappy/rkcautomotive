@@ -10,7 +10,13 @@ import {
   Wind,
   ClipboardCheck,
   ShieldCheck,
-  AlertTriangle
+  AlertTriangle,
+  Calendar,
+  FileText,
+  AlertCircle,
+  MapPin,
+  Award,
+  Star
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -102,13 +108,124 @@ export default function Services() {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-blue via-primary-blue-dark to-primary-green text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
-          <p className="text-xl text-white max-w-3xl mx-auto">
-            Comprehensive automotive repair and maintenance services to keep your vehicle running at its best
-          </p>
+      {/* Hero Header */}
+      <div>
+        <div className="h-32 w-full bg-gradient-to-br from-primary-blue via-primary-blue-dark to-primary-green lg:h-48" />
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
+            <div className="flex">
+              <div className="size-24 rounded-full ring-4 ring-white sm:size-32 bg-white flex items-center justify-center">
+                <span className="text-4xl sm:text-5xl font-bold text-primary-green">RKC</span>
+              </div>
+            </div>
+            <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+              <div className="mt-6 min-w-0 flex-1 sm:hidden md:block">
+                <h1 className="text-2xl font-bold text-gray-900">RKC Automotive</h1>
+                <p className="text-gray-600">Your Trusted Auto Repair in Englewood</p>
+              </div>
+              <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                <a
+                  href="tel:+17207493965"
+                  className="inline-flex justify-center items-center rounded-md bg-primary-green hover:bg-primary-green-dark px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors"
+                >
+                  <svg className="w-5 h-5 mr-1.5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span>Call Now</span>
+                </a>
+                <a
+                  href="https://share.google/hRQ6WsLJdoo0DwUlu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex justify-center items-center rounded-md bg-white hover:bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-colors"
+                >
+                  <MapPin className="w-5 h-5 mr-1.5 -ml-0.5 text-gray-400" />
+                  <span>Directions</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
+            <h1 className="text-2xl font-bold text-gray-900">RKC Automotive</h1>
+            <p className="text-gray-600">Your Trusted Auto Repair in Englewood</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <a
+            href="tel:+17207493965"
+            className="group relative bg-white border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-green"
+          >
+            <div>
+              <span className="inline-flex rounded-lg p-3 bg-green-50 text-primary-green">
+                <Calendar className="w-6 h-6" />
+              </span>
+            </div>
+            <div className="mt-8">
+              <h3 className="text-base font-semibold text-gray-900">
+                Schedule an Appointment
+              </h3>
+              <p className="mt-2 text-sm text-gray-500">
+                Call us today to schedule your service. We offer flexible appointment times to fit your schedule.
+              </p>
+            </div>
+            <span className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400">
+              <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
+                <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+              </svg>
+            </span>
+          </a>
+
+          <a
+            href="tel:+17207493965"
+            className="group relative bg-white border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-blue"
+          >
+            <div>
+              <span className="inline-flex rounded-lg p-3 bg-blue-50 text-primary-blue">
+                <FileText className="w-6 h-6" />
+              </span>
+            </div>
+            <div className="mt-8">
+              <h3 className="text-base font-semibold text-gray-900">
+                Get a Free Quote
+              </h3>
+              <p className="mt-2 text-sm text-gray-500">
+                Need an estimate? Call or visit us for a free, honest quote on any service or repair.
+              </p>
+            </div>
+            <span className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400">
+              <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
+                <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+              </svg>
+            </span>
+          </a>
+
+          <a
+            href="tel:+17207493965"
+            className="group relative bg-white border border-gray-200 p-6 rounded-lg hover:shadow-md transition-shadow focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-red-600"
+          >
+            <div>
+              <span className="inline-flex rounded-lg p-3 bg-red-50 text-red-600">
+                <AlertCircle className="w-6 h-6" />
+              </span>
+            </div>
+            <div className="mt-8">
+              <h3 className="text-base font-semibold text-gray-900">
+                Emergency Service
+              </h3>
+              <p className="mt-2 text-sm text-gray-500">
+                Car trouble? We're here to help. Call us right away for prompt, professional emergency service.
+              </p>
+            </div>
+            <span className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400">
+              <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
+                <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+              </svg>
+            </span>
+          </a>
         </div>
       </section>
 
@@ -142,6 +259,47 @@ export default function Services() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose RKC */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose RKC Automotive?</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Your local Englewood auto shop with the expertise and service of the big chains
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-green rounded-full mb-4">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-gray-900">Expert Technicians</h3>
+              <p className="text-gray-600">
+                Certified mechanics with years of experience servicing all makes and models. We stay up-to-date with the latest automotive technology.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-blue rounded-full mb-4">
+                <ShieldCheck className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-gray-900">Honest & Fair</h3>
+              <p className="text-gray-600">
+                Transparent pricing with no hidden fees. We provide detailed estimates before any work begins and never recommend unnecessary services.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-green rounded-full mb-4">
+                <MapPin className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-gray-900">Local & Trusted</h3>
+              <p className="text-gray-600">
+                Family-owned and operated in Englewood. We're your neighbors, and we care about keeping your family safe on Colorado roads.
+              </p>
+            </div>
           </div>
         </div>
       </section>
