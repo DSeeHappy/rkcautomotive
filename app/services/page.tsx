@@ -21,59 +21,82 @@ export const metadata: Metadata = {
 export default function Services() {
   const services = [
     {
-      title: 'Engine Diagnostics & Repair',
-      description: 'Advanced diagnostic equipment to identify and repair engine issues quickly and accurately.',
-      icon: Car,
-    },
-    {
-      title: 'Brake Service & Repair',
-      description: 'Complete brake system inspection, pad replacement, rotor resurfacing, and brake fluid service.',
-      icon: Disc,
-    },
-    {
-      title: 'Oil Changes & Fluid Service',
-      description: 'Regular oil changes and complete fluid maintenance to keep your vehicle running smoothly.',
-      icon: Droplets,
-    },
-    {
-      title: 'Transmission Service',
-      description: 'Transmission diagnostics, repairs, and fluid changes for automatic and manual transmissions.',
-      icon: Cog,
+      title: 'Preventative Maintenance',
+      label: 'Most Important',
+      description: 'Winter is here - is your vehicle ready? Regular maintenance is crucial for Colorado winters. We check your battery health, fluid levels, belts, hoses, and overall vehicle condition to prevent breakdowns when you need your car most. Don\'t wait for warning lights - stay ahead of problems.',
+      icon: ShieldCheck,
+      span: 'lg:col-span-4',
+      featured: true,
     },
     {
       title: 'Battery & Electrical',
-      description: 'Battery testing, replacement, and electrical system diagnostics and repair.',
+      label: 'Winter Critical',
+      description: 'Cold weather is hard on batteries. We test battery health, check charging systems, and ensure your vehicle starts reliably all winter long.',
       icon: BatteryCharging,
+      span: 'lg:col-span-2',
+    },
+    {
+      title: 'Brake Service & Repair',
+      label: 'Safety First',
+      description: 'Complete brake system inspection, pad replacement, rotor resurfacing, and brake fluid service. Critical for safe winter driving.',
+      icon: Disc,
+      span: 'lg:col-span-2',
+    },
+    {
+      title: 'Engine Diagnostics & Repair',
+      label: 'Expert Service',
+      description: 'Advanced diagnostic equipment to identify and repair engine issues quickly and accurately. Keep your engine running strong.',
+      icon: Car,
+      span: 'lg:col-span-4',
+    },
+    {
+      title: 'Oil Changes & Fluid Service',
+      label: 'Regular Service',
+      description: 'Regular oil changes and complete fluid maintenance to keep your vehicle running smoothly through all seasons.',
+      icon: Droplets,
+      span: 'lg:col-span-2',
     },
     {
       title: 'Air Conditioning & Heating',
-      description: 'A/C recharge, heating system repair, and climate control diagnostics.',
+      label: 'Comfort',
+      description: 'A/C recharge, heating system repair, and climate control diagnostics. Stay warm this winter.',
       icon: Snowflake,
+      span: 'lg:col-span-2',
+    },
+    {
+      title: 'Transmission Service',
+      label: 'Drivetrain',
+      description: 'Transmission diagnostics, repairs, and fluid changes for automatic and manual transmissions.',
+      icon: Cog,
+      span: 'lg:col-span-2',
     },
     {
       title: 'Suspension & Steering',
-      description: 'Suspension inspection, shock and strut replacement, and steering system repair.',
+      label: 'Handling',
+      description: 'Suspension inspection, shock and strut replacement, and steering system repair for safe handling.',
       icon: Gauge,
+      span: 'lg:col-span-2',
     },
     {
       title: 'Exhaust System Service',
+      label: 'Emissions',
       description: 'Muffler replacement, catalytic converter service, and exhaust leak repair.',
       icon: Wind,
+      span: 'lg:col-span-2',
     },
     {
       title: 'Pre-Purchase Inspections',
-      description: 'Comprehensive vehicle inspection before you buy to identify potential issues.',
+      label: 'Smart Buying',
+      description: 'Comprehensive vehicle inspection before you buy to identify potential issues and avoid costly surprises.',
       icon: ClipboardCheck,
-    },
-    {
-      title: 'Preventative Maintenance',
-      description: 'Regular maintenance schedules to prevent costly repairs and extend vehicle life.',
-      icon: ShieldCheck,
+      span: 'lg:col-span-3',
     },
     {
       title: 'Check Engine Light Diagnostics',
-      description: 'Advanced scan tools to diagnose check engine lights and emission problems.',
+      label: 'Diagnostics',
+      description: 'Advanced scan tools to diagnose check engine lights and emission problems quickly.',
       icon: AlertTriangle,
+      span: 'lg:col-span-3',
     },
   ];
 
@@ -90,19 +113,32 @@ export default function Services() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-24 sm:py-32 bg-gray-50">
+        <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+          <h2 className="text-base/7 font-semibold text-primary-green">Professional Auto Care</h2>
+          <p className="mt-2 max-w-lg text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+            Complete automotive services for Colorado drivers
+          </p>
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
             {services.map((service, index) => {
               const IconComponent = service.icon;
+              const isFirst = index === 0;
               return (
-                <div
-                  key={index}
-                  className="bg-white p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
-                >
-                  <IconComponent className="w-12 h-12 text-primary-green mb-4" strokeWidth={1.5} />
-                  <h3 className="text-lg font-bold mb-2 text-foreground">{service.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{service.description}</p>
+                <div key={index} className={`flex p-px ${service.span || 'lg:col-span-2'}`}>
+                  <div className="w-full overflow-hidden rounded-lg bg-white shadow-sm outline outline-black/5">
+                    <div className="p-10">
+                      <div className="flex items-center gap-3 mb-4">
+                        <IconComponent className="w-8 h-8 text-primary-green flex-shrink-0" strokeWidth={1.5} />
+                        <h3 className="text-sm/4 font-semibold text-gray-500">{service.label}</h3>
+                      </div>
+                      <p className={`${isFirst ? 'text-2xl' : 'text-lg'} font-medium tracking-tight text-gray-900`}>
+                        {service.title}
+                      </p>
+                      <p className={`mt-2 ${isFirst ? 'max-w-2xl' : 'max-w-lg'} text-sm/6 text-gray-600`}>
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               );
             })}
