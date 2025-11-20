@@ -39,10 +39,10 @@ export default function Navigation() {
               About Us
             </Link>
             <Link
-              href="/contact"
+              href="/englewood-co-auto-repair"
               className="text-foreground hover:text-primary-green transition-colors font-medium"
             >
-              Contact
+              Location
             </Link>
           </div>
 
@@ -123,11 +123,11 @@ export default function Navigation() {
               About Us
             </Link>
             <Link
-              href="/contact"
+              href="/englewood-co-auto-repair"
               className="block text-foreground hover:text-primary-green transition-colors font-medium py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Contact
+              Location
             </Link>
             <a
               href="tel:+17207493965"

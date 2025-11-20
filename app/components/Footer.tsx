@@ -36,8 +36,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-primary-green transition-colors">
-                  Contact
+                <Link href="/englewood-co-auto-repair" className="text-gray-400 hover:text-primary-green transition-colors">
+                  Location
                 </Link>
               </li>
             </ul>
