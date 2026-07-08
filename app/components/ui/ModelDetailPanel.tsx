@@ -6,9 +6,10 @@ import Link from 'next/link';
 import { getBrandAccentGlow, getBrandPanelBackground } from '@/lib/vehicleBrands';
 import { BUSINESS } from '@/lib/constants';
 import type { VehicleBrand } from '@/lib/vehicleBrands';
-import { resolveModel3dUrl, type VehicleModel } from '@/lib/vehicleModels';
+import { getCategoryImage, type VehicleModel } from '@/lib/vehicleModels';
+import { getVehicleImage } from '@/lib/vehicleImages';
 import BrandLogo from './BrandLogo';
-import VehicleModelViewer from './VehicleModelViewer';
+import VehicleImagePanel from './VehicleImagePanel';
 
 type ModelDetailPanelProps = {
   model: VehicleModel | null;
@@ -20,7 +21,14 @@ type ModelDetailPanelProps = {
 export default function ModelDetailPanel({ model, brand, open, onClose }: ModelDetailPanelProps) {
   if (!model || !brand) return null;
 
-  const model3dUrl = resolveModel3dUrl(model);
+  const vehicleImage = getVehicleImage(brand.slug, brand.name, model.model);
+  const imageSrc =
+    vehicleImage.src ??
+    (vehicleImage.record?.sourceUrl.startsWith('http') ? vehicleImage.record.sourceUrl : undefined) ??
+    getCategoryImage(model.vehicleType);
+  const imageAlt = vehicleImage.alt;
+  const imageYearRange = vehicleImage.yearRange ?? model.yearRange;
+  const remoteFallbackSrc = vehicleImage.record?.sourceUrl;
 
   return (
     <Dialog open={open} onClose={onClose} className="relative z-50">
@@ -57,11 +65,15 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
 
                 <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row">
                   <div className="relative shrink-0 lg:sticky lg:top-0 lg:h-full lg:w-[45%] lg:min-h-0">
-                    <VehicleModelViewer
-                      modelUrl={model3dUrl}
-                      fallbackImageSrc={model.image}
-                      alt={`${brand.name} ${model.model} 3D model`}
+                    <VehicleImagePanel
+                      src={imageSrc}
+                      remoteFallbackSrc={remoteFallbackSrc}
+                      alt={imageAlt}
                       brandColor={brand.color}
+                      brandName={brand.name}
+                      model={model.model}
+                      yearRange={imageYearRange}
+                      fallbackType={model.vehicleType}
                     />
                   </div>
 

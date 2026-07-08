@@ -1,4 +1,5 @@
 import { VEHICLE_BRANDS } from '@/lib/vehicleBrands';
+import { getVehicleImage, resolveVehicleImageSrc } from '@/lib/vehicleImages';
 
 export type VehicleType = 'truck' | 'suv' | 'sedan' | 'hybrid' | 'ev' | 'performance' | 'van' | 'luxury';
 
@@ -446,13 +447,14 @@ function buildVehicleModel(
   const vehicleType = getModelType(brandSlug, model);
   const modelSlug = slugify(model);
   const slug = `${brandSlug}-${modelSlug}`;
+  const vehicleImage = getVehicleImage(brandSlug, brandName, model);
 
   return {
     brand: brandSlug,
     brandName,
     model,
     slug,
-    image: getModelImage(vehicleType),
+    image: resolveVehicleImageSrc(vehicleImage.record) ?? getModelImage(vehicleType),
     vehicleType,
     model3dCategory: vehicleType,
     model3dUrl: MODEL_3D_URLS[vehicleType],
@@ -484,7 +486,8 @@ export function getCategoryImage(type: VehicleType): string {
 }
 
 export function resolveModelImage(model: VehicleModel): string {
-  return model.image;
+  const record = getVehicleImage(model.brand, model.brandName, model.model).record;
+  return resolveVehicleImageSrc(record) ?? model.image;
 }
 
 export function resolveModel3dUrl(model: VehicleModel): string {
