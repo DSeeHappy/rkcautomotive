@@ -3,6 +3,8 @@
  * Prefer these over remote stock imagery site-wide.
  */
 export const PHOTOS = {
+  /** Green bay entrance + branded shirt — homepage hero */
+  heroMain: '/images/hero-main.webp',
   /** Shop exterior with RKC signage — contact / location */
   exterior: '/images/shop-exterior.webp',
   /** Green & blue branded shop bay + tire stack */
@@ -19,7 +21,7 @@ export const PHOTOS = {
   teamCuevas: '/images/shop-detail-02.webp',
   /** Three techs inspecting undercarriage */
   teamInspect: '/images/shop-detail-03.webp',
-  /** Branded shirt back + busy bay (hero) */
+  /** Branded shirt back + busy bay */
   brandedBay: '/images/shop-detail-06.webp',
   /** Cuevas working with pry bar */
   techCloseup: '/images/shop-detail-01.webp',

@@ -22,11 +22,11 @@ export default function Hero() {
     <section ref={ref} className="relative isolate min-h-[100svh] overflow-hidden bg-[#0c1222]">
       <motion.div className="absolute inset-0" style={reduce ? undefined : { y }}>
         <Image
-          src={PHOTOS.brandedBay}
-          alt="RKC Automotive technicians at work in the Englewood shop bay"
+          src={PHOTOS.heroMain}
+          alt="RKC Automotive green shop bay entrance in Englewood"
           fill
           priority
-          className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
+          className={`object-cover object-[55%_42%] sm:object-[52%_40%] lg:object-[50%_38%] ${reduce ? '' : 'ken-burns'}`}
           sizes="100vw"
         />
         <div className="photo-veil absolute inset-0" />
