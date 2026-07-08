@@ -67,10 +67,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
 
                   <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
                     <div className="border-b border-white/10 p-6 sm:p-8 lg:pt-14">
-                      <p
-                        className="text-xs font-semibold uppercase tracking-[0.2em]"
-                        style={{ color: `color-mix(in srgb, ${brand.color} 55%, white)` }}
-                      >
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
                         {brand.name} · {model.yearRange}
                       </p>
                       <DialogTitle className="mt-1 font-display text-3xl tracking-wide text-white sm:text-4xl">
@@ -81,11 +78,11 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                     <div className="flex-1 p-6 sm:p-8">
                       <div className="flex items-start gap-4">
                         <BrandLogo slug={brand.slug} color={brand.color} size={40} className="shrink-0" />
-                        <p className="text-base leading-relaxed text-white/78">{model.description}</p>
+                        <p className="text-base leading-relaxed text-white">{model.description}</p>
                       </div>
 
                       <section className="mt-8">
-                        <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+                        <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                           <Calendar className="size-4" aria-hidden />
                           Factory maintenance schedule
                         </h3>
@@ -93,17 +90,14 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                           {model.maintenanceSchedule.map((entry) => (
                             <div
                               key={entry.interval}
-                              className="rounded-2xl border border-white/10 bg-white/[0.07] p-5 backdrop-blur-sm"
+                              className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"
                             >
-                              <p
-                                className="text-sm font-semibold"
-                                style={{ color: `color-mix(in srgb, ${brand.color} 50%, white)` }}
-                              >
+                              <p className="text-sm font-semibold text-white">
                                 {entry.interval}
                               </p>
                               <ul className="mt-3 space-y-2">
                                 {entry.items.map((item) => (
-                                  <li key={item} className="flex gap-2 text-sm text-white/85">
+                                  <li key={item} className="flex gap-2 text-sm text-white">
                                     <span
                                       className="mt-1.5 size-1.5 shrink-0 rounded-full"
                                       style={{ backgroundColor: brand.color }}
@@ -119,7 +113,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                       </section>
 
                       <section className="mt-8">
-                        <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+                        <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                           <Wrench className="size-4" aria-hidden />
                           Common RKC services for the {model.model}
                         </h3>
@@ -127,7 +121,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                           {model.commonServices.map((service) => (
                             <li
                               key={service}
-                              className="rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm text-white/85"
+                              className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white"
                             >
                               {service}
                             </li>

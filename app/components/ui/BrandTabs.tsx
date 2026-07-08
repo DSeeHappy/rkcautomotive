@@ -88,10 +88,7 @@ export default function BrandTabs() {
               <div className="relative z-10 p-6 sm:p-10 lg:max-w-[68%]">
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
                   <div>
-                    <p
-                      className="text-xs font-semibold uppercase tracking-[0.2em]"
-                      style={{ color: `color-mix(in srgb, ${brand.color} 55%, white)` }}
-                    >
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
                       {brand.category === 'domestic' ? 'Domestic' : 'Import'} · Serviced at RKC Englewood
                     </p>
                     <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
@@ -109,15 +106,15 @@ export default function BrandTabs() {
                   </a>
                 </div>
 
-                <div className="mt-8 space-y-5 text-base leading-relaxed text-white/78">
+                <div className="mt-8 space-y-5 text-base leading-relaxed text-white">
                   {brand.paragraphs.map((paragraph) => (
                     <p key={paragraph.slice(0, 48)}>{paragraph}</p>
                   ))}
                 </div>
 
                 <div className="mt-10 grid gap-6 lg:grid-cols-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-5 backdrop-blur-sm">
-                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+                  <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                       <Wrench className="size-4" aria-hidden />
                       Common models
                     </p>
@@ -127,7 +124,7 @@ export default function BrandTabs() {
                           <button
                             type="button"
                             onClick={() => openModelDetail(brand, model)}
-                            className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm font-medium text-white/90 transition hover:border-white/25 hover:bg-white/20 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/40"
+                            className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/40"
                           >
                             {model}
                           </button>
@@ -136,12 +133,12 @@ export default function BrandTabs() {
                     </ul>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-5 backdrop-blur-sm">
-                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+                  <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                       <Wrench className="size-4" aria-hidden />
                       RKC services
                     </p>
-                    <ul className="mt-3 space-y-2 text-sm text-white/85">
+                    <ul className="mt-3 space-y-2 text-sm text-white">
                       {brand.services.map((service) => (
                         <li key={service} className="flex gap-2">
                           <span
@@ -162,14 +159,11 @@ export default function BrandTabs() {
                       backgroundColor: `color-mix(in srgb, ${brand.color} 12%, rgba(255,255,255,0.06))`,
                     }}
                   >
-                    <p
-                      className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em]"
-                      style={{ color: `color-mix(in srgb, ${brand.color} 50%, white)` }}
-                    >
+                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                       <MapPin className="size-4" aria-hidden />
                       Colorado notes
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-white/85">{brand.coloradoNotes}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-white">{brand.coloradoNotes}</p>
                   </div>
                 </div>
 

@@ -66,7 +66,7 @@ export default function VehicleModelViewer({
       <div className="relative flex h-full min-h-[280px] w-full flex-col bg-[#080d18] sm:min-h-[360px] lg:min-h-0">
         <Image src={fallbackImageSrc} alt={alt} fill className="object-cover opacity-80" sizes="45vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c1222] via-[#0c1222]/30 to-transparent" />
-        <p className="absolute bottom-4 left-0 right-0 px-4 text-center text-xs text-white/50">
+        <p className="absolute bottom-4 left-0 right-0 px-4 text-center text-xs text-white/90">
           3D preview unavailable — showing photo instead
         </p>
       </div>
@@ -89,7 +89,7 @@ export default function VehicleModelViewer({
             className="size-10 animate-spin rounded-full border-2 border-white/15 border-t-white/70"
             aria-hidden
           />
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/45">Loading 3D model</p>
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/90">Loading 3D model</p>
         </div>
       )}
 
@@ -118,8 +118,8 @@ export default function VehicleModelViewer({
       )}
 
       <div className="pointer-events-none absolute bottom-4 left-0 right-0 flex items-center justify-center gap-1.5 px-4">
-        <Rotate3d className="size-3.5 text-white/35" aria-hidden />
-        <p className="text-xs text-white/45">Drag to rotate · Scroll to zoom</p>
+        <Rotate3d className="size-3.5 text-white/90" aria-hidden />
+        <p className="text-xs text-white/90">Drag to rotate · Scroll to zoom</p>
       </div>
     </div>
   );
