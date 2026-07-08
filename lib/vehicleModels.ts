@@ -7,6 +7,8 @@ export type MaintenanceInterval = {
   items: string[];
 };
 
+export type Model3dCategory = 'truck' | 'suv' | 'sedan' | 'performance' | 'ev' | 'van' | 'hybrid' | 'luxury';
+
 export type VehicleModel = {
   brand: string;
   brandName: string;
@@ -14,10 +16,24 @@ export type VehicleModel = {
   slug: string;
   image: string;
   vehicleType: VehicleType;
+  model3dCategory: Model3dCategory;
+  model3dUrl?: string;
   yearRange: string;
   maintenanceSchedule: MaintenanceInterval[];
   commonServices: string[];
   description: string;
+};
+
+/** Category GLB files — one per body style, not per model. */
+const MODEL_3D_URLS: Record<VehicleType, string> = {
+  truck: '/models/vehicles/truck.glb',
+  suv: '/models/vehicles/suv.glb',
+  sedan: '/models/vehicles/sedan.glb',
+  hybrid: '/models/vehicles/sedan.glb',
+  ev: '/models/vehicles/sedan.glb',
+  performance: '/models/vehicles/performance.glb',
+  van: '/models/vehicles/van.glb',
+  luxury: '/models/vehicles/luxury.glb',
 };
 
 /** Unsplash hero images by vehicle category (allowed in next.config). */
@@ -438,6 +454,8 @@ function buildVehicleModel(
     slug,
     image: getModelImage(vehicleType),
     vehicleType,
+    model3dCategory: vehicleType,
+    model3dUrl: MODEL_3D_URLS[vehicleType],
     yearRange: '2015–2026',
     maintenanceSchedule: buildMaintenanceSchedule(vehicleType, brandName, model),
     commonServices: TYPE_COMMON_SERVICES[vehicleType],
@@ -467,4 +485,8 @@ export function getCategoryImage(type: VehicleType): string {
 
 export function resolveModelImage(model: VehicleModel): string {
   return model.image;
+}
+
+export function resolveModel3dUrl(model: VehicleModel): string {
+  return model.model3dUrl ?? MODEL_3D_URLS[model.vehicleType];
 }
