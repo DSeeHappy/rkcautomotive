@@ -160,6 +160,7 @@ function mergeCsvRows() {
 
 const siteModelKeys = loadSiteModelKeys();
 const rows = mergeCsvRows();
+const regenerateOnly = process.argv.includes('--regenerate-only');
 
 const entries = rows.map((row) => {
   const make = row.Make;
@@ -197,7 +198,7 @@ let failed = 0;
 for (const entry of downloadOrder) {
   const destPath = publicPathToFs(entry.publicPath);
 
-  if (fs.existsSync(destPath)) {
+  if (regenerateOnly || fs.existsSync(destPath)) {
     skipped += 1;
     continue;
   }
