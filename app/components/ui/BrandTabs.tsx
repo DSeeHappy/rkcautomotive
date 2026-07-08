@@ -3,11 +3,29 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import { ExternalLink, MapPin, Wrench } from 'lucide-react';
 import Link from 'next/link';
-import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
+import { useState } from 'react';
+import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS, type VehicleBrand } from '@/lib/vehicleBrands';
+import { getModel, type VehicleModel } from '@/lib/vehicleModels';
 import BrandLogo from './BrandLogo';
 import FadeIn from './FadeIn';
+import ModelDetailPanel from './ModelDetailPanel';
 
 export default function BrandTabs() {
+  const [selectedModel, setSelectedModel] = useState<VehicleModel | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<VehicleBrand | null>(null);
+
+  function openModelDetail(brand: VehicleBrand, modelName: string) {
+    const model = getModel(brand.slug, modelName);
+    if (!model) return;
+    setSelectedBrand(brand);
+    setSelectedModel(model);
+  }
+
+  function closeModelDetail() {
+    setSelectedModel(null);
+    setSelectedBrand(null);
+  }
+
   return (
     <FadeIn className="wrap pb-20 pt-12 sm:pb-24 sm:pt-16">
       <div className="mb-10 max-w-3xl">
@@ -105,11 +123,14 @@ export default function BrandTabs() {
                     </p>
                     <ul className="mt-3 flex flex-wrap gap-2">
                       {brand.commonModels.map((model) => (
-                        <li
-                          key={model}
-                          className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm font-medium text-white/90"
-                        >
-                          {model}
+                        <li key={model}>
+                          <button
+                            type="button"
+                            onClick={() => openModelDetail(brand, model)}
+                            className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-sm font-medium text-white/90 transition hover:border-white/25 hover:bg-white/20 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/40"
+                          >
+                            {model}
+                          </button>
                         </li>
                       ))}
                     </ul>
@@ -165,6 +186,13 @@ export default function BrandTabs() {
           ))}
         </TabPanels>
       </TabGroup>
+
+      <ModelDetailPanel
+        model={selectedModel}
+        brand={selectedBrand}
+        open={selectedModel !== null}
+        onClose={closeModelDetail}
+      />
     </FadeIn>
   );
 }
