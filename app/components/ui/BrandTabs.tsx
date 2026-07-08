@@ -40,11 +40,11 @@ export default function BrandTabs() {
       </div>
 
       <TabGroup>
-        <TabList className="flex gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <TabList className="flex flex-wrap gap-2 pb-2 md:gap-2">
           {VEHICLE_BRANDS.map((brand) => (
             <Tab
               key={brand.slug}
-              className="group flex shrink-0 items-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-4 py-2.5 text-sm font-semibold text-ink-muted shadow-sm outline-none transition data-selected:border-transparent data-selected:bg-[#0c1222] data-selected:text-white data-selected:shadow-[0_10px_28px_-10px_rgba(12,18,34,0.45)] data-hover:border-primary-green/40 data-hover:text-foreground data-focus-visible:ring-2 data-focus-visible:ring-primary-green/30"
+              className="group flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-3 py-2 text-xs font-semibold text-ink-muted shadow-sm outline-none transition sm:px-4 sm:py-2.5 sm:text-sm data-selected:border-transparent data-selected:bg-[#0c1222] data-selected:text-white data-selected:shadow-[0_10px_28px_-10px_rgba(12,18,34,0.45)] data-hover:border-primary-green/40 data-hover:text-foreground data-focus-visible:ring-2 data-focus-visible:ring-primary-green/30"
             >
               <BrandLogo slug={brand.slug} color={brand.color} size={20} className="group-data-selected:!bg-white" />
               <span>{brand.name}</span>
