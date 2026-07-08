@@ -21,21 +21,29 @@ export default function Hero() {
   return (
     <section ref={ref} className="relative isolate min-h-[100svh] overflow-hidden bg-[#0c1222]">
       <motion.div className="absolute inset-0" style={reduce ? undefined : { y }}>
-        <Image
-          src={PHOTOS.heroMain}
-          alt="RKC Automotive green shop bay entrance in Englewood"
-          fill
-          priority
-          className={`object-cover object-[55%_42%] sm:object-[52%_40%] lg:object-[50%_38%] ${reduce ? '' : 'ken-burns'}`}
-          sizes="100vw"
-        />
-        <div className="photo-veil absolute inset-0" />
+        <div className="absolute inset-0 origin-[78%_56%] scale-[0.94] sm:origin-[74%_53%] sm:scale-[0.97] lg:origin-[70%_50%] lg:scale-[1.05]">
+          <Image
+            src={PHOTOS.heroMain}
+            alt="RKC Automotive green shop bay entrance in Englewood"
+            fill
+            priority
+            className={`object-cover object-[78%_56%] sm:object-[74%_53%] lg:object-[70%_50%] ${reduce ? '' : 'ken-burns'}`}
+            sizes="100vw"
+          />
+        </div>
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c1222]/90 via-[#0c1222]/25 to-[#0c1222]/15"
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(12, 18, 34, 0.45) 0%, rgba(12, 18, 34, 0.22) 38%, rgba(12, 18, 34, 0.68) 100%), linear-gradient(90deg, rgba(14, 133, 54, 0.18) 0%, transparent 55%, rgba(28, 61, 145, 0.1) 100%)',
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c1222]/88 via-[#0c1222]/18 to-[#0c1222]/10"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1222]/75 via-[#0c1222]/20 to-transparent lg:from-[#0c1222]/65 lg:via-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1222]/72 via-[#0c1222]/12 to-transparent lg:from-[#0c1222]/60 lg:via-[#0c1222]/5 lg:to-transparent"
           aria-hidden
         />
       </motion.div>
