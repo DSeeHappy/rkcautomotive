@@ -4,12 +4,34 @@ export type VehicleBrand = {
   logoPath: string;
   officialUrl: string;
   color: string;
+  /** Optional override for panel gradient base; defaults to `color` darkened with RKC navy */
+  backgroundColor?: string;
   category: 'domestic' | 'import';
   commonModels: string[];
   services: string[];
   coloradoNotes: string;
   paragraphs: string[];
 };
+
+const PANEL_NAVY = '#0a0f1a';
+const PANEL_NAVY_DEEP = '#060a12';
+
+/** Dark brand-tinted gradient for premium tab panels (MyMolecule-style). */
+export function getBrandPanelBackground(brand: Pick<VehicleBrand, 'color' | 'backgroundColor'>): string {
+  const accent = brand.backgroundColor ?? brand.color;
+  return [
+    `linear-gradient(145deg,`,
+    `color-mix(in srgb, ${accent} 52%, ${PANEL_NAVY}) 0%,`,
+    `#0c1222 44%,`,
+    `color-mix(in srgb, ${accent} 18%, ${PANEL_NAVY_DEEP}) 100%)`,
+  ].join(' ');
+}
+
+/** Radial glow behind the watermark logo on the right edge. */
+export function getBrandAccentGlow(brand: Pick<VehicleBrand, 'color' | 'backgroundColor'>): string {
+  const accent = brand.backgroundColor ?? brand.color;
+  return `radial-gradient(ellipse 72% 85% at 90% 48%, color-mix(in srgb, ${accent} 38%, transparent) 0%, transparent 68%)`;
+}
 
 export const VEHICLE_BRANDS: VehicleBrand[] = [
   {
