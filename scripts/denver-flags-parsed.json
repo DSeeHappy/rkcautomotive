@@ -1,0 +1,428 @@
+[
+  {
+    "name": "Athmar Park",
+    "slug": "athmar-park",
+    "wikiFile": "Flag_of_Athmar_Park,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Auraria",
+    "slug": "auraria",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Belcaro",
+    "slug": "belcaro",
+    "wikiFile": "Flag_of_Belcaro,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Berkeley",
+    "slug": "berkeley",
+    "wikiFile": "Flag_of_Berkeley,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Capitol Hill",
+    "slug": "capitol-hill",
+    "wikiFile": "Flag_of_Capitol_Hill,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Central Business District",
+    "slug": "central-business-district",
+    "wikiFile": "Flag_of_Central_Business_District,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Chaffee Park",
+    "slug": "chaffee-park",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Cheesman Park",
+    "slug": "cheesman-park",
+    "wikiFile": "Flag_of_Cheesman_Park,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Cherry Creek",
+    "slug": "cherry-creek",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "City Park",
+    "slug": "city-park",
+    "wikiFile": "Flag_of_City_Park,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "City Park West",
+    "slug": "city-park-west",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Civic Center",
+    "slug": "civic-center",
+    "wikiFile": "Flag_of_Civic_Center,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Clayton",
+    "slug": "clayton",
+    "wikiFile": "Flag_of_Clayton,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Cole",
+    "slug": "cole",
+    "wikiFile": "Flag_of_Cole,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "College View",
+    "slug": "college-view",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Congress Park",
+    "slug": "congress-park",
+    "wikiFile": "Flag_of_Congress_Park,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Cory-Merrill",
+    "slug": "cory-merrill",
+    "wikiFile": "Flag_of_Cory-Merrill,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Country Club",
+    "slug": "country-club",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Denver Airport",
+    "slug": "denver-airport",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "East Colfax",
+    "slug": "east-colfax",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Elyria Swansea",
+    "slug": "elyria-swansea",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Five Points",
+    "slug": "five-points",
+    "wikiFile": "Flag_of_Five_Points,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Fort Logan",
+    "slug": "fort-logan",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Globeville",
+    "slug": "globeville",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Goldsmith",
+    "slug": "goldsmith",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Green Valley Ranch",
+    "slug": "green-valley-ranch",
+    "wikiFile": "Flag_of_Green_Valley_Ranch,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Hale",
+    "slug": "hale",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Hampden",
+    "slug": "hampden",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Hampden South",
+    "slug": "hampden-south",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Harvey Park",
+    "slug": "harvey-park",
+    "wikiFile": "Flag_of_Harvey_Park,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Harvey Park South",
+    "slug": "harvey-park-south",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Highland",
+    "slug": "highland",
+    "wikiFile": "Flag_of_Highland,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Hilltop",
+    "slug": "hilltop",
+    "wikiFile": "Flag_of_Hilltop,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Indian Creek",
+    "slug": "indian-creek",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Jefferson Park",
+    "slug": "jefferson-park",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Kennedy",
+    "slug": "kennedy",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Lincoln Park",
+    "slug": "lincoln-park",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Lowry Field",
+    "slug": "lowry-field",
+    "wikiFile": "Flag_of_Lowry_Field,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Mar Lee",
+    "slug": "mar-lee",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Marston",
+    "slug": "marston",
+    "wikiFile": "Flag_of_Marston,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Montbello",
+    "slug": "montbello",
+    "wikiFile": "Flag_of_Montbello,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Montclair",
+    "slug": "montclair",
+    "wikiFile": "Flag_of_Montclair,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "North Capitol Hill",
+    "slug": "north-capitol-hill",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "North Park Hill",
+    "slug": "north-park-hill",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Northeast Park Hill",
+    "slug": "northeast-park-hill",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Overland",
+    "slug": "overland",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Platt Park",
+    "slug": "platt-park",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Regis",
+    "slug": "regis",
+    "wikiFile": "Flag_of_Regis,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Rosedale",
+    "slug": "rosedale",
+    "wikiFile": "Flag_of_Rosedale,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Ruby Hill",
+    "slug": "ruby-hill",
+    "wikiFile": "Flag_of_Ruby_Hill,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Skyland",
+    "slug": "skyland",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Sloan&#39;s Lake",
+    "slug": "sloan-39-s-lake",
+    "wikiFile": "Flag_of_Sloan's_Lake,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "South Park Hill",
+    "slug": "south-park-hill",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Speer",
+    "slug": "speer",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Stapleton",
+    "slug": "stapleton",
+    "wikiFile": "Flag_of_Stapleton,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Sun Valley",
+    "slug": "sun-valley",
+    "wikiFile": "Flag_of_Sun_Valley,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Sunnyside",
+    "slug": "sunnyside",
+    "wikiFile": "Flag_of_Sunnyside,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Union Station",
+    "slug": "union-station",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "University",
+    "slug": "university",
+    "wikiFile": "Flag_of_University,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "University Hills",
+    "slug": "university-hills",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "University Park",
+    "slug": "university-park",
+    "wikiFile": "Flag_of_University_Park,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Valverde",
+    "slug": "valverde",
+    "wikiFile": "Flag_of_Valverde,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Villa Park",
+    "slug": "villa-park",
+    "wikiFile": "Flag_of_Villa_Park,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Virginia Village",
+    "slug": "virginia-village",
+    "wikiFile": "Flag_of_Virginia_Village,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Washington Park",
+    "slug": "washington-park",
+    "wikiFile": "Flag_of_Washington_Park,_Denver.jpg",
+    "status": "available"
+  },
+  {
+    "name": "Washington Park West",
+    "slug": "washington-park-west",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Washington Virginia Vale",
+    "slug": "washington-virginia-vale",
+    "wikiFile": "Flag_of_Washington_Virginia_Vale,_Denver.png",
+    "status": "available"
+  },
+  {
+    "name": "Wellshire",
+    "slug": "wellshire",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "West Colfax",
+    "slug": "west-colfax",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "West Highland",
+    "slug": "west-highland",
+    "wikiFile": null,
+    "status": "tbd"
+  },
+  {
+    "name": "Westwood",
+    "slug": "westwood",
+    "wikiFile": "Flag_of_Westwood,_Denver.png",
+    "status": "available"
+  }
+]

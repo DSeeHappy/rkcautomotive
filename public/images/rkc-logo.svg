@@ -1,0 +1,7 @@
+<svg viewBox="0 0 480 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RKC Automotive">
+  <path d="M 112 168 A 128 128 0 0 1 368 168" stroke="#0e8536" stroke-width="22" stroke-linecap="butt"/>
+  <path d="M 368 168 A 128 128 0 0 1 112 168" stroke="#0e8536" stroke-width="22" stroke-linecap="butt"/>
+  <path d="M 252 28 L 228 168 L 248 168 L 234 318 L 278 158 L 258 158 Z" fill="#1c3d91"/>
+  <text x="240" y="198" text-anchor="middle" fill="#0e8536" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="88" letter-spacing="-0.02em">RKC</text>
+  <text x="240" y="358" text-anchor="middle" fill="#1c3d91" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="0.28em">AUTOMOTIVE</text>
+</svg>

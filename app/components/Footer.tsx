@@ -1,84 +1,94 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { Clock, MapPin, Phone } from 'lucide-react';
+import { BUSINESS, FOOTER_LINKS, PHOTOS, SERVICES } from '@/lib/constants';
+import SocialLinks from '@/app/components/ui/SocialLinks';
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Company Info */}
+    <footer className="relative overflow-hidden bg-[#0c1222] text-white">
+      <div className="absolute inset-0 opacity-30">
+        <Image src={PHOTOS.interior} alt="" fill className="object-cover" sizes="100vw" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0c1222] via-[#0c1222]/90 to-[#0c1222]/70" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mb-14 flex flex-col gap-6 border-b border-white/10 pb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h3 className="text-2xl font-bold mb-4">
-              <span className="text-primary-green">RKC</span>{' '}
-              <span className="text-primary-blue">Automotive</span>
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Professional automotive repair and maintenance services in Englewood, CO.
+            <p className="font-display text-6xl tracking-wide text-white sm:text-7xl">
+              <span className="text-primary-green-light">RKC</span> AUTOMOTIVE
+            </p>
+            <p className="mt-4 max-w-md text-lg text-white/60">
+              ASE-certified auto repair on W Evans Ave — honest diagnostics, quality parts, 30+ years serving Englewood &amp; Denver metro.
             </p>
           </div>
+          <a href={BUSINESS.phoneHref} className="btn-green shrink-0 self-start lg:self-auto">
+            <Phone className="size-5" />
+            {BUSINESS.phone}
+          </a>
+        </div>
 
-          {/* Quick Links */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-primary-green transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="text-gray-400 hover:text-primary-green transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-gray-400 hover:text-primary-green transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/englewood-co-auto-repair" className="text-gray-400 hover:text-primary-green transition-colors">
-                  Location
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <ul className="space-y-3 text-gray-400">
-              <li className="flex items-start">
-                <svg className="w-5 h-5 mr-3 mt-0.5 text-primary-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>2120 W Evans Ave<br />Englewood, CO 80110</span>
-              </li>
-              <li className="flex items-center">
-                <svg className="w-5 h-5 mr-3 text-primary-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <a href="tel:+17207493965" className="hover:text-primary-green transition-colors">
-                  (720) 749-3965
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Visit</h4>
+            <ul className="space-y-3 text-sm text-white/65">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-primary-blue-light" />
+                <a href={BUSINESS.directionsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                  {BUSINESS.address.full}
                 </a>
               </li>
-              <li className="flex items-start">
-                <svg className="w-5 h-5 mr-3 mt-0.5 text-primary-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              <li className="flex items-start gap-3">
+                <Clock className="mt-0.5 size-4 shrink-0 text-primary-blue-light" />
                 <div>
-                  <p>Mon-Fri: 8 AM – 5 PM</p>
-                  <p>Sat: 8 AM – 12 PM</p>
-                  <p>Sun: Closed</p>
+                  <p>{BUSINESS.hours.weekdays}</p>
+                  <p>{BUSINESS.hours.saturday}</p>
+                  <p>{BUSINESS.hours.sunday}</p>
                 </div>
               </li>
             </ul>
           </div>
+
+          <div>
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Explore</h4>
+            <ul className="space-y-2">
+              {FOOTER_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-white/65 transition-colors hover:text-white">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-2 lg:col-span-2">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Services</h4>
+            <div className="flex flex-wrap gap-2">
+              {SERVICES.map((service) => (
+                <Link
+                  key={service.href}
+                  href={service.href}
+                  className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70 transition-colors hover:border-primary-green/50 hover:bg-primary-green/20 hover:text-white"
+                >
+                  {service.name}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} RKC Automotive. All rights reserved.</p>
+        <div className="mt-10 border-t border-white/10 pt-8">
+          <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">
+            Connect &amp; reviews
+          </h4>
+          <SocialLinks variant="light" />
+        </div>
+
+        <div className="mt-14 border-t border-white/10 pt-8 text-center text-sm text-white/40">
+          <p>© {year} {BUSINESS.name}. All rights reserved. · ASE Certified · Englewood, Colorado</p>
         </div>
       </div>
     </footer>

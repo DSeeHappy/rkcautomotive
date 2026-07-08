@@ -1,29 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f8fa;
+  --foreground: #0c1222;
 
-  /* RKC Automotive Brand Colors */
   --primary-green: #0e8536;
   --primary-green-dark: #0a6629;
-  --primary-green-light: #10a844;
+  --primary-green-light: #12a043;
 
   --primary-blue: #1c3d91;
   --primary-blue-dark: #152e6e;
-  --primary-blue-light: #2450b8;
+  --primary-blue-light: #2a52b8;
 
   --accent-gray: #64748b;
-  --accent-gray-light: #f1f5f9;
+  --accent-gray-light: #eef1f6;
+  --surface: #ffffff;
+  --ink-muted: #5a6478;
+  --line: rgba(12, 18, 34, 0.1);
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.35);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-bebas);
 
-  /* Custom color tokens */
   --color-primary-green: var(--primary-green);
   --color-primary-green-dark: var(--primary-green-dark);
   --color-primary-green-light: var(--primary-green-light);
@@ -34,12 +37,107 @@
 
   --color-accent-gray: var(--accent-gray);
   --color-accent-gray-light: var(--accent-gray-light);
+  --color-surface: var(--surface);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
 }
 
-/* Dark mode disabled for better contrast control */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary-green) 32%, white);
+  color: var(--primary-blue-dark);
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-bebas), Impact, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.wrap {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.btn-green {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary-green px-7 py-3.5 text-base font-semibold text-white shadow-[0_12px_32px_-12px_rgba(14,133,54,0.65)] transition-all hover:bg-primary-green-dark hover:shadow-[0_16px_40px_-10px_rgba(14,133,54,0.75)];
+}
+
+.btn-blue {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary-blue px-7 py-3.5 text-base font-semibold text-white shadow-[0_12px_32px_-12px_rgba(28,61,145,0.55)] transition-all hover:bg-primary-blue-dark;
+}
+
+.btn-ghost-light {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20;
+}
+
+.field {
+  @apply w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3.5 text-foreground outline-none transition focus:border-primary-green focus:ring-2 focus:ring-primary-green/20;
+}
+
+.glass-nav {
+  background: var(--glass);
+  border-bottom: 1px solid rgba(12, 18, 34, 0.06);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+.photo-veil {
+  background:
+    linear-gradient(180deg, rgba(12, 18, 34, 0.55) 0%, rgba(12, 18, 34, 0.35) 38%, rgba(12, 18, 34, 0.72) 100%),
+    linear-gradient(90deg, rgba(14, 133, 54, 0.22) 0%, transparent 45%, rgba(28, 61, 145, 0.28) 100%);
+}
+
+.photo-veil-deep {
+  background:
+    linear-gradient(180deg, rgba(8, 12, 24, 0.45) 0%, rgba(8, 12, 24, 0.55) 50%, rgba(8, 12, 24, 0.85) 100%),
+    linear-gradient(115deg, rgba(14, 133, 54, 0.35) 0%, transparent 40%, rgba(28, 61, 145, 0.4) 100%);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.ken-burns {
+  animation: kenburns 18s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track,
+  .ken-burns {
+    animation: none;
+  }
 }

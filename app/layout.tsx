@@ -1,38 +1,55 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
-import { Analytics } from "@vercel/analytics/next";
+import type { Metadata, Viewport } from 'next';
+import { Bebas_Neue, Manrope } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import './globals.css';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import FloatingCallButton from './components/ui/FloatingCallButton';
+import SplashScreen from './components/ui/SplashScreen';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const bebas = Bebas_Neue({
+  weight: '400',
+  variable: '--font-bebas',
+  subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const manrope = Manrope({
+  variable: '--font-manrope',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
-  title: "RKC Automotive | Auto Repair & Service in Englewood, CO",
-  description: "Professional automotive repair and maintenance services in Englewood, CO. Quality service, fair prices. Open Monday-Saturday. Call (720) 749-3965.",
+  metadataBase: new URL('https://rkcautomotive.com'),
+  title: {
+    default: 'RKC Automotive | Auto Repair in Englewood, CO',
+    template: '%s | RKC Automotive',
+  },
+  description:
+    'ASE-certified auto repair in Englewood, CO. Brakes, diagnostics, oil changes, and more. Call (720) 749-3965. Mon–Fri 8–5, Sat 8–12.',
+  openGraph: {
+    siteName: 'RKC Automotive',
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: '#0e8536',
+  width: 'device-width',
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navigation />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+      <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
+        <SplashScreen>
+          <Navigation />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <FloatingCallButton />
+        </SplashScreen>
         <Analytics />
       </body>
     </html>
