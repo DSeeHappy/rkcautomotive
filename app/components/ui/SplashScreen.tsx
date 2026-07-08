@@ -24,8 +24,11 @@ const SPLASH_EXIT_MS = 600;
 /** Skip button appears after intro has started */
 const SKIP_APPEAR_MS = 1500;
 
-const LOGO_CLASS =
-  'max-h-[85vh] max-w-[92vw] w-auto h-auto object-contain select-none';
+const VIDEO_CLASS =
+  'absolute inset-0 h-full w-full object-cover object-center select-none';
+
+const STATIC_LOGO_CLASS =
+  'max-h-[85vh] max-w-[92vw] w-auto h-auto object-contain object-center select-none';
 
 type Phase = 'checking' | 'playing' | 'done';
 
@@ -129,7 +132,10 @@ export default function SplashScreen({ children }: SplashScreenProps) {
   if (phase === 'checking') {
     return (
       <>
-        <div className="fixed inset-0 z-[100] bg-[#000000]" aria-hidden />
+        <div
+          className="fixed inset-0 z-[9999] h-screen w-screen bg-[#000000]"
+          aria-hidden
+        />
         <div className="invisible" aria-hidden>
           {children}
         </div>
@@ -155,7 +161,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
 
       <div
         id="splash-screen"
-        className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#000000] transition-opacity ease-out ${
+        className={`fixed inset-0 z-[9999] h-screen w-screen overflow-hidden bg-[#000000] transition-opacity ease-out ${
           splashExiting ? 'pointer-events-none opacity-0' : 'opacity-100'
         }`}
         style={{ transitionDuration: `${SPLASH_EXIT_MS}ms` }}
@@ -163,49 +169,47 @@ export default function SplashScreen({ children }: SplashScreenProps) {
         aria-modal
         aria-label="RKC Automotive intro"
       >
-        <div className="relative inline-flex items-center justify-center">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            className={`block ${LOGO_CLASS} transition-opacity ease-in-out`}
-            style={{
-              opacity: videoOpacity,
-              transitionDuration: `${CROSSFADE_MS}ms`,
-            }}
-            aria-hidden={videoOpacity === 0}
-          >
-            <source src={RKC_LOGO_VIDEO_WEBM} type="video/webm" />
-            <source src={RKC_LOGO_VIDEO_MP4} type="video/mp4" />
-          </video>
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          className={`${VIDEO_CLASS} transition-opacity ease-in-out`}
+          style={{
+            opacity: videoOpacity,
+            transitionDuration: `${CROSSFADE_MS}ms`,
+          }}
+          aria-hidden={videoOpacity === 0}
+        >
+          <source src={RKC_LOGO_VIDEO_WEBM} type="video/webm" />
+          <source src={RKC_LOGO_VIDEO_MP4} type="video/mp4" />
+        </video>
 
-          <div
-            className="pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity ease-in-out"
-            style={{
-              opacity: staticLogoOpacity,
-              transitionDuration: `${CROSSFADE_MS}ms`,
-            }}
-            aria-hidden={staticLogoOpacity === 0}
-          >
-            <Image
-              src={STATIC_LOGO_SRC}
-              alt="RKC Automotive"
-              width={RKC_LOGO_WIDTH}
-              height={RKC_LOGO_HEIGHT}
-              quality={95}
-              priority
-              className={LOGO_CLASS}
-              draggable={false}
-            />
-          </div>
+        <div
+          className="pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity ease-in-out"
+          style={{
+            opacity: staticLogoOpacity,
+            transitionDuration: `${CROSSFADE_MS}ms`,
+          }}
+          aria-hidden={staticLogoOpacity === 0}
+        >
+          <Image
+            src={STATIC_LOGO_SRC}
+            alt="RKC Automotive"
+            width={RKC_LOGO_WIDTH}
+            height={RKC_LOGO_HEIGHT}
+            quality={95}
+            priority
+            className={STATIC_LOGO_CLASS}
+            draggable={false}
+          />
         </div>
 
         <button
           type="button"
           onClick={dismiss}
-          className={`absolute top-6 right-6 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/35 hover:bg-white/10 hover:text-white sm:top-8 sm:right-8 ${
+          className={`absolute top-6 right-6 z-10 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/35 hover:bg-white/10 hover:text-white sm:top-8 sm:right-8 ${
             showSkip ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
         >
