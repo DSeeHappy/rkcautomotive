@@ -15,6 +15,7 @@ type VehicleImagePanelProps = {
   fallbackType: VehicleType;
   isRepresentative?: boolean;
   fillImage?: boolean;
+  fullBleed?: boolean;
 };
 
 function isRemoteSrc(src: string): boolean {
@@ -32,6 +33,7 @@ export default function VehicleImagePanel({
   fallbackType,
   isRepresentative = false,
   fillImage = false,
+  fullBleed = false,
 }: VehicleImagePanelProps) {
   const [imageSrc, setImageSrc] = useState(src);
   const [fallbackStage, setFallbackStage] = useState<'primary' | 'remote' | 'category'>('primary');
@@ -55,6 +57,35 @@ export default function VehicleImagePanel({
   }
 
   const remote = isRemoteSrc(imageSrc);
+
+  if (fullBleed) {
+    return (
+      <div className="absolute inset-0 overflow-hidden bg-[#080d18]">
+        <Image
+          src={imageSrc}
+          alt={alt}
+          width={1600}
+          height={900}
+          onError={handleError}
+          className="absolute inset-0 h-full w-full object-cover"
+          sizes="100vw"
+          priority={!remote}
+          unoptimized={remote}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            background: `radial-gradient(ellipse at 30% 80%, color-mix(in srgb, ${brandColor} 35%, transparent) 0%, transparent 65%)`,
+          }}
+        />
+        {isRepresentative && (
+          <span className="absolute right-16 top-4 z-20 rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/80 sm:right-20">
+            Representative photo
+          </span>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex h-full min-h-[280px] w-full flex-col overflow-hidden bg-[#080d18] sm:min-h-[360px] lg:min-h-0">

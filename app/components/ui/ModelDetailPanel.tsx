@@ -30,6 +30,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
   const imageYearRange = vehicleImage.yearRange ?? model.yearRange;
   const remoteFallbackSrc = vehicleImage.record?.sourceUrl;
   const isRepresentative = vehicleImage.isRepresentative;
+  const isVolkswagenFullBleed = brand.slug === 'volkswagen';
 
   return (
     <Dialog open={open} onClose={onClose} className="relative z-50">
@@ -40,32 +41,8 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-4 sm:pl-10">
             <DialogPanel className="pointer-events-auto w-screen max-w-2xl lg:max-w-5xl xl:max-w-6xl">
               <div className="relative flex h-full flex-col overflow-hidden shadow-2xl">
-                <div
-                  className="absolute inset-0"
-                  style={{ background: getBrandPanelBackground(brand) }}
-                  aria-hidden
-                />
-                <div
-                  className="absolute inset-0 opacity-90"
-                  style={{ background: getBrandAccentGlow(brand) }}
-                  aria-hidden
-                />
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-transparent to-primary-blue/15"
-                  aria-hidden
-                />
-
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="absolute right-4 top-4 z-20 rounded-full border border-white/20 bg-black/40 p-2 text-white transition hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50"
-                  aria-label="Close model details"
-                >
-                  <X className="size-5" aria-hidden />
-                </button>
-
-                <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row">
-                  <div className="relative shrink-0 lg:sticky lg:top-0 lg:h-full lg:w-[45%] lg:min-h-0">
+                {isVolkswagenFullBleed ? (
+                  <>
                     <VehicleImagePanel
                       src={imageSrc}
                       remoteFallbackSrc={remoteFallbackSrc}
@@ -76,11 +53,75 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                       yearRange={imageYearRange}
                       fallbackType={model.vehicleType}
                       isRepresentative={isRepresentative}
-                      fillImage={brand.slug === 'volkswagen'}
+                      fullBleed
                     />
-                  </div>
+                    <div
+                      className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-[#060a12]/95 via-[#060a12]/75 to-[#060a12]/35 lg:via-[#060a12]/55 lg:to-[#060a12]/20"
+                      aria-hidden
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#060a12]/90 via-[#060a12]/25 to-[#060a12]/50"
+                      aria-hidden
+                    />
+                  </>
+                ) : (
+                  <>
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: getBrandPanelBackground(brand) }}
+                      aria-hidden
+                    />
+                    <div
+                      className="absolute inset-0 opacity-90"
+                      style={{ background: getBrandAccentGlow(brand) }}
+                      aria-hidden
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-transparent to-primary-blue/15"
+                      aria-hidden
+                    />
+                  </>
+                )}
 
-                  <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="absolute right-4 top-4 z-20 rounded-full border border-white/20 bg-black/40 p-2 text-white transition hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50"
+                  aria-label="Close model details"
+                >
+                  <X className="size-5" aria-hidden />
+                </button>
+
+                <div
+                  className={
+                    isVolkswagenFullBleed
+                      ? 'relative z-10 flex min-h-0 flex-1 flex-col'
+                      : 'relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row'
+                  }
+                >
+                  {!isVolkswagenFullBleed && (
+                    <div className="relative shrink-0 lg:sticky lg:top-0 lg:h-full lg:w-[45%] lg:min-h-0">
+                      <VehicleImagePanel
+                        src={imageSrc}
+                        remoteFallbackSrc={remoteFallbackSrc}
+                        alt={imageAlt}
+                        brandColor={brand.color}
+                        brandName={brand.name}
+                        model={model.model}
+                        yearRange={imageYearRange}
+                        fallbackType={model.vehicleType}
+                        isRepresentative={isRepresentative}
+                      />
+                    </div>
+                  )}
+
+                  <div
+                    className={
+                      isVolkswagenFullBleed
+                        ? 'flex min-h-0 flex-1 flex-col overflow-y-auto lg:ml-auto lg:max-w-[58%]'
+                        : 'flex min-h-0 flex-1 flex-col overflow-y-auto'
+                    }
+                  >
                     <div className="border-b border-white/10 p-6 sm:p-8 lg:pt-14">
                       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
                         {brand.name} · {model.yearRange}
