@@ -11,7 +11,7 @@ import { getVehicleImage } from '@/lib/vehicleImages';
 import BrandLogo from './BrandLogo';
 import VehicleImagePanel from './VehicleImagePanel';
 
-const FULL_BLEED_BRANDS = ['volkswagen', 'kia', 'audi'] as const;
+const FULL_BLEED_BRANDS = ['volkswagen', 'kia', 'audi', 'jeep', 'nissan', 'hyundai'] as const;
 
 type ModelDetailPanelProps = {
   model: VehicleModel | null;
