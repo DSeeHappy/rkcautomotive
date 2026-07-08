@@ -13,6 +13,7 @@ type VehicleImagePanelProps = {
   model: string;
   yearRange?: string;
   fallbackType: VehicleType;
+  isRepresentative?: boolean;
 };
 
 function isRemoteSrc(src: string): boolean {
@@ -28,6 +29,7 @@ export default function VehicleImagePanel({
   model,
   yearRange,
   fallbackType,
+  isRepresentative = false,
 }: VehicleImagePanelProps) {
   const [imageSrc, setImageSrc] = useState(src);
   const [fallbackStage, setFallbackStage] = useState<'primary' | 'remote' | 'category'>('primary');
@@ -67,6 +69,11 @@ export default function VehicleImagePanel({
       />
 
       <div className="relative flex flex-1 items-center justify-center p-6 sm:p-8">
+        {isRepresentative && (
+          <span className="absolute right-4 top-4 z-20 rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/80">
+            Representative photo
+          </span>
+        )}
         <Image
           src={imageSrc}
           alt={alt}
@@ -86,7 +93,7 @@ export default function VehicleImagePanel({
         </p>
         <p className="mt-1 text-sm text-white/90">{model}</p>
         {fallbackStage === 'category' && (
-          <p className="mt-2 text-xs text-white/70">Photo reference — schedule service for your exact {model}</p>
+          <p className="mt-2 text-xs text-white/70">Representative image — schedule service for your exact {model}</p>
         )}
       </div>
     </div>

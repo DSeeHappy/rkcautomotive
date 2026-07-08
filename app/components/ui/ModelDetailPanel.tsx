@@ -29,6 +29,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
   const imageAlt = vehicleImage.alt;
   const imageYearRange = vehicleImage.yearRange ?? model.yearRange;
   const remoteFallbackSrc = vehicleImage.record?.sourceUrl;
+  const isRepresentative = vehicleImage.isRepresentative;
 
   return (
     <Dialog open={open} onClose={onClose} className="relative z-50">
@@ -74,6 +75,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                       model={model.model}
                       yearRange={imageYearRange}
                       fallbackType={model.vehicleType}
+                      isRepresentative={isRepresentative}
                     />
                   </div>
 
