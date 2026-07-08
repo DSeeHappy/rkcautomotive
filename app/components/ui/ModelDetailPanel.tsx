@@ -76,6 +76,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                       yearRange={imageYearRange}
                       fallbackType={model.vehicleType}
                       isRepresentative={isRepresentative}
+                      fillImage={brand.slug === 'volkswagen'}
                     />
                   </div>
 

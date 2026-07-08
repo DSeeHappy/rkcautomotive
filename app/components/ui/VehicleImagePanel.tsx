@@ -14,6 +14,7 @@ type VehicleImagePanelProps = {
   yearRange?: string;
   fallbackType: VehicleType;
   isRepresentative?: boolean;
+  fillImage?: boolean;
 };
 
 function isRemoteSrc(src: string): boolean {
@@ -30,6 +31,7 @@ export default function VehicleImagePanel({
   yearRange,
   fallbackType,
   isRepresentative = false,
+  fillImage = false,
 }: VehicleImagePanelProps) {
   const [imageSrc, setImageSrc] = useState(src);
   const [fallbackStage, setFallbackStage] = useState<'primary' | 'remote' | 'category'>('primary');
@@ -68,7 +70,13 @@ export default function VehicleImagePanel({
         aria-hidden
       />
 
-      <div className="relative flex flex-1 items-center justify-center p-6 sm:p-8">
+      <div
+        className={
+          fillImage
+            ? 'relative min-h-0 flex-1 overflow-hidden'
+            : 'relative flex flex-1 items-center justify-center p-6 sm:p-8'
+        }
+      >
         {isRepresentative && (
           <span className="absolute right-4 top-4 z-20 rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/80">
             Representative photo
@@ -80,7 +88,11 @@ export default function VehicleImagePanel({
           width={1600}
           height={900}
           onError={handleError}
-          className="relative z-10 h-auto max-h-[min(52vh,420px)] w-full object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.45)]"
+          className={
+            fillImage
+              ? 'absolute inset-0 z-10 h-full w-full object-cover'
+              : 'relative z-10 h-auto max-h-[min(52vh,420px)] w-full object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.45)]'
+          }
           sizes="(max-width: 1024px) 100vw, 45vw"
           priority={!remote}
           unoptimized={remote}
