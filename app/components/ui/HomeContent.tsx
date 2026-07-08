@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
-  BRAND_MARQUEE,
   BUSINESS,
   FEATURED_SERVICES,
   PHOTOS,
@@ -16,6 +15,7 @@ import {
   TRUST_BADGES,
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
+import BrandSection from './BrandSection';
 import Hero from './Hero';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 import ReviewCards from './ReviewCards';
@@ -175,16 +175,7 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* Brand marquee */}
-      <section className="overflow-hidden border-y border-[color:var(--line)] bg-white py-8">
-        <div className="marquee-track gap-10 px-4">
-          {[...BRAND_MARQUEE, ...BRAND_MARQUEE].map((brand, i) => (
-            <span key={`${brand}-${i}`} className="font-display text-3xl tracking-wide text-foreground/25 sm:text-4xl">
-              {brand}
-            </span>
-          ))}
-        </div>
-      </section>
+      <BrandSection />
 
       {/* Service areas grid */}
       <section className="border-y border-[color:var(--line)] bg-white py-24 sm:py-28">

@@ -297,22 +297,7 @@ export const TRUST_BADGES = [
   'Locally Owned',
 ] as const;
 
-export const BRAND_MARQUEE = [
-  'Toyota',
-  'Honda',
-  'Ford',
-  'Chevrolet',
-  'BMW',
-  'Mercedes-Benz',
-  'Audi',
-  'Nissan',
-  'Subaru',
-  'Jeep',
-  'Ram',
-  'Hyundai',
-  'Kia',
-  'Volkswagen',
-] as const;
+export { VEHICLE_BRANDS as BRAND_MARQUEE } from '@/lib/vehicleBrands';
 
 export const PRICING_PACKAGES = [
   {
