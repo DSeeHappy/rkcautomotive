@@ -11,6 +11,8 @@ import { getVehicleImage } from '@/lib/vehicleImages';
 import BrandLogo from './BrandLogo';
 import VehicleImagePanel from './VehicleImagePanel';
 
+const FULL_BLEED_BRANDS = ['volkswagen', 'kia', 'audi'] as const;
+
 type ModelDetailPanelProps = {
   model: VehicleModel | null;
   brand: VehicleBrand | null;
@@ -30,7 +32,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
   const imageYearRange = vehicleImage.yearRange ?? model.yearRange;
   const remoteFallbackSrc = vehicleImage.record?.sourceUrl;
   const isRepresentative = vehicleImage.isRepresentative;
-  const isVolkswagenFullBleed = brand.slug === 'volkswagen';
+  const isFullBleed = FULL_BLEED_BRANDS.includes(brand.slug as (typeof FULL_BLEED_BRANDS)[number]);
 
   return (
     <Dialog open={open} onClose={onClose} className="relative z-50">
@@ -41,7 +43,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-4 sm:pl-10">
             <DialogPanel className="pointer-events-auto w-screen max-w-2xl lg:max-w-5xl xl:max-w-6xl">
               <div className="relative flex h-full flex-col overflow-hidden shadow-2xl">
-                {isVolkswagenFullBleed ? (
+                {isFullBleed ? (
                   <>
                     <VehicleImagePanel
                       src={imageSrc}
@@ -94,12 +96,12 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
 
                 <div
                   className={
-                    isVolkswagenFullBleed
+                    isFullBleed
                       ? 'relative z-10 flex min-h-0 flex-1 flex-col'
                       : 'relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row'
                   }
                 >
-                  {!isVolkswagenFullBleed && (
+                  {!isFullBleed && (
                     <div className="relative shrink-0 lg:sticky lg:top-0 lg:h-full lg:w-[45%] lg:min-h-0">
                       <VehicleImagePanel
                         src={imageSrc}
@@ -117,7 +119,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
 
                   <div
                     className={
-                      isVolkswagenFullBleed
+                      isFullBleed
                         ? 'flex min-h-0 flex-1 flex-col overflow-y-auto lg:ml-auto lg:max-w-[58%]'
                         : 'flex min-h-0 flex-1 flex-col overflow-y-auto'
                     }
