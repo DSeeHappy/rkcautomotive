@@ -10,6 +10,8 @@ import {
   Battery,
   Wind as Exhaust,
   ShieldCheck,
+  Wrench,
+  CircleDot,
   type LucideIcon,
 } from 'lucide-react';
 import { PHOTOS, SERVICE_PHOTOS } from './photos';
@@ -507,6 +509,22 @@ export const SERVICES: ServiceItem[] = [
     icon: Car,
     description: 'Advanced diagnostics for check-engine lights, drivability, diesel, and electrical issues.',
     image: SERVICE_PHOTOS['engine-diagnostics-englewood-co'],
+  },
+  {
+    name: 'Engine Rebuilds',
+    href: '/services/engine-rebuilds-englewood-co',
+    slug: 'engine-rebuilds-englewood-co',
+    icon: Wrench,
+    description: 'Long-block and short-block rebuilding, machining, and blueprinting.',
+    image: SERVICE_PHOTOS['engine-rebuilds-englewood-co'],
+  },
+  {
+    name: 'Camshaft & Lifters',
+    href: '/services/camshaft-lifter-repair-englewood-co',
+    slug: 'camshaft-lifter-repair-englewood-co',
+    icon: CircleDot,
+    description: 'Camshaft, hydraulic lifter, and valvetrain repair for ticks and misfires.',
+    image: SERVICE_PHOTOS['camshaft-lifter-repair-englewood-co'],
   },
   {
     name: 'Transmission Services',

@@ -29,7 +29,27 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/engine-replacement-englewood-co',
-        destination: '/services/engine-diagnostics-englewood-co',
+        destination: '/services/engine-rebuilds-englewood-co',
+        permanent: true,
+      },
+      {
+        source: '/engine-rebuild-englewood-co',
+        destination: '/services/engine-rebuilds-englewood-co',
+        permanent: true,
+      },
+      {
+        source: '/engine-rebuilds-englewood-co',
+        destination: '/services/engine-rebuilds-englewood-co',
+        permanent: true,
+      },
+      {
+        source: '/camshaft-lifter-repair-englewood-co',
+        destination: '/services/camshaft-lifter-repair-englewood-co',
+        permanent: true,
+      },
+      {
+        source: '/camshaft-repair-englewood-co',
+        destination: '/services/camshaft-lifter-repair-englewood-co',
         permanent: true,
       },
       {

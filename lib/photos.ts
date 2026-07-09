@@ -59,6 +59,8 @@ export const PHOTOS = {
 export const SERVICE_PHOTOS: Record<string, string> = {
   'brake-repair-englewood-co': PHOTOS.undercarriage,
   'engine-diagnostics-englewood-co': PHOTOS.engineBay,
+  'engine-rebuilds-englewood-co': PHOTOS.engineRebuild,
+  'camshaft-lifter-repair-englewood-co': PHOTOS.classicEngine,
   'transmission-services-englewood-co': PHOTOS.classicLift,
   'suspension-steering-englewood-co': PHOTOS.techCloseup,
   'heating-ac-englewood-co': PHOTOS.interior,

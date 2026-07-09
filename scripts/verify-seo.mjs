@@ -32,6 +32,8 @@ const ROUTES = [
   '/services/battery-testing-englewood-co',
   '/services/exhaust-system-englewood-co',
   '/services/preventative-maintenance-englewood-co',
+  '/services/engine-rebuilds-englewood-co',
+  '/services/camshaft-lifter-repair-englewood-co',
 ];
 
 const ROUTE_TO_FILE = {
@@ -56,6 +58,8 @@ const ROUTE_TO_FILE = {
   '/services/battery-testing-englewood-co': 'app/services/battery-testing-englewood-co/page.tsx',
   '/services/exhaust-system-englewood-co': 'app/services/exhaust-system-englewood-co/page.tsx',
   '/services/preventative-maintenance-englewood-co': 'app/services/preventative-maintenance-englewood-co/page.tsx',
+  '/services/engine-rebuilds-englewood-co': 'app/services/engine-rebuilds-englewood-co/page.tsx',
+  '/services/camshaft-lifter-repair-englewood-co': 'app/services/camshaft-lifter-repair-englewood-co/page.tsx',
 };
 
 const KEY_JSON_LD_PAGES = [
@@ -235,7 +239,7 @@ checkRobotsAndSitemap();
 const areaRoutes = checkAreaPages();
 
 const coreCount = 10;
-const serviceCount = 11;
+const serviceCount = 13;
 const areaCount = areaRoutes.length;
 const totalRoutes = coreCount + serviceCount + areaCount;
 
