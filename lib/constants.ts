@@ -438,31 +438,37 @@ export const PRICING_SAVINGS_SCENARIOS = [
 export const PRICING_PHILOSOPHY = [
   {
     title: 'One rate. No games.',
+    icon: 'rate' as const,
     description:
       '$120/hr — posted on this page, explained on the phone, and applied on every invoice. No surprise shop fees, environmental charges, or padded line items.',
   },
   {
     title: 'No overselling. No scare tactics.',
+    icon: 'shield' as const,
     description:
       'We will not wave a printout of 15 "recommended" services or tell you your car is unsafe to drive unless it actually is. If it can wait, we say so.',
   },
   {
     title: 'Fix what is broken. Skip what is not.',
+    icon: 'wrench' as const,
     description:
       'Your estimate lists only the work you need. We diagnose the real problem — not every sensor on the wiring diagram — and get you back on the road.',
   },
   {
     title: 'Diagnostic fee applied to repair.',
+    icon: 'diagnostic' as const,
     description:
       'Pay from $99 for a real diagnostic. Approve the repair and that fee comes off the total. You are not paying twice to find out what is wrong.',
   },
   {
     title: 'Written before we wrench.',
+    icon: 'estimate' as const,
     description:
       'Every repair gets a written estimate you approve first. If the scope changes mid-job, we call you before spending another dollar.',
   },
   {
     title: 'ASE certified. 30+ years. Englewood.',
+    icon: 'certified' as const,
     description:
       'Same technician expertise dealerships charge $180–220/hr for — without the franchise overhead, the waiting-room upsell, or the vague final bill.',
   },

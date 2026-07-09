@@ -3,17 +3,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {
+  Award,
   CheckCircle,
   Phone,
   Clock,
   Shield,
+  ShieldCheck,
   Wrench,
   Calculator,
   TrendingDown,
   CircleDollarSign,
   ArrowRight,
   FileText,
+  ClipboardCheck,
+  ScanSearch,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
   BUSINESS,
@@ -34,6 +39,15 @@ import FAQAccordion from '@/app/components/ui/FAQAccordion';
 const RKC_RATE = 120;
 const DEALER_RATE = 180;
 const CHAIN_RATE = 150;
+
+const PHILOSOPHY_ICONS: Record<(typeof PRICING_PHILOSOPHY)[number]['icon'], LucideIcon> = {
+  rate: CircleDollarSign,
+  shield: ShieldCheck,
+  wrench: Wrench,
+  diagnostic: ScanSearch,
+  estimate: ClipboardCheck,
+  certified: Award,
+};
 
 function formatCurrency(amount: number) {
   return `$${amount.toLocaleString('en-US')}`;
@@ -352,9 +366,31 @@ export default function PricingContent() {
       </section>
 
       {/* Pricing philosophy */}
-      <section className="bg-[var(--background)] py-24 sm:py-28">
-        <div className="wrap">
-          <FadeIn className="mb-14 max-w-3xl text-center mx-auto">
+      <section className="relative isolate overflow-hidden bg-[var(--background)] py-20 sm:py-24">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 1px 1px, rgba(28,61,145,0.07) 1px, transparent 0)',
+            backgroundSize: '28px 28px',
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-green/30 to-transparent"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-20 -top-24 size-80 rounded-full bg-primary-green/[0.06] blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-20 -left-16 size-72 rounded-full bg-primary-blue/[0.06] blur-3xl"
+        />
+
+        <div className="wrap relative">
+          <FadeIn className="mx-auto mb-8 max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Our philosophy</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Honest pricing. No overselling.
@@ -363,31 +399,54 @@ export default function PricingContent() {
               We are not the cheapest shop in Denver — we are the fair one. Lower overhead than a dealership, better
               technicians than a chain, and zero pressure to approve work you do not need.
             </p>
+            <div
+              aria-hidden
+              className="mx-auto mt-8 h-px w-24 bg-gradient-to-r from-transparent via-primary-green to-transparent"
+            />
           </FadeIn>
 
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-            {PRICING_PHILOSOPHY.map((point) => (
-              <StaggerItem key={point.title}>
-                <div className="h-full rounded-2xl border border-[color:var(--line)] bg-white p-6 sm:p-8">
-                  <CircleDollarSign className="size-7 text-primary-green" aria-hidden />
-                  <h3 className="mt-4 font-display text-2xl tracking-wide text-primary-blue sm:text-3xl">
-                    {point.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{point.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
+            {PRICING_PHILOSOPHY.map((point, index) => {
+              const Icon = PHILOSOPHY_ICONS[point.icon];
+
+              return (
+                <StaggerItem key={point.title}>
+                  <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-6 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)] sm:p-8">
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute -right-8 -top-8 size-28 rounded-full bg-primary-blue/[0.04] transition duration-300 group-hover:bg-primary-green/[0.06]"
+                    />
+                    <div className="relative flex items-start gap-4">
+                      <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-green/15 to-primary-blue/10 ring-1 ring-primary-green/20">
+                        <Icon className="size-6 text-primary-green" aria-hidden />
+                      </div>
+                      <span className="font-display text-4xl leading-none tracking-wide text-primary-blue/15">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+                    <h3 className="relative mt-5 font-display text-2xl tracking-wide text-primary-blue sm:text-[1.65rem]">
+                      {point.title}
+                    </h3>
+                    <p className="relative mt-3 flex-1 text-sm leading-relaxed text-ink-muted sm:text-base">
+                      {point.description}
+                    </p>
+                  </article>
+                </StaggerItem>
+              );
+            })}
           </Stagger>
 
-          <FadeIn className="mt-12 flex flex-wrap justify-center gap-4">
-            <a href={BUSINESS.phoneHref} className="btn-green">
-              <Phone className="size-5" />
-              Get a written estimate
-            </a>
-            <Link href="/contact" className="btn-blue">
-              <FileText className="size-5" />
-              Request quote online
-            </Link>
+          <FadeIn className="mt-12 border-t border-[color:var(--line)] pt-10">
+            <div className="flex flex-wrap justify-center gap-4">
+              <a href={BUSINESS.phoneHref} className="btn-green">
+                <Phone className="size-5" />
+                Get a written estimate
+              </a>
+              <Link href="/contact" className="btn-blue">
+                <FileText className="size-5" />
+                Request quote online
+              </Link>
+            </div>
           </FadeIn>
         </div>
       </section>
