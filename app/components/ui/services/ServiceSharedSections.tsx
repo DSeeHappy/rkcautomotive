@@ -503,17 +503,23 @@ export function ServiceFinalCTA({
   imageAlt = 'RKC Automotive shop bay in Englewood Colorado',
 }: ServiceFinalCTAProps) {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative isolate overflow-hidden before:absolute before:inset-0 before:z-[1] before:bg-gradient-to-b before:from-[#0c1222]/85 before:via-[#0c1222]/75 before:to-[#0c1222]/90">
       <div className="absolute inset-0">
         <Image src={image} alt={imageAlt} fill className="object-cover" sizes="100vw" />
         <div className="photo-veil-deep absolute inset-0" />
       </div>
-      <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">{eyebrow}</p>
-          <h2 className="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">{title}</h2>
-          <p className="mx-auto mt-4 max-w-lg text-white/75">{description}</p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-green-light sm:mb-4">
+            {eyebrow}
+          </p>
+          <h2 className="mx-auto max-w-3xl text-balance text-2xl font-bold leading-snug tracking-normal text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:text-3xl lg:text-4xl">
+            {title}
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg">
+            {description}
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
             <MotionAnchor href={primaryCta.href} className="btn-green">
               <Phone className="size-5" />
               {primaryCta.label}
@@ -523,12 +529,12 @@ export function ServiceFinalCTA({
               {secondaryCta.label}
             </Link>
           </div>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-white/50">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm leading-relaxed text-white/75">
             <span>{BUSINESS.address.full}</span>
             <span aria-hidden>·</span>
             <MotionAnchor
               href={BUSINESS.directionsUrl}
-              className="inline-flex items-center gap-1.5 text-white/60 transition hover:text-white"
+              className="inline-flex items-center gap-1.5 text-white/75 transition hover:text-white"
             >
               <MapPin className="size-4" />
               Get directions
