@@ -503,10 +503,13 @@ export function ServiceFinalCTA({
   imageAlt = 'RKC Automotive shop bay in Englewood Colorado',
 }: ServiceFinalCTAProps) {
   return (
-    <section className="relative isolate overflow-hidden before:absolute before:inset-0 before:z-[1] before:bg-gradient-to-b before:from-[#0c1222]/85 before:via-[#0c1222]/75 before:to-[#0c1222]/90">
+    <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0">
-        <Image src={image} alt={imageAlt} fill className="object-cover" sizes="100vw" />
-        <div className="photo-veil-deep absolute inset-0" />
+        <Image src={image} alt={imageAlt} fill className="object-cover object-center" sizes="100vw" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"
+        />
       </div>
       <div className="relative z-10 px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
         <FadeIn className="mx-auto max-w-3xl">
