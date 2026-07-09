@@ -1,57 +1,85 @@
 /**
- * Verify exact image lookup for Ford, Toyota, Mercedes-Benz site models.
- * Run: node scripts/verify-brand-lookups.mjs
+ * Verify exact image lookups for all 14 BrandTabs commonModels.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
-const require = createRequire(import.meta.url);
+
+const BRAND_SLUGS = [
+  'toyota', 'honda', 'ford', 'chevrolet', 'bmw', 'mercedes', 'audi', 'nissan',
+  'subaru', 'jeep', 'ram', 'hyundai', 'kia', 'volkswagen',
+];
 
 function slugify(text) {
-  return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
-const brandsTs = fs.readFileSync(path.join(root, 'lib', 'vehicleBrands.ts'), 'utf8');
-const targetSlugs = new Set(['ford', 'toyota', 'mercedes']);
-const models = [];
+function loadCommonModels(slug) {
+  const brandsTs = fs.readFileSync(path.join(root, 'lib', 'vehicleBrands.ts'), 'utf8');
+  const block = brandsTs.match(new RegExp(`slug: '${slug}'[\\s\\S]*?commonModels: \\[([\\s\\S]*?)\\]`));
+  if (!block) return [];
+  return [...block[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+}
 
-for (const match of brandsTs.matchAll(/slug: '([^']+)'[\s\S]*?commonModels: \[([\s\S]*?)\]/g)) {
-  if (!targetSlugs.has(match[1])) continue;
-  for (const m of [...match[2].matchAll(/'([^']+)'/g)]) {
-    models.push({ brandSlug: match[1], model: m[1] });
+function loadImageLookup() {
+  const ts = fs.readFileSync(path.join(root, 'lib', 'vehicleImages.ts'), 'utf8');
+  const lookup = new Map();
+  const recordRegex = /makeSlug: '([^']+)'[\s\S]*?modelSlug: '([^']+)'[\s\S]*?imagePath: '([^']+)'[\s\S]*?fallbackNeeded: (true|false)/g;
+  let match;
+  while ((match = recordRegex.exec(ts)) !== null) {
+    lookup.set(`${match[1]}::${match[2]}`, {
+      imagePath: match[3],
+      fallbackNeeded: match[4] === 'true',
+    });
+  }
+  return lookup;
+}
+
+const lookup = loadImageLookup();
+let exact = 0;
+let issues = 0;
+const bad = [];
+
+const MODEL_ALIASES = {
+  bmw: { '3 series': '3-series', '5 series': '5-series' },
+  chevrolet: { silverado: 'silverado-1500' },
+};
+
+function resolveKey(makeSlug, model) {
+  const brandSlug = makeSlug === 'mercedes-benz' ? 'mercedes' : makeSlug;
+  const modelSlug = MODEL_ALIASES[brandSlug]?.[model.toLowerCase()] ?? slugify(model);
+  return `${makeSlug}::${modelSlug}`;
+}
+
+for (const slug of BRAND_SLUGS) {
+  const makeSlug = slug === 'mercedes' ? 'mercedes-benz' : slug;
+  for (const model of loadCommonModels(slug)) {
+    const key = resolveKey(makeSlug, model);
+    const record = lookup.get(key);
+    const fileExists = record ? fs.existsSync(path.join(root, 'public', record.imagePath.replace(/^\//, ''))) : false;
+    const ok = record && !record.fallbackNeeded && fileExists;
+
+    if (ok) {
+      exact += 1;
+      console.log(`OK  ${key} -> ${record.imagePath}`);
+    } else {
+      issues += 1;
+      bad.push(key);
+      console.log(`BAD ${key} record=${!!record} fallback=${record?.fallbackNeeded} file=${fileExists}`);
+    }
   }
 }
 
-// Compile vehicleImages.ts on the fly via tsx/ts-node fallback: parse generated records
-const ts = fs.readFileSync(path.join(root, 'lib', 'vehicleImages.ts'), 'utf8');
-const MAKE_ALIASES = { mercedes: 'mercedes-benz' };
-const records = [...ts.matchAll(/makeSlug: '([^']+)'[\s\S]*?modelSlug: '([^']+)'[\s\S]*?imagePath: '([^']+)'/g)].map((m) => ({
-  makeSlug: m[1],
-  modelSlug: m[2],
-  imagePath: m[3],
-}));
-const lookup = new Map(records.map((r) => [`${r.makeSlug}::${r.modelSlug}`, r]));
-
-let ok = 0;
-let fail = 0;
-
-for (const { brandSlug, model } of models) {
-  const makeSlug = MAKE_ALIASES[brandSlug] ?? brandSlug;
-  const key = `${makeSlug}::${slugify(model)}`;
-  const record = lookup.get(key);
-  const exists = record ? fs.existsSync(path.join(root, 'public', record.imagePath.replace(/^\//, ''))) : false;
-  if (record && exists) {
-    ok += 1;
-    console.log(`OK  ${key} -> ${record.imagePath}`);
-  } else {
-    fail += 1;
-    console.log(`FAIL ${key} record=${Boolean(record)} exists=${exists}`);
-  }
+console.log(`\nExact matches: ${exact}, issues: ${issues}`);
+if (issues) {
+  console.log('Missing:', bad.join(', '));
+  process.exit(1);
 }
-
-console.log(`\n${ok}/${models.length} exact lookups with local WebP`);
-process.exit(fail > 0 ? 1 : 0);
