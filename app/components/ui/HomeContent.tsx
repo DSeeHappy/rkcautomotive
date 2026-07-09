@@ -16,9 +16,7 @@ import {
   TRUST_BADGES,
   COMPETITIVE_POSITIONING,
   LABOR_RATE,
-  WARRANTY_PEACE_OF_MIND,
 } from '@/lib/constants';
-import WarrantyProviders from './WarrantyProviders';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
 import BrandSection from './BrandSection';
 import Hero from './Hero';
@@ -277,33 +275,6 @@ export default function HomeContent() {
               </MotionAnchor>
             </FadeIn>
           </div>
-        </div>
-      </section>
-
-      {/* Warranty & peace of mind */}
-      <section className="py-24 sm:py-28">
-        <div className="wrap">
-          <FadeIn className="mb-14 max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Peace of mind</p>
-            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Warranty &amp; clear approvals
-            </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              We stand behind our work with written estimates, quality parts, and warranty options explained on every
-              invoice — plus help with third-party extended warranty claims when coverage applies.
-            </p>
-          </FadeIn>
-          <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
-            {WARRANTY_PEACE_OF_MIND.map((item) => (
-              <StaggerItem key={item.title}>
-                <div className="h-full rounded-2xl border border-[color:var(--line)] bg-white p-6 sm:p-8">
-                  <h3 className="text-lg font-bold text-primary-blue">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-muted">{item.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-          <WarrantyProviders />
         </div>
       </section>
 
