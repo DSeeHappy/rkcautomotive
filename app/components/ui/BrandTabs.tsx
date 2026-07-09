@@ -1,7 +1,7 @@
 'use client';
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
-import { ExternalLink, MapPin, Wrench } from 'lucide-react';
+import { ChevronRight, ExternalLink, MapPin, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS, type VehicleBrand } from '@/lib/vehicleBrands';
@@ -118,15 +118,23 @@ export default function BrandTabs() {
                       <Wrench className="size-4" aria-hidden />
                       Common models
                     </p>
+                    <p className="mt-1.5 text-xs text-white/60">
+                      Tap a model for maintenance schedule &amp; pricing context
+                    </p>
                     <ul className="mt-3 flex flex-wrap gap-2">
                       {brand.commonModels.map((model) => (
                         <li key={model}>
                           <button
                             type="button"
                             onClick={() => openModelDetail(brand, model)}
-                            className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/40"
+                            aria-label={`View ${brand.name} ${model} details`}
+                            className="group inline-flex cursor-pointer items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-[0.98]"
                           >
-                            {model}
+                            <span>{model}</span>
+                            <ChevronRight
+                              className="size-3.5 shrink-0 text-white/50 transition duration-200 group-hover:translate-x-0.5 group-hover:text-white/90"
+                              aria-hidden
+                            />
                           </button>
                         </li>
                       ))}
