@@ -121,7 +121,7 @@ export default function LocationPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Verified reviews</p>
             <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground">What customers say</h2>
           </FadeIn>
-          <ReviewCards reviews={VERIFIED_REVIEWS_4_PLUS.slice(0, 3)} />
+          <ReviewCards reviews={VERIFIED_REVIEWS_4_PLUS} />
         </div>
       </section>
 

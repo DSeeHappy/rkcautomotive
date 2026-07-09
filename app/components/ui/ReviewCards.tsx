@@ -6,7 +6,8 @@ import { ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { GOOGLE_REVIEWS_URL, VERIFIED_REVIEWS_4_PLUS, type VerifiedReview } from '@/lib/constants';
 
-const ROTATION_INTERVAL_MS = 6000;
+const ROTATION_INTERVAL_MS = 1000;
+const COMPACT_INDICATOR_THRESHOLD = 10;
 const ease = [0.22, 1, 0.36, 1] as const;
 
 type ReviewCardsProps = {
@@ -81,6 +82,7 @@ export default function ReviewCards({
   const shouldRotate = rotate ?? reviews.length > visibleCount;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const useCompactIndicator = reviews.length >= COMPACT_INDICATOR_THRESHOLD;
 
   const slotCount = shouldRotate ? visibleCount : reviews.length;
   const visibleReviews = useMemo(
@@ -99,6 +101,7 @@ export default function ReviewCards({
   }, [shouldRotate, isPaused, reduceMotion, advance, intervalMs]);
 
   const gridClass = slotCount >= 3 ? 'lg:grid-cols-3' : slotCount === 2 ? 'sm:grid-cols-2' : '';
+  const progressPercent = reviews.length > 0 ? ((currentIndex + 1) / reviews.length) * 100 : 0;
 
   return (
     <div className={className}>
@@ -159,23 +162,47 @@ export default function ReviewCards({
         )}
 
         {shouldRotate ? (
-          <div className="mt-8 flex justify-center gap-2" role="tablist" aria-label="Review slides">
-            {reviews.map((review, index) => (
-              <button
-                key={reviewKey(review)}
-                type="button"
-                role="tab"
-                aria-selected={index === currentIndex}
-                aria-label={`Show review from ${review.author}`}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'w-6 bg-primary-green'
-                    : 'w-2 bg-[color:var(--line)] hover:bg-primary-green/40'
-                }`}
-              />
-            ))}
-          </div>
+          useCompactIndicator ? (
+            <div className="mt-8 space-y-2" aria-label="Review rotation progress">
+              <div className="flex items-center justify-between text-xs text-ink-muted">
+                <span>
+                  Review {currentIndex + 1} of {reviews.length}
+                </span>
+                <span className="font-medium text-primary-green">{reviews.length} verified</span>
+              </div>
+              <div
+                className="h-1.5 overflow-hidden rounded-full bg-[color:var(--line)]"
+                role="progressbar"
+                aria-valuemin={1}
+                aria-valuemax={reviews.length}
+                aria-valuenow={currentIndex + 1}
+                aria-label={`Showing review ${currentIndex + 1} of ${reviews.length}`}
+              >
+                <div
+                  className="h-full rounded-full bg-primary-green transition-all duration-300 ease-out"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="mt-8 flex justify-center gap-2" role="tablist" aria-label="Review slides">
+              {reviews.map((review, index) => (
+                <button
+                  key={reviewKey(review)}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === currentIndex}
+                  aria-label={`Show review from ${review.author}`}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? 'w-6 bg-primary-green'
+                      : 'w-2 bg-[color:var(--line)] hover:bg-primary-green/40'
+                  }`}
+                />
+              ))}
+            </div>
+          )
         ) : null}
       </div>
 

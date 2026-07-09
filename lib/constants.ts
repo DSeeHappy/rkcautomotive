@@ -86,6 +86,14 @@ export type VerifiedReview = {
 export const VERIFIED_REVIEWS: VerifiedReview[] = [
   {
     quote:
+      'RKC Automotive saved me thousands! Another shop told me I need a new engine for about 11,000, but RKC found the real issue and fixed it for only 3,200. My GMC Yukon runs great now. Honest, Skilled, and trustworthy-Highly recommend!',
+    author: 'T.s Robert',
+    rating: 5,
+    source: 'Google Review',
+    sourceUrl: GOOGLE_REVIEWS_URL,
+  },
+  {
+    quote:
       "Ray is an Honest, trustworthy person who knows his cars. Very pleasant and polite person. And he will work with low income families. Doesn't overcharge!",
     author: 'Christine Rivero',
     rating: 5,
@@ -104,6 +112,53 @@ export const VERIFIED_REVIEWS: VerifiedReview[] = [
     quote:
       'Truly a GREAT shop. The owner, mechanics, employees were busy, but treated my walk-in as a regular customer. I brought my car into the shop on a Friday afternoon. Ray and his mechanics had my car fixed within a couple of hours, even as busy as they were. Great prices and great work done. Everyone was very kind, professional, friendly, and helpful. Highly recommend!',
     author: 'Cassie Holderman',
+    rating: 5,
+    source: 'Google Review',
+    sourceUrl: GOOGLE_REVIEWS_URL,
+  },
+  {
+    quote:
+      "I've been coming to RKC Automotive in Englewood for a while now, and I can't say enough good things about them. They are such good people with genuinely good hearts. Every time I've had car trouble, they've helped me out—always honest, kind, and super understanding, especially knowing I'm a student on a budget. They always offer affordable prices and never try to upsell me on things I don't need. It's rare to find a shop you can truly trust, and I feel so grateful to have found them. Highly recommend to anyone looking for reliable and caring mechanics!",
+    author: 'Ly Trần',
+    rating: 5,
+    source: 'Google Review',
+    sourceUrl: GOOGLE_REVIEWS_URL,
+  },
+  {
+    quote:
+      "Ray is the man! He has help me numerous times and we couldn't more happier with the service and prices.",
+    author: 'Jay Fher',
+    rating: 5,
+    source: 'Google Review',
+    sourceUrl: GOOGLE_REVIEWS_URL,
+  },
+  {
+    quote:
+      "Ray and his entire crew are the absolute best! I wouldn't take my car anywhere else. Amazing customer service and they have the best dogs ever! Don't forget to say hi to Indy and Diesel!",
+    author: 'Tyler Stitt',
+    rating: 5,
+    source: 'Google Review',
+    sourceUrl: GOOGLE_REVIEWS_URL,
+  },
+  {
+    quote: 'Fantastic, super friendly and they fixed my car quickly!',
+    author: 'Heather Fritts',
+    rating: 5,
+    source: 'Google Review',
+    sourceUrl: GOOGLE_REVIEWS_URL,
+  },
+  {
+    quote:
+      'Quality and integrity, I highly recommend! Stand behind their work and have fair prices.',
+    author: 'Ann Symalla',
+    rating: 5,
+    source: 'Google Review',
+    sourceUrl: GOOGLE_REVIEWS_URL,
+  },
+  {
+    quote:
+      'Ray quality of work is not only amazing but his integrity backs up anything he does. If you need work done I highly recommend RKC',
+    author: 'Kalena Rodriguez',
     rating: 5,
     source: 'Google Review',
     sourceUrl: GOOGLE_REVIEWS_URL,
