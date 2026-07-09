@@ -22,7 +22,7 @@ export default function ModelCommonServicesSection({
     <section className="mt-8" aria-labelledby="model-common-services-heading">
       <h3
         id="model-common-services-heading"
-        className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white"
+        className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
       >
         <Wrench className="size-4" aria-hidden />
         Common RKC services for the {modelName}
@@ -33,9 +33,11 @@ export default function ModelCommonServicesSection({
         {services.map((service) => (
           <li
             key={service.id}
-            className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"
+            className="rounded-xl border border-white/15 border-l-4 border-l-primary-green bg-gradient-to-br from-black/80 to-[#0c1222]/70 p-5 shadow-lg backdrop-blur-lg"
           >
-            <h4 className="text-base font-semibold leading-snug text-white">{service.title}</h4>
+            <h4 className="text-base font-semibold leading-snug text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+              {service.title}
+            </h4>
             <p className="mt-3 text-sm leading-relaxed text-white/85">{service.description}</p>
             <Link
               href={service.href}
@@ -50,7 +52,7 @@ export default function ModelCommonServicesSection({
       </ul>
 
       {/* Mobile: accordion */}
-      <div className="mt-4 divide-y divide-white/15 overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm sm:hidden">
+      <div className="mt-4 divide-y divide-white/15 overflow-hidden rounded-xl border border-white/15 border-l-4 border-l-primary-green bg-gradient-to-br from-black/80 to-[#0c1222]/70 shadow-lg backdrop-blur-lg sm:hidden">
         {services.map((service) => (
           <Disclosure key={service.id} as="div">
             {({ open }) => (
