@@ -203,7 +203,19 @@ export default function HomeContent() {
               {TRUST_BADGES.map((badge) => (
                 <li key={badge} className="flex items-center gap-3 text-sm font-semibold">
                   <span className="size-2 shrink-0 rounded-full bg-primary-green" />
-                  {badge}
+                  {badge === 'ASE Certified' ? (
+                    <a
+                      href={ASE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={ASE_ARIA_LABEL}
+                      className="transition-colors hover:text-primary-green"
+                    >
+                      {badge}
+                    </a>
+                  ) : (
+                    badge
+                  )}
                 </li>
               ))}
             </ul>

@@ -4,14 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   AlertTriangle,
-  Award,
   CalendarCheck,
   CheckCircle2,
   ClipboardCheck,
   Eye,
   FileText,
   Filter,
-  MapPin,
   Phone,
   Ruler,
   ShieldCheck,
@@ -20,8 +18,6 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import {
-  ASE_ARIA_LABEL,
-  ASE_URL,
   BUSINESS,
   CAMSHAFT_LIFTER_PAGE_FAQ,
   LABOR_RATE,
@@ -35,15 +31,8 @@ import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 import { SECTION_PAD, SECTION_HEADER, SECTION_HEADER_CENTER, getServiceBreadcrumbs } from './servicesShared';
 import RelatedServices from '@/app/components/ui/RelatedServices';
-import { ServiceAreaServed, ServiceFinalCTA } from './ServiceSharedSections';
+import { HeroTrustPills, ServiceAreaServed, ServiceFinalCTA, TRUST_PILLS } from './ServiceSharedSections';
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
-
-const TRUST_PILLS = [
-  { icon: Wrench, label: LABOR_RATE, sub: 'posted labor rate' },
-  { icon: Award, label: 'ASE', sub: 'certified techs', href: ASE_URL },
-  { icon: ClipboardCheck, label: 'Written', sub: 'estimates first' },
-  { icon: MapPin, label: 'Evans Ave', sub: 'Englewood shop' },
-] as const;
 
 const TICK_CARDS: {
   icon: LucideIcon;
@@ -227,44 +216,8 @@ export default function CamshaftLifterContent() {
               </div>
             </div>
 
-            <div ref={pills.ref} className="mt-10 flex flex-wrap gap-3 lg:mt-12">
-              {TRUST_PILLS.map((pill) => {
-                const Icon = pill.icon;
-                const pillClassName =
-                  'flex items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] px-4 py-3 backdrop-blur-md transition-colors';
-                const content = (
-                  <>
-                    <span className="flex size-9 items-center justify-center rounded-xl bg-primary-green/20 ring-1 ring-primary-green/30">
-                      <Icon className="size-4 text-primary-green-light" aria-hidden />
-                    </span>
-                    <div>
-                      <p className="font-display text-xl tracking-wide text-white">{pill.label}</p>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/55">{pill.sub}</p>
-                    </div>
-                  </>
-                );
-
-                if ('href' in pill && pill.href) {
-                  return (
-                    <MotionAnchor
-                      key={pill.sub}
-                      href={pill.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={ASE_ARIA_LABEL}
-                      className={`${pillClassName} hover:border-primary-green/40`}
-                    >
-                      {content}
-                    </MotionAnchor>
-                  );
-                }
-
-                return (
-                  <div key={pill.sub} className={pillClassName}>
-                    {content}
-                  </div>
-                );
-              })}
+            <div ref={pills.ref} className="mt-10 lg:mt-12">
+              <HeroTrustPills pills={TRUST_PILLS} />
             </div>
           </div>
         </div>

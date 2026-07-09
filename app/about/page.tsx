@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
-import { BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS, LABOR_RATE, COMPETITIVE_POSITIONING, ASE_URL, ASE_ARIA_LABEL } from '@/lib/constants';
+import { ASE_ARIA_LABEL, ASE_URL, BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS, LABOR_RATE, COMPETITIVE_POSITIONING } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
@@ -169,7 +169,19 @@ export default function AboutPage() {
                 key={b}
                 className="rounded-full border border-[color:var(--line)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-foreground"
               >
-                {b}
+                {b === 'ASE Certified' ? (
+                  <a
+                    href={ASE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={ASE_ARIA_LABEL}
+                    className="transition-colors hover:text-primary-green"
+                  >
+                    {b}
+                  </a>
+                ) : (
+                  b
+                )}
               </span>
             ))}
           </div>

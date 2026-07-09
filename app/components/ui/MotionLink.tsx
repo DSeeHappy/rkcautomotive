@@ -32,6 +32,7 @@ export function MotionLink({ children, className, ...props }: MotionLinkProps) {
 
 type MotionAnchorProps = Omit<ComponentProps<'a'>, 'children'> & {
   children: ReactNode;
+  /** @deprecated Applied to the anchor — wrapper div removed so href clicks are never blocked */
   wrapperClassName?: string;
 };
 
@@ -42,21 +43,12 @@ export function MotionAnchor({
   wrapperClassName,
   ...rest
 }: MotionAnchorProps) {
-  const { ref, reduce } = useGsapHoverPress<HTMLDivElement>({ hoverScale: 1.01 });
-
-  if (reduce) {
-    return (
-      <a href={href} className={className} {...rest}>
-        {children}
-      </a>
-    );
-  }
+  const { ref, reduce } = useGsapHoverPress<HTMLAnchorElement>({ hoverScale: 1.01 });
+  const mergedClassName = [wrapperClassName, className].filter(Boolean).join(' ') || undefined;
 
   return (
-    <div ref={ref} className={wrapperClassName ?? 'inline-flex'}>
-      <a href={href} className={className} {...rest}>
-        {children}
-      </a>
-    </div>
+    <a ref={reduce ? undefined : ref} href={href} className={mergedClassName} {...rest}>
+      {children}
+    </a>
   );
 }

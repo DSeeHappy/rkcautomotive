@@ -465,29 +465,46 @@ export default function PricingContent() {
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
             {PRICING_PHILOSOPHY.map((point, index) => {
               const Icon = PHILOSOPHY_ICONS[point.icon];
+              const cardClassName =
+                'group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-6 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)] sm:p-8';
+              const cardContent = (
+                <>
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -right-8 -top-8 size-28 rounded-full bg-primary-blue/[0.04] transition duration-300 group-hover:bg-primary-green/[0.06]"
+                  />
+                  <div className="relative flex items-start gap-4">
+                    <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-green/15 to-primary-blue/10 ring-1 ring-primary-green/20">
+                      <Icon className="size-6 text-primary-green" aria-hidden />
+                    </div>
+                    <span className="font-display text-4xl leading-none tracking-wide text-primary-blue/15">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="relative mt-5 font-display text-2xl tracking-wide text-primary-blue sm:text-[1.65rem]">
+                    {point.title}
+                  </h3>
+                  <p className="relative mt-3 flex-1 text-sm leading-relaxed text-ink-muted sm:text-base">
+                    {point.description}
+                  </p>
+                </>
+              );
 
               return (
                 <StaggerItem key={point.title}>
-                  <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-6 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)] sm:p-8">
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute -right-8 -top-8 size-28 rounded-full bg-primary-blue/[0.04] transition duration-300 group-hover:bg-primary-green/[0.06]"
-                    />
-                    <div className="relative flex items-start gap-4">
-                      <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-green/15 to-primary-blue/10 ring-1 ring-primary-green/20">
-                        <Icon className="size-6 text-primary-green" aria-hidden />
-                      </div>
-                      <span className="font-display text-4xl leading-none tracking-wide text-primary-blue/15">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                    </div>
-                    <h3 className="relative mt-5 font-display text-2xl tracking-wide text-primary-blue sm:text-[1.65rem]">
-                      {point.title}
-                    </h3>
-                    <p className="relative mt-3 flex-1 text-sm leading-relaxed text-ink-muted sm:text-base">
-                      {point.description}
-                    </p>
-                  </article>
+                  {point.icon === 'certified' ? (
+                    <MotionAnchor
+                      href={ASE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={ASE_ARIA_LABEL}
+                      className={`${cardClassName} hover:border-primary-green/40`}
+                    >
+                      {cardContent}
+                    </MotionAnchor>
+                  ) : (
+                    <article className={cardClassName}>{cardContent}</article>
+                  )}
                 </StaggerItem>
               );
             })}

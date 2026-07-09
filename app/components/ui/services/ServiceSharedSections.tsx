@@ -42,6 +42,64 @@ export const TRUST_PILLS = [
   { icon: MapPin, label: 'Evans Ave', sub: 'Englewood shop' },
 ] as const;
 
+export type HeroTrustPill = {
+  icon: LucideIcon;
+  label: string;
+  sub: string;
+  href?: string;
+};
+
+const HERO_PILL_CLASS =
+  'flex items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] px-4 py-3 backdrop-blur-md transition-colors';
+
+export function HeroTrustPills({
+  pills,
+  className = 'flex flex-wrap gap-3',
+}: {
+  pills: readonly HeroTrustPill[];
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      {pills.map((pill) => {
+        const Icon = pill.icon;
+        const content = (
+          <>
+            <span className="flex size-9 items-center justify-center rounded-xl bg-primary-green/20 ring-1 ring-primary-green/30">
+              <Icon className="size-4 text-primary-green-light" aria-hidden />
+            </span>
+            <div>
+              <p className="font-display text-xl tracking-wide text-white">{pill.label}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/55">{pill.sub}</p>
+            </div>
+          </>
+        );
+
+        if (pill.href) {
+          return (
+            <MotionAnchor
+              key={pill.sub}
+              href={pill.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={ASE_ARIA_LABEL}
+              className={`${HERO_PILL_CLASS} hover:border-primary-green/40`}
+            >
+              {content}
+            </MotionAnchor>
+          );
+        }
+
+        return (
+          <div key={pill.sub} className={HERO_PILL_CLASS}>
+            {content}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export type ServiceCta = { href: string; label: string };
 
 export type ServiceHeroProps = {
@@ -137,44 +195,8 @@ export function ServiceCinematicHero({
             </div>
           </div>
 
-          <div ref={pillsRef.ref} className="mt-10 flex flex-wrap gap-3 lg:mt-12">
-            {TRUST_PILLS.map((pill) => {
-              const Icon = pill.icon;
-              const pillClassName =
-                'flex items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] px-4 py-3 backdrop-blur-md transition-colors';
-              const content = (
-                <>
-                  <span className="flex size-9 items-center justify-center rounded-xl bg-primary-green/20 ring-1 ring-primary-green/30">
-                    <Icon className="size-4 text-primary-green-light" aria-hidden />
-                  </span>
-                  <div>
-                    <p className="font-display text-xl tracking-wide text-white">{pill.label}</p>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/55">{pill.sub}</p>
-                  </div>
-                </>
-              );
-
-              if ('href' in pill && pill.href) {
-                return (
-                  <MotionAnchor
-                    key={pill.sub}
-                    href={pill.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={ASE_ARIA_LABEL}
-                    className={`${pillClassName} hover:border-primary-green/40`}
-                  >
-                    {content}
-                  </MotionAnchor>
-                );
-              }
-
-              return (
-                <div key={pill.sub} className={pillClassName}>
-                  {content}
-                </div>
-              );
-            })}
+          <div ref={pillsRef.ref} className="mt-10 lg:mt-12">
+            <HeroTrustPills pills={TRUST_PILLS} />
           </div>
         </div>
       </div>
