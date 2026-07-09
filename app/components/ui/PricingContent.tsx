@@ -49,6 +49,16 @@ const PHILOSOPHY_ICONS: Record<(typeof PRICING_PHILOSOPHY)[number]['icon'], Luci
   certified: Award,
 };
 
+const SECTION_PAD = 'py-24 sm:py-28';
+const SECTION_HEADER = 'mb-14 max-w-3xl';
+const PRICING_CARD =
+  'overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)]';
+const PRICING_CARD_INTERACTIVE = `${PRICING_CARD} transition-transform hover:-translate-y-1`;
+const PRICING_CARD_FEATURED =
+  'overflow-hidden rounded-[1.75rem] bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_30px_80px_-30px_rgba(28,61,145,0.65)] ring-2 ring-primary-green';
+const SECTION_DIVIDER =
+  'h-px bg-gradient-to-r from-transparent via-primary-green/25 to-transparent';
+
 function formatCurrency(amount: number) {
   return `$${amount.toLocaleString('en-US')}`;
 }
@@ -136,9 +146,9 @@ export default function PricingContent() {
       </section>
 
       {/* Dealer vs chain vs RKC comparison */}
-      <section className="bg-[var(--background)] py-24 sm:py-28">
+      <section className={`bg-[var(--background)] ${SECTION_PAD}`}>
         <div className="wrap">
-          <FadeIn className="mb-14 max-w-3xl">
+          <FadeIn className={SECTION_HEADER}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Compare</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Dealership vs chain vs RKC
@@ -283,9 +293,9 @@ export default function PricingContent() {
       </section>
 
       {/* What $120/hr means for you */}
-      <section className="bg-white py-24 sm:py-28">
+      <section className={`bg-white ${SECTION_PAD}`}>
         <div className="wrap">
-          <FadeIn className="mb-14 max-w-3xl">
+          <FadeIn className={SECTION_HEADER}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Real math</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               What {LABOR_RATE} means for you
@@ -366,7 +376,7 @@ export default function PricingContent() {
       </section>
 
       {/* Pricing philosophy */}
-      <section className="relative isolate overflow-hidden bg-[var(--background)] py-20 sm:py-24">
+      <section className={`relative isolate overflow-hidden bg-[var(--background)] ${SECTION_PAD}`}>
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -390,7 +400,7 @@ export default function PricingContent() {
         />
 
         <div className="wrap relative">
-          <FadeIn className="mx-auto mb-8 max-w-3xl text-center">
+          <FadeIn className={`mx-auto ${SECTION_HEADER} text-center`}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Our philosophy</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Honest pricing. No overselling.
@@ -451,15 +461,15 @@ export default function PricingContent() {
         </div>
       </section>
 
-      {/* Packages */}
-      <section className="bg-white py-24 sm:py-28">
+      {/* Packages + À la carte — unified pricing offerings */}
+      <section className={`bg-white ${SECTION_PAD}`}>
         <div className="wrap">
-          <FadeIn className="mb-14 text-center">
+          <FadeIn className={SECTION_HEADER}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Packages</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Starting prices, honest labor
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-ink-muted">
+            <p className="mt-4 text-lg text-ink-muted">
               Starting prices for common jobs — all at {LABOR_RATE} labor. Every package gets a written estimate before
               work begins. No hidden upsells tucked into the total.
             </p>
@@ -469,10 +479,8 @@ export default function PricingContent() {
             {PRICING_PACKAGES.map((pkg) => (
               <StaggerItem key={pkg.name}>
                 <article
-                  className={`relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-8 transition-transform hover:-translate-y-1 ${
-                    pkg.featured
-                      ? 'bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_30px_80px_-30px_rgba(28,61,145,0.65)] ring-2 ring-primary-green'
-                      : 'border border-[color:var(--line)] bg-[var(--background)] shadow-[0_20px_60px_-40px_rgba(12,18,34,0.3)]'
+                  className={`relative flex h-full flex-col p-8 ${
+                    pkg.featured ? `${PRICING_CARD_FEATURED} transition-transform hover:-translate-y-1` : PRICING_CARD_INTERACTIVE
                   }`}
                 >
                   {pkg.featured && (
@@ -519,35 +527,33 @@ export default function PricingContent() {
               </StaggerItem>
             ))}
           </Stagger>
-        </div>
-      </section>
 
-      {/* À la carte */}
-      <section className="bg-[var(--background)] py-24 sm:py-28">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <FadeIn className="mb-14 text-center">
+          <div aria-hidden className={`my-20 sm:my-24 ${SECTION_DIVIDER}`} />
+
+          <FadeIn className={SECTION_HEADER}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">À la carte</p>
-            <h2 className="font-display text-5xl tracking-wide text-foreground sm:text-6xl">
+            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Starting prices by service
             </h2>
-            <p className="mt-3 text-lg text-ink-muted">
+            <p className="mt-4 text-lg text-ink-muted">
               Know exactly what you need? Parts plus {LABOR_RATE} labor where applicable. Labor time estimates shown so
               you can do the math yourself.
             </p>
           </FadeIn>
-          <div className="space-y-12">
+
+          <div className="mx-auto max-w-5xl space-y-12">
             {PRICING_TIERS.map((tier, ti) => (
               <FadeIn key={tier.category} delay={ti * 0.05}>
                 <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-green">
                   {tier.category}
                 </h3>
-                <div className="mt-4 overflow-hidden rounded-2xl border border-[color:var(--line)] bg-white">
+                <div className={`mt-4 ${PRICING_CARD}`}>
                   {tier.items.map((item, ii) => (
                     <div
                       key={item.service}
                       className={`grid gap-2 px-6 py-5 sm:grid-cols-12 sm:items-center sm:gap-4 ${
                         ii > 0 ? 'border-t border-[color:var(--line)]' : ''
-                      } ${ii % 2 === 0 ? 'bg-white' : 'bg-[var(--background)]'}`}
+                      } ${ii % 2 === 0 ? 'bg-white' : 'bg-[var(--background)]/60'}`}
                     >
                       <div className="sm:col-span-6">
                         <p className="font-semibold text-foreground">{item.service}</p>
@@ -571,7 +577,8 @@ export default function PricingContent() {
               </FadeIn>
             ))}
           </div>
-          <FadeIn className="mt-10 rounded-2xl border border-[color:var(--line)] bg-white px-6 py-5 text-center text-sm text-ink-muted">
+
+          <FadeIn className="mx-auto mt-10 max-w-5xl rounded-[1.75rem] border border-primary-blue/15 bg-primary-blue/5 px-6 py-5 text-center text-sm text-ink-muted sm:px-8">
             All prices are starting estimates and vary by make, model, and condition. Labor billed at {LABOR_RATE}.
             Diagnostic fees applied toward approved repairs. Free multi-point inspection with any service — no upsell
             pressure.
@@ -580,18 +587,18 @@ export default function PricingContent() {
       </section>
 
       {/* Pricing FAQ */}
-      <section className="bg-white py-24 sm:py-28">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <FadeIn className="mb-10 text-center">
+      <section className={`bg-[var(--background)] ${SECTION_PAD}`}>
+        <div className="wrap">
+          <FadeIn className={`mx-auto ${SECTION_HEADER} text-center`}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">FAQ</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Pricing questions
             </h2>
-            <p className="mt-3 text-lg text-ink-muted">
+            <p className="mt-4 text-lg text-ink-muted">
               Straight answers about our $120/hr rate — no fine print.
             </p>
           </FadeIn>
-          <FadeIn>
+          <FadeIn className="mx-auto max-w-3xl">
             <FAQAccordion items={PRICING_PAGE_FAQ} />
           </FadeIn>
         </div>
