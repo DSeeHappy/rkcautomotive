@@ -5,12 +5,15 @@ export type BrandReliabilityBullet = {
 
 export type BrandReliabilitySnapshot = {
   id: string;
+  /** 3–5 standout models worth driving — display names may include year notes */
+  reliablePicks: string[];
   bullets: BrandReliabilityBullet[];
 };
 
 export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   {
     id: 'toyota',
+    reliablePicks: ['Camry', 'Corolla', 'RAV4 (2019+)', '4Runner', 'Tacoma'],
     bullets: [
       {
         label: 'Generally solid',
@@ -28,6 +31,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'honda',
+    reliablePicks: ['Accord', 'Civic (2022+)', 'HR-V', 'Pilot', 'Ridgeline'],
     bullets: [
       {
         label: 'Generally solid',
@@ -45,6 +49,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'ford',
+    reliablePicks: ['F-150 5.0L', 'Ranger', 'Bronco Sport', 'Mustang GT'],
     bullets: [
       {
         label: 'Generally solid',
@@ -62,6 +67,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'chevrolet',
+    reliablePicks: ['Colorado', 'Tahoe', 'Suburban', 'Silverado 5.3L'],
     bullets: [
       {
         label: 'Generally solid',
@@ -79,6 +85,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'bmw',
+    reliablePicks: ['3 Series', '5 Series', 'X3', 'X5 (2019+)'],
     bullets: [
       {
         label: 'Generally solid',
@@ -96,6 +103,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'mercedes',
+    reliablePicks: ['E-Class', 'GLE', 'S-Class', 'Sprinter'],
     bullets: [
       {
         label: 'Generally solid',
@@ -113,6 +121,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'audi',
+    reliablePicks: ['Q5', 'Q7 3.0T', 'A4', 'A6'],
     bullets: [
       {
         label: 'Generally solid',
@@ -130,6 +139,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'nissan',
+    reliablePicks: ['Frontier (2022+)', 'Titan', 'Altima (manual)', 'Sentra'],
     bullets: [
       {
         label: 'Generally solid',
@@ -147,6 +157,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'subaru',
+    reliablePicks: ['Crosstrek', 'Outback', 'Forester', 'WRX'],
     bullets: [
       {
         label: 'Generally solid',
@@ -164,6 +175,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'jeep',
+    reliablePicks: ['Gladiator', 'Wrangler JL', 'Grand Cherokee'],
     bullets: [
       {
         label: 'Generally solid',
@@ -181,6 +193,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'ram',
+    reliablePicks: ['2500 Cummins', '3500 Cummins', '1500 5.7L', 'Power Wagon'],
     bullets: [
       {
         label: 'Generally solid',
@@ -198,6 +211,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'hyundai',
+    reliablePicks: ['Palisade', 'Tucson (2022+)', 'Ioniq 5', 'Santa Fe'],
     bullets: [
       {
         label: 'Generally solid',
@@ -215,6 +229,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'kia',
+    reliablePicks: ['Telluride', 'EV6', 'Sportage (2023+)', 'K5'],
     bullets: [
       {
         label: 'Generally solid',
@@ -232,6 +247,7 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
   },
   {
     id: 'volkswagen',
+    reliablePicks: ['Golf', 'GTI', 'Tiguan', 'Atlas 3.6'],
     bullets: [
       {
         label: 'Generally solid',
