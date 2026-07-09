@@ -9,7 +9,8 @@
     "lint": "eslint",
     "generate:vehicle-models": "node scripts/generate-vehicle-models.mjs",
     "sync:vehicle-images": "node scripts/sync-vehicle-images.mjs",
-    "verify:seo": "node scripts/verify-seo.mjs"
+    "verify:seo": "node scripts/verify-seo.mjs",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.3.1",

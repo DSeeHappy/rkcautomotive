@@ -106,10 +106,20 @@ export function getRoutesForSitemapShard(shardId: SitemapShardId): string[] {
   }
 }
 
+/** ISO date (YYYY-MM-DD) for sitemap lastmod fields */
+export function formatSitemapLastMod(date: Date = new Date()): string {
+  return date.toISOString().slice(0, 10);
+}
+
+export function getSitemapShardLastModified(_shardId: SitemapShardId): Date {
+  return new Date();
+}
+
 export function buildSitemapEntries(paths: string[]): MetadataRoute.Sitemap {
+  const lastModified = new Date();
   return paths.map((path) => ({
     url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: path.startsWith('/services/') || path.startsWith('/areas-we-serve/')
       ? ('monthly' as const)
       : ('weekly' as const),
