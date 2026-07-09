@@ -190,6 +190,7 @@ export const NAV_LINKS = [
   { name: 'Contact', href: '/contact' },
   { name: 'Areas', href: '/areas-we-serve' },
   { name: 'Vehicles', href: '/vehicles-we-service' },
+  { name: 'Extended Warranty', href: '/warranty' },
 ] as const;
 
 export const FOOTER_LINKS = [

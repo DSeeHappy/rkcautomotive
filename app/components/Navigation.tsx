@@ -141,9 +141,6 @@ export default function Navigation() {
             <Link href="/services" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5">
               All Services
             </Link>
-            <Link href="/warranty" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5">
-              Extended Warranty
-            </Link>
             {links.map((link) => (
               <Link
                 key={link.href}
