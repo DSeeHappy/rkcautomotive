@@ -365,32 +365,37 @@ export { VEHICLE_BRANDS as BRAND_MARQUEE } from '@/lib/vehicleBrands';
 
 export const LABOR_RATE = '$120/hr' as const;
 
+export type FAQItem = { question: string; answer: string };
+
+export const PRICING_COMPARISON_DISCLAIMER =
+  'Typical labor rates and fees reported by Englewood and Denver metro drivers. Actual charges vary by vehicle, brand, and shop location.' as const;
+
 export const PRICING_COMPARISON = [
   {
     name: 'Dealership',
-    laborRate: '$150–200+/hr',
-    diagnosticFee: '$150–250',
-    upselling: 'Common — extra services pushed',
+    laborRate: '$180–220/hr',
+    diagnosticFee: '$150–250 (often non-refundable)',
+    upselling: 'High — recommended services lists, fluid flushes, cabin filters',
     turnaround: '2–5 business days',
-    estimate: 'Often vague until bill arrives',
+    estimate: 'Often itemized only after work starts',
     highlight: false,
   },
   {
     name: 'Chain Shop',
-    laborRate: '$130–160/hr',
-    diagnosticFee: '$89–150',
-    upselling: 'Frequent — package add-ons',
+    laborRate: '$140–160/hr',
+    diagnosticFee: '$89–150 (rarely credited)',
+    upselling: 'Frequent — package add-ons, upsell scripts',
     turnaround: '1–3 business days',
-    estimate: 'Menu pricing, limited detail',
+    estimate: 'Menu pricing, limited line-item detail',
     highlight: false,
   },
   {
     name: 'RKC Automotive',
     laborRate: LABOR_RATE,
-    diagnosticFee: 'From $99 — applied to repair',
-    upselling: 'None — only what you need',
-    turnaround: 'Same-day when possible',
-    estimate: 'Written before any work',
+    diagnosticFee: 'From $99 — credited toward approved repair',
+    upselling: 'None — fix what is broken, skip what is not',
+    turnaround: 'Same-day when parts are available',
+    estimate: 'Written estimate before any wrench turns',
     highlight: true,
   },
 ] as const;
@@ -403,66 +408,134 @@ export const PRICING_COMPARISON_ROWS = [
   { label: 'Estimate', key: 'estimate' as const },
 ] as const;
 
+export const PRICING_SAVINGS_SCENARIOS = [
+  {
+    title: 'Brake pads & rotors (per axle)',
+    hours: 2,
+    icon: 'brakes' as const,
+    note: 'Labor only — parts quoted separately at every shop. Same OEM-quality work, lower hourly rate.',
+  },
+  {
+    title: 'Timing belt & water pump',
+    hours: 4.5,
+    icon: 'timing' as const,
+    note: 'Major service where dealer labor markup hurts most. RKC saves $270–$450 on labor alone.',
+  },
+  {
+    title: 'A/C compressor replacement',
+    hours: 3,
+    icon: 'ac' as const,
+    note: 'Summer breakdowns do not need a $600+ labor bill. We charge for the hours the job actually takes.',
+  },
+  {
+    title: 'Check-engine diagnostic',
+    hours: 1,
+    icon: 'diagnostic' as const,
+    note: 'Our $99 diagnostic is applied to your repair. Dealers often charge $150–250 and keep it.',
+  },
+] as const;
+
 export const PRICING_PHILOSOPHY = [
   {
     title: 'One rate. No games.',
     description:
-      'Our labor rate is $120/hr — posted, explained, and applied consistently. No surprise shop fees or padded line items.',
+      '$120/hr — posted on this page, explained on the phone, and applied on every invoice. No surprise shop fees, environmental charges, or padded line items.',
+  },
+  {
+    title: 'No overselling. No scare tactics.',
+    description:
+      'We will not wave a printout of 15 "recommended" services or tell you your car is unsafe to drive unless it actually is. If it can wait, we say so.',
+  },
+  {
+    title: 'Fix what is broken. Skip what is not.',
+    description:
+      'Your estimate lists only the work you need. We diagnose the real problem — not every sensor on the wiring diagram — and get you back on the road.',
+  },
+  {
+    title: 'Diagnostic fee applied to repair.',
+    description:
+      'Pay from $99 for a real diagnostic. Approve the repair and that fee comes off the total. You are not paying twice to find out what is wrong.',
   },
   {
     title: 'Written before we wrench.',
     description:
-      'Every repair gets a written estimate you approve first. If the job changes, we call you before spending another dollar.',
+      'Every repair gets a written estimate you approve first. If the scope changes mid-job, we call you before spending another dollar.',
   },
   {
-    title: 'Fix it. Get you driving.',
+    title: 'ASE certified. 30+ years. Englewood.',
     description:
-      'We diagnose the actual problem — not every sensor on the diagram. Same-day service when parts are on hand and the bay is open.',
+      'Same technician expertise dealerships charge $180–220/hr for — without the franchise overhead, the waiting-room upsell, or the vague final bill.',
   },
 ] as const;
+
+export const PRICING_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Why not just go to the cheapest shop?',
+    answer:
+      'The cheapest shop often cuts corners on parts, skips real diagnostics, or pads the bill elsewhere. At $120/hr, RKC sits below dealers and most chains while still using quality parts and ASE-certified technicians. You pay less per hour for the same caliber of work — not a stripped-down job.',
+  },
+  {
+    question: 'Do you match dealer coupons or specials?',
+    answer:
+      'Dealer coupons usually hide a higher labor rate or require bundled services you do not need. Our $120/hr is the rate — every day, every job. Compare the full estimate: labor hours × rate + parts. You will often beat the "special" without the fine print.',
+  },
+  {
+    question: 'Is $120/hr really everything?',
+    answer:
+      'Yes — $120/hr covers our technician labor. Parts are quoted separately at cost-plus, same as any shop. No hidden shop fees, no mandatory "service packages," no diagnostic double-dip when you approve the repair. What we quote is what you pay.',
+  },
+  {
+    question: 'How do I know I am not being upsold?',
+    answer:
+      'We show you what we found, explain what is urgent vs. what can wait, and let you decide. Your written estimate is the scope — nothing gets added without your OK. That is the whole point of posting our rate publicly.',
+  },
+];
 
 export const PRICING_PACKAGES = [
   {
     name: 'Essential Care',
     price: 'From $79',
-    description: 'Routine maintenance — no bundled extras you did not ask for.',
+    laborNote: '~0.5 hr labor included',
+    description: 'Routine maintenance at $120/hr — no bundled extras, no surprise add-ons at checkout.',
     featured: false,
     features: [
       'Synthetic oil change',
       'Tire rotation',
-      'Multi-point inspection',
+      'Multi-point inspection (not a sales pitch)',
       'Fluid top-offs',
-      'Cabin air filter check',
+      'Cabin air filter check — replace only if you approve',
     ],
-    cta: 'Call to schedule',
+    cta: 'Get estimate',
   },
   {
     name: 'Safety Package',
     price: 'From $349',
-    description: 'Brakes and battery work priced at $120/hr labor — straight numbers.',
+    laborNote: '~2 hrs labor at $120/hr',
+    description: 'Brakes and battery priced honestly — labor calculated at $120/hr, parts quoted upfront.',
     featured: true,
     features: [
-      'Brake pad + rotor (per axle starts)',
-      'Free brake inspection',
+      'Brake pad + rotor (per axle, from $349)',
+      'Free brake inspection — no pressure to replace',
       'Battery test & load check',
-      'Written estimate before work',
-      'Priority same-day slots when available',
+      'Written estimate before any work',
+      'Same-day slots when parts are in stock',
     ],
-    cta: 'Call to schedule',
+    cta: 'Get estimate',
   },
   {
     name: 'Diagnostic Pro',
     price: 'From $99',
-    description: 'Find the real problem. Fee credited toward approved repair.',
+    laborNote: '~1 hr labor at $120/hr',
+    description: 'Find the real problem first. Diagnostic fee credited toward approved repair — not a separate profit center.',
     featured: false,
     features: [
-      'Check-engine diagnostic',
-      'Code scan & verification',
-      'Road-test evaluation',
-      'Fee applied toward approved repair',
-      'Clear next-step plan',
+      'Check-engine light diagnostic',
+      'Code scan, verification & road test',
+      'Root-cause diagnosis — not a parts-replacement guess',
+      '$99 fee applied toward approved repair',
+      'Clear next-step plan, no scare tactics',
     ],
-    cta: 'Call to schedule',
+    cta: 'Get estimate',
   },
 ] as const;
 
@@ -470,42 +543,105 @@ export const PRICING_TIERS = [
   {
     category: 'Maintenance',
     items: [
-      { service: 'Oil Change (Conventional)', price: 'From $49', note: 'Includes filter & multi-point inspection' },
-      { service: 'Oil Change (Synthetic)', price: 'From $79', note: 'Premium synthetic oil' },
-      { service: 'Tire Rotation', price: 'From $29', note: 'Extend tire life' },
-      { service: 'Multi-Point Inspection', price: 'Free', note: 'With any service' },
+      {
+        service: 'Oil Change (Conventional)',
+        price: 'From $49',
+        note: 'Includes filter & multi-point inspection',
+        laborEstimate: '~0.3 hrs labor',
+      },
+      {
+        service: 'Oil Change (Synthetic)',
+        price: 'From $79',
+        note: 'Premium synthetic oil',
+        laborEstimate: '~0.5 hrs labor',
+      },
+      {
+        service: 'Tire Rotation',
+        price: 'From $29',
+        note: 'Extend tire life',
+        laborEstimate: '~0.25 hrs labor',
+      },
+      { service: 'Multi-Point Inspection', price: 'Free', note: 'With any service — no upsell pressure' },
     ],
   },
   {
     category: 'Brakes & Safety',
     items: [
-      { service: 'Brake Inspection', price: 'Free', note: 'Visual inspection' },
-      { service: 'Brake Pad Replacement (per axle)', price: 'From $189', note: 'Pads & labor' },
-      { service: 'Brake Pad + Rotor (per axle)', price: 'From $349', note: 'Pads, rotors & labor' },
-      { service: 'Brake Fluid Flush', price: 'From $99', note: 'Fresh fluid for responsive braking' },
+      { service: 'Brake Inspection', price: 'Free', note: 'Visual inspection — replace only if you approve' },
+      {
+        service: 'Brake Pad Replacement (per axle)',
+        price: 'From $189',
+        note: 'Pads + labor at $120/hr',
+        laborEstimate: '~1.5 hrs = ~$180 labor + parts',
+      },
+      {
+        service: 'Brake Pad + Rotor (per axle)',
+        price: 'From $349',
+        note: 'Pads, rotors + labor at $120/hr',
+        laborEstimate: '~2 hrs = ~$240 labor + parts',
+      },
+      {
+        service: 'Brake Fluid Flush',
+        price: 'From $99',
+        note: 'Fresh fluid for responsive braking',
+        laborEstimate: '~0.75 hrs labor',
+      },
     ],
   },
   {
     category: 'Diagnostics & Electrical',
     items: [
-      { service: 'Check Engine Light Diagnostic', price: 'From $99', note: 'Applied toward repair if approved' },
+      {
+        service: 'Check Engine Light Diagnostic',
+        price: 'From $99',
+        note: 'Applied toward repair if approved',
+        laborEstimate: '~1 hr at $120/hr',
+      },
       { service: 'Battery Test', price: 'Free', note: 'Quick health check' },
-      { service: 'Battery Replacement', price: 'From $149', note: 'Plus battery cost' },
-      { service: 'Electrical Diagnostic', price: 'From $129', note: 'Wiring & component testing' },
+      {
+        service: 'Battery Replacement',
+        price: 'From $149',
+        note: 'Labor at $120/hr + battery cost',
+        laborEstimate: '~0.5 hrs labor + battery',
+      },
+      {
+        service: 'Electrical Diagnostic',
+        price: 'From $129',
+        note: 'Wiring & component testing',
+        laborEstimate: '~1–1.5 hrs at $120/hr',
+      },
     ],
   },
   {
     category: 'Fluids & Filters',
     items: [
-      { service: 'Coolant Flush', price: 'From $129', note: 'Protect your engine' },
-      { service: 'Transmission Fluid Service', price: 'From $179', note: 'Extend transmission life' },
-      { service: 'Cabin Air Filter', price: 'From $39', note: 'Cleaner air inside' },
-      { service: 'Engine Air Filter', price: 'From $29', note: 'Better fuel economy' },
+      {
+        service: 'Coolant Flush',
+        price: 'From $129',
+        note: 'Protect your engine',
+        laborEstimate: '~1 hr labor + fluid',
+      },
+      {
+        service: 'Transmission Fluid Service',
+        price: 'From $179',
+        note: 'Extend transmission life',
+        laborEstimate: '~1.5 hrs labor + fluid',
+      },
+      {
+        service: 'Cabin Air Filter',
+        price: 'From $39',
+        note: 'Cleaner air inside',
+        laborEstimate: '~0.2 hrs labor',
+      },
+      {
+        service: 'Engine Air Filter',
+        price: 'From $29',
+        note: 'Better fuel economy',
+        laborEstimate: '~0.2 hrs labor',
+      },
     ],
   },
 ] as const;
-
-export type FAQItem = { question: string; answer: string };
 
 export const FAQ_CATEGORIES: { title: string; items: FAQItem[] }[] = [
   {
