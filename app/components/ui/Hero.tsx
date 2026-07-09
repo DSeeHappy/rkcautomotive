@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AlertTriangle, Phone } from 'lucide-react';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
@@ -29,7 +30,7 @@ export default function Hero() {
             fill
             priority
             className={`object-cover object-[78%_56%] sm:object-[74%_53%] lg:object-[70%_50%] ${reduce ? '' : 'ken-burns'}`}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1920px"
+            sizes={HERO_IMAGE_SIZES}
           />
         </div>
         <div
@@ -61,7 +62,7 @@ export default function Hero() {
                   Englewood, CO · Hablamos Español
                 </p>
                 <h1 className="mt-4 font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white">
-                  Auto Repair &amp; Diagnostics in Englewood, CO You Can Trust
+                  Auto Repair &amp; Precision Diagnostics in Englewood, CO
                 </h1>
                 <p className="mt-5 max-w-xl text-lg font-medium text-white/85 sm:text-xl">
                   Diagnostics • Engine Repair • Transmission • Brakes • Maintenance

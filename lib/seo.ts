@@ -223,6 +223,7 @@ export function createHomepageAutoRepairSchema() {
       latitude: BUSINESS_GEO.latitude,
       longitude: BUSINESS_GEO.longitude,
     },
+    openingHours: [...SCHEMA_OPENING_HOURS],
     openingHoursSpecification: OPENING_HOURS_SCHEMA,
     areaServed: HOMEPAGE_AREA_SERVED,
     sameAs: [FACEBOOK_URL, INSTAGRAM_URL],

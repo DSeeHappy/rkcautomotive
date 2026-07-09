@@ -55,6 +55,10 @@ export const PHOTOS = {
   ],
 } as const;
 
+/** Full-bleed hero backgrounds — cap decoded width at 1920px for next/image */
+export const HERO_IMAGE_SIZES =
+  '(max-width: 640px) 100vw, (max-width: 1200px) 100vw, 1920px';
+
 /** Service-page hero photo by slug */
 export const SERVICE_PHOTOS: Record<string, string> = {
   'brake-repair-englewood-co': PHOTOS.undercarriage,

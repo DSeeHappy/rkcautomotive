@@ -76,6 +76,10 @@ export default function AboutPage() {
                 won&apos;t share their labor rate until you call or submit a form. We publish {LABOR_RATE} so you can
                 compare the full estimate — hours × rate + parts — before you visit.
               </p>
+              <p className="mt-4 text-ink-muted">
+                RKC has served the Denver south metro for more than 30 years from our Englewood bay at 2120 W Evans
+                Ave — same location, same commitment to written estimates and ASE-certified work.
+              </p>
               <p className="mt-4 text-ink-muted">{BUSINESS.shortDescription}</p>
               <a href={BUSINESS.phoneHref} className="btn-green mt-10">
                 <Phone className="size-5" />

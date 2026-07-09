@@ -164,9 +164,8 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           }`}
           style={{ transitionDuration: `${SPLASH_EXIT_MS}ms` }}
           role="dialog"
-          aria-modal={!splashExiting}
-          aria-hidden={splashExiting}
           aria-label="RKC Automotive intro"
+          aria-hidden={splashExiting || undefined}
         >
           <div className="absolute inset-0 overflow-hidden bg-black">
             <video

@@ -84,6 +84,22 @@ export default async function CityServiceAreaPage({ params }: Props) {
 
       <section className="py-16 sm:py-20">
         <div className="wrap">
+          <FadeIn className="max-w-3xl">
+            <h2 className="font-display text-4xl tracking-wide text-foreground sm:text-5xl">
+              Auto repair for {area.name} drivers
+            </h2>
+            <p className="mt-4 text-lg text-ink-muted">{area.description}</p>
+            {area.localParagraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)} className="mt-4 text-lg leading-relaxed text-ink-muted">
+                {paragraph}
+              </p>
+            ))}
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="wrap">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <FadeIn className="lg:col-span-7">
               <h2 className="font-display text-4xl tracking-wide text-foreground sm:text-5xl">

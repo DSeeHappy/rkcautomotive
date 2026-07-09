@@ -166,7 +166,7 @@ function NavScrollLogo({
           ref={transparentRef}
           className={scrolled ? 'pointer-events-none invisible' : undefined}
           style={{ opacity: scrolled ? 0 : 1 }}
-          aria-hidden={scrolled}
+          aria-hidden={scrolled || undefined}
         >
           <Image
             src={RKC_LOGO_NAV_WEBP}
@@ -184,13 +184,12 @@ function NavScrollLogo({
           ref={cardRef}
           className={`absolute inset-0 flex items-center ${scrolled ? '' : 'pointer-events-none invisible'}`}
           style={{ opacity: scrolled ? 1 : 0 }}
-          aria-hidden={!scrolled}
+          aria-hidden={!scrolled || undefined}
         >
           <div className={navScrolledCardClass}>
             <Image
               src={RKC_LOGO_NAV_WEBP}
-              alt=""
-              aria-hidden
+              alt={scrolled ? 'RKC Automotive' : ''}
               width={RKC_LOGO_WIDTH}
               height={RKC_LOGO_HEIGHT}
               quality={95}

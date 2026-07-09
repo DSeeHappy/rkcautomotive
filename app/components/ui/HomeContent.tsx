@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone } from 'lucide-react';
+import { Award, Phone } from 'lucide-react';
 import {
   ASE_ARIA_LABEL,
   ASE_URL,
@@ -261,7 +261,10 @@ export default function HomeContent() {
                 aria-label={ASE_ARIA_LABEL}
                 className="flex h-full min-h-[220px] flex-col justify-center rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8 transition-colors hover:border-primary-green/40"
               >
-                <p className="font-display text-6xl tracking-wide text-primary-blue">ASE</p>
+                <div className="flex items-center gap-3">
+                  <Award className="size-10 text-primary-green" aria-hidden />
+                  <p className="font-display text-6xl tracking-wide text-primary-blue">ASE</p>
+                </div>
                 <p className="mt-2 text-lg font-bold text-foreground">Certified technicians</p>
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted">
                   Dealer-level diagnostics and repair without the dealer markup — credentials you can ask about when

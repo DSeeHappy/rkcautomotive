@@ -24,7 +24,7 @@ import {
   SERVICE_AREAS_DATA,
   type FAQItem,
 } from '@/lib/constants';
-import { PHOTOS } from '@/lib/photos';
+import { HERO_IMAGE_SIZES, PHOTOS } from '@/lib/photos';
 import Breadcrumbs, { type BreadcrumbItem } from '@/app/components/ui/Breadcrumbs';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
@@ -84,7 +84,7 @@ export function ServiceCinematicHero({
           fill
           priority
           className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
-          sizes="100vw"
+          sizes={HERO_IMAGE_SIZES}
         />
         <div
           className="absolute inset-0"
@@ -311,7 +311,7 @@ export function ServiceProcessTimeline({
     <section className="relative overflow-hidden bg-[#0c1222] py-24 text-white sm:py-28">
       {bgImage && (
         <div className="absolute inset-0 opacity-25">
-          <Image src={bgImage} alt={bgImageAlt ?? ''} fill className="object-cover" sizes="100vw" />
+          <Image src={bgImage} alt={bgImageAlt ?? ''} fill className="object-cover" sizes={HERO_IMAGE_SIZES} />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
       )}
@@ -505,7 +505,7 @@ export function ServiceFinalCTA({
   return (
     <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0">
-        <Image src={image} alt={imageAlt} fill className="object-cover object-center" sizes="100vw" />
+        <Image src={image} alt={imageAlt} fill className="object-cover object-center" sizes={HERO_IMAGE_SIZES} />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"

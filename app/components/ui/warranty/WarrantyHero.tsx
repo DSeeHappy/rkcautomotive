@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Award, CalendarCheck, Phone, ShieldCheck, Users, Wrench } from 'lucide-react';
 import { ASE_ARIA_LABEL, ASE_URL, BUSINESS, LABOR_RATE, OTHER_WARRANTY_PROVIDERS, PHOTOS } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
@@ -40,7 +41,7 @@ export default function WarrantyHero() {
           fill
           priority
           className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
-          sizes="100vw"
+          sizes={HERO_IMAGE_SIZES}
         />
         <div
           className="absolute inset-0"
