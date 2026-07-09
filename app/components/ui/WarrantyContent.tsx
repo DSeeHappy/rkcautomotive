@@ -17,7 +17,6 @@ import { BUSINESS, LABOR_RATE, PHOTOS, WARRANTY_CLAIM_PROCESS, WARRANTY_PAGE_FAQ
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import PageCTAs from '@/app/components/ui/PageCTAs';
-import WarrantyPageProviders from '@/app/components/ui/WarrantyPageProviders';
 import WarrantyHero from '@/app/components/ui/warranty/WarrantyHero';
 import WarrantyRealityCheck from '@/app/components/ui/warranty/WarrantyRealityCheck';
 import WarrantyApprovalTimes from '@/app/components/ui/warranty/WarrantyApprovalTimes';
@@ -105,42 +104,6 @@ export default function WarrantyContent() {
               );
             })}
           </Stagger>
-        </div>
-      </section>
-
-      {/* Verified providers — dark premium section */}
-      <section className={`relative overflow-hidden ${SECTION_PAD} bg-[#0c1222]`}>
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-green/30 to-transparent"
-        />
-        <div className="wrap relative">
-          <FadeIn className="mb-14 max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">
-              Verified active providers
-            </p>
-            <h2 className="mt-3 font-display text-5xl tracking-wide text-white sm:text-6xl">
-              We work directly with your warranty company
-            </h2>
-            <p className="mt-4 text-lg text-white/70">
-              These administrators are verified active partners with direct claims portals. RKC submits
-              diagnostics, negotiates approvals, and tracks your claim through completion.
-            </p>
-            <div
-              aria-hidden
-              className="mt-6 h-1 w-20 bg-gradient-to-r from-primary-green-light to-transparent"
-            />
-          </FadeIn>
-          <WarrantyPageProviders />
         </div>
       </section>
 
