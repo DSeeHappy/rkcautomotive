@@ -15,6 +15,7 @@ import {
   ServiceTechnicalSection,
 } from '@/app/components/ui/services/ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
+import ModelSiblingServices, { type ModelServiceLink } from '@/app/components/ui/vehicles/ModelSiblingServices';
 import { BUSINESS } from '@/lib/constants';
 import type { ModelDeepDiveContent } from '@/lib/modelDeepDiveContent';
 
@@ -25,6 +26,9 @@ type ModelServiceDeepDiveContentProps = {
   image: string;
   imageAlt: string;
   breadcrumbs: BreadcrumbItem[];
+  siblingServices: ModelServiceLink[];
+  modelName: string;
+  brandName: string;
 };
 
 export default function ModelServiceDeepDiveContent({
@@ -32,6 +36,9 @@ export default function ModelServiceDeepDiveContent({
   image,
   imageAlt,
   breadcrumbs,
+  siblingServices,
+  modelName,
+  brandName,
 }: ModelServiceDeepDiveContentProps) {
   return (
     <div>
@@ -104,6 +111,11 @@ export default function ModelServiceDeepDiveContent({
 
       <ServiceFAQSection title={content.faqTitle} intro={content.faqIntro} items={content.faqItems} />
 
+      <ModelSiblingServices
+        modelName={modelName}
+        brandName={brandName}
+        services={siblingServices}
+      />
       <RelatedServices slug={content.relatedServiceSlug} title={content.relatedTitle} />
       <ServiceAreaServed serviceLabel={content.serviceAreaLabel} />
       <ServiceFinalCTA

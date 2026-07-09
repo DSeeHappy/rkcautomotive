@@ -3,31 +3,14 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import { AlertTriangle, ChevronRight, MapPin, Phone, Wrench } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
 import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
-import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS, type VehicleBrand } from '@/lib/vehicleBrands';
-import { getModel, type VehicleModel } from '@/lib/vehicleModels';
+import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
+import { buildModelHubPath } from '@/lib/modelHubRoutes';
 import { BUSINESS } from '@/lib/constants';
 import BrandLogo from './BrandLogo';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
-import ModelDetailPanel from './ModelDetailPanel';
 
 export default function BrandTabs() {
-  const [selectedModel, setSelectedModel] = useState<VehicleModel | null>(null);
-  const [selectedBrand, setSelectedBrand] = useState<VehicleBrand | null>(null);
-
-  function openModelDetail(brand: VehicleBrand, modelName: string) {
-    const model = getModel(brand.slug, modelName);
-    if (!model) return;
-    setSelectedBrand(brand);
-    setSelectedModel(model);
-  }
-
-  function closeModelDetail() {
-    setSelectedModel(null);
-    setSelectedBrand(null);
-  }
-
   return (
     <FadeIn className="wrap pb-20 pt-12 sm:pb-24 sm:pt-16">
       <div className="mb-10 max-w-3xl">
@@ -135,18 +118,16 @@ export default function BrandTabs() {
                         <ul className="mt-5 flex flex-wrap gap-2 border-t border-white/10 pt-5">
                           {brand.commonModels.map((model) => (
                             <li key={model}>
-                              <button
-                                type="button"
-                                onClick={() => openModelDetail(brand, model)}
-                                aria-label={`View ${brand.name} ${model} details`}
-                                className="group inline-flex cursor-pointer items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-[0.98] sm:text-sm"
+                              <Link
+                                href={buildModelHubPath(brand.slug, model)}
+                                className="group inline-flex items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-[0.98] sm:text-sm"
                               >
                                 <span>{model}</span>
                                 <ChevronRight
                                   className="size-3.5 shrink-0 text-white/50 transition duration-200 group-hover:translate-x-0.5 group-hover:text-white/90"
                                   aria-hidden
                                 />
-                              </button>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -226,13 +207,6 @@ export default function BrandTabs() {
           })}
         </TabPanels>
       </TabGroup>
-
-      <ModelDetailPanel
-        model={selectedModel}
-        brand={selectedBrand}
-        open={selectedModel !== null}
-        onClose={closeModelDetail}
-      />
     </FadeIn>
   );
 }

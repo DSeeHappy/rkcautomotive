@@ -5,6 +5,8 @@ import JsonLd from '@/app/components/JsonLd';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import VehicleCategoryCards from '@/app/components/ui/VehicleCategoryCards';
+import BrandSection from '@/app/components/ui/BrandSection';
+import VehicleDeepDiveCrawlLinks from '@/app/components/ui/VehicleDeepDiveCrawlLinks';
 import { createPageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
@@ -46,6 +48,10 @@ export default function VehiclesPage() {
       />
 
       <VehicleCategoryCards />
+
+      <BrandSection />
+
+      <VehicleDeepDiveCrawlLinks />
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">

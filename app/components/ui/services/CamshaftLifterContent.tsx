@@ -574,7 +574,7 @@ export default function CamshaftLifterContent() {
       </section>
 
       <RelatedServices slug="camshaft-lifter-repair-englewood-co" />
-      <ServiceAreaServed serviceLabel="camshaft and lifter repair" />
+      <ServiceAreaServed serviceLabel="camshaft and lifter repair" relatedServiceSlug="camshaft-lifter-repair-englewood-co" />
 
       <ServiceFinalCTA
         eyebrow="Stop the tick"

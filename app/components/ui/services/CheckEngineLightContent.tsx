@@ -166,7 +166,7 @@ export default function CheckEngineLightContent() {
         items={CHECK_ENGINE_LIGHT_PAGE_FAQ}
       />
       <RelatedServices slug="check-engine-light-englewood-co" />
-      <ServiceAreaServed serviceLabel="check engine light diagnosis" />
+      <ServiceAreaServed serviceLabel="check engine light diagnosis" relatedServiceSlug="check-engine-light-englewood-co" />
       <ServiceFinalCTA
         title={"Check engine light on?"}
         description={"Call or schedule at RKC Automotive on Evans Ave. We decode the code, test the system, and quote the real fix before clearing your MIL."}

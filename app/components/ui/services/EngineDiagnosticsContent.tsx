@@ -178,7 +178,7 @@ export default function EngineDiagnosticsContent() {
         items={ENGINE_DIAGNOSTICS_PAGE_FAQ}
       />
       <RelatedServices slug="engine-diagnostics-englewood-co" />
-      <ServiceAreaServed serviceLabel="engine diagnostics" />
+      <ServiceAreaServed serviceLabel="engine diagnostics" relatedServiceSlug="engine-diagnostics-englewood-co" />
       <ServiceFinalCTA
         title={"Need engine diagnostics today?"}
         description={"Schedule at 2120 W Evans Ave. We find the root cause — misfire, vacuum leak, sensor fault, or mechanical wear — with tests you can understand before you approve the fix."}

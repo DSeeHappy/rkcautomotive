@@ -165,7 +165,7 @@ export default function TransmissionServicesContent() {
         items={TRANSMISSION_SERVICES_PAGE_FAQ}
       />
       <RelatedServices slug="transmission-services-englewood-co" />
-      <ServiceAreaServed serviceLabel="transmission service" />
+      <ServiceAreaServed serviceLabel="transmission service" relatedServiceSlug="transmission-services-englewood-co" />
       <ServiceFinalCTA
         title={"Transmission acting up?"}
         description={"Schedule diagnosis at RKC on Evans Ave. We read fluid, scan TCM data, and quote the right fix — service, repair, or rebuild — before major money moves."}

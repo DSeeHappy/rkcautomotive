@@ -624,7 +624,7 @@ export default function HeatingAcContent() {
 
       <RelatedServices slug="heating-ac-englewood-co" />
 
-      <ServiceAreaServed serviceLabel="heating and AC repair" />
+      <ServiceAreaServed serviceLabel="heating and AC repair" relatedServiceSlug="heating-ac-englewood-co" />
 
       <ServiceFinalCTA
         title="AC blowing warm?"

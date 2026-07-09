@@ -165,7 +165,7 @@ export default function OilChangesContent() {
         items={OIL_CHANGES_PAGE_FAQ}
       />
       <RelatedServices slug="oil-changes-englewood-co" />
-      <ServiceAreaServed serviceLabel="oil changes" />
+      <ServiceAreaServed serviceLabel="oil changes" relatedServiceSlug="oil-changes-englewood-co" />
       <ServiceFinalCTA
         title={"Due for an oil change?"}
         description={"Walk in or schedule at RKC Automotive on Evans Ave. Correct spec, honest inspection, and $120/hr labor on anything beyond the basic service."}

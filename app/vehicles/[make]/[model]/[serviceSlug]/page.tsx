@@ -3,6 +3,7 @@ import JsonLd from '@/app/components/JsonLd';
 import ModelServiceDeepDiveContent from '@/app/components/ui/vehicles/ModelServiceDeepDiveContent';
 import { getModelDeepDiveContent } from '@/lib/modelDeepDiveContent';
 import { getAllModelDeepDiveParams } from '@/lib/modelDeepDiveRoutes';
+import { buildModelHubPath } from '@/lib/modelHubRoutes';
 import { createPageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from '@/lib/seo';
 import { getModelsByBrand, resolveModelImage } from '@/lib/vehicleModels';
@@ -57,10 +58,15 @@ export default async function ModelServiceDeepDivePage({ params }: PageProps) {
   const imageRecord = getVehicleImage(vehicle.brand, vehicle.brandName, vehicle.model).record;
   const imageAlt = resolveVehicleImageAlt(imageRecord, vehicle.brandName, vehicle.model);
 
+  const modelHubPath = buildModelHubPath(make, vehicle.model);
+  const siblingServices = vehicle.commonServices
+    .filter((service) => service.href !== content.path)
+    .map((service) => ({ href: service.href, title: service.title }));
+
   const breadcrumbs = [
     { label: 'Home', href: '/' },
     { label: 'Vehicles We Service', href: '/vehicles-we-service' },
-    { label: `${vehicle.brandName} ${vehicle.model}`, href: '/vehicles-we-service' },
+    { label: `${vehicle.brandName} ${vehicle.model}`, href: modelHubPath },
     { label: content.serviceName },
   ];
 
@@ -79,7 +85,7 @@ export default async function ModelServiceDeepDivePage({ params }: PageProps) {
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Vehicles We Service', path: '/vehicles-we-service' },
-            { name: `${vehicle.brandName} ${vehicle.model}`, path: '/vehicles-we-service' },
+            { name: `${vehicle.brandName} ${vehicle.model}`, path: modelHubPath },
             { name: content.serviceName, path: content.path },
           ]),
         ]}
@@ -89,6 +95,9 @@ export default async function ModelServiceDeepDivePage({ params }: PageProps) {
         image={image}
         imageAlt={imageAlt}
         breadcrumbs={breadcrumbs}
+        siblingServices={siblingServices}
+        modelName={vehicle.model}
+        brandName={vehicle.brandName}
       />
     </>
   );

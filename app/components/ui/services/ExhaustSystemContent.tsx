@@ -164,7 +164,7 @@ export default function ExhaustSystemContent() {
         items={EXHAUST_SYSTEM_PAGE_FAQ}
       />
       <RelatedServices slug="exhaust-system-englewood-co" />
-      <ServiceAreaServed serviceLabel="exhaust system repair" />
+      <ServiceAreaServed serviceLabel="exhaust system repair" relatedServiceSlug="exhaust-system-englewood-co" />
       <ServiceFinalCTA
         title={"Exhaust noise or emissions code?"}
         description={"Inspect exhaust at RKC on Evans Ave. Leak sealed, catalyst verified, monitors ready — $120/hr labor on every repair."}

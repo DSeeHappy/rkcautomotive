@@ -165,7 +165,7 @@ export default function ElectricalSystemContent() {
         items={ELECTRICAL_SYSTEM_PAGE_FAQ}
       />
       <RelatedServices slug="electrical-system-englewood-co" />
-      <ServiceAreaServed serviceLabel="electrical system repair" />
+      <ServiceAreaServed serviceLabel="electrical system repair" relatedServiceSlug="electrical-system-englewood-co" />
       <ServiceFinalCTA
         title={"Electrical problem leaving you stranded?"}
         description={"Diagnose starting and charging at RKC on Evans Ave. Tested circuits, quoted repairs, $120/hr labor — before you buy parts that do not fix the fault."}

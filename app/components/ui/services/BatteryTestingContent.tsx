@@ -163,7 +163,7 @@ export default function BatteryTestingContent() {
         items={BATTERY_TESTING_PAGE_FAQ}
       />
       <RelatedServices slug="battery-testing-englewood-co" />
-      <ServiceAreaServed serviceLabel="battery testing" />
+      <ServiceAreaServed serviceLabel="battery testing" relatedServiceSlug="battery-testing-englewood-co" />
       <ServiceFinalCTA
         title={"Battery worried you?"}
         description={"Stop by RKC on Evans Ave for a free test with charging-system check. Replace only when data says so — same-day install available."}

@@ -14,6 +14,7 @@ import { SERVICE_AREAS_DATA } from './serviceAreas';
 import { PHOTOS } from './photos';
 import { absoluteUrl, SITE_URL } from './og';
 import { getAllModelDeepDiveRoutes } from './modelDeepDiveRoutes';
+import { getAllModelHubRoutes } from './modelHubRoutes';
 
 export const BUSINESS_GEO = {
   latitude: 39.6784,
@@ -71,6 +72,7 @@ export function getAllSiteRoutes(): string[] {
     '/terms',
     '/areas-we-serve',
     '/vehicles-we-service',
+    ...getAllModelHubRoutes(),
     ...getAllModelDeepDiveRoutes(),
     ...SERVICES.map((s) => s.href),
     ...SERVICE_AREAS_DATA.map((a) => a.href),

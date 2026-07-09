@@ -166,7 +166,7 @@ export default function BrakeRepairContent() {
         items={BRAKE_REPAIR_PAGE_FAQ}
       />
       <RelatedServices slug="brake-repair-englewood-co" />
-      <ServiceAreaServed serviceLabel="brake repair" />
+      <ServiceAreaServed serviceLabel="brake repair" relatedServiceSlug="brake-repair-englewood-co" />
       <ServiceFinalCTA
         title={"Ready for a brake inspection?"}
         description={"Free visual inspection at 2120 W Evans Ave. We measure, explain, and quote — pads, rotors, fluid, or calipers — at $120/hr labor plus parts before any work begins."}

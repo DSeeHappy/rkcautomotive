@@ -24,6 +24,7 @@ import {
   SERVICE_AREAS_DATA,
   type FAQItem,
 } from '@/lib/constants';
+import { getPopularDeepDivesForServicePage } from '@/lib/serviceDeepDiveLinks';
 import { HERO_IMAGE_SIZES, PHOTOS } from '@/lib/photos';
 import Breadcrumbs, { type BreadcrumbItem } from '@/app/components/ui/Breadcrumbs';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
@@ -708,12 +709,16 @@ const FEATURED_SERVICE_AREAS = ['Englewood', 'Denver', 'Aurora', 'Littleton', 'L
 
 export type ServiceAreaServedProps = {
   serviceLabel: string;
+  relatedServiceSlug?: string;
 };
 
-export function ServiceAreaServed({ serviceLabel }: ServiceAreaServedProps) {
+export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceAreaServedProps) {
   const featuredAreas = SERVICE_AREAS_DATA.filter((area) =>
     FEATURED_SERVICE_AREAS.includes(area.name as (typeof FEATURED_SERVICE_AREAS)[number]),
   );
+  const popularDeepDives = relatedServiceSlug
+    ? getPopularDeepDivesForServicePage(relatedServiceSlug)
+    : [];
 
   return (
     <section className="border-t border-[color:var(--line)] bg-[var(--background)] py-12 sm:py-16">
@@ -741,6 +746,28 @@ export function ServiceAreaServed({ serviceLabel }: ServiceAreaServedProps) {
             .
           </p>
         </FadeIn>
+
+        {popularDeepDives.length > 0 ? (
+          <FadeIn delay={0.08} className="mt-10">
+            <h3 className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
+              Popular models we service
+            </h3>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {popularDeepDives.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="group block rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 transition hover:border-primary-green/40 hover:bg-primary-green/5"
+                  >
+                    <span className="font-semibold text-foreground group-hover:text-primary-green">
+                      {link.title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        ) : null}
       </div>
     </section>
   );

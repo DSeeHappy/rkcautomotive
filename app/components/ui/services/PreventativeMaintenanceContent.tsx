@@ -166,7 +166,7 @@ export default function PreventativeMaintenanceContent() {
         items={PREVENTATIVE_MAINTENANCE_PAGE_FAQ}
       />
       <RelatedServices slug="preventative-maintenance-englewood-co" />
-      <ServiceAreaServed serviceLabel="preventative maintenance" />
+      <ServiceAreaServed serviceLabel="preventative maintenance" relatedServiceSlug="preventative-maintenance-englewood-co" />
       <ServiceFinalCTA
         title={"Build your maintenance plan"}
         description={"Visit RKC on Evans Ave with your mileage and manual. We quote what is due — not everything on a poster — at $120/hr labor plus parts."}

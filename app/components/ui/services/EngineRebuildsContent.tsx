@@ -611,7 +611,7 @@ export default function EngineRebuildsContent() {
       </section>
 
       <RelatedServices slug="engine-rebuilds-englewood-co" />
-      <ServiceAreaServed serviceLabel="engine rebuilds" />
+      <ServiceAreaServed serviceLabel="engine rebuilds" relatedServiceSlug="engine-rebuilds-englewood-co" />
 
       <ServiceFinalCTA
         title="Ready for a rebuild estimate?"

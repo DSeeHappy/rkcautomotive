@@ -165,7 +165,7 @@ export default function SuspensionSteeringContent() {
         items={SUSPENSION_STEERING_PAGE_FAQ}
       />
       <RelatedServices slug="suspension-steering-englewood-co" />
-      <ServiceAreaServed serviceLabel="suspension and steering repair" />
+      <ServiceAreaServed serviceLabel="suspension and steering repair" relatedServiceSlug="suspension-steering-englewood-co" />
       <ServiceFinalCTA
         title={"Handling feel off?"}
         description={"Inspect suspension and steering at RKC on Evans Ave. We find the clunk, fix the joint, align the geometry — at transparent $120/hr labor."}
