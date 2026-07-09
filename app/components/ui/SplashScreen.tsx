@@ -1,34 +1,21 @@
 'use client';
 
-import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  RKC_LOGO_CARD_SIZE,
-  RKC_LOGO_CARD_WEBP,
-  RKC_LOGO_VIDEO_MP4,
-  RKC_LOGO_VIDEO_WEBM,
-} from '@/lib/logo';
-
-const STATIC_LOGO_SRC = RKC_LOGO_CARD_WEBP;
+import { RKC_LOGO_VIDEO_MP4, RKC_LOGO_VIDEO_WEBM } from '@/lib/logo';
 
 const SPLASH_SESSION_KEY = 'rkc-splash-seen';
 
-/** Pre-fade when smoke has settled and logo is fully revealed (5.5–6s range) */
-const PREFADE_TRIGGER_MS = 5750;
-/** 1s cross-fade: video → static logo + site content */
-const CROSSFADE_MS = 1000;
-/** Brief hold on static logo before splash exits */
-const HOLD_AFTER_CROSSFADE_MS = 700;
-/** Final splash overlay fade-out */
-const SPLASH_EXIT_MS = 600;
+/** Start overlay fade this long before the video ends (covers final explosion frames) */
+const FADE_BEFORE_END_MS = 1400;
+/** Fallback if duration metadata is unavailable */
+const FALLBACK_PREFADE_MS = 4800;
+/** Entire splash overlay fade-out to homepage */
+const SPLASH_EXIT_MS = 550;
 /** Skip button appears after intro has started */
 const SKIP_APPEAR_MS = 1500;
 
 const VIDEO_CLASS =
   'absolute inset-0 h-full w-full object-cover object-center select-none';
-
-const STATIC_LOGO_CLASS =
-  'max-h-[85vh] max-w-[92vw] w-auto h-auto rounded-2xl object-contain object-center select-none shadow-[0_16px_48px_-12px_rgba(0,0,0,0.65)]';
 
 type Phase = 'checking' | 'playing' | 'done';
 
@@ -36,16 +23,19 @@ type SplashScreenProps = {
   children: React.ReactNode;
 };
 
+function pauseVideo(video: HTMLVideoElement | null) {
+  video?.pause();
+}
+
 export default function SplashScreen({ children }: SplashScreenProps) {
   const [phase, setPhase] = useState<Phase>('checking');
-  const [videoOpacity, setVideoOpacity] = useState(1);
-  const [staticLogoOpacity, setStaticLogoOpacity] = useState(0);
   const [splashExiting, setSplashExiting] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const dismissedRef = useRef(false);
   const handoffStartedRef = useRef(false);
+  const prefadeAtMsRef = useRef(FALLBACK_PREFADE_MS);
   const timersRef = useRef<number[]>([]);
 
   const clearTimers = useCallback(() => {
@@ -64,6 +54,8 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     dismissedRef.current = true;
     clearTimers();
     sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+    setShowSkip(false);
+    pauseVideo(videoRef.current);
     setSplashExiting(true);
     addTimer(() => {
       setPhase('done');
@@ -74,22 +66,24 @@ export default function SplashScreen({ children }: SplashScreenProps) {
   const startHandoff = useCallback(() => {
     if (dismissedRef.current || handoffStartedRef.current) return;
     handoffStartedRef.current = true;
-
-    setVideoOpacity(0);
-    setStaticLogoOpacity(1);
-
-    addTimer(() => {
-      finishSplash();
-    }, HOLD_AFTER_CROSSFADE_MS);
-  }, [addTimer, finishSplash]);
+    pauseVideo(videoRef.current);
+    finishSplash();
+  }, [finishSplash]);
 
   const dismiss = useCallback(() => {
     if (dismissedRef.current) return;
     handoffStartedRef.current = true;
-    setVideoOpacity(0);
-    setStaticLogoOpacity(0);
     finishSplash();
   }, [finishSplash]);
+
+  const schedulePrefade = useCallback(
+    (delayMs: number) => {
+      clearTimers();
+      addTimer(() => setShowSkip(true), SKIP_APPEAR_MS);
+      addTimer(() => startHandoff(), delayMs);
+    },
+    [addTimer, clearTimers, startHandoff],
+  );
 
   useEffect(() => {
     const seen = sessionStorage.getItem(SPLASH_SESSION_KEY);
@@ -100,15 +94,13 @@ export default function SplashScreen({ children }: SplashScreenProps) {
 
     setPhase('playing');
     document.body.style.overflow = 'hidden';
-
-    addTimer(() => setShowSkip(true), SKIP_APPEAR_MS);
-    addTimer(() => startHandoff(), PREFADE_TRIGGER_MS);
+    schedulePrefade(FALLBACK_PREFADE_MS);
 
     return () => {
       clearTimers();
       document.body.style.overflow = '';
     };
-  }, [addTimer, clearTimers, startHandoff]);
+  }, [clearTimers, schedulePrefade]);
 
   useEffect(() => {
     if (phase !== 'playing') return;
@@ -116,15 +108,38 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     const video = videoRef.current;
     if (!video) return;
 
+    const onLoadedMetadata = () => {
+      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      const prefadeMs = Math.max(
+        SKIP_APPEAR_MS + 200,
+        video.duration * 1000 - FADE_BEFORE_END_MS,
+      );
+      prefadeAtMsRef.current = prefadeMs;
+      schedulePrefade(prefadeMs);
+    };
+
     const onTimeUpdate = () => {
-      if (video.currentTime >= PREFADE_TRIGGER_MS / 1000) {
+      if (video.currentTime * 1000 >= prefadeAtMsRef.current) {
         startHandoff();
       }
     };
 
+    const onEnded = () => {
+      startHandoff();
+    };
+
+    video.addEventListener('loadedmetadata', onLoadedMetadata);
     video.addEventListener('timeupdate', onTimeUpdate);
-    return () => video.removeEventListener('timeupdate', onTimeUpdate);
-  }, [phase, startHandoff]);
+    video.addEventListener('ended', onEnded);
+
+    if (video.readyState >= 1) onLoadedMetadata();
+
+    return () => {
+      video.removeEventListener('loadedmetadata', onLoadedMetadata);
+      video.removeEventListener('timeupdate', onTimeUpdate);
+      video.removeEventListener('ended', onEnded);
+    };
+  }, [phase, schedulePrefade, startHandoff]);
 
   if (phase === 'done') {
     return <>{children}</>;
@@ -148,7 +163,8 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           }`}
           style={{ transitionDuration: `${SPLASH_EXIT_MS}ms` }}
           role="dialog"
-          aria-modal="true"
+          aria-modal={!splashExiting}
+          aria-hidden={splashExiting}
           aria-label="RKC Automotive intro"
         >
           <video
@@ -157,42 +173,20 @@ export default function SplashScreen({ children }: SplashScreenProps) {
             muted
             playsInline
             preload="auto"
-            className={`${VIDEO_CLASS} transition-opacity ease-in-out`}
-            style={{
-              opacity: videoOpacity,
-              transitionDuration: `${CROSSFADE_MS}ms`,
-            }}
-            aria-hidden={videoOpacity === 0}
+            className={VIDEO_CLASS}
+            aria-hidden
           >
             <source src={RKC_LOGO_VIDEO_WEBM} type="video/webm" />
             <source src={RKC_LOGO_VIDEO_MP4} type="video/mp4" />
           </video>
 
-          <div
-            className="pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity ease-in-out"
-            style={{
-              opacity: staticLogoOpacity,
-              transitionDuration: `${CROSSFADE_MS}ms`,
-            }}
-            aria-hidden={staticLogoOpacity === 0}
-          >
-            <Image
-              src={STATIC_LOGO_SRC}
-              alt="RKC Automotive"
-              width={RKC_LOGO_CARD_SIZE}
-              height={RKC_LOGO_CARD_SIZE}
-              quality={95}
-              priority
-              className={STATIC_LOGO_CLASS}
-              draggable={false}
-            />
-          </div>
-
           <button
             type="button"
             onClick={dismiss}
-            className={`absolute top-6 right-6 z-10 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/35 hover:bg-white/10 hover:text-white sm:top-8 sm:right-8 ${
-              showSkip ? 'opacity-100' : 'pointer-events-none opacity-0'
+            className={`absolute top-6 right-6 z-10 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/70 backdrop-blur-sm transition-all duration-300 hover:border-white/35 hover:bg-white/10 hover:text-white sm:top-8 sm:right-8 ${
+              showSkip && !splashExiting
+                ? 'opacity-100'
+                : 'pointer-events-none opacity-0'
             }`}
           >
             Skip Intro
