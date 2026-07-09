@@ -4,6 +4,7 @@ import { Tab, TabGroup, TabPanel, TabPanels } from '@headlessui/react';
 import { AlertTriangle, ChevronRight, MapPin, MousePointerClick, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
+import { getBrandReliabilitySnapshot } from '@/lib/brandReliabilityNotes';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { BUSINESS } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
@@ -60,6 +61,7 @@ export default function BrandTabs() {
         <TabPanels className="mt-8">
           {VEHICLE_BRANDS.map((brand) => {
             const profile = getBrandFailureProfile(brand.slug);
+            const reliabilitySnapshot = getBrandReliabilitySnapshot(brand.slug);
 
             return (
               <TabPanel
@@ -112,13 +114,13 @@ export default function BrandTabs() {
                     </Link>
                   </div>
 
-                  {profile ? (
+                  {profile && reliabilitySnapshot ? (
                     <>
                       <p className="mt-10 text-sm font-semibold text-white/90 sm:text-base">
                         {brand.name} — select your model
                       </p>
                       <Stagger className="mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
-                        <BrandModelPicker brand={brand} profileCommonModels={profile.commonModels} />
+                        <BrandModelPicker brand={brand} reliabilitySnapshot={reliabilitySnapshot} />
 
                         <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
                           <p className="text-sm font-bold uppercase tracking-[0.16em] text-white">
