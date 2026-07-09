@@ -93,6 +93,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap-index',
+      },
+    ];
+  },
   images: {
     // Cap generated srcset widths — default deviceSizes includes 3840 which overserves heroes.
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],

@@ -191,6 +191,9 @@ function checkRobotsAndSitemap() {
   if (fs.existsSync(path.join(root, 'public/sitemap.xml'))) {
     warnings.push('public/sitemap.xml exists — may conflict with app/sitemap.ts');
   }
+  if (!fs.existsSync(path.join(root, 'app/sitemap-index/route.ts'))) {
+    errors.push('Missing app/sitemap-index/route.ts sitemap index handler');
+  }
   if (fs.existsSync(path.join(root, 'public/robots.txt'))) {
     warnings.push('public/robots.txt exists — may conflict with app/robots.ts');
   }
