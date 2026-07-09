@@ -94,8 +94,20 @@ function extractSitemapRoutes() {
   const content = read('lib/seo.ts');
   const hasGetAll = content.includes('export function getAllSiteRoutes');
   if (!hasGetAll) errors.push('lib/seo.ts missing getAllSiteRoutes()');
+  if (!content.includes('getRoutesForSitemapShard')) {
+    errors.push('lib/seo.ts missing getRoutesForSitemapShard() for sitemap sharding');
+  }
+  if (!content.includes('SITEMAP_SHARD_IDS')) {
+    errors.push('lib/seo.ts missing SITEMAP_SHARD_IDS');
+  }
+
   const sitemap = read('app/sitemap.ts');
-  if (!sitemap.includes('getAllSiteRoutes')) errors.push('app/sitemap.ts must use getAllSiteRoutes()');
+  if (!sitemap.includes('generateSitemaps')) {
+    errors.push('app/sitemap.ts must use generateSitemaps() for sharded sitemaps');
+  }
+  if (!sitemap.includes('getRoutesForSitemapShard')) {
+    errors.push('app/sitemap.ts must use getRoutesForSitemapShard()');
+  }
 }
 
 function checkMetadata() {

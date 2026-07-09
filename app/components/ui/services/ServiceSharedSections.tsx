@@ -24,7 +24,8 @@ import {
   SERVICE_AREAS_DATA,
   type FAQItem,
 } from '@/lib/constants';
-import { getPopularDeepDivesForServicePage } from '@/lib/serviceDeepDiveLinks';
+import { getPopularDeepDivesForServicePage, getPlatformDiagnosticsForServicePage } from '@/lib/serviceDeepDiveLinks';
+import { getFeaturedServiceCities } from '@/lib/adjacentSeoLinks';
 import { HERO_IMAGE_SIZES, PHOTOS } from '@/lib/photos';
 import Breadcrumbs, { type BreadcrumbItem } from '@/app/components/ui/Breadcrumbs';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
@@ -726,19 +727,18 @@ export function ServicePullQuote({ quote, attribution }: ServicePullQuoteProps) 
   );
 }
 
-const FEATURED_SERVICE_AREAS = ['Englewood', 'Denver', 'Aurora', 'Littleton', 'Lakewood', 'Centennial'] as const;
-
 export type ServiceAreaServedProps = {
   serviceLabel: string;
   relatedServiceSlug?: string;
 };
 
 export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceAreaServedProps) {
-  const featuredAreas = SERVICE_AREAS_DATA.filter((area) =>
-    FEATURED_SERVICE_AREAS.includes(area.name as (typeof FEATURED_SERVICE_AREAS)[number]),
-  );
+  const featuredAreas = getFeaturedServiceCities();
   const popularDeepDives = relatedServiceSlug
     ? getPopularDeepDivesForServicePage(relatedServiceSlug)
+    : [];
+  const platformDiagnostics = relatedServiceSlug
+    ? getPlatformDiagnosticsForServicePage(relatedServiceSlug)
     : [];
 
   return (
@@ -768,13 +768,59 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
           </p>
         </FadeIn>
 
+        <FadeIn delay={0.1} className="mt-10">
+          <h3 className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
+            {serviceLabel} near you
+          </h3>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredAreas.map((area) => (
+              <li key={area.slug}>
+                <Link
+                  href={area.href}
+                  className="group block rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 transition hover:border-primary-green/40 hover:bg-primary-green/5"
+                >
+                  <span className="font-semibold text-foreground group-hover:text-primary-green">
+                    {serviceLabel} for {area.name} drivers
+                  </span>
+                  <span className="mt-1 block text-sm text-ink-muted">{area.distanceFromShop} from shop</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </FadeIn>
+
         {popularDeepDives.length > 0 ? (
-          <FadeIn delay={0.08} className="mt-10">
+          <FadeIn delay={0.14} className="mt-10">
             <h3 className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
               Popular models we service
             </h3>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {popularDeepDives.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="group block rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 transition hover:border-primary-green/40 hover:bg-primary-green/5"
+                  >
+                    <span className="font-semibold text-foreground group-hover:text-primary-green">
+                      {link.title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        ) : null}
+
+        {platformDiagnostics.length > 0 ? (
+          <FadeIn delay={0.18} className="mt-10">
+            <h3 className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
+              Platform-specific diagnostics
+            </h3>
+            <p className="mt-3 max-w-3xl text-ink-muted">
+              Model-specific guides for Ford, Chevy, BMW, Jeep, Toyota, and Honda platforms we diagnose every week.
+            </p>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {platformDiagnostics.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

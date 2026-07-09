@@ -1,22 +1,18 @@
-import { getAllSiteRoutes } from '@/lib/seo';
-import { SITE_URL } from '@/lib/og';
+import type { MetadataRoute } from 'next';
+import {
+  buildSitemapEntries,
+  getRoutesForSitemapShard,
+  SITEMAP_SHARD_IDS,
+  type SitemapShardId,
+} from '@/lib/seo';
 
-export default function sitemap() {
-  return getAllSiteRoutes().map((path) => ({
-    url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
-    lastModified: new Date(),
-    changeFrequency: path.startsWith('/services/') || path.startsWith('/areas-we-serve/')
-      ? ('monthly' as const)
-      : ('weekly' as const),
-    priority:
-      path === '/'
-        ? 1
-        : path === '/englewood-co-auto-repair' || path === '/contact'
-          ? 0.9
-          : path.startsWith('/services/')
-            ? 0.8
-            : path.startsWith('/areas-we-serve/')
-              ? 0.7
-              : 0.75,
-  }));
+export async function generateSitemaps() {
+  return SITEMAP_SHARD_IDS.map((id) => ({ id }));
+}
+
+export default async function sitemap(props: {
+  id: Promise<SitemapShardId>;
+}): Promise<MetadataRoute.Sitemap> {
+  const id = await props.id;
+  return buildSitemapEntries(getRoutesForSitemapShard(id));
 }

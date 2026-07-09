@@ -15,11 +15,17 @@ const FEATURED_BRAND_MODELS = [
   'jeep-wrangler',
 ] as const;
 
-/** Popular model-specific deep-dives that map to a generic /services/* page. */
-export function getPopularDeepDivesForServicePage(
-  servicePageSlug: string,
-  limit = 4,
-): ServiceDeepDiveLink[] {
+/** One flagship model per major brand for platform-specific diagnostic deep-dives. */
+const PLATFORM_BRAND_MODELS = [
+  'ford-f-150',
+  'chevrolet-silverado',
+  'bmw-x3',
+  'jeep-wrangler',
+  'toyota-camry',
+  'honda-cr-v',
+] as const;
+
+function collectServiceIdsForPage(servicePageSlug: string): Set<string> {
   const serviceHref = `/services/${servicePageSlug}`;
   const serviceIds = new Set<string>();
 
@@ -32,11 +38,19 @@ export function getPopularDeepDivesForServicePage(
     }
   }
 
+  return serviceIds;
+}
+
+function buildDeepDiveLinks(
+  serviceIds: Set<string>,
+  modelSlugs: readonly string[],
+  limit: number,
+): ServiceDeepDiveLink[] {
   if (serviceIds.size === 0) return [];
 
   const links: ServiceDeepDiveLink[] = [];
 
-  for (const modelSlug of FEATURED_BRAND_MODELS) {
+  for (const modelSlug of modelSlugs) {
     const vehicle = VEHICLE_MODELS.find((m) => m.slug === modelSlug);
     if (!vehicle) continue;
 
@@ -57,4 +71,24 @@ export function getPopularDeepDivesForServicePage(
   }
 
   return links;
+}
+
+/** Popular model-specific deep-dives that map to a generic /services/* page. */
+export function getPopularDeepDivesForServicePage(
+  servicePageSlug: string,
+  limit = 6,
+): ServiceDeepDiveLink[] {
+  return buildDeepDiveLinks(collectServiceIdsForPage(servicePageSlug), FEATURED_BRAND_MODELS, limit);
+}
+
+/** Platform-specific diagnostic deep-dives (Ford, Chevy, BMW, etc.) per service hub page. */
+export function getPlatformDiagnosticsForServicePage(
+  servicePageSlug: string,
+  limit = 6,
+): ServiceDeepDiveLink[] {
+  return buildDeepDiveLinks(
+    collectServiceIdsForPage(servicePageSlug),
+    PLATFORM_BRAND_MODELS,
+    limit,
+  );
 }

@@ -1,3 +1,4 @@
+import type { MetadataRoute } from 'next';
 import {
   BUSINESS,
   FACEBOOK_URL,
@@ -15,6 +16,25 @@ import { PHOTOS } from './photos';
 import { absoluteUrl, SITE_URL } from './og';
 import { getAllModelDeepDiveRoutes } from './modelDeepDiveRoutes';
 import { getAllModelHubRoutes } from './modelHubRoutes';
+
+export const SITEMAP_SHARD_IDS = ['core', 'services', 'cities', 'vehicles'] as const;
+export type SitemapShardId = (typeof SITEMAP_SHARD_IDS)[number];
+
+const CORE_ROUTES = [
+  '/',
+  '/about',
+  '/reviews',
+  '/contact',
+  '/pricing',
+  '/warranty',
+  '/services',
+  '/englewood-co-auto-repair',
+  '/frequently-asked-questions',
+  '/privacy',
+  '/terms',
+  '/areas-we-serve',
+  '/vehicles-we-service',
+] as const;
 
 export const BUSINESS_GEO = {
   latitude: 39.6784,
@@ -56,27 +76,61 @@ const DEFAULT_AREA_SERVED = SERVICE_AREAS.map((name) => ({
   containedInPlace: { '@type': 'State' as const, name: 'Colorado' },
 }));
 
+/** Routes grouped for sharded sitemaps */
+export function getCoreRoutes(): string[] {
+  return [...CORE_ROUTES];
+}
+
+export function getServiceRoutes(): string[] {
+  return SERVICES.map((s) => s.href);
+}
+
+export function getCityRoutes(): string[] {
+  return SERVICE_AREAS_DATA.map((a) => a.href);
+}
+
+export function getVehicleRoutes(): string[] {
+  return [...getAllModelHubRoutes(), ...getAllModelDeepDiveRoutes()];
+}
+
+export function getRoutesForSitemapShard(shardId: SitemapShardId): string[] {
+  switch (shardId) {
+    case 'core':
+      return getCoreRoutes();
+    case 'services':
+      return getServiceRoutes();
+    case 'cities':
+      return getCityRoutes();
+    case 'vehicles':
+      return getVehicleRoutes();
+  }
+}
+
+export function buildSitemapEntries(paths: string[]): MetadataRoute.Sitemap {
+  return paths.map((path) => ({
+    url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
+    lastModified: new Date(),
+    changeFrequency: path.startsWith('/services/') || path.startsWith('/areas-we-serve/')
+      ? ('monthly' as const)
+      : ('weekly' as const),
+    priority:
+      path === '/'
+        ? 1
+        : path === '/englewood-co-auto-repair' || path === '/contact'
+          ? 0.9
+          : path.startsWith('/services/')
+            ? 0.8
+            : path.startsWith('/areas-we-serve/')
+              ? 0.7
+              : path.startsWith('/vehicles/')
+                ? 0.65
+                : 0.75,
+  }));
+}
+
 /** All indexable routes for sitemap and SEO verification */
 export function getAllSiteRoutes(): string[] {
-  return [
-    '/',
-    '/about',
-    '/reviews',
-    '/contact',
-    '/pricing',
-    '/warranty',
-    '/services',
-    '/englewood-co-auto-repair',
-    '/frequently-asked-questions',
-    '/privacy',
-    '/terms',
-    '/areas-we-serve',
-    '/vehicles-we-service',
-    ...getAllModelHubRoutes(),
-    ...getAllModelDeepDiveRoutes(),
-    ...SERVICES.map((s) => s.href),
-    ...SERVICE_AREAS_DATA.map((a) => a.href),
-  ];
+  return SITEMAP_SHARD_IDS.flatMap((shardId) => getRoutesForSitemapShard(shardId));
 }
 
 export function createAggregateRating() {

@@ -12,6 +12,7 @@ import { BUSINESS, PHOTOS, TOP_AREA_SERVICES } from '@/lib/constants';
 import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { CrossCityServiceLinks, NearbyCityLinks } from '@/app/components/ui/seo/AdjacentSeoLinks';
 import { createPageMetadata } from '@/lib/og';
 type Props = { params: Promise<{ slug: string }> };
 
@@ -37,8 +38,6 @@ export default async function CityServiceAreaPage({ params }: Props) {
   const { slug } = await params;
   const area = getServiceAreaBySlug(slug);
   if (!area) notFound();
-
-  const otherAreas = SERVICE_AREAS_DATA.filter((a) => a.slug !== slug).slice(0, 6);
 
   return (
     <div>
@@ -177,6 +176,8 @@ export default async function CityServiceAreaPage({ params }: Props) {
         </div>
       </section>
 
+      <CrossCityServiceLinks currentSlug={slug} cityName={area.name} />
+
       <section className="border-y border-[color:var(--line)] bg-[color:var(--accent-gray-light)] py-16 sm:py-20">
         <div className="wrap">
           <FadeIn className="max-w-3xl">
@@ -214,39 +215,22 @@ export default async function CityServiceAreaPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
-        <div className="wrap">
-          <FadeIn className="mb-10">
-            <h2 className="font-display text-4xl tracking-wide text-foreground">
-              More areas we serve
-            </h2>
-            <p className="mt-3 text-ink-muted">
-              RKC Automotive serves {SERVICE_AREAS_DATA.length} cities across the south Denver metro.
-            </p>
-          </FadeIn>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {otherAreas.map((a) => (
-              <Link
-                key={a.slug}
-                href={a.href}
-                className="group flex items-center justify-between rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 font-semibold text-foreground transition hover:border-primary-green/40 hover:text-primary-green"
-              >
-                {a.name}, CO
-                <span className="opacity-0 transition group-hover:opacity-100">→</span>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-8">
-            <Link
-              href="/areas-we-serve"
-              className="inline-flex items-center gap-2 text-sm font-bold text-primary-blue hover:text-primary-green"
-            >
-              <ArrowLeft className="size-4" />
-              All service areas
-            </Link>
-          </div>
-        </div>
-      </section>
+      <NearbyCityLinks
+        currentSlug={slug}
+        title="More areas we serve"
+        intro={`RKC Automotive serves ${SERVICE_AREAS_DATA.length} cities across the south Denver metro. These communities are closest to ${area.name}.`}
+        className="py-16 sm:py-20"
+      />
+
+      <div className="wrap pb-16 sm:pb-20">
+        <Link
+          href="/areas-we-serve"
+          className="inline-flex items-center gap-2 text-sm font-bold text-primary-blue hover:text-primary-green"
+        >
+          <ArrowLeft className="size-4" />
+          All service areas
+        </Link>
+      </div>
     </div>
   );
 }
