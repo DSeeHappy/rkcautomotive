@@ -15,9 +15,23 @@ import { PHOTOS } from './photos';
 import { absoluteUrl, SITE_URL } from './og';
 
 export const BUSINESS_GEO = {
-  latitude: 39.6785,
+  latitude: 39.6784,
   longitude: -105.0125,
 } as const;
+
+const HOMEPAGE_AUTO_REPAIR_DESCRIPTION =
+  'RKC Automotive provides reliable auto repair, engine diagnostics, brake service, oil changes, and preventative maintenance in Englewood, Colorado and the Denver metro area.';
+
+const HOMEPAGE_AREA_SERVED = [
+  { '@type': 'AdministrativeArea' as const, name: 'Englewood, CO' },
+  { '@type': 'AdministrativeArea' as const, name: 'Denver, CO' },
+  { '@type': 'AdministrativeArea' as const, name: 'Littleton, CO' },
+  { '@type': 'AdministrativeArea' as const, name: 'Lakewood, CO' },
+  { '@type': 'AdministrativeArea' as const, name: 'Centennial, CO' },
+];
+
+const HAS_MAP_URL =
+  'https://maps.google.com/?q=2120+W+Evans+Ave,+Englewood,+CO+80110';
 
 export type BreadcrumbItem = { name: string; path?: string };
 
@@ -184,14 +198,32 @@ export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
   };
 }
 
-/** Homepage AutoRepair schema with full service-area coverage for local SEO audits. */
+/** Homepage AutoRepair schema — exact structure for local SEO audits. */
 export function createHomepageAutoRepairSchema() {
-  return createLocalBusinessSchema({
-    pageUrl: '/',
-    description: BUSINESS.shortDescription,
-    areaServed: DEFAULT_AREA_SERVED,
-    includeRating: true,
-  });
+  const aggregateRating = createAggregateRating();
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AutoRepair',
+    name: BUSINESS.name,
+    url: SITE_URL,
+    telephone: '+1-720-749-3965',
+    logo: absoluteUrl('/images/rkc-logo-card.png'),
+    image: absoluteUrl(PHOTOS.heroMain),
+    description: HOMEPAGE_AUTO_REPAIR_DESCRIPTION,
+    priceRange: '$$',
+    hasMap: HAS_MAP_URL,
+    address: POSTAL_ADDRESS,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: BUSINESS_GEO.latitude,
+      longitude: BUSINESS_GEO.longitude,
+    },
+    openingHoursSpecification: OPENING_HOURS_SCHEMA,
+    areaServed: HOMEPAGE_AREA_SERVED,
+    sameAs: [FACEBOOK_URL, INSTAGRAM_URL],
+    ...(aggregateRating ? { aggregateRating } : {}),
+  };
 }
 
 export function createBreadcrumbSchema(items: BreadcrumbItem[]) {

@@ -4,7 +4,7 @@ import { createPageMetadata } from '@/lib/og';
 import { createHomepageAutoRepairSchema, createBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
-  title: 'Auto Repair in Englewood, CO You Can Trust | RKC Automotive',
+  title: 'Auto Repair & Diagnostics in Englewood, CO You Can Trust | RKC Automotive',
   description:
     'ASE-certified auto repair in Englewood, CO. Diagnostics, transmission, brakes & maintenance at $120/hr. Serving Denver metro. Call (720) 749-3965.',
   path: '/',

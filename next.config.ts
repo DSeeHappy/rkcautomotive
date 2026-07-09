@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // NOTE: Apex → www redirect is intentionally disabled until www DNS/SSL is fixed
+  // (https://www.rkcautomotive.com currently returns 525). Re-enable in redirects()
+  // or vercel.json once www resolves correctly.
   async redirects() {
     return [
       {
