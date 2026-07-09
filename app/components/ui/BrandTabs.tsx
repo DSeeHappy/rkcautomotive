@@ -1,15 +1,15 @@
 'use client';
 
 import { Tab, TabGroup, TabPanel, TabPanels } from '@headlessui/react';
-import { AlertTriangle, ChevronRight, MapPin, MousePointerClick, Phone, Wrench } from 'lucide-react';
+import { AlertTriangle, ChevronRight, MapPin, MousePointerClick, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
-import { buildModelHubPath } from '@/lib/modelHubRoutes';
 import { BUSINESS } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import AnimatedBrandTabList from './AnimatedBrandTabList';
 import BrandLogo from './BrandLogo';
+import BrandModelPicker from './BrandModelPicker';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 
 export default function BrandTabs() {
@@ -45,13 +45,13 @@ export default function BrandTabs() {
                 data-brand-tab
                 className="brand-tab group flex cursor-pointer items-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-3 py-2 text-xs font-semibold text-ink-muted shadow-sm outline-none transition-colors sm:px-4 sm:py-2.5 sm:text-sm data-selected:border-transparent data-selected:bg-[#0c1222] data-selected:text-white data-hover:border-primary-green/40 data-hover:bg-white data-hover:text-foreground data-focus-visible:ring-2 data-focus-visible:ring-primary-green/30"
               >
-              <BrandLogo
-                slug={brand.slug}
-                color={brand.color}
-                size={20}
-                className="brand-tab-logo group-data-selected:!bg-white"
-              />
-              <span className="relative z-[1]">{brand.name}</span>
+                <BrandLogo
+                  slug={brand.slug}
+                  color={brand.color}
+                  size={20}
+                  className="brand-tab-logo group-data-selected:!bg-white"
+                />
+                <span className="relative z-[1]">{brand.name}</span>
               </Tab>
             ))}
           </AnimatedBrandTabList>
@@ -113,103 +113,68 @@ export default function BrandTabs() {
                   </div>
 
                   {profile ? (
-                    <Stagger className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
-                      {/* Column 1: Common Models */}
-                      <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
-                        <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-white">
-                          <Wrench className="size-4 shrink-0 text-primary-green-light" aria-hidden />
-                          Common Models Serviced
-                        </p>
-                        <p className="mt-1.5 text-xs text-white/60">
-                          Tap a model for maintenance schedule &amp; pricing context
-                        </p>
-                        <ul className="mt-4 space-y-2">
-                          {profile.commonModels.map((model) => (
-                            <li key={model} className="flex gap-2 text-sm text-white">
-                              <span
-                                className="mt-1.5 size-1.5 shrink-0 rounded-full"
-                                style={{ backgroundColor: brand.color }}
-                                aria-hidden
-                              />
-                              {model}
-                            </li>
-                          ))}
-                        </ul>
-                        <ul className="mt-5 flex flex-wrap gap-2 border-t border-white/10 pt-5">
-                          {brand.commonModels.map((model) => (
-                            <li key={model}>
-                              <Link
-                                href={buildModelHubPath(brand.slug, model)}
-                                className="group inline-flex items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-[0.98] sm:text-sm"
-                              >
-                                <span>{model}</span>
-                                <ChevronRight
-                                  className="size-3.5 shrink-0 text-white/50 transition duration-200 group-hover:translate-x-0.5 group-hover:text-white/90"
-                                  aria-hidden
-                                />
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </StaggerItem>
+                    <>
+                      <p className="mt-10 text-sm font-semibold text-white/90 sm:text-base">
+                        {brand.name} — select your model
+                      </p>
+                      <Stagger className="mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
+                        <BrandModelPicker brand={brand} profileCommonModels={profile.commonModels} />
 
-                      {/* Column 2: Failure Profiles */}
-                      <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
-                        <p className="text-sm font-bold uppercase tracking-[0.16em] text-white">
-                          Hyper-Specific Failure Profiles
-                        </p>
-                        <div className="mt-4 space-y-5">
-                          {profile.failureProfiles.map((failure) => (
-                            <div key={failure.title}>
-                              <p className="text-sm font-bold leading-snug text-white">{failure.title}</p>
-                              <p className="mt-1.5 text-sm leading-relaxed text-white/85">{failure.description}</p>
+                        <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
+                          <p className="text-sm font-bold uppercase tracking-[0.16em] text-white">
+                            Hyper-Specific Failure Profiles
+                          </p>
+                          <div className="mt-4 space-y-5">
+                            {profile.failureProfiles.map((failure) => (
+                              <div key={failure.title}>
+                                <p className="text-sm font-bold leading-snug text-white">{failure.title}</p>
+                                <p className="mt-1.5 text-sm leading-relaxed text-white/85">{failure.description}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </StaggerItem>
+
+                        <StaggerItem className="relative overflow-hidden rounded-2xl border-2 border-amber-500/50 bg-gradient-to-br from-[#1a1208] via-[#0c1222] to-[#0c1222] p-5 shadow-[0_0_32px_-8px_rgba(245,158,11,0.35)]">
+                          <div
+                            aria-hidden
+                            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.14),transparent_60%)]"
+                          />
+                          <div
+                            aria-hidden
+                            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(239,68,68,0.08),transparent_55%)]"
+                          />
+                          <div className="relative">
+                            <div className="flex items-start gap-3">
+                              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/25 ring-2 ring-amber-400/40">
+                                <AlertTriangle className="size-5 text-amber-300" aria-hidden />
+                              </span>
+                              <p className="text-sm font-bold uppercase leading-snug tracking-[0.12em] text-amber-200">
+                                🚨 Buyer&apos;s Warning: What to Avoid / Inspect Before Buying
+                              </p>
                             </div>
-                          ))}
-                        </div>
-                      </StaggerItem>
-
-                      {/* Column 3: Buyer's Warning */}
-                      <StaggerItem className="relative overflow-hidden rounded-2xl border-2 border-amber-500/50 bg-gradient-to-br from-[#1a1208] via-[#0c1222] to-[#0c1222] p-5 shadow-[0_0_32px_-8px_rgba(245,158,11,0.35)]">
-                        <div
-                          aria-hidden
-                          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.14),transparent_60%)]"
-                        />
-                        <div
-                          aria-hidden
-                          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(239,68,68,0.08),transparent_55%)]"
-                        />
-                        <div className="relative">
-                          <div className="flex items-start gap-3">
-                            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/25 ring-2 ring-amber-400/40">
-                              <AlertTriangle className="size-5 text-amber-300" aria-hidden />
-                            </span>
-                            <p className="text-sm font-bold uppercase leading-snug tracking-[0.12em] text-amber-200">
-                              🚨 Buyer&apos;s Warning: What to Avoid / Inspect Before Buying
+                            <p className="relative mt-4 text-sm font-medium leading-relaxed text-white">
+                              {profile.buyerWarning}
                             </p>
                           </div>
-                          <p className="relative mt-4 text-sm font-medium leading-relaxed text-white">
-                            {profile.buyerWarning}
-                          </p>
-                        </div>
-                      </StaggerItem>
+                        </StaggerItem>
 
-                      {/* Column 4: Colorado Notes */}
-                      <StaggerItem>
-                        <div
-                          className="h-full rounded-2xl border p-5 backdrop-blur-sm"
-                          style={{
-                            borderColor: `color-mix(in srgb, ${brand.color} 35%, transparent)`,
-                            backgroundColor: `color-mix(in srgb, ${brand.color} 12%, rgba(6,10,18,0.45))`,
-                          }}
-                        >
-                          <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-white">
-                            <MapPin className="size-4 shrink-0" aria-hidden />
-                            Colorado Notes
-                          </p>
-                          <p className="mt-4 text-sm font-medium leading-relaxed text-white">{profile.coloradoNotes}</p>
-                        </div>
-                      </StaggerItem>
-                    </Stagger>
+                        <StaggerItem>
+                          <div
+                            className="h-full rounded-2xl border p-5 backdrop-blur-sm"
+                            style={{
+                              borderColor: `color-mix(in srgb, ${brand.color} 35%, transparent)`,
+                              backgroundColor: `color-mix(in srgb, ${brand.color} 12%, rgba(6,10,18,0.45))`,
+                            }}
+                          >
+                            <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-white">
+                              <MapPin className="size-4 shrink-0" aria-hidden />
+                              Colorado Notes
+                            </p>
+                            <p className="mt-4 text-sm font-medium leading-relaxed text-white">{profile.coloradoNotes}</p>
+                          </div>
+                        </StaggerItem>
+                      </Stagger>
+                    </>
                   ) : null}
 
                   <FadeIn delay={0.12} className="mt-8 flex flex-wrap gap-3">
