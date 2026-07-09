@@ -986,6 +986,369 @@ export const CAMSHAFT_LIFTER_PAGE_FAQ: FAQItem[] = [
   },
 ];
 
+export const BRAKE_REPAIR_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'How do I know if I need new brake pads or rotors?',
+    answer:
+      'Pads need replacement when lining thickness drops near 3mm or wear sensors contact the rotor. Rotors need service when thickness is below minimum spec, surfaces are scored from metal-on-metal contact, or pedal pulsation indicates runout. We measure both with a micrometer and dial indicator — not guess from mileage. Many Englewood pad jobs include rotors because Colorado heat cycling warps friction surfaces before pads reach end of life.',
+  },
+  {
+    question: 'Why does my brake pedal pulse when I slow down?',
+    answer:
+      'Pedal pulsation under light braking is classic warped rotor runout — often from overheating on long downhill grades or uneven lug-nut torque. Resurfacing works only when rotor thickness remains above the stamped minimum. Many modern rotors are too thin to machine and require replacement. We measure runout and thickness before quoting resurfacing vs. new rotors.',
+  },
+  {
+    question: 'How often should brake fluid be flushed in Colorado?',
+    answer:
+      'Most manufacturers recommend brake fluid exchange every 2–3 years because DOT fluid absorbs moisture, lowering boiling point and promoting internal corrosion. Colorado temperature swings accelerate moisture ingress. We test copper content and fluid condition — if it passes, we do not push a flush. If it fails, we quote a flush with the correct DOT spec for your vehicle.',
+  },
+  {
+    question: 'Can I drive with a grinding brake noise?',
+    answer:
+      'Grinding means pad backing plate is contacting the rotor — generating heat that can glaze pads, damage caliper pistons, and score rotors beyond salvage. Schedule service immediately. Metal-on-metal braking also increases stopping distance, which is dangerous in Denver metro traffic. We inspect for caliper damage when grinding has continued more than a few days.',
+  },
+  {
+    question: 'Do you service ABS and electronic brake systems?',
+    answer:
+      'Yes. We diagnose ABS wheel-speed sensors, tone-ring debris, and hydraulic issues that trigger ABS lights or false activation at low speed. After pad or rotor service, we road-test ABS function and verify pedal feel. Electronic parking brakes on newer vehicles require scan-tool calibration after rear pad service — we include that in the scope when applicable.',
+  },
+  {
+    question: 'How much does brake repair cost at RKC Automotive?',
+    answer:
+      'Brake pad replacement per axle starts around $189 plus parts; pad and rotor service from about $349 per axle — labor at our posted $120/hr rate. Caliper rebuilds, fluid flushes, and ABS-related repairs are quoted separately after inspection. You receive a written estimate before parts are ordered, with no shop-supply fees hidden in the total.',
+  },
+];
+
+export const ENGINE_DIAGNOSTICS_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'What is included in an engine diagnostic at RKC?',
+    answer:
+      'We scan OBD-II for stored, pending, and permanent codes; review freeze-frame data; analyze live fuel trims, sensor response, and misfire counters; and perform targeted tests — smoke test for vacuum leaks, compression or leak-down for mechanical faults, scope traces for ignition patterns. You receive a written repair plan with prioritized fixes at $120/hr labor. The diagnostic fee credits toward approved repairs.',
+  },
+  {
+    question: 'Why should I pay for diagnostics when parts stores scan for free?',
+    answer:
+      'Free scans read codes — they do not verify root cause. A P0171 lean code can be a vacuum leak, weak fuel pump, dirty MAF, or exhaust leak pulling false air. Throwing parts at codes wastes money. Our paid diagnostic applies professional test equipment and technician time to confirm what failed before you buy parts. The fee is credited toward repair when you approve the work.',
+  },
+  {
+    question: 'When do you recommend a compression or leak-down test?',
+    answer:
+      'When misfires follow a mechanical pattern — equal on cold start, oil consumption, or coolant loss — or when fuel and ignition tests check out but power remains low. Compression identifies ring or valve sealing issues; leak-down pinpoints which valve or ring land leaks. These tests prevent approving expensive coil or injector jobs on an engine with internal wear.',
+  },
+  {
+    question: 'Can you diagnose rough idle and stalling problems?',
+    answer:
+      'Yes. Rough idle traces to vacuum leaks, carbon on direct-injection valves, idle-air control faults, or misfires. We graph fuel trims at idle and off-idle, smoke-test intake plumbing, and scope ignition on cylinders that show elevated misfire counts. Denver altitude can expose marginal sensors that pass at sea level — we test under your actual driving conditions.',
+  },
+  {
+    question: 'Do you diagnose diesel engine problems?',
+    answer:
+      'We handle common diesel drivability — boost leaks, DEF/SCR faults, fuel-filter restrictions, and sensor-related power loss on HD pickups and passenger diesels where equipment allows. Complex emissions-aftertreatment repairs are scoped honestly with parts availability and timeline before authorization.',
+  },
+  {
+    question: 'How long does engine diagnostics take?',
+    answer:
+      'Straightforward single-code faults may resolve in an hour. Intermittent drivability, multiple codes, or mechanical follow-up tests can take longer. We communicate findings as we go and never expand scope without your approval. Same-day diagnosis is common when you call before early afternoon.',
+  },
+];
+
+export const CHECK_ENGINE_LIGHT_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Can I drive with the check engine light on?',
+    answer:
+      'A steady check engine light usually means you can drive short distances and schedule service soon — but fuel economy, emissions readiness, and catalyst health may be affected. A flashing check engine light indicates catalyst-damaging misfire; stop driving except to reach a safe location and arrange tow if needed. We triage flashing codes as priority appointments.',
+  },
+  {
+    question: 'What does a P0420 catalytic converter code mean?',
+    answer:
+      'P0420 means the downstream oxygen sensor sees reduced catalyst efficiency. The converter may be worn, but exhaust leaks, upstream misfires, or lazy O2 sensors can set the same code. We compare upstream and downstream O2 activity and inspect for leaks before quoting converter replacement — a four-figure part that should not be guessed.',
+  },
+  {
+    question: 'Will you clear my check engine light without fixing the problem?',
+    answer:
+      'We clear codes only after verifying the fault is repaired and monitors are ready where emissions apply. Clearing without repair fails Colorado emissions inspections and returns the light when the fault reoccurs — often within one drive cycle. Our goal is a light that stays off because the system is healthy.',
+  },
+  {
+    question: 'How much does check engine light diagnosis cost?',
+    answer:
+      'Diagnosis starts from $99 and credits toward approved repairs at our posted $120/hr labor rate. Complex multi-code or intermittent faults may require additional test time — we call before exceeding the initial scope. You receive code definitions, test results, and a written repair estimate before authorization.',
+  },
+  {
+    question: 'What is the difference between pending and stored codes?',
+    answer:
+      'Pending codes mean the PCM detected a fault once but has not confirmed it on a second drive cycle — early warning for developing problems. Stored codes confirmed the fault and illuminated the MIL. Permanent codes on some vehicles cannot clear until the underlying issue is repaired and monitors complete. We explain which type you have and what it implies for emissions testing.',
+  },
+  {
+    question: 'Can a loose gas cap cause a check engine light?',
+    answer:
+      'Yes — EVAP small-leak codes like P0442 often trace to loose, missing, or cracked gas caps and vent hoses. We smoke-test the EVAP system to confirm cap vs. hose vs. purge-valve faults. It is a inexpensive fix when the cap seals poorly, but we verify rather than assume so you are not back in a week with the same code.',
+  },
+];
+
+export const TRANSMISSION_SERVICES_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'How do I know if my transmission is slipping?',
+    answer:
+      'Slip feels like engine RPM rising without matching road speed — especially during the 2-3 shift or under load climbing I-70. Delayed engagement from Park to Drive, harsh shifts, and burnt-fluid smell are related warnings. We inspect fluid color, magnet debris, and scan TCM adaptive data before recommending fluid service vs. internal repair.',
+  },
+  {
+    question: 'Is a transmission fluid flush always the right fix?',
+    answer:
+      'No. A flush on a slipping unit with dark fluid and metal debris can worsen failure by disturbing clutch material without fixing worn packs. Pan-drop inspection with debris analysis tells us whether fluid service, valve-body repair, or overhaul is appropriate. We never recommend flush-only service when data shows internal wear.',
+  },
+  {
+    question: 'What is the difference between CVT and traditional automatic service?',
+    answer:
+      'CVTs use steel belts or chains on variable pulleys with specific fluid friction modifiers — wrong fluid causes slip and overheating. Traditional planetary autos have defined gear shifts and often serviceable filters. CVT whine with metal in the pan often requires replacement rather than service. We identify your unit type and follow manufacturer fluid and repair procedures.',
+  },
+  {
+    question: 'Should I rebuild my transmission or install a remanufactured unit?',
+    answer:
+      'Rebuild-in-house suits repairable valve-body or single-component failures when the case and hard parts are sound. High-mileage units with heavy pan debris often favor remanufactured replacements with warranty. We quote both paths when viable so you choose based on cost, downtime, and warranty coverage — always with written approval before teardown.',
+  },
+  {
+    question: 'How much does transmission repair cost in Englewood?',
+    answer:
+      'Fluid service starts around $179 plus fluid; minor external repairs and seal jobs vary by labor hours at $120/hr. Major overhaul or replacement is quoted after diagnosis — often thousands depending on unit type and parts. We document fluid condition and scan data so you understand why the scope is priced as it is.',
+  },
+  {
+    question: 'Can towing or mountain driving damage my transmission?',
+    answer:
+      'Heat is the primary killer. Towing on grades without proper cooling, repeated hard shifts in traffic, and deferred fluid changes break down friction modifiers and overheat clutch packs. We ask about towing history during diagnosis and inspect cooler lines and fluid condition — preventive fluid service at manufacturer intervals extends life on Colorado commuters.',
+  },
+];
+
+export const OIL_CHANGES_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'How often should I change my oil in Colorado?',
+    answer:
+      'Follow your owner manual with severe-duty adjustment for short trips, towing, and extreme temperatures — common in Denver metro. Many modern turbo engines specify 5,000–7,500 mile synthetic intervals despite longer dash reminders. Conventional oil in older low-stress engines may use 3,000–5,000 miles. We stamp the windshield and reset monitors based on your actual driving — not a generic 3,000-mile scare tactic.',
+  },
+  {
+    question: 'Is synthetic oil worth the extra cost?',
+    answer:
+      'Turbocharged, direct-injection, and high-performance engines require synthetic viscosity and additive packages — conventional oil can coke on hot turbo bearings. Naturally aspirated older engines may use conventional or synthetic blend per manual. We match API/ILSAC spec and viscosity to your VIN rather than upsell synthetic where conventional is specified.',
+  },
+  {
+    question: 'What is included in an RKC oil change?',
+    answer:
+      'Correct-spec oil and filter, drain-plug gasket, torque-to-spec plug and filter install, oil-level verification, oil-life monitor reset, and multi-point inspection of fluids, belts, hoses, tires, and visible leaks. Undercarriage shields are removed when needed so we actually see the drain point — not a blind quick-lube reach.',
+  },
+  {
+    question: 'Can a cheap oil filter damage my engine?',
+    answer:
+      'Yes. Filters with weak media or poor bypass valves allow unfiltered oil or collapsed elements to starve bearings. We use quality filter brands with documented burst strength. The few dollars saved on a no-name filter are not worth the risk on a turbo DI engine.',
+  },
+  {
+    question: 'Do you reset the oil life monitor on my dashboard?',
+    answer:
+      'Yes — for vehicles with oil-life monitoring systems we reset after service so reminders align with the interval we recommend. Some European platforms require scan-tool reset; we handle that in-house when needed.',
+  },
+  {
+    question: 'What other services should I pair with an oil change?',
+    answer:
+      'Cabin and engine air filters, tire rotation, and fluid level checks are common companions. Milestone items — transmission fluid, coolant exchange, spark plugs — are due by mileage and time, not every oil change. We flag due-soon items on your invoice without pressure to bundle unnecessary services.',
+  },
+];
+
+export const SUSPENSION_STEERING_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'How do I know if I need new struts or shocks?',
+    answer:
+      'Cupped tire wear, excessive bounce after bumps, nose dive under braking, and fluid leakage on struts indicate worn dampers. We perform bounce and visual tests plus inspect mounts and boots. Struts are often replaced as assemblies on MacPherson designs because the spring and mount are integral to safe disassembly.',
+  },
+  {
+    question: 'Why does my car pull to one side after hitting a pothole?',
+    answer:
+      'Impact can bend control arms, shift subframe alignment, or damage tire sidewalls. We inspect for bent components before aligning — alignment alone cannot fix structural bend. Colorado spring potholes on Englewood arterials are a common cause of sudden pull and uneven tire wear.',
+  },
+  {
+    question: 'Do I need an alignment after replacing suspension parts?',
+    answer:
+      'Yes — any front-end or rear adjustable component replacement changes geometry. We provide before-and-after alignment printouts. Replacing struts, control arms, tie rods, or steering racks without alignment leads to tire wear and wandering within weeks.',
+  },
+  {
+    question: 'What is a ball joint and why is it dangerous when worn?',
+    answer:
+      'Ball joints connect control arms to steering knuckles and allow suspension travel. Excessive play lets the wheel camber change under load — causing clunks, wandering, and in extreme cases separation. We load-test joints with pry bars and dial indicators; worn joints are a safety repair, not a convenience item.',
+  },
+  {
+    question: 'Can bad suspension cause vibration when braking?',
+    answer:
+      'Warped rotors cause brake pulsation, but worn control-arm bushings and loose tie rods also transmit vibration through the steering wheel. We separate brake vs. suspension causes during road test so you do not replace rotors when bushings are the real issue.',
+  },
+  {
+    question: 'How much does suspension repair cost at RKC?',
+    answer:
+      'Strut replacement, ball joints, and alignments are quoted per axle and component at $120/hr labor plus parts. We itemize each line on the written estimate — no bundled mystery front-end packages. Alignment is typically added after any geometry-affecting repair.',
+  },
+];
+
+export const HEATING_AC_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Why is my car AC blowing warm air?',
+    answer:
+      'Common causes include low refrigerant from leaks, weak compressor, stuck blend doors, or condenser fan failure. We measure vent temperature and system pressures against ambient specs — not just add refrigerant. Recharge without leak repair fails again within weeks in Colorado summer heat.',
+  },
+  {
+    question: 'How often does car AC need to be recharged?',
+    answer:
+      'Never, if the system is sealed. Refrigerant loss always means a leak — o-rings, condenser stone damage, or evaporator corrosion. We vacuum-test and dye-trace leaks, repair the source, then charge by weight to manufacturer spec. Annual top-offs mask problems until the compressor slugs with liquid.',
+  },
+  {
+    question: 'What is the difference between R134a and R1234yf?',
+    answer:
+      'R1234yf is the lower-GWP refrigerant used on newer vehicles with different service fittings and machine requirements. Using the wrong refrigerant damages components and violates EPA rules. We service both with dedicated equipment and charge weights from your label.',
+  },
+  {
+    question: 'Why does my windshield fog up with a sweet smell?',
+    answer:
+      'Sweet odor with fog often indicates heater-core coolant leak into the cabin — a safety and interior-damage issue. Stop using heat if you suspect leak, schedule service promptly, and avoid prolonged driving that wets carpet and electronics under the dash.',
+  },
+  {
+    question: 'How much does AC compressor replacement cost?',
+    answer:
+      'Compressor jobs are labor-intensive — often 3+ hours at $120/hr plus reman or new compressor, receiver-drier, and refrigerant. We confirm compressor failure with clutch, bearing, and pressure tests before ordering parts. Leak repair and full evacuation are included in scope quotes.',
+  },
+  {
+    question: 'Can you fix heat that only works when driving?',
+    answer:
+      'Heat at speed but cold at idle often points to low coolant, air in the system, or clogged heater core. Thermostat stuck open also reduces heat. We pressure-test cooling system, check core flow, and verify water-pump circulation before recommending core replacement.',
+  },
+];
+
+export const ELECTRICAL_SYSTEM_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'How do I know if my alternator or battery is bad?',
+    answer:
+      'Batteries fail crank tests and show high internal resistance; alternators fail to hold 13.5–14.5V under load or produce AC ripple indicating diode damage. We test both before recommending parts. Replacing only the battery on a weak alternator repeats the no-start in days.',
+  },
+  {
+    question: 'What causes a parasitic battery drain?',
+    answer:
+      'Modules that fail to sleep, aftermarket accessories wired to constant power, stuck relays, and interior lights left on circuits draw milliamps overnight until the battery flatlines. We measure draw after shutdown timers expire and isolate circuits by fuse pull — documenting the offending branch before repair.',
+  },
+  {
+    question: 'Do you repair wiring harnesses and shorts?',
+    answer:
+      'Yes — we repair chafed harnesses with solder, heat-shrink, and loom rather than tape wraps. Rub-through on body pinch welds and rodent damage are common on high-mileage Denver vehicles. We trace shorts with schematic-based testing instead of replacing entire harnesses when a section repair is sound.',
+  },
+  {
+    question: 'Can a bad starter drain my battery?',
+    answer:
+      'A starter with shorted windings or a stuck solenoid can draw excessive current and heat — sometimes failing intermittently on hot restart. We measure starter amperage and voltage drop on cables. A good battery with slow crank may be cables or starter, not capacity.',
+  },
+  {
+    question: 'How much does electrical diagnosis cost?',
+    answer:
+      'Electrical diagnostics start from $129 with labor at $120/hr for repairs. Complex CAN-bus or multi-circuit faults may require additional time — we communicate before expanding scope. Test results stay on your invoice.',
+  },
+  {
+    question: 'Do you install aftermarket electrical accessories?',
+    answer:
+      'We integrate lights, radios, and fleet equipment with proper fusing and wire gauge — avoiding tap-into circuits that wake modules or void warranties. Poor accessory installs are a leading cause of parasitic drain complaints we diagnose weekly.',
+  },
+];
+
+export const BATTERY_TESTING_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Is battery testing really free at RKC?',
+    answer:
+      'Yes — conductance testing with printed results and a charging-system voltage check is free. We explain state-of-health percentage and recommend replacement only when data supports it. There is no pressure to buy a battery you do not need.',
+  },
+  {
+    question: 'How long do car batteries last in Colorado?',
+    answer:
+      'Most flooded batteries last 3–5 years in Denver metro due to heat cycles and cold-crank demand in winter. AGM batteries in start-stop vehicles may differ. Date codes on the case help — we advise replacement when conductance drops below reliable cold-crank threshold before you are stranded.',
+  },
+  {
+    question: 'Should I replace my battery before winter?',
+    answer:
+      'Marginal batteries that pass summer tests often fail first sub-zero morning. Pre-winter testing is smart for commuters and fleet vehicles. We match cold-cranking amps and group size to your VIN and verify alternator output at the same visit.',
+  },
+  {
+    question: 'Do new cars need a battery management system reset?',
+    answer:
+      'Many European and some Asian vehicles require scan-tool BMS reset after battery replacement so idle-stop and charging strategy calibrate correctly. We register the new battery when required — skipping reset causes premature failure messages and stop-start faults.',
+  },
+  {
+    question: 'Can corrosion on terminals cause a no-start?',
+    answer:
+      'Absolutely — high resistance at terminals mimics a dead battery. We clean, torque, and sometimes replace cable ends before selling a battery. Voltage-drop testing confirms when cables, not the pack, are the problem.',
+  },
+  {
+    question: 'How much does battery replacement cost?',
+    answer:
+      'Replacement starts around $149 plus battery cost — labor at $120/hr when cables or registration procedures add time. Premium AGM batteries for start-stop applications cost more but are required for correct operation. We quote group size and CCA before install.',
+  },
+];
+
+export const EXHAUST_SYSTEM_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Why did I get a P0420 code — do I need a new catalytic converter?',
+    answer:
+      'P0420 indicates catalyst efficiency below threshold — but upstream leaks, misfires, and lazy O2 sensors can set the same code on a healthy converter. We graph O2 sensor behavior and inspect for exhaust leaks before quoting converter replacement. Fixing root cause first saves money when the cat is not actually worn.',
+  },
+  {
+    question: 'Is it legal to remove a catalytic converter in Colorado?',
+    answer:
+      'Federal and Colorado emissions rules require functioning catalysts on applicable vehicles. Removal fails emissions inspection and can result in fines. We install EPA/CARB-compliant replacement converters and complete repairs that allow monitors to set before your test.',
+  },
+  {
+    question: 'What causes exhaust rattling at idle?',
+    answer:
+      'Broken heat shields, failed hanger isolators, and loose flex-pipe bellows rattle independently of muffler internals. We inspect under lift before quoting mufflers — sometimes a shield tack-weld or hanger fixes the noise for minimal cost.',
+  },
+  {
+    question: 'Can an exhaust leak cause a check engine light?',
+    answer:
+      'Leaks upstream of O2 sensors let oxygen into the exhaust stream, biasing fuel trim and setting lean or efficiency codes. Manifold cracks are common on certain V8 and inline engines — tick when cold that fades as metal expands. We smoke-test and pressure-check critical joints.',
+  },
+  {
+    question: 'How much does catalytic converter replacement cost?',
+    answer:
+      'Converters are among the most expensive exhaust components — often $800–$2,500+ parts plus labor at $120/hr depending on vehicle and CARB compliance requirements. We confirm failure with data, fix contributing misfires or leaks first, and quote compliant parts before cutting pipe.',
+  },
+  {
+    question: 'Do you weld exhaust or use clamp-on parts?',
+    answer:
+      'We use direct-fit sections, quality clamps, and welding where appropriate for durability. Flanges and flex sections are aligned to prevent stress cracks. All work is scoped on a written estimate before torches or cutters touch the system.',
+  },
+];
+
+export const PREVENTATIVE_MAINTENANCE_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'What is the difference between normal and severe maintenance schedules?',
+    answer:
+      'Severe schedules shorten oil, fluid, and inspection intervals for short trips, towing, dusty conditions, and extreme temperatures — all common in Colorado. Owner manuals default to normal in marketing copy, but Denver commuting often qualifies as severe. We classify your driving honestly and quote intervals that match reality.',
+  },
+  {
+    question: 'What is included in a 30k / 60k / 90k service?',
+    answer:
+      'Milestones are VIN-specific — not generic. A 60k Honda may need trans fluid and spark plugs; a Toyota may need coolant exchange; German cars need brake-fluid time changes. We build packages from your manual tables: fluids, filters, belts, plugs, and inspections due at that mileage. You approve the bundle before work starts.',
+  },
+  {
+    question: 'Will maintenance at RKC void my factory warranty?',
+    answer:
+      'No. Federal Magnuson-Moss law protects your right to service at independent shops when proper procedures and parts are used. We document maintenance with invoices and fluid specs your warranty claims may request.',
+  },
+  {
+    question: 'How do I know which maintenance my car actually needs?',
+    answer:
+      'We read the owner manual interval tables, check your mileage and prior service history, and inspect wear items. Due-now vs. due-soon items are separated — we do not sell a 90k package at 45k miles unless items are legitimately early due to age or condition.',
+  },
+  {
+    question: 'Do you offer fleet preventative maintenance plans?',
+    answer:
+      'Yes — commercial accounts receive scheduled logging, consolidated invoicing, and priority booking when available. We track oil, brake, and inspection intervals per vehicle so fleet managers are not guessing which unit is due.',
+  },
+  {
+    question: 'Why is preventative maintenance cheaper than waiting for breakdowns?',
+    answer:
+      'Coolant exchanges cost far less than head gaskets from overheating. Timing-belt service prevents valve interference damage worth thousands. Trans fluid service extends life vs. slip and overhaul. Maintenance spends small dollars on schedule instead of large dollars on emergency tow and collateral damage.',
+  },
+];
+
 export const PRICING_TIERS = [
   {
     category: 'Maintenance',
