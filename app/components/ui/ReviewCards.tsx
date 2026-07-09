@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { GOOGLE_REVIEWS_URL, VERIFIED_REVIEWS_4_PLUS, type VerifiedReview } from '@/lib/constants';
 
@@ -82,6 +82,7 @@ export default function ReviewCards({
   const shouldRotate = rotate ?? reviews.length > visibleCount;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [timerResetToken, setTimerResetToken] = useState(0);
   const useCompactIndicator = reviews.length >= COMPACT_INDICATOR_THRESHOLD;
 
   const slotCount = shouldRotate ? visibleCount : reviews.length;
@@ -90,15 +91,40 @@ export default function ReviewCards({
     [reviews, currentIndex, slotCount],
   );
 
+  const resetRotationTimer = useCallback(() => {
+    setTimerResetToken((token) => token + 1);
+  }, []);
+
   const advance = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length);
   }, [reviews.length]);
+
+  const goToNext = useCallback(() => {
+    advance();
+    resetRotationTimer();
+  }, [advance, resetRotationTimer]);
+
+  const goToPrevious = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+    resetRotationTimer();
+  }, [reviews.length, resetRotationTimer]);
+
+  const goToIndex = useCallback(
+    (index: number) => {
+      setCurrentIndex(index);
+      resetRotationTimer();
+    },
+    [resetRotationTimer],
+  );
 
   useEffect(() => {
     if (!shouldRotate || isPaused || reduceMotion) return;
     const id = window.setInterval(advance, intervalMs);
     return () => window.clearInterval(id);
-  }, [shouldRotate, isPaused, reduceMotion, advance, intervalMs]);
+  }, [shouldRotate, isPaused, reduceMotion, advance, intervalMs, timerResetToken]);
+
+  const navButtonClass =
+    'inline-flex size-10 items-center justify-center rounded-full border border-[color:var(--line)] bg-white text-[#1c3d91] shadow-[0_8px_24px_-16px_rgba(12,18,34,0.35)] transition hover:border-primary-green/40 hover:text-primary-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/30';
 
   const gridClass = slotCount >= 3 ? 'lg:grid-cols-3' : slotCount === 2 ? 'sm:grid-cols-2' : '';
   const progressPercent = reviews.length > 0 ? ((currentIndex + 1) / reviews.length) * 100 : 0;
@@ -163,44 +189,62 @@ export default function ReviewCards({
 
         {shouldRotate ? (
           useCompactIndicator ? (
-            <div className="mt-8 space-y-2" aria-label="Review rotation progress">
-              <div className="flex items-center justify-between text-xs text-ink-muted">
-                <span>
-                  Review {currentIndex + 1} of {reviews.length}
-                </span>
-                <span className="font-medium text-primary-green">{reviews.length} verified</span>
-              </div>
-              <div
-                className="h-1.5 overflow-hidden rounded-full bg-[color:var(--line)]"
-                role="progressbar"
-                aria-valuemin={1}
-                aria-valuemax={reviews.length}
-                aria-valuenow={currentIndex + 1}
-                aria-label={`Showing review ${currentIndex + 1} of ${reviews.length}`}
-              >
+            <div className="mt-8 flex items-end gap-4" aria-label="Review rotation progress">
+              <div className="min-w-0 flex-1 space-y-2">
+                <div className="flex items-center justify-between text-xs text-ink-muted">
+                  <span>
+                    Review {currentIndex + 1} of {reviews.length}
+                  </span>
+                  <span className="font-medium text-primary-green">{reviews.length} verified</span>
+                </div>
                 <div
-                  className="h-full rounded-full bg-primary-green transition-all duration-300 ease-out"
-                  style={{ width: `${progressPercent}%` }}
-                />
+                  className="h-1.5 overflow-hidden rounded-full bg-[color:var(--line)]"
+                  role="progressbar"
+                  aria-valuemin={1}
+                  aria-valuemax={reviews.length}
+                  aria-valuenow={currentIndex + 1}
+                  aria-label={`Showing review ${currentIndex + 1} of ${reviews.length}`}
+                >
+                  <div
+                    className="h-full rounded-full bg-primary-green transition-all duration-300 ease-out"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
+              </div>
+              <div className="flex shrink-0 gap-2">
+                <button type="button" onClick={goToPrevious} aria-label="Previous review" className={navButtonClass}>
+                  <ChevronLeft className="size-5" aria-hidden />
+                </button>
+                <button type="button" onClick={goToNext} aria-label="Next review" className={navButtonClass}>
+                  <ChevronRight className="size-5" aria-hidden />
+                </button>
               </div>
             </div>
           ) : (
-            <div className="mt-8 flex justify-center gap-2" role="tablist" aria-label="Review slides">
-              {reviews.map((review, index) => (
-                <button
-                  key={reviewKey(review)}
-                  type="button"
-                  role="tab"
-                  aria-selected={index === currentIndex}
-                  aria-label={`Show review from ${review.author}`}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? 'w-6 bg-primary-green'
-                      : 'w-2 bg-[color:var(--line)] hover:bg-primary-green/40'
-                  }`}
-                />
-              ))}
+            <div className="mt-8 flex items-center justify-center gap-4">
+              <button type="button" onClick={goToPrevious} aria-label="Previous review" className={navButtonClass}>
+                <ChevronLeft className="size-5" aria-hidden />
+              </button>
+              <div className="flex gap-2" role="tablist" aria-label="Review slides">
+                {reviews.map((review, index) => (
+                  <button
+                    key={reviewKey(review)}
+                    type="button"
+                    role="tab"
+                    aria-selected={index === currentIndex}
+                    aria-label={`Show review from ${review.author}`}
+                    onClick={() => goToIndex(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === currentIndex
+                        ? 'w-6 bg-primary-green'
+                        : 'w-2 bg-[color:var(--line)] hover:bg-primary-green/40'
+                    }`}
+                  />
+                ))}
+              </div>
+              <button type="button" onClick={goToNext} aria-label="Next review" className={navButtonClass}>
+                <ChevronRight className="size-5" aria-hidden />
+              </button>
             </div>
           )
         ) : null}
