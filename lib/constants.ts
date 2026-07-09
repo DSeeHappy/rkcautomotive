@@ -386,18 +386,22 @@ export const PRICING_COMPARISON = [
     upselling: 'High — recommended services lists, fluid flushes, cabin filters',
     turnaround: '2–5 business days',
     estimate: 'Often itemized only after work starts',
+    shopFees: 'Facilities & environmental fees common',
+    technicianContinuity: 'Varies — advisor turnover, rotating techs',
     weekdayHours: 'Mon–Fri until 5–6 PM',
     highlight: false,
   },
   {
     name: 'Chain Shop',
     laborRate: '$140–160/hr',
-    ratePosted: 'Menu pricing — not a flat hourly rate',
-    diagnosticFee: '$89–150 (rarely credited)',
-    upselling: 'Frequent — package add-ons, upsell scripts',
-    turnaround: '1–3 business days',
-    estimate: 'Menu pricing, limited line-item detail',
-    weekdayHours: 'Mon–Fri until 6–7 PM',
+    ratePosted: 'Menu & package pricing — ZIP code required, no flat hourly rate',
+    diagnosticFee: 'Often "free" inspections — recommended add-ons follow',
+    upselling: 'Heavy — coupons, bundles, fluid flushes, store credit offers',
+    turnaround: 'Appointment queue — 1–3 days; walk-in waits common',
+    estimate: 'Package pricing + 8–10% shop supply fee on labor',
+    shopFees: '8–10% supply fee on labor (typical at national chains)',
+    technicianContinuity: 'Rotating staff — high-volume, 1,000+ locations',
+    weekdayHours: 'Mon–Sat until 6–7 PM; many open Sundays',
     highlight: false,
   },
   {
@@ -408,6 +412,8 @@ export const PRICING_COMPARISON = [
     upselling: 'Varies — warranty and fleet upsells common',
     turnaround: 'Often 24–48 hrs to confirm appointment',
     estimate: 'Provided after callback or first visit',
+    shopFees: 'Varies — some add supply or disposal fees',
+    technicianContinuity: 'Often same owner-operator bay',
     weekdayHours: 'Mon–Fri until 5 PM typical',
     highlight: false,
   },
@@ -419,6 +425,8 @@ export const PRICING_COMPARISON = [
     upselling: 'None — fix what is broken, skip what is not',
     turnaround: 'Same-day when parts are available',
     estimate: 'Written estimate before any wrench turns',
+    shopFees: 'None — posted rate is the rate',
+    technicianContinuity: 'Same ASE-certified crew every visit',
     weekdayHours: 'Mon–Fri until 6 PM · Sat 8–12',
     highlight: true,
   },
@@ -431,6 +439,8 @@ export const PRICING_COMPARISON_ROWS = [
   { label: 'Upselling', key: 'upselling' as const },
   { label: 'Turnaround', key: 'turnaround' as const },
   { label: 'Estimate', key: 'estimate' as const },
+  { label: 'Shop fees', key: 'shopFees' as const },
+  { label: 'Who works on your car', key: 'technicianContinuity' as const },
   { label: 'Weekday hours', key: 'weekdayHours' as const },
 ] as const;
 
@@ -472,7 +482,7 @@ export const PRICING_PHILOSOPHY = [
     title: 'No overselling. No scare tactics.',
     icon: 'shield' as const,
     description:
-      'We will not wave a printout of 15 "recommended" services or tell you your car is unsafe to drive unless it actually is. If it can wait, we say so.',
+      'We will not stack coupons, push a courtesy-check printout of "recommended" services, or tell you your car is unsafe to drive unless it actually is. If it can wait, we say so.',
   },
   {
     title: 'Fix what is broken. Skip what is not.',
@@ -504,17 +514,22 @@ export const COMPETITIVE_POSITIONING = [
   {
     title: 'Rate you can see before you call',
     description:
-      'Many Denver metro independents ask you to request a quote or wait for a callback before sharing labor pricing. RKC posts $120/hr so you can compare the full estimate — hours × rate + parts — before you drive over.',
+      'National chains quote menu packages by ZIP code — labor rates and shop supply fees vary by location and rarely appear as a flat hourly rate online. RKC posts $120/hr so you can compare hours × rate + parts before you drive over.',
+  },
+  {
+    title: 'Same crew, not a rotating line',
+    description:
+      'High-volume chain stores run appointment queues with different technicians each visit. At RKC you talk to the same ASE-certified crew — Ray, Oscar, and the team who have been turning wrenches in this Englewood bay for 30+ years.',
   },
   {
     title: 'Open until 6 PM weekdays',
     description:
-      'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no appointment form required.',
+      'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no online appointment form required.',
   },
   {
     title: 'No oversell. Real diagnostics.',
     description:
-      'Shops that lean on extended-warranty and fleet programs sometimes push coverage you may not need. We diagnose the actual problem, explain what is urgent vs. what can wait, and fix only what you approve.',
+      'Chain shops often bundle "free" inspections with coupon-driven add-ons — fluid flushes, filter packages, store credit offers. We diagnose the actual problem, explain what is urgent vs. what can wait, and fix only what you approve.',
   },
 ] as const;
 
@@ -525,9 +540,14 @@ export const PRICING_PAGE_FAQ: FAQItem[] = [
       'The cheapest shop often cuts corners on parts, skips real diagnostics, or pads the bill elsewhere. At $120/hr, RKC sits below dealers and most chains while still using quality parts and ASE-certified technicians. You pay less per hour for the same caliber of work — not a stripped-down job.',
   },
   {
-    question: 'Do you match dealer coupons or specials?',
+    question: 'Do you match dealer or chain coupons?',
     answer:
-      'Dealer coupons usually hide a higher labor rate or require bundled services you do not need. Our $120/hr is the rate — every day, every job. Compare the full estimate: labor hours × rate + parts. You will often beat the "special" without the fine print.',
+      'Dealer and national-chain coupons usually hide a higher labor rate, require bundled services, or add shop supply fees on top. Our $120/hr is the rate — every day, every job, no coupon math. Compare the full estimate: labor hours × rate + parts. You will often beat the "special" without the fine print.',
+  },
+  {
+    question: 'How is RKC different from a national chain shop?',
+    answer:
+      'National chains advertise package pricing and stackable coupons, but labor rates vary by ZIP code and often include an 8–10% shop supply fee. You may wait in an appointment queue and see a different technician each visit. RKC is one Englewood bay with the same crew, $120/hr posted online, written change orders if scope changes, and no pressure to approve fluid flushes or add-ons you do not need.',
   },
   {
     question: 'Is $120/hr really everything?',

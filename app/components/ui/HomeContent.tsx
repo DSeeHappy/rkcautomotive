@@ -149,7 +149,7 @@ export default function HomeContent() {
                 We&apos;re the Englewood shop that answers the phone, posts {LABOR_RATE} on the pricing page, and puts
                 every repair in writing before a wrench turns — no quote-only runaround.
               </p>
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {COMPETITIVE_POSITIONING.map((item) => (
                   <div key={item.title} className="rounded-2xl border border-[color:var(--line)] bg-white p-5">
                     <h3 className="text-sm font-bold text-primary-blue">{item.title}</h3>

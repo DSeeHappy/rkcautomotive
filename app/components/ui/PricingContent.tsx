@@ -97,9 +97,9 @@ export default function PricingContent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
           >
-            ASE-certified Englewood shop. Dealers charge $180–220/hr. Typical local shops often charge{' '}
-            {LOCAL_SHOP_RATE_RANGE} but rarely post it online. We charge {LABOR_RATE}, publish it here, and get you
-            back on the road.
+            ASE-certified Englewood shop. Dealers charge $180–220/hr. National chains quote $140–160/hr in menu packages
+            with shop fees — but rarely post a flat rate. Typical local shops often charge {LOCAL_SHOP_RATE_RANGE} but
+            rarely publish it online. We charge {LABOR_RATE}, publish it here, and get you back on the road.
           </motion.p>
           <motion.div
             className="mt-8 flex flex-wrap gap-3"
@@ -304,7 +304,7 @@ export default function PricingContent() {
               their hourly rate. RKC puts {LABOR_RATE} on the page so you can compare the full estimate upfront.
             </p>
           </FadeIn>
-          <Stagger className="grid gap-6 md:grid-cols-3" stagger={0.08}>
+          <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
             {COMPETITIVE_POSITIONING.map((item) => (
               <StaggerItem key={item.title}>
                 <article className="h-full rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] p-8">

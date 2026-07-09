@@ -146,7 +146,7 @@ export default function AboutPage() {
               drive over.
             </p>
           </FadeIn>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {COMPETITIVE_POSITIONING.map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.08}>
                 <div className="h-full rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8">
