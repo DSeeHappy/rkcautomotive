@@ -1,14 +1,17 @@
 'use client';
 
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
-import { Calendar, Phone, Wrench, X } from 'lucide-react';
+import { Calendar, Phone, X } from 'lucide-react';
 import Link from 'next/link';
+import JsonLd from '@/app/components/JsonLd';
 import { getBrandAccentGlow, getBrandPanelBackground } from '@/lib/vehicleBrands';
 import { BUSINESS } from '@/lib/constants';
 import type { VehicleBrand } from '@/lib/vehicleBrands';
 import { getCategoryImage, type VehicleModel } from '@/lib/vehicleModels';
 import { getVehicleImage } from '@/lib/vehicleImages';
+import { createItemListSchema } from '@/lib/seo';
 import BrandLogo from './BrandLogo';
+import ModelCommonServicesSection from './ModelCommonServicesSection';
 import VehicleImagePanel from './VehicleImagePanel';
 
 const FULL_BLEED_BRANDS = [
@@ -48,8 +51,18 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
   const isRepresentative = vehicleImage.isRepresentative;
   const isFullBleed = FULL_BLEED_BRANDS.includes(brand.slug as (typeof FULL_BLEED_BRANDS)[number]);
 
+  const servicesSchema = createItemListSchema(
+    `Common RKC Services for the ${model.model}`,
+    model.commonServices.map((service) => ({
+      name: service.title,
+      url: service.href,
+      description: service.description,
+    })),
+  );
+
   return (
     <Dialog open={open} onClose={onClose} className="relative z-50">
+      <JsonLd data={servicesSchema} />
       <div className="fixed inset-0 bg-[#060a12]/70 backdrop-blur-sm" aria-hidden="true" />
 
       <div className="fixed inset-0 overflow-hidden">
@@ -184,22 +197,11 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                         </div>
                       </section>
 
-                      <section className="mt-8">
-                        <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
-                          <Wrench className="size-4" aria-hidden />
-                          Common RKC services for the {model.model}
-                        </h3>
-                        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                          {model.commonServices.map((service) => (
-                            <li
-                              key={service}
-                              className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white"
-                            >
-                              {service}
-                            </li>
-                          ))}
-                        </ul>
-                      </section>
+                      <ModelCommonServicesSection
+                        modelName={model.model}
+                        services={model.commonServices}
+                        brandColor={brand.color}
+                      />
 
                       <div className="mt-10 flex flex-wrap gap-3 border-t border-white/10 pt-8">
                         <a href={BUSINESS.phoneHref} className="btn-green inline-flex items-center gap-2">

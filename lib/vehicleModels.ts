@@ -1,5 +1,8 @@
+import { getModelCommonServices, type ModelCommonService } from '@/lib/modelCommonServices';
 import { VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { getVehicleImage, resolveVehicleImageSrc } from '@/lib/vehicleImages';
+
+export type { ModelCommonService };
 
 export type VehicleType = 'truck' | 'suv' | 'sedan' | 'hybrid' | 'ev' | 'performance' | 'van' | 'luxury';
 
@@ -21,7 +24,7 @@ export type VehicleModel = {
   model3dUrl?: string;
   yearRange: string;
   maintenanceSchedule: MaintenanceInterval[];
-  commonServices: string[];
+  commonServices: ModelCommonService[];
   description: string;
 };
 
@@ -289,73 +292,6 @@ const TYPE_INTERVAL_EXTRAS: Record<VehicleType, Partial<Record<string, string[]>
   },
 };
 
-const TYPE_COMMON_SERVICES: Record<VehicleType, string[]> = {
-  truck: [
-    '4WD & transfer case service',
-    'Turbo/diesel engine diagnostics',
-    'Heavy-duty brake service',
-    'Towing & hauling prep inspection',
-    'Suspension lift & alignment',
-    'Fleet maintenance programs',
-  ],
-  suv: [
-    'AWD/4WD system service',
-    'Brake pad & rotor replacement',
-    'Suspension & steering repair',
-    'Check engine light diagnostics',
-    'Pre-winter Colorado inspection',
-    'Roof rack & hitch installation check',
-  ],
-  sedan: [
-    'Oil changes & factory maintenance',
-    'CVT/transmission service',
-    'Brake repair & pad replacement',
-    'A/C recharge & repair',
-    'Check engine light diagnostics',
-    'Pre-purchase inspection',
-  ],
-  hybrid: [
-    'Hybrid battery system checks',
-    'Regenerative brake service',
-    'Inverter coolant service',
-    'Oil changes & hybrid inspections',
-    'Check engine & hybrid warning diagnostics',
-    'Colorado cold-start battery testing',
-  ],
-  ev: [
-    'Battery health & range diagnostics',
-    'EV charging system inspection',
-    'Brake service (regenerative)',
-    'Thermal management system service',
-    '12V auxiliary battery replacement',
-    'Software update & module checks',
-  ],
-  performance: [
-    'Performance brake upgrades',
-    'Turbo & intake system service',
-    'Sport suspension alignment',
-    'Track prep inspection',
-    'Engine diagnostics & tuning support',
-    'High-performance fluid changes',
-  ],
-  van: [
-    'Fleet scheduled maintenance',
-    'Sliding door & liftgate repair',
-    'Heavy-load brake service',
-    'Transmission & cooling service',
-    'Commercial vehicle inspections',
-    'Cargo HVAC service',
-  ],
-  luxury: [
-    'European import diagnostics',
-    'Air suspension repair',
-    'A-Service & B-Service maintenance',
-    'Brake & rotor replacement',
-    'Electrical module programming',
-    'Cooling system & water pump service',
-  ],
-};
-
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -460,7 +396,7 @@ function buildVehicleModel(
     model3dUrl: MODEL_3D_URLS[vehicleType],
     yearRange: '2015–2026',
     maintenanceSchedule: buildMaintenanceSchedule(vehicleType, brandName, model),
-    commonServices: TYPE_COMMON_SERVICES[vehicleType],
+    commonServices: getModelCommonServices(brandSlug, brandName, model, vehicleType),
     description: buildDescription(vehicleType, brandName, model),
   };
 }
