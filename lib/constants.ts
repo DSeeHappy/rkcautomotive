@@ -920,6 +920,72 @@ export const WARRANTY_PAGE_FAQ: FAQItem[] = [
   },
 ];
 
+export const ENGINE_REBUILDS_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'How do I know if I need a full engine rebuild vs. a top-end repair?',
+    answer:
+      'Bottom-end symptoms — rod knock, low oil pressure at hot idle, metallic debris in the oil filter, or blow-by pressurizing the crankcase — point to bearing and ring wear that requires pulling the short block. Top-end-only issues like a single-cylinder misfire or valvetrain tick may need cam and head work without a full rebuild. We run compression, leak-down, and oil-pressure tests before recommending teardown scope so you are not paying for a long-block when a short-block or valvetrain job solves the problem.',
+  },
+  {
+    question: 'What is the difference between a short-block and a long-block rebuild?',
+    answer:
+      'A short-block includes the block, crankshaft, connecting rods, pistons, rings, bearings, oil pump, and timing components — everything below the cylinder heads. A long-block adds fully reconditioned cylinder heads, valvetrain hardware, and often the intake manifold. Short-blocks make sense when heads are reusable; long-blocks are the turnkey choice when heads are cracked, warped, or have valve-seat damage. We quote both options when applicable so you can choose based on inspection findings and budget.',
+  },
+  {
+    question: 'How long does an engine rebuild take at RKC Automotive?',
+    answer:
+      'Timeline depends on machine-shop queue, parts availability, and whether we find hidden damage after teardown. A straightforward domestic V8 short-block rebuild typically runs several weeks from approval to installation — machine work, parts ordering, and assembly each take real time. We provide a realistic window at estimate time and call with photos if magnaflux, bore measurements, or crank journal condition changes the schedule.',
+  },
+  {
+    question: 'Can you rebuild turbocharged or high-performance engines?',
+    answer:
+      'Yes. Turbo and forced-induction engines demand tighter clearances, forged or hypereutectic piston selection matched to boost levels, and careful deck and head-surface preparation. We blueprint rotating assemblies for balance and document every machine-shop measurement. Whether you daily-drive a EcoBoost F-150 or tow with a Cummins, the same written-estimate and approval-before-teardown process applies at our posted $120/hr labor rate.',
+  },
+  {
+    question: 'Do you offer a warranty on rebuilt engines?',
+    answer:
+      'We stand behind our machine work and assembly with a written warranty on labor and installed parts — terms depend on scope and components used. Rebuilt engines also benefit from proper break-in procedures: specific oil change intervals, avoiding sustained high load for the first miles, and verifying oil pressure before you leave the lot. We walk you through break-in requirements at pickup so the investment lasts.',
+  },
+  {
+    question: 'Why rebuild instead of installing a crate engine or used junkyard motor?',
+    answer:
+      'Crate engines are convenient but expensive and may not match your VIN-specific accessories, sensors, or emissions hardware. Junkyard swaps are a gamble — unknown maintenance history, hidden overheating damage, and no machine-shop verification. A rebuild uses your block when it passes magnaflux and bore inspection, restores known clearances, and lets you upgrade pistons, rings, and bearings to address the failure mode that caused the original problem. For many Englewood and Denver metro drivers, that is the best balance of cost and long-term reliability.',
+  },
+];
+
+export const CAMSHAFT_LIFTER_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Is the HEMI lifter tick always a cam and lifter problem?',
+    answer:
+      'Not always — exhaust manifold leaks, VVT actuator rattle, and fuel injector tick can sound similar. That is why we measure valvetrain clearance where possible, borescope cam lobes, and correlate misfire data before quoting cam replacement. When roller lifters have collapsed and lobes show flat spots, partial repair is false economy: the tick returns and metal circulates through the oil galleries. Confirmed lobe damage means full cam assembly and matched lifter set.',
+  },
+  {
+    question: 'What is AFM/DFM and why does it cause lifter failures on GM trucks?',
+    answer:
+      'Active Fuel Management (AFM) and Dynamic Fuel Management (DFM) disable cylinders under light load by collapsing lifters via oil-pressure solenoids. Over time, stuck solenoids, deferred oil changes, and low-tension valve springs accelerate lifter collapse and cam lobe wear on cylinders 1, 4, 6, or 7 depending on engine family. Silverado, Sierra, Tahoe, and Yukon owners across the Denver metro often see misfire codes before the tick becomes constant. We diagnose AFM-related failures before recommending repair scope.',
+  },
+  {
+    question: 'Should I delete AFM when replacing the cam and lifters?',
+    answer:
+      'AFM delete kits disable the cylinder-deactivation hardware and use non-AFM lifters and a non-AFM cam profile. Some owners choose delete after repeated AFM failures; others prefer a stock replacement cam and lifters to maintain factory fuel-economy behavior. We explain both paths — parts cost, labor difference, and emissions implications — without pushing either option. The right choice depends on how you use the truck and whether you want to eliminate the failure mode entirely.',
+  },
+  {
+    question: 'Can I drive with an engine tick until my appointment?',
+    answer:
+      'A faint cold-start tick that fades as oil pressure builds may be tolerable for a short window if you have an appointment scheduled. A tick that persists at operating temperature, accompanies a misfire, or worsens under load means the valvetrain is actively damaging itself — continued driving sends metal through bearings you cannot inspect without teardown. If oil pressure drops or the engine runs rough, stop driving and arrange a tow. We would rather diagnose a still-salvageable top end than quote a full short-block because metal migrated downstream.',
+  },
+  {
+    question: 'Do you replace pushrods, springs, and stem seals during cam work?',
+    answer:
+      'When the heads are accessible, we inspect pushrods for straightness and end-cup wear, check valve spring height and tension, and replace stem seals while the valvetrain is apart. Reusing collapsed lifters or fatigued springs guarantees comebacks. Our valvetrain restoration checklist covers cam assembly, full lifter set, pushrods, springs, seals, and an oil gallery flush to remove debris from the failure — all scoped in a written estimate at $120/hr labor before parts are ordered.',
+  },
+  {
+    question: 'How much does cam and lifter replacement cost compared to a full rebuild?',
+    answer:
+      'Cam-in-block overhead-valve jobs and overhead-cam layouts differ widely in labor hours and parts cost. A confirmed valvetrain repair on a pushrod V8 is typically a fraction of a full short-block rebuild — but only when the block, crank, and bearings are still healthy. Oil filter debris analysis and compression testing tell us whether top-end work is sufficient or if wear has already reached the bottom end. We never recommend a rebuild when a cam job solves the problem, and we never patch one lifter when the cam is scored.',
+  },
+];
+
 export const PRICING_TIERS = [
   {
     category: 'Maintenance',
