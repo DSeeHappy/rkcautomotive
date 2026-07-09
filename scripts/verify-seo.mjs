@@ -13,6 +13,7 @@ const root = path.resolve(__dirname, '..');
 const ROUTES = [
   '/',
   '/about',
+  '/reviews',
   '/contact',
   '/pricing',
   '/services',
@@ -36,6 +37,7 @@ const ROUTES = [
 const ROUTE_TO_FILE = {
   '/': 'app/page.tsx',
   '/about': 'app/about/page.tsx',
+  '/reviews': 'app/reviews/page.tsx',
   '/contact': 'app/contact/page.tsx',
   '/pricing': 'app/pricing/page.tsx',
   '/services': 'app/services/page.tsx',
@@ -232,7 +234,7 @@ checkJsonLd();
 checkRobotsAndSitemap();
 const areaRoutes = checkAreaPages();
 
-const coreCount = 9;
+const coreCount = 10;
 const serviceCount = 11;
 const areaCount = areaRoutes.length;
 const totalRoutes = coreCount + serviceCount + areaCount;

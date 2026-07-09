@@ -19,7 +19,7 @@ const schema = {
   provider: {
     '@type': 'AutomotiveBusiness',
     name: 'RKC Automotive',
-    image: 'https://rkcautomotive.com/images/shop-exterior.webp',
+    image: 'https://www.rkcautomotive.com/images/shop-exterior.webp',
     telephone: '+1-720-749-3965',
     address: {
       '@type': 'PostalAddress',
@@ -30,7 +30,7 @@ const schema = {
       addressCountry: 'US',
     },
     geo: { '@type': 'GeoCoordinates', latitude: '39.6711', longitude: '-105.0239' },
-    url: 'https://rkcautomotive.com',
+    url: 'https://www.rkcautomotive.com',
     priceRange: '$$',
     openingHoursSpecification: [
       {

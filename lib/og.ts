@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { BUSINESS } from './constants';
-import { PHOTOS } from './photos';
 
 export const SITE_URL = BUSINESS.website;
 export const SITE_NAME = BUSINESS.name;
@@ -9,10 +8,10 @@ export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 
 export const DEFAULT_OG_IMAGE = {
-  url: PHOTOS.heroMain,
+  url: '/og/rkc-automotive-og.jpg',
   width: OG_IMAGE_WIDTH,
   height: OG_IMAGE_HEIGHT,
-  alt: 'RKC Automotive — ASE-certified auto repair in Englewood, CO',
+  alt: 'RKC Automotive — Engine & auto repair experts in Englewood, CO',
 } as const;
 
 export type PageMetadataOptions = {
@@ -123,8 +122,8 @@ export const rootOpenGraphDefaults: Metadata['openGraph'] = {
 
 export const rootTwitterDefaults: Metadata['twitter'] = {
   card: 'summary_large_image',
-  title: 'RKC Automotive | Auto Repair in Englewood, CO',
+  title: 'RKC Automotive — Engine & Auto Repair Experts in Englewood, CO',
   description:
-    'ASE-certified auto repair in Englewood, CO. Brakes, diagnostics, oil changes, and more. Call (720) 749-3965.',
+    'ASE-certified engine and auto repair in Englewood, CO. Diagnostics, brakes, oil changes & more. Call (720) 749-3965. Hablamos Español.',
   images: [absoluteUrl(DEFAULT_OG_IMAGE.url)],
 };

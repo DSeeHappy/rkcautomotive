@@ -36,7 +36,7 @@ export function getAllSiteRoutes(): string[] {
   return [
     '/',
     '/about',
-    '/contact',
+    '/reviews',
     '/pricing',
     '/services',
     '/englewood-co-auto-repair',

@@ -44,7 +44,8 @@ export const BUSINESS = {
     full: '2120 W Evans Ave, Englewood, CO 80110',
   },
   directionsUrl: 'https://share.google/hRQ6WsLJdoo0DwUlu',
-  website: 'https://rkcautomotive.com',
+  textHref: 'sms:+17207493965',
+  website: 'https://www.rkcautomotive.com',
   hours: {
     weekdays: 'Mon–Fri: 8:00 AM – 6:00 PM',
     saturday: 'Sat: 8:00 AM – 12:00 PM',
@@ -53,7 +54,7 @@ export const BUSINESS = {
   yearsExperience: 30,
   vehiclesServiced: '5,000+',
   serviceCategories: 11,
-  tagline: 'ASE Certified · Englewood, CO · Hablo Español',
+  tagline: 'ASE Certified · Englewood, CO · Hablamos Español',
   shortDescription:
     'Trusted automotive services — engine and auto repair for every make, model, and year. Serving Englewood and the Denver metro.',
   facebookReviewCount: 3,
@@ -358,7 +359,7 @@ export const TRUST_BADGES = [
   'Written Estimates',
   'Same-Day Service',
   'All Makes & Models',
-  'Hablo Español',
+  'Hablamos Español',
   'Locally Owned',
 ] as const;
 

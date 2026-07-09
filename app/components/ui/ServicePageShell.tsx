@@ -9,6 +9,7 @@ import { BUSINESS, PHOTOS, SERVICES, type ServiceItem } from '@/lib/constants';
 import { createBreadcrumbSchema } from '@/lib/seo';
 import PageHero from './PageHero';
 import FadeIn from './FadeIn';
+import PageCTAs from './PageCTAs';
 
 export type ServicePageShellProps = {
   title: string;
@@ -80,6 +81,8 @@ export default function ServicePageShell({
       ))}
 
       <PageHero title={title} description={description} breadcrumbs={breadcrumbs} imageSrc={imageSrc} imageAlt={`${title} at RKC Automotive in Englewood, CO`} />
+
+      <PageCTAs variant="band" />
 
       <section className="border-b border-[color:var(--line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-[color:var(--line)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">

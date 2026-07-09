@@ -80,6 +80,10 @@ body {
   @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20;
 }
 
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-primary-green/40 hover:bg-primary-green/5 hover:text-primary-green;
+}
+
 .field {
   @apply w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3.5 text-foreground outline-none transition focus:border-primary-green focus:ring-2 focus:ring-primary-green/20;
 }

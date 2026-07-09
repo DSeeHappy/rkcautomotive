@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import MobileStickyBar from './components/ui/MobileStickyBar';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import SplashScreen from './components/ui/SplashScreen';
 import JsonLd from './components/JsonLd';
@@ -25,11 +26,16 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'RKC Automotive | Auto Repair in Englewood, CO',
+    default: 'RKC Automotive — Engine & Auto Repair Experts in Englewood, CO',
     template: '%s | RKC Automotive',
   },
   description:
-    'ASE-certified auto repair in Englewood, CO. Brakes, diagnostics, oil changes, and more. Call (720) 749-3965. Mon–Fri 8–6, Sat 8–12.',
+    'ASE-certified engine and auto repair in Englewood, CO. Diagnostics, transmission, brakes & maintenance at $120/hr. Call (720) 749-3965. Hablamos Español.',
+  manifest: '/site.webmanifest',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
   openGraph: rootOpenGraphDefaults,
   twitter: rootTwitterDefaults,
 };
@@ -47,8 +53,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
         <SplashScreen>
           <Navigation />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
           <Footer />
+          <MobileStickyBar />
           <FloatingCallButton />
         </SplashScreen>
         <Analytics />
