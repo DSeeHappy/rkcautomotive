@@ -39,6 +39,11 @@ export const metadata: Metadata = {
   },
   openGraph: rootOpenGraphDefaults,
   twitter: rootTwitterDefaults,
+  verification: {
+    other: {
+      'msvalidate.01': 'F95A402B999BC67315CA610B07111B57',
+    },
+  },
 };
 
 export const viewport: Viewport = {
