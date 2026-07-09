@@ -275,7 +275,7 @@ export const WARRANTY_PROVIDERS: WarrantyProvider[] = [
   {
     name: 'Olive',
     slug: 'olive',
-    logo: null,
+    logo: '/warranty-logos/olive.png',
     claimsUrl: 'https://www.witholive.com/claims',
   },
   {
@@ -323,7 +323,7 @@ export const WARRANTY_PROVIDERS: WarrantyProvider[] = [
   {
     name: 'Allstate Car Care',
     slug: 'allstate-car-care',
-    logo: null,
+    logo: '/warranty-logos/allstate-car-care.png',
     claimsUrl: 'https://www.allstatecarcare.com/claims/',
   },
   {
@@ -347,31 +347,31 @@ export const WARRANTY_PROVIDERS: WarrantyProvider[] = [
   {
     name: 'Matrix Warranty Solutions',
     slug: 'matrix',
-    logo: null,
+    logo: '/warranty-logos/matrix.png',
     claimsUrl: 'https://matrixwarranty.com/repair-facilities/',
   },
   {
     name: 'United Auto Defense',
     slug: 'united-auto-defense',
-    logo: null,
+    logo: '/warranty-logos/united-auto-defense.png',
     claimsUrl: 'https://unitedautodefense.com/claims/',
   },
   {
     name: 'National Vehicle Protection',
     slug: 'nvp',
-    logo: null,
+    logo: '/warranty-logos/nvp.png',
     claimsUrl: 'https://www.nvpcservices.com/repair-facilities/',
   },
   {
     name: 'Protect My Car',
     slug: 'protect-my-car',
-    logo: null,
+    logo: '/warranty-logos/protect-my-car.png',
     claimsUrl: 'https://protectmycar.com/file-a-claim/',
   },
   {
     name: 'Liberty Bell Auto Protect',
     slug: 'liberty-bell',
-    logo: null,
+    logo: '/warranty-logos/liberty-bell.png',
     claimsUrl: 'https://www.libertybellautoprotect.com/claims/',
   },
   {
@@ -383,13 +383,13 @@ export const WARRANTY_PROVIDERS: WarrantyProvider[] = [
   {
     name: 'AA Auto Protection',
     slug: 'aa-auto-protection',
-    logo: null,
+    logo: '/warranty-logos/aa-auto-protection.png',
     claimsUrl: 'https://aaautoprotection.com/claims/',
   },
   {
     name: 'Smart Auto Care',
     slug: 'smart-auto-care',
-    logo: null,
+    logo: '/warranty-logos/smart-auto-care.png',
     claimsUrl: 'https://smartautocare.com/repair-facilities/',
   },
   {
@@ -407,7 +407,7 @@ export const WARRANTY_PROVIDERS: WarrantyProvider[] = [
   {
     name: 'Preferred Warranties',
     slug: 'preferred',
-    logo: null,
+    logo: '/warranty-logos/preferred.png',
     claimsUrl: 'https://www.pwoi.com/repair-facilities/',
   },
   {
