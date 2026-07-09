@@ -3,40 +3,30 @@
 import { ChevronRight, MousePointerClick, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { buildModelHubPath } from '@/lib/modelHubRoutes';
-import type { BrandReliabilitySnapshot } from '@/lib/brandReliabilityNotes';
 import type { VehicleBrand } from '@/lib/vehicleBrands';
 import { StaggerItem } from './FadeIn';
 
-const RELIABILITY_LABEL_STYLES: Record<BrandReliabilitySnapshot['bullets'][number]['label'], string> = {
-  'Generally solid': 'text-emerald-300',
-  'Higher scrutiny': 'text-amber-300',
-  'Colorado angle': 'text-sky-300',
-};
-
 type BrandModelPickerProps = {
   brand: VehicleBrand;
-  reliabilitySnapshot: BrandReliabilitySnapshot;
+  profileCommonModels: string[];
 };
 
-export default function BrandModelPicker({ brand, reliabilitySnapshot }: BrandModelPickerProps) {
+export default function BrandModelPicker({ brand, profileCommonModels }: BrandModelPickerProps) {
   return (
     <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
       <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-white">
         <Wrench className="size-4 shrink-0 text-primary-green-light" aria-hidden />
-        Reliability at a Glance
+        Common Models Serviced
       </p>
-      <ul role="list" className="mt-4 space-y-3">
-        {reliabilitySnapshot.bullets.map((bullet) => (
-          <li key={bullet.label} role="listitem" className="flex gap-2 text-sm leading-relaxed text-white/90">
+      <ul role="list" className="mt-4 space-y-2">
+        {profileCommonModels.map((model) => (
+          <li key={model} role="listitem" className="flex gap-2 text-sm text-white">
             <span
-              className="mt-2 size-1.5 shrink-0 rounded-full"
+              className="mt-1.5 size-1.5 shrink-0 rounded-full"
               style={{ backgroundColor: brand.color }}
               aria-hidden
             />
-            <span>
-              <span className={`font-semibold ${RELIABILITY_LABEL_STYLES[bullet.label]}`}>{bullet.label}:</span>{' '}
-              {bullet.text}
-            </span>
+            {model}
           </li>
         ))}
       </ul>

@@ -4,7 +4,6 @@ import { Tab, TabGroup, TabPanel, TabPanels } from '@headlessui/react';
 import { AlertTriangle, ChevronRight, MapPin, MousePointerClick, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
-import { getBrandReliabilitySnapshot } from '@/lib/brandReliabilityNotes';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { BUSINESS } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
@@ -34,9 +33,7 @@ export default function BrandTabs() {
               <MousePointerClick className="size-4 shrink-0 text-primary-green" aria-hidden />
               <p className="text-sm font-semibold text-foreground sm:text-base">Pick your make</p>
             </div>
-            <p className="mt-1.5 pl-6 text-sm leading-relaxed text-ink-muted">
-              Tap a brand to see common failures and services for your model
-            </p>
+            <p className="mt-1.5 pl-6 text-sm leading-relaxed text-ink-muted">Tap a brand below</p>
           </div>
 
           <AnimatedBrandTabList aria-label="Vehicle makes" className="flex flex-wrap gap-2 md:gap-2">
@@ -61,7 +58,6 @@ export default function BrandTabs() {
         <TabPanels className="mt-8">
           {VEHICLE_BRANDS.map((brand) => {
             const profile = getBrandFailureProfile(brand.slug);
-            const reliabilitySnapshot = getBrandReliabilitySnapshot(brand.slug);
 
             return (
               <TabPanel
@@ -114,13 +110,13 @@ export default function BrandTabs() {
                     </Link>
                   </div>
 
-                  {profile && reliabilitySnapshot ? (
+                  {profile ? (
                     <>
                       <p className="mt-10 text-sm font-semibold text-white/90 sm:text-base">
-                        {brand.name} — select your model
+                        {brand.name} — pick your model
                       </p>
                       <Stagger className="mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
-                        <BrandModelPicker brand={brand} reliabilitySnapshot={reliabilitySnapshot} />
+                        <BrandModelPicker brand={brand} profileCommonModels={profile.commonModels} />
 
                         <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
                           <p className="text-sm font-bold uppercase tracking-[0.16em] text-white">
