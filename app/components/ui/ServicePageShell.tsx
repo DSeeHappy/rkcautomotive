@@ -4,12 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { CheckCircle, Phone } from 'lucide-react';
 import { type ReactNode } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { BUSINESS, PHOTOS, SERVICES, type ServiceItem } from '@/lib/constants';
 import { createBreadcrumbSchema } from '@/lib/seo';
 import PageHero from './PageHero';
 import FadeIn from './FadeIn';
 import PageCTAs from './PageCTAs';
+import { MotionAnchor } from './MotionLink';
 
 export type ServicePageShellProps = {
   title: string;
@@ -42,8 +42,6 @@ export default function ServicePageShell({
     'Quality parts & workmanship',
   ],
 }: ServicePageShellProps) {
-  const reduce = useReducedMotion();
-
   const breadcrumbs =
     breadcrumbsProp ??
     (breadcrumbLabel
@@ -120,15 +118,10 @@ export default function ServicePageShell({
                       Schedule service
                     </p>
                     <p className="mt-2 font-display text-4xl tracking-wide">{BUSINESS.phone}</p>
-                    <motion.a
-                      href={BUSINESS.phoneHref}
-                      className="btn-green mt-5 w-full"
-                      whileHover={reduce ? undefined : { y: -2 }}
-                      whileTap={reduce ? undefined : { scale: 0.98 }}
-                    >
+                    <MotionAnchor href={BUSINESS.phoneHref} className="btn-green mt-5 w-full">
                       <Phone className="size-4" />
                       {phoneCta || 'Call now'}
-                    </motion.a>
+                    </MotionAnchor>
                     <p className="mt-4 text-xs text-white/50">
                       {BUSINESS.hours.weekdays}
                       <br />
@@ -177,15 +170,10 @@ export default function ServicePageShell({
               Call RKC Automotive in Englewood for a clear estimate and expert repair.
             </p>
           </div>
-          <motion.a
-            href={BUSINESS.phoneHref}
-            className="btn-green"
-            whileHover={reduce ? undefined : { y: -2 }}
-            whileTap={reduce ? undefined : { scale: 0.98 }}
-          >
+          <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
             <Phone className="size-5" />
             {BUSINESS.phone}
-          </motion.a>
+          </MotionAnchor>
         </div>
       </section>
     </div>

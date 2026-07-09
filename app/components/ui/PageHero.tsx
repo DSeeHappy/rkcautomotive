@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
+import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import { useGsapReveal } from '@/lib/useGsapReveal';
 
 type PageHeroProps = {
   title: string;
@@ -23,8 +24,10 @@ export default function PageHero({
   imageSrc = PHOTOS.interior,
   imageAlt,
 }: PageHeroProps) {
-  const reduce = useReducedMotion();
   const heroAlt = imageAlt ?? `${title} — RKC Automotive in Englewood, CO`;
+  const heading = useGsapReveal<HTMLHeadingElement>({ y: 24, duration: 0.7 });
+  const desc = useGsapReveal<HTMLParagraphElement>({ delay: 0.1, y: 16, duration: 0.6 });
+  const ctas = useGsapReveal<HTMLDivElement>({ delay: 0.2, y: 12, duration: 0.5 });
 
   return (
     <section className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] pt-24 sm:min-h-[64svh] xl:pt-28">
@@ -53,41 +56,24 @@ export default function PageHero({
         {eyebrow && (
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">{eyebrow}</p>
         )}
-        <motion.h1
+        <h1
+          ref={heading.ref}
           className="mt-3 max-w-4xl font-display text-5xl tracking-wide text-white sm:text-6xl lg:text-7xl"
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           {title}
-        </motion.h1>
-        <motion.p
-          className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl"
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        >
+        </h1>
+        <p ref={desc.ref} className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl">
           {description}
-        </motion.p>
-        <motion.div
-          className="mt-8 flex flex-wrap gap-3"
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <motion.a
-            href={BUSINESS.phoneHref}
-            className="btn-green"
-            whileHover={reduce ? undefined : { y: -2 }}
-            whileTap={reduce ? undefined : { scale: 0.98 }}
-          >
+        </p>
+        <div ref={ctas.ref} className="mt-8 flex flex-wrap gap-3">
+          <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
             <Phone className="size-5" />
             {BUSINESS.phone}
-          </motion.a>
+          </MotionAnchor>
           <Link href="/contact" className="btn-ghost-light">
             Contact
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

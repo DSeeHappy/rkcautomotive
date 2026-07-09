@@ -2,7 +2,6 @@
 
 import { Clock, FileCheck, Shield } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import FadeIn from '@/app/components/ui/FadeIn';
 
 const STATS: { icon: LucideIcon; value: string; label: string; detail: string }[] = [
@@ -27,16 +26,13 @@ const STATS: { icon: LucideIcon; value: string; label: string; detail: string }[
 ];
 
 export default function WarrantyRealityCheck() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="relative overflow-hidden bg-[#0c1222] py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
-          backgroundImage:
-            'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)',
+          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)',
           backgroundSize: '32px 32px',
         }}
       />
@@ -54,8 +50,8 @@ export default function WarrantyRealityCheck() {
             &ldquo;We fight the claim so you don&apos;t fight the adjuster.&rdquo;
           </blockquote>
           <p className="mx-auto mt-5 max-w-2xl text-base text-white/65 sm:text-lg">
-            Extended warranty companies profit when claims stall or get denied. RKC documents every
-            failure, negotiates teardown authorizations, and escalates when adjusters play games.
+            Extended warranty companies profit when claims stall or get denied. RKC documents every failure, negotiates
+            teardown authorizations, and escalates when adjusters play games.
           </p>
         </FadeIn>
 
@@ -64,21 +60,12 @@ export default function WarrantyRealityCheck() {
             const Icon = stat.icon;
             return (
               <FadeIn key={stat.label} delay={i * 0.08} className="px-6 py-10 sm:px-8">
-                <motion.div
-                  initial={reduce ? false : { opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <Icon className="size-8 text-primary-green-light" aria-hidden />
-                  <p className="mt-4 font-display text-5xl tracking-wide text-white sm:text-6xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-2 text-sm font-bold uppercase tracking-[0.16em] text-primary-green-light">
-                    {stat.label}
-                  </p>
-                  <p className="mt-2 text-sm text-white/55">{stat.detail}</p>
-                </motion.div>
+                <Icon className="size-8 text-primary-green-light" aria-hidden />
+                <p className="mt-4 font-display text-5xl tracking-wide text-white sm:text-6xl">{stat.value}</p>
+                <p className="mt-2 text-sm font-bold uppercase tracking-[0.16em] text-primary-green-light">
+                  {stat.label}
+                </p>
+                <p className="mt-2 text-sm text-white/55">{stat.detail}</p>
               </FadeIn>
             );
           })}

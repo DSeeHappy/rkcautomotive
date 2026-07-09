@@ -12,7 +12,6 @@ import {
   Wrench,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { BUSINESS, LABOR_RATE, PHOTOS, WARRANTY_CLAIM_PROCESS, WARRANTY_PAGE_FAQ } from '@/lib/constants';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
@@ -30,8 +29,6 @@ import { MotionAnchor } from '@/app/components/ui/MotionLink';
 const PROCESS_ICONS: LucideIcon[] = [ClipboardList, ScanSearch, Phone, Wrench];
 
 export default function WarrantyContent() {
-  const reduce = useReducedMotion();
-
   return (
     <div>
       <WarrantyHero />
@@ -153,15 +150,10 @@ export default function WarrantyContent() {
               denials, and handle the entire claims process at {LABOR_RATE}.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <motion.a
-                href={BUSINESS.phoneHref}
-                className="btn-green"
-                whileHover={reduce ? undefined : { y: -2 }}
-                whileTap={reduce ? undefined : { scale: 0.98 }}
-              >
+              <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                 <Phone className="size-5" />
                 {BUSINESS.phone}
-              </motion.a>
+              </MotionAnchor>
               <Link href="/contact" className="btn-ghost-light">
                 <CalendarCheck className="size-5" />
                 Schedule diagnostic

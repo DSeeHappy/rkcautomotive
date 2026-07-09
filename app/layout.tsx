@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import MobileStickyBar from './components/ui/MobileStickyBar';
 import FloatingCallButton from './components/ui/FloatingCallButton';
+import GsapProvider from './components/ui/GsapProvider';
 import SplashScreen from './components/ui/SplashScreen';
 import JsonLd from './components/JsonLd';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
@@ -51,13 +52,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
-        <SplashScreen>
-          <Navigation />
-          <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
-          <Footer />
-          <MobileStickyBar />
-          <FloatingCallButton />
-        </SplashScreen>
+        <GsapProvider>
+          <SplashScreen>
+            <Navigation />
+            <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
+            <Footer />
+            <MobileStickyBar />
+            <FloatingCallButton />
+          </SplashScreen>
+        </GsapProvider>
         <Analytics />
       </body>
     </html>

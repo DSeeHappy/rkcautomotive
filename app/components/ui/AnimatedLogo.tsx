@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
+import { gsap } from '@/lib/gsap';
 import {
   RKC_LOGO_CARD_PNG,
   RKC_LOGO_CARD_SIZE,
@@ -11,9 +13,7 @@ import {
   RKC_LOGO_PNG,
   RKC_LOGO_WIDTH,
 } from '@/lib/logo';
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 export type AnimatedLogoVariant = 'hero' | 'nav' | 'footer';
 
@@ -21,7 +21,6 @@ type AnimatedLogoProps = {
   variant?: AnimatedLogoVariant;
   className?: string;
   href?: string;
-  /** Nav over dark hero — use white card for contrast */
   onDarkBackground?: boolean;
 };
 
@@ -95,55 +94,62 @@ function LogoContent({
   className = '',
   onDarkBackground = false,
 }: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground'>) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const v = variant ?? 'nav';
   const isNav = v === 'nav';
   const isHero = v === 'hero';
   const useCard = useCardAsset(v, onDarkBackground);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (reduce || !wrapperRef.current) return;
+
+      gsap.set(wrapperRef.current, { willChange: 'transform, opacity' });
+      gsap.from(wrapperRef.current, {
+        opacity: 0,
+        y: isHero ? 12 : 0,
+        scale: isHero ? 0.98 : 0.9,
+        duration: isHero ? 0.95 : 0.85,
+        delay: isHero ? 0.08 : 0,
+        ease: 'power2.out',
+        onComplete: () => {
+          if (wrapperRef.current) gsap.set(wrapperRef.current, { clearProps: 'willChange' });
+        },
+      });
+    },
+    { scope: wrapperRef, dependencies: [reduce, isHero] },
+  );
+
+  useGSAP(
+    () => {
+      const el = containerRef.current;
+      if (reduce || !isNav || !el) return;
+
+      const onEnter = () => gsap.to(el, { scale: 1.02, duration: 0.25, ease: 'power2.out' });
+      const onLeave = () => gsap.to(el, { scale: 1, duration: 0.25, ease: 'power2.out' });
+
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
+
+      return () => {
+        el.removeEventListener('mouseenter', onEnter);
+        el.removeEventListener('mouseleave', onLeave);
+      };
+    },
+    { scope: containerRef, dependencies: [reduce, isNav] },
+  );
 
   return (
-    <motion.div
-      className={`relative inline-flex shrink-0 items-center ${className}`}
-      initial={
-        reduce
-          ? false
-          : isHero
-            ? { opacity: 0, y: 12, scale: 0.98 }
-            : { opacity: 0, scale: 0.9 }
-      }
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={
-        isHero
-          ? {
-              opacity: { duration: 0.9, ease: EASE_OUT, delay: 0.08 },
-              y: { duration: 0.95, ease: EASE_OUT, delay: 0.08 },
-              scale: { duration: 0.95, ease: EASE_OUT, delay: 0.08 },
-            }
-          : {
-              opacity: { duration: 0.7, ease: EASE },
-              scale: { duration: 0.85, ease: EASE_OUT },
-            }
-      }
-      whileHover={
-        reduce || !isNav
-          ? undefined
-          : { scale: 1.02, transition: { duration: 0.25, ease: EASE } }
-      }
-    >
+    <div ref={wrapperRef} className={`relative inline-flex shrink-0 items-center ${className}`}>
       <div
-        className={
-          isNav && useCard
-            ? 'p-0.5'
-            : isNav
-              ? 'px-0.5 py-0.5'
-              : isHero
-                ? 'p-0'
-                : ''
-        }
+        ref={containerRef}
+        className={isNav && useCard ? 'p-0.5' : isNav ? 'px-0.5 py-0.5' : isHero ? 'p-0' : ''}
       >
         <LogoImage variant={v} onDarkBackground={onDarkBackground} />
       </div>
-    </motion.div>
+    </div>
   );
 }
 

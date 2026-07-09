@@ -1,13 +1,50 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useGSAP } from '@gsap/react';
 import { CheckCircle, Send } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { gsap } from '@/lib/gsap';
 import { BUSINESS } from '@/lib/constants';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
+import { useGsapHoverPress } from '@/lib/useGsapHoverPress';
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+  const { ref: submitRef } = useGsapHoverPress<HTMLButtonElement>();
+
+  useGSAP(
+    () => {
+      if (reduce || !formRef.current) return;
+
+      gsap.set(formRef.current, { opacity: 0, y: 20, willChange: 'transform, opacity' });
+      gsap.to(formRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: formRef.current,
+          start: 'top 90%',
+          once: true,
+        },
+        onComplete: () => {
+          if (formRef.current) gsap.set(formRef.current, { clearProps: 'willChange' });
+        },
+      });
+    },
+    { scope: formRef, dependencies: [reduce] },
+  );
+
+  useGSAP(
+    () => {
+      if (reduce || !submitted || !successRef.current) return;
+      gsap.from(successRef.current, { opacity: 0, y: 12, duration: 0.5, ease: 'power2.out' });
+    },
+    { scope: successRef, dependencies: [reduce, submitted] },
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -21,7 +58,7 @@ export default function ContactForm() {
 
     const subject = encodeURIComponent(`Service Request from ${name}`);
     const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nVehicle: ${vehicle}\n\nMessage:\n${message}`
+      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nVehicle: ${vehicle}\n\nMessage:\n${message}`,
     );
     window.location.href = `mailto:${BUSINESS.email}?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -29,10 +66,9 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <motion.div
+      <div
+        ref={successRef}
         className="rounded-3xl border border-[color:var(--line)] bg-white p-10 text-center shadow-xl"
-        initial={reduce ? false : { opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
       >
         <CheckCircle className="mx-auto size-12 text-primary-green" />
         <h3 className="mt-4 font-display text-4xl tracking-wide text-foreground">Thank you</h3>
@@ -43,18 +79,15 @@ export default function ContactForm() {
           </a>
           .
         </p>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.form
+    <form
+      ref={formRef}
       onSubmit={handleSubmit}
       className="space-y-5 rounded-3xl border border-white/40 bg-white/95 p-7 shadow-2xl backdrop-blur-md sm:p-9"
-      initial={reduce ? false : { opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-green">Message the bay</p>
@@ -105,15 +138,10 @@ export default function ContactForm() {
         />
       </div>
 
-      <motion.button
-        type="submit"
-        className="btn-green w-full sm:w-auto"
-        whileHover={reduce ? undefined : { y: -2 }}
-        whileTap={reduce ? undefined : { scale: 0.98 }}
-      >
+      <button ref={submitRef} type="submit" className="btn-green w-full sm:w-auto">
         <Send className="size-4" />
         Send message
-      </motion.button>
+      </button>
 
       <p className="text-sm text-ink-muted">
         Or call{' '}
@@ -122,6 +150,6 @@ export default function ContactForm() {
         </a>{' '}
         for same-day scheduling.
       </p>
-    </motion.form>
+    </form>
   );
 }

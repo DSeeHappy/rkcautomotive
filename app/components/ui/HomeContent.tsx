@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import {
   BUSINESS,
   FEATURED_SERVICES,
@@ -24,9 +23,9 @@ import Hero from './Hero';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 import ReviewCards from './ReviewCards';
 import ServiceAreaGrid from './ServiceAreaGrid';
+import { MotionAnchor } from './MotionLink';
 
 export default function HomeContent() {
-  const reduce = useReducedMotion();
 
   return (
     <div>
@@ -62,15 +61,9 @@ export default function HomeContent() {
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-[color:var(--line)] lg:grid-cols-4">
           {STATS.map((stat, i) => (
             <FadeIn key={stat.label} delay={i * 0.06} className="px-6 py-10 sm:px-8">
-              <motion.p
-                className="font-display text-5xl tracking-wide text-primary-blue sm:text-6xl"
-                initial={reduce ? false : { opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-              >
+              <p className="font-display text-5xl tracking-wide text-primary-blue sm:text-6xl">
                 {stat.value}
-              </motion.p>
+              </p>
               <p className="mt-2 text-sm font-bold uppercase tracking-[0.16em] text-foreground">{stat.label}</p>
               <p className="mt-1 text-sm text-ink-muted">{stat.sublabel}</p>
             </FadeIn>
@@ -365,15 +358,10 @@ export default function HomeContent() {
               Same-day openings when available. Call the bay or send a message — we&apos;ll get you a clear next step.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <motion.a
-                href={BUSINESS.phoneHref}
-                className="btn-green"
-                whileHover={reduce ? undefined : { y: -3 }}
-                whileTap={reduce ? undefined : { scale: 0.98 }}
-              >
+              <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                 <Phone className="size-5" />
                 {BUSINESS.phone}
-              </motion.a>
+              </MotionAnchor>
               <Link href="/pricing" className="btn-ghost-light">
                 See pricing
               </Link>

@@ -1,14 +1,15 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useGSAP } from '@gsap/react';
+import { gsap } from '@/lib/gsap';
 import { GOOGLE_REVIEWS_URL, VERIFIED_REVIEWS_4_PLUS, type VerifiedReview } from '@/lib/constants';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 const ROTATION_INTERVAL_MS = 15000;
 const COMPACT_INDICATOR_THRESHOLD = 10;
-const ease = [0.22, 1, 0.36, 1] as const;
 
 type ReviewCardsProps = {
   reviews?: readonly VerifiedReview[];
@@ -70,6 +71,34 @@ function ReviewCard({ review }: { review: VerifiedReview }) {
   );
 }
 
+function AnimatedReviewSlot({ review, reduceMotion }: { review: VerifiedReview; reduceMotion: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const key = reviewKey(review);
+
+  useGSAP(
+    () => {
+      if (reduceMotion || !ref.current) return;
+
+      gsap.set(ref.current, { y: 20, willChange: 'transform' });
+      gsap.to(ref.current, {
+        y: 0,
+        duration: 0.45,
+        ease: 'power2.out',
+        onComplete: () => {
+          if (ref.current) gsap.set(ref.current, { clearProps: 'willChange' });
+        },
+      });
+    },
+    { scope: ref, dependencies: [key, reduceMotion] },
+  );
+
+  return (
+    <div ref={ref} className="h-full">
+      <ReviewCard review={review} />
+    </div>
+  );
+}
+
 export default function ReviewCards({
   reviews = VERIFIED_REVIEWS_4_PLUS,
   className = '',
@@ -77,7 +106,7 @@ export default function ReviewCards({
   rotate,
   intervalMs = ROTATION_INTERVAL_MS,
 }: ReviewCardsProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const visibleCount = useVisibleCount();
   const shouldRotate = rotate ?? reviews.length > visibleCount;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -163,18 +192,7 @@ export default function ReviewCards({
               const review = visibleReviews[slot]!;
               return (
                 <div key={slot} className="min-h-[280px]">
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.div
-                      key={reviewKey(review)}
-                      className="h-full"
-                      initial={reduceMotion ? false : { y: 20 }}
-                      animate={{ y: 0 }}
-                      exit={reduceMotion ? undefined : { y: -16 }}
-                      transition={{ duration: 0.45, ease }}
-                    >
-                      <ReviewCard review={review} />
-                    </motion.div>
-                  </AnimatePresence>
+                  <AnimatedReviewSlot review={review} reduceMotion={reduceMotion} />
                 </div>
               );
             })}

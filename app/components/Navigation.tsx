@@ -4,16 +4,16 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { ChevronDown, Menu, Phone, X } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { BUSINESS, NAV_LINKS, SERVICES } from '@/lib/constants';
 import AnimatedLogo from '@/app/components/ui/AnimatedLogo';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import { useGsapReveal } from '@/lib/useGsapReveal';
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
-  const reduce = useReducedMotion();
+  const { ref: navRef } = useGsapReveal<HTMLElement>({ y: -20, duration: 0.7 });
   const links = NAV_LINKS.filter((l) => l.name !== 'Home');
 
   useEffect(() => {
@@ -24,13 +24,11 @@ export default function Navigation() {
   }, []);
 
   return (
-    <motion.nav
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+    <nav
+      ref={navRef}
+      className={`fixed inset-x-0 top-0 z-50 ${
         scrolled ? 'glass-nav shadow-[0_8px_40px_-20px_rgba(12,18,34,0.35)]' : 'bg-transparent'
       }`}
-      initial={reduce ? false : { y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-4 sm:h-28 lg:h-32 xl:h-36 sm:px-6 lg:px-8">
         <AnimatedLogo variant="nav" href="/" onDarkBackground={!scrolled} />
@@ -171,6 +169,6 @@ export default function Navigation() {
           </div>
         </DialogPanel>
       </Dialog>
-    </motion.nav>
+    </nav>
   );
 }

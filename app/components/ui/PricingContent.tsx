@@ -18,7 +18,6 @@ import {
   ScanSearch,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import {
   BUSINESS,
   LABOR_RATE,
@@ -36,6 +35,8 @@ import {
 } from '@/lib/constants';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
+import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import { useGsapReveal } from '@/lib/useGsapReveal';
 
 const RKC_RATE = 120;
 const DEALER_RATE = 180;
@@ -65,7 +66,10 @@ function laborCost(hours: number, rate: number) {
 }
 
 export default function PricingContent() {
-  const reduce = useReducedMotion();
+  const rateReveal = useGsapReveal<HTMLParagraphElement>({ y: 20, duration: 0.7 });
+  const titleReveal = useGsapReveal<HTMLHeadingElement>({ delay: 0.08, y: 24, duration: 0.7 });
+  const descReveal = useGsapReveal<HTMLParagraphElement>({ delay: 0.16, y: 16, duration: 0.6 });
+  const ctaReveal = useGsapReveal<HTMLDivElement>({ delay: 0.24, y: 12, duration: 0.5 });
 
   return (
     <div>
@@ -75,51 +79,26 @@ export default function PricingContent() {
         <div className="photo-veil absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">Pricing</p>
-          <motion.p
-            className="mt-4 font-display text-[clamp(5rem,16vw,10rem)] leading-[0.85] tracking-wide text-primary-green-light"
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <p ref={rateReveal.ref} className="mt-4 font-display text-[clamp(5rem,16vw,10rem)] leading-[0.85] tracking-wide text-primary-green-light">
             {LABOR_RATE}
-          </motion.p>
-          <motion.h1
-            className="mt-1 max-w-4xl font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl"
-            initial={reduce ? false : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
+          </p>
+          <h1 ref={titleReveal.ref} className="mt-1 max-w-4xl font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">
             Beat dealers on price and service.
-          </motion.h1>
-          <motion.p
-            className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-          >
+          </h1>
+          <p ref={descReveal.ref} className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl">
             ASE-certified Englewood shop. Dealers charge $180–220/hr. National chains quote $140–160/hr in menu packages
             with shop fees — but rarely post a flat rate. Typical local shops often charge {LOCAL_SHOP_RATE_RANGE} but
             rarely publish it online. We charge {LABOR_RATE}, publish it here, and get you back on the road.
-          </motion.p>
-          <motion.div
-            className="mt-8 flex flex-wrap gap-3"
-            initial={reduce ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <motion.a
-              href={BUSINESS.phoneHref}
-              className="btn-green"
-              whileHover={reduce ? undefined : { y: -2 }}
-              whileTap={reduce ? undefined : { scale: 0.98 }}
-            >
+          </p>
+          <div ref={ctaReveal.ref} className="mt-8 flex flex-wrap gap-3">
+            <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
               <Phone className="size-5" />
               {BUSINESS.phone}
-            </motion.a>
+            </MotionAnchor>
             <Link href="/contact" className="btn-ghost-light">
               Get estimate
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -604,15 +583,10 @@ export default function PricingContent() {
               upsell, no runaround. ASE certified, 30+ years in Englewood.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <motion.a
-                href={BUSINESS.phoneHref}
-                className="btn-green"
-                whileHover={reduce ? undefined : { y: -2 }}
-                whileTap={reduce ? undefined : { scale: 0.98 }}
-              >
+              <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                 <Phone className="size-5" />
                 {BUSINESS.phone}
-              </motion.a>
+              </MotionAnchor>
               <Link href="/contact" className="btn-ghost-light">
                 Get estimate
               </Link>

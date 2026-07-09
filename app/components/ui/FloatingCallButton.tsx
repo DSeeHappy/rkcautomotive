@@ -1,12 +1,19 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
 import { Phone } from 'lucide-react';
 import { BUSINESS } from '@/lib/constants';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import { useGsapReveal } from '@/lib/useGsapReveal';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 export default function FloatingCallButton() {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const { ref } = useGsapReveal<HTMLDivElement>({
+    delay: 1.2,
+    y: 24,
+    scale: 0.9,
+    duration: 0.55,
+  });
 
   if (reduce) {
     return (
@@ -22,12 +29,7 @@ export default function FloatingCallButton() {
   }
 
   return (
-    <motion.div
-      className="fixed bottom-5 right-5 z-40 hidden lg:bottom-8 lg:right-8 lg:block"
-      initial={{ opacity: 0, y: 24, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: 1.2, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <div ref={ref} className="fixed bottom-5 right-5 z-40 hidden lg:bottom-8 lg:right-8 lg:block">
       <MotionAnchor
         href={BUSINESS.phoneHref}
         aria-label={`Call ${BUSINESS.phone}`}
@@ -36,6 +38,6 @@ export default function FloatingCallButton() {
         <Phone className="size-5" />
         <span className="hidden sm:inline">Call Now</span>
       </MotionAnchor>
-    </motion.div>
+    </div>
   );
 }

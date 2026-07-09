@@ -2,7 +2,6 @@
 
 import { Clock, Gauge, Zap } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import { SECTION_PAD, SECTION_HEADER } from './warrantyShared';
@@ -58,35 +57,18 @@ const TIMELINE: {
   },
 ];
 
-function TimelineNode({
-  card,
-  index,
-  reduce,
-}: {
-  card: (typeof TIMELINE)[number];
-  index: number;
-  reduce: boolean | null;
-}) {
+function TimelineNode({ card }: { card: (typeof TIMELINE)[number] }) {
   const Icon = card.icon;
 
   return (
-    <motion.div
-      className="relative flex flex-col items-center text-center lg:items-start lg:text-left"
-      initial={reduce ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.55, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {/* Node on horizontal line — desktop only */}
+    <div className="relative flex flex-col items-center text-center lg:items-start lg:text-left">
       <div className="relative z-10 mb-6 hidden lg:flex lg:w-full lg:items-center">
         <span
           className={`flex size-14 shrink-0 items-center justify-center rounded-2xl ${card.accentBg} ring-2 ${card.accentRing}`}
         >
           <Icon className={`size-7 ${card.accent}`} aria-hidden />
         </span>
-        <span className={`ml-4 font-display text-4xl tracking-wide text-primary-blue/15`}>
-          {card.step}
-        </span>
+        <span className={`ml-4 font-display text-4xl tracking-wide text-primary-blue/15`}>{card.step}</span>
       </div>
 
       <article className="group relative h-full w-full overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)]">
@@ -95,7 +77,6 @@ function TimelineNode({
           className={`pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-60 ${card.accent}`}
         />
 
-        {/* Mobile icon row */}
         <div className="mb-5 flex items-center justify-between gap-3 lg:hidden">
           <span
             className={`flex size-12 items-center justify-center rounded-2xl ${card.accentBg} ring-1 ${card.accentRing}`}
@@ -119,13 +100,11 @@ function TimelineNode({
           </p>
         ))}
       </article>
-    </motion.div>
+    </div>
   );
 }
 
 export default function WarrantyApprovalTimes() {
-  const reduce = useReducedMotion();
-
   return (
     <section className={`${SECTION_PAD} bg-[var(--background)]`}>
       <div className="wrap">
@@ -137,12 +116,11 @@ export default function WarrantyApprovalTimes() {
             How Long Does Approval Actually Take?
           </h2>
           <p className="mt-4 text-lg text-ink-muted">
-            Warranty companies advertise fast claims. The reality at independent shops is measured in
-            business days — and major powertrain failures can take a week or more.
+            Warranty companies advertise fast claims. The reality at independent shops is measured in business days — and
+            major powertrain failures can take a week or more.
           </p>
         </FadeIn>
 
-        {/* Horizontal timeline connector — desktop */}
         <div className="relative mb-2 hidden lg:block">
           <div
             aria-hidden
@@ -162,9 +140,9 @@ export default function WarrantyApprovalTimes() {
         </div>
 
         <Stagger className="grid gap-8 lg:grid-cols-3 lg:gap-8" stagger={0.08} delay={0.05}>
-          {TIMELINE.map((card, i) => (
+          {TIMELINE.map((card) => (
             <StaggerItem key={card.title}>
-              <TimelineNode card={card} index={i} reduce={reduce} />
+              <TimelineNode card={card} />
             </StaggerItem>
           ))}
         </Stagger>

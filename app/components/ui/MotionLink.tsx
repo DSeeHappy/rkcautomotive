@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode, ComponentProps } from 'react';
+import { useGsapHoverPress } from '@/lib/useGsapHoverPress';
 
 type MotionLinkProps = ComponentProps<typeof Link> & {
   children: ReactNode;
@@ -11,7 +11,7 @@ type MotionLinkProps = ComponentProps<typeof Link> & {
 
 /** Premium hover: subtle lift + opacity settle */
 export function MotionLink({ children, className, ...props }: MotionLinkProps) {
-  const reduce = useReducedMotion();
+  const { ref, reduce } = useGsapHoverPress<HTMLDivElement>({ hoverScale: 1 });
 
   if (reduce) {
     return (
@@ -22,11 +22,11 @@ export function MotionLink({ children, className, ...props }: MotionLinkProps) {
   }
 
   return (
-    <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}>
+    <div ref={ref} className="inline-flex">
       <Link className={className} {...props}>
         {children}
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
@@ -38,26 +38,21 @@ type MotionAnchorProps = {
 };
 
 export function MotionAnchor({ href, children, className, ...rest }: MotionAnchorProps) {
-  const reduce = useReducedMotion();
-
-  const anchor = (
-    <a href={href} className={className} {...rest}>
-      {children}
-    </a>
-  );
+  const { ref, reduce } = useGsapHoverPress<HTMLDivElement>({ hoverScale: 1.01 });
 
   if (reduce) {
-    return anchor;
+    return (
+      <a href={href} className={className} {...rest}>
+        {children}
+      </a>
+    );
   }
 
   return (
-    <motion.div
-      className="inline-flex"
-      whileHover={{ y: -2, scale: 1.01 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {anchor}
-    </motion.div>
+    <div ref={ref} className="inline-flex">
+      <a href={href} className={className} {...rest}>
+        {children}
+      </a>
+    </div>
   );
 }
