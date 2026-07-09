@@ -73,9 +73,9 @@ export default function VehicleImagePanel({
           unoptimized={remote}
         />
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0 opacity-25"
           style={{
-            background: `radial-gradient(ellipse at 30% 80%, color-mix(in srgb, ${brandColor} 35%, transparent) 0%, transparent 65%)`,
+            background: `radial-gradient(ellipse at 30% 80%, color-mix(in srgb, ${brandColor} 28%, transparent) 0%, transparent 65%)`,
           }}
         />
         {isRepresentative && (

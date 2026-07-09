@@ -30,7 +30,7 @@ export function getBrandPanelBackground(brand: Pick<VehicleBrand, 'color' | 'bac
 /** Radial glow behind the watermark logo on the right edge. */
 export function getBrandAccentGlow(brand: Pick<VehicleBrand, 'color' | 'backgroundColor'>): string {
   const accent = brand.backgroundColor ?? brand.color;
-  return `radial-gradient(ellipse 72% 85% at 90% 48%, color-mix(in srgb, ${accent} 38%, transparent) 0%, transparent 68%)`;
+  return `radial-gradient(ellipse 72% 85% at 90% 48%, color-mix(in srgb, ${accent} 28%, transparent) 0%, transparent 68%)`;
 }
 
 export const VEHICLE_BRANDS: VehicleBrand[] = [

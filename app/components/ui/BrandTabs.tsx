@@ -64,17 +64,22 @@ export default function BrandTabs() {
                 aria-hidden
               />
               <div
-                className="absolute inset-0 opacity-90"
+                className="absolute inset-0 opacity-55"
                 style={{ background: getBrandAccentGlow(brand) }}
                 aria-hidden
               />
               <div
-                className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-transparent to-primary-blue/15"
+                className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary-blue/8"
                 aria-hidden
               />
 
               <div
-                className="pointer-events-none absolute -right-[8%] top-1/2 -translate-y-1/2 opacity-[0.11] sm:-right-[4%] sm:opacity-[0.13] lg:-right-[2%] lg:opacity-[0.14]"
+                className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-full max-w-[82%] bg-gradient-to-r from-[#060a12]/82 via-[#060a12]/38 to-transparent lg:max-w-[74%]"
+                aria-hidden
+              />
+
+              <div
+                className="pointer-events-none absolute -right-[8%] top-1/2 -translate-y-1/2 opacity-[0.18] sm:-right-[4%] sm:opacity-[0.20] lg:-right-[2%] lg:opacity-[0.22]"
                 aria-hidden
               >
                 <BrandLogo
@@ -113,7 +118,7 @@ export default function BrandTabs() {
                 </div>
 
                 <div className="mt-10 grid gap-6 lg:grid-cols-3">
-                  <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+                  <div className="rounded-2xl border border-white/20 bg-[#060a12]/35 p-5">
                     <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                       <Wrench className="size-4" aria-hidden />
                       Common models
@@ -141,7 +146,7 @@ export default function BrandTabs() {
                     </ul>
                   </div>
 
-                  <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
+                  <div className="rounded-2xl border border-white/20 bg-[#060a12]/35 p-5">
                     <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                       <Wrench className="size-4" aria-hidden />
                       RKC services
@@ -161,10 +166,10 @@ export default function BrandTabs() {
                   </div>
 
                   <div
-                    className="rounded-2xl border p-5 backdrop-blur-sm"
+                    className="rounded-2xl border p-5"
                     style={{
                       borderColor: `color-mix(in srgb, ${brand.color} 35%, transparent)`,
-                      backgroundColor: `color-mix(in srgb, ${brand.color} 12%, rgba(255,255,255,0.06))`,
+                      backgroundColor: `color-mix(in srgb, ${brand.color} 12%, rgba(6,10,18,0.35))`,
                     }}
                   >
                     <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">

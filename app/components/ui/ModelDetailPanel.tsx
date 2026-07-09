@@ -72,11 +72,11 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                       fullBleed
                     />
                     <div
-                      className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-[#060a12]/95 via-[#060a12]/75 to-[#060a12]/35 lg:via-[#060a12]/55 lg:to-[#060a12]/20"
+                      className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[68%] bg-gradient-to-l from-[#060a12]/88 via-[#060a12]/52 to-transparent lg:block"
                       aria-hidden
                     />
                     <div
-                      className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[#060a12]/90 via-[#060a12]/25 to-[#060a12]/50"
+                      className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[72%] bg-gradient-to-t from-[#060a12]/90 via-[#060a12]/48 to-transparent lg:hidden"
                       aria-hidden
                     />
                   </>
@@ -88,12 +88,12 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                       aria-hidden
                     />
                     <div
-                      className="absolute inset-0 opacity-90"
+                      className="absolute inset-0 opacity-55"
                       style={{ background: getBrandAccentGlow(brand) }}
                       aria-hidden
                     />
                     <div
-                      className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-transparent to-primary-blue/15"
+                      className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary-blue/8"
                       aria-hidden
                     />
                   </>
