@@ -1,7 +1,7 @@
 'use client';
 
-import { Check, PackageCheck, PackageX, ShieldCheck, X } from 'lucide-react';
-import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
+import { Check, Minus, PackageCheck, PackageX, ShieldCheck, X } from 'lucide-react';
+import FadeIn from '@/app/components/ui/FadeIn';
 import { SECTION_PAD, SECTION_HEADER } from './warrantyShared';
 
 const COMPARISON_COLUMNS = [
@@ -148,7 +148,12 @@ export default function WarrantyPartsBattle() {
                         {row.warranty}
                       </span>
                     </td>
-                    <td className="px-6 py-5 text-sm text-ink-muted">{row.chain}</td>
+                    <td className="px-6 py-5 text-sm text-ink-muted">
+                      <span className="flex items-start gap-2">
+                        <Minus className="mt-0.5 size-4 shrink-0 text-amber-500" aria-hidden />
+                        {row.chain}
+                      </span>
+                    </td>
                     <td className="bg-primary-blue/5 px-6 py-5 text-sm font-semibold text-primary-blue">
                       <span className="flex items-start gap-2">
                         <Check className="mt-0.5 size-4 shrink-0 text-primary-green" aria-hidden />
@@ -162,55 +167,56 @@ export default function WarrantyPartsBattle() {
           </div>
         </FadeIn>
 
-        {/* Mobile cards */}
-        <Stagger className="grid gap-6 lg:hidden" stagger={0.1}>
+        {/* Mobile cards — no Stagger; GSAP opacity:0 left the RKC card invisible */}
+        <div className="grid gap-6 lg:hidden">
           {COMPARISON_COLUMNS.map((col) => {
             const dataKey = col.highlight ? 'rkc' : col.tone === 'red' ? 'warranty' : 'chain';
+            const RowIcon = col.highlight ? Check : col.tone === 'red' ? X : Minus;
+            const rowIconClass = col.highlight
+              ? 'text-primary-green-light'
+              : col.tone === 'red'
+                ? 'text-red-400'
+                : 'text-amber-500';
             return (
-              <StaggerItem key={col.name}>
-                <article
-                  className={`overflow-hidden rounded-[1.75rem] p-6 ${
-                    col.highlight
-                      ? 'bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_30px_80px_-30px_rgba(28,61,145,0.65)] ring-2 ring-primary-green'
-                      : 'border border-[color:var(--line)] bg-white'
-                  }`}
-                >
-                  <h3 className="font-display text-3xl tracking-wide">{col.name}</h3>
-                  {col.highlight && (
-                    <span className="mt-2 inline-block rounded-full bg-primary-green px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
-                      Your shop
-                    </span>
-                  )}
-                  <dl className="mt-6 space-y-4">
-                    {COMPARISON_ROWS.map((row) => (
-                      <div key={row.key}>
-                        <dt
-                          className={`text-xs font-bold uppercase tracking-[0.16em] ${
-                            col.highlight ? 'text-white/60' : 'text-ink-muted'
-                          }`}
-                        >
-                          {row.label}
-                        </dt>
-                        <dd
-                          className={`mt-1 flex items-start gap-2 text-sm ${
-                            col.highlight ? 'font-semibold text-white' : 'text-foreground'
-                          }`}
-                        >
-                          {col.highlight ? (
-                            <Check className="mt-0.5 size-4 shrink-0 text-primary-green-light" aria-hidden />
-                          ) : col.tone === 'red' ? (
-                            <X className="mt-0.5 size-4 shrink-0 text-red-400" aria-hidden />
-                          ) : null}
-                          {row[dataKey]}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </article>
-              </StaggerItem>
+              <article
+                key={col.name}
+                className={`overflow-hidden rounded-[1.75rem] p-6 ${
+                  col.highlight
+                    ? 'bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_30px_80px_-30px_rgba(28,61,145,0.65)] ring-2 ring-primary-green'
+                    : 'border border-[color:var(--line)] bg-white'
+                }`}
+              >
+                <h3 className="font-display text-3xl tracking-wide">{col.name}</h3>
+                {col.highlight && (
+                  <span className="mt-2 inline-block rounded-full bg-primary-green px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
+                    Your shop
+                  </span>
+                )}
+                <dl className="mt-6 space-y-4">
+                  {COMPARISON_ROWS.map((row) => (
+                    <div key={row.key}>
+                      <dt
+                        className={`text-xs font-bold uppercase tracking-[0.16em] ${
+                          col.highlight ? 'text-white/60' : 'text-ink-muted'
+                        }`}
+                      >
+                        {row.label}
+                      </dt>
+                      <dd
+                        className={`mt-1 flex items-start gap-2 text-sm ${
+                          col.highlight ? 'font-semibold text-white' : 'text-foreground'
+                        }`}
+                      >
+                        <RowIcon className={`mt-0.5 size-4 shrink-0 ${rowIconClass}`} aria-hidden />
+                        {row[dataKey]}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
             );
           })}
-        </Stagger>
+        </div>
 
         {/* Context cards */}
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
