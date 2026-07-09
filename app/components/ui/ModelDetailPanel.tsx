@@ -22,6 +22,9 @@ const FULL_BLEED_BRANDS = [
   'ram',
   'bmw',
   'honda',
+  'ford',
+  'toyota',
+  'mercedes',
 ] as const;
 
 type ModelDetailPanelProps = {

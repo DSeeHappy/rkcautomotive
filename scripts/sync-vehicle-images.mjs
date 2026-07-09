@@ -14,7 +14,7 @@ const csvPath = path.join(root, 'data', 'vehicle-images.csv');
 const supplementPath = path.join(root, 'data', 'site-model-supplements.csv');
 const brandsPath = path.join(root, 'lib', 'vehicleBrands.ts');
 const outTsPath = path.join(root, 'lib', 'vehicleImages.ts');
-const DOWNLOAD_DELAY_MS = 2000;
+const DOWNLOAD_DELAY_MS = 45000;
 
 function slugify(text) {
   return text
@@ -159,8 +159,10 @@ function mergeCsvRows() {
 }
 
 const siteModelKeys = loadSiteModelKeys();
-const rows = mergeCsvRows();
 const regenerateOnly = process.argv.includes('--regenerate-only');
+const rows = regenerateOnly
+  ? parseCsv(fs.readFileSync(csvPath, 'utf8'))
+  : mergeCsvRows();
 
 const entries = rows.map((row) => {
   const make = row.Make;
