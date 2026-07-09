@@ -1,13 +1,14 @@
 'use client';
 
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
-import { AlertTriangle, ChevronRight, MapPin, Phone, Wrench } from 'lucide-react';
+import { Tab, TabGroup, TabPanel, TabPanels } from '@headlessui/react';
+import { AlertTriangle, ChevronRight, MapPin, MousePointerClick, Phone, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { buildModelHubPath } from '@/lib/modelHubRoutes';
 import { BUSINESS } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
+import AnimatedBrandTabList from './AnimatedBrandTabList';
 import BrandLogo from './BrandLogo';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 
@@ -26,17 +27,35 @@ export default function BrandTabs() {
       </div>
 
       <TabGroup>
-        <TabList className="flex flex-wrap gap-2 pb-2 md:gap-2">
-          {VEHICLE_BRANDS.map((brand) => (
-            <Tab
-              key={brand.slug}
-              className="group flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-3 py-2 text-xs font-semibold text-ink-muted shadow-sm outline-none transition sm:px-4 sm:py-2.5 sm:text-sm data-selected:border-transparent data-selected:bg-[#0c1222] data-selected:text-white data-selected:shadow-[0_10px_28px_-10px_rgba(12,18,34,0.45)] data-hover:border-primary-green/40 data-hover:text-foreground data-focus-visible:ring-2 data-focus-visible:ring-primary-green/30"
-            >
-              <BrandLogo slug={brand.slug} color={brand.color} size={20} className="group-data-selected:!bg-white" />
-              <span>{brand.name}</span>
-            </Tab>
-          ))}
-        </TabList>
+        <div className="rounded-2xl border border-[color:var(--line)] bg-[color:var(--accent-gray-light)]/70 p-4 shadow-sm sm:p-5">
+          <div className="mb-4">
+            <div className="flex items-center gap-2">
+              <MousePointerClick className="size-4 shrink-0 text-primary-green" aria-hidden />
+              <p className="text-sm font-semibold text-foreground sm:text-base">Pick your make</p>
+            </div>
+            <p className="mt-1.5 pl-6 text-sm leading-relaxed text-ink-muted">
+              Tap a brand to see common failures and services for your model
+            </p>
+          </div>
+
+          <AnimatedBrandTabList aria-label="Vehicle makes" className="flex flex-wrap gap-2 md:gap-2">
+            {VEHICLE_BRANDS.map((brand) => (
+              <Tab
+                key={brand.slug}
+                data-brand-tab
+                className="brand-tab group flex cursor-pointer items-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-3 py-2 text-xs font-semibold text-ink-muted shadow-sm outline-none transition-colors sm:px-4 sm:py-2.5 sm:text-sm data-selected:border-transparent data-selected:bg-[#0c1222] data-selected:text-white data-hover:border-primary-green/40 data-hover:bg-white data-hover:text-foreground data-focus-visible:ring-2 data-focus-visible:ring-primary-green/30"
+              >
+              <BrandLogo
+                slug={brand.slug}
+                color={brand.color}
+                size={20}
+                className="brand-tab-logo group-data-selected:!bg-white"
+              />
+              <span className="relative z-[1]">{brand.name}</span>
+              </Tab>
+            ))}
+          </AnimatedBrandTabList>
+        </div>
 
         <TabPanels className="mt-8">
           {VEHICLE_BRANDS.map((brand) => {
