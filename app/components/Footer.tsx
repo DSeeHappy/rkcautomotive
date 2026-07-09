@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, MapPin, Phone } from 'lucide-react';
 import { BUSINESS, FOOTER_LINKS, PHOTOS, SERVICES } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import SocialLinks from '@/app/components/ui/SocialLinks';
 import { AnimatedLogoStatic } from '@/app/components/ui/AnimatedLogo';
 
@@ -23,13 +24,10 @@ export default function Footer() {
               ASE-certified auto repair on W Evans Ave — honest diagnostics, quality parts, 30+ years serving Englewood &amp; Denver metro.
             </p>
           </div>
-          <a href={BUSINESS.phoneHref} className="btn-green shrink-0 self-start lg:self-auto">
+          <PhoneLink className="btn-green shrink-0 self-start lg:self-auto">
             <Phone className="size-5" />
             {BUSINESS.phone}
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+          </PhoneLink>
           <div>
             <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Visit</h4>
             <ul className="space-y-3 text-sm text-white/65">

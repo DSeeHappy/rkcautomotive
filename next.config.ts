@@ -3,7 +3,21 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // NOTE: Apex → www redirect is intentionally disabled until www DNS/SSL is fixed
   // (https://www.rkcautomotive.com currently returns 525). Re-enable in redirects()
-  // or vercel.json once www resolves correctly.
+  // or vercel.json once www resolves correctly. Canonical metadata uses www via SITE_URL.
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            // Prevents Cloudflare Email Obfuscation from corrupting tel: hrefs (about:invalid#zCSafez)
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate, no-transform',
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       {

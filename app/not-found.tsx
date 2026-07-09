@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
 import { BUSINESS, FOOTER_LINKS } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import { createPageMetadata } from '@/lib/og';
 
 export const metadata = createPageMetadata({
@@ -27,10 +28,10 @@ export default function NotFound() {
         <Link href="/" className="btn-green">
           Back to home
         </Link>
-        <a href={BUSINESS.phoneHref} className="btn-blue">
+        <PhoneLink className="btn-blue">
           <Phone className="size-5" />
           {BUSINESS.phone}
-        </a>
+        </PhoneLink>
       </div>
       <nav aria-label="Helpful links" className="mt-12">
         <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-primary-blue">

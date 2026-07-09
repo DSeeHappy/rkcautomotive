@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { CheckCircle, Phone } from 'lucide-react';
 import { type ReactNode } from 'react';
 import { BUSINESS, PHOTOS, SERVICES, type ServiceItem } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import { createBreadcrumbSchema } from '@/lib/seo';
 import PageHero from './PageHero';
 import FadeIn from './FadeIn';
@@ -160,7 +161,7 @@ export default function ServicePageShell({
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image src={PHOTOS.brandedBay} alt="RKC Automotive branded shop bay in Englewood, CO" fill className="object-cover" sizes="100vw" />
+          <Image src={PHOTOS.brandedBay} alt="RKC Automotive branded shop bay in Englewood, CO" fill className="object-cover" sizes={HERO_IMAGE_SIZES} />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
         <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-20 sm:px-6 lg:flex-row lg:items-center lg:px-8">

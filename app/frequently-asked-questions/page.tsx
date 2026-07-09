@@ -3,7 +3,9 @@ import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import JsonLd from '@/app/components/JsonLd';
 import { ALL_FAQS, BUSINESS, FAQ_CATEGORIES, PHOTOS } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { createPageMetadata } from '@/lib/og';
@@ -63,7 +65,7 @@ export default function FAQPage() {
             alt="RKC Automotive branded shop bay in Englewood, Colorado"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={HERO_IMAGE_SIZES}
           />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
@@ -74,10 +76,10 @@ export default function FAQPage() {
               Call our Englewood shop — we are happy to walk you through pricing, timing, and what to expect.
             </p>
           </div>
-          <a href={BUSINESS.phoneHref} className="btn-green">
+          <PhoneLink className="btn-green">
             <Phone className="size-5" />
             {BUSINESS.phone}
-          </a>
+          </PhoneLink>
         </div>
       </section>
     </div>

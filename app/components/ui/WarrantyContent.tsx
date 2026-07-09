@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { BUSINESS, LABOR_RATE, PHOTOS, WARRANTY_CLAIM_PROCESS, WARRANTY_PAGE_FAQ } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import PageCTAs from '@/app/components/ui/PageCTAs';
@@ -51,7 +52,7 @@ export default function WarrantyContent() {
             alt="RKC Automotive shop bay in Englewood, Colorado"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={HERO_IMAGE_SIZES}
           />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
@@ -176,7 +177,7 @@ export default function WarrantyContent() {
             alt="RKC Automotive shop exterior in Englewood, Colorado"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={HERO_IMAGE_SIZES}
           />
           <div className="photo-veil-deep absolute inset-0" />
         </div>

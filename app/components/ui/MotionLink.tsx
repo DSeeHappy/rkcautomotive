@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import type { ReactNode, ComponentProps } from 'react';
 import { useGsapHoverPress } from '@/lib/useGsapHoverPress';
+import { useRestoreTelHref } from '@/app/components/ui/PhoneLink';
 
 type MotionLinkProps = ComponentProps<typeof Link> & {
   children: ReactNode;
@@ -43,11 +44,21 @@ export function MotionAnchor({
   wrapperClassName,
   ...rest
 }: MotionAnchorProps) {
-  const { ref, reduce } = useGsapHoverPress<HTMLAnchorElement>({ hoverScale: 1.01 });
+  const { ref } = useGsapHoverPress<HTMLAnchorElement>({ hoverScale: 1.01 });
   const mergedClassName = [wrapperClassName, className].filter(Boolean).join(' ') || undefined;
+  const hrefStr = typeof href === 'string' ? href : undefined;
+  const isTel = hrefStr?.startsWith('tel:') ?? false;
+
+  useRestoreTelHref(isTel ? hrefStr : undefined, ref);
 
   return (
-    <a ref={reduce ? undefined : ref} href={href} className={mergedClassName} {...rest}>
+    <a
+      ref={ref}
+      href={href}
+      className={mergedClassName}
+      {...(isTel ? { 'data-phone-link': '' } : {})}
+      {...rest}
+    >
       {children}
     </a>
   );

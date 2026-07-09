@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BUSINESS } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { createPageMetadata } from '@/lib/og';
@@ -67,9 +68,9 @@ export default function PrivacyPage() {
             <h2 className="font-display text-3xl tracking-wide text-foreground">Contact us</h2>
             <p>
               Questions about this policy? Contact {BUSINESS.name} at{' '}
-              <a href={BUSINESS.phoneHref} className="font-semibold text-primary-green">
+              <PhoneLink className="font-semibold text-primary-green">
                 {BUSINESS.phone}
-              </a>{' '}
+              </PhoneLink>{' '}
               or{' '}
               <a href={`mailto:${BUSINESS.email}`} className="font-semibold text-primary-green">
                 {BUSINESS.email}

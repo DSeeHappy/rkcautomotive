@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import { CheckCircle, Send } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
 import { BUSINESS } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapHoverPress } from '@/lib/useGsapHoverPress';
 
@@ -74,9 +75,9 @@ export default function ContactForm() {
         <h3 className="mt-4 font-display text-4xl tracking-wide text-foreground">Thank you</h3>
         <p className="mt-3 text-ink-muted">
           Your email client should open shortly. Prefer to talk? Call{' '}
-          <a href={BUSINESS.phoneHref} className="font-semibold text-primary-green hover:underline">
+          <PhoneLink className="font-semibold text-primary-green hover:underline">
             {BUSINESS.phone}
-          </a>
+          </PhoneLink>
           .
         </p>
       </div>
@@ -145,9 +146,9 @@ export default function ContactForm() {
 
       <p className="text-sm text-ink-muted">
         Or call{' '}
-        <a href={BUSINESS.phoneHref} className="font-semibold text-primary-green hover:underline">
+        <PhoneLink className="font-semibold text-primary-green hover:underline">
           {BUSINESS.phone}
-        </a>{' '}
+        </PhoneLink>{' '}
         for same-day scheduling.
       </p>
     </form>

@@ -7,6 +7,7 @@ import {
   getServiceAreaBySlug,
   SERVICE_AREAS_DATA,
 } from '@/lib/serviceAreas';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import JsonLd from '@/app/components/JsonLd';
 import { BUSINESS, PHOTOS, TOP_AREA_SERVICES } from '@/lib/constants';
 import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
@@ -197,10 +198,10 @@ export default async function CityServiceAreaPage({ params }: Props) {
               </a>
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <a href={BUSINESS.phoneHref} className="btn-green">
+              <PhoneLink className="btn-green">
                 <Phone className="size-5" />
                 {BUSINESS.phone}
-              </a>
+              </PhoneLink>
               <a
                 href={BUSINESS.directionsUrl}
                 className="btn-blue"

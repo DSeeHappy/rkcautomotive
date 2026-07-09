@@ -62,7 +62,7 @@ export default function Hero() {
                   Englewood, CO · Hablamos Español
                 </p>
                 <h1 className="mt-4 font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white">
-                  Auto Repair &amp; Precision Diagnostics in Englewood, CO
+                  Auto Repair &amp; Diagnostics in Englewood, CO You Can Trust
                 </h1>
                 <p className="mt-5 max-w-xl text-lg font-medium text-white/85 sm:text-xl">
                   Diagnostics • Engine Repair • Transmission • Brakes • Maintenance

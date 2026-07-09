@@ -22,6 +22,7 @@ import {
   LABOR_RATE,
   PHOTOS,
 } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
@@ -188,7 +189,7 @@ export default function EngineRebuildsContent() {
             fill
             priority
             className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
-            sizes="100vw"
+            sizes={HERO_IMAGE_SIZES}
           />
           <div
             className="absolute inset-0"
@@ -355,7 +356,7 @@ export default function EngineRebuildsContent() {
             alt="Engine bay service and machine shop work at RKC Automotive Englewood CO"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={HERO_IMAGE_SIZES}
           />
           <div className="photo-veil-deep absolute inset-0" />
         </div>

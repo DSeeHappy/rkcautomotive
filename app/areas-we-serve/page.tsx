@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import JsonLd from '@/app/components/JsonLd';
 import { BUSINESS, PHOTOS, SERVICE_AREAS_DATA } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import ServiceAreaGrid from '@/app/components/ui/ServiceAreaGrid';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
@@ -83,7 +84,7 @@ export default function AreasPage() {
             alt="RKC Automotive service bays in Englewood, Colorado"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={HERO_IMAGE_SIZES}
           />
           <div className="photo-veil-deep absolute inset-0" />
         </div>

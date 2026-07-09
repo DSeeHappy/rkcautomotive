@@ -7,6 +7,7 @@ import { ChevronDown, Menu, Phone, Shield, Sparkles, X } from 'lucide-react';
 import { BUSINESS, NAV_LINKS, SERVICE_NAV_GROUPS, SERVICES } from '@/lib/constants';
 import AnimatedLogo from '@/app/components/ui/AnimatedLogo';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 
 const serviceBySlug = Object.fromEntries(SERVICES.map((s) => [s.slug, s]));
@@ -218,10 +219,10 @@ export default function Navigation() {
             ))}
           </div>
           <div className="border-t border-white/10 p-4">
-            <a href={BUSINESS.phoneHref} className="btn-green w-full justify-center">
+            <PhoneLink className="btn-green w-full justify-center">
               <Phone className="size-5" />
               Call {BUSINESS.phone}
-            </a>
+            </PhoneLink>
           </div>
         </DialogPanel>
       </Dialog>

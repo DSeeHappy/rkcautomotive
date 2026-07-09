@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/app/components/JsonLd';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { BUSINESS } from '@/lib/constants';
@@ -118,9 +119,9 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
           </ul>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href={BUSINESS.phoneHref} className="btn-green">
+            <PhoneLink className="btn-green">
               Call {BUSINESS.phone}
-            </a>
+            </PhoneLink>
             <Link
               href={`/contact?vehicle=${encodeURIComponent(`${vehicle.brandName} ${vehicle.model}`)}`}
               className="btn-blue"

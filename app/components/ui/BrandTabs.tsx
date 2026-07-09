@@ -7,6 +7,7 @@ import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { buildModelHubPath } from '@/lib/modelHubRoutes';
 import { BUSINESS } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import BrandLogo from './BrandLogo';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 
@@ -196,10 +197,10 @@ export default function BrandTabs() {
                     <Link href="/contact" className="btn-green">
                       Schedule {brand.name} Diagnostic
                     </Link>
-                    <a href={BUSINESS.phoneHref} className="btn-ghost-light inline-flex items-center gap-2">
+                    <PhoneLink className="btn-ghost-light inline-flex items-center gap-2">
                       <Phone className="size-4" aria-hidden />
                       Call {BUSINESS.phone}
-                    </a>
+                    </PhoneLink>
                   </FadeIn>
                 </div>
               </TabPanel>

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
 import { ASE_ARIA_LABEL, ASE_URL, BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS, LABOR_RATE, COMPETITIVE_POSITIONING } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
@@ -81,10 +82,10 @@ export default function AboutPage() {
                 Ave — same location, same commitment to written estimates and ASE-certified work.
               </p>
               <p className="mt-4 text-ink-muted">{BUSINESS.shortDescription}</p>
-              <a href={BUSINESS.phoneHref} className="btn-green mt-10">
+              <PhoneLink className="btn-green mt-10">
                 <Phone className="size-5" />
                 {BUSINESS.phone}
-              </a>
+              </PhoneLink>
             </FadeIn>
             <FadeIn delay={0.1}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">

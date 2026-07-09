@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BUSINESS, LABOR_RATE } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { createPageMetadata } from '@/lib/og';
@@ -75,9 +76,9 @@ export default function TermsPage() {
             <h2 className="font-display text-3xl tracking-wide text-foreground">Contact</h2>
             <p>
               {BUSINESS.name} · {BUSINESS.address.full} ·{' '}
-              <a href={BUSINESS.phoneHref} className="font-semibold text-primary-green">
+              <PhoneLink className="font-semibold text-primary-green">
                 {BUSINESS.phone}
-              </a>
+              </PhoneLink>
             </p>
 
             <p>

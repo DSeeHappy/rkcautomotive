@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { BUSINESS, HEATING_AC_PAGE_FAQ, LABOR_RATE, PHOTOS } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import {
   ServiceCinematicHero,
@@ -438,7 +439,7 @@ export default function HeatingAcContent() {
             alt="AC diagnostic service at RKC Automotive Englewood Colorado"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={HERO_IMAGE_SIZES}
           />
           <div className="photo-veil-deep absolute inset-0" />
         </div>

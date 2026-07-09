@@ -6,6 +6,7 @@ import {
   PHOTOS,
   VERIFIED_REVIEWS_4_PLUS,
 } from '@/lib/constants';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import ReviewCards from '@/app/components/ui/ReviewCards';
 import PageCTAs from '@/app/components/ui/PageCTAs';
@@ -61,10 +62,10 @@ export default function ReviewsPage() {
             <a href={GOOGLE_REVIEWS_URL} className="btn-blue" target="_blank" rel="noopener noreferrer">
               Read Google reviews
             </a>
-            <a href={BUSINESS.phoneHref} className="btn-green">
+            <PhoneLink className="btn-green">
               <Phone className="size-4" />
               Call {BUSINESS.phone}
-            </a>
+            </PhoneLink>
             <Link href="/contact" className="btn-outline">
               Book service
             </Link>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import JsonLd from '@/app/components/JsonLd';
 import {
   BUSINESS,
@@ -73,9 +74,9 @@ export default function LocationPage() {
               <div className="mt-10 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-[color:var(--line)] bg-white p-6">
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">Phone</p>
-                  <a href={BUSINESS.phoneHref} className="mt-2 block font-display text-3xl tracking-wide text-primary-green">
+                  <PhoneLink className="mt-2 block font-display text-3xl tracking-wide text-primary-green">
                     {BUSINESS.phone}
-                  </a>
+                  </PhoneLink>
                 </div>
                 <div className="rounded-2xl border border-[color:var(--line)] bg-white p-6">
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">Hours</p>
@@ -85,10 +86,10 @@ export default function LocationPage() {
                 </div>
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={BUSINESS.phoneHref} className="btn-green">
+                <PhoneLink className="btn-green">
                   <Phone className="size-4" />
                   Call now
-                </a>
+                </PhoneLink>
                 <a
                   href={BUSINESS.directionsUrl}
                   target="_blank"

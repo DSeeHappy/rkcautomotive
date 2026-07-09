@@ -35,8 +35,10 @@ import {
   LOCAL_SHOP_RATE_RANGE,
   COMPETITIVE_POSITIONING,
 } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
+import PhoneLink from '@/app/components/ui/PhoneLink';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import { useGsapReveal } from '@/lib/useGsapReveal';
@@ -78,7 +80,7 @@ export default function PricingContent() {
     <div>
       {/* Hero — $120/hr anchor */}
       <section className="relative isolate min-h-[72svh] overflow-hidden bg-[#0c1222] pt-20 sm:min-h-[78svh]">
-        <Image src={PHOTOS.teamCollab} alt="ASE-certified technicians collaborating at RKC Automotive in Englewood, CO" fill priority className="object-cover" sizes="100vw" />
+        <Image src={PHOTOS.teamCollab} alt="ASE-certified technicians collaborating at RKC Automotive in Englewood, CO" fill priority className="object-cover" sizes={HERO_IMAGE_SIZES} />
         <div className="photo-veil absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
           <Breadcrumbs
@@ -512,10 +514,10 @@ export default function PricingContent() {
 
           <FadeIn className="mt-12 border-t border-[color:var(--line)] pt-10">
             <div className="flex flex-wrap justify-center gap-4">
-              <a href={BUSINESS.phoneHref} className="btn-green">
+              <PhoneLink className="btn-green">
                 <Phone className="size-5" />
                 Get a written estimate
-              </a>
+              </PhoneLink>
               <Link href="/contact" className="btn-blue">
                 <FileText className="size-5" />
                 Request quote online
@@ -619,7 +621,7 @@ export default function PricingContent() {
       {/* CTA band */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image src={PHOTOS.exteriorBay} alt="RKC Automotive shop exterior in Englewood, Colorado" fill className="object-cover" sizes="100vw" />
+          <Image src={PHOTOS.exteriorBay} alt="RKC Automotive shop exterior in Englewood, Colorado" fill className="object-cover" sizes={HERO_IMAGE_SIZES} />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
