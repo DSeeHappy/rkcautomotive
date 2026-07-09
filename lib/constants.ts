@@ -1281,34 +1281,54 @@ export const SUSPENSION_STEERING_PAGE_FAQ: FAQItem[] = [
 
 export const HEATING_AC_PAGE_FAQ: FAQItem[] = [
   {
-    question: 'Why is my car AC blowing warm air?',
+    question: 'Why is my car AC blowing warm air in Denver summer heat?',
     answer:
-      'Common causes include low refrigerant from leaks, weak compressor, stuck blend doors, or condenser fan failure. We measure vent temperature and system pressures against ambient specs — not just add refrigerant. Recharge without leak repair fails again within weeks in Colorado summer heat.',
+      'Common causes include low refrigerant from leaks, weak compressor, stuck blend doors, or condenser fan failure — especially noticeable above 95°F on I-25 stop-and-go traffic. We measure center-vent temperature and high/low-side pressures against ambient temperature charts, not just add refrigerant. Recharge without leak repair fails again within weeks in Colorado summer heat.',
   },
   {
     question: 'How often does car AC need to be recharged?',
     answer:
-      'Never, if the system is sealed. Refrigerant loss always means a leak — o-rings, condenser stone damage, or evaporator corrosion. We vacuum-test and dye-trace leaks, repair the source, then charge by weight to manufacturer spec. Annual top-offs mask problems until the compressor slugs with liquid.',
+      'Never, if the system is sealed. Refrigerant loss always means a leak — o-rings at the compressor, condenser stone damage on C-470, or evaporator corrosion. We vacuum-test and dye-trace leaks, repair the source, then charge by weight to manufacturer spec. Annual top-offs from DIY cans mask problems until the compressor slugs with liquid refrigerant.',
   },
   {
     question: 'What is the difference between R134a and R1234yf?',
     answer:
-      'R1234yf is the lower-GWP refrigerant used on newer vehicles with different service fittings and machine requirements. Using the wrong refrigerant damages components and violates EPA rules. We service both with dedicated equipment and charge weights from your label.',
+      'R134a (HFC-134a) was the industry standard from roughly 1994 through the mid-2010s with a global-warming potential (GWP) of 1,430. R1234yf (HFO-1234yf) has a GWP near 4 and became mandatory on new U.S. light vehicles. R1234yf uses different service port fittings, requires EPA Section 609–certified recovery equipment rated for A2L refrigerants, and must never be mixed with R134a. Using the wrong refrigerant damages compressors, voids warranties, and violates federal law.',
   },
   {
-    question: 'Why does my windshield fog up with a sweet smell?',
+    question: 'How much more does R1234yf cost than R134a?',
     answer:
-      'Sweet odor with fog often indicates heater-core coolant leak into the cabin — a safety and interior-damage issue. Stop using heat if you suspect leak, schedule service promptly, and avoid prolonged driving that wets carpet and electronics under the dash.',
+      'R1234yf refrigerant typically costs three to five times more per pound than R134a because of patent licensing, specialized handling, and lower production volume. A full charge on a newer SUV can run $150–$300 in refrigerant alone before labor — which is why leak repair matters. We quote refrigerant by weight from your under-hood label so you know the cost before we open the system.',
   },
   {
-    question: 'How much does AC compressor replacement cost?',
+    question: 'Can I use a recharge can from AutoZone or O\'Reilly?',
     answer:
-      'Compressor jobs are labor-intensive — often 3+ hours at $120/hr plus reman or new compressor, receiver-drier, and refrigerant. We confirm compressor failure with clutch, bearing, and pressure tests before ordering parts. Leak repair and full evacuation are included in scope quotes.',
+      'We do not recommend DIY recharge cans for several reasons. They rarely fix the underlying leak, overcharging slugging the compressor with liquid refrigerant is common, sealant additives gum up shop recovery machines, and using R134a on an R1234yf system causes serious damage. EPA regulations require recovered refrigerant to be handled by Section 609–certified technicians — venting to atmosphere is illegal regardless of can size.',
+  },
+  {
+    question: 'Why does my car AC smell musty or like dirty socks?',
+    answer:
+      'Musty odor usually means mold and bacteria growing on the evaporator core — the cold, damp heat exchanger behind your dash. Colorado drivers who run AC all summer then switch to heat without drying the evaporator see this every fall. Cabin air filter replacement helps airflow, but evaporator treatment or core removal may be needed when biofilm is established. A sweet smell is different — that points to heater-core coolant leak, not mold.',
+  },
+  {
+    question: 'What are heater core leak symptoms?',
+    answer:
+      'Heater core leaks show as sweet-smelling fog on the windshield, sticky film on interior glass, damp carpet on the passenger footwell, slow coolant loss with no external puddle, or greasy residue on the defroster vents. Coolant on the carpet can damage airbag modules and body control electronics under the center stack. If you smell ethylene glycol inside the cabin, schedule service promptly and avoid prolonged heat use.',
+  },
+  {
+    question: 'How much does AC compressor replacement cost at RKC?',
+    answer:
+      'Compressor jobs are labor-intensive — often 3–5 hours at $120/hr plus reman or new compressor, receiver-drier or accumulator, o-rings, and refrigerant by weight. R1234yf systems add refrigerant cost. We confirm compressor failure with clutch air gap, bearing noise, and pressure differential tests before ordering parts. Leak repair, evacuation to 500 microns, and charge-by-weight are included in scope quotes.',
   },
   {
     question: 'Can you fix heat that only works when driving?',
     answer:
-      'Heat at speed but cold at idle often points to low coolant, air in the system, or clogged heater core. Thermostat stuck open also reduces heat. We pressure-test cooling system, check core flow, and verify water-pump circulation before recommending core replacement.',
+      'Heat at highway speed but cold at idle in Englewood traffic often points to low coolant, air in the cooling system, clogged heater core from neglected Dex-Cool service, or a thermostat stuck open. A weak water pump also reduces circulation at low RPM. We pressure-test the cooling system, measure heater-core inlet/outlet temperature delta, and verify water-pump flow before recommending core replacement — which is a dash-out job on many vehicles.',
+  },
+  {
+    question: 'Do you service R12 (Freon) systems on classic cars?',
+    answer:
+      'Pre-1994 vehicles originally charged with R-12 (CFC-12) cannot legally receive new R-12 — production ended in 1995 and venting any refrigerant violates the Clean Air Act. We recover remaining charge, inspect for leaks, and retrofit to R134a with compatible POE or mineral oil, new service port adapters, and often a replacement compressor and seals. Retrofit performance varies by vehicle age; we document expected vent temps so classic car owners know what to expect in Denver heat.',
   },
 ];
 
