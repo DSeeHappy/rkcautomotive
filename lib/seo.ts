@@ -61,6 +61,7 @@ export function getAllSiteRoutes(): string[] {
     '/about',
     '/reviews',
     '/pricing',
+    '/warranty',
     '/services',
     '/englewood-co-auto-repair',
     '/frequently-asked-questions',

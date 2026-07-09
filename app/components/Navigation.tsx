@@ -70,6 +70,12 @@ export default function Navigation() {
                       >
                         View all services →
                       </Link>
+                      <Link
+                        href="/warranty"
+                        className="col-span-2 mb-1 rounded-xl border border-primary-green/20 bg-primary-green/8 px-4 py-3 text-sm font-semibold text-primary-green transition-colors hover:bg-primary-green/12"
+                      >
+                        Extended warranty repair →
+                      </Link>
                       {SERVICES.map((service) => (
                         <Link
                           key={service.href}
@@ -134,6 +140,9 @@ export default function Navigation() {
             </Link>
             <Link href="/services" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5">
               All Services
+            </Link>
+            <Link href="/warranty" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5">
+              Extended Warranty
             </Link>
             {links.map((link) => (
               <Link

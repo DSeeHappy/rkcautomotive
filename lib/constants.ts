@@ -197,6 +197,7 @@ export const FOOTER_LINKS = [
   { name: 'About', href: '/about' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Contact', href: '/contact' },
+  { name: 'Extended Warranty', href: '/warranty' },
   { name: 'Areas We Serve', href: '/areas-we-serve' },
   { name: 'Vehicles We Service', href: '/vehicles-we-service' },
   { name: 'Location', href: '/englewood-co-auto-repair' },
@@ -258,6 +259,99 @@ export const EXTENDED_WARRANTY_PROVIDERS = [
   'Preferred Warranties',
   'Assurant Solutions',
   'Fidelity Warranty Services',
+] as const;
+
+/** Featured extended warranty administrators — shown with blurbs on /warranty */
+export const FEATURED_WARRANTY_PROVIDERS = [
+  {
+    title: 'Endurance',
+    names: ['Endurance'] as const,
+    blurb:
+      'One of the largest vehicle service contract administrators. We submit digital diagnostics and repair estimates directly to Endurance claims for faster approvals.',
+  },
+  {
+    title: 'CARCHEX',
+    names: ['CARCHEX'] as const,
+    blurb:
+      'CARCHEX-backed contracts often require documented failure codes and photos. We run full scans and package the technical evidence claims adjusters expect.',
+  },
+  {
+    title: 'CarShield / American Auto Shield',
+    names: ['CarShield', 'American Auto Shield'] as const,
+    blurb:
+      'CarShield and American Auto Shield policies share the same claims workflow. We handle authorization calls, supplemental requests, and parts approvals in-house.',
+  },
+  {
+    title: 'Royal Administration Services',
+    names: ['Royal Administration Services'] as const,
+    blurb:
+      'Royal administers contracts sold through many brokers and dealers. Bring your policy ID — we verify coverage and coordinate inspection requirements before repairs begin.',
+  },
+  {
+    title: 'autopom!',
+    names: ['autopom!'] as const,
+    blurb:
+      'autopom! plans vary by tier and mileage. We review your contract exclusions up front so you know what is covered before we order parts.',
+  },
+  {
+    title: 'Olive',
+    names: ['Olive'] as const,
+    blurb:
+      'Olive subscription-style coverage still requires a licensed shop and proper diagnostics. We document component failure and labor hours for Olive claims review.',
+  },
+  {
+    title: 'Omega Auto Care',
+    names: ['Omega Auto Care'] as const,
+    blurb:
+      'Omega contracts often cover powertrain and electrical components. Our ASE-certified techs provide the detailed failure analysis Omega adjusters need to approve repairs.',
+  },
+  {
+    title: 'Zurich',
+    names: ['Zurich North America'] as const,
+    blurb:
+      'Zurich-backed service contracts are common on newer vehicles. We follow Zurich shop guidelines, submit photos and estimates, and track authorization through completion.',
+  },
+  {
+    title: 'American Guardian',
+    names: ['American Guardian'] as const,
+    blurb:
+      'American Guardian administers plans sold nationwide. We work directly with their claims team so you are not stuck on hold explaining a check-engine light.',
+  },
+] as const;
+
+const FEATURED_WARRANTY_PROVIDER_NAMES = new Set<string>(
+  FEATURED_WARRANTY_PROVIDERS.flatMap((provider) => [...provider.names]),
+);
+
+/** Remaining providers shown as badges on the warranty page */
+export const OTHER_WARRANTY_PROVIDERS = EXTENDED_WARRANTY_PROVIDERS.filter(
+  (name) => !FEATURED_WARRANTY_PROVIDER_NAMES.has(name),
+);
+
+export const WARRANTY_CLAIM_PROCESS = [
+  {
+    step: '01',
+    title: 'Drop-Off & Document',
+    description: `Bring your vehicle and service contract to ${BUSINESS.address.street}. We verify policy details and note your deductible before any work begins.`,
+  },
+  {
+    step: '02',
+    title: 'Digital Diagnostics',
+    description:
+      'Complete scan and inspection — we capture failure codes, photos, and technical findings formatted for warranty company review.',
+  },
+  {
+    step: '03',
+    title: 'Direct Negotiation',
+    description:
+      'We call the claims administrator — Endurance, CarShield, Royal, and others — submit estimates and photos, and push for maximum approved coverage.',
+  },
+  {
+    step: '04',
+    title: 'Certified Repair',
+    description:
+      'ASE-certified repairs with quality components. You pay only your plan deductible and any non-covered wear items we disclosed upfront.',
+  },
 ] as const;
 
 export type ServiceItem = {
@@ -625,6 +719,34 @@ export const PRICING_PAGE_FAQ: FAQItem[] = [
     question: 'Do you work with extended warranties or fleet accounts?',
     answer:
       'Yes — we service personal vehicles, fleet trucks, and diesel work daily, and we can help with third-party extended warranty claims when coverage applies. You still get our posted $120/hr labor rate and a written estimate before any work begins.',
+  },
+];
+
+export const WARRANTY_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Do I have to go to the dealership for my extended warranty?',
+    answer:
+      'No. Any licensed, ASE-certified repair facility can handle service contracts when your plan allows independent shops. RKC Automotive meets the compliance standards extended warranty companies require — proper diagnostics, documentation, and authorized parts.',
+  },
+  {
+    question: 'What do I have to pay out of pocket?',
+    answer:
+      'Typically only your plan deductible — often $50, $100, or $200 per visit — plus non-covered fluids, filters, or wear items your contract excludes. We break down covered vs. non-covered costs in writing before starting work.',
+  },
+  {
+    question: 'What should I bring when I drop off my vehicle?',
+    answer:
+      'Bring your extended warranty contract or policy number, a photo ID, and your vehicle keys. If you have prior denial letters or claim numbers from the warranty company, bring those too — they help us pick up where a previous shop left off.',
+  },
+  {
+    question: 'How long does warranty claim approval take?',
+    answer:
+      'Simple claims with clear failure codes are often approved same day or within 24 hours. Complex repairs — transmission, engine, or electrical — may require inspector photos or supplemental estimates and can take 1–3 business days. We keep you updated at every step.',
+  },
+  {
+    question: 'Can RKC work with any extended warranty company?',
+    answer:
+      'We work with all major third-party administrators including Endurance, CarShield, CARCHEX, Royal Administration Services, autopom!, Olive, Omega Auto Care, Zurich, and dozens more. If your provider is not listed, call us — we likely still accept it.',
   },
 ];
 
