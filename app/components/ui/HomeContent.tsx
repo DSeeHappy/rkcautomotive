@@ -145,26 +145,10 @@ export default function HomeContent() {
               <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
                 Mile-high standards. Neighbor-shop honesty.
               </h2>
-              <p className="mt-5 text-lg text-ink-muted">
+              <p className="mt-5 text-lg leading-relaxed text-ink-muted">
                 We&apos;re the Englewood shop that answers the phone, posts {LABOR_RATE} on the pricing page, and puts
                 every repair in writing before a wrench turns — no quote-only runaround.
               </p>
-              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {COMPETITIVE_POSITIONING.map((item) => (
-                  <div key={item.title} className="rounded-2xl border border-[color:var(--line)] bg-white p-5">
-                    <h3 className="text-sm font-bold text-primary-blue">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</p>
-                  </div>
-                ))}
-              </div>
-              <ul className="mt-10 space-y-4">
-                {TRUST_BADGES.map((badge) => (
-                  <li key={badge} className="flex items-center gap-3 border-b border-[color:var(--line)] pb-4 text-sm font-semibold">
-                    <span className="size-2 rounded-full bg-primary-green" />
-                    {badge}
-                  </li>
-                ))}
-              </ul>
             </FadeIn>
             <FadeIn delay={0.1} className="relative lg:col-span-7">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
@@ -182,6 +166,28 @@ export default function HomeContent() {
               </div>
             </FadeIn>
           </div>
+
+          <Stagger className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4" stagger={0.08}>
+            {COMPETITIVE_POSITIONING.map((item) => (
+              <StaggerItem key={item.title}>
+                <div className="h-full rounded-2xl border border-[color:var(--line)] bg-white p-6 sm:p-8">
+                  <h3 className="text-lg font-bold leading-snug text-primary-blue sm:text-xl">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{item.description}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+
+          <FadeIn className="mt-16 border-t border-[color:var(--line)] pt-12">
+            <ul className="grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+              {TRUST_BADGES.map((badge) => (
+                <li key={badge} className="flex items-center gap-3 text-sm font-semibold">
+                  <span className="size-2 shrink-0 rounded-full bg-primary-green" />
+                  {badge}
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
         </div>
       </section>
 
