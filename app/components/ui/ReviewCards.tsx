@@ -6,7 +6,7 @@ import { ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { GOOGLE_REVIEWS_URL, VERIFIED_REVIEWS_4_PLUS, type VerifiedReview } from '@/lib/constants';
 
-const ROTATION_INTERVAL_MS = 1000;
+const ROTATION_INTERVAL_MS = 15000;
 const COMPACT_INDICATOR_THRESHOLD = 10;
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -45,22 +45,22 @@ function useVisibleCount() {
 
 function ReviewCard({ review }: { review: VerifiedReview }) {
   return (
-    <blockquote className="flex h-full flex-col justify-between rounded-3xl border border-[color:var(--line)] bg-white/80 p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.35)] backdrop-blur-sm">
+    <blockquote className="flex h-full flex-col justify-between rounded-3xl border border-[color:var(--line)] bg-white p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.35)] [color-scheme:light]">
       <div>
         {review.rating ? (
           <p className="text-primary-green" aria-label={`${review.rating} out of 5 stars`}>
             {'★'.repeat(review.rating)}
           </p>
         ) : null}
-        <p className="mt-5 text-lg leading-relaxed text-foreground">&ldquo;{review.quote}&rdquo;</p>
+        <p className="mt-5 text-lg leading-relaxed text-[#0c1222]">&ldquo;{review.quote}&rdquo;</p>
       </div>
       <footer className="mt-8 border-t border-[color:var(--line)] pt-5">
-        <p className="font-bold text-primary-blue">{review.author}</p>
+        <p className="font-bold text-[#1c3d91]">{review.author}</p>
         <a
           href={review.sourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-1 inline-flex items-center gap-1 text-sm text-ink-muted hover:text-primary-green"
+          className="mt-1 inline-flex items-center gap-1 text-sm text-[#5a6478] hover:text-primary-green"
         >
           {review.source}
           <ExternalLink className="size-3" aria-hidden />
@@ -141,9 +141,9 @@ export default function ReviewCards({
                     <motion.div
                       key={reviewKey(review)}
                       className="h-full"
-                      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={reduceMotion ? undefined : { opacity: 0, y: -16 }}
+                      initial={reduceMotion ? false : { y: 20 }}
+                      animate={{ y: 0 }}
+                      exit={reduceMotion ? undefined : { y: -16 }}
                       transition={{ duration: 0.45, ease }}
                     >
                       <ReviewCard review={review} />
