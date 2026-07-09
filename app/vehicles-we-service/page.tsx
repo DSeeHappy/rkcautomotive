@@ -2,9 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import JsonLd from '@/app/components/JsonLd';
-import { BUSINESS, PHOTOS, VEHICLE_CATEGORIES } from '@/lib/constants';
+import { BUSINESS, PHOTOS } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
-import FadeIn from '@/app/components/ui/FadeIn';
+import VehicleCategoryCards from '@/app/components/ui/VehicleCategoryCards';
 import { createPageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
@@ -41,29 +41,7 @@ export default function VehiclesPage() {
         imageAlt="Classic vehicle on lift at RKC Automotive in Englewood, CO"
       />
 
-      <section className="py-20 sm:py-24">
-        <div className="wrap">
-          <div className="grid gap-8 lg:grid-cols-3">
-            {VEHICLE_CATEGORIES.map((cat, i) => (
-              <FadeIn key={cat.title} delay={i * 0.06}>
-                <div className="h-full rounded-3xl border border-[color:var(--line)] bg-white p-8">
-                  <h2 className="font-display text-3xl tracking-wide text-primary-blue">{cat.title}</h2>
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {cat.brands.map((brand) => (
-                      <li
-                        key={brand}
-                        className="rounded-full border border-[color:var(--line)] bg-[var(--background)] px-3.5 py-1.5 text-sm font-medium text-foreground"
-                      >
-                        {brand}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+      <VehicleCategoryCards />
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">

@@ -277,3 +277,7 @@ export const VEHICLE_BRANDS: VehicleBrand[] = [
 export function getBrandBySlug(slug: string): VehicleBrand | undefined {
   return VEHICLE_BRANDS.find((brand) => brand.slug === slug);
 }
+
+export function getBrandByName(name: string): VehicleBrand | undefined {
+  return VEHICLE_BRANDS.find((brand) => brand.name === name);
+}

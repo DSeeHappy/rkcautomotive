@@ -3,7 +3,7 @@ import BrandTabs from './BrandTabs';
 
 export default function BrandSection() {
   return (
-    <section className="bg-white">
+    <section id="brands" className="scroll-mt-28 bg-white">
       <BrandMarquee />
       <BrandTabs />
     </section>
