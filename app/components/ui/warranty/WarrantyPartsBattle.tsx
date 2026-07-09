@@ -1,6 +1,5 @@
 'use client';
 
-import { useCallback, useRef } from 'react';
 import { Check, Minus, PackageCheck, PackageX, ShieldCheck, X } from 'lucide-react';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { SECTION_PAD, SECTION_HEADER } from './warrantyShared';
@@ -158,15 +157,6 @@ function TierHeader({
 }
 
 export default function WarrantyPartsBattle() {
-  const cardRefs = useRef<Record<string, HTMLElement | null>>({});
-
-  const scrollToTier = useCallback((tierId: string) => {
-    const card = cardRefs.current[tierId];
-    if (!card) return;
-    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    card.focus({ preventScroll: true });
-  }, []);
-
   return (
     <section className={`${SECTION_PAD} bg-[var(--background)]`}>
       <div className="wrap">
@@ -181,31 +171,6 @@ export default function WarrantyPartsBattle() {
             Warranty administrators mandate the cheapest parts available. RKC inspects, rejects, and
             documents every component before it goes on your vehicle.
           </p>
-        </FadeIn>
-
-        {/* Tier highlight bar — tappable on mobile to jump to matching card */}
-        <FadeIn className="mb-10">
-          <div className="grid gap-4 sm:grid-cols-3">
-            {COMPARISON_TIERS.map((tier) => {
-              const inner = (
-                <>
-                  <TierHeader tier={tier} variant="pill" />
-                </>
-              );
-
-              return (
-                <button
-                  key={tier.id}
-                  type="button"
-                  onClick={() => scrollToTier(tier.id)}
-                  className={`rounded-2xl px-6 py-5 text-center transition-transform active:scale-[0.98] lg:pointer-events-none lg:cursor-default ${tierPillClass(tier.tone)}`}
-                  aria-label={`Jump to ${tier.label}: ${tier.value}`}
-                >
-                  {inner}
-                </button>
-              );
-            })}
-          </div>
         </FadeIn>
 
         {/* Desktop comparison table */}
@@ -270,60 +235,70 @@ export default function WarrantyPartsBattle() {
           </div>
         </FadeIn>
 
-        {/* Mobile cards — labels mirror highlight pills; text wrapped to avoid flex clipping */}
-        <div className="grid gap-6 lg:hidden">
-          {COMPARISON_TIERS.map((tier) => {
-            const RowIcon = tierIcon(tier);
-            return (
-              <article
-                key={tier.id}
-                id={`parts-tier-${tier.id}`}
-                ref={(node) => {
-                  cardRefs.current[tier.id] = node;
-                }}
-                tabIndex={-1}
-                className={`overflow-hidden rounded-[1.75rem] p-6 outline-none focus-visible:ring-2 focus-visible:ring-primary-green ${
-                  tier.highlight
-                    ? 'bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_30px_80px_-30px_rgba(28,61,145,0.65)] ring-2 ring-primary-green'
-                    : 'border border-[color:var(--line)] bg-white'
-                }`}
-              >
-                <TierHeader tier={tier} variant="card" />
-                <p
-                  className={`mt-4 text-sm leading-relaxed ${
-                    tier.highlight ? 'text-white/80' : 'text-ink-muted'
-                  }`}
-                >
-                  {tier.summary}
-                </p>
-                <dl className="mt-6 space-y-4">
-                  {COMPARISON_ROWS.map((row) => (
-                    <div key={row.key}>
-                      <dt
-                        className={`text-xs font-bold uppercase tracking-[0.16em] ${
-                          tier.highlight ? 'text-white/60' : 'text-ink-muted'
-                        }`}
-                      >
-                        {row.label}
-                      </dt>
-                      <dd
-                        className={`mt-1 flex items-start gap-2 text-sm ${
-                          tier.highlight ? 'font-semibold text-white' : 'text-foreground'
-                        }`}
-                      >
-                        <RowIcon
-                          className={`mt-0.5 size-4 shrink-0 ${tierIconClass(tier, tier.highlight)}`}
-                          aria-hidden
-                        />
-                        <span className="min-w-0 flex-1 leading-relaxed">{row[tier.dataKey]}</span>
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </article>
-            );
-          })}
-        </div>
+        {/* Mobile / tablet — each column groups tier header + card */}
+        <FadeIn className="lg:hidden">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-4">
+            {COMPARISON_TIERS.map((tier) => {
+              const RowIcon = tierIcon(tier);
+              return (
+                <div key={tier.id} className="flex min-w-0 flex-col gap-3">
+                  <div
+                    className={`rounded-2xl px-4 py-4 text-center sm:px-5 sm:py-5 ${tierPillClass(tier.tone)}`}
+                  >
+                    <TierHeader tier={tier} variant="pill" />
+                    {tier.highlight && (
+                      <span className="mt-2 inline-block rounded-full bg-primary-green px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
+                        Your shop
+                      </span>
+                    )}
+                  </div>
+                  <article
+                    id={`parts-tier-${tier.id}`}
+                    className={`flex flex-1 flex-col overflow-hidden rounded-[1.75rem] p-5 sm:p-6 ${
+                      tier.highlight
+                        ? 'bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_30px_80px_-30px_rgba(28,61,145,0.65)] ring-2 ring-primary-green'
+                        : 'border border-[color:var(--line)] bg-white'
+                    }`}
+                  >
+                    <dl className="space-y-4">
+                      {COMPARISON_ROWS.map((row) => (
+                        <div key={row.key}>
+                          <dt
+                            className={`text-xs font-bold uppercase tracking-[0.16em] ${
+                              tier.highlight ? 'text-white/60' : 'text-ink-muted'
+                            }`}
+                          >
+                            {row.label}
+                          </dt>
+                          <dd
+                            className={`mt-1 flex items-start gap-2 text-sm ${
+                              tier.highlight ? 'font-semibold text-white' : 'text-foreground'
+                            }`}
+                          >
+                            <RowIcon
+                              className={`mt-0.5 size-4 shrink-0 ${tierIconClass(tier, tier.highlight)}`}
+                              aria-hidden
+                            />
+                            <span className="min-w-0 flex-1 leading-relaxed">{row[tier.dataKey]}</span>
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <p
+                      className={`mt-6 border-t pt-4 text-sm leading-relaxed ${
+                        tier.highlight
+                          ? 'border-white/15 text-white/80'
+                          : 'border-[color:var(--line)] text-ink-muted'
+                      }`}
+                    >
+                      {tier.summary}
+                    </p>
+                  </article>
+                </div>
+              );
+            })}
+          </div>
+        </FadeIn>
 
         {/* Context cards */}
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
