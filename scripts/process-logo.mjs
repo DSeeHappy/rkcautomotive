@@ -1,16 +1,15 @@
 import sharp from 'sharp';
-import { access } from 'fs/promises';
-import { mkdir } from 'fs/promises';
+import { access, mkdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 
-const candidates = [
-  'C:/Users/BS/.cursor/projects/c-Users-BS-Desktop-Software-rkcautomotive/assets/c__Users_BS_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_rkc_automotive_logo_transparent-b761543a-b971-4f97-8abc-90886676a8d4.png',
-  path.join(root, 'public/images/rkc-logo.png'),
-];
+const NEW_LOGO =
+  'C:/Users/BS/.cursor/projects/c-Users-BS-Desktop-Software-rkcautomotive/assets/c__Users_BS_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_rkc-logo-white-square-card-1200-16a6dae6-afe2-4bfb-b3c6-57f818d1aa60.png';
+
+const candidates = [NEW_LOGO, path.join(root, 'public/images/rkc-logo-card.png')];
 
 const BACKGROUND_LUM = 52;
 const BACKGROUND_SAT = 0.14;
@@ -96,10 +95,10 @@ async function makeTransparent(input) {
   })
     .trim({ threshold: 24 })
     .extend({
-      top: 24,
-      bottom: 24,
-      left: 24,
-      right: 24,
+      top: 16,
+      bottom: 16,
+      left: 16,
+      right: 16,
       background: { r: 0, g: 0, b: 0, alpha: 0 },
     })
     .toBuffer({ resolveWithObject: true });
@@ -111,6 +110,18 @@ async function makeTransparent(input) {
   return sharp(trimmed.data, {
     raw: { width: trimmed.info.width, height: trimmed.info.height, channels: trimmed.info.channels },
   });
+}
+
+async function makeCard(input) {
+  return sharp(input)
+    .resize(1024, 1024, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 1 } })
+    .extend({
+      top: 8,
+      bottom: 8,
+      left: 8,
+      right: 8,
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    });
 }
 
 async function exportVariant(pipeline, outPath, width, format) {
@@ -130,39 +141,53 @@ async function exportVariant(pipeline, outPath, width, format) {
 const src = await resolveSource();
 const outDir = path.join(root, 'public/images');
 const iconOut = path.join(root, 'app/icon.png');
+const schemaLogoOut = path.join(outDir, 'logo.png');
 
 await mkdir(outDir, { recursive: true });
 
+const card = await makeCard(src);
 const transparent = await makeTransparent(src);
-const trimmedMeta = await transparent.clone().metadata();
 
+const cardPngOut = path.join(outDir, 'rkc-logo-card.png');
+const cardWebpOut = path.join(outDir, 'rkc-logo-card.webp');
 const pngOut = path.join(outDir, 'rkc-logo.png');
 const webpOut = path.join(outDir, 'rkc-logo.webp');
+const navWebpOut = path.join(outDir, 'rkc-logo-nav.webp');
 const png2xOut = path.join(outDir, 'rkc-logo@2x.png');
 const png3xOut = path.join(outDir, 'rkc-logo@3x.png');
 const webp2xOut = path.join(outDir, 'rkc-logo@2x.webp');
 
+await exportVariant(card, cardPngOut, 1024, 'png');
+await exportVariant(card, cardWebpOut, 1024, 'webp');
 await exportVariant(transparent, pngOut, 1024, 'png');
 await exportVariant(transparent, webpOut, 1024, 'webp');
+await exportVariant(transparent, navWebpOut, 640, 'webp');
 await exportVariant(transparent, png2xOut, 2048, 'png');
 await exportVariant(transparent, png3xOut, 3072, 'png');
 await exportVariant(transparent, webp2xOut, 2048, 'webp');
 
-await transparent
+await card
   .clone()
-  .resize(512, 512, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .resize(512, 512, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 1 } })
   .png()
   .toFile(iconOut);
 
+await card.clone().resize(512, 512, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 1 } }).png().toFile(schemaLogoOut);
+
 const finalMeta = await sharp(pngOut).metadata();
+const cardMeta = await sharp(cardPngOut).metadata();
+
 console.log('Logo processed from:', src);
-console.log('Trimmed source:', { width: trimmedMeta.width, height: trimmedMeta.height });
+console.log('Transparent export:', { width: finalMeta.width, height: finalMeta.height });
+console.log('Card export:', { width: cardMeta.width, height: cardMeta.height });
 console.log('Exports:', {
-  width: finalMeta.width,
-  height: finalMeta.height,
+  cardPngOut,
+  cardWebpOut,
   pngOut,
   webpOut,
+  navWebpOut,
   png2xOut,
   png3xOut,
   iconOut,
+  schemaLogoOut,
 });

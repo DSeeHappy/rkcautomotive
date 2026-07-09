@@ -3,7 +3,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { RKC_LOGO_HEIGHT, RKC_LOGO_PNG, RKC_LOGO_WIDTH } from '@/lib/logo';
+import {
+  RKC_LOGO_CARD_PNG,
+  RKC_LOGO_CARD_SIZE,
+  RKC_LOGO_HEIGHT,
+  RKC_LOGO_NAV_WEBP,
+  RKC_LOGO_PNG,
+  RKC_LOGO_WIDTH,
+} from '@/lib/logo';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
@@ -14,41 +21,70 @@ type AnimatedLogoProps = {
   variant?: AnimatedLogoVariant;
   className?: string;
   href?: string;
-  /** Nav over dark hero — subtle backdrop for contrast when needed */
+  /** Nav over dark hero — use white card for contrast */
   onDarkBackground?: boolean;
 };
 
 const sizeClass = {
-  hero: 'w-[min(52vw,168px)] sm:w-[min(44vw,200px)] lg:w-[min(22vw,220px)] h-auto',
-  nav: 'h-14 w-auto sm:h-16 lg:h-[4.5rem] xl:h-20',
+  hero: 'w-[min(56vw,184px)] sm:w-[min(48vw,216px)] lg:w-[min(24vw,240px)] h-auto',
+  nav: 'h-16 w-auto sm:h-[4.25rem] lg:h-[4.75rem] xl:h-24',
   footer: 'h-16 w-auto sm:h-[4.5rem]',
 } as const;
 
-const heroGlowClass =
-  'drop-shadow-[0_4px_18px_rgba(12,18,34,0.45)] drop-shadow-[0_0_24px_rgba(14,133,54,0.22)]';
+const heroCardClass =
+  'rounded-2xl shadow-[0_10px_32px_-8px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.25)]';
+
+const navLightClass =
+  'drop-shadow-[0_2px_10px_rgba(12,18,34,0.14)] drop-shadow-[0_0_1px_rgba(12,18,34,0.08)]';
+
+const navDarkCardClass =
+  'rounded-xl shadow-[0_8px_28px_-10px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.2)]';
+
+function useCardAsset(variant: AnimatedLogoVariant, onDarkBackground: boolean) {
+  if (variant === 'hero') return true;
+  if (variant === 'nav' && onDarkBackground) return true;
+  if (variant === 'footer') return true;
+  return false;
+}
 
 function LogoImage({
   variant = 'nav',
   className = '',
-}: Pick<AnimatedLogoProps, 'variant' | 'className'>) {
+  onDarkBackground = false,
+}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground'>) {
   const v = variant ?? 'nav';
+  const useCard = useCardAsset(v, onDarkBackground);
+  const src = useCard ? RKC_LOGO_CARD_PNG : v === 'nav' ? RKC_LOGO_NAV_WEBP : RKC_LOGO_PNG;
+  const width = useCard ? RKC_LOGO_CARD_SIZE : RKC_LOGO_WIDTH;
+  const height = useCard ? RKC_LOGO_CARD_SIZE : RKC_LOGO_HEIGHT;
+
+  const imageClass = [
+    'block select-none',
+    sizeClass[v],
+    v === 'hero' && useCard ? heroCardClass : '',
+    v === 'nav' && useCard ? navDarkCardClass : '',
+    v === 'nav' && !useCard ? navLightClass : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <Image
-      src={RKC_LOGO_PNG}
+      src={src}
       alt="RKC Automotive"
-      width={RKC_LOGO_WIDTH}
-      height={RKC_LOGO_HEIGHT}
+      width={width}
+      height={height}
       quality={95}
       priority={v === 'hero' || v === 'nav'}
       sizes={
         v === 'hero'
-          ? '(max-width: 640px) 168px, (max-width: 1024px) 200px, 220px'
+          ? '(max-width: 640px) 184px, (max-width: 1024px) 216px, 240px'
           : v === 'nav'
-            ? '(max-width: 640px) 112px, (max-width: 1280px) 144px, 160px'
+            ? '(max-width: 640px) 128px, (max-width: 1280px) 160px, 192px'
             : '(max-width: 640px) 128px, 144px'
       }
-      className={`block ${sizeClass[v]} select-none ${v === 'hero' ? heroGlowClass : ''} ${className}`}
+      className={imageClass}
       draggable={false}
     />
   );
@@ -63,6 +99,7 @@ function LogoContent({
   const v = variant ?? 'nav';
   const isNav = v === 'nav';
   const isHero = v === 'hero';
+  const useCard = useCardAsset(v, onDarkBackground);
 
   return (
     <motion.div
@@ -95,14 +132,16 @@ function LogoContent({
     >
       <div
         className={
-          isNav && onDarkBackground
-            ? 'rounded-xl bg-white/92 px-2.5 py-1 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.45)] backdrop-blur-[2px]'
+          isNav && useCard
+            ? 'p-0.5'
             : isNav
               ? 'px-0.5 py-0.5'
-              : ''
+              : isHero
+                ? 'p-0'
+                : ''
         }
       >
-        <LogoImage variant={v} />
+        <LogoImage variant={v} onDarkBackground={onDarkBackground} />
       </div>
     </motion.div>
   );
@@ -135,6 +174,7 @@ export default function AnimatedLogo({
 export function AnimatedLogoStatic({
   variant = 'footer',
   className = '',
-}: Pick<AnimatedLogoProps, 'variant' | 'className'>) {
-  return <LogoImage variant={variant} className={className} />;
+  onDarkBackground = true,
+}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground'>) {
+  return <LogoImage variant={variant} className={className} onDarkBackground={onDarkBackground} />;
 }

@@ -108,7 +108,7 @@ export default function Navigation() {
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col overflow-y-auto bg-[#0c1222] text-white">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-4 sm:px-6 sm:py-5">
-            <AnimatedLogo variant="nav" href="/" onDarkBackground={false} />
+            <AnimatedLogo variant="nav" href="/" onDarkBackground />
             <button type="button" onClick={() => setOpen(false)} className="p-2" aria-label="Close menu">
               <X className="size-6" />
             </button>

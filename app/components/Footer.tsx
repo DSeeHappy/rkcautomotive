@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Clock, MapPin, Phone } from 'lucide-react';
 import { BUSINESS, FOOTER_LINKS, PHOTOS, SERVICES } from '@/lib/constants';
 import SocialLinks from '@/app/components/ui/SocialLinks';
+import { AnimatedLogoStatic } from '@/app/components/ui/AnimatedLogo';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -17,9 +18,7 @@ export default function Footer() {
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-14 flex flex-col gap-6 border-b border-white/10 pb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-display text-6xl tracking-wide text-white sm:text-7xl">
-              <span className="text-primary-green-light">RKC</span> AUTOMOTIVE
-            </p>
+            <AnimatedLogoStatic variant="footer" onDarkBackground className="rounded-xl shadow-[0_8px_24px_-10px_rgba(0,0,0,0.45)]" />
             <p className="mt-4 max-w-md text-lg text-white/60">
               ASE-certified auto repair on W Evans Ave — honest diagnostics, quality parts, 30+ years serving Englewood &amp; Denver metro.
             </p>

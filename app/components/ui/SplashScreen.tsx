@@ -3,13 +3,13 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  RKC_LOGO_HEIGHT,
+  RKC_LOGO_CARD_SIZE,
+  RKC_LOGO_CARD_WEBP,
   RKC_LOGO_VIDEO_MP4,
   RKC_LOGO_VIDEO_WEBM,
-  RKC_LOGO_WIDTH,
 } from '@/lib/logo';
 
-const STATIC_LOGO_SRC = '/images/rkc-logo.webp';
+const STATIC_LOGO_SRC = RKC_LOGO_CARD_WEBP;
 
 const SPLASH_SESSION_KEY = 'rkc-splash-seen';
 
@@ -28,7 +28,7 @@ const VIDEO_CLASS =
   'absolute inset-0 h-full w-full object-cover object-center select-none';
 
 const STATIC_LOGO_CLASS =
-  'max-h-[85vh] max-w-[92vw] w-auto h-auto object-contain object-center select-none';
+  'max-h-[85vh] max-w-[92vw] w-auto h-auto rounded-2xl object-contain object-center select-none shadow-[0_16px_48px_-12px_rgba(0,0,0,0.65)]';
 
 type Phase = 'checking' | 'playing' | 'done';
 
@@ -197,8 +197,8 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           <Image
             src={STATIC_LOGO_SRC}
             alt="RKC Automotive"
-            width={RKC_LOGO_WIDTH}
-            height={RKC_LOGO_HEIGHT}
+            width={RKC_LOGO_CARD_SIZE}
+            height={RKC_LOGO_CARD_SIZE}
             quality={95}
             priority
             className={STATIC_LOGO_CLASS}
