@@ -15,6 +15,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -98,6 +99,55 @@ export default function EngineDiagnosticsContent() {
         title={"Symptoms that need real diagnostics"}
         intro={"Modern powertrains mask problems until load, altitude, or cold-start conditions expose them. These patterns need scan tools and test equipment — not a generic tune-up quote."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Diagnostic depth"
+        title="OBD-II PIDs, freeze frame, smoke test & relative compression"
+        intro="Professional engine diagnostics goes beyond reading codes. We capture the conditions when the fault set, graph live data under load, smoke-test vacuum leaks, and compare cylinder cranking speed — so repairs target root cause, not the cheapest guess."
+        cards={[
+          {
+            title: 'Live OBD-II PIDs we graph',
+            body: 'Short-term and long-term fuel trims (STFT/LTFT), MAF grams-per-second vs. calculated load, O2 sensor switching voltage, misfire counters per cylinder, MAP/MAF correlation, and VVT commanded vs. actual cam angles. Denver altitude exposes marginal sensors that pass at sea level — we test on Englewood routes, not just in the bay.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'Freeze-frame capture',
+            body: 'When a code sets, the PCM records RPM, coolant temp, fuel status, and load at that moment. A P0171 lean code at cold idle differs from one at 70 mph uphill on C-470. Freeze-frame tells us which operating cell failed — critical for intermittent faults that disappear when you arrive at the shop.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'Smoke-machine vacuum & EVAP test',
+            body: 'Visible vapor injected into the intake finds cracked PCV hoses, intake gasket leaks, and torn MAF boots that set lean codes. EVAP smoke locates gas-cap, purge-valve, and vent-hose leaks causing P044x codes. Leaks too small to hear are found in minutes — common on high-mileage rubber in Colorado heat.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+          {
+            title: 'Relative compression testing',
+            body: 'Uses crankshaft position sensor to compare cranking acceleration between cylinders — no spark plugs removed. A weak cylinder shows slower compression stroke speed. We follow with traditional compression or leak-down on flagged cylinders before recommending top-end or bottom-end repair — saving hours on multi-cylinder misfire diagnosis.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+        ]}
+        tableTitle="Key OBD-II PIDs for drivability diagnosis"
+        tableIntro="These parameters tell us whether the fault is fuel, air, ignition, or mechanical — before parts get ordered."
+        table={{
+          caption: 'Common OBD-II PIDs used during engine diagnostics',
+          columns: ['PID', 'What it tells us', 'Red flag'],
+          rows: [
+            { label: 'STFT / LTFT', values: ['Fuel trim correction', '±10% sustained = lean/rich fault'], highlight: 1 },
+            { label: 'MAF g/s', values: ['Airflow at RPM/load', 'Low vs. calculated load = restriction or bad MAF'] },
+            { label: 'O2 B1S1', values: ['Upstream O2 switching', 'Lazy or stuck = fuel or cat issue'] },
+            { label: 'Misfire counts', values: ['Per-cylinder misfires', 'Climbing count = coil, injector, or mechanical'] },
+            { label: 'VVT actual vs. cmd', values: ['Cam timing correlation', 'Deviation = solenoid, oil, or chain'] },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

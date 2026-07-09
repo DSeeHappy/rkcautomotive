@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -86,6 +87,54 @@ export default function TransmissionServicesContent() {
         title={"Transmission failure modes we diagnose"}
         intro={"Transmissions fail gradually — harsh shifts today become slip tomorrow. These symptoms need professional diagnosis, not another quart from the parts store."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Transmission science"
+        title="Fluid color chart, CVT vs planetary, TCM relearn"
+        intro="Transmission failures are expensive — our technical evaluation starts with fluid condition, unit identification, and adaptive data before recommending flush, repair, or rebuild."
+        cards={[
+          {
+            title: 'Automatic transmission fluid color',
+            body: 'Bright red or pink with no burnt smell is healthy. Brown shows age and additive depletion. Dark brown or black with burnt odor means heat damage — internal clutch wear is likely. Metal glitter on the pan magnet confirms friction material loss. We document color, smell, and debris before recommending service scope.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+          {
+            title: 'CVT vs traditional planetary automatic',
+            body: 'Nissan/Jatco CVTs use steel belts on variable pulleys with specific friction-modified fluid — wrong fluid causes slip and overheating. Traditional 6–10 speed units use clutch packs and defined gear shifts. CVT whine with metal in fluid often means replacement, not flush. We identify unit type from VIN and pan before quoting.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'TCM adaptive relearn procedures',
+            body: 'The transmission control module adapts shift pressure and timing to wear. After valve-body service, fluid exchange, or battery disconnect, shifts may feel harsh until relearn completes. Ford, GM, and Nissan CVTs often require scan-tool relearn — we reset adaptive tables and road-test hot and cold before return.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'Torque converter clutch shudder',
+            body: 'TCC shudder feels like rumble strips at 45 mph — usually converter clutch apply strategy, degraded fluid, or worn converter lining. We differentiate hydraulic delay from electronic TCC control with pressure and scan data. Misdiagnosed shudder leads to unnecessary rebuilds when fluid and TCC strategy are the real fix.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+        ]}
+        tableTitle="Transmission fluid color & condition chart"
+        table={{
+          caption: 'Automatic transmission fluid condition guide',
+          columns: ['Appearance', 'Smell', 'Typical action'],
+          rows: [
+            { label: 'Bright red / pink', values: ['Normal', 'Serviceable — pan inspect if due'], highlight: 2 },
+            { label: 'Light brown', values: ['Slight aged', 'Fluid exchange if interval due'] },
+            { label: 'Dark brown', values: ['Burnt hint', 'Inspect pan debris — may need repair'] },
+            { label: 'Black + burnt', values: ['Burnt', 'Teardown assessment — flush alone risky'], highlight: 2 },
+            { label: 'Metal on magnet', values: ['N/A', 'Internal wear — rebuild/replace path'], highlight: 2 },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

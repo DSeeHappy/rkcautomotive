@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -86,6 +87,53 @@ export default function ExhaustSystemContent() {
         title={"Exhaust and emissions symptoms"}
         intro={"Exhaust problems range from annoying rattles to failed emissions tests — each needs inspection under the vehicle, not a catalog muffler quote."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Emissions science"
+        title="Catalytic efficiency, O2 switching & Colorado compliance"
+        intro="P0420 is not always a bad catalytic converter — we graph O2 sensor behavior, fix upstream faults first, and install EPA/CARB-compliant components so Englewood emissions tests pass once."
+        cards={[
+          {
+            title: 'Catalyst efficiency testing',
+            body: 'We compare upstream and downstream O2 switching — a healthy catalyst shows reduced downstream activity. Exhaust leaks upstream of sensors, rich fuel trim, and misfires can set P0420 on a good cat. Converter replacement is quoted only when live data confirms efficiency loss, not on code alone.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'O2 sensor switching analysis',
+            body: 'Upstream O2 should switch rich/lean roughly once per second at idle. Downstream on a healthy cat stays relatively steady. Rapid downstream switching mirrors upstream — efficiency failure territory. Lazy upstream sensors cause rich/lean faults that mimic cat failure — we graph both before quoting four-figure converters.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'Manifold crack vs muffler rattle',
+            body: 'Ticking on cold start that fades may be cast exhaust manifold crack — common on certain V8 and inline engines. Flex-pipe bellows tear on lowered vehicles. Heat shield rattle is independent of muffler internals — we inspect under lift before quoting mufflers when a shield tack-weld fixes the noise for minimal cost.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+          {
+            title: 'Colorado emissions & CARB compliance',
+            body: 'Denver metro requires functioning catalysts and ready OBD-II monitors on applicable vehicles. Tampered or missing cats fail inspection and risk fines. We install compliant converters, complete drive cycles after repair, and document readiness so you are not back in line twice.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+        ]}
+        tableTitle="O2 sensor behavior vs exhaust fault"
+        table={{
+          caption: 'O2 sensor switching patterns and likely causes',
+          columns: ['Pattern', 'Likely cause', 'First test'],
+          rows: [
+            { label: 'Upstream switching, steady downstream', values: ['Healthy catalyst', 'Verify if code present — may be marginal'] },
+            { label: 'Both switching rapidly', values: ['Efficiency loss or exhaust leak', 'Leak test + compare waveforms'], highlight: 1 },
+            { label: 'Upstream lazy / stuck', values: ['Sensor or fuel fault', 'Scope sensor — do not replace cat first'], highlight: 1 },
+            { label: 'Rich trim + efficiency code', values: ['Fuel fault poisoning cat', 'Fix fuel before converter'], highlight: 1 },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

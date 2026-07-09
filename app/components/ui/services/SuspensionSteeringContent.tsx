@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -86,6 +87,54 @@ export default function SuspensionSteeringContent() {
         title={"Suspension and steering warning signs"}
         intro={"Ride quality degrades slowly until a pothole on Broadway exposes how much control you have lost."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Alignment & wear limits"
+        title="Alignment specs, ball joint play & strut mount diagnosis"
+        intro="Suspension repair is safety-critical — we load-test joints, measure alignment geometry, and replace strut mounts with struts because alignment alone cannot fix mechanical slop."
+        cards={[
+          {
+            title: 'Camber, caster & toe targets',
+            body: 'Camber near 0° with slight negative improves cornering; toe is adjusted for tire wear and straight tracking. Thrust angle must be corrected so rear axle aim does not force front toe compensation. We provide before-and-after alignment printouts — Englewood potholes can shift subframe geometry requiring component replacement before pins are touched.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'Ball joint play limits',
+            body: 'Load-bearing lower ball joints with vertical play under pry-bar test are a safety failure. Upper joints and tie-rod ends have tighter tolerances — we measure with dial indicators where spec exists. Clunk over railroad crossings near Evans Ave with joint play means replace before separation, especially on trucks and SUVs.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+          {
+            title: 'Strut mount clunk on cold start',
+            body: 'Strut mount bearings allow the strut to rotate with steering. Worn rubber isolators and dry bearings clunk on first bumps, then quiet as grease warms. Worn mounts cause steering bind and uneven tire wear. MacPherson strut jobs include new mounts — reusing old mounts transfers noise to the new strut within weeks.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'Tire wear pattern diagnosis',
+            body: 'Feathering is toe; cupping is shock failure; center wear is over-inflation. Worn struts let tires bounce — looks like alignment fault but fixes with dampers. We read wear patterns before recommending a four-wheel align, saving $120 on adjustments that cannot fix mechanical slop.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+        ]}
+        tableTitle="Common alignment specifications (typical passenger car)"
+        tableIntro="Exact specs are VIN-specific — this illustrates why thrust angle and camber matter for tire life."
+        table={{
+          caption: 'Typical alignment specification ranges',
+          columns: ['Parameter', 'Typical spec', 'Wear symptom if out'],
+          rows: [
+            { label: 'Front camber', values: ['0° to −1.0°', 'Inside or outside edge wear'] },
+            { label: 'Front toe', values: ['0° to +0.10° total', 'Feathering, pull, wander'] },
+            { label: 'Thrust angle', values: ['0° ± 0.25°', 'Dog-track, crooked steering wheel'] },
+            { label: 'Rear camber (if adjustable)', values: ['Manufacturer spec', 'Rear tire wear, instability'] },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

@@ -3,11 +3,13 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-import { ChevronDown, Menu, Phone, X } from 'lucide-react';
-import { BUSINESS, NAV_LINKS, SERVICES } from '@/lib/constants';
+import { ChevronDown, Menu, Phone, Shield, Sparkles, X } from 'lucide-react';
+import { BUSINESS, NAV_LINKS, SERVICE_NAV_GROUPS, SERVICES } from '@/lib/constants';
 import AnimatedLogo from '@/app/components/ui/AnimatedLogo';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { useGsapReveal } from '@/lib/useGsapReveal';
+
+const serviceBySlug = Object.fromEntries(SERVICES.map((s) => [s.slug, s]));
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
@@ -64,30 +66,67 @@ export default function Navigation() {
                 </PopoverButton>
                 <PopoverPanel
                   transition
-                  className="absolute left-1/2 top-full z-50 w-[28rem] -translate-x-1/2 pt-3 transition data-closed:translate-y-2 data-closed:opacity-0"
+                  className="absolute left-1/2 top-full z-50 w-[44rem] -translate-x-1/2 pt-3 transition data-closed:translate-y-2 data-closed:opacity-0"
                 >
                   <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl">
-                    <div className="grid grid-cols-2 gap-1 p-3">
-                      <Link
-                        href="/services"
-                        className="col-span-2 mb-1 rounded-xl bg-gradient-to-r from-primary-green to-primary-blue px-4 py-3 text-sm font-semibold text-white"
-                      >
-                        View all services →
-                      </Link>
-                      <Link
-                        href="/warranty"
-                        className="col-span-2 mb-1 rounded-xl border border-primary-green/20 bg-primary-green/8 px-4 py-3 text-sm font-semibold text-primary-green transition-colors hover:bg-primary-green/12"
-                      >
-                        Extended warranty repair →
-                      </Link>
-                      {SERVICES.map((service) => (
+                    <div className="border-b border-[color:var(--line)] bg-gradient-to-r from-primary-green/8 to-primary-blue/8 p-4">
+                      <div className="flex flex-wrap gap-2">
                         <Link
-                          key={service.href}
-                          href={service.href}
-                          className="rounded-xl px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary-green/8 hover:text-primary-green"
+                          href="/services"
+                          className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-green to-primary-blue px-4 py-3 text-sm font-semibold text-white transition hover:opacity-95"
                         >
-                          {service.name}
+                          View all services →
                         </Link>
+                        <Link
+                          href="/warranty"
+                          className="inline-flex items-center gap-2 rounded-xl border border-primary-green/25 bg-white px-4 py-3 text-sm font-semibold text-primary-green transition-colors hover:bg-primary-green/8"
+                        >
+                          <Shield className="size-4" />
+                          Extended warranty
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-0 p-4 sm:grid-cols-2">
+                      {SERVICE_NAV_GROUPS.map((group) => (
+                        <div key={group.label} className="p-2">
+                          <p className="mb-2 px-2 text-[10px] font-bold uppercase tracking-[0.22em] text-ink-muted">
+                            {group.label}
+                          </p>
+                          <ul className="space-y-0.5">
+                            {group.slugs.map((slug) => {
+                              const service = serviceBySlug[slug];
+                              if (!service) return null;
+                              const Icon = service.icon;
+                              const isFeatured = group.featured?.includes(slug);
+                              return (
+                                <li key={slug}>
+                                  <Link
+                                    href={service.href}
+                                    className={`group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-primary-green/8 ${
+                                      isFeatured ? 'bg-primary-green/5 ring-1 ring-primary-green/15' : ''
+                                    }`}
+                                  >
+                                    <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary-green/10 ring-1 ring-primary-green/20 transition group-hover:bg-primary-green/15">
+                                      <Icon className="size-4 text-primary-green" aria-hidden />
+                                    </span>
+                                    <span className="min-w-0">
+                                      <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground group-hover:text-primary-green">
+                                        {service.name}
+                                        {isFeatured && (
+                                          <Sparkles className="size-3 text-primary-green" aria-label="Featured service" />
+                                        )}
+                                      </span>
+                                      <span className="mt-0.5 block text-xs leading-snug text-ink-muted">
+                                        {service.description}
+                                      </span>
+                                    </span>
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -145,6 +184,9 @@ export default function Navigation() {
             <Link href="/services" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5">
               All Services
             </Link>
+            <Link href="/warranty" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold text-primary-green-light hover:bg-white/5">
+              Extended Warranty
+            </Link>
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -155,16 +197,24 @@ export default function Navigation() {
                 {link.name}
               </Link>
             ))}
-            <p className="mt-6 px-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Services</p>
-            {SERVICES.map((service) => (
-              <Link
-                key={service.href}
-                href={service.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-xl px-4 py-2.5 text-sm text-white/70 hover:bg-white/5 hover:text-white"
-              >
-                {service.name}
-              </Link>
+            {SERVICE_NAV_GROUPS.map((group) => (
+              <div key={group.label}>
+                <p className="mt-6 px-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">{group.label}</p>
+                {group.slugs.map((slug) => {
+                  const service = serviceBySlug[slug];
+                  if (!service) return null;
+                  return (
+                    <Link
+                      key={slug}
+                      href={service.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-xl px-4 py-2.5 text-sm text-white/70 hover:bg-white/5 hover:text-white"
+                    >
+                      {service.name}
+                    </Link>
+                  );
+                })}
+              </div>
             ))}
           </div>
           <div className="border-t border-white/10 p-4">

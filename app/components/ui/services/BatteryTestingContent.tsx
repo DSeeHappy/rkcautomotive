@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -86,6 +87,52 @@ export default function BatteryTestingContent() {
         title={"When to test or replace your battery"}
         intro={"Batteries fail on a curve — slow crank today, no-start tomorrow. These signs mean test now, not after a jump."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Battery science"
+        title="CCA testing, sulfation & Colorado cold-start demands"
+        intro="A battery that tests borderline at 70°F fails at 10°F on a January morning in Englewood. We conductance-test CCA, inspect for sulfation, and verify alternator output before selling you a group size."
+        cards={[
+          {
+            title: 'CCA conductance testing',
+            body: 'Cold Cranking Amps measure starting power at 0°F — critical for Colorado winters. Resting voltage above 12.4V does not mean the battery delivers rated CCA. Our conductance tester prints state-of-health percentage — we share the readout before recommending replacement. A 70% health battery may start today and fail tomorrow at dawn.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'Sulfation from short trips',
+            body: 'Lead sulfate crystals form when a battery sits partially discharged — short-trip Englewood commuting without full recharge accelerates sulfation. Advanced sulfation is not reversible — replacement is the fix. Regular driving or a maintainer on stored vehicles prevents capacity loss that voltage checks miss.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'AGM vs flooded in start-stop vehicles',
+            body: 'Start-stop and idle-stop systems demand AGM batteries with correct amp-hour and CCA ratings. Wrong group size triggers premature failure and idle-stop faults. We match battery type to VIN and register BMS on European and Asian platforms that require scan-tool reset after install.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+          {
+            title: 'Colorado heat + cold cycle stress',
+            body: 'Summer under-hood temps above 140°F evaporate electrolyte on flooded designs. Winter cold increases internal resistance. Temperature swings from I-25 traffic to sub-zero mornings are harder on batteries than steady coastal climates — pre-winter testing catches borderline units before no-start season.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+        ]}
+        tableTitle="Battery type comparison"
+        table={{
+          caption: 'Flooded vs AGM battery comparison',
+          columns: ['Type', 'Best for', 'Colorado note'],
+          rows: [
+            { label: 'Flooded (FLA)', values: ['Older vehicles, standard cranking', '3–5 yr typical life in metro heat'], highlight: 2 },
+            { label: 'AGM', values: ['Start-stop, luxury, deep cycling', 'Required for many 2015+ platforms'] },
+            { label: 'EFB (enhanced flooded)', values: ['Entry start-stop', 'Mid-tier stop-start applications'] },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -86,6 +87,54 @@ export default function ElectricalSystemContent() {
         title={"Common electrical failure patterns"}
         intro={"Electrical problems look like engine problems until you read voltage — we start with the battery and work upstream."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Electrical diagnostics"
+        title="Parasitic draw, alternator ripple & CAN bus fundamentals"
+        intro="Modern Englewood vehicles run 30+ modules on shared networks. We measure current draw after shutdown, scope alternator ripple under load, and trace CAN communication faults — not just swap batteries and alternators."
+        cards={[
+          {
+            title: 'Parasitic draw isolation',
+            body: 'After modules sleep — typically 20–45 minutes post-shutdown — total draw should be under 50 mA on most vehicles. Draw above 100–150 mA flattens a battery in days. We measure at the battery, then pull fuses to isolate the circuit. Aftermarket dashcams, amps, and stuck relays are weekly culprits on Denver commuters.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'Alternator ripple test',
+            body: 'Healthy alternators produce smooth DC under 500 mV AC ripple at the battery. High ripple means failing diode trio or rectifier plates — pulsed voltage that cannot fully charge. We scope output under load with headlights and blower on before recommending alternator replacement over a $40 ground strap fix.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'Voltage drop testing',
+            body: 'Crank sag below 9.6V with good battery capacity points to high resistance in positive cables, ground straps, or starter trigger circuits. We voltage-drop each leg under load — a $0 cable clean prevents a $400 starter misdiagnosis on heat-soaked V8 trucks.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+          {
+            title: 'CAN bus communication basics',
+            body: 'Controller Area Network connects PCM, BCM, ABS, HVAC, and steering modules on two-wire high-speed lines. U-codes mean a module stopped responding — from power/ground loss, wiring rub-through on unibody pinch welds, or failed module. We verify termination resistance and module wake before parts replacement.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+        ]}
+        tableTitle="Electrical test reference values"
+        table={{
+          caption: 'Typical electrical system test values',
+          columns: ['Test', 'Good range', 'Indicates if bad'],
+          rows: [
+            { label: 'Resting battery voltage', values: ['12.4–12.7 V', 'Below 12.4 = discharge or weak cell'], highlight: 1 },
+            { label: 'Crank voltage', values: ['Above 9.6 V', 'Below = cable, ground, or battery'] },
+            { label: 'Charging voltage', values: ['13.5–14.5 V loaded', 'Low = belt, alt; high = regulator'] },
+            { label: 'Alternator ripple', values: ['< 500 mV AC', 'High = diode/rectifier failure'] },
+            { label: 'Parasitic draw (asleep)', values: ['< 50 mA typical', '> 100 mA = drain hunt needed'], highlight: 1 },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

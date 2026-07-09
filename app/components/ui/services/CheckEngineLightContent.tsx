@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -87,6 +88,54 @@ export default function CheckEngineLightContent() {
         title={"What your check engine light is telling you"}
         intro={"Not every illuminated MIL is equal. How it behaves — steady, flashing, or intermittent — changes how urgently you need service."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="CEL decoded"
+        title="Flashing vs solid, emissions vs misfire, readiness monitors"
+        intro="Not every check engine light means the same urgency. How it behaves — steady, flashing, or intermittent — and which code family triggered determines whether you can commute tomorrow or need a tow today."
+        cards={[
+          {
+            title: 'Flashing MIL = catalyst-damaging misfire',
+            body: 'A flashing check engine light under load means unburned fuel is entering the exhaust and overheating the catalytic converter. Stop driving except to reach safety. Steady MIL with P030x codes still needs prompt service — but flashing is emergency priority at RKC because every mile adds catalyst cost.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+          {
+            title: 'Emissions vs misfire code families',
+            body: 'P0420/P0430 efficiency codes, EVAP P044x leaks, and O2 heater circuits often present as steady MIL with no drivability complaint. P030x misfires affect power and catalyst health. Each family has a distinct test path — we classify codes before recommending converters, coils, or gas caps.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'Pending vs stored vs permanent codes',
+            body: 'Pending codes mean the PCM saw one failure cycle — early warning. Stored codes confirmed the fault and lit the MIL. Permanent codes on some platforms cannot clear until repaired and monitors complete. Clearing without repair fails Colorado emissions when monitors reset to not-ready.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'Readiness monitors for Colorado emissions',
+            body: 'Monitors prove the PCM tested catalyst, O2, EVAP, EGR, and other systems since the last code clear. A quick erase at the parts store resets monitors — your Englewood emissions test fails even if the light is off. We run drive cycles after repair and coach your commute pattern so monitors set before inspection.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+        ]}
+        tableTitle="CEL severity & code family guide"
+        table={{
+          caption: 'Check engine light severity by code type',
+          columns: ['Behavior / code', 'Severity', 'Action'],
+          rows: [
+            { label: 'Flashing MIL + P030x', values: ['Critical', 'Stop driving — tow if needed'], highlight: 1 },
+            { label: 'Steady MIL + P0420/P0430', values: ['Moderate', 'Schedule diagnosis — cat at risk if misfire present'] },
+            { label: 'Steady MIL + P044x EVAP', values: ['Low–moderate', 'Smoke test — often cap or hose'] },
+            { label: 'Pending only (no MIL)', values: ['Monitor', 'Early warning — diagnose before MIL sets'] },
+            { label: 'MIL off, monitors N/R', values: ['Emissions fail', 'Drive cycle or complete repair first'], highlight: 1 },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

@@ -601,6 +601,102 @@ export const SERVICES: ServiceItem[] = [
   },
 ];
 
+export type ServiceNavGroup = {
+  label: string;
+  slugs: string[];
+  featured?: string[];
+};
+
+/** Grouped services for premium navigation dropdown */
+export const SERVICE_NAV_GROUPS: ServiceNavGroup[] = [
+  {
+    label: 'Engine & Diagnostics',
+    slugs: [
+      'engine-rebuilds-englewood-co',
+      'camshaft-lifter-repair-englewood-co',
+      'engine-diagnostics-englewood-co',
+      'check-engine-light-englewood-co',
+    ],
+    featured: ['engine-rebuilds-englewood-co', 'camshaft-lifter-repair-englewood-co'],
+  },
+  {
+    label: 'Drivetrain & Brakes',
+    slugs: [
+      'transmission-services-englewood-co',
+      'brake-repair-englewood-co',
+      'suspension-steering-englewood-co',
+      'exhaust-system-englewood-co',
+    ],
+  },
+  {
+    label: 'Maintenance',
+    slugs: [
+      'preventative-maintenance-englewood-co',
+      'oil-changes-englewood-co',
+      'battery-testing-englewood-co',
+    ],
+  },
+  {
+    label: 'Climate & Electrical',
+    slugs: [
+      'heating-ac-englewood-co',
+      'electrical-system-englewood-co',
+    ],
+  },
+];
+
+export type ServiceCategory = {
+  label: string;
+  description: string;
+  slugs: string[];
+  accent: string;
+};
+
+/** Category cards for /services hub landing */
+export const SERVICE_CATEGORIES: ServiceCategory[] = [
+  {
+    label: 'Engine & Diagnostics',
+    description: 'Rebuilds, camshaft repair, OBD-II diagnostics, and check-engine triage.',
+    slugs: [
+      'engine-rebuilds-englewood-co',
+      'camshaft-lifter-repair-englewood-co',
+      'engine-diagnostics-englewood-co',
+      'check-engine-light-englewood-co',
+    ],
+    accent: 'from-primary-green/20 to-primary-blue/10',
+  },
+  {
+    label: 'Drivetrain & Brakes',
+    description: 'Transmission, brakes, suspension, and emissions-compliant exhaust.',
+    slugs: [
+      'transmission-services-englewood-co',
+      'brake-repair-englewood-co',
+      'suspension-steering-englewood-co',
+      'exhaust-system-englewood-co',
+    ],
+    accent: 'from-primary-blue/20 to-primary-green/10',
+  },
+  {
+    label: 'Maintenance',
+    description: 'Oil changes, 30/60/90k milestones, and battery health testing.',
+    slugs: [
+      'preventative-maintenance-englewood-co',
+      'oil-changes-englewood-co',
+      'battery-testing-englewood-co',
+    ],
+    accent: 'from-primary-green/15 to-emerald-500/10',
+  },
+  {
+    label: 'Climate & Electrical',
+    description: 'R134a/R1234yf HVAC, heater cores, and starting/charging systems.',
+    slugs: [
+      'heating-ac-englewood-co',
+      'electrical-system-englewood-co',
+    ],
+    accent: 'from-sky-500/15 to-primary-blue/10',
+  },
+];
+
 export const FEATURED_SERVICES = SERVICES.filter((s) =>
   [
     'Preventative Maintenance',
@@ -1112,6 +1208,21 @@ export const BRAKE_REPAIR_PAGE_FAQ: FAQItem[] = [
     answer:
       'Brake pad replacement per axle starts around $189 plus parts; pad and rotor service from about $349 per axle — labor at our posted $120/hr rate. Caliper rebuilds, fluid flushes, and ABS-related repairs are quoted separately after inspection. You receive a written estimate before parts are ordered, with no shop-supply fees hidden in the total.',
   },
+  {
+    question: 'What is the minimum rotor thickness and why does it matter?',
+    answer:
+      'Every rotor has a minimum thickness stamped on the hat or edge — often 22–25mm on front vented rotors. Below minimum, the rotor cannot dissipate heat safely and may crack under mountain braking on I-70. We micrometer every rotor before recommending resurface vs. replace. Many modern thin rotors are single-use — machined once in life, if at all.',
+  },
+  {
+    question: 'Ceramic vs semi-metallic brake pads — which should I choose?',
+    answer:
+      'Ceramic pads run quieter with less dust — ideal for daily commuters and luxury vehicles. Semi-metallic pads handle heat better for towing, mountain grades, and work trucks. Low-metallic organic pads are OEM on many imports. We match compound to your driving — not upsell the most expensive pad. Wrong compound causes squeal, fade, or premature rotor wear.',
+  },
+  {
+    question: 'What does an ABS module or wheel-speed sensor repair involve?',
+    answer:
+      'ABS wheel-speed sensors read tone rings on each hub. Metal debris from grinding brakes, damaged tone rings, or corroded sensor tips trigger ABS lights and false activation at low speed. We inspect sensors after pad work, clean tone rings, and scope wheel-speed signals on a road test. Module replacement is rare — most ABS faults trace to sensors, wiring, or hydraulic valves.',
+  },
 ];
 
 export const ENGINE_DIAGNOSTICS_PAGE_FAQ: FAQItem[] = [
@@ -1144,6 +1255,21 @@ export const ENGINE_DIAGNOSTICS_PAGE_FAQ: FAQItem[] = [
     question: 'How long does engine diagnostics take?',
     answer:
       'Straightforward single-code faults may resolve in an hour. Intermittent drivability, multiple codes, or mechanical follow-up tests can take longer. We communicate findings as we go and never expand scope without your approval. Same-day diagnosis is common when you call before early afternoon.',
+  },
+  {
+    question: 'What OBD-II live data PIDs do you monitor during diagnostics?',
+    answer:
+      'We graph short-term and long-term fuel trims (STFT/LTFT), MAF grams-per-second vs. calculated load, O2 sensor switching voltage, misfire counters per cylinder, MAP/MAF correlation, and VVT commanded vs. actual cam angles. Freeze-frame captures RPM, coolant temp, and fuel status at the moment the fault set — critical for intermittent lean codes on cold mornings in Englewood.',
+  },
+  {
+    question: 'What is a smoke test and when do you use it?',
+    answer:
+      'A smoke machine injects visible vapor into the intake or EVAP system to find vacuum leaks, cracked PCV hoses, and intake gasket failures that set lean codes. EVAP smoke tests locate gas-cap, purge-valve, and vent-hose leaks causing P044x codes. Smoke finds leaks too small to hear — common on high-mileage Denver vehicles with hardened rubber boots.',
+  },
+  {
+    question: 'What is relative compression testing?',
+    answer:
+      'Relative compression uses the crankshaft position sensor to compare cranking speed between cylinders — no spark plugs removed. A weak cylinder shows slower acceleration during compression stroke. We follow with traditional compression or leak-down on flagged cylinders before recommending top-end or bottom-end repair. It saves hours on multi-cylinder misfire diagnosis.',
   },
 ];
 
@@ -1178,6 +1304,21 @@ export const CHECK_ENGINE_LIGHT_PAGE_FAQ: FAQItem[] = [
     answer:
       'Yes — EVAP small-leak codes like P0442 often trace to loose, missing, or cracked gas caps and vent hoses. We smoke-test the EVAP system to confirm cap vs. hose vs. purge-valve faults. It is a inexpensive fix when the cap seals poorly, but we verify rather than assume so you are not back in a week with the same code.',
   },
+  {
+    question: 'What is the difference between a flashing and steady check engine light?',
+    answer:
+      'A steady MIL means a confirmed fault that should be diagnosed soon — emissions, sensor, or efficiency codes are common. A flashing MIL under load indicates catalyst-damaging misfire; continued driving can overheat and destroy the catalytic converter. Flashing codes get priority scheduling at RKC — we triage before parts-store code clears.',
+  },
+  {
+    question: 'What are OBD-II readiness monitors and why do they matter in Colorado?',
+    answer:
+      'Readiness monitors prove the PCM has tested emissions systems since the last code clear — catalyst, O2 sensors, EVAP, EGR, and others. Clearing codes without repair resets monitors to "not ready" and fails Colorado emissions even if the MIL is off. We explain which monitors are incomplete, run drive cycles after repair, and coach your commute pattern so monitors set before your inspection appointment.',
+  },
+  {
+    question: 'How do misfire codes differ from emissions efficiency codes?',
+    answer:
+      'P030x misfire codes affect drivability, fuel economy, and catalyst health — often coils, injectors, or mechanical compression loss. P0420/P0430 efficiency codes mean downstream O2 activity is low — worn catalyst, exhaust leak, or upstream misfire. EVAP P044x codes are leak detection, not misfire. Each family has a distinct test path — we classify codes before recommending parts.',
+  },
 ];
 
 export const TRANSMISSION_SERVICES_PAGE_FAQ: FAQItem[] = [
@@ -1210,6 +1351,21 @@ export const TRANSMISSION_SERVICES_PAGE_FAQ: FAQItem[] = [
     question: 'Can towing or mountain driving damage my transmission?',
     answer:
       'Heat is the primary killer. Towing on grades without proper cooling, repeated hard shifts in traffic, and deferred fluid changes break down friction modifiers and overheat clutch packs. We ask about towing history during diagnosis and inspect cooler lines and fluid condition — preventive fluid service at manufacturer intervals extends life on Colorado commuters.',
+  },
+  {
+    question: 'What does transmission fluid color tell you?',
+    answer:
+      'Bright red or pink fluid with no burnt smell is healthy. Brown fluid shows age and additive depletion. Dark brown or black with burnt odor means heat damage — internal clutch wear is likely. Metal glitter on the pan magnet confirms friction material loss. We document color, smell, and debris before recommending fluid service vs. teardown.',
+  },
+  {
+    question: 'What is a TCM relearn and when is it required?',
+    answer:
+      'The transmission control module adapts shift pressure and timing to wear. After valve-body service, fluid exchange, or battery disconnect, shift quality may feel harsh until adaptive data relearns. Some platforms require scan-tool relearn procedures — Ford, GM, and Nissan CVTs especially. We reset adaptive tables and road-test hot and cold before return.',
+  },
+  {
+    question: 'How do CVT and traditional automatic failures differ?',
+    answer:
+      'Traditional planetary autos fail clutch packs, bands, and torque-converter clutches — often recoverable with rebuild if caught early. CVT belt/pulley damage from wrong fluid or overheating usually means replacement, not flush. CVT whine with metal in fluid is a red flag. We identify unit type from VIN and pan inspection before quoting service scope.',
   },
 ];
 
@@ -1244,6 +1400,21 @@ export const OIL_CHANGES_PAGE_FAQ: FAQItem[] = [
     answer:
       'Cabin and engine air filters, tire rotation, and fluid level checks are common companions. Milestone items — transmission fluid, coolant exchange, spark plugs — are due by mileage and time, not every oil change. We flag due-soon items on your invoice without pressure to bundle unnecessary services.',
   },
+  {
+    question: 'What is the difference between 0W-20 and 5W-30 oil?',
+    answer:
+      'The first number (0W, 5W) is cold-start viscosity — lower numbers flow faster in Colorado winter. The second number (20, 30) is hot operating viscosity. Many turbo DI engines specify 0W-20 for fuel economy and turbo bearing protection. Using 5W-30 where 0W-20 is required can trigger warranty issues and cold-start wear. We match viscosity to your under-hood label and API spec.',
+  },
+  {
+    question: 'When should I follow severe vs normal oil change intervals?',
+    answer:
+      'Severe schedules apply to short trips under 5 miles, frequent idling, towing, dusty conditions, and extreme temperatures — typical Denver metro commuting qualifies for many vehicles. Severe intervals are often 5,000 miles vs. 7,500–10,000 normal. Dash oil-life monitors may stretch reminders; we reset based on your actual driving pattern, not marketing defaults.',
+  },
+  {
+    question: 'Does altitude affect oil change intervals in Colorado?',
+    answer:
+      'Altitude itself does not shorten oil life dramatically, but cold starts at 5,280 feet stress oil until operating temperature — especially on short Englewood commutes. Turbocharged engines run hotter and dilute oil with fuel during cold enrichment. Combined with severe-duty driving, we often recommend shorter intervals than the dash displays for turbo DI platforms.',
+  },
 ];
 
 export const SUSPENSION_STEERING_PAGE_FAQ: FAQItem[] = [
@@ -1276,6 +1447,21 @@ export const SUSPENSION_STEERING_PAGE_FAQ: FAQItem[] = [
     question: 'How much does suspension repair cost at RKC?',
     answer:
       'Strut replacement, ball joints, and alignments are quoted per axle and component at $120/hr labor plus parts. We itemize each line on the written estimate — no bundled mystery front-end packages. Alignment is typically added after any geometry-affecting repair.',
+  },
+  {
+    question: 'What alignment specs matter after suspension repair?',
+    answer:
+      'Camber, caster, and toe are set to manufacturer spec — typically camber near 0° with slight negative for handling, toe adjusted for tire wear. Thrust angle must be corrected so rear axle aim does not force front toe compensation. We provide before-and-after alignment printouts. Englewood potholes can shift subframe geometry — we inspect for bent components before aligning.',
+  },
+  {
+    question: 'How much ball joint play is too much?',
+    answer:
+      'Load-bearing lower ball joints with visible vertical play under pry-bar test are a safety failure — not a wait-and-see item. Upper joints and tie-rod ends have tighter tolerances. We measure with dial indicators where spec exists. A clunk over bumps with play at the joint means replace before separation — especially on trucks and SUVs on Colorado roads.',
+  },
+  {
+    question: 'What causes strut mount clunk on cold mornings?',
+    answer:
+      'Strut mount bearings allow the strut to rotate with steering. Worn rubber isolators and dry bearings clunk on first bumps of the day, then quiet as grease warms. Worn mounts also cause steering bind and uneven tire wear. We inspect mount play during strut replacement — mounts should be replaced with struts on MacPherson designs, not reused.',
   },
 ];
 
@@ -1363,6 +1549,21 @@ export const ELECTRICAL_SYSTEM_PAGE_FAQ: FAQItem[] = [
     answer:
       'We integrate lights, radios, and fleet equipment with proper fusing and wire gauge — avoiding tap-into circuits that wake modules or void warranties. Poor accessory installs are a leading cause of parasitic drain complaints we diagnose weekly.',
   },
+  {
+    question: 'What is a parasitic draw test and what is normal?',
+    answer:
+      'After modules enter sleep mode — typically 20–45 minutes post-shutdown — total draw should be under 50 milliamps on most vehicles. Draw above 100–150 mA flattens a battery in days. We measure amp draw at the battery, then pull fuses to isolate the circuit. Aftermarket dashcams, amps, and stuck relays are common culprits on Denver commuters.',
+  },
+  {
+    question: 'What is alternator ripple and why does it matter?',
+    answer:
+      'Healthy alternators produce smooth DC under 500 mV AC ripple at the battery. High ripple means failing diode trio or rectifier plates — the battery receives pulsed voltage that cannot fully charge. We scope charging output under load with headlights and blower on before recommending alternator replacement over a $40 ground strap fix.',
+  },
+  {
+    question: 'What is CAN bus and how does it relate to electrical faults?',
+    answer:
+      'Controller Area Network connects modules — PCM, BCM, ABS, HVAC, steering — on two-wire high-speed data lines. Communication faults set U-codes and cause symptoms from no-start to random warning lights. We verify termination resistance, check power and ground at modules, and use scan tools to see which module stopped responding — not replace parts blindly.',
+  },
 ];
 
 export const BATTERY_TESTING_PAGE_FAQ: FAQItem[] = [
@@ -1395,6 +1596,21 @@ export const BATTERY_TESTING_PAGE_FAQ: FAQItem[] = [
     question: 'How much does battery replacement cost?',
     answer:
       'Replacement starts around $149 plus battery cost — labor at $120/hr when cables or registration procedures add time. Premium AGM batteries for start-stop applications cost more but are required for correct operation. We quote group size and CCA before install.',
+  },
+  {
+    question: 'What is CCA testing and how is it different from voltage?',
+    answer:
+      'Cold Cranking Amps measure available starting power at 0°F — critical for Colorado winters. Resting voltage above 12.4V does not mean the battery can deliver rated CCA. Conductance testers estimate internal resistance and state-of-health percentage. A battery at 70% health may start today and fail at 10°F tomorrow — we share printed results.',
+  },
+  {
+    question: 'What is battery sulfation and can it be reversed?',
+    answer:
+      'Sulfation forms when a battery sits discharged — lead sulfate crystals harden on plates and reduce capacity. Short-trip Englewood commuting without full recharge accelerates sulfation. Once advanced, sulfation is not reversible — replacement is the fix. Maintaining charge with regular driving or a maintainer on stored vehicles prevents it.',
+  },
+  {
+    question: 'Why do batteries fail faster in Colorado climate?',
+    answer:
+      'Summer under-hood heat above 140°F evaporates electrolyte and accelerates plate corrosion. Winter cold increases internal resistance — marginal batteries fail on first sub-zero morning. Temperature swings from I-25 traffic to January cold starts are harder on batteries than steady coastal climates. Pre-winter testing catches borderline units before no-start season.',
   },
 ];
 
@@ -1429,6 +1645,21 @@ export const EXHAUST_SYSTEM_PAGE_FAQ: FAQItem[] = [
     answer:
       'We use direct-fit sections, quality clamps, and welding where appropriate for durability. Flanges and flex sections are aligned to prevent stress cracks. All work is scoped on a written estimate before torches or cutters touch the system.',
   },
+  {
+    question: 'How do you test catalytic converter efficiency?',
+    answer:
+      'We compare upstream and downstream O2 sensor switching — a healthy catalyst shows reduced downstream activity. We also verify fuel trims are not running rich, check for exhaust leaks upstream of sensors, and confirm no misfires are poisoning the cat. Converter replacement is quoted only when data confirms efficiency loss, not on P0420 alone.',
+  },
+  {
+    question: 'What does O2 sensor switching tell you about exhaust health?',
+    answer:
+      'Upstream O2 should switch rich/lean roughly once per second at idle — the PCM uses this to adjust fuel. Downstream O2 on a healthy cat stays relatively steady. Rapid downstream switching mirrors upstream — efficiency code territory. Lazy upstream sensors cause rich/lean faults that mimic cat failure. We graph both sensors before quoting converters.',
+  },
+  {
+    question: 'What are Colorado emissions requirements for exhaust repairs?',
+    answer:
+      'Gasoline vehicles in the Denver metro require passing OBD-II readiness and tailpipe standards where applicable. Tampered or missing catalysts fail inspection. We install EPA/CARB-compliant converters, complete repairs that allow monitors to set, and coach drive cycles before your emissions appointment — so you pass once, not twice.',
+  },
 ];
 
 export const PREVENTATIVE_MAINTENANCE_PAGE_FAQ: FAQItem[] = [
@@ -1461,6 +1692,21 @@ export const PREVENTATIVE_MAINTENANCE_PAGE_FAQ: FAQItem[] = [
     question: 'Why is preventative maintenance cheaper than waiting for breakdowns?',
     answer:
       'Coolant exchanges cost far less than head gaskets from overheating. Timing-belt service prevents valve interference damage worth thousands. Trans fluid service extends life vs. slip and overhaul. Maintenance spends small dollars on schedule instead of large dollars on emergency tow and collateral damage.',
+  },
+  {
+    question: 'What fluids should be exchanged at 30k, 60k, and 90k?',
+    answer:
+      'Intervals are VIN-specific — not universal. Common milestones: engine coolant at 60k–100k, brake fluid every 2–3 years, transmission fluid at 30k–60k on severe schedules, differential and transfer-case on AWD at 30k–60k. We build your list from the owner manual table, not a generic shop poster.',
+  },
+  {
+    question: 'What is included in a typical 60k service package?',
+    answer:
+      'A Honda 60k may include trans fluid, spark plugs, and valve adjustment inspection. Toyota often specifies coolant first drain. German vehicles need brake-fluid time changes regardless of mileage. We quote each line item with labor at $120/hr — you approve the bundle before work starts, not a mystery "60k special."',
+  },
+  {
+    question: 'How do I track maintenance for multiple vehicles or a fleet?',
+    answer:
+      'We log mileage, services performed, and next-due items on each invoice. Fleet accounts receive consolidated billing and priority booking when available. Each vehicle gets a due-now vs. due-soon list — oil, brakes, inspections — so managers are not guessing which unit needs service this week.',
   },
 ];
 

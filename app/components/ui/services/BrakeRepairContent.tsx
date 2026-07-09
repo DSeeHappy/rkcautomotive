@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -87,6 +88,54 @@ export default function BrakeRepairContent() {
         title={"When your brakes are telling you something"}
         intro={"Brake problems rarely announce themselves with a dashboard light first. Pedal feel, noise, and steering pull change gradually — until an emergency stop on Broadway exposes how much stopping power you have lost."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Brake science"
+        title="Rotor specs, DOT fluid, pad compounds & ABS"
+        intro="Colorado mountain braking and stop-and-go heat punish friction surfaces and brake fluid. We measure rotor thickness to stamped minimum, test fluid copper content, match pad compound to your driving, and scan ABS wheel-speed data — not just swap whatever the parts counter suggests."
+        cards={[
+          {
+            title: 'Rotor minimum thickness & runout',
+            body: 'Every rotor carries a minimum thickness stamped on the hat — often 22–25 mm on vented fronts. Below spec, rotors cannot shed heat safely on long I-70 descents and may crack. We micrometer thickness and dial-indicator runout before recommending resurface vs. replace. Many modern thin rotors are single-use — pad jobs include new rotors when machining is not safe.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'DOT 3, DOT 4 & DOT 5.1 brake fluid',
+            body: 'DOT 3 and DOT 4 are glycol-based and hygroscopic — moisture lowers boiling point and corrodes ABS modulator internals. DOT 5.1 is compatible with DOT 3/4 but higher dry/wet boiling points. Never mix DOT 5 silicone with glycol fluids. We test copper ppm and boiling point, then flush with the spec your cap and manual require — not universal bulk fluid from a quick-lube lane.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'Ceramic, semi-metallic & low-metallic pads',
+            body: 'Ceramic pads run quiet with low dust — ideal for daily commuters. Semi-metallic handles heat for towing and mountain grades. Low-metallic organic is OEM on many imports. Wrong compound causes squeal, fade, or accelerated rotor wear. We match pad material to rotor type, caliper design, and whether you tow through the foothills.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+          {
+            title: 'ABS module & wheel-speed sensors',
+            body: 'ABS modulators pulse individual calipers during panic stops. Wheel-speed sensors read tone rings on each hub — metal debris from grinding pads, cracked tone rings, or corroded sensor tips trigger ABS lights and false low-speed activation. We scope wheel-speed signals and clean tone rings after pad work — a common post-grinding oversight at discount shops.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+        ]}
+        tableTitle="Brake fluid DOT ratings at a glance"
+        tableIntro="Boiling point drops as fluid absorbs moisture — Colorado humidity and heat cycles accelerate aging."
+        table={{
+          caption: 'Comparison of brake fluid DOT specifications',
+          columns: ['Spec', 'Dry BP', 'Wet BP', 'Notes'],
+          rows: [
+            { label: 'DOT 3', values: ['401°F (205°C)', '284°F (140°C)', 'Common on older vehicles; flush every 2–3 yrs'] },
+            { label: 'DOT 4', values: ['446°F (230°C)', '311°F (155°C)', 'Most modern imports and domestics'] },
+            { label: 'DOT 5.1', values: ['500°F (260°C)', '356°F (180°C)', 'Glycol-based high-temp; NOT silicone DOT 5'] },
+            { label: 'DOT 5 (silicone)', values: ['500°F (260°C)', 'Does not absorb water', 'NOT compatible with ABS/glycol systems'], highlight: 3 },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

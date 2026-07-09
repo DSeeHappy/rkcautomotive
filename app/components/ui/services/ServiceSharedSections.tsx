@@ -540,6 +540,155 @@ export function ServiceFinalCTA({
   );
 }
 
+export type ComparisonRow = {
+  label: string;
+  values: string[];
+  highlight?: number;
+};
+
+export type ServiceComparisonTableProps = {
+  columns: string[];
+  rows: ComparisonRow[];
+  caption?: string;
+};
+
+export function ServiceComparisonTable({ columns, rows, caption }: ServiceComparisonTableProps) {
+  return (
+    <div className="overflow-hidden rounded-[1.75rem] border border-white/10">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[36rem] text-left text-sm">
+          {caption && <caption className="sr-only">{caption}</caption>}
+          <thead>
+            <tr className="border-b border-white/10 bg-white/[0.04]">
+              {columns.map((col) => (
+                <th
+                  key={col}
+                  scope="col"
+                  className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white/55 first:rounded-tl-[1.75rem] last:rounded-tr-[1.75rem]"
+                >
+                  {col}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.label} className="border-b border-white/5 last:border-0">
+                <th scope="row" className="px-6 py-4 font-semibold text-white/90">
+                  {row.label}
+                </th>
+                {row.values.map((value, i) => (
+                  <td
+                    key={`${row.label}-${i}`}
+                    className={`px-6 py-4 leading-relaxed ${
+                      row.highlight === i ? 'font-semibold text-primary-green-light' : 'text-white/65'
+                    }`}
+                  >
+                    {value}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+export type TechnicalCard = {
+  title: string;
+  body: string;
+  accent?: string;
+  accentBg?: string;
+  accentBorder?: string;
+};
+
+export type ServiceTechnicalSectionProps = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  cards?: TechnicalCard[];
+  table?: ServiceComparisonTableProps;
+  tableTitle?: string;
+  tableIntro?: string;
+  bgClass?: string;
+};
+
+export function ServiceTechnicalSection({
+  eyebrow,
+  title,
+  intro,
+  cards,
+  table,
+  tableTitle,
+  tableIntro,
+  bgClass = 'bg-[#0c1222] text-white',
+}: ServiceTechnicalSectionProps) {
+  return (
+    <section className={`${SECTION_PAD} ${bgClass}`}>
+      <div className="wrap">
+        <FadeIn className={SECTION_HEADER}>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">{eyebrow}</p>
+          <h2 className="mt-3 font-display text-5xl tracking-wide sm:text-6xl">{title}</h2>
+          <p className="mt-4 text-lg text-white/70">{intro}</p>
+        </FadeIn>
+
+        {cards && cards.length > 0 && (
+          <Stagger className="grid gap-6 lg:grid-cols-2" stagger={0.08}>
+            {cards.map((card) => (
+              <StaggerItem key={card.title}>
+                <article
+                  className={`flex h-full flex-col overflow-hidden rounded-[1.75rem] border ${card.accentBorder ?? 'border-white/10'} bg-white/[0.04]`}
+                >
+                  <div
+                    className={`border-b ${card.accentBorder ?? 'border-white/10'} ${card.accentBg ?? 'bg-white/[0.02]'} px-8 py-6`}
+                  >
+                    <h3 className={`font-display text-2xl tracking-wide ${card.accent ?? 'text-white'}`}>
+                      {card.title}
+                    </h3>
+                  </div>
+                  <p className="flex-1 px-8 py-6 text-sm leading-relaxed text-white/65 sm:text-base">{card.body}</p>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        )}
+
+        {table && (
+          <FadeIn delay={0.1} className={cards && cards.length > 0 ? 'mt-14' : ''}>
+            {tableTitle && (
+              <h3 className="font-display text-3xl tracking-wide text-white">{tableTitle}</h3>
+            )}
+            {tableIntro && <p className="mt-3 max-w-3xl text-base text-white/65">{tableIntro}</p>}
+            <div className={tableTitle || tableIntro ? 'mt-8' : ''}>
+              <ServiceComparisonTable {...table} />
+            </div>
+          </FadeIn>
+        )}
+      </div>
+    </section>
+  );
+}
+
+export type ServicePullQuoteProps = {
+  quote: string;
+  attribution?: string;
+};
+
+export function ServicePullQuote({ quote, attribution }: ServicePullQuoteProps) {
+  return (
+    <aside className="relative my-8 rounded-2xl border border-primary-green/25 bg-primary-green/5 px-8 py-6">
+      <blockquote className="font-display text-2xl leading-snug tracking-wide text-primary-blue sm:text-3xl">
+        &ldquo;{quote}&rdquo;
+      </blockquote>
+      {attribution && (
+        <p className="mt-3 text-sm font-semibold uppercase tracking-[0.14em] text-ink-muted">{attribution}</p>
+      )}
+    </aside>
+  );
+}
+
 const FEATURED_SERVICE_AREAS = ['Englewood', 'Denver', 'Aurora', 'Littleton', 'Lakewood', 'Centennial'] as const;
 
 export type ServiceAreaServedProps = {

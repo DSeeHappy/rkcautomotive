@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -86,6 +87,54 @@ export default function OilChangesContent() {
         title={"Why interval and spec matter in Colorado"}
         intro={"Oil is not just mileage math — turbochargers, GDI soot, and altitude change how fast additive packages deplete."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Oil specification"
+        title="0W-20 vs 5W-30, OEM intervals & Colorado severe service"
+        intro="Oil is not one-size-fits-all — turbocharged direct-injection engines, altitude, and short-trip commuting change which viscosity and interval actually protect your engine in Englewood."
+        cards={[
+          {
+            title: '0W-20 vs 5W-30 viscosity',
+            body: 'The first number is cold-start flow — 0W flows faster in Colorado winter. The second is hot operating viscosity. Many turbo DI engines specify 0W-20 for fuel economy and turbo bearing protection. Using 5W-30 where 0W-20 is required can void warranty coverage and increase cold-start wear on EcoBoost, Honda 1.5T, and Toyota 2.5L platforms.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'OEM interval vs dash reminder',
+            body: 'Owner manuals list normal and severe schedules — severe is often 5,000 miles vs. 7,500–10,000 normal. Oil-life monitors optimize for marketing as much as protection. Short trips on Federal Blvd, idling in winter, and towing qualify as severe for most Denver commuters — we reset monitors based on your actual pattern.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'API / ILSAC / OEM approvals',
+            body: 'Dexos, LL-01, 502.00, and other OEM specs require specific additive packages — bulk oil from quick-lube lanes may not meet them. Turbo DI engines coke on hot bearings with wrong spec. We match API/ILSAC and manufacturer approval to your under-hood label and VIN.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+          {
+            title: 'High-mileage & diesel considerations',
+            body: 'High-mileage formulas with seal conditioners help aging gaskets on 150k+ engines when appropriate. Diesel pickups need CJ-4/CK-4 and correct viscosity for CP4 pump protection. DEF and fuel filter intervals are separate from oil — we flag diesel-specific items on the same visit.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+        ]}
+        tableTitle="Normal vs severe service intervals (typical)"
+        tableIntro="Your owner manual is authoritative — this table shows why Denver commuting often qualifies as severe."
+        table={{
+          caption: 'Normal vs severe oil change interval comparison',
+          columns: ['Condition', 'Normal schedule', 'Severe schedule'],
+          rows: [
+            { label: 'Turbo DI gasoline', values: ['7,500–10,000 mi', '5,000 mi'], highlight: 1 },
+            { label: 'Short trips (<5 mi)', values: ['Often normal on paper', 'Severe — moisture in oil'], highlight: 1 },
+            { label: 'Towing / mountains', values: ['Extended if lucky', 'Severe — heat & load'], highlight: 1 },
+            { label: 'Older conventional', values: ['3,000–5,000 mi', '3,000 mi typical'] },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline

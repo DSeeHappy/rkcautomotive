@@ -14,6 +14,7 @@ import {
   ServiceFAQSection,
   ServiceFinalCTA,
   ServiceAreaServed,
+  ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import { getServiceBreadcrumbs } from './servicesShared';
@@ -86,6 +87,55 @@ export default function PreventativeMaintenanceContent() {
         title={"What preventative maintenance actually prevents"}
         intro={"Maintenance is not generic — timing belts, CVT fluid, and spark intervals are engine-specific failure prevention."}
         cards={SYMPTOMS}
+      />
+
+      <ServiceTechnicalSection
+        eyebrow="Maintenance schedules"
+        title="30/60/90k milestones & fluid exchange intervals"
+        intro="Factory maintenance is VIN-specific — not a generic coupon. We build milestone packages from your owner manual tables with due-now vs due-soon priority so you spend on prevention, not emergency tow bills."
+        cards={[
+          {
+            title: '30k / 60k / 90k milestone content',
+            body: 'Honda 60k includes trans fluid and spark plugs; Toyota specifies coolant first-drain intervals; German cars need brake-fluid time changes regardless of mileage. Timing-belt service on interference engines prevents valve crash worth thousands. We quote each line at $120/hr — you approve the bundle before work starts.',
+            accent: 'text-sky-400',
+            accentBg: 'bg-sky-500/10',
+            accentBorder: 'border-sky-500/25',
+          },
+          {
+            title: 'Fluid exchange intervals',
+            body: 'Engine coolant at 60k–100k, brake fluid every 2–3 years, transmission fluid at 30k–60k on severe schedules, differential and transfer-case on AWD at 30k–60k. Fluids break down by time and heat — not mileage alone. Denver heat and salt qualify as severe for most commuters.',
+            accent: 'text-amber-400',
+            accentBg: 'bg-amber-500/10',
+            accentBorder: 'border-amber-500/25',
+          },
+          {
+            title: 'Belt, brake & suspension at service visits',
+            body: 'Serpentine belt crack scan, brake pad thickness, ball-joint play — caught at maintenance before they become repairs. We photograph wear when it matters and prioritize safety-first items. No 27-point printout designed to sell cabin filters you changed last month.',
+            accent: 'text-emerald-400',
+            accentBg: 'bg-emerald-500/10',
+            accentBorder: 'border-emerald-500/25',
+          },
+          {
+            title: 'Fleet & multi-vehicle logging',
+            body: 'Commercial accounts receive scheduled logging, consolidated invoicing, and priority booking when available. Each vehicle gets due-now vs due-soon lists — oil, brakes, inspections — so fleet managers are not guessing which unit needs service this week.',
+            accent: 'text-red-400',
+            accentBg: 'bg-red-500/10',
+            accentBorder: 'border-red-500/25',
+          },
+        ]}
+        tableTitle="Typical fluid exchange intervals (severe schedule)"
+        tableIntro="Always verify against your owner manual — this illustrates why deferred fluid service leads to expensive failures."
+        table={{
+          caption: 'Preventative maintenance fluid exchange intervals',
+          columns: ['Fluid', 'Typical severe interval', 'Failure if deferred'],
+          rows: [
+            { label: 'Engine oil', values: ['5,000 mi / 6 mo', 'Turbo bearing coke, sludge'], highlight: 2 },
+            { label: 'Coolant', values: ['60k–100k / 5 yr', 'Head gasket, heater core clog'] },
+            { label: 'Brake fluid', values: ['2–3 years', 'Moisture, ABS corrosion'] },
+            { label: 'Transmission', values: ['30k–60k severe', 'Slip, overheat, rebuild'] },
+            { label: 'Diff / transfer case', values: ['30k–60k AWD', 'Gear wear, chatter'] },
+          ],
+        }}
       />
 
       <ServiceProcessTimeline
