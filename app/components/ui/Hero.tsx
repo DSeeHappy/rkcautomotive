@@ -6,7 +6,6 @@ import { Phone } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { BUSINESS, PHOTOS, LABOR_RATE } from '@/lib/constants';
-import AnimatedLogo from '@/app/components/ui/AnimatedLogo';
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -52,10 +51,8 @@ export default function Hero() {
         className="relative z-10 flex min-h-[100svh] flex-col px-4 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36"
         style={reduce ? undefined : { opacity }}
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
-          <AnimatedLogo variant="hero" className="self-start" />
-
-          <div className="mt-auto pb-16 sm:pb-20 lg:pb-24">
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end">
+          <div className="pb-16 sm:pb-20 lg:pb-24">
             <div className="max-w-3xl text-left xl:max-w-4xl">
               <motion.div
                 initial={reduce ? false : { opacity: 0, y: 28 }}
