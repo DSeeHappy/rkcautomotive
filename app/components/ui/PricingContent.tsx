@@ -13,7 +13,6 @@ import {
   Calculator,
   TrendingDown,
   CircleDollarSign,
-  ArrowRight,
   FileText,
   ClipboardCheck,
   ScanSearch,
@@ -27,7 +26,6 @@ import {
   PRICING_COMPARISON,
   PRICING_COMPARISON_DISCLAIMER,
   PRICING_COMPARISON_ROWS,
-  PRICING_PACKAGES,
   PRICING_PAGE_FAQ,
   PRICING_PHILOSOPHY,
   PRICING_SAVINGS_SCENARIOS,
@@ -53,11 +51,6 @@ const SECTION_PAD = 'py-24 sm:py-28';
 const SECTION_HEADER = 'mb-14 max-w-3xl';
 const PRICING_CARD =
   'overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)]';
-const PRICING_CARD_INTERACTIVE = `${PRICING_CARD} transition-transform hover:-translate-y-1`;
-const PRICING_CARD_FEATURED =
-  'overflow-hidden rounded-[1.75rem] bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_30px_80px_-30px_rgba(28,61,145,0.65)] ring-2 ring-primary-green';
-const SECTION_DIVIDER =
-  'h-px bg-gradient-to-r from-transparent via-primary-green/25 to-transparent';
 
 function formatCurrency(amount: number) {
   return `$${amount.toLocaleString('en-US')}`;
@@ -461,83 +454,17 @@ export default function PricingContent() {
         </div>
       </section>
 
-      {/* Packages + À la carte — unified pricing offerings */}
+      {/* Starting prices by service */}
       <section className={`bg-white ${SECTION_PAD}`}>
         <div className="wrap">
           <FadeIn className={SECTION_HEADER}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Packages</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Pricing</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Starting prices, honest labor
             </h2>
             <p className="mt-4 text-lg text-ink-muted">
-              Starting prices for common jobs — all at {LABOR_RATE} labor. Every package gets a written estimate before
-              work begins. No hidden upsells tucked into the total.
-            </p>
-          </FadeIn>
-
-          <Stagger className="grid items-stretch gap-6 lg:grid-cols-3" stagger={0.1}>
-            {PRICING_PACKAGES.map((pkg) => (
-              <StaggerItem key={pkg.name}>
-                <article
-                  className={`relative flex h-full flex-col p-8 ${
-                    pkg.featured ? `${PRICING_CARD_FEATURED} transition-transform hover:-translate-y-1` : PRICING_CARD_INTERACTIVE
-                  }`}
-                >
-                  {pkg.featured && (
-                    <span className="absolute right-6 top-6 rounded-full bg-primary-green px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
-                      Most requested
-                    </span>
-                  )}
-                  <h3 className="font-display text-3xl tracking-wide">{pkg.name}</h3>
-                  <p className={`mt-2 text-sm ${pkg.featured ? 'text-white/70' : 'text-ink-muted'}`}>
-                    {pkg.description}
-                  </p>
-                  <p className="mt-8 font-display text-5xl tracking-wide">{pkg.price}</p>
-                  <p
-                    className={`mt-2 text-xs font-semibold uppercase tracking-[0.16em] ${
-                      pkg.featured ? 'text-primary-green-light' : 'text-primary-green'
-                    }`}
-                  >
-                    {pkg.laborNote}
-                  </p>
-                  <ul className="mt-8 flex-1 space-y-3">
-                    {pkg.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2.5 text-sm">
-                        <CheckCircle
-                          className={`mt-0.5 size-4 shrink-0 ${pkg.featured ? 'text-primary-green-light' : 'text-primary-green'}`}
-                        />
-                        <span className={pkg.featured ? 'text-white/85' : 'text-foreground/80'}>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.a
-                    href={BUSINESS.phoneHref}
-                    className={`mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold transition ${
-                      pkg.featured
-                        ? 'bg-primary-green text-white hover:bg-primary-green-dark'
-                        : 'bg-primary-blue text-white hover:bg-primary-blue-dark'
-                    }`}
-                    whileHover={reduce ? undefined : { y: -2 }}
-                    whileTap={reduce ? undefined : { scale: 0.98 }}
-                  >
-                    {pkg.cta}
-                    <ArrowRight className="size-4" />
-                  </motion.a>
-                </article>
-              </StaggerItem>
-            ))}
-          </Stagger>
-
-          <div aria-hidden className={`my-20 sm:my-24 ${SECTION_DIVIDER}`} />
-
-          <FadeIn className={SECTION_HEADER}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">À la carte</p>
-            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Starting prices by service
-            </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Know exactly what you need? Parts plus {LABOR_RATE} labor where applicable. Labor time estimates shown so
-              you can do the math yourself.
+              Starting prices for common jobs — all at {LABOR_RATE} labor. Labor time estimates shown so you can do the
+              math yourself. Parts quoted separately where applicable.
             </p>
           </FadeIn>
 

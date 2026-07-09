@@ -497,54 +497,6 @@ export const PRICING_PAGE_FAQ: FAQItem[] = [
   },
 ];
 
-export const PRICING_PACKAGES = [
-  {
-    name: 'Essential Care',
-    price: 'From $79',
-    laborNote: '~0.5 hr labor included',
-    description: 'Routine maintenance at $120/hr — no bundled extras, no surprise add-ons at checkout.',
-    featured: false,
-    features: [
-      'Synthetic oil change',
-      'Tire rotation',
-      'Multi-point inspection (not a sales pitch)',
-      'Fluid top-offs',
-      'Cabin air filter check — replace only if you approve',
-    ],
-    cta: 'Get estimate',
-  },
-  {
-    name: 'Safety Package',
-    price: 'From $349',
-    laborNote: '~2 hrs labor at $120/hr',
-    description: 'Brakes and battery priced honestly — labor calculated at $120/hr, parts quoted upfront.',
-    featured: true,
-    features: [
-      'Brake pad + rotor (per axle, from $349)',
-      'Free brake inspection — no pressure to replace',
-      'Battery test & load check',
-      'Written estimate before any work',
-      'Same-day slots when parts are in stock',
-    ],
-    cta: 'Get estimate',
-  },
-  {
-    name: 'Diagnostic Pro',
-    price: 'From $99',
-    laborNote: '~1 hr labor at $120/hr',
-    description: 'Find the real problem first. Diagnostic fee credited toward approved repair — not a separate profit center.',
-    featured: false,
-    features: [
-      'Check-engine light diagnostic',
-      'Code scan, verification & road test',
-      'Root-cause diagnosis — not a parts-replacement guess',
-      '$99 fee applied toward approved repair',
-      'Clear next-step plan, no scare tactics',
-    ],
-    cta: 'Get estimate',
-  },
-] as const;
-
 export const PRICING_TIERS = [
   {
     category: 'Maintenance',
