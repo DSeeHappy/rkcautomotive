@@ -1,13 +1,15 @@
 'use client';
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
-import { ChevronRight, MapPin, Wrench } from 'lucide-react';
+import { AlertTriangle, ChevronRight, MapPin, Phone, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS, type VehicleBrand } from '@/lib/vehicleBrands';
 import { getModel, type VehicleModel } from '@/lib/vehicleModels';
+import { BUSINESS } from '@/lib/constants';
 import BrandLogo from './BrandLogo';
-import FadeIn from './FadeIn';
+import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 import ModelDetailPanel from './ModelDetailPanel';
 
 export default function BrandTabs() {
@@ -31,11 +33,11 @@ export default function BrandTabs() {
       <div className="mb-10 max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">All makes &amp; models</p>
         <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">
-          Expert service for every brand we work on
+          Expert diagnostics for every brand we work on
         </h2>
         <p className="mt-4 text-lg text-ink-muted">
           RKC Automotive in Englewood services Toyota, Ford, BMW, Subaru, and every major make on Colorado roads.
-          Select a brand to learn how we keep your vehicle running strong.
+          Select a brand for hyper-specific failure profiles, buyer warnings, and local altitude context.
         </p>
       </div>
 
@@ -53,142 +55,175 @@ export default function BrandTabs() {
         </TabList>
 
         <TabPanels className="mt-8">
-          {VEHICLE_BRANDS.map((brand) => (
-            <TabPanel
-              key={brand.slug}
-              className="relative overflow-hidden rounded-[2rem] shadow-[0_32px_80px_-24px_rgba(12,18,34,0.55)]"
-            >
-              <div
-                className="absolute inset-0"
-                style={{ background: getBrandPanelBackground(brand) }}
-                aria-hidden
-              />
-              <div
-                className="absolute inset-0 opacity-55"
-                style={{ background: getBrandAccentGlow(brand) }}
-                aria-hidden
-              />
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary-blue/8"
-                aria-hidden
-              />
+          {VEHICLE_BRANDS.map((brand) => {
+            const profile = getBrandFailureProfile(brand.slug);
 
-              <div
-                className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-full max-w-[82%] bg-gradient-to-r from-[#060a12]/82 via-[#060a12]/38 to-transparent lg:max-w-[74%]"
-                aria-hidden
-              />
-
-              <div
-                className="pointer-events-none absolute -right-[8%] top-1/2 -translate-y-1/2 opacity-[0.18] sm:-right-[4%] sm:opacity-[0.20] lg:-right-[2%] lg:opacity-[0.22]"
-                aria-hidden
+            return (
+              <TabPanel
+                key={brand.slug}
+                className="relative overflow-hidden rounded-[2rem] shadow-[0_32px_80px_-24px_rgba(12,18,34,0.55)]"
               >
-                <BrandLogo
-                  slug={brand.slug}
-                  color="#ffffff"
-                  size={320}
-                  className="!size-[min(62vw,22rem)] sm:!size-[min(48vw,26rem)] lg:!size-[28rem]"
+                <div
+                  className="absolute inset-0"
+                  style={{ background: getBrandPanelBackground(brand) }}
+                  aria-hidden
                 />
-              </div>
+                <div
+                  className="absolute inset-0 opacity-55"
+                  style={{ background: getBrandAccentGlow(brand) }}
+                  aria-hidden
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary-blue/8"
+                  aria-hidden
+                />
 
-              <div className="relative z-10 p-6 sm:p-10 lg:max-w-[68%]">
-                <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
-                      {brand.category === 'domestic' ? 'Domestic' : 'Import'} · Serviced at RKC Englewood
-                    </p>
-                    <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                      {brand.name} Service
-                    </h3>
-                  </div>
-                  <Link
-                    href="/vehicles-we-service#brands"
-                    className="btn-ghost-light inline-flex shrink-0 items-center gap-2 self-start px-4 py-2 text-sm"
-                  >
-                    All {brand.name} info
-                    <ChevronRight className="size-4" aria-hidden />
-                  </Link>
+                <div
+                  className="pointer-events-none absolute -right-[6%] top-1/2 z-[1] -translate-y-1/2 opacity-[0.14] sm:-right-[3%] sm:opacity-[0.18] lg:-right-[1%] lg:opacity-[0.20]"
+                  aria-hidden
+                >
+                  <BrandLogo
+                    slug={brand.slug}
+                    color="#ffffff"
+                    size={320}
+                    className="!size-[min(52vw,18rem)] sm:!size-[min(40vw,22rem)] lg:!size-[24rem]"
+                  />
                 </div>
 
-                <div className="mt-8 space-y-5 text-base leading-relaxed text-white">
-                  {brand.paragraphs.map((paragraph) => (
-                    <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-                  ))}
-                </div>
-
-                <div className="mt-10 grid gap-6 lg:grid-cols-3">
-                  <div className="rounded-2xl border border-white/20 bg-[#060a12]/35 p-5">
-                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
-                      <Wrench className="size-4" aria-hidden />
-                      Common models
-                    </p>
-                    <p className="mt-1.5 text-xs text-white/60">
-                      Tap a model for maintenance schedule &amp; pricing context
-                    </p>
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      {brand.commonModels.map((model) => (
-                        <li key={model}>
-                          <button
-                            type="button"
-                            onClick={() => openModelDetail(brand, model)}
-                            aria-label={`View ${brand.name} ${model} details`}
-                            className="group inline-flex cursor-pointer items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-[0.98]"
-                          >
-                            <span>{model}</span>
-                            <ChevronRight
-                              className="size-3.5 shrink-0 text-white/50 transition duration-200 group-hover:translate-x-0.5 group-hover:text-white/90"
-                              aria-hidden
-                            />
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
+                <div className="relative z-10 p-6 sm:p-10">
+                  <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+                        {brand.category === 'domestic' ? 'Domestic' : 'Import'} · Serviced at RKC Englewood
+                      </p>
+                      <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
+                        {profile?.name ?? brand.name} Diagnostics
+                      </h3>
+                    </div>
+                    <Link
+                      href="/vehicles-we-service#brands"
+                      className="btn-ghost-light inline-flex shrink-0 items-center gap-2 self-start px-4 py-2 text-sm"
+                    >
+                      All {brand.name} info
+                      <ChevronRight className="size-4" aria-hidden />
+                    </Link>
                   </div>
 
-                  <div className="rounded-2xl border border-white/20 bg-[#060a12]/35 p-5">
-                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
-                      <Wrench className="size-4" aria-hidden />
-                      RKC services
-                    </p>
-                    <ul className="mt-3 space-y-2 text-sm text-white">
-                      {brand.services.map((service) => (
-                        <li key={service} className="flex gap-2">
-                          <span
-                            className="mt-1.5 size-1.5 shrink-0 rounded-full"
-                            style={{ backgroundColor: brand.color }}
-                            aria-hidden
-                          />
-                          {service}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {profile ? (
+                    <Stagger className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
+                      {/* Column 1: Common Models */}
+                      <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
+                        <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-white">
+                          <Wrench className="size-4 shrink-0 text-primary-green-light" aria-hidden />
+                          Common Models Serviced
+                        </p>
+                        <p className="mt-1.5 text-xs text-white/60">
+                          Tap a model for maintenance schedule &amp; pricing context
+                        </p>
+                        <ul className="mt-4 space-y-2">
+                          {profile.commonModels.map((model) => (
+                            <li key={model} className="flex gap-2 text-sm text-white">
+                              <span
+                                className="mt-1.5 size-1.5 shrink-0 rounded-full"
+                                style={{ backgroundColor: brand.color }}
+                                aria-hidden
+                              />
+                              {model}
+                            </li>
+                          ))}
+                        </ul>
+                        <ul className="mt-5 flex flex-wrap gap-2 border-t border-white/10 pt-5">
+                          {brand.commonModels.map((model) => (
+                            <li key={model}>
+                              <button
+                                type="button"
+                                onClick={() => openModelDetail(brand, model)}
+                                aria-label={`View ${brand.name} ${model} details`}
+                                className="group inline-flex cursor-pointer items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-[0.98] sm:text-sm"
+                              >
+                                <span>{model}</span>
+                                <ChevronRight
+                                  className="size-3.5 shrink-0 text-white/50 transition duration-200 group-hover:translate-x-0.5 group-hover:text-white/90"
+                                  aria-hidden
+                                />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </StaggerItem>
 
-                  <div
-                    className="rounded-2xl border p-5"
-                    style={{
-                      borderColor: `color-mix(in srgb, ${brand.color} 35%, transparent)`,
-                      backgroundColor: `color-mix(in srgb, ${brand.color} 12%, rgba(6,10,18,0.35))`,
-                    }}
-                  >
-                    <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-white">
-                      <MapPin className="size-4" aria-hidden />
-                      Colorado notes
-                    </p>
-                    <p className="mt-3 text-sm leading-relaxed text-white">{brand.coloradoNotes}</p>
-                  </div>
-                </div>
+                      {/* Column 2: Failure Profiles */}
+                      <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
+                        <p className="text-sm font-bold uppercase tracking-[0.16em] text-white">
+                          Hyper-Specific Failure Profiles
+                        </p>
+                        <div className="mt-4 space-y-5">
+                          {profile.failureProfiles.map((failure) => (
+                            <div key={failure.title}>
+                              <p className="text-sm font-bold leading-snug text-white">{failure.title}</p>
+                              <p className="mt-1.5 text-sm leading-relaxed text-white/85">{failure.description}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </StaggerItem>
 
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link href="/contact" className="btn-green">
-                    Schedule {brand.name} service
-                  </Link>
-                  <Link href="/services" className="btn-ghost-light">
-                    View all services
-                  </Link>
+                      {/* Column 3: Buyer's Warning */}
+                      <StaggerItem className="relative overflow-hidden rounded-2xl border-2 border-amber-500/50 bg-gradient-to-br from-[#1a1208] via-[#0c1222] to-[#0c1222] p-5 shadow-[0_0_32px_-8px_rgba(245,158,11,0.35)]">
+                        <div
+                          aria-hidden
+                          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.14),transparent_60%)]"
+                        />
+                        <div
+                          aria-hidden
+                          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(239,68,68,0.08),transparent_55%)]"
+                        />
+                        <div className="relative">
+                          <div className="flex items-start gap-3">
+                            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/25 ring-2 ring-amber-400/40">
+                              <AlertTriangle className="size-5 text-amber-300" aria-hidden />
+                            </span>
+                            <p className="text-sm font-bold uppercase leading-snug tracking-[0.12em] text-amber-200">
+                              🚨 Buyer&apos;s Warning: What to Avoid / Inspect Before Buying
+                            </p>
+                          </div>
+                          <p className="relative mt-4 text-sm font-medium leading-relaxed text-white">
+                            {profile.buyerWarning}
+                          </p>
+                        </div>
+                      </StaggerItem>
+
+                      {/* Column 4: Colorado Notes */}
+                      <StaggerItem>
+                        <div
+                          className="h-full rounded-2xl border p-5 backdrop-blur-sm"
+                          style={{
+                            borderColor: `color-mix(in srgb, ${brand.color} 35%, transparent)`,
+                            backgroundColor: `color-mix(in srgb, ${brand.color} 12%, rgba(6,10,18,0.45))`,
+                          }}
+                        >
+                          <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-white">
+                            <MapPin className="size-4 shrink-0" aria-hidden />
+                            Colorado Notes
+                          </p>
+                          <p className="mt-4 text-sm font-medium leading-relaxed text-white">{profile.coloradoNotes}</p>
+                        </div>
+                      </StaggerItem>
+                    </Stagger>
+                  ) : null}
+
+                  <FadeIn delay={0.12} className="mt-8 flex flex-wrap gap-3">
+                    <Link href="/contact" className="btn-green">
+                      Schedule {brand.name} Diagnostic
+                    </Link>
+                    <a href={BUSINESS.phoneHref} className="btn-ghost-light inline-flex items-center gap-2">
+                      <Phone className="size-4" aria-hidden />
+                      Call {BUSINESS.phone}
+                    </a>
+                  </FadeIn>
                 </div>
-              </div>
-            </TabPanel>
-          ))}
+              </TabPanel>
+            );
+          })}
         </TabPanels>
       </TabGroup>
 
