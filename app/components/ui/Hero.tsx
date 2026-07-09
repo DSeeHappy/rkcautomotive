@@ -51,7 +51,7 @@ export default function Hero() {
 
       <div
         ref={contentRef}
-        className="relative z-10 flex min-h-[100svh] flex-col px-4 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36"
+        className="relative z-10 flex min-h-[100svh] flex-col px-4 pt-20 sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
       >
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end">
           <div className="pb-24 sm:pb-28 lg:pb-32">

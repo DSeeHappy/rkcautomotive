@@ -31,7 +31,7 @@ export default function PageHero({
   const ctas = useGsapReveal<HTMLDivElement>({ delay: 0.2, y: 12, duration: 0.5 });
 
   return (
-    <section className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] pt-24 sm:min-h-[64svh] xl:pt-28">
+    <section className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] pt-20 sm:min-h-[64svh] xl:pt-24">
       <Image src={imageSrc} alt={heroAlt} fill priority className="object-cover" sizes="100vw" />
       <div className="photo-veil absolute inset-0" />
 

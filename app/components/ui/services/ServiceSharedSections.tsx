@@ -102,7 +102,7 @@ export function ServiceCinematicHero({
 
       <div
         ref={contentRef}
-        className="relative z-10 flex min-h-[70svh] flex-col px-4 pt-28 sm:min-h-[78svh] sm:px-6 sm:pt-32 lg:px-8 lg:pt-36"
+        className="relative z-10 flex min-h-[70svh] flex-col px-4 pt-20 sm:min-h-[78svh] sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
       >
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end pb-20 sm:pb-24">
           <div className="max-w-4xl">

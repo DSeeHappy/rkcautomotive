@@ -30,8 +30,8 @@ export default function Navigation() {
         scrolled ? 'glass-nav shadow-[0_8px_40px_-20px_rgba(12,18,34,0.35)]' : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-4 sm:h-28 lg:h-32 xl:h-36 sm:px-6 lg:px-8">
-        <AnimatedLogo variant="nav" href="/" onDarkBackground={!scrolled} />
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[4.5rem] lg:h-20 sm:px-6 lg:px-8">
+        <AnimatedLogo variant="nav" href="/" onDarkBackground={!scrolled} className="min-h-0 max-h-full" />
 
         <div className="hidden items-center gap-1 lg:flex">
           <Popover className="relative">

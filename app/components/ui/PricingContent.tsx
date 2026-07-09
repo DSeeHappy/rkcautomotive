@@ -77,7 +77,7 @@ export default function PricingContent() {
   return (
     <div>
       {/* Hero — $120/hr anchor */}
-      <section className="relative isolate min-h-[72svh] overflow-hidden bg-[#0c1222] pt-24 sm:min-h-[78svh]">
+      <section className="relative isolate min-h-[72svh] overflow-hidden bg-[#0c1222] pt-20 sm:min-h-[78svh]">
         <Image src={PHOTOS.teamCollab} alt="ASE-certified technicians collaborating at RKC Automotive in Englewood, CO" fill priority className="object-cover" sizes="100vw" />
         <div className="photo-veil absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">

@@ -26,7 +26,7 @@ type AnimatedLogoProps = {
 
 const sizeClass = {
   hero: 'w-[min(56vw,184px)] sm:w-[min(48vw,216px)] lg:w-[min(24vw,240px)] h-auto',
-  nav: 'w-[min(42vw,160px)] sm:w-[min(36vw,180px)] lg:w-[min(22vw,220px)] h-auto',
+  nav: 'h-12 max-h-full w-auto max-w-[120px] object-contain sm:h-14 sm:max-w-[140px] lg:h-16 lg:max-w-[160px]',
   footer: 'h-16 w-auto sm:h-[4.5rem]',
 } as const;
 
@@ -80,7 +80,7 @@ function LogoImage({
         v === 'hero'
           ? '(max-width: 640px) 184px, (max-width: 1024px) 216px, 240px'
           : v === 'nav'
-            ? '(max-width: 640px) 160px, (max-width: 1024px) 190px, 220px'
+            ? '(max-width: 640px) 120px, (max-width: 1024px) 140px, 160px'
             : '(max-width: 640px) 128px, 144px'
       }
       className={imageClass}
@@ -142,10 +142,10 @@ function LogoContent({
   );
 
   return (
-    <div ref={wrapperRef} className={`relative inline-flex shrink-0 items-center ${className}`}>
+    <div ref={wrapperRef} className={`relative inline-flex max-h-full shrink-0 items-center ${className}`}>
       <div
         ref={containerRef}
-        className={isNav && useCard ? 'p-0.5' : isNav ? 'px-0.5 py-0.5' : isHero ? 'p-0' : ''}
+        className={isNav ? 'flex max-h-full items-center px-1 py-2' : isHero ? 'p-0' : ''}
       >
         <LogoImage variant={v} onDarkBackground={onDarkBackground} />
       </div>

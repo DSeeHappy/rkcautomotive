@@ -75,7 +75,7 @@ export default function ContactPage() {
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
           <div className="photo-veil absolute inset-0" />
-          <div className="absolute inset-0 flex flex-col justify-end p-8 pt-28 sm:p-12 lg:p-16">
+          <div className="absolute inset-0 flex flex-col justify-end p-8 pt-20 sm:p-12 lg:p-16">
             <Breadcrumbs
               items={[
                 { label: 'Home', href: '/' },
