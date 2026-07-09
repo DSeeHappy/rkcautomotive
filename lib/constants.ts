@@ -228,39 +228,216 @@ export const WARRANTY_PEACE_OF_MIND = [
   },
 ] as const;
 
-export const EXTENDED_WARRANTY_PROVIDERS = [
-  'Endurance',
-  'CARCHEX',
-  'CarShield',
-  'American Auto Shield',
-  'Royal Administration Services',
-  'autopom!',
-  'Olive',
-  'Omega Auto Care',
-  'Zurich North America',
-  'American Guardian',
-  'Concord Auto Protect',
-  'CarGuard Administration',
-  'Toco Warranty',
-  'Continental Warranty',
-  'Allstate Car Care',
-  'Aegis Accountability',
-  'GWC Warranty',
-  'EasyCare',
-  'Matrix Warranty Solutions',
-  'United Auto Defense',
-  'National Vehicle Protection',
-  'Protect My Car',
-  'Liberty Bell Auto Protect',
-  'Select Auto Protect',
-  'AA Auto Protection',
-  'Smart Auto Care',
-  'Alpha Warranty Services',
-  'Penn Warranty',
-  'Preferred Warranties',
-  'Assurant Solutions',
-  'Fidelity Warranty Services',
-] as const;
+export type WarrantyProvider = {
+  name: string;
+  slug: string;
+  logo: string | null;
+  claimsUrl: string;
+};
+
+export const WARRANTY_PROVIDERS: WarrantyProvider[] = [
+  {
+    name: 'Endurance',
+    slug: 'endurance',
+    logo: '/warranty-logos/endurance.png',
+    claimsUrl: 'https://www.endurancewarranty.com/customer-portal/',
+  },
+  {
+    name: 'CARCHEX',
+    slug: 'carchex',
+    logo: '/warranty-logos/carchex.png',
+    claimsUrl: 'https://www.carchex.com/warranty-claims/',
+  },
+  {
+    name: 'CarShield',
+    slug: 'carshield',
+    logo: '/warranty-logos/carshield.png',
+    claimsUrl: 'https://www.carshield.com/file-a-claim/',
+  },
+  {
+    name: 'American Auto Shield',
+    slug: 'american-auto-shield',
+    logo: '/warranty-logos/american-auto-shield.png',
+    claimsUrl: 'https://www.americanautoshield.com/claims/',
+  },
+  {
+    name: 'Royal Administration Services',
+    slug: 'royal-administration',
+    logo: '/warranty-logos/royal-administration.png',
+    claimsUrl: 'https://www.royaladmin.com/repair-facilities/',
+  },
+  {
+    name: 'autopom!',
+    slug: 'autopom',
+    logo: '/warranty-logos/autopom.png',
+    claimsUrl: 'https://www.extended-vehicle-warranty.com/claims/',
+  },
+  {
+    name: 'Olive',
+    slug: 'olive',
+    logo: null,
+    claimsUrl: 'https://www.witholive.com/claims',
+  },
+  {
+    name: 'Omega Auto Care',
+    slug: 'omega-auto-care',
+    logo: '/warranty-logos/omega-auto-care.png',
+    claimsUrl: 'https://www.omegaautocare.com/claims/',
+  },
+  {
+    name: 'Zurich North America',
+    slug: 'zurich',
+    logo: '/warranty-logos/zurich.png',
+    claimsUrl: 'https://www.zurichna.com/en/industry-solutions/financial-services/vehicle-service-contracts',
+  },
+  {
+    name: 'American Guardian',
+    slug: 'american-guardian',
+    logo: '/warranty-logos/american-guardian.png',
+    claimsUrl: 'https://www.agws.com/claims/',
+  },
+  {
+    name: 'Concord Auto Protect',
+    slug: 'concord-auto-protect',
+    logo: '/warranty-logos/concord-auto-protect.png',
+    claimsUrl: 'https://www.concordautoprotect.com/claims/',
+  },
+  {
+    name: 'CarGuard Administration',
+    slug: 'carguard',
+    logo: '/warranty-logos/carguard.png',
+    claimsUrl: 'https://www.carguardadmin.com/repair-facilities/',
+  },
+  {
+    name: 'Toco Warranty',
+    slug: 'toco',
+    logo: '/warranty-logos/toco.png',
+    claimsUrl: 'https://www.tocowarranty.com/claims/',
+  },
+  {
+    name: 'Continental Warranty',
+    slug: 'continental',
+    logo: '/warranty-logos/continental.png',
+    claimsUrl: 'https://www.continentalwarranty.org/claims/',
+  },
+  {
+    name: 'Allstate Car Care',
+    slug: 'allstate-car-care',
+    logo: null,
+    claimsUrl: 'https://www.allstatecarcare.com/claims/',
+  },
+  {
+    name: 'Aegis Accountability',
+    slug: 'aegis',
+    logo: '/warranty-logos/aegis.png',
+    claimsUrl: 'https://aegisadmin.com/repair-facility/',
+  },
+  {
+    name: 'GWC Warranty',
+    slug: 'gwc',
+    logo: '/warranty-logos/gwc.png',
+    claimsUrl: 'https://www.gwcwarranty.com/repair-facility/',
+  },
+  {
+    name: 'EasyCare',
+    slug: 'easycare',
+    logo: '/warranty-logos/easycare.png',
+    claimsUrl: 'https://easycare.com/repair-facilities/',
+  },
+  {
+    name: 'Matrix Warranty Solutions',
+    slug: 'matrix',
+    logo: null,
+    claimsUrl: 'https://matrixwarranty.com/repair-facilities/',
+  },
+  {
+    name: 'United Auto Defense',
+    slug: 'united-auto-defense',
+    logo: null,
+    claimsUrl: 'https://unitedautodefense.com/claims/',
+  },
+  {
+    name: 'National Vehicle Protection',
+    slug: 'nvp',
+    logo: null,
+    claimsUrl: 'https://www.nvpcservices.com/repair-facilities/',
+  },
+  {
+    name: 'Protect My Car',
+    slug: 'protect-my-car',
+    logo: null,
+    claimsUrl: 'https://protectmycar.com/file-a-claim/',
+  },
+  {
+    name: 'Liberty Bell Auto Protect',
+    slug: 'liberty-bell',
+    logo: null,
+    claimsUrl: 'https://www.libertybellautoprotect.com/claims/',
+  },
+  {
+    name: 'Select Auto Protect',
+    slug: 'select-auto-protect',
+    logo: '/warranty-logos/select-auto-protect.png',
+    claimsUrl: 'https://selectautoprotect.com/claims/',
+  },
+  {
+    name: 'AA Auto Protection',
+    slug: 'aa-auto-protection',
+    logo: null,
+    claimsUrl: 'https://aaautoprotection.com/claims/',
+  },
+  {
+    name: 'Smart Auto Care',
+    slug: 'smart-auto-care',
+    logo: null,
+    claimsUrl: 'https://smartautocare.com/repair-facilities/',
+  },
+  {
+    name: 'Alpha Warranty Services',
+    slug: 'alpha',
+    logo: '/warranty-logos/alpha.png',
+    claimsUrl: 'https://www.alphawarranty.com/repair-facilities/',
+  },
+  {
+    name: 'Penn Warranty',
+    slug: 'penn',
+    logo: '/warranty-logos/penn.png',
+    claimsUrl: 'https://pennwarranty.com/repair-facilities/',
+  },
+  {
+    name: 'Preferred Warranties',
+    slug: 'preferred',
+    logo: null,
+    claimsUrl: 'https://www.pwoi.com/repair-facilities/',
+  },
+  {
+    name: 'Assurant Solutions',
+    slug: 'assurant',
+    logo: '/warranty-logos/assurant.png',
+    claimsUrl: 'https://www.assurant.com/partners/vehicle-service-contracts',
+  },
+  {
+    name: 'Fidelity Warranty Services',
+    slug: 'fidelity',
+    logo: '/warranty-logos/fidelity.png',
+    claimsUrl: 'https://www.fidelitywarrantyservices.com/repair-facilities/',
+  },
+];
+
+export const EXTENDED_WARRANTY_PROVIDERS = WARRANTY_PROVIDERS.map((provider) => provider.name);
+
+const WARRANTY_PROVIDER_BY_NAME = new Map(WARRANTY_PROVIDERS.map((provider) => [provider.name, provider]));
+
+export function getWarrantyProvider(name: string): WarrantyProvider | undefined {
+  return WARRANTY_PROVIDER_BY_NAME.get(name);
+}
+
+export function getWarrantyProviders(names: readonly string[]): WarrantyProvider[] {
+  return names.flatMap((name) => {
+    const provider = getWarrantyProvider(name);
+    return provider ? [provider] : [];
+  });
+}
 
 /** Featured extended warranty administrators — shown with blurbs on /warranty */
 export const FEATURED_WARRANTY_PROVIDERS = [
@@ -324,9 +501,9 @@ const FEATURED_WARRANTY_PROVIDER_NAMES = new Set<string>(
   FEATURED_WARRANTY_PROVIDERS.flatMap((provider) => [...provider.names]),
 );
 
-/** Remaining providers shown as badges on the warranty page */
-export const OTHER_WARRANTY_PROVIDERS = EXTENDED_WARRANTY_PROVIDERS.filter(
-  (name) => !FEATURED_WARRANTY_PROVIDER_NAMES.has(name),
+/** Remaining providers shown as logo grid on the warranty page */
+export const OTHER_WARRANTY_PROVIDERS = getWarrantyProviders(
+  EXTENDED_WARRANTY_PROVIDERS.filter((name) => !FEATURED_WARRANTY_PROVIDER_NAMES.has(name)),
 );
 
 export const WARRANTY_CLAIM_PROCESS = [

@@ -1,16 +1,44 @@
 'use client';
 
+import Image from 'next/image';
+import { useState } from 'react';
 import {
   FEATURED_WARRANTY_PROVIDERS,
   OTHER_WARRANTY_PROVIDERS,
+  getWarrantyProvider,
+  type WarrantyProvider,
 } from '@/lib/constants';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
+import WarrantyProviderLogoGrid from './WarrantyProviderLogoGrid';
 
-function ProviderTag({ name }: { name: string }) {
+function FeaturedProviderLogo({ provider }: { provider: WarrantyProvider }) {
+  const [logoFailed, setLogoFailed] = useState(false);
+  const showLogo = provider.logo && !logoFailed;
+
   return (
-    <span className="inline-flex items-center rounded-full border border-[color:var(--line)] bg-white px-4 py-2.5 text-sm font-semibold text-foreground shadow-[0_4px_14px_-8px_rgba(12,18,34,0.12)] transition duration-200 hover:border-primary-green/40 hover:bg-primary-green/[0.04]">
-      {name}
-    </span>
+    <a
+      href={provider.claimsUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={`${provider.name} — open claims portal`}
+      aria-label={`${provider.name} — open claims portal in new tab`}
+      className="group mb-4 inline-flex items-center"
+    >
+      {showLogo && provider.logo ? (
+        <Image
+          src={provider.logo}
+          alt={`${provider.name} logo`}
+          width={140}
+          height={56}
+          className="h-12 w-auto max-w-[10rem] object-contain opacity-90 transition duration-200 group-hover:opacity-100"
+          onError={() => setLogoFailed(true)}
+        />
+      ) : (
+        <span className="inline-flex h-12 min-w-[3rem] items-center justify-center rounded-full bg-primary-blue/10 px-4 text-sm font-bold tracking-wide text-primary-blue transition duration-200 group-hover:bg-primary-green/10 group-hover:text-primary-green">
+          {provider.name.replace(/[!]/g, '').slice(0, 2).toUpperCase()}
+        </span>
+      )}
+    </a>
   );
 }
 
@@ -18,14 +46,18 @@ export default function WarrantyPageProviders() {
   return (
     <div className="space-y-12">
       <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05} delay={0.05}>
-        {FEATURED_WARRANTY_PROVIDERS.map((provider) => (
-          <StaggerItem key={provider.title}>
-            <div className="h-full rounded-3xl border border-[color:var(--line)] bg-white p-6 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.18)]">
-              <h3 className="text-xl font-bold text-primary-blue">{provider.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{provider.blurb}</p>
-            </div>
-          </StaggerItem>
-        ))}
+        {FEATURED_WARRANTY_PROVIDERS.map((provider) => {
+          const primaryProvider = getWarrantyProvider(provider.names[0]);
+          return (
+            <StaggerItem key={provider.title}>
+              <div className="h-full rounded-3xl border border-[color:var(--line)] bg-white p-6 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.18)]">
+                {primaryProvider ? <FeaturedProviderLogo provider={primaryProvider} /> : null}
+                <h3 className="text-xl font-bold text-primary-blue">{provider.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-muted">{provider.blurb}</p>
+              </div>
+            </StaggerItem>
+          );
+        })}
       </Stagger>
 
       <FadeIn>
@@ -40,11 +72,10 @@ export default function WarrantyPageProviders() {
             If your contract is backed by any of these companies, bring your policy — we handle claims
             and approvals when coverage applies.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {OTHER_WARRANTY_PROVIDERS.map((name) => (
-              <ProviderTag key={name} name={name} />
-            ))}
-          </div>
+          <WarrantyProviderLogoGrid
+            providers={OTHER_WARRANTY_PROVIDERS}
+            className="mt-8"
+          />
         </div>
       </FadeIn>
     </div>
