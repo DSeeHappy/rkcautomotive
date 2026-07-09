@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,25 +10,25 @@ import {
 import { BUSINESS, OPENING_HOURS_SCHEMA, PHOTOS } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { createPageMetadata } from '@/lib/og';
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return getAllServiceAreaSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const area = getServiceAreaBySlug(slug);
   if (!area) return { title: 'Area Not Found' };
 
-  return {
+  return createPageMetadata({
     title: `Auto Repair in ${area.name}, CO`,
     description: area.metaDescription,
-    openGraph: {
-      title: `Auto Repair in ${area.name}, CO | RKC Automotive`,
-      description: area.metaDescription,
-    },
-  };
+    path: area.href,
+    image: PHOTOS.exterior,
+    imageAlt: `Auto repair serving ${area.name}, CO from RKC Automotive in Englewood`,
+  });
 }
 
 export default async function CityServiceAreaPage({ params }: Props) {

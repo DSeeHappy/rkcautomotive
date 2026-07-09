@@ -1,29 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Brake Repair in Englewood, CO | Expert Brake Service | RKC Automotive',
-  description:
-    'Professional brake repair and service in Englewood, CO. Brake pads, rotors, calipers, and complete brake system service. Call (720) 749-3965 for same-day service.',
-  keywords:
-    'brake repair Englewood CO, brake service Denver, brake pads replacement, rotor resurfacing, brake inspection',
-  openGraph: {
-    title: 'Brake Repair in Englewood, CO | RKC Automotive',
-    description:
-      'Expert brake repair and service in Englewood. Brake pads, rotors, calipers, and complete brake system service.',
-    url: 'https://rkcautomotive.com/services/brake-repair-englewood-co',
-    type: 'website',
-    images: [
-      {
-        url: '/images/mechanic-undercarriage.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Brake Repair Service at RKC Automotive Englewood CO',
-      },
-    ],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Brake Repair in Englewood, CO | Expert Brake Service | RKC Automotive',
+  'Professional brake repair and service in Englewood, CO. Brake pads, rotors, calipers, and complete brake system service. Call (720) 749-3965 for same-day service.',
+  'brake-repair-englewood-co',
+  PHOTOS.undercarriage,
+  'Brake Repair Service at RKC Automotive Englewood CO',
+  'brake repair Englewood CO, brake service Denver, brake pads replacement, rotor resurfacing, brake inspection',
+);
 
 const schema = {
   '@context': 'https://schema.org',

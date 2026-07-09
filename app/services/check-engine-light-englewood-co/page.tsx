@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Check Engine Light Diagnosis in Englewood, CO | RKC Automotive',
-  description: 'Check engine light on? Expert diagnosis and repair in Englewood, CO. We find the real problem, not just the code. Call (720) 749-3965 today.',
-  keywords: 'check engine light Englewood CO, CEL diagnosis Denver, OBD diagnostic',
-  openGraph: {
-    title: 'Check Engine Light Diagnosis in Englewood, CO',
-    description: 'Real diagnosis beyond the code — Englewood check engine light experts.',
-    url: 'https://rkcautomotive.com/services/check-engine-light-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/engine-rebuild-team.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Check Engine Light at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Check Engine Light Diagnosis in Englewood, CO | RKC Automotive',
+  'Check engine light on? Expert diagnosis and repair in Englewood, CO. We find the real problem, not just the code. Call (720) 749-3965 today.',
+  'check-engine-light-englewood-co',
+  PHOTOS.engineRebuild,
+  'Check Engine Light at RKC Automotive Englewood CO',
+  'check engine light Englewood CO, CEL diagnosis Denver, OBD diagnostic',
+);
 
 const schema = {
   '@context': 'https://schema.org',

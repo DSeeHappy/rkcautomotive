@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Auto AC Repair & Heating Service in Englewood, CO | RKC Automotive',
-  description: 'Expert auto AC repair and heating service in Englewood, CO. AC recharge, compressor replacement, heater repair. Stay comfortable year-round. Call (720) 749-3965.',
-  keywords: 'auto AC repair Englewood CO, car heater repair Denver, AC recharge',
-  openGraph: {
-    title: 'Heating & AC Service in Englewood, CO | RKC Automotive',
-    description: 'Auto AC and heating diagnostics and repair in Englewood.',
-    url: 'https://rkcautomotive.com/services/heating-ac-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/shop-interior-bay.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Heating & AC at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Auto AC Repair & Heating Service in Englewood, CO | RKC Automotive',
+  'Expert auto AC repair and heating service in Englewood, CO. AC recharge, compressor replacement, heater repair. Stay comfortable year-round. Call (720) 749-3965.',
+  'heating-ac-englewood-co',
+  PHOTOS.interior,
+  'Heating & AC at RKC Automotive Englewood CO',
+  'auto AC repair Englewood CO, car heater repair Denver, AC recharge',
+);
 
 const schema = {
   '@context': 'https://schema.org',

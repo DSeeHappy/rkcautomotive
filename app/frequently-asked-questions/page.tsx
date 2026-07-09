@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
@@ -6,12 +5,16 @@ import { ALL_FAQS, BUSINESS, FAQ_CATEGORIES, PHOTOS } from '@/lib/constants';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { createPageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Frequently Asked Questions',
   description:
     'FAQ about auto repair at RKC Automotive in Englewood, CO — pricing, warranties, same-day service, maintenance, and more.',
-};
+  path: '/frequently-asked-questions',
+  image: PHOTOS.exteriorBay,
+  imageAlt: 'RKC Automotive shop in Englewood, CO — auto repair FAQ',
+});
 
 export default function FAQPage() {
   return (

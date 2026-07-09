@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
@@ -7,12 +6,16 @@ import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
 import SocialLinks from '@/app/components/ui/SocialLinks';
+import { createPageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'About Us',
   description:
     'Learn about RKC Automotive, your trusted auto repair shop in Englewood, CO. ASE-certified technicians, 30+ years experience, honest pricing.',
-};
+  path: '/about',
+  image: PHOTOS.teamCollab,
+  imageAlt: 'ASE-certified technicians at RKC Automotive in Englewood, CO',
+});
 
 const values = [
   {

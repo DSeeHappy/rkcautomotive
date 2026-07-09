@@ -1,16 +1,19 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import { BUSINESS, PHOTOS, VEHICLE_CATEGORIES } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { createPageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Vehicles We Service',
   description:
     'RKC Automotive services all makes and models — domestic, Asian imports, and European vehicles in Englewood, CO. Call (720) 749-3965.',
-};
+  path: '/vehicles-we-service',
+  image: PHOTOS.classicLift,
+  imageAlt: 'Classic car on lift at RKC Automotive — all makes and models serviced',
+});
 
 export default function VehiclesPage() {
   return (

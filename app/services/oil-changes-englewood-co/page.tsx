@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Oil Change Service in Englewood, CO | Quick & Affordable | RKC Automotive',
-  description: 'Fast, affordable oil change service in Englewood, CO. Synthetic, conventional, and high-mileage oil. Fluid top-off included. Call (720) 749-3965 today.',
-  keywords: 'oil change Englewood CO, synthetic oil change Denver, quick oil change',
-  openGraph: {
-    title: 'Oil Change Service in Englewood, CO | RKC Automotive',
-    description: 'Conventional and synthetic oil changes with multi-point inspection.',
-    url: 'https://rkcautomotive.com/services/oil-changes-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/team-lift-collaboration.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Oil Changes at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Oil Change Service in Englewood, CO | Quick & Affordable | RKC Automotive',
+  'Fast, affordable oil change service in Englewood, CO. Synthetic, conventional, and high-mileage oil. Fluid top-off included. Call (720) 749-3965 today.',
+  'oil-changes-englewood-co',
+  PHOTOS.teamCollab,
+  'Oil Changes at RKC Automotive Englewood CO',
+  'oil change Englewood CO, synthetic oil change Denver, quick oil change',
+);
 
 const schema = {
   '@context': 'https://schema.org',

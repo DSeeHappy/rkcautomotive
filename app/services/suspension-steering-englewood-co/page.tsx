@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Suspension & Steering Repair in Englewood, CO | RKC Automotive',
-  description: 'Professional suspension and steering repair in Englewood, CO. Shocks, struts, ball joints, alignment, and steering system service. Call (720) 749-3965.',
-  keywords: 'suspension repair Englewood CO, steering repair Denver, shocks struts ball joints',
-  openGraph: {
-    title: 'Suspension & Steering in Englewood, CO | RKC Automotive',
-    description: 'Shocks, struts, ball joints, and steering repairs in Englewood.',
-    url: 'https://rkcautomotive.com/services/suspension-steering-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/shop-detail-01.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Suspension & Steering at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Suspension & Steering Repair in Englewood, CO | RKC Automotive',
+  'Professional suspension and steering repair in Englewood, CO. Shocks, struts, ball joints, alignment, and steering system service. Call (720) 749-3965.',
+  'suspension-steering-englewood-co',
+  PHOTOS.techCloseup,
+  'Suspension & Steering at RKC Automotive Englewood CO',
+  'suspension repair Englewood CO, steering repair Denver, shocks struts ball joints',
+);
 
 const schema = {
   '@context': 'https://schema.org',

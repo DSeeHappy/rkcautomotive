@@ -1,27 +1,25 @@
-import type { Metadata } from 'next';
 import HomeContent from './components/ui/HomeContent';
 import {
   FACEBOOK_URL,
   GOOGLE_REVIEWS_URL,
   INSTAGRAM_URL,
   OPENING_HOURS_SCHEMA,
+  PHOTOS,
   YAHOO_LOCAL_URL,
 } from '@/lib/constants';
+import { createPageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "RKC Automotive | Englewood's Bay for Work You Can Trust",
   description:
     'Professional auto repair and maintenance in Englewood, CO. Expert service for brakes, engines, batteries, and more. Call (720) 749-3965 for service today.',
+  path: '/',
+  titleAbsolute: true,
+  image: PHOTOS.heroMain,
+  imageAlt: 'RKC Automotive shop bay in Englewood, CO',
   keywords:
     'auto repair Englewood CO, car repair Denver, mechanic Englewood, brake repair, oil change, battery replacement',
-  openGraph: {
-    title: "RKC Automotive | Englewood's Bay for Work You Can Trust",
-    description:
-      'Professional auto repair and maintenance serving Englewood and Denver metro area.',
-    url: 'https://rkcautomotive.com',
-    type: 'website',
-  },
-};
+});
 
 export default function HomePage() {
   return (

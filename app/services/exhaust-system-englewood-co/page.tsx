@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Exhaust System Repair in Englewood, CO | Muffler & Catalytic Converter | RKC Automotive',
-  description: 'Expert exhaust system repair in Englewood, CO. Muffler, catalytic converter, pipes, and emissions repair. Call (720) 749-3965 for exhaust service.',
-  keywords: 'exhaust repair Englewood CO, muffler replacement Denver, catalytic converter',
-  openGraph: {
-    title: 'Exhaust System Repair in Englewood, CO | RKC Automotive',
-    description: 'Mufflers, pipes, catalytic converters, and emissions-related exhaust repair.',
-    url: 'https://rkcautomotive.com/services/exhaust-system-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/mechanic-undercarriage.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Exhaust System at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Exhaust System Repair in Englewood, CO | Muffler & Catalytic Converter | RKC Automotive',
+  'Expert exhaust system repair in Englewood, CO. Muffler, catalytic converter, pipes, and emissions repair. Call (720) 749-3965 for exhaust service.',
+  'exhaust-system-englewood-co',
+  PHOTOS.undercarriage,
+  'Exhaust System at RKC Automotive Englewood CO',
+  'exhaust repair Englewood CO, muffler replacement Denver, catalytic converter',
+);
 
 const schema = {
   '@context': 'https://schema.org',

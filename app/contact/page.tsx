@@ -1,22 +1,19 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { BUSINESS, GOOGLE_REVIEWS_URL, MAP_EMBED, PHOTOS } from '@/lib/constants';
 import ContactForm from '@/app/components/ui/ContactForm';
 import FadeIn from '@/app/components/ui/FadeIn';
 import SocialLinks from '@/app/components/ui/SocialLinks';
+import { createPageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Contact Us | RKC Automotive Englewood, CO',
+export const metadata = createPageMetadata({
+  title: 'Contact Us',
   description:
     'Contact RKC Automotive for auto repair in Englewood, CO. Call (720) 749-3965 or visit us at 2120 W Evans Ave. Mon-Fri 8-6, Sat 8-12.',
-  openGraph: {
-    title: 'Contact RKC Automotive | Englewood, CO',
-    description: 'Get in touch with RKC Automotive for expert auto repair and maintenance.',
-    url: 'https://rkcautomotive.com/contact',
-    type: 'website',
-  },
-};
+  path: '/contact',
+  image: PHOTOS.exterior,
+  imageAlt: 'RKC Automotive shop exterior at 2120 W Evans Ave, Englewood, CO',
+});
 
 const details = [
   {

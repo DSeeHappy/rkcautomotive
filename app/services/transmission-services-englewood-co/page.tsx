@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Transmission Service & Repair in Englewood, CO | RKC Automotive',
-  description: 'Expert transmission service and repair in Englewood, CO. Automatic and manual transmission repair, fluid service, and diagnostics. Call (720) 749-3965.',
-  keywords: 'transmission repair Englewood CO, transmission fluid service Denver, automatic transmission',
-  openGraph: {
-    title: 'Transmission Service in Englewood, CO | RKC Automotive',
-    description: 'Transmission diagnostics, fluid service, and repairs in Englewood.',
-    url: 'https://rkcautomotive.com/services/transmission-services-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/classic-car-lift.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Transmission Services at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Transmission Service & Repair in Englewood, CO | RKC Automotive',
+  'Expert transmission service and repair in Englewood, CO. Automatic and manual transmission repair, fluid service, and diagnostics. Call (720) 749-3965.',
+  'transmission-services-englewood-co',
+  PHOTOS.classicLift,
+  'Transmission Services at RKC Automotive Englewood CO',
+  'transmission repair Englewood CO, transmission fluid service Denver, automatic transmission',
+);
 
 const schema = {
   '@context': 'https://schema.org',

@@ -1,16 +1,19 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import { BUSINESS, PHOTOS, SERVICES } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { createPageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Auto Repair Services in Englewood, CO',
   description:
     'Complete auto repair services in Englewood, CO: brakes, diagnostics, oil changes, batteries, transmission, AC, and more. Call (720) 749-3965.',
-};
+  path: '/services',
+  image: PHOTOS.interior,
+  imageAlt: 'Full-service auto repair bays at RKC Automotive in Englewood, CO',
+});
 
 export default function ServicesPage() {
   return (

@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
@@ -16,12 +15,17 @@ import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
 import SocialLinks from '@/app/components/ui/SocialLinks';
+import { createPageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Englewood CO Auto Repair | RKC Automotive Location',
   description:
     'Visit RKC Automotive at 2120 W Evans Ave, Englewood, CO 80110. ASE-certified auto repair. Mon–Fri 8–6, Sat 8–12. Call (720) 749-3965.',
-};
+  path: '/englewood-co-auto-repair',
+  titleAbsolute: true,
+  image: PHOTOS.exterior,
+  imageAlt: 'RKC Automotive location at 2120 W Evans Ave, Englewood, CO 80110',
+});
 
 export default function LocationPage() {
   return (

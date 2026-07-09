@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Car Battery Testing & Replacement in Englewood, CO | RKC Automotive',
-  description: 'Free battery testing and professional battery replacement in Englewood, CO. Don\'t get stranded. Call (720) 749-3965 for battery service today.',
-  keywords: 'battery testing Englewood CO, car battery replacement Denver, free battery test',
-  openGraph: {
-    title: 'Battery Testing & Replacement in Englewood, CO',
-    description: 'Free battery testing and professional replacement at RKC Automotive.',
-    url: 'https://rkcautomotive.com/services/battery-testing-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/shop-detail-02.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Battery Testing at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Car Battery Testing & Replacement in Englewood, CO | RKC Automotive',
+  "Free battery testing and professional battery replacement in Englewood, CO. Don't get stranded. Call (720) 749-3965 for battery service today.",
+  'battery-testing-englewood-co',
+  PHOTOS.teamCuevas,
+  'Battery Testing at RKC Automotive Englewood CO',
+  'battery testing Englewood CO, car battery replacement Denver, free battery test',
+);
 
 const schema = {
   '@context': 'https://schema.org',

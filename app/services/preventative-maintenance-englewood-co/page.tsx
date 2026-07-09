@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Preventative Maintenance in Englewood, CO | Keep Your Car Running | RKC Automotive',
-  description: 'Comprehensive preventative maintenance in Englewood, CO. Regular service keeps your vehicle reliable and prevents expensive repairs. Call (720) 749-3965 today.',
-  keywords: 'preventative maintenance Englewood CO, scheduled car maintenance Denver, vehicle service',
-  openGraph: {
-    title: 'Preventative Maintenance in Englewood, CO | RKC Automotive',
-    description: 'Scheduled maintenance that prevents expensive surprises.',
-    url: 'https://rkcautomotive.com/services/preventative-maintenance-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/shop-detail-06.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Preventative Maintenance at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Preventative Maintenance in Englewood, CO | Keep Your Car Running | RKC Automotive',
+  'Comprehensive preventative maintenance in Englewood, CO. Regular service keeps your vehicle reliable and prevents expensive repairs. Call (720) 749-3965 today.',
+  'preventative-maintenance-englewood-co',
+  PHOTOS.brandedBay,
+  'Preventative Maintenance at RKC Automotive Englewood CO',
+  'preventative maintenance Englewood CO, scheduled car maintenance Denver, vehicle service',
+);
 
 const schema = {
   '@context': 'https://schema.org',

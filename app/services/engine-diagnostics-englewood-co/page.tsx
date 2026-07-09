@@ -1,24 +1,15 @@
-import type { Metadata } from 'next';
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
+import { createServicePageMetadata } from '@/lib/og';
 
-export const metadata: Metadata = {
-  title: 'Engine Diagnostics & Repair in Englewood, CO | RKC Automotive',
-  description: 'Expert engine diagnostics and repair in Englewood, CO. Advanced diagnostic equipment for all makes and models. Call (720) 749-3965 for engine service.',
-  keywords: 'engine diagnostics Englewood CO, engine repair Denver, car diagnostics, check engine diagnosis',
-  openGraph: {
-    title: 'Engine Diagnostics in Englewood, CO | RKC Automotive',
-    description: 'Advanced engine diagnostics and repair for all makes and models in Englewood.',
-    url: 'https://rkcautomotive.com/services/engine-diagnostics-englewood-co',
-    type: 'website',
-    images: [{
-      url: '/images/engine-bay-teamwork.webp',
-      width: 1200,
-      height: 630,
-      alt: 'Engine Diagnostics at RKC Automotive Englewood CO',
-    }],
-  },
-};
+export const metadata = createServicePageMetadata(
+  'Engine Diagnostics & Repair in Englewood, CO | RKC Automotive',
+  'Expert engine diagnostics and repair in Englewood, CO. Advanced diagnostic equipment for all makes and models. Call (720) 749-3965 for engine service.',
+  'engine-diagnostics-englewood-co',
+  PHOTOS.engineBay,
+  'Engine Diagnostics at RKC Automotive Englewood CO',
+  'engine diagnostics Englewood CO, engine repair Denver, car diagnostics, check engine diagnosis',
+);
 
 const schema = {
   '@context': 'https://schema.org',

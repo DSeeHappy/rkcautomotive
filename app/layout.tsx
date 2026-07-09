@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import SplashScreen from './components/ui/SplashScreen';
+import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
 
 const bebas = Bebas_Neue({
   weight: '400',
@@ -20,18 +21,15 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://rkcautomotive.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'RKC Automotive | Auto Repair in Englewood, CO',
     template: '%s | RKC Automotive',
   },
   description:
-    'ASE-certified auto repair in Englewood, CO. Brakes, diagnostics, oil changes, and more. Call (720) 749-3965. Mon–Fri 8–5, Sat 8–12.',
-  openGraph: {
-    siteName: 'RKC Automotive',
-    locale: 'en_US',
-    type: 'website',
-  },
+    'ASE-certified auto repair in Englewood, CO. Brakes, diagnostics, oil changes, and more. Call (720) 749-3965. Mon–Fri 8–6, Sat 8–12.',
+  openGraph: rootOpenGraphDefaults,
+  twitter: rootTwitterDefaults,
 };
 
 export const viewport: Viewport = {
