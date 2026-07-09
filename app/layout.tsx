@@ -39,12 +39,9 @@ export const metadata: Metadata = {
   },
   openGraph: rootOpenGraphDefaults,
   twitter: rootTwitterDefaults,
-  verification: {
-    other: {
-      'msvalidate.01': 'F95A402B999BC67315CA610B07111B57',
-    },
-  },
 };
+
+const BING_SITE_VERIFICATION = 'F95A402B999BC67315CA610B07111B57';
 
 export const viewport: Viewport = {
   themeColor: '#0e8536',
@@ -56,6 +53,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="msvalidate.01" content={BING_SITE_VERIFICATION} />
+      </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
         <GsapProvider>
