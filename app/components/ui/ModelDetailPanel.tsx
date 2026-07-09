@@ -147,7 +147,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                   <div
                     className={
                       isFullBleed
-                        ? 'flex min-h-0 flex-1 flex-col overflow-y-auto lg:ml-auto lg:max-w-[58%]'
+                        ? 'flex min-h-0 flex-1 flex-col overflow-y-auto bg-gradient-to-b from-[#0c1222]/98 via-[#0c1222]/96 to-[#0c1222]/98 lg:ml-auto lg:max-w-[58%]'
                         : 'flex min-h-0 flex-1 flex-col overflow-y-auto'
                     }
                   >
@@ -175,17 +175,19 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
                           {model.maintenanceSchedule.map((entry) => (
                             <div
                               key={entry.interval}
-                              className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"
+                              className="rounded-xl border border-white/10 border-l-4 border-l-primary-green bg-[#0c1222]/95 p-4 shadow-lg backdrop-blur-md sm:p-5"
                             >
-                              <p className="text-sm font-semibold text-white">
+                              <p className="text-base font-bold text-white sm:text-lg">
                                 {entry.interval}
                               </p>
                               <ul className="mt-3 space-y-2">
                                 {entry.items.map((item) => (
-                                  <li key={item} className="flex gap-2 text-sm text-white">
+                                  <li
+                                    key={item}
+                                    className="flex gap-2 text-sm leading-relaxed text-slate-200 sm:text-base"
+                                  >
                                     <span
-                                      className="mt-1.5 size-1.5 shrink-0 rounded-full"
-                                      style={{ backgroundColor: brand.color }}
+                                      className="mt-2 size-1.5 shrink-0 rounded-full bg-primary-green"
                                       aria-hidden
                                     />
                                     {item}
