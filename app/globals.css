@@ -231,6 +231,25 @@ body {
   animation: brand-logo-float 2.6s ease-in-out infinite;
 }
 
+/* Inline copy links on dark surfaces — underline affordance (not buttons/cards/nav pills) */
+:is(footer, [class*='0c1222'], section:has(.photo-veil), section:has(.photo-veil-deep))
+  :is(p, blockquote, li, dd, td, .prose)
+  a:not(.btn-green):not(.btn-blue):not(.btn-ghost-light):not(.btn-outline):not(.brand-tab):not([class*='rounded-full']):not([class*='rounded-xl']):not([class*='rounded-2xl']):not([class*='rounded-3xl']),
+:is(footer, [class*='0c1222'], section:has(.photo-veil), section:has(.photo-veil-deep))
+  a:not(.btn-green):not(.btn-blue):not(.btn-ghost-light):not(.btn-outline):not(.brand-tab):not([class*='rounded-full']):not([class*='rounded-xl']):not([class*='rounded-2xl']):not([class*='rounded-3xl']):is(
+    [class*='text-primary-green-light'],
+    [class*='text-white/']
+  ) {
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in srgb, var(--primary-green-light) 55%, transparent);
+}
+
+:is(footer, [class*='0c1222'], section:has(.photo-veil), section:has(.photo-veil-deep))
+  a[class*='text-white/']:not(.btn-green):not(.btn-blue):not(.btn-ghost-light):not(.btn-outline):not(.brand-tab):not([class*='rounded-full']):not([class*='rounded-xl']):not([class*='rounded-2xl']):not([class*='rounded-3xl']) {
+  text-decoration-color: color-mix(in srgb, white 45%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
