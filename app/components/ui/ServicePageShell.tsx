@@ -6,6 +6,7 @@ import { CheckCircle, Phone } from 'lucide-react';
 import { type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { BUSINESS, PHOTOS, SERVICES, type ServiceItem } from '@/lib/constants';
+import { createBreadcrumbSchema } from '@/lib/seo';
 import PageHero from './PageHero';
 import FadeIn from './FadeIn';
 
@@ -56,16 +57,29 @@ export default function ServicePageShell({
     relatedServices ??
     SERVICES.filter((s) => s.name !== breadcrumbLabel && !title.startsWith(s.name)).slice(0, 4);
 
+  const breadcrumbSchema =
+    breadcrumbs && breadcrumbs.length > 0
+      ? createBreadcrumbSchema(
+          breadcrumbs.map((crumb) => ({
+            name: crumb.label,
+            path: crumb.href,
+          })),
+        )
+      : null;
+
+  const schemaBlocks = [schemaJson, breadcrumbSchema].filter(Boolean) as object[];
+
   return (
     <div>
-      {schemaJson && (
+      {schemaBlocks.map((schema, index) => (
         <script
+          key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-      )}
+      ))}
 
-      <PageHero title={title} description={description} breadcrumbs={breadcrumbs} imageSrc={imageSrc} />
+      <PageHero title={title} description={description} breadcrumbs={breadcrumbs} imageSrc={imageSrc} imageAlt={`${title} at RKC Automotive in Englewood, CO`} />
 
       <section className="border-b border-[color:var(--line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-[color:var(--line)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
@@ -95,7 +109,7 @@ export default function ServicePageShell({
               <FadeIn delay={0.1} className="sticky top-28 space-y-5">
                 <div className="overflow-hidden rounded-3xl bg-[#0c1222] shadow-2xl">
                   <div className="relative aspect-[4/3]">
-                    <Image src={imageSrc} alt="" fill className="object-cover opacity-90" sizes="400px" />
+                    <Image src={imageSrc} alt={`${title} service at RKC Automotive`} fill className="object-cover opacity-90" sizes="400px" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0c1222] to-transparent" />
                   </div>
                   <div className="p-6 text-white">
@@ -150,7 +164,7 @@ export default function ServicePageShell({
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image src={PHOTOS.brandedBay} alt="" fill className="object-cover" sizes="100vw" />
+          <Image src={PHOTOS.brandedBay} alt="RKC Automotive branded shop bay in Englewood, CO" fill className="object-cover" sizes="100vw" />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
         <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-20 sm:px-6 lg:flex-row lg:items-center lg:px-8">

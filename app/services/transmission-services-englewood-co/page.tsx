@@ -1,10 +1,11 @@
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
 import { createServicePageMetadata } from '@/lib/og';
+import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
-  'Transmission Service & Repair in Englewood, CO | RKC Automotive',
-  'Expert transmission service and repair in Englewood, CO. Automatic and manual transmission repair, fluid service, and diagnostics. Call (720) 749-3965.',
+  'Transmission Repair in Englewood, CO | RKC Automotive',
+  'Transmission service and repair in Englewood, CO — automatic, manual, fluid service, and diagnostics for Denver south metro drivers. Call (720) 749-3965.',
   'transmission-services-englewood-co',
   PHOTOS.classicLift,
   'Transmission Services at RKC Automotive Englewood CO',

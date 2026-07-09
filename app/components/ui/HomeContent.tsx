@@ -114,7 +114,7 @@ export default function HomeContent() {
       {/* Process with motion */}
       <section className="relative overflow-hidden bg-[#0c1222] py-24 text-white sm:py-28">
         <div className="absolute inset-0 opacity-25">
-          <Image src={PHOTOS.engineBay} alt="" fill className="object-cover" sizes="100vw" />
+          <Image src={PHOTOS.engineBay} alt="Engine bay service at RKC Automotive in Englewood, CO" fill className="object-cover" sizes="100vw" />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
         <div className="relative wrap">
@@ -218,7 +218,7 @@ export default function HomeContent() {
       {/* Testimonials with photo backdrop */}
       <section className="relative overflow-hidden py-24 sm:py-28">
         <div className="absolute inset-0">
-          <Image src={PHOTOS.classicLift} alt="" fill className="object-cover opacity-20" sizes="100vw" />
+          <Image src={PHOTOS.classicLift} alt="Classic car on lift at RKC Automotive in Englewood, Colorado" fill className="object-cover opacity-20" sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-[var(--background)]/92 to-[var(--background)]" />
         </div>
         <div className="relative wrap">

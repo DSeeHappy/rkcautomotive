@@ -1,6 +1,7 @@
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
 import { createServicePageMetadata } from '@/lib/og';
+import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
   'Auto Electrical System Repair in Englewood, CO | RKC Automotive',

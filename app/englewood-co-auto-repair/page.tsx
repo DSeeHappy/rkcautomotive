@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
+import JsonLd from '@/app/components/JsonLd';
 import {
   BUSINESS,
   GOOGLE_REVIEWS_URL,
   MAP_EMBED,
-  OPENING_HOURS_SCHEMA,
   PHOTOS,
   SERVICE_AREAS_DATA,
   SERVICES,
@@ -16,11 +16,12 @@ import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
 import SocialLinks from '@/app/components/ui/SocialLinks';
 import { createPageMetadata } from '@/lib/og';
+import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Englewood CO Auto Repair | RKC Automotive Location',
   description:
-    'Visit RKC Automotive at 2120 W Evans Ave, Englewood, CO 80110. ASE-certified auto repair. Mon–Fri 8–6, Sat 8–12. Call (720) 749-3965.',
+    'Visit RKC Automotive at 2120 W Evans Ave, Englewood, CO 80110. ASE-certified auto repair for Denver south metro. Mon–Fri 8AM–6PM, Sat 8AM–12PM. Call (720) 749-3965.',
   path: '/englewood-co-auto-repair',
   titleAbsolute: true,
   image: PHOTOS.exterior,
@@ -30,31 +31,20 @@ export const metadata = createPageMetadata({
 export default function LocationPage() {
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'AutomotiveBusiness',
-            name: 'RKC Automotive',
-            telephone: '+1-720-749-3965',
-            address: {
-              '@type': 'PostalAddress',
-              streetAddress: '2120 W Evans Ave',
-              addressLocality: 'Englewood',
-              addressRegion: 'CO',
-              postalCode: '80110',
-              addressCountry: 'US',
-            },
-            geo: {
-              '@type': 'GeoCoordinates',
-              latitude: '39.6785',
-              longitude: '-105.0125',
-            },
-            url: 'https://rkcautomotive.com/englewood-co-auto-repair',
-            openingHoursSpecification: OPENING_HOURS_SCHEMA,
+      <JsonLd
+        data={[
+          createLocalBusinessSchema({
+            pageUrl: '/englewood-co-auto-repair',
+            description:
+              'ASE-certified auto repair at 2120 W Evans Ave, Englewood, CO 80110. Serving the Denver south metro.',
+            areaServed: 'Englewood',
+            includeRating: true,
           }),
-        }}
+          createBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Englewood Location', path: '/englewood-co-auto-repair' },
+          ]),
+        ]}
       />
 
       <PageHero
@@ -62,6 +52,11 @@ export default function LocationPage() {
         title="The W Evans Ave bay"
         description="ASE-certified service at 2120 W Evans Ave — easy access for Englewood and Denver metro drivers."
         imageSrc={PHOTOS.exterior}
+        imageAlt="RKC Automotive shop at 2120 W Evans Ave, Englewood, CO 80110"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Englewood Location' },
+        ]}
       />
 
       <section className="py-20">
@@ -112,7 +107,7 @@ export default function LocationPage() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
-                <Image src={PHOTOS.exteriorBay} alt="RKC Automotive shop exterior" fill className="object-cover" sizes="50vw" />
+                <Image src={PHOTOS.exteriorBay} alt="RKC Automotive shop exterior in Englewood, CO" fill className="object-cover" sizes="50vw" />
               </div>
             </FadeIn>
           </div>

@@ -6,7 +6,9 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import SplashScreen from './components/ui/SplashScreen';
+import JsonLd from './components/JsonLd';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
+import { createOrganizationSchema, createWebSiteSchema } from '@/lib/seo';
 
 const bebas = Bebas_Neue({
   weight: '400',
@@ -42,6 +44,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
+        <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
         <SplashScreen>
           <Navigation />
           <main className="min-h-screen">{children}</main>

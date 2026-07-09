@@ -1,6 +1,7 @@
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
 import { createServicePageMetadata } from '@/lib/og';
+import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
   'Brake Repair in Englewood, CO | Expert Brake Service | RKC Automotive',

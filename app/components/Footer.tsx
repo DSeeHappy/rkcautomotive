@@ -9,7 +9,7 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-[#0c1222] text-white">
-      <div className="absolute inset-0 opacity-30">
+      <div className="absolute inset-0 opacity-30" aria-hidden>
         <Image src={PHOTOS.interior} alt="" fill className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c1222] via-[#0c1222]/90 to-[#0c1222]/70" />
       </div>

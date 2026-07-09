@@ -71,7 +71,7 @@ export default function PricingContent() {
     <div>
       {/* Hero — $120/hr anchor */}
       <section className="relative isolate min-h-[72svh] overflow-hidden bg-[#0c1222] pt-24 sm:min-h-[78svh]">
-        <Image src={PHOTOS.teamCollab} alt="" fill priority className="object-cover" sizes="100vw" />
+        <Image src={PHOTOS.teamCollab} alt="ASE-certified technicians collaborating at RKC Automotive in Englewood, CO" fill priority className="object-cover" sizes="100vw" />
         <div className="photo-veil absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">Pricing</p>
@@ -588,7 +588,7 @@ export default function PricingContent() {
       {/* CTA band */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image src={PHOTOS.exteriorBay} alt="" fill className="object-cover" sizes="100vw" />
+          <Image src={PHOTOS.exteriorBay} alt="RKC Automotive shop exterior in Englewood, Colorado" fill className="object-cover" sizes="100vw" />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
         <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">

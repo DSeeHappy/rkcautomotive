@@ -1,10 +1,11 @@
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
 import { createServicePageMetadata } from '@/lib/og';
+import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
-  'Oil Change Service in Englewood, CO | Quick & Affordable | RKC Automotive',
-  'Fast, affordable oil change service in Englewood, CO. Synthetic, conventional, and high-mileage oil. Fluid top-off included. Call (720) 749-3965 today.',
+  'Oil Change Service in Englewood, CO | RKC Automotive',
+  'Fast, affordable oil changes in Englewood, CO — conventional, synthetic, and high-mileage oil with fluid top-off. Serving Denver south metro. Call (720) 749-3965.',
   'oil-changes-englewood-co',
   PHOTOS.teamCollab,
   'Oil Changes at RKC Automotive Englewood CO',

@@ -1,10 +1,11 @@
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
 import { createServicePageMetadata } from '@/lib/og';
+import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
-  'Engine Diagnostics & Repair in Englewood, CO | RKC Automotive',
-  'Expert engine diagnostics and repair in Englewood, CO. Advanced diagnostic equipment for all makes and models. Call (720) 749-3965 for engine service.',
+  'Engine Diagnostics in Englewood, CO | RKC Automotive',
+  'Expert engine diagnostics and repair in Englewood, CO. Advanced equipment for all makes and models in the Denver south metro. Call (720) 749-3965 for service.',
   'engine-diagnostics-englewood-co',
   PHOTOS.engineBay,
   'Engine Diagnostics at RKC Automotive Englewood CO',

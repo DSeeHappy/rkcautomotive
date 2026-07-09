@@ -12,6 +12,7 @@ type PageHeroProps = {
   breadcrumbs?: { label: string; href?: string }[];
   eyebrow?: string;
   imageSrc?: string;
+  imageAlt?: string;
 };
 
 export default function PageHero({
@@ -20,12 +21,14 @@ export default function PageHero({
   breadcrumbs,
   eyebrow,
   imageSrc = PHOTOS.interior,
+  imageAlt,
 }: PageHeroProps) {
   const reduce = useReducedMotion();
+  const heroAlt = imageAlt ?? `${title} — RKC Automotive in Englewood, CO`;
 
   return (
     <section className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] pt-24 sm:min-h-[64svh] xl:pt-28">
-      <Image src={imageSrc} alt="" fill priority className="object-cover" sizes="100vw" />
+      <Image src={imageSrc} alt={heroAlt} fill priority className="object-cover" sizes="100vw" />
       <div className="photo-veil absolute inset-0" />
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-20 sm:px-6 sm:pb-20 lg:px-8">

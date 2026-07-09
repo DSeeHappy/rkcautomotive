@@ -7,7 +7,9 @@ import {
   getServiceAreaBySlug,
   SERVICE_AREAS_DATA,
 } from '@/lib/serviceAreas';
-import { BUSINESS, OPENING_HOURS_SCHEMA, PHOTOS } from '@/lib/constants';
+import JsonLd from '@/app/components/JsonLd';
+import { BUSINESS, PHOTOS } from '@/lib/constants';
+import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { createPageMetadata } from '@/lib/og';
@@ -38,37 +40,22 @@ export default async function CityServiceAreaPage({ params }: Props) {
 
   const otherAreas = SERVICE_AREAS_DATA.filter((a) => a.slug !== slug).slice(0, 6);
 
-  const schemaJson = {
-    '@context': 'https://schema.org',
-    '@type': 'AutomotiveBusiness',
-    name: 'RKC Automotive',
-    telephone: '+1-720-749-3965',
-    url: `${BUSINESS.website}${area.href}`,
-    description: area.metaDescription,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: BUSINESS.address.street,
-      addressLocality: BUSINESS.address.city,
-      addressRegion: BUSINESS.address.state,
-      postalCode: BUSINESS.address.zip,
-      addressCountry: 'US',
-    },
-    areaServed: {
-      '@type': 'City',
-      name: area.name,
-      containedInPlace: {
-        '@type': 'State',
-        name: 'Colorado',
-      },
-    },
-    openingHoursSpecification: OPENING_HOURS_SCHEMA,
-  };
-
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }}
+      <JsonLd
+        data={[
+          createLocalBusinessSchema({
+            pageUrl: area.href,
+            description: area.metaDescription,
+            areaServed: { name: area.name, type: 'City' },
+            includeRating: true,
+          }),
+          createBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Areas We Serve', path: '/areas-we-serve' },
+            { name: `${area.name}, CO`, path: area.href },
+          ]),
+        ]}
       />
 
       <PageHero
@@ -81,6 +68,7 @@ export default async function CityServiceAreaPage({ params }: Props) {
           { label: area.name },
         ]}
         imageSrc={PHOTOS.exterior}
+        imageAlt={`Auto repair serving ${area.name}, CO from RKC Automotive in Englewood`}
       />
 
       <section className="border-b border-[color:var(--line)] bg-white">
@@ -114,7 +102,7 @@ export default async function CityServiceAreaPage({ params }: Props) {
                     <span className="relative size-6 shrink-0 overflow-hidden rounded-sm ring-1 ring-[color:var(--line)]">
                       <Image
                         src={n.flag}
-                        alt=""
+                        alt={`${n.name} neighborhood flag`}
                         fill
                         sizes="24px"
                         className="object-cover"

@@ -8,10 +8,13 @@ import ReviewCards from '@/app/components/ui/ReviewCards';
 import SocialLinks from '@/app/components/ui/SocialLinks';
 import { createPageMetadata } from '@/lib/og';
 
+import JsonLd from '@/app/components/JsonLd';
+import { createAboutPageSchema, createBreadcrumbSchema } from '@/lib/seo';
+
 export const metadata = createPageMetadata({
-  title: 'About Us',
+  title: 'About RKC Automotive | ASE Auto Repair Englewood, CO',
   description:
-    'Learn about RKC Automotive, your trusted auto repair shop in Englewood, CO. ASE-certified technicians, 30+ years experience, honest pricing.',
+    'Meet RKC Automotive — ASE-certified auto repair in Englewood, CO. 30+ years serving Denver south metro with honest pricing, written estimates, and $120/hr labor.',
   path: '/about',
   image: PHOTOS.teamCollab,
   imageAlt: 'ASE-certified technicians at RKC Automotive in Englewood, CO',
@@ -35,11 +38,21 @@ const values = [
 export default function AboutPage() {
   return (
     <div>
+      <JsonLd
+        data={[
+          createAboutPageSchema(),
+          createBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'About', path: '/about' },
+          ]),
+        ]}
+      />
       <PageHero
         eyebrow="About"
         title="Thirty years. One Englewood bay. Zero upsell theatre."
         description="Trusted automotive services for every make, model, and year — ASE-certified repairs at $120/hr with straight answers, fair pricing, and Hablo Español."
         imageSrc={PHOTOS.teamCuevas}
+        imageAlt="RKC Automotive ASE-certified technicians in Englewood, CO"
       />
 
       <section className="py-24">
@@ -82,7 +95,7 @@ export default function AboutPage() {
 
       <section className="relative overflow-hidden bg-[#0c1222] py-24 text-white">
         <div className="absolute inset-0 opacity-20">
-          <Image src={PHOTOS.engineRebuild} alt="" fill className="object-cover" sizes="100vw" />
+          <Image src={PHOTOS.engineRebuild} alt="Engine rebuild at RKC Automotive in Englewood, CO" fill className="object-cover" sizes="100vw" />
         </div>
         <div className="relative wrap">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">

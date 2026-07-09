@@ -1,10 +1,11 @@
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
 import { createServicePageMetadata } from '@/lib/og';
+import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
-  'Exhaust System Repair in Englewood, CO | Muffler & Catalytic Converter | RKC Automotive',
-  'Expert exhaust system repair in Englewood, CO. Muffler, catalytic converter, pipes, and emissions repair. Call (720) 749-3965 for exhaust service.',
+  'Exhaust System Repair in Englewood, CO | RKC',
+  'Exhaust system repair in Englewood, CO — mufflers, catalytic converters, pipes, and emissions service for Denver south metro drivers. Call (720) 749-3965.',
   'exhaust-system-englewood-co',
   PHOTOS.undercarriage,
   'Exhaust System at RKC Automotive Englewood CO',

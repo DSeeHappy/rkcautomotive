@@ -25,6 +25,7 @@ export type PageMetadataOptions = {
   imageAlt?: string;
   type?: 'website' | 'article';
   keywords?: string | string[];
+  robots?: Metadata['robots'];
 };
 
 function normalizePath(path: string): string {
@@ -62,6 +63,7 @@ export function createPageMetadata({
   imageAlt = DEFAULT_OG_IMAGE.alt,
   type = 'website',
   keywords,
+  robots,
 }: PageMetadataOptions): Metadata {
   const url = absoluteUrl(path);
   const ogTitle = resolveDisplayTitle(title, titleAbsolute);
@@ -71,6 +73,7 @@ export function createPageMetadata({
     title: titleAbsolute ? { absolute: title } : title,
     description,
     ...(keywords ? { keywords } : {}),
+    ...(robots ? { robots } : {}),
     alternates: {
       canonical: url,
     },

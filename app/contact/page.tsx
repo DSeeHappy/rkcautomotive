@@ -6,10 +6,13 @@ import FadeIn from '@/app/components/ui/FadeIn';
 import SocialLinks from '@/app/components/ui/SocialLinks';
 import { createPageMetadata } from '@/lib/og';
 
+import JsonLd from '@/app/components/JsonLd';
+import { createBreadcrumbSchema, createContactPageSchema } from '@/lib/seo';
+
 export const metadata = createPageMetadata({
-  title: 'Contact Us',
+  title: 'Contact RKC Automotive | Englewood, CO Auto Repair',
   description:
-    'Contact RKC Automotive for auto repair in Englewood, CO. Call (720) 749-3965 or visit us at 2120 W Evans Ave. Mon-Fri 8-6, Sat 8-12.',
+    'Contact RKC Automotive for auto repair in Englewood, CO. Call (720) 749-3965 or visit 2120 W Evans Ave. Mon–Fri 8AM–6PM, Sat 8AM–12PM. Walk-ins welcome.',
   path: '/contact',
   image: PHOTOS.exterior,
   imageAlt: 'RKC Automotive shop exterior at 2120 W Evans Ave, Englewood, CO',
@@ -49,30 +52,14 @@ const details = [
 export default function ContactPage() {
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'ContactPage',
-            name: 'Contact RKC Automotive',
-            url: 'https://rkcautomotive.com/contact',
-            mainEntity: {
-              '@type': 'AutomotiveBusiness',
-              name: 'RKC Automotive',
-              telephone: '+1-720-749-3965',
-              email: BUSINESS.email,
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: BUSINESS.address.street,
-                addressLocality: BUSINESS.address.city,
-                addressRegion: BUSINESS.address.state,
-                postalCode: BUSINESS.address.zip,
-                addressCountry: 'US',
-              },
-            },
-          }),
-        }}
+      <JsonLd
+        data={[
+          createContactPageSchema(),
+          createBreadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Contact', path: '/contact' },
+          ]),
+        ]}
       />
 
       {/* Split full-bleed photo + form — agency quality */}

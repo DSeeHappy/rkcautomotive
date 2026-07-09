@@ -22,7 +22,7 @@ function NeighborhoodChip({ neighborhood }: { neighborhood: ServiceAreaNeighborh
       <span className="relative size-4 shrink-0 overflow-hidden rounded-sm ring-1 ring-white/20">
         <Image
           src={neighborhood.flag}
-          alt=""
+          alt={`${neighborhood.name} neighborhood flag`}
           fill
           sizes="16px"
           className="object-cover"
@@ -58,7 +58,7 @@ function ServiceAreaCard({
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <Image
             src={area.flag}
-            alt=""
+            alt={`${area.name}, Colorado area flag`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"

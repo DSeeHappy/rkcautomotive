@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "generate:vehicle-models": "node scripts/generate-vehicle-models.mjs",
-    "sync:vehicle-images": "node scripts/sync-vehicle-images.mjs"
+    "sync:vehicle-images": "node scripts/sync-vehicle-images.mjs",
+    "verify:seo": "node scripts/verify-seo.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.3.1",

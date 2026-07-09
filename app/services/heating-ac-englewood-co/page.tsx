@@ -1,10 +1,11 @@
 import { PHOTOS } from '@/lib/constants';
 import ServicePageShell from '@/app/components/ui/ServicePageShell';
 import { createServicePageMetadata } from '@/lib/og';
+import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
-  'Auto AC Repair & Heating Service in Englewood, CO | RKC Automotive',
-  'Expert auto AC repair and heating service in Englewood, CO. AC recharge, compressor replacement, heater repair. Stay comfortable year-round. Call (720) 749-3965.',
+  'Auto AC & Heating Repair | Englewood, CO',
+  'Auto AC repair and heating service in Englewood, CO. AC recharge, compressor replacement, and climate diagnostics for Denver south metro. Call (720) 749-3965.',
   'heating-ac-englewood-co',
   PHOTOS.interior,
   'Heating & AC at RKC Automotive Englewood CO',
