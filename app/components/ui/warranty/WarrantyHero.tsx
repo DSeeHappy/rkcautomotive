@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Award, CalendarCheck, Phone, ShieldCheck, Users, Wrench } from 'lucide-react';
-import { BUSINESS, LABOR_RATE, OTHER_WARRANTY_PROVIDERS, PHOTOS } from '@/lib/constants';
+import { ASE_ARIA_LABEL, ASE_URL, BUSINESS, LABOR_RATE, OTHER_WARRANTY_PROVIDERS, PHOTOS } from '@/lib/constants';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
@@ -12,7 +12,7 @@ import { useGsapReveal } from '@/lib/useGsapReveal';
 const STAT_PILLS = [
   { icon: Wrench, label: LABOR_RATE, sub: 'posted labor rate' },
   { icon: Users, label: '13+', sub: 'warranty partners' },
-  { icon: Award, label: 'ASE', sub: 'certified techs' },
+  { icon: Award, label: 'ASE', sub: 'certified techs', href: ASE_URL },
   { icon: ShieldCheck, label: '30+ yrs', sub: 'Englewood shop' },
 ] as const;
 
@@ -100,11 +100,10 @@ export default function WarrantyHero() {
             {STAT_PILLS.map((pill) => {
               const Icon = pill.icon;
               const label = pill.label === '13+' ? `${partnerCount}+` : pill.label;
-              return (
-                <div
-                  key={pill.sub}
-                  className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] px-4 py-3 backdrop-blur-md"
-                >
+              const pillClassName =
+                'flex items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] px-4 py-3 backdrop-blur-md transition-colors';
+              const content = (
+                <>
                   <span className="flex size-9 items-center justify-center rounded-xl bg-primary-green/20 ring-1 ring-primary-green/30">
                     <Icon className="size-4 text-primary-green-light" aria-hidden />
                   </span>
@@ -112,6 +111,27 @@ export default function WarrantyHero() {
                     <p className="font-display text-xl tracking-wide text-white">{label}</p>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/55">{pill.sub}</p>
                   </div>
+                </>
+              );
+
+              if ('href' in pill && pill.href) {
+                return (
+                  <MotionAnchor
+                    key={pill.sub}
+                    href={pill.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={ASE_ARIA_LABEL}
+                    className={`${pillClassName} hover:border-primary-green/40`}
+                  >
+                    {content}
+                  </MotionAnchor>
+                );
+              }
+
+              return (
+                <div key={pill.sub} className={pillClassName}>
+                  {content}
                 </div>
               );
             })}

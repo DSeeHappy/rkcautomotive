@@ -20,6 +20,9 @@ export const GOOGLE_REVIEWS_URL = 'https://share.google/i1wZ38efUAtcyUqnp';
 export const FACEBOOK_URL = 'https://www.facebook.com/RKCAutomotive/';
 export const INSTAGRAM_URL = 'https://www.instagram.com/rkcautomotive/';
 export const YAHOO_LOCAL_URL = 'https://local.yahoo.com/info-235125355-rkc-automotive-englewood/';
+export const ASE_URL = 'https://www.ase.com/';
+export const ASE_ARIA_LABEL =
+  'ASE — National Institute for Automotive Service Excellence (opens in new tab)';
 
 export const SOCIAL_LINKS = [
   { name: 'Facebook', href: FACEBOOK_URL, label: 'Facebook' },

@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import {
+  ASE_ARIA_LABEL,
+  ASE_URL,
   BUSINESS,
   LABOR_RATE,
   PHOTOS,
@@ -107,18 +109,42 @@ export default function PricingContent() {
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-[color:var(--line)] lg:grid-cols-4">
           {[
             { icon: Wrench, label: 'Labor rate', value: LABOR_RATE },
-            { icon: Shield, label: 'ASE certified', value: '30+ years' },
+            { icon: Shield, label: 'ASE certified', value: '30+ years', href: ASE_URL },
             { icon: CheckCircle, label: 'Estimates', value: 'Written first' },
             { icon: Clock, label: 'Hours', value: 'Mon–Fri 8–6' },
-          ].map((item, i) => (
-            <FadeIn key={item.label} delay={i * 0.06} className="flex items-center gap-4 px-6 py-8 sm:px-8">
-              <item.icon className="size-8 shrink-0 text-primary-green" aria-hidden />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-ink-muted">{item.label}</p>
-                <p className="mt-1 font-display text-2xl tracking-wide text-primary-blue sm:text-3xl">{item.value}</p>
-              </div>
-            </FadeIn>
-          ))}
+          ].map((item, i) => {
+            const inner = (
+              <>
+                <item.icon className="size-8 shrink-0 text-primary-green" aria-hidden />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-ink-muted">{item.label}</p>
+                  <p className="mt-1 font-display text-2xl tracking-wide text-primary-blue sm:text-3xl">{item.value}</p>
+                </div>
+              </>
+            );
+
+            if ('href' in item && item.href) {
+              return (
+                <FadeIn key={item.label} delay={i * 0.06}>
+                  <MotionAnchor
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={ASE_ARIA_LABEL}
+                    className="flex items-center gap-4 px-6 py-8 transition-colors hover:bg-primary-green/[0.06] sm:px-8"
+                  >
+                    {inner}
+                  </MotionAnchor>
+                </FadeIn>
+              );
+            }
+
+            return (
+              <FadeIn key={item.label} delay={i * 0.06} className="flex items-center gap-4 px-6 py-8 sm:px-8">
+                {inner}
+              </FadeIn>
+            );
+          })}
         </div>
       </section>
 

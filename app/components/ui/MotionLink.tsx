@@ -30,11 +30,8 @@ export function MotionLink({ children, className, ...props }: MotionLinkProps) {
   );
 }
 
-type MotionAnchorProps = {
-  href: string;
+type MotionAnchorProps = Omit<ComponentProps<'a'>, 'children'> & {
   children: ReactNode;
-  className?: string;
-  'aria-label'?: string;
 };
 
 export function MotionAnchor({ href, children, className, ...rest }: MotionAnchorProps) {

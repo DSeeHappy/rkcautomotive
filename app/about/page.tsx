@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
-import { BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS, LABOR_RATE, COMPETITIVE_POSITIONING } from '@/lib/constants';
+import { BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS, LABOR_RATE, COMPETITIVE_POSITIONING, ASE_URL, ASE_ARIA_LABEL } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
@@ -102,14 +102,38 @@ export default function AboutPage() {
             {[
               { value: '30+', label: 'Years serving' },
               { value: '5,000+', label: 'Vehicles serviced' },
-              { value: 'ASE', label: 'Certified techs' },
+              { value: 'ASE', label: 'Certified techs', href: ASE_URL },
               { value: '5★', label: 'Verified reviews' },
-            ].map((s, i) => (
-              <FadeIn key={s.label} delay={i * 0.06}>
-                <p className="font-display text-6xl tracking-wide text-primary-green-light">{s.value}</p>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/60">{s.label}</p>
-              </FadeIn>
-            ))}
+            ].map((s, i) => {
+              const inner = (
+                <>
+                  <p className="font-display text-6xl tracking-wide text-primary-green-light">{s.value}</p>
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/60">{s.label}</p>
+                </>
+              );
+
+              if ('href' in s && s.href) {
+                return (
+                  <FadeIn key={s.label} delay={i * 0.06}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={ASE_ARIA_LABEL}
+                      className="block rounded-2xl p-4 -m-4 transition-colors hover:bg-white/5"
+                    >
+                      {inner}
+                    </a>
+                  </FadeIn>
+                );
+              }
+
+              return (
+                <FadeIn key={s.label} delay={i * 0.06}>
+                  {inner}
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>

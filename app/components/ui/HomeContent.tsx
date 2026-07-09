@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import {
+  ASE_ARIA_LABEL,
+  ASE_URL,
   BUSINESS,
   FEATURED_SERVICES,
   PHOTOS,
@@ -254,7 +256,13 @@ export default function HomeContent() {
               </p>
             </FadeIn>
             <FadeIn delay={0.15}>
-              <div className="flex h-full min-h-[220px] flex-col justify-center rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8">
+              <MotionAnchor
+                href={ASE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={ASE_ARIA_LABEL}
+                className="flex h-full min-h-[220px] flex-col justify-center rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8 transition-colors hover:border-primary-green/40"
+              >
                 <p className="font-display text-6xl tracking-wide text-primary-blue">ASE</p>
                 <p className="mt-2 text-lg font-bold text-foreground">Certified technicians</p>
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted">
@@ -266,7 +274,7 @@ export default function HomeContent() {
                   <li>• Written estimates before work</li>
                   <li>• Hablamos Español</li>
                 </ul>
-              </div>
+              </MotionAnchor>
             </FadeIn>
           </div>
         </div>
