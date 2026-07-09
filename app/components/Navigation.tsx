@@ -7,6 +7,7 @@ import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { BUSINESS, NAV_LINKS, SERVICES } from '@/lib/constants';
 import AnimatedLogo from '@/app/components/ui/AnimatedLogo';
+import { MotionAnchor } from '@/app/components/ui/MotionLink';
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
@@ -83,15 +84,13 @@ export default function Navigation() {
             </Link>
           ))}
 
-          <motion.a
+          <MotionAnchor
             href={BUSINESS.phoneHref}
             className="ml-2 inline-flex items-center gap-2 rounded-full bg-primary-green px-5 py-2.5 text-sm font-bold text-white shadow-[0_10px_28px_-10px_rgba(14,133,54,0.7)]"
-            whileHover={reduce ? undefined : { y: -2, scale: 1.02 }}
-            whileTap={reduce ? undefined : { scale: 0.98 }}
           >
             <Phone className="size-4" />
             {BUSINESS.phone}
-          </motion.a>
+          </MotionAnchor>
         </div>
 
         <button

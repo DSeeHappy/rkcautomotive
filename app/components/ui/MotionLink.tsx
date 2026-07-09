@@ -40,24 +40,24 @@ type MotionAnchorProps = {
 export function MotionAnchor({ href, children, className, ...rest }: MotionAnchorProps) {
   const reduce = useReducedMotion();
 
+  const anchor = (
+    <a href={href} className={className} {...rest}>
+      {children}
+    </a>
+  );
+
   if (reduce) {
-    return (
-      <a href={href} className={className} {...rest}>
-        {children}
-      </a>
-    );
+    return anchor;
   }
 
   return (
-    <motion.a
-      href={href}
-      className={className}
+    <motion.div
+      className="inline-flex"
       whileHover={{ y: -2, scale: 1.01 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-      {...rest}
     >
-      {children}
-    </motion.a>
+      {anchor}
+    </motion.div>
   );
 }

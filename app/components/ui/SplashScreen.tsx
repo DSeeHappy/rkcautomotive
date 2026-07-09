@@ -38,7 +38,6 @@ type SplashScreenProps = {
 
 export default function SplashScreen({ children }: SplashScreenProps) {
   const [phase, setPhase] = useState<Phase>('checking');
-  const [contentVisible, setContentVisible] = useState(false);
   const [videoOpacity, setVideoOpacity] = useState(1);
   const [staticLogoOpacity, setStaticLogoOpacity] = useState(0);
   const [splashExiting, setSplashExiting] = useState(false);
@@ -76,7 +75,6 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     if (dismissedRef.current || handoffStartedRef.current) return;
     handoffStartedRef.current = true;
 
-    setContentVisible(true);
     setVideoOpacity(0);
     setStaticLogoOpacity(1);
 
@@ -88,7 +86,6 @@ export default function SplashScreen({ children }: SplashScreenProps) {
   const dismiss = useCallback(() => {
     if (dismissedRef.current) return;
     handoffStartedRef.current = true;
-    setContentVisible(true);
     setVideoOpacity(0);
     setStaticLogoOpacity(0);
     finishSplash();
@@ -129,93 +126,79 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     return () => video.removeEventListener('timeupdate', onTimeUpdate);
   }, [phase, startHandoff]);
 
-  if (phase === 'checking') {
-    return (
-      <>
-        <div
-          className="fixed inset-0 z-[9999] h-screen w-screen bg-[#000000]"
-          aria-hidden
-        />
-        <div className="invisible" aria-hidden>
-          {children}
-        </div>
-      </>
-    );
-  }
-
   if (phase === 'done') {
     return <>{children}</>;
   }
 
   return (
     <>
-      <div
-        className={`transition-opacity ease-out ${
-          contentVisible ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
-        style={{ transitionDuration: `${CROSSFADE_MS}ms` }}
-        aria-hidden={!contentVisible}
-      >
-        {children}
-      </div>
+      {children}
 
-      <div
-        id="splash-screen"
-        className={`fixed inset-0 z-[9999] h-screen w-screen overflow-hidden bg-[#000000] transition-opacity ease-out ${
-          splashExiting ? 'pointer-events-none opacity-0' : 'opacity-100'
-        }`}
-        style={{ transitionDuration: `${SPLASH_EXIT_MS}ms` }}
-        role="dialog"
-        aria-modal
-        aria-label="RKC Automotive intro"
-      >
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          className={`${VIDEO_CLASS} transition-opacity ease-in-out`}
-          style={{
-            opacity: videoOpacity,
-            transitionDuration: `${CROSSFADE_MS}ms`,
-          }}
-          aria-hidden={videoOpacity === 0}
-        >
-          <source src={RKC_LOGO_VIDEO_WEBM} type="video/webm" />
-          <source src={RKC_LOGO_VIDEO_MP4} type="video/mp4" />
-        </video>
-
+      {phase === 'checking' ? (
         <div
-          className="pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity ease-in-out"
-          style={{
-            opacity: staticLogoOpacity,
-            transitionDuration: `${CROSSFADE_MS}ms`,
-          }}
-          aria-hidden={staticLogoOpacity === 0}
-        >
-          <Image
-            src={STATIC_LOGO_SRC}
-            alt="RKC Automotive"
-            width={RKC_LOGO_CARD_SIZE}
-            height={RKC_LOGO_CARD_SIZE}
-            quality={95}
-            priority
-            className={STATIC_LOGO_CLASS}
-            draggable={false}
-          />
-        </div>
-
-        <button
-          type="button"
-          onClick={dismiss}
-          className={`absolute top-6 right-6 z-10 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/35 hover:bg-white/10 hover:text-white sm:top-8 sm:right-8 ${
-            showSkip ? 'opacity-100' : 'pointer-events-none opacity-0'
+          className="fixed inset-0 z-[9999] h-screen w-screen bg-[#000000]"
+          aria-busy="true"
+          aria-label="Loading RKC Automotive"
+        />
+      ) : (
+        <div
+          id="splash-screen"
+          className={`fixed inset-0 z-[9999] h-screen w-screen overflow-hidden bg-[#000000] transition-opacity ease-out ${
+            splashExiting ? 'pointer-events-none opacity-0' : 'opacity-100'
           }`}
+          style={{ transitionDuration: `${SPLASH_EXIT_MS}ms` }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="RKC Automotive intro"
         >
-          Skip Intro
-        </button>
-      </div>
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            className={`${VIDEO_CLASS} transition-opacity ease-in-out`}
+            style={{
+              opacity: videoOpacity,
+              transitionDuration: `${CROSSFADE_MS}ms`,
+            }}
+            aria-hidden={videoOpacity === 0}
+          >
+            <source src={RKC_LOGO_VIDEO_WEBM} type="video/webm" />
+            <source src={RKC_LOGO_VIDEO_MP4} type="video/mp4" />
+          </video>
+
+          <div
+            className="pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity ease-in-out"
+            style={{
+              opacity: staticLogoOpacity,
+              transitionDuration: `${CROSSFADE_MS}ms`,
+            }}
+            aria-hidden={staticLogoOpacity === 0}
+          >
+            <Image
+              src={STATIC_LOGO_SRC}
+              alt="RKC Automotive"
+              width={RKC_LOGO_CARD_SIZE}
+              height={RKC_LOGO_CARD_SIZE}
+              quality={95}
+              priority
+              className={STATIC_LOGO_CLASS}
+              draggable={false}
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={dismiss}
+            className={`absolute top-6 right-6 z-10 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/35 hover:bg-white/10 hover:text-white sm:top-8 sm:right-8 ${
+              showSkip ? 'opacity-100' : 'pointer-events-none opacity-0'
+            }`}
+          >
+            Skip Intro
+          </button>
+        </div>
+      )}
     </>
   );
 }

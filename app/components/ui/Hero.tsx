@@ -6,6 +6,7 @@ import { Phone } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { BUSINESS, PHOTOS, LABOR_RATE } from '@/lib/constants';
+import { MotionAnchor } from '@/app/components/ui/MotionLink';
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -27,7 +28,7 @@ export default function Hero() {
             fill
             priority
             className={`object-cover object-[78%_56%] sm:object-[74%_53%] lg:object-[70%_50%] ${reduce ? '' : 'ken-burns'}`}
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1920px"
           />
         </div>
         <div
@@ -77,15 +78,10 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
               >
-                <motion.a
-                  href={BUSINESS.phoneHref}
-                  className="btn-green"
-                  whileHover={reduce ? undefined : { y: -3 }}
-                  whileTap={reduce ? undefined : { scale: 0.98 }}
-                >
+                <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                   <Phone className="size-5" />
                   Call {BUSINESS.phone}
-                </motion.a>
+                </MotionAnchor>
                 <Link href="/pricing" className="btn-ghost-light">
                   See {LABOR_RATE} pricing
                 </Link>
