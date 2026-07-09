@@ -50,7 +50,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Thirty years. One Englewood bay. Zero upsell theatre."
-        description="Trusted automotive services for every make, model, and year — ASE-certified repairs at $120/hr with straight answers, fair pricing, and Hablo Español."
+        description="Trusted automotive services for every make, model, and year — ASE-certified repairs at $120/hr with straight answers, fair pricing, and Hablamos Español."
         imageSrc={PHOTOS.teamCuevas}
         imageAlt="RKC Automotive ASE-certified technicians in Englewood, CO"
       />

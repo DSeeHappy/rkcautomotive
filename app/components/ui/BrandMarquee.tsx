@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import BrandLogo from './BrandLogo';
 
@@ -10,13 +11,11 @@ export default function BrandMarquee() {
     <div className="overflow-hidden border-y border-[color:var(--line)] bg-white py-8">
       <div className="marquee-track gap-8 px-4 sm:gap-10">
         {brands.map((brand, i) => (
-          <a
+          <Link
             key={`${brand.slug}-${i}`}
-            href={brand.officialUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/vehicles-we-service#brands"
             className="group inline-flex shrink-0 items-center gap-3 rounded-full px-2 py-1 transition hover:bg-black/[0.03]"
-            aria-label={`Visit ${brand.name} official website`}
+            aria-label={`${brand.name} service at RKC Automotive`}
           >
             <BrandLogo
               slug={brand.slug}
@@ -27,7 +26,7 @@ export default function BrandMarquee() {
             <span className="font-display text-2xl tracking-wide text-foreground/70 transition group-hover:text-foreground sm:text-3xl">
               {brand.name}
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

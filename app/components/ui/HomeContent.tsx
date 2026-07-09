@@ -15,6 +15,7 @@ import {
   TRUST_BADGES,
   COMPETITIVE_POSITIONING,
   LABOR_RATE,
+  WARRANTY_PEACE_OF_MIND,
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
 import BrandSection from './BrandSection';
@@ -82,10 +83,10 @@ export default function HomeContent() {
           <FadeIn className="mb-14 max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">What we fix</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl lg:text-7xl">
-              Shop work that shows
+              Full-service auto repair
             </h2>
             <p className="mt-4 text-lg text-ink-muted">
-              Full-bay photography of the jobs Englewood drivers actually need — not clip-art icons in green squares.
+              Brakes, diagnostics, oil changes, transmission work, and more — real shop photos from our Englewood bay.
             </p>
           </FadeIn>
 
@@ -168,11 +169,11 @@ export default function HomeContent() {
             <FadeIn className="lg:col-span-5">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Why RKC</p>
               <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-                Mile-high standards. Neighbor-shop honesty.
+                Honest work from a shop you can reach
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-muted">
                 We&apos;re the Englewood shop that answers the phone, posts {LABOR_RATE} on the pricing page, and puts
-                every repair in writing before a wrench turns — no quote-only runaround.
+                every repair in writing before a wrench turns.
               </p>
             </FadeIn>
             <FadeIn delay={0.1} className="relative lg:col-span-7">
@@ -213,6 +214,93 @@ export default function HomeContent() {
               ))}
             </ul>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* Trust proof — team, shop, credentials */}
+      <section className="border-y border-[color:var(--line)] bg-white py-24 sm:py-28">
+        <div className="wrap">
+          <FadeIn className="mb-14 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">The shop</p>
+            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
+              Real people. Real bay. Real reviews.
+            </h2>
+            <p className="mt-4 text-lg text-ink-muted">
+              Visit us at 2120 W Evans Ave — ASE-certified technicians, a locally owned Englewood shop, and verified
+              Google &amp; Facebook reviews from customers in the metro.
+            </p>
+          </FadeIn>
+          <div className="grid gap-6 md:grid-cols-3">
+            <FadeIn delay={0.05}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <Image
+                  src={PHOTOS.exterior}
+                  alt="RKC Automotive shop exterior at 2120 W Evans Ave, Englewood, CO"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <p className="mt-4 text-sm font-bold uppercase tracking-[0.14em] text-primary-green">Our location</p>
+              <p className="mt-2 text-sm text-ink-muted">{BUSINESS.address.full}</p>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <Image
+                  src={PHOTOS.teamCollab}
+                  alt="RKC Automotive ASE-certified technicians working together in Englewood"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <p className="mt-4 text-sm font-bold uppercase tracking-[0.14em] text-primary-green">Our team</p>
+              <p className="mt-2 text-sm text-ink-muted">
+                Same crew visit after visit — Ray, Oscar, and technicians with 30+ years in this bay.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.15}>
+              <div className="flex h-full min-h-[220px] flex-col justify-center rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8">
+                <p className="font-display text-6xl tracking-wide text-primary-blue">ASE</p>
+                <p className="mt-2 text-lg font-bold text-foreground">Certified technicians</p>
+                <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                  Dealer-level diagnostics and repair without the dealer markup — credentials you can ask about when
+                  you visit.
+                </p>
+                <ul className="mt-6 space-y-2 text-sm font-semibold text-foreground">
+                  <li>• {LABOR_RATE} posted online</li>
+                  <li>• Written estimates before work</li>
+                  <li>• Hablamos Español</li>
+                </ul>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Warranty & peace of mind */}
+      <section className="py-24 sm:py-28">
+        <div className="wrap">
+          <FadeIn className="mb-14 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Peace of mind</p>
+            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
+              Warranty &amp; clear approvals
+            </h2>
+            <p className="mt-4 text-lg text-ink-muted">
+              We stand behind our work with written estimates, quality parts, and warranty options explained on every
+              invoice — plus help with third-party extended warranty claims when coverage applies.
+            </p>
+          </FadeIn>
+          <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+            {WARRANTY_PEACE_OF_MIND.map((item) => (
+              <StaggerItem key={item.title}>
+                <div className="h-full rounded-2xl border border-[color:var(--line)] bg-white p-6 sm:p-8">
+                  <h3 className="text-lg font-bold text-primary-blue">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-muted">{item.description}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </section>
 

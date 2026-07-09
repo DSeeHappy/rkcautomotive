@@ -279,7 +279,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       'Easy access from Wash Park, Capitol Hill, Five Points, and University Hills',
       'Honest diagnostics — we find the root cause, not just the code',
       'All makes and models, domestic and import',
-      'Hablo Español — bilingual service team',
+      'Hablamos Español — bilingual service team',
     ],
     'Auto repair for Denver neighborhoods near RKC Automotive in Englewood. Wash Park, Capitol Hill, Five Points, Highland & more. Call (720) 749-3965.'
   ),
@@ -472,7 +472,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       'Worth the drive for honest second opinions',
       'Emissions and exhaust repair for Colorado inspections',
       'Transmission fluid service and diagnostics',
-      'Bilingual team — Hablo Español',
+      'Bilingual team — Hablamos Español',
     ],
     'Auto repair for south Aurora, CO neighborhoods. RKC Automotive in Englewood — honest diagnostics & ASE-certified service. Call (720) 749-3965.'
   ),

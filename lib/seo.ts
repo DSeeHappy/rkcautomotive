@@ -4,6 +4,7 @@ import {
   GOOGLE_REVIEWS_URL,
   INSTAGRAM_URL,
   OPENING_HOURS_SCHEMA,
+  SERVICE_AREAS,
   SERVICES,
   VERIFIED_REVIEWS_4_PLUS,
   YAHOO_LOCAL_URL,
@@ -31,6 +32,14 @@ const POSTAL_ADDRESS = {
 
 const SAME_AS = [FACEBOOK_URL, INSTAGRAM_URL, GOOGLE_REVIEWS_URL, YAHOO_LOCAL_URL];
 
+const SCHEMA_OPENING_HOURS = ['Mo-Fr 08:00-18:00', 'Sa 08:00-12:00'] as const;
+
+const DEFAULT_AREA_SERVED = SERVICE_AREAS.map((name) => ({
+  '@type': 'City' as const,
+  name,
+  containedInPlace: { '@type': 'State' as const, name: 'Colorado' },
+}));
+
 /** All indexable routes for sitemap and SEO verification */
 export function getAllSiteRoutes(): string[] {
   return [
@@ -41,6 +50,8 @@ export function getAllSiteRoutes(): string[] {
     '/services',
     '/englewood-co-auto-repair',
     '/frequently-asked-questions',
+    '/privacy',
+    '/terms',
     '/areas-we-serve',
     '/vehicles-we-service',
     ...SERVICES.map((s) => s.href),
@@ -93,29 +104,58 @@ export function createWebSiteSchema() {
   };
 }
 
+type AreaServedInput =
+  | string
+  | { name: string; type?: 'City' | 'AdministrativeArea' }
+  | Array<string | { name: string; type?: 'City' | 'AdministrativeArea' }>;
+
 type LocalBusinessOptions = {
   pageUrl?: string;
   description?: string;
-  areaServed?: string | { name: string; type?: 'City' | 'AdministrativeArea' };
+  areaServed?: AreaServedInput;
   includeRating?: boolean;
 };
+
+function normalizeAreaServed(areaServed: AreaServedInput) {
+  const items = Array.isArray(areaServed) ? areaServed : [areaServed];
+
+  return items.map((item) =>
+    typeof item === 'string'
+      ? {
+          '@type': 'City' as const,
+          name: item,
+          containedInPlace: { '@type': 'State' as const, name: 'Colorado' },
+        }
+      : {
+          '@type': item.type ?? ('City' as const),
+          name: item.name,
+          containedInPlace: { '@type': 'State' as const, name: 'Colorado' },
+        },
+  );
+}
+
+function resolveAreaServed(areaServed: AreaServedInput) {
+  if (
+    Array.isArray(areaServed) &&
+    areaServed.length > 0 &&
+    typeof areaServed[0] === 'object' &&
+    '@type' in areaServed[0]
+  ) {
+    return areaServed;
+  }
+
+  return normalizeAreaServed(areaServed);
+}
 
 export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
   const {
     pageUrl = '/',
     description = BUSINESS.shortDescription,
-    areaServed = 'Englewood',
+    areaServed = DEFAULT_AREA_SERVED,
     includeRating = true,
   } = options;
 
-  const areaServedValue =
-    typeof areaServed === 'string'
-      ? { '@type': 'City' as const, name: areaServed }
-      : {
-          '@type': areaServed.type ?? ('City' as const),
-          name: areaServed.name,
-          containedInPlace: { '@type': 'State' as const, name: 'Colorado' },
-        };
+  const areaServedValue = resolveAreaServed(areaServed as AreaServedInput);
 
   const aggregateRating = includeRating ? createAggregateRating() : undefined;
 
@@ -125,7 +165,7 @@ export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
     '@id': `${absoluteUrl(pageUrl)}#business`,
     name: BUSINESS.name,
     image: absoluteUrl(PHOTOS.exterior),
-    url: absoluteUrl(pageUrl),
+    url: SITE_URL,
     telephone: '+1-720-749-3965',
     email: BUSINESS.email,
     priceRange: '$$',
@@ -136,11 +176,22 @@ export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
       latitude: String(BUSINESS_GEO.latitude),
       longitude: String(BUSINESS_GEO.longitude),
     },
+    openingHours: SCHEMA_OPENING_HOURS,
     openingHoursSpecification: OPENING_HOURS_SCHEMA,
     areaServed: areaServedValue,
-    sameAs: SAME_AS,
+    sameAs: [FACEBOOK_URL, INSTAGRAM_URL],
     ...(aggregateRating ? { aggregateRating } : {}),
   };
+}
+
+/** Homepage AutoRepair schema with full service-area coverage for local SEO audits. */
+export function createHomepageAutoRepairSchema() {
+  return createLocalBusinessSchema({
+    pageUrl: '/',
+    description: BUSINESS.shortDescription,
+    areaServed: DEFAULT_AREA_SERVED,
+    includeRating: true,
+  });
 }
 
 export function createBreadcrumbSchema(items: BreadcrumbItem[]) {

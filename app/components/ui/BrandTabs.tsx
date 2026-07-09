@@ -1,7 +1,7 @@
 'use client';
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
-import { ChevronRight, ExternalLink, MapPin, Wrench } from 'lucide-react';
+import { ChevronRight, MapPin, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS, type VehicleBrand } from '@/lib/vehicleBrands';
@@ -100,15 +100,13 @@ export default function BrandTabs() {
                       {brand.name} Service
                     </h3>
                   </div>
-                  <a
-                    href={brand.officialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/vehicles-we-service#brands"
                     className="btn-ghost-light inline-flex shrink-0 items-center gap-2 self-start px-4 py-2 text-sm"
                   >
-                    Visit {brand.name}
-                    <ExternalLink className="size-4" aria-hidden />
-                  </a>
+                    All {brand.name} info
+                    <ChevronRight className="size-4" aria-hidden />
+                  </Link>
                 </div>
 
                 <div className="mt-8 space-y-5 text-base leading-relaxed text-white">

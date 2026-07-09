@@ -202,6 +202,28 @@ export const FOOTER_LINKS = [
   { name: 'Location', href: '/englewood-co-auto-repair' },
   { name: 'FAQ', href: '/frequently-asked-questions' },
   { name: 'All Services', href: '/services' },
+  { name: 'Privacy Policy', href: '/privacy' },
+  { name: 'Terms of Service', href: '/terms' },
+] as const;
+
+export const WARRANTY_PEACE_OF_MIND = [
+  {
+    title: 'Quality parts',
+    description: 'We source reliable parts for every repair and explain what goes on your vehicle before we order.',
+  },
+  {
+    title: 'Written estimates',
+    description: 'Every job starts with a clear written estimate — no surprise charges after work begins.',
+  },
+  {
+    title: 'Your approval first',
+    description: 'We diagnose, explain what is urgent vs. what can wait, and only proceed after you approve the scope.',
+  },
+  {
+    title: 'Repair warranty options',
+    description:
+      'Repairs include warranty coverage on parts and labor — terms vary by service and we explain specifics on your estimate.',
+  },
 ] as const;
 
 export type ServiceItem = {
