@@ -363,11 +363,69 @@ export const TRUST_BADGES = [
 
 export { VEHICLE_BRANDS as BRAND_MARQUEE } from '@/lib/vehicleBrands';
 
+export const LABOR_RATE = '$120/hr' as const;
+
+export const PRICING_COMPARISON = [
+  {
+    name: 'Dealership',
+    laborRate: '$150–200+/hr',
+    diagnosticFee: '$150–250',
+    upselling: 'Common — extra services pushed',
+    turnaround: '2–5 business days',
+    estimate: 'Often vague until bill arrives',
+    highlight: false,
+  },
+  {
+    name: 'Chain Shop',
+    laborRate: '$130–160/hr',
+    diagnosticFee: '$89–150',
+    upselling: 'Frequent — package add-ons',
+    turnaround: '1–3 business days',
+    estimate: 'Menu pricing, limited detail',
+    highlight: false,
+  },
+  {
+    name: 'RKC Automotive',
+    laborRate: LABOR_RATE,
+    diagnosticFee: 'From $99 — applied to repair',
+    upselling: 'None — only what you need',
+    turnaround: 'Same-day when possible',
+    estimate: 'Written before any work',
+    highlight: true,
+  },
+] as const;
+
+export const PRICING_COMPARISON_ROWS = [
+  { label: 'Labor rate', key: 'laborRate' as const },
+  { label: 'Diagnostic fee', key: 'diagnosticFee' as const },
+  { label: 'Upselling', key: 'upselling' as const },
+  { label: 'Turnaround', key: 'turnaround' as const },
+  { label: 'Estimate', key: 'estimate' as const },
+] as const;
+
+export const PRICING_PHILOSOPHY = [
+  {
+    title: 'One rate. No games.',
+    description:
+      'Our labor rate is $120/hr — posted, explained, and applied consistently. No surprise shop fees or padded line items.',
+  },
+  {
+    title: 'Written before we wrench.',
+    description:
+      'Every repair gets a written estimate you approve first. If the job changes, we call you before spending another dollar.',
+  },
+  {
+    title: 'Fix it. Get you driving.',
+    description:
+      'We diagnose the actual problem — not every sensor on the diagram. Same-day service when parts are on hand and the bay is open.',
+  },
+] as const;
+
 export const PRICING_PACKAGES = [
   {
     name: 'Essential Care',
     price: 'From $79',
-    description: 'Keep the basics dialed for Colorado miles.',
+    description: 'Routine maintenance — no bundled extras you did not ask for.',
     featured: false,
     features: [
       'Synthetic oil change',
@@ -376,12 +434,12 @@ export const PRICING_PACKAGES = [
       'Fluid top-offs',
       'Cabin air filter check',
     ],
-    cta: 'Book Essential Care',
+    cta: 'Call to schedule',
   },
   {
     name: 'Safety Package',
     price: 'From $349',
-    description: 'Brakes and batteries that keep you confident.',
+    description: 'Brakes and battery work priced at $120/hr labor — straight numbers.',
     featured: true,
     features: [
       'Brake pad + rotor (per axle starts)',
@@ -390,12 +448,12 @@ export const PRICING_PACKAGES = [
       'Written estimate before work',
       'Priority same-day slots when available',
     ],
-    cta: 'Book Safety Package',
+    cta: 'Call to schedule',
   },
   {
     name: 'Diagnostic Pro',
     price: 'From $99',
-    description: 'When the light comes on — find it, fix it.',
+    description: 'Find the real problem. Fee credited toward approved repair.',
     featured: false,
     features: [
       'Check-engine diagnostic',
@@ -404,7 +462,7 @@ export const PRICING_PACKAGES = [
       'Fee applied toward approved repair',
       'Clear next-step plan',
     ],
-    cta: 'Book Diagnostic',
+    cta: 'Call to schedule',
   },
 ] as const;
 

@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import PricingContent from '@/app/components/ui/PricingContent';
 
 export const metadata: Metadata = {
-  title: 'Pricing & Estimates | RKC Automotive Englewood, CO',
+  title: '$120/hr Auto Repair Pricing | RKC Automotive Englewood, CO',
   description:
-    'Transparent auto repair pricing in Englewood, CO. Oil changes from $49, brake service from $189, free inspections. Call (720) 749-3965 for a written estimate.',
+    'RKC Automotive charges $120/hr — less than dealerships ($150–200+/hr) with ASE-certified service, written estimates, and no upselling. Call (720) 749-3965.',
   openGraph: {
-    title: 'Auto Repair Pricing | RKC Automotive',
-    description: 'Fair, transparent pricing for auto repair and maintenance in Englewood, CO.',
+    title: '$120/hr Auto Repair | RKC Automotive',
+    description:
+      'Honest $120/hr labor rate. Beat dealership pricing with ASE-certified service in Englewood, CO.',
     url: 'https://rkcautomotive.com/pricing',
     type: 'website',
   },
