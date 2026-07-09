@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
-import { BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS } from '@/lib/constants';
+import { BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS, LABOR_RATE, COMPETITIVE_POSITIONING } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
@@ -35,7 +35,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Thirty years. One Englewood bay. Zero upsell theatre."
-        description="Trusted automotive services for every make, model, and year — ASE-certified repairs with straight answers, fair pricing, and Hablo Español."
+        description="Trusted automotive services for every make, model, and year — ASE-certified repairs at $120/hr with straight answers, fair pricing, and Hablo Español."
         imageSrc={PHOTOS.teamCuevas}
       />
 
@@ -51,7 +51,13 @@ export default function AboutPage() {
                 Families across the Denver metro bring their vehicles here because we listen first, diagnose carefully,
                 and stand behind the work.
               </p>
-              <p className="mt-4 text-ink-muted">{BUSINESS.shortDescription}</p>              <a href={BUSINESS.phoneHref} className="btn-green mt-10">
+              <p className="mt-4 text-ink-muted">
+                Plenty of Front Range shops promise dealership-level diagnostics and transparent pricing, but many
+                won&apos;t share their labor rate until you call or submit a form. We publish {LABOR_RATE} so you can
+                compare the full estimate — hours × rate + parts — before you visit.
+              </p>
+              <p className="mt-4 text-ink-muted">{BUSINESS.shortDescription}</p>
+              <a href={BUSINESS.phoneHref} className="btn-green mt-10">
                 <Phone className="size-5" />
                 {BUSINESS.phone}
               </a>
@@ -126,6 +132,29 @@ export default function AboutPage() {
             <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="btn-green">
               Read Google reviews
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[color:var(--line)] bg-white py-24">
+        <div className="wrap">
+          <FadeIn className="mb-12 max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">How we compare</p>
+            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground">Posted pricing beats quote-only</h2>
+            <p className="mt-4 text-ink-muted">
+              Same ASE-certified skill other Denver metro shops advertise — with a labor rate you can verify before you
+              drive over.
+            </p>
+          </FadeIn>
+          <div className="grid gap-6 md:grid-cols-3">
+            {COMPETITIVE_POSITIONING.map((item, i) => (
+              <FadeIn key={item.title} delay={i * 0.08}>
+                <div className="h-full rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8">
+                  <h3 className="text-xl font-bold text-primary-blue">{item.title}</h3>
+                  <p className="mt-3 text-ink-muted">{item.description}</p>
+                </div>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>

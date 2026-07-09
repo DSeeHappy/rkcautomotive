@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { BUSINESS, PHOTOS } from '@/lib/constants';
+import { BUSINESS, PHOTOS, LABOR_RATE } from '@/lib/constants';
 import AnimatedLogo from '@/app/components/ui/AnimatedLogo';
 
 export default function Hero() {
@@ -69,8 +69,8 @@ export default function Hero() {
                   Englewood&apos;s bay for work you can trust
                 </h1>
                 <p className="mt-5 max-w-xl text-lg font-medium text-white/80 sm:text-xl">
-                  ASE-certified repair with written estimates, real shop photos, and thirty years of Denver-metro
-                  know-how — brakes to diagnostics under one roof.
+                  ASE-certified repair at {LABOR_RATE} — posted online, explained on the phone, and applied on every
+                  invoice. Written estimates, real shop photos, and thirty years of Denver-metro know-how.
                 </p>
               </motion.div>
 
@@ -89,14 +89,14 @@ export default function Hero() {
                   <Phone className="size-5" />
                   Call {BUSINESS.phone}
                 </motion.a>
-                <Link href="/contact" className="btn-ghost-light">
-                  Book service
+                <Link href="/pricing" className="btn-ghost-light">
+                  See {LABOR_RATE} pricing
                 </Link>
                 <Link
-                  href="/services"
+                  href="/contact"
                   className="text-sm font-semibold text-white/80 underline-offset-4 transition hover:text-white hover:underline"
                 >
-                  Explore services
+                  Book service
                 </Link>
               </motion.div>
             </div>

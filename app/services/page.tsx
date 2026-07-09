@@ -18,7 +18,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="Eleven lanes of real shop work"
-        description="From preventative maintenance to major repairs — ASE-certified technicians behind every job at our Englewood shop."
+        description="From preventative maintenance to diesel, transmission, and extended-warranty repairs — ASE-certified technicians behind every job at our Englewood shop."
         imageSrc={PHOTOS.interior}
       />
 

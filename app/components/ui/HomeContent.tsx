@@ -13,6 +13,8 @@ import {
   STATS,
   VERIFIED_REVIEWS_4_PLUS,
   TRUST_BADGES,
+  COMPETITIVE_POSITIONING,
+  LABOR_RATE,
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
 import BrandSection from './BrandSection';
@@ -144,9 +146,17 @@ export default function HomeContent() {
                 Mile-high standards. Neighbor-shop honesty.
               </h2>
               <p className="mt-5 text-lg text-ink-muted">
-                We&apos;re the Englewood shop that answers the phone, explains the repair, and puts it in writing before
-                a wrench turns.
+                We&apos;re the Englewood shop that answers the phone, posts {LABOR_RATE} on the pricing page, and puts
+                every repair in writing before a wrench turns — no quote-only runaround.
               </p>
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                {COMPETITIVE_POSITIONING.map((item) => (
+                  <div key={item.title} className="rounded-2xl border border-[color:var(--line)] bg-white p-5">
+                    <h3 className="text-sm font-bold text-primary-blue">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</p>
+                  </div>
+                ))}
+              </div>
               <ul className="mt-10 space-y-4">
                 {TRUST_BADGES.map((badge) => (
                   <li key={badge} className="flex items-center gap-3 border-b border-[color:var(--line)] pb-4 text-sm font-semibold">

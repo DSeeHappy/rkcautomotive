@@ -227,7 +227,7 @@ export const SERVICES: ServiceItem[] = [
     href: '/services/engine-diagnostics-englewood-co',
     slug: 'engine-diagnostics-englewood-co',
     icon: Car,
-    description: 'Advanced diagnostics to find problems fast.',
+    description: 'Advanced diagnostics for check-engine lights, drivability, diesel, and electrical issues.',
     image: SERVICE_PHOTOS['engine-diagnostics-englewood-co'],
   },
   {
@@ -353,6 +353,7 @@ export const PROCESS_STEPS = [
 
 export const TRUST_BADGES = [
   'ASE Certified',
+  '$120/hr Posted Online',
   '30+ Years Experience',
   'Written Estimates',
   'Same-Day Service',
@@ -361,6 +362,9 @@ export const TRUST_BADGES = [
   'Locally Owned',
 ] as const;
 
+/** Typical Denver metro independent shop labor range when a rate is disclosed — many shops quote only. */
+export const LOCAL_SHOP_RATE_RANGE = '$130–175/hr' as const;
+
 export { VEHICLE_BRANDS as BRAND_MARQUEE } from '@/lib/vehicleBrands';
 
 export const LABOR_RATE = '$120/hr' as const;
@@ -368,7 +372,7 @@ export const LABOR_RATE = '$120/hr' as const;
 export type FAQItem = { question: string; answer: string };
 
 export const PRICING_COMPARISON_DISCLAIMER =
-  'Typical labor rates and fees reported by Englewood and Denver metro drivers. Actual charges vary by vehicle, brand, and shop location.' as const;
+  'Typical labor rates and fees reported by Englewood and Denver metro drivers. Many local shops do not publish hourly rates online — actual charges vary by vehicle, brand, and shop.' as const;
 
 export const PRICING_TIERS_DISCLAIMER =
   'Starting prices assume typical conditions. Parts vary by vehicle, and we may find additional issues during inspection. If anything changes, you get a written change order before we proceed — no surprise charges.' as const;
@@ -377,38 +381,57 @@ export const PRICING_COMPARISON = [
   {
     name: 'Dealership',
     laborRate: '$180–220/hr',
+    ratePosted: 'Sometimes — often buried in fine print',
     diagnosticFee: '$150–250 (often non-refundable)',
     upselling: 'High — recommended services lists, fluid flushes, cabin filters',
     turnaround: '2–5 business days',
     estimate: 'Often itemized only after work starts',
+    weekdayHours: 'Mon–Fri until 5–6 PM',
     highlight: false,
   },
   {
     name: 'Chain Shop',
     laborRate: '$140–160/hr',
+    ratePosted: 'Menu pricing — not a flat hourly rate',
     diagnosticFee: '$89–150 (rarely credited)',
     upselling: 'Frequent — package add-ons, upsell scripts',
     turnaround: '1–3 business days',
     estimate: 'Menu pricing, limited line-item detail',
+    weekdayHours: 'Mon–Fri until 6–7 PM',
+    highlight: false,
+  },
+  {
+    name: 'Typical Local Shop',
+    laborRate: `${LOCAL_SHOP_RATE_RANGE} — quote only`,
+    ratePosted: 'Rarely — call or online form for pricing',
+    diagnosticFee: 'Varies — quoted at intake',
+    upselling: 'Varies — warranty and fleet upsells common',
+    turnaround: 'Often 24–48 hrs to confirm appointment',
+    estimate: 'Provided after callback or first visit',
+    weekdayHours: 'Mon–Fri until 5 PM typical',
     highlight: false,
   },
   {
     name: 'RKC Automotive',
     laborRate: LABOR_RATE,
+    ratePosted: 'Yes — posted on this page and every estimate',
     diagnosticFee: 'From $99 — credited toward approved repair',
     upselling: 'None — fix what is broken, skip what is not',
     turnaround: 'Same-day when parts are available',
     estimate: 'Written estimate before any wrench turns',
+    weekdayHours: 'Mon–Fri until 6 PM · Sat 8–12',
     highlight: true,
   },
 ] as const;
 
 export const PRICING_COMPARISON_ROWS = [
   { label: 'Labor rate', key: 'laborRate' as const },
+  { label: 'Rate posted online', key: 'ratePosted' as const },
   { label: 'Diagnostic fee', key: 'diagnosticFee' as const },
   { label: 'Upselling', key: 'upselling' as const },
   { label: 'Turnaround', key: 'turnaround' as const },
   { label: 'Estimate', key: 'estimate' as const },
+  { label: 'Weekday hours', key: 'weekdayHours' as const },
 ] as const;
 
 export const PRICING_SAVINGS_SCENARIOS = [
@@ -440,10 +463,10 @@ export const PRICING_SAVINGS_SCENARIOS = [
 
 export const PRICING_PHILOSOPHY = [
   {
-    title: 'One rate. No games.',
+    title: 'One rate. Posted publicly.',
     icon: 'rate' as const,
     description:
-      '$120/hr — posted on this page, explained on the phone, and applied on every invoice. No surprise shop fees, environmental charges, or padded line items.',
+      '$120/hr — on this page, on the phone, and on every invoice. Plenty of Englewood shops promise transparent pricing but make you call or submit a form before you know the hourly rate. We publish ours.',
   },
   {
     title: 'No overselling. No scare tactics.',
@@ -473,7 +496,25 @@ export const PRICING_PHILOSOPHY = [
     title: 'ASE certified. 30+ years. Englewood.',
     icon: 'certified' as const,
     description:
-      'Same technician expertise dealerships charge $180–220/hr for — without the franchise overhead, the waiting-room upsell, or the vague final bill.',
+      'Dealership-level diagnostics and repair — the same ASE-certified skill other Front Range shops advertise — without the $180–220/hr dealer markup or the quote-only runaround.',
+  },
+] as const;
+
+export const COMPETITIVE_POSITIONING = [
+  {
+    title: 'Rate you can see before you call',
+    description:
+      'Many Denver metro independents ask you to request a quote or wait for a callback before sharing labor pricing. RKC posts $120/hr so you can compare the full estimate — hours × rate + parts — before you drive over.',
+  },
+  {
+    title: 'Open until 6 PM weekdays',
+    description:
+      'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no appointment form required.',
+  },
+  {
+    title: 'No oversell. Real diagnostics.',
+    description:
+      'Shops that lean on extended-warranty and fleet programs sometimes push coverage you may not need. We diagnose the actual problem, explain what is urgent vs. what can wait, and fix only what you approve.',
   },
 ] as const;
 
@@ -497,6 +538,16 @@ export const PRICING_PAGE_FAQ: FAQItem[] = [
     question: 'How do I know I am not being upsold?',
     answer:
       'We show you what we found, explain what is urgent vs. what can wait, and let you decide. Your written estimate is the scope — nothing gets added without your OK. That is the whole point of posting our rate publicly.',
+  },
+  {
+    question: 'Why do other Englewood shops not show their labor rate?',
+    answer:
+      `Most independent shops in the Denver metro charge ${LOCAL_SHOP_RATE_RANGE} when they disclose a rate at all — but many only quote after a phone call or online form. Posting $120/hr lets you do the math yourself: labor hours × rate + parts. No callback required to compare apples to apples.`,
+  },
+  {
+    question: 'Do you work with extended warranties or fleet accounts?',
+    answer:
+      'Yes — we service personal vehicles, fleet trucks, and diesel work daily, and we can help with third-party extended warranty claims when coverage applies. You still get our posted $120/hr labor rate and a written estimate before any work begins.',
   },
 ];
 

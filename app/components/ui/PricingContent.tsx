@@ -31,6 +31,8 @@ import {
   PRICING_SAVINGS_SCENARIOS,
   PRICING_TIERS,
   PRICING_TIERS_DISCLAIMER,
+  LOCAL_SHOP_RATE_RANGE,
+  COMPETITIVE_POSITIONING,
 } from '@/lib/constants';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
@@ -38,6 +40,7 @@ import FAQAccordion from '@/app/components/ui/FAQAccordion';
 const RKC_RATE = 120;
 const DEALER_RATE = 180;
 const CHAIN_RATE = 150;
+const LOCAL_RATE = 155;
 
 const PHILOSOPHY_ICONS: Record<(typeof PRICING_PHILOSOPHY)[number]['icon'], LucideIcon> = {
   rate: CircleDollarSign,
@@ -94,8 +97,9 @@ export default function PricingContent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
           >
-            ASE-certified Englewood shop. Dealers charge $180–220/hr and push services you do not need. We charge{' '}
-            {LABOR_RATE}, tell you straight, and get you back on the road.
+            ASE-certified Englewood shop. Dealers charge $180–220/hr. Typical local shops often charge{' '}
+            {LOCAL_SHOP_RATE_RANGE} but rarely post it online. We charge {LABOR_RATE}, publish it here, and get you
+            back on the road.
           </motion.p>
           <motion.div
             className="mt-8 flex flex-wrap gap-3"
@@ -145,20 +149,21 @@ export default function PricingContent() {
           <FadeIn className={SECTION_HEADER}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Compare</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Dealership vs chain vs RKC
+              Dealer vs chain vs local vs RKC
             </h2>
             <p className="mt-4 text-lg text-ink-muted">
-              Same ASE-certified work. Different labor rates, different pressure. Here is what Englewood and Denver metro
-              drivers typically pay — and what you get for it.
+              Same ASE-certified work. Different labor rates, different transparency. Here is what Englewood and Denver
+              metro drivers typically pay — and whether you can see the rate before you call.
             </p>
           </FadeIn>
 
           {/* Rate highlight bar */}
           <FadeIn className="mb-10">
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {[
                 { label: 'Dealership', rate: '$180–220/hr', tone: 'muted' as const },
                 { label: 'Chain shop', rate: '$140–160/hr', tone: 'muted' as const },
+                { label: 'Typical local shop', rate: LOCAL_SHOP_RATE_RANGE, tone: 'muted' as const },
                 { label: 'RKC Automotive', rate: LABOR_RATE, tone: 'highlight' as const },
               ].map((item) => (
                 <div
@@ -286,6 +291,32 @@ export default function PricingContent() {
         </div>
       </section>
 
+      {/* Why posted pricing beats quote-only shops */}
+      <section className={`border-y border-[color:var(--line)] bg-white ${SECTION_PAD}`}>
+        <div className="wrap">
+          <FadeIn className={SECTION_HEADER}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Why it matters</p>
+            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
+              Transparency you can verify
+            </h2>
+            <p className="mt-4 text-lg text-ink-muted">
+              Plenty of Front Range shops advertise honest pricing — then ask you to request a quote before sharing
+              their hourly rate. RKC puts {LABOR_RATE} on the page so you can compare the full estimate upfront.
+            </p>
+          </FadeIn>
+          <Stagger className="grid gap-6 md:grid-cols-3" stagger={0.08}>
+            {COMPETITIVE_POSITIONING.map((item) => (
+              <StaggerItem key={item.title}>
+                <article className="h-full rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] p-8">
+                  <h3 className="font-display text-2xl tracking-wide text-primary-blue">{item.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-muted">{item.description}</p>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
       {/* What $120/hr means for you */}
       <section className={`bg-white ${SECTION_PAD}`}>
         <div className="wrap">
@@ -305,7 +336,9 @@ export default function PricingContent() {
               const rkc = laborCost(scenario.hours, RKC_RATE);
               const dealer = laborCost(scenario.hours, DEALER_RATE);
               const chain = laborCost(scenario.hours, CHAIN_RATE);
+              const local = laborCost(scenario.hours, LOCAL_RATE);
               const savingsVsDealer = dealer - rkc;
+              const savingsVsLocal = local - rkc;
 
               return (
                 <StaggerItem key={scenario.title}>
@@ -325,11 +358,16 @@ export default function PricingContent() {
                     </div>
 
                     <div className="flex-1 space-y-4 px-6 py-6 sm:px-8">
-                      <div className="grid grid-cols-3 gap-3 text-center">
+                      <div className="grid grid-cols-2 gap-3 text-center sm:grid-cols-4">
                         <div className="rounded-xl bg-white p-4 ring-2 ring-primary-green">
                           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-primary-green">RKC</p>
                           <p className="mt-1 font-display text-2xl tracking-wide text-primary-blue">{formatCurrency(rkc)}</p>
                           <p className="mt-0.5 text-[10px] text-ink-muted">@ $120/hr</p>
+                        </div>
+                        <div className="rounded-xl bg-white p-4">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-muted">Local</p>
+                          <p className="mt-1 font-display text-2xl tracking-wide text-foreground">{formatCurrency(local)}</p>
+                          <p className="mt-0.5 text-[10px] text-ink-muted">@ ~$155/hr</p>
                         </div>
                         <div className="rounded-xl bg-white p-4">
                           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-muted">Chain</p>
@@ -346,7 +384,8 @@ export default function PricingContent() {
                       <div className="flex items-center gap-3 rounded-xl bg-primary-green/10 px-4 py-3">
                         <TrendingDown className="size-5 shrink-0 text-primary-green" aria-hidden />
                         <p className="text-sm font-semibold text-primary-blue">
-                          Save {formatCurrency(savingsVsDealer)}+ on labor vs. typical dealer rate
+                          Save {formatCurrency(savingsVsLocal)}+ vs. typical local shop · {formatCurrency(savingsVsDealer)}+
+                          vs. dealer
                         </p>
                       </div>
 
@@ -361,9 +400,9 @@ export default function PricingContent() {
           <FadeIn className="mt-10 rounded-2xl border border-primary-blue/15 bg-primary-blue/5 px-6 py-5 sm:px-8">
             <p className="text-sm leading-relaxed text-ink-muted">
               <span className="font-semibold text-primary-blue">The formula is simple:</span> labor hours × hourly rate
-              + parts. At RKC, the rate is always $120/hr. A 2-hour brake job is $240 in labor here — $360+ at a
-              $180/hr dealer. Parts are quoted separately at every shop; we do not hide behind bundled "starting at"
-              prices.
+              + parts. At RKC, the rate is always $120/hr. A 2-hour brake job is $240 in labor here — $310+ at a typical
+              local shop and $360+ at a $180/hr dealer. Parts are quoted separately at every shop; we do not hide
+              behind quote-only forms or bundled &quot;starting at&quot; prices.
             </p>
           </FadeIn>
         </div>
