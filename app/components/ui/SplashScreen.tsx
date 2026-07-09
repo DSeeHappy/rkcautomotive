@@ -15,7 +15,7 @@ const SPLASH_EXIT_MS = 550;
 const SKIP_APPEAR_MS = 1500;
 
 const VIDEO_CLASS =
-  'absolute inset-0 h-full w-full object-cover object-center select-none';
+  'max-h-full max-w-full h-full w-auto object-contain object-center select-none';
 
 type Phase = 'checking' | 'playing' | 'done';
 
@@ -167,18 +167,20 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           aria-hidden={splashExiting}
           aria-label="RKC Automotive intro"
         >
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            className={VIDEO_CLASS}
-            aria-hidden
-          >
-            <source src={RKC_LOGO_VIDEO_WEBM} type="video/webm" />
-            <source src={RKC_LOGO_VIDEO_MP4} type="video/mp4" />
-          </video>
+          <div className="flex h-full w-full items-center justify-center bg-black">
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              className={VIDEO_CLASS}
+              aria-hidden
+            >
+              <source src={RKC_LOGO_VIDEO_WEBM} type="video/webm" />
+              <source src={RKC_LOGO_VIDEO_MP4} type="video/mp4" />
+            </video>
+          </div>
 
           <button
             type="button"
