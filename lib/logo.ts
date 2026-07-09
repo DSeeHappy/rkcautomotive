@@ -19,11 +19,11 @@ export const RKC_LOGO_HEIGHT = 1123;
 /** Square white-card asset dimensions */
 export const RKC_LOGO_CARD_SIZE = 1040;
 
-/** Nav logo — compact when scrolled (px), from commit 778e84f */
-export const NAV_LOGO_SCROLLED_HEIGHT = { base: 48, sm: 56, lg: 64 } as const;
+/** Nav logo — compact when scrolled (px) */
+export const NAV_LOGO_SCROLLED_HEIGHT = { base: 56, sm: 64, lg: 72 } as const;
 
-/** Nav logo scale at top (transparent) vs compact scrolled size — mobile uses smaller delta */
-export const NAV_LOGO_TOP_SCALE = { base: 1.3, sm: 1.45, lg: 1.6 } as const;
+/** Nav logo scale at top (transparent) vs compact scrolled size */
+export const NAV_LOGO_TOP_SCALE = { base: 1.5, sm: 1.65, lg: 1.8 } as const;
 
 export function getNavTopScale(): number {
   if (typeof window === 'undefined') return NAV_LOGO_TOP_SCALE.sm;

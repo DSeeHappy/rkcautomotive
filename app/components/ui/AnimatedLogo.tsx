@@ -30,12 +30,16 @@ type AnimatedLogoProps = {
 
 const sizeClass = {
   hero: 'w-[min(56vw,184px)] sm:w-[min(48vw,216px)] lg:w-[min(24vw,240px)] h-auto',
-  nav: 'h-12 max-h-full w-auto max-w-[120px] object-contain sm:h-14 sm:max-w-[140px] lg:h-16 lg:max-w-[160px]',
+  nav: 'h-14 max-h-[calc(100%-8px)] w-auto object-contain sm:h-16 lg:h-[4.5rem]',
   footer: 'h-16 w-auto sm:h-[4.5rem]',
 } as const;
 
-const navSizes =
-  '(max-width: 640px) 120px, (max-width: 1024px) 140px, 160px';
+const navSizes = '(max-width: 640px) 140px, (max-width: 1024px) 160px, 180px';
+
+const navScrolledImgClass =
+  'block h-14 max-h-[calc(100%-8px)] w-auto object-contain select-none sm:h-16 lg:h-[4.5rem]';
+
+const navScrolledCardClass = 'rounded-lg bg-white p-0.5 shadow-sm';
 
 const heroCardClass =
   'rounded-2xl shadow-[0_10px_32px_-8px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.25)]';
@@ -44,7 +48,7 @@ const navLightClass =
   'drop-shadow-[0_2px_10px_rgba(12,18,34,0.14)] drop-shadow-[0_0_1px_rgba(12,18,34,0.08)]';
 
 const navDarkCardClass =
-  'rounded-xl shadow-[0_8px_28px_-10px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.2)]';
+  'rounded-lg shadow-[0_8px_28px_-10px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.2)]';
 
 function useCardAsset(
   variant: AnimatedLogoVariant,
@@ -151,8 +155,6 @@ function NavScrollLogo({
     { dependencies: [scrolled, reduce] },
   );
 
-  const imgClass = `block h-12 max-h-full w-auto max-w-[120px] object-contain sm:h-14 sm:max-w-[140px] lg:h-16 lg:max-w-[160px] select-none`;
-
   return (
     <div
       ref={scaleRef}
@@ -160,7 +162,12 @@ function NavScrollLogo({
       style={{ transformOrigin: 'left center' }}
     >
       <div className="relative">
-        <div ref={transparentRef} style={{ opacity: scrolled ? 0 : 1 }}>
+        <div
+          ref={transparentRef}
+          className={scrolled ? 'pointer-events-none invisible' : undefined}
+          style={{ opacity: scrolled ? 0 : 1 }}
+          aria-hidden={scrolled}
+        >
           <Image
             src={RKC_LOGO_NAV_WEBP}
             alt="RKC Automotive"
@@ -169,28 +176,30 @@ function NavScrollLogo({
             quality={95}
             priority
             sizes={navSizes}
-            className={`${imgClass} ${navLightClass}`}
+            className={`${navScrolledImgClass} ${navLightClass}`}
             draggable={false}
           />
         </div>
         <div
           ref={cardRef}
-          className="absolute inset-0 flex items-center"
+          className={`absolute inset-0 flex items-center ${scrolled ? '' : 'pointer-events-none invisible'}`}
           style={{ opacity: scrolled ? 1 : 0 }}
           aria-hidden={!scrolled}
         >
-          <Image
-            src={RKC_LOGO_CARD_PNG}
-            alt=""
-            aria-hidden
-            width={RKC_LOGO_CARD_SIZE}
-            height={RKC_LOGO_CARD_SIZE}
-            quality={95}
-            priority
-            sizes={navSizes}
-            className={`${imgClass} ${navDarkCardClass}`}
-            draggable={false}
-          />
+          <div className={navScrolledCardClass}>
+            <Image
+              src={RKC_LOGO_NAV_WEBP}
+              alt=""
+              aria-hidden
+              width={RKC_LOGO_WIDTH}
+              height={RKC_LOGO_HEIGHT}
+              quality={95}
+              priority
+              sizes={navSizes}
+              className={navScrolledImgClass}
+              draggable={false}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -253,7 +262,7 @@ function LogoContent({
   if (useScrollNav) {
     return (
       <div ref={wrapperRef} className={`relative inline-flex max-h-full shrink-0 items-center ${className}`}>
-        <div ref={containerRef} className="flex max-h-full items-center px-1 py-2">
+        <div ref={containerRef} className="flex max-h-full items-center py-0.5">
           <NavScrollLogo scrolled={scrolled} />
         </div>
       </div>
@@ -264,7 +273,7 @@ function LogoContent({
     <div ref={wrapperRef} className={`relative inline-flex max-h-full shrink-0 items-center ${className}`}>
       <div
         ref={containerRef}
-        className={isNav ? 'flex max-h-full items-center px-1 py-2' : isHero ? 'p-0' : ''}
+        className={isNav ? 'flex max-h-full items-center py-0.5' : isHero ? 'p-0' : ''}
       >
         <LogoImage variant={v} onDarkBackground={onDarkBackground} scrolled={scrolled} />
       </div>
