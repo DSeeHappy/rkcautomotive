@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 import {
   FEATURED_WARRANTY_PROVIDERS,
@@ -22,7 +23,7 @@ function FeaturedProviderLogo({ provider }: { provider: WarrantyProvider }) {
       rel="noopener noreferrer"
       title={`${provider.name} — open claims portal`}
       aria-label={`${provider.name} — open claims portal in new tab`}
-      className="group mb-4 inline-flex items-center"
+      className="group mb-5 inline-flex items-center gap-2"
     >
       {showLogo && provider.logo ? (
         <Image
@@ -38,6 +39,7 @@ function FeaturedProviderLogo({ provider }: { provider: WarrantyProvider }) {
           {provider.name.replace(/[!]/g, '').slice(0, 2).toUpperCase()}
         </span>
       )}
+      <ExternalLink className="size-3.5 text-ink-muted opacity-0 transition duration-200 group-hover:opacity-100" aria-hidden />
     </a>
   );
 }
@@ -50,10 +52,10 @@ export default function WarrantyPageProviders() {
           const primaryProvider = getWarrantyProvider(provider.names[0]);
           return (
             <StaggerItem key={provider.title}>
-              <div className="h-full rounded-3xl border border-[color:var(--line)] bg-white p-6 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.18)]">
+              <div className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-7 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.18)] transition duration-300 hover:-translate-y-1 hover:border-primary-green/30 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)]">
                 {primaryProvider ? <FeaturedProviderLogo provider={primaryProvider} /> : null}
-                <h3 className="text-xl font-bold text-primary-blue">{provider.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-muted">{provider.blurb}</p>
+                <h3 className="font-display text-2xl tracking-wide text-primary-blue">{provider.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted sm:text-base">{provider.blurb}</p>
               </div>
             </StaggerItem>
           );
@@ -61,7 +63,7 @@ export default function WarrantyPageProviders() {
       </Stagger>
 
       <FadeIn>
-        <div className="rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] p-8 sm:p-10">
+        <div className="overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.12)] sm:p-10">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
             Also accepted
           </p>

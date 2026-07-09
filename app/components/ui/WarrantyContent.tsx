@@ -5,12 +5,14 @@ import Image from 'next/image';
 import {
   CalendarCheck,
   ClipboardList,
+  MapPin,
   Phone,
   ScanSearch,
   ShieldCheck,
   Wrench,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { BUSINESS, PHOTOS, WARRANTY_CLAIM_PROCESS, WARRANTY_PAGE_FAQ } from '@/lib/constants';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
@@ -22,12 +24,16 @@ import WarrantyTeardownWarning from '@/app/components/ui/warranty/WarrantyTeardo
 import WarrantyDenialTactics from '@/app/components/ui/warranty/WarrantyDenialTactics';
 import WarrantyPartsBattle from '@/app/components/ui/warranty/WarrantyPartsBattle';
 import WarrantyProviderIndex from '@/app/components/ui/warranty/WarrantyProviderIndex';
+import { MotionAnchor } from '@/app/components/ui/MotionLink';
 
 const PROCESS_ICONS: LucideIcon[] = [ClipboardList, ScanSearch, Phone, Wrench];
 
 const SECTION_PAD = 'py-24 sm:py-28';
+const SECTION_HEADER = 'mb-14 max-w-3xl';
 
 export default function WarrantyContent() {
+  const reduce = useReducedMotion();
+
   return (
     <div>
       <WarrantyHero />
@@ -40,36 +46,46 @@ export default function WarrantyContent() {
 
       <WarrantyPartsBattle />
 
-      {/* Process */}
-      <section className={`${SECTION_PAD} border-t border-[color:var(--line)] bg-[var(--background)]`}>
-        <div className="wrap">
-          <FadeIn className="mb-14 max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
+      {/* Process — dark section with photo bg like homepage */}
+      <section className="relative overflow-hidden bg-[#0c1222] py-24 text-white sm:py-28">
+        <div className="absolute inset-0 opacity-25">
+          <Image
+            src={PHOTOS.brandedBay}
+            alt="RKC Automotive shop bay in Englewood, Colorado"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="photo-veil-deep absolute inset-0" />
+        </div>
+        <div className="relative wrap">
+          <FadeIn className="mb-16 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">
               How we handle your claim
             </p>
-            <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
+            <h2 className="mt-3 font-display text-5xl tracking-wide sm:text-6xl">
               Four steps. Zero phone-tree misery.
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
+            <p className="mt-4 text-lg text-white/70">
               Drop off at our Englewood shop — we take it from diagnosis through approved repair,
               fighting denials and documenting every interaction with your warranty administrator.
             </p>
           </FadeIn>
 
-          <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-4" stagger={0.08} delay={0.05}>
+          <Stagger className="grid gap-8 md:grid-cols-2 lg:grid-cols-4" stagger={0.12}>
             {WARRANTY_CLAIM_PROCESS.map((step, i) => {
               const Icon = PROCESS_ICONS[i] ?? ShieldCheck;
               return (
                 <StaggerItem key={step.step}>
-                  <div className="h-full rounded-3xl border border-[color:var(--line)] bg-white p-8">
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-display text-4xl text-primary-green-light">{step.step}</span>
-                      <span className="flex size-12 items-center justify-center rounded-2xl bg-primary-blue/10 text-primary-blue">
-                        <Icon className="size-6" />
+                  <div className="group border-t border-white/20 pt-6 transition duration-300 hover:border-primary-green/50">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="font-display text-5xl text-primary-green-light">{step.step}</p>
+                      <span className="flex size-11 items-center justify-center rounded-2xl bg-white/10 text-primary-green-light ring-1 ring-white/15 transition duration-300 group-hover:bg-primary-green/15">
+                        <Icon className="size-5" />
                       </span>
                     </div>
-                    <h3 className="mt-6 text-xl font-bold text-foreground">{step.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-muted">{step.description}</p>
+                    <h3 className="mt-4 text-xl font-bold">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-white/65">{step.description}</p>
                   </div>
                 </StaggerItem>
               );
@@ -78,10 +94,10 @@ export default function WarrantyContent() {
         </div>
       </section>
 
-      {/* Verified providers — clickable logo grid */}
+      {/* Verified providers */}
       <section className={`${SECTION_PAD} bg-white`}>
         <div className="wrap">
-          <FadeIn className="mb-14 max-w-3xl">
+          <FadeIn className={SECTION_HEADER}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
               Verified active providers
             </p>
@@ -90,8 +106,7 @@ export default function WarrantyContent() {
             </h2>
             <p className="mt-4 text-lg text-ink-muted">
               These administrators are verified active partners with direct claims portals. RKC submits
-              diagnostics, negotiates approvals, and tracks your claim through completion — you never
-              sit on hold with a call center.
+              diagnostics, negotiates approvals, and tracks your claim through completion.
             </p>
           </FadeIn>
           <WarrantyPageProviders />
@@ -100,10 +115,10 @@ export default function WarrantyContent() {
 
       <WarrantyProviderIndex />
 
-      {/* FAQ */}
-      <section className={`${SECTION_PAD} border-t border-[color:var(--line)] bg-white`}>
+      {/* FAQ — centered like Pricing */}
+      <section className={`${SECTION_PAD} bg-[var(--background)]`}>
         <div className="wrap">
-          <FadeIn className="mb-10 max-w-3xl">
+          <FadeIn className={`mx-auto ${SECTION_HEADER} text-center`}>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">FAQ</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
               Extended warranty questions
@@ -113,13 +128,13 @@ export default function WarrantyContent() {
               timelines, and what to expect at our Englewood shop.
             </p>
           </FadeIn>
-          <FadeIn delay={0.06}>
+          <FadeIn delay={0.06} className="mx-auto max-w-3xl">
             <FAQAccordion items={WARRANTY_PAGE_FAQ} />
           </FadeIn>
         </div>
       </section>
 
-      {/* Bottom CTA band */}
+      {/* Final CTA band */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -131,26 +146,47 @@ export default function WarrantyContent() {
           />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
-        <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-20 sm:px-6 lg:flex-row lg:items-center lg:px-8">
-          <div>
-            <h2 className="font-display text-4xl tracking-wide text-white sm:text-5xl">
+        <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
+          <FadeIn>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">
+              Englewood, CO
+            </p>
+            <h2 className="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">
               Ready to file your warranty claim?
             </h2>
-            <p className="mt-3 max-w-lg text-white/75">
+            <p className="mx-auto mt-4 max-w-lg text-white/75">
               Bring your vehicle and contract to {BUSINESS.address.full}. We look up coverage, fight
               denials, and handle the entire claims process.
             </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/contact" className="btn-green">
-              <CalendarCheck className="size-5" />
-              Schedule Warranty Diagnostic
-            </Link>
-            <a href={BUSINESS.phoneHref} className="btn-ghost-light">
-              <Phone className="size-5" />
-              {BUSINESS.phone}
-            </a>
-          </div>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <motion.div whileHover={reduce ? undefined : { y: -2 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
+                <Link href="/contact" className="btn-green">
+                  <CalendarCheck className="size-5" />
+                  Schedule Warranty Diagnostic
+                </Link>
+              </motion.div>
+              <MotionAnchor href={BUSINESS.phoneHref} className="btn-ghost-light">
+                <Phone className="size-5" />
+                {BUSINESS.phone}
+              </MotionAnchor>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-md transition hover:bg-white/15"
+              >
+                Contact us
+              </Link>
+              <MotionAnchor
+                href={BUSINESS.directionsUrl}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-md transition hover:bg-white/15"
+              >
+                <MapPin className="size-5" />
+                Get directions
+              </MotionAnchor>
+            </div>
+            <p className="mt-6 text-sm text-white/50">
+              {BUSINESS.address.full} · {BUSINESS.hours.weekdays}
+            </p>
+          </FadeIn>
         </div>
       </section>
 

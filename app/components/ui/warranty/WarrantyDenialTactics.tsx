@@ -40,7 +40,7 @@ const DENIAL_TACTICS: {
 
 export default function WarrantyDenialTactics() {
   return (
-    <section className={`${SECTION_PAD} border-t border-[color:var(--line)] bg-[var(--background)]`}>
+    <section className={`${SECTION_PAD} bg-white`}>
       <div className="wrap">
         <FadeIn className="mb-14 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
@@ -51,8 +51,8 @@ export default function WarrantyDenialTactics() {
           </h2>
           <p className="mt-4 text-lg text-ink-muted">
             Extended warranty companies deny roughly 30–40% of initial claims. The denials follow
-            predictable patterns — and each one has a technical counter when your shop knows how to
-            document evidence properly.
+            predictable patterns — and each one has a technical counter when your shop documents
+            evidence properly.
           </p>
         </FadeIn>
 
@@ -61,36 +61,36 @@ export default function WarrantyDenialTactics() {
             const Icon = item.icon;
             return (
               <StaggerItem key={item.tactic}>
-                <article
-                  className={`h-full overflow-hidden rounded-3xl border border-[color:var(--line)] ${
-                    index % 2 === 0 ? 'bg-white' : 'bg-white'
-                  }`}
-                >
-                  <div className="border-b border-[color:var(--line)] bg-primary-blue/5 px-8 py-6">
+                <article className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)]">
+                  <div className="border-b border-[color:var(--line)] bg-gradient-to-br from-primary-blue/[0.06] to-transparent px-8 py-7">
                     <div className="flex items-center gap-4">
-                      <span className="flex size-11 items-center justify-center rounded-2xl bg-primary-blue/10 text-primary-blue">
-                        <Icon className="size-5" />
+                      <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-green/15 to-primary-blue/10 ring-1 ring-primary-green/20">
+                        <Icon className="size-6 text-primary-green" />
                       </span>
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-red-600/80">
                           Tactic {index + 1}
                         </p>
-                        <h3 className="text-xl font-bold text-primary-blue">{item.tactic}</h3>
+                        <h3 className="font-display text-2xl tracking-wide text-primary-blue">{item.tactic}</h3>
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-5 px-8 py-6">
+                  <div className="flex flex-1 flex-col gap-5 px-8 py-7">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">
                         What adjusters claim
                       </p>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.adjusterClaim}</p>
-                    </div>
-                    <div className="rounded-2xl bg-primary-green/5 p-5">
-                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-green">
-                        RKC counter-measure
+                      <p className="mt-2.5 text-sm leading-relaxed text-ink-muted sm:text-base">
+                        {item.adjusterClaim}
                       </p>
-                      <p className="mt-2 text-sm leading-relaxed text-foreground">{item.rkcResponse}</p>
+                    </div>
+                    <div className="mt-auto rounded-2xl border border-primary-green/20 bg-primary-green/[0.06] p-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-green">
+                        Our fight
+                      </p>
+                      <p className="mt-2.5 text-sm leading-relaxed text-foreground sm:text-base">
+                        {item.rkcResponse}
+                      </p>
                     </div>
                   </div>
                 </article>

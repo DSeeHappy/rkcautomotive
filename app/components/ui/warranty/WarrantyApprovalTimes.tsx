@@ -7,12 +7,14 @@ import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 const SECTION_PAD = 'py-24 sm:py-28';
 
 const TIMELINE_CARDS: {
+  step: string;
   icon: LucideIcon;
   title: string;
   timeframe: string;
   paragraphs: string[];
 }[] = [
   {
+    step: '01',
     icon: Zap,
     title: 'Standard Component Claims',
     timeframe: '1–3 business days',
@@ -22,6 +24,7 @@ const TIMELINE_CARDS: {
     ],
   },
   {
+    step: '02',
     icon: Gauge,
     title: 'Major Powertrain Claims',
     timeframe: '3–7+ business days',
@@ -31,6 +34,7 @@ const TIMELINE_CARDS: {
     ],
   },
   {
+    step: '03',
     icon: Clock,
     title: 'How RKC Accelerates Approval',
     timeframe: 'Direct adjuster access',
@@ -43,39 +47,57 @@ const TIMELINE_CARDS: {
 
 export default function WarrantyApprovalTimes() {
   return (
-    <section className={`${SECTION_PAD} bg-white`}>
+    <section className={`${SECTION_PAD} bg-[var(--background)]`}>
       <div className="wrap">
         <FadeIn className="mb-14 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
             The harsh reality
           </p>
           <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-            The Elephant in the Shop: How Long Does Approval Actually Take?
+            How Long Does Approval Actually Take?
           </h2>
           <p className="mt-4 text-lg text-ink-muted">
             Warranty companies advertise fast claims. The reality at independent shops is measured in
-            business days — and major powertrain failures can take a week or more. Here is what
-            actually happens after you drop off your vehicle.
+            business days — and major powertrain failures can take a week or more.
           </p>
         </FadeIn>
+
+        {/* Desktop timeline connector */}
+        <div className="relative hidden lg:block">
+          <div
+            aria-hidden
+            className="absolute left-[16.67%] right-[16.67%] top-[3.25rem] h-px bg-gradient-to-r from-primary-green/20 via-primary-green/50 to-primary-green/20"
+          />
+        </div>
 
         <Stagger className="grid gap-8 lg:grid-cols-3" stagger={0.08} delay={0.05}>
           {TIMELINE_CARDS.map((card) => {
             const Icon = card.icon;
             return (
               <StaggerItem key={card.title}>
-                <article className="h-full rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8">
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="flex size-12 items-center justify-center rounded-2xl bg-primary-blue/10 text-primary-blue">
-                      <Icon className="size-6" />
-                    </span>
-                    <span className="rounded-full bg-primary-green/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-green">
+                <article className="group relative h-full overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)]">
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -right-8 -top-8 size-28 rounded-full bg-primary-blue/[0.04] transition duration-300 group-hover:bg-primary-green/[0.06]"
+                  />
+                  <div className="relative flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-green/15 to-primary-blue/10 ring-1 ring-primary-green/20">
+                        <Icon className="size-6 text-primary-green" />
+                      </span>
+                      <span className="font-display text-3xl leading-none tracking-wide text-primary-blue/20">
+                        {card.step}
+                      </span>
+                    </div>
+                    <span className="shrink-0 rounded-full bg-primary-green/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-primary-green">
                       {card.timeframe}
                     </span>
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-foreground">{card.title}</h3>
+                  <h3 className="relative mt-6 font-display text-2xl tracking-wide text-primary-blue">
+                    {card.title}
+                  </h3>
                   {card.paragraphs.map((paragraph) => (
-                    <p key={paragraph.slice(0, 40)} className="mt-4 text-sm leading-relaxed text-ink-muted">
+                    <p key={paragraph.slice(0, 40)} className="relative mt-4 text-sm leading-relaxed text-ink-muted sm:text-base">
                       {paragraph}
                     </p>
                   ))}
