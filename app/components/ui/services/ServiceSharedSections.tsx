@@ -132,7 +132,6 @@ export function ServiceCinematicHero({
   const titleRef = useGsapReveal<HTMLHeadingElement>({ delay: 0.06, y: 28, duration: 0.75 });
   const descriptionRef = useGsapReveal<HTMLParagraphElement>({ delay: 0.14, y: 16, duration: 0.6 });
   const ctasRef = useGsapReveal<HTMLDivElement>({ delay: 0.22, y: 12, duration: 0.5 });
-  const pillsRef = useGsapReveal<HTMLDivElement>({ delay: 0.32, y: 20, duration: 0.6 });
 
   return (
     <section ref={sectionRef} className="relative isolate min-h-[70svh] overflow-hidden bg-[#0c1222] sm:min-h-[78svh]">
@@ -195,7 +194,7 @@ export function ServiceCinematicHero({
             </div>
           </div>
 
-          <div ref={pillsRef.ref} className="mt-10 lg:mt-12">
+          <div className="relative z-20 mt-10 lg:mt-12">
             <HeroTrustPills pills={TRUST_PILLS} />
           </div>
         </div>

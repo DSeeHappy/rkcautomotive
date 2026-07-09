@@ -25,17 +25,27 @@ export function useGsapReveal<T extends HTMLElement>(
       if (reduce || !ref.current) return;
 
       gsap.set(ref.current, { willChange: 'transform, opacity' });
-      gsap.from(ref.current, {
-        opacity: 0,
-        y,
-        ...(scale !== undefined ? { scale } : {}),
-        duration,
-        delay,
-        ease: 'power2.out',
-        onComplete: () => {
-          if (ref.current) gsap.set(ref.current, { clearProps: 'willChange' });
+      gsap.fromTo(
+        ref.current,
+        {
+          opacity: 0,
+          y,
+          ...(scale !== undefined ? { scale } : {}),
         },
-      });
+        {
+          opacity: 1,
+          y: 0,
+          ...(scale !== undefined ? { scale: 1 } : {}),
+          duration,
+          delay,
+          ease: 'power2.out',
+          onComplete: () => {
+            if (ref.current) {
+              gsap.set(ref.current, { clearProps: 'willChange,opacity,transform' });
+            }
+          },
+        },
+      );
     },
     { scope: ref, dependencies: [reduce, delay, y, duration, scale, ...dependencies] },
   );

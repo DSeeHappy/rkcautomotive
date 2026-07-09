@@ -146,7 +146,6 @@ export default function CamshaftLifterContent() {
   const title = useGsapReveal<HTMLHeadingElement>({ delay: 0.06, y: 28, duration: 0.75 });
   const description = useGsapReveal<HTMLParagraphElement>({ delay: 0.14, y: 16, duration: 0.6 });
   const ctas = useGsapReveal<HTMLDivElement>({ delay: 0.22, y: 12, duration: 0.5 });
-  const pills = useGsapReveal<HTMLDivElement>({ delay: 0.32, y: 20, duration: 0.6 });
 
   const [featuredTick, ...otherTicks] = TICK_CARDS;
 
@@ -216,7 +215,7 @@ export default function CamshaftLifterContent() {
               </div>
             </div>
 
-            <div ref={pills.ref} className="mt-10 lg:mt-12">
+            <div className="relative z-20 mt-10 lg:mt-12">
               <HeroTrustPills pills={TRUST_PILLS} />
             </div>
           </div>
