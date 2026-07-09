@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
-import { BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS } from '@/lib/constants';
+import { BUSINESS, GOOGLE_REVIEWS_URL, PHOTOS, TRUST_BADGES, VERIFIED_REVIEWS_4_PLUS } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import ReviewCards from '@/app/components/ui/ReviewCards';
@@ -136,7 +136,7 @@ export default function AboutPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">What customers say</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground">Verified public reviews</h2>
           </FadeIn>
-          <ReviewCards reviews={VERIFIED_REVIEWS} />
+          <ReviewCards reviews={VERIFIED_REVIEWS_4_PLUS} />
           <div className="mt-12">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-ink-muted">Find us online</p>
             <SocialLinks />

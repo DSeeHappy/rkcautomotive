@@ -112,10 +112,17 @@ export const VERIFIED_REVIEWS: VerifiedReview[] = [
     quote:
       'WOW!!! BEST PLACE TO GO FOR ANY & ALL OF YOUR MECHANIC NEEDS, PERIOD!!! UNICO LUGAR DONDE IRE, EN COLORADO! Y PUNTO. LOS RECOMENDO AL 💯',
     author: 'Violet Zavala',
+    rating: 5,
     source: 'Facebook',
     sourceUrl: FACEBOOK_URL,
   },
 ];
+
+/** Verified reviews rated 4–5 stars only — used for homepage rotation and public display. */
+export const VERIFIED_REVIEWS_4_PLUS = VERIFIED_REVIEWS.filter(
+  (review): review is VerifiedReview & { rating: number } =>
+    review.rating !== undefined && review.rating >= 4,
+);
 
 export { SERVICE_AREAS, SERVICE_AREAS_DATA } from './serviceAreas';
 export type { ServiceArea } from './serviceAreas';
@@ -261,8 +268,10 @@ export const STATS = [
   { value: '5★', label: 'Verified Reviews', sublabel: 'Google & Facebook' },
 ] as const;
 
-/** Homepage featured reviews — real quotes only, never placeholders. */
-export const TESTIMONIALS = [VERIFIED_REVIEWS[0], VERIFIED_REVIEWS[1], VERIFIED_REVIEWS[3]];
+/** Homepage featured reviews — 4–5 star verified quotes only, never placeholders. */
+export const TESTIMONIALS = VERIFIED_REVIEWS_4_PLUS.filter((review) =>
+  ['Christine Rivero', 'Anthony Guerra', 'Violet Zavala'].includes(review.author),
+);
 
 export const PROCESS_STEPS = [
   {

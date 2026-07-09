@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
-import { GOOGLE_REVIEWS_URL, VERIFIED_REVIEWS, type VerifiedReview } from '@/lib/constants';
+import { GOOGLE_REVIEWS_URL, VERIFIED_REVIEWS_4_PLUS, type VerifiedReview } from '@/lib/constants';
 import FadeIn from './FadeIn';
 
 type ReviewCardsProps = {
@@ -10,7 +10,7 @@ type ReviewCardsProps = {
 };
 
 export default function ReviewCards({
-  reviews = VERIFIED_REVIEWS,
+  reviews = VERIFIED_REVIEWS_4_PLUS,
   className = '',
   showCtas = true,
 }: ReviewCardsProps) {
