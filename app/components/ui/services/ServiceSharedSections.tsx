@@ -508,37 +508,43 @@ export function ServiceFinalCTA({
         <Image src={image} alt={imageAlt} fill className="object-cover" sizes="100vw" />
         <div className="photo-veil-deep absolute inset-0" />
       </div>
-      <div className="relative z-10 mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
-        <FadeIn>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-green-light sm:mb-4">
-            {eyebrow}
-          </p>
-          <h2 className="mx-auto max-w-3xl text-balance text-2xl font-bold leading-snug tracking-normal text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:text-3xl lg:text-4xl">
-            {title}
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg">
-            {description}
-          </p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
-            <MotionAnchor href={primaryCta.href} className="btn-green">
-              <Phone className="size-5" />
-              {primaryCta.label}
-            </MotionAnchor>
-            <Link href={secondaryCta.href} className="btn-ghost-light">
-              <CalendarCheck className="size-5" />
-              {secondaryCta.label}
-            </Link>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm leading-relaxed text-white/75">
-            <span>{BUSINESS.address.full}</span>
-            <span aria-hidden>·</span>
-            <MotionAnchor
-              href={BUSINESS.directionsUrl}
-              className="inline-flex items-center gap-1.5 text-white/75 transition hover:text-white"
-            >
-              <MapPin className="size-4" />
-              Get directions
-            </MotionAnchor>
+      <div className="relative z-10 px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
+        <FadeIn className="mx-auto max-w-3xl">
+          <div className="divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-[#0c1222]/95 shadow-2xl backdrop-blur-md">
+            <div className="px-5 py-6 text-center sm:px-8 sm:py-7">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-green-light sm:mb-4">
+                {eyebrow}
+              </p>
+              <h2 className="text-balance text-2xl font-bold leading-relaxed tracking-normal text-white sm:text-3xl lg:text-4xl">
+                {title}
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg">
+                {description}
+              </p>
+            </div>
+            <div className="px-5 py-5 text-center sm:px-8 sm:py-6">
+              <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                <MotionAnchor href={primaryCta.href} className="btn-green">
+                  <Phone className="size-5" />
+                  {primaryCta.label}
+                </MotionAnchor>
+                <Link href={secondaryCta.href} className="btn-ghost-light">
+                  <CalendarCheck className="size-5" />
+                  {secondaryCta.label}
+                </Link>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm leading-relaxed text-white/75">
+                <span>{BUSINESS.address.full}</span>
+                <span aria-hidden>·</span>
+                <MotionAnchor
+                  href={BUSINESS.directionsUrl}
+                  className="inline-flex items-center gap-1.5 text-white/75 transition hover:text-white"
+                >
+                  <MapPin className="size-4" />
+                  Get directions
+                </MotionAnchor>
+              </div>
+            </div>
           </div>
         </FadeIn>
       </div>
