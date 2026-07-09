@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import {
+  getNavTopScale,
   RKC_LOGO_CARD_PNG,
   RKC_LOGO_CARD_SIZE,
   RKC_LOGO_HEIGHT,
@@ -21,7 +22,10 @@ type AnimatedLogoProps = {
   variant?: AnimatedLogoVariant;
   className?: string;
   href?: string;
+  /** Hero/footer/mobile menu — use white-card asset on dark backgrounds */
   onDarkBackground?: boolean;
+  /** Nav bar scroll state — compact card logo when true, large transparent at top */
+  scrolled?: boolean;
 };
 
 const sizeClass = {
@@ -29,6 +33,9 @@ const sizeClass = {
   nav: 'h-12 max-h-full w-auto max-w-[120px] object-contain sm:h-14 sm:max-w-[140px] lg:h-16 lg:max-w-[160px]',
   footer: 'h-16 w-auto sm:h-[4.5rem]',
 } as const;
+
+const navSizes =
+  '(max-width: 640px) 120px, (max-width: 1024px) 140px, 160px';
 
 const heroCardClass =
   'rounded-2xl shadow-[0_10px_32px_-8px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.25)]';
@@ -39,10 +46,15 @@ const navLightClass =
 const navDarkCardClass =
   'rounded-xl shadow-[0_8px_28px_-10px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.2)]';
 
-function useCardAsset(variant: AnimatedLogoVariant, onDarkBackground: boolean) {
+function useCardAsset(
+  variant: AnimatedLogoVariant,
+  onDarkBackground: boolean,
+  scrolled?: boolean,
+) {
   if (variant === 'hero') return true;
-  if (variant === 'nav' && onDarkBackground) return true;
   if (variant === 'footer') return true;
+  if (variant === 'nav' && scrolled !== undefined) return scrolled;
+  if (variant === 'nav' && onDarkBackground) return true;
   return false;
 }
 
@@ -50,9 +62,10 @@ function LogoImage({
   variant = 'nav',
   className = '',
   onDarkBackground = false,
-}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground'>) {
+  scrolled,
+}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground' | 'scrolled'>) {
   const v = variant ?? 'nav';
-  const useCard = useCardAsset(v, onDarkBackground);
+  const useCard = useCardAsset(v, onDarkBackground, scrolled);
   const src = useCard ? RKC_LOGO_CARD_PNG : v === 'nav' ? RKC_LOGO_NAV_WEBP : RKC_LOGO_PNG;
   const width = useCard ? RKC_LOGO_CARD_SIZE : RKC_LOGO_WIDTH;
   const height = useCard ? RKC_LOGO_CARD_SIZE : RKC_LOGO_HEIGHT;
@@ -80,7 +93,7 @@ function LogoImage({
         v === 'hero'
           ? '(max-width: 640px) 184px, (max-width: 1024px) 216px, 240px'
           : v === 'nav'
-            ? '(max-width: 640px) 120px, (max-width: 1024px) 140px, 160px'
+            ? navSizes
             : '(max-width: 640px) 128px, 144px'
       }
       className={imageClass}
@@ -89,16 +102,112 @@ function LogoImage({
   );
 }
 
+function NavScrollLogo({
+  className = '',
+  scrolled = false,
+}: {
+  className?: string;
+  scrolled?: boolean;
+}) {
+  const reduce = usePrefersReducedMotion();
+  const scaleRef = useRef<HTMLDivElement>(null);
+  const transparentRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const scaleEl = scaleRef.current;
+      const transparentEl = transparentRef.current;
+      const cardEl = cardRef.current;
+      if (!scaleEl || !transparentEl || !cardEl) return;
+
+      const topScale = getNavTopScale();
+      const targetScale = scrolled ? 1 : topScale;
+      const cardOpacity = scrolled ? 1 : 0;
+      const transparentOpacity = scrolled ? 0 : 1;
+
+      if (reduce) {
+        gsap.set(scaleEl, { scale: targetScale, transformOrigin: 'left center' });
+        gsap.set(cardEl, { opacity: cardOpacity });
+        gsap.set(transparentEl, { opacity: transparentOpacity });
+        return;
+      }
+
+      gsap.to(scaleEl, {
+        scale: targetScale,
+        transformOrigin: 'left center',
+        duration: 0.3,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+      gsap.to(cardEl, { opacity: cardOpacity, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
+      gsap.to(transparentEl, {
+        opacity: transparentOpacity,
+        duration: 0.3,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+    },
+    { dependencies: [scrolled, reduce] },
+  );
+
+  const imgClass = `block h-12 max-h-full w-auto max-w-[120px] object-contain sm:h-14 sm:max-w-[140px] lg:h-16 lg:max-w-[160px] select-none`;
+
+  return (
+    <div
+      ref={scaleRef}
+      className={`relative inline-flex max-h-full shrink-0 origin-left items-center ${className}`}
+      style={{ transformOrigin: 'left center' }}
+    >
+      <div className="relative">
+        <div ref={transparentRef} style={{ opacity: scrolled ? 0 : 1 }}>
+          <Image
+            src={RKC_LOGO_NAV_WEBP}
+            alt="RKC Automotive"
+            width={RKC_LOGO_WIDTH}
+            height={RKC_LOGO_HEIGHT}
+            quality={95}
+            priority
+            sizes={navSizes}
+            className={`${imgClass} ${navLightClass}`}
+            draggable={false}
+          />
+        </div>
+        <div
+          ref={cardRef}
+          className="absolute inset-0 flex items-center"
+          style={{ opacity: scrolled ? 1 : 0 }}
+          aria-hidden={!scrolled}
+        >
+          <Image
+            src={RKC_LOGO_CARD_PNG}
+            alt=""
+            aria-hidden
+            width={RKC_LOGO_CARD_SIZE}
+            height={RKC_LOGO_CARD_SIZE}
+            quality={95}
+            priority
+            sizes={navSizes}
+            className={`${imgClass} ${navDarkCardClass}`}
+            draggable={false}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function LogoContent({
   variant = 'nav',
   className = '',
   onDarkBackground = false,
-}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground'>) {
+  scrolled,
+}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground' | 'scrolled'>) {
   const reduce = usePrefersReducedMotion();
   const v = variant ?? 'nav';
   const isNav = v === 'nav';
   const isHero = v === 'hero';
-  const useCard = useCardAsset(v, onDarkBackground);
+  const useScrollNav = isNav && scrolled !== undefined;
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -125,7 +234,7 @@ function LogoContent({
   useGSAP(
     () => {
       const el = containerRef.current;
-      if (reduce || !isNav || !el) return;
+      if (reduce || !isNav || useScrollNav || !el) return;
 
       const onEnter = () => gsap.to(el, { scale: 1.02, duration: 0.25, ease: 'power2.out' });
       const onLeave = () => gsap.to(el, { scale: 1, duration: 0.25, ease: 'power2.out' });
@@ -138,8 +247,18 @@ function LogoContent({
         el.removeEventListener('mouseleave', onLeave);
       };
     },
-    { scope: containerRef, dependencies: [reduce, isNav] },
+    { scope: containerRef, dependencies: [reduce, isNav, useScrollNav] },
   );
+
+  if (useScrollNav) {
+    return (
+      <div ref={wrapperRef} className={`relative inline-flex max-h-full shrink-0 items-center ${className}`}>
+        <div ref={containerRef} className="flex max-h-full items-center px-1 py-2">
+          <NavScrollLogo scrolled={scrolled} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={wrapperRef} className={`relative inline-flex max-h-full shrink-0 items-center ${className}`}>
@@ -147,7 +266,7 @@ function LogoContent({
         ref={containerRef}
         className={isNav ? 'flex max-h-full items-center px-1 py-2' : isHero ? 'p-0' : ''}
       >
-        <LogoImage variant={v} onDarkBackground={onDarkBackground} />
+        <LogoImage variant={v} onDarkBackground={onDarkBackground} scrolled={scrolled} />
       </div>
     </div>
   );
@@ -158,9 +277,15 @@ export default function AnimatedLogo({
   className = '',
   href,
   onDarkBackground = false,
+  scrolled,
 }: AnimatedLogoProps) {
   const content = (
-    <LogoContent variant={variant} className={className} onDarkBackground={onDarkBackground} />
+    <LogoContent
+      variant={variant}
+      className={className}
+      onDarkBackground={onDarkBackground}
+      scrolled={scrolled}
+    />
   );
 
   if (href) {
