@@ -14,8 +14,9 @@ const SPLASH_EXIT_MS = 550;
 /** Skip button appears after intro has started */
 const SKIP_APPEAR_MS = 1500;
 
+/** Full-bleed cover; scale down slightly on portrait phones so logo + AUTOMOTIVE stay visible */
 const VIDEO_CLASS =
-  'max-h-full max-w-full h-full w-auto object-contain object-center select-none';
+  'h-full w-full origin-center object-cover object-center select-none max-sm:scale-[0.88] sm:scale-100';
 
 type Phase = 'checking' | 'playing' | 'done';
 
@@ -167,7 +168,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           aria-hidden={splashExiting}
           aria-label="RKC Automotive intro"
         >
-          <div className="flex h-full w-full items-center justify-center bg-black">
+          <div className="absolute inset-0 overflow-hidden bg-black">
             <video
               ref={videoRef}
               autoPlay
