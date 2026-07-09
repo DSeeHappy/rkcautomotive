@@ -45,6 +45,7 @@ export const viewport: Viewport = {
   themeColor: '#0e8536',
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -55,7 +56,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <GsapProvider>
           <SplashScreen>
             <Navigation />
-            <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
+            <main className="min-h-screen pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
+              {children}
+            </main>
             <Footer />
             <MobileStickyBar />
             <FloatingCallButton />

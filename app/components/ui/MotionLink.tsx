@@ -32,9 +32,16 @@ export function MotionLink({ children, className, ...props }: MotionLinkProps) {
 
 type MotionAnchorProps = Omit<ComponentProps<'a'>, 'children'> & {
   children: ReactNode;
+  wrapperClassName?: string;
 };
 
-export function MotionAnchor({ href, children, className, ...rest }: MotionAnchorProps) {
+export function MotionAnchor({
+  href,
+  children,
+  className,
+  wrapperClassName,
+  ...rest
+}: MotionAnchorProps) {
   const { ref, reduce } = useGsapHoverPress<HTMLDivElement>({ hoverScale: 1.01 });
 
   if (reduce) {
@@ -46,7 +53,7 @@ export function MotionAnchor({ href, children, className, ...rest }: MotionAncho
   }
 
   return (
-    <div ref={ref} className="inline-flex">
+    <div ref={ref} className={wrapperClassName ?? 'inline-flex'}>
       <a href={href} className={className} {...rest}>
         {children}
       </a>
