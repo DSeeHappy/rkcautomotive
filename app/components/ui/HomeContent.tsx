@@ -17,6 +17,7 @@ import {
   LABOR_RATE,
   WARRANTY_PEACE_OF_MIND,
 } from '@/lib/constants';
+import WarrantyProviders from './WarrantyProviders';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
 import BrandSection from './BrandSection';
 import Hero from './Hero';
@@ -301,6 +302,7 @@ export default function HomeContent() {
               </StaggerItem>
             ))}
           </Stagger>
+          <WarrantyProviders />
         </div>
       </section>
 

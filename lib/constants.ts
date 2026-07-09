@@ -226,6 +226,40 @@ export const WARRANTY_PEACE_OF_MIND = [
   },
 ] as const;
 
+export const EXTENDED_WARRANTY_PROVIDERS = [
+  'Endurance',
+  'CARCHEX',
+  'CarShield',
+  'American Auto Shield',
+  'Royal Administration Services',
+  'autopom!',
+  'Olive',
+  'Omega Auto Care',
+  'Zurich North America',
+  'American Guardian',
+  'Concord Auto Protect',
+  'CarGuard Administration',
+  'Toco Warranty',
+  'Continental Warranty',
+  'Allstate Car Care',
+  'Aegis Accountability',
+  'GWC Warranty',
+  'EasyCare',
+  'Matrix Warranty Solutions',
+  'United Auto Defense',
+  'National Vehicle Protection',
+  'Protect My Car',
+  'Liberty Bell Auto Protect',
+  'Select Auto Protect',
+  'AA Auto Protection',
+  'Smart Auto Care',
+  'Alpha Warranty Services',
+  'Penn Warranty',
+  'Preferred Warranties',
+  'Assurant Solutions',
+  'Fidelity Warranty Services',
+] as const;
+
 export type ServiceItem = {
   name: string;
   href: string;
