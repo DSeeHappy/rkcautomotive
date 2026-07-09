@@ -13,6 +13,7 @@ import {
 import { SERVICE_AREAS_DATA } from './serviceAreas';
 import { PHOTOS } from './photos';
 import { absoluteUrl, SITE_URL } from './og';
+import { getAllModelDeepDiveRoutes } from './modelDeepDiveRoutes';
 
 export const BUSINESS_GEO = {
   latitude: 39.6784,
@@ -70,9 +71,7 @@ export function getAllSiteRoutes(): string[] {
     '/terms',
     '/areas-we-serve',
     '/vehicles-we-service',
-    '/vehicles/toyota/rav4/timing-belt-water-pump-englewood-co',
-    '/vehicles/toyota/rav4/pre-winter-service-englewood-co',
-    '/vehicles/toyota/rav4/check-engine-light-englewood-co',
+    ...getAllModelDeepDiveRoutes(),
     ...SERVICES.map((s) => s.href),
     ...SERVICE_AREAS_DATA.map((a) => a.href),
   ];

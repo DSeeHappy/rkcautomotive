@@ -1,3 +1,4 @@
+import { VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import type { VehicleType } from '@/lib/vehicleModels';
 
 export type ModelCommonService = {
@@ -7,7 +8,7 @@ export type ModelCommonService = {
   href: string;
 };
 
-type ModelServiceContext = {
+export type ModelServiceContext = {
   brandSlug: string;
   brandName: string;
   model: string;
@@ -1113,24 +1114,101 @@ const MODEL_SERVICE_IDS: Record<string, string[]> = {
   ],
 };
 
-/** Model-specific deep-dive page href overrides (sparse). */
-const MODEL_SERVICE_HREFS: Record<string, Partial<Record<string, string>>> = {
-  'toyota-rav4': {
-    'timing-belt': '/vehicles/toyota/rav4/timing-belt-water-pump-englewood-co',
-    'pre-winter': '/vehicles/toyota/rav4/pre-winter-service-englewood-co',
-    'check-engine': '/vehicles/toyota/rav4/check-engine-light-englewood-co',
-  },
+/** URL slug suffix per service id — `{make}/{model}/{slug}` under /vehicles/ */
+export const SERVICE_URL_SLUGS: Record<string, string> = {
+  'four-wheel-drive': 'four-wheel-drive-service-englewood-co',
+  'ecoboost-diagnostics': 'ecoboost-diagnostics-englewood-co',
+  'heavy-brake': 'heavy-duty-brake-service-englewood-co',
+  'towing-prep': 'towing-prep-inspection-englewood-co',
+  'suspension-lift': 'suspension-lift-alignment-englewood-co',
+  'fleet-maintenance': 'fleet-maintenance-englewood-co',
+  'awd-service': 'awd-drivetrain-service-englewood-co',
+  'brake-service': 'brake-repair-service-englewood-co',
+  'suspension-steering': 'suspension-steering-repair-englewood-co',
+  'check-engine': 'check-engine-light-englewood-co',
+  'pre-winter': 'pre-winter-service-englewood-co',
+  'oil-maintenance': 'oil-changes-maintenance-englewood-co',
+  'cvt-service': 'cvt-transmission-service-englewood-co',
+  'transmission-service': 'transmission-service-englewood-co',
+  'ac-heating': 'ac-heating-repair-englewood-co',
+  'engine-diagnostics': 'engine-diagnostics-englewood-co',
+  'pre-purchase': 'pre-purchase-inspection-englewood-co',
+  'hybrid-system': 'hybrid-battery-service-englewood-co',
+  'regenerative-brake': 'regenerative-brake-service-englewood-co',
+  'inverter-coolant': 'inverter-coolant-service-englewood-co',
+  'ev-battery': 'ev-battery-diagnostics-englewood-co',
+  'ev-charging': 'ev-charging-inspection-englewood-co',
+  'thermal-management': 'battery-thermal-management-englewood-co',
+  'performance-brake': 'performance-brake-service-englewood-co',
+  'turbo-intake': 'turbo-intake-service-englewood-co',
+  'sport-alignment': 'sport-suspension-alignment-englewood-co',
+  'european-diagnostics': 'european-diagnostics-englewood-co',
+  'cooling-system': 'cooling-system-service-englewood-co',
+  'timing-chain': 'timing-chain-inspection-englewood-co',
+  'gdi-carbon': 'direct-injection-carbon-cleaning-englewood-co',
+  'air-suspension': 'air-suspension-repair-englewood-co',
+  'ab-service': 'ab-service-maintenance-englewood-co',
+  'electrical-system': 'electrical-diagnostics-englewood-co',
+  'quattro-awd': 'quattro-awd-service-englewood-co',
+  'boxer-engine': 'boxer-engine-service-englewood-co',
+  'head-gasket': 'head-gasket-inspection-englewood-co',
+  'timing-belt': 'timing-belt-water-pump-englewood-co',
+  'off-road-inspection': 'off-road-wear-assessment-englewood-co',
+  'diesel-gas-truck': 'diesel-gas-truck-service-englewood-co',
+  'hemi-diagnostics': 'hemi-engine-diagnostics-englewood-co',
+  'factory-maintenance': 'factory-maintenance-englewood-co',
+  'hybrid-ev-service': 'hybrid-ev-service-englewood-co',
+  'tsi-tdi-service': 'tsi-tdi-engine-service-englewood-co',
+  'dsg-transmission': 'dsg-transmission-service-englewood-co',
+  'awd-4motion': '4motion-awd-service-englewood-co',
+  'afm-diagnostics': 'afm-dfm-diagnostics-englewood-co',
+  'truck-maintenance': 'truck-maintenance-englewood-co',
+  'mercedes-diagnostics': 'mercedes-diagnostics-englewood-co',
+  'scheduled-maintenance': 'scheduled-maintenance-englewood-co',
+  'cargo-hvac': 'cargo-hvac-service-englewood-co',
+  'commercial-inspection': 'commercial-vehicle-inspection-englewood-co',
+  'sliding-door': 'sliding-door-repair-englewood-co',
 };
 
-function slugify(text: string): string {
+const SERVICE_SLUG_TO_ID = Object.fromEntries(
+  Object.entries(SERVICE_URL_SLUGS).map(([id, slug]) => [slug, id]),
+) as Record<string, string>;
+
+export function slugifyModel(text: string): string {
   return text
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 }
 
+export function getServiceUrlSlug(serviceId: string): string {
+  return SERVICE_URL_SLUGS[serviceId] ?? `${serviceId}-service-englewood-co`;
+}
+
+export function parseServiceIdFromSlug(serviceSlug: string): string | undefined {
+  return SERVICE_SLUG_TO_ID[serviceSlug];
+}
+
+export function buildModelServicePath(
+  brandSlug: string,
+  model: string,
+  serviceId: string,
+): string {
+  return `/vehicles/${brandSlug}/${slugifyModel(model)}/${getServiceUrlSlug(serviceId)}`;
+}
+
+export function getServiceCatalogEntry(serviceId: string): ServiceDef | undefined {
+  return SERVICE_CATALOG[serviceId];
+}
+
+export type ModelDeepDiveParam = {
+  make: string;
+  model: string;
+  serviceSlug: string;
+};
+
 function resolveServiceIds(ctx: ModelServiceContext): string[] {
-  const modelKey = `${ctx.brandSlug}-${slugify(ctx.model)}`;
+  const modelKey = `${ctx.brandSlug}-${slugifyModel(ctx.model)}`;
   if (MODEL_SERVICE_IDS[modelKey]) return MODEL_SERVICE_IDS[modelKey];
 
   const brandTypeIds = BRAND_TYPE_SERVICE_IDS[ctx.brandSlug]?.[ctx.vehicleType];
@@ -1152,9 +1230,6 @@ export function getModelCommonServices(
 ): ModelCommonService[] {
   const ctx: ModelServiceContext = { brandSlug, brandName, model, vehicleType };
   const ids = resolveServiceIds(ctx);
-  const modelKey = `${brandSlug}-${slugify(model)}`;
-  const hrefOverrides = MODEL_SERVICE_HREFS[modelKey];
-
   return ids
     .map((id) => {
       const def = SERVICE_CATALOG[id];
@@ -1163,7 +1238,7 @@ export function getModelCommonServices(
         id: def.id,
         title: buildTitle(model, def.name),
         description: def.describe(ctx),
-        href: hrefOverrides?.[id] ?? def.href,
+        href: buildModelServicePath(brandSlug, model, id),
       };
     })
     .filter((s): s is ModelCommonService => s !== null);
