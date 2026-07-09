@@ -5,14 +5,17 @@ import { createPageMetadata } from '@/lib/og';
 import {
   createBreadcrumbSchema,
   createFAQPageSchema,
-  createServiceSchema,
+  createWarrantyAutoRepairSchema,
+  createWarrantyServiceSchema,
   createWebPageSchema,
 } from '@/lib/seo';
 
+const WARRANTY_PAGE_DESCRIPTION =
+  'We handle the entire third-party warranty claims process directly. From teardown authorizations to fighting corporate denials with Endurance, CarShield, CARCHEX, and Zurich.';
+
 export const metadata = createPageMetadata({
   title: 'Extended Warranty Repair in Englewood, CO | RKC Automotive',
-  description:
-    'We work directly with Endurance, CarShield, CARCHEX, and all major auto service contracts. Bring your car to our shop on W Evans Ave and let us handle your claim.',
+  description: WARRANTY_PAGE_DESCRIPTION,
   path: '/warranty',
   image: PHOTOS.engineBay,
   imageAlt: 'Extended warranty repair and diagnostics at RKC Automotive in Englewood, CO',
@@ -24,15 +27,12 @@ export default function WarrantyPage() {
       <JsonLd
         data={[
           createWebPageSchema(
-            'Extended Warranty Repair at RKC Automotive',
-            'Third-party extended warranty claim handling and ASE-certified repairs in Englewood, CO.',
+            'Extended Warranty Repair in Englewood, CO | RKC Automotive',
+            WARRANTY_PAGE_DESCRIPTION,
             '/warranty',
           ),
-          createServiceSchema(
-            'Extended Warranty Repair',
-            'We work directly with Endurance, CarShield, CARCHEX, Royal Administration Services, and all major auto service contracts. Bring your car to our Englewood shop and let us handle your claim.',
-            '/warranty',
-          ),
+          createWarrantyServiceSchema(),
+          createWarrantyAutoRepairSchema(),
           createFAQPageSchema(WARRANTY_PAGE_FAQ),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },

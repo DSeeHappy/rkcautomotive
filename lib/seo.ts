@@ -353,6 +353,52 @@ export function createWebPageSchema(name: string, description: string, path: str
   };
 }
 
+const WARRANTY_PAGE_DESCRIPTION =
+  'We handle the entire third-party warranty claims process directly. From teardown authorizations to fighting corporate denials with Endurance, CarShield, CARCHEX, and Zurich.';
+
+/** AutoRepair schema scoped to the extended warranty landing page */
+export function createWarrantyAutoRepairSchema() {
+  const aggregateRating = createAggregateRating();
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AutoRepair',
+    '@id': `${absoluteUrl('/warranty')}#business`,
+    name: BUSINESS.name,
+    url: absoluteUrl('/warranty'),
+    telephone: '+1-720-749-3965',
+    email: BUSINESS.email,
+    image: absoluteUrl(PHOTOS.engineBay),
+    description: WARRANTY_PAGE_DESCRIPTION,
+    priceRange: '$$',
+    address: POSTAL_ADDRESS,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: String(BUSINESS_GEO.latitude),
+      longitude: String(BUSINESS_GEO.longitude),
+    },
+    openingHoursSpecification: OPENING_HOURS_SCHEMA,
+    areaServed: DEFAULT_AREA_SERVED,
+    sameAs: SAME_AS,
+    knowsAbout: [
+      'Extended warranty repair',
+      'Third-party warranty claims',
+      'Vehicle service contracts',
+      'Teardown authorization',
+      'Warranty claim denial appeals',
+    ],
+    ...(aggregateRating ? { aggregateRating } : {}),
+  };
+}
+
+export function createWarrantyServiceSchema() {
+  return createServiceSchema(
+    'Extended Warranty Repair & Claims Advocacy',
+    WARRANTY_PAGE_DESCRIPTION,
+    '/warranty',
+  );
+}
+
 /** Serialize one or more JSON-LD objects for dangerouslySetInnerHTML */
 export function jsonLdHtml(...schemas: object[]): string {
   return JSON.stringify(schemas.length === 1 ? schemas[0] : schemas);

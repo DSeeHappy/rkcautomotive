@@ -398,6 +398,60 @@ export const OTHER_WARRANTY_PROVIDERS = getWarrantyProviders(
   EXTENDED_WARRANTY_PROVIDERS.filter((name) => !FEATURED_WARRANTY_PROVIDER_NAMES.has(name)),
 );
 
+/** Comprehensive text-only provider index for semantic SEO — no outbound links */
+export const WARRANTY_PROVIDER_INDEX = [
+  {
+    category: 'Direct Administrators',
+    providers: [
+      'Endurance',
+      'American Auto Shield',
+      'GWC Warranty',
+      'EasyCare',
+      'Royal Administration Services',
+      'CarGuard Administration',
+      'Smart Auto Care',
+      'Alpha Warranty Services',
+      'Penn Warranty',
+      'Preferred Warranties (PWI)',
+      'Assurant Solutions',
+      'Fidelity Warranty Services',
+      'Aegis Accountability',
+      'Matrix Warranty Solutions',
+    ],
+  },
+  {
+    category: 'Brokers & Providers',
+    providers: [
+      'CARCHEX',
+      'CarShield',
+      'autopom!',
+      'Olive',
+      'Omega Auto Care',
+      'Concord Auto Protect',
+      'Toco Warranty',
+      'Continental Warranty',
+      'United Auto Defense',
+      'National Vehicle Protection',
+      'Protect My Car',
+      'Liberty Bell Auto Protect',
+      'Select Auto Protect',
+      'AA Auto Protection',
+    ],
+  },
+  {
+    category: 'Institutional & Specialized',
+    providers: [
+      'Allstate Car Care',
+      'Zurich North America',
+      'American Guardian (AGWS)',
+      'Premier Auto Protect',
+      'Federal Warranty',
+      'National Auto Care',
+      'Total Warranty Services',
+    ],
+  },
+] as const;
+
 export const WARRANTY_CLAIM_PROCESS = [
   {
     step: '01',
@@ -809,14 +863,39 @@ export const WARRANTY_PAGE_FAQ: FAQItem[] = [
       'Bring your extended warranty contract or policy number, a photo ID, and your vehicle keys. If you have prior denial letters or claim numbers from the warranty company, bring those too — they help us pick up where a previous shop left off.',
   },
   {
-    question: 'How long does warranty claim approval take?',
+    question: 'How long does warranty claim approval actually take?',
     answer:
-      'Simple claims with clear failure codes are often approved same day or within 24 hours. Complex repairs — transmission, engine, or electrical — may require inspector photos or supplemental estimates and can take 1–3 business days. We keep you updated at every step.',
+      'Standard component claims — alternators, starters, brake master cylinders — typically take 1–3 business days once we submit AllData or Mitchell labor guides and failure codes. Major powertrain claims involving engines or transmissions often take 3–7+ business days because adjusters require field inspectors, teardown authorizations, and maintenance history verification. We accelerate approvals with direct adjuster lines, digital evidence packages, and transparent $120/hr labor documentation.',
+  },
+  {
+    question: 'What is a teardown authorization and why does the warranty company require it?',
+    answer:
+      'When your engine or transmission will not run, the warranty company will not pay to find out why until you authorize a partial teardown. If the failure is covered, the warranty reimburses teardown labor. If the adjuster finds neglect, pre-existing damage, or an excluded failure, you pay for the teardown. RKC documents every step with full-bay photography so there are no surprises.',
+  },
+  {
+    question: 'What if my warranty claim was denied for lack of maintenance?',
+    answer:
+      'This is one of the most common denial tactics. Adjusters look for sludge, overdue oil changes, or missing service records. RKC counters with oil analysis when appropriate, freeze-frame data showing the failure sequence, and evidence that catastrophic component failure — not neglect — caused the breakdown. We have successfully overturned maintenance-related denials when the technical evidence supports coverage.',
+  },
+  {
+    question: 'Will the warranty company make me use cheap used parts (LKQ)?',
+    answer:
+      'Many administrators push LKQ (Like Kind and Quality) salvage-yard parts or the cheapest remanufactured units available. RKC inspects every provider-supplied part on delivery. We reject components with visible damage, incorrect specifications, or substandard reman quality — and we document our rejection with photos so the adjuster must authorize remanufactured or OEM-grade replacements.',
   },
   {
     question: 'Can RKC work with any extended warranty company?',
     answer:
       'We work with all major third-party administrators including Endurance, CarShield, CARCHEX, Royal Administration Services, autopom!, Olive, Omega Auto Care, Zurich, and dozens more. If your provider is not listed, call us — we likely still accept it.',
+  },
+  {
+    question: 'What happens if my claim is denied after repairs begin?',
+    answer:
+      'We never start covered repairs without written authorization or a clear verbal approval logged with a claim number. If a supplemental request is denied mid-repair, we stop work immediately, document the adjuster decision, and present your options — appeal with additional evidence, pay out of pocket for the uncovered portion, or pursue the warranty company dispute process. You are never surprised by a bill you did not authorize.',
+  },
+  {
+    question: 'Does RKC charge more for warranty work than regular repairs?',
+    answer:
+      'No. Our posted labor rate is $120/hr whether you pay cash or your warranty company pays. Warranty administrators cap labor at guidebook rates — we document hours accurately using AllData and Mitchell so adjusters cannot arbitrarily reduce approved time.',
   },
 ];
 
