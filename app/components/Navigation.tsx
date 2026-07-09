@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -12,6 +12,7 @@ import { MotionAnchor } from '@/app/components/ui/MotionLink';
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const reduce = useReducedMotion();
   const links = NAV_LINKS.filter((l) => l.name !== 'Home');
 
@@ -36,38 +37,53 @@ export default function Navigation() {
 
         <div className="hidden items-center gap-1 lg:flex">
           <Popover className="relative">
-            <PopoverButton
-              className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold outline-none transition-colors ${
-                scrolled
-                  ? 'text-foreground hover:bg-black/5 hover:text-primary-green'
-                  : 'text-white/90 hover:bg-white/10 hover:text-white'
-              }`}
-            >
-              Services
-              <ChevronDown className="size-4 opacity-70" />
-            </PopoverButton>
-            <PopoverPanel
-              transition
-              className="absolute left-1/2 z-50 mt-3 w-[28rem] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl transition data-closed:translate-y-2 data-closed:opacity-0"
-            >
-              <div className="grid grid-cols-2 gap-1 p-3">
-                <Link
-                  href="/services"
-                  className="col-span-2 mb-1 rounded-xl bg-gradient-to-r from-primary-green to-primary-blue px-4 py-3 text-sm font-semibold text-white"
+            {({ open: servicesOpen, close: closeServices }) => (
+              <div
+                className="relative"
+                onMouseEnter={() => {
+                  if (!servicesOpen) servicesButtonRef.current?.click();
+                }}
+                onMouseLeave={() => {
+                  if (servicesOpen) closeServices();
+                }}
+              >
+                <PopoverButton
+                  ref={servicesButtonRef}
+                  className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold outline-none transition-colors ${
+                    scrolled
+                      ? 'text-foreground hover:bg-black/5 hover:text-primary-green'
+                      : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  }`}
                 >
-                  View all services →
-                </Link>
-                {SERVICES.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    className="rounded-xl px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary-green/8 hover:text-primary-green"
-                  >
-                    {service.name}
-                  </Link>
-                ))}
+                  Services
+                  <ChevronDown className="size-4 opacity-70" />
+                </PopoverButton>
+                <PopoverPanel
+                  transition
+                  className="absolute left-1/2 top-full z-50 w-[28rem] -translate-x-1/2 pt-3 transition data-closed:translate-y-2 data-closed:opacity-0"
+                >
+                  <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl">
+                    <div className="grid grid-cols-2 gap-1 p-3">
+                      <Link
+                        href="/services"
+                        className="col-span-2 mb-1 rounded-xl bg-gradient-to-r from-primary-green to-primary-blue px-4 py-3 text-sm font-semibold text-white"
+                      >
+                        View all services →
+                      </Link>
+                      {SERVICES.map((service) => (
+                        <Link
+                          key={service.href}
+                          href={service.href}
+                          className="rounded-xl px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary-green/8 hover:text-primary-green"
+                        >
+                          {service.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </PopoverPanel>
               </div>
-            </PopoverPanel>
+            )}
           </Popover>
 
           {links.map((link) => (
