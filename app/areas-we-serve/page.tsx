@@ -16,7 +16,7 @@ import {
 export const metadata = createPageMetadata({
   title: 'Service Areas | Auto Repair South Denver Metro',
   description:
-    'RKC Automotive serves 20 cities across the south Denver metro — Englewood, Denver, Littleton, Highlands Ranch, Centennial, Aurora, Lakewood, and more. Call (720) 749-3965.',
+    'RKC Automotive serves 20 cities across south Denver metro — Englewood, Denver, Littleton, Highlands Ranch, Centennial, Aurora, Lakewood & more. Call (720) 749-3965.',
   path: '/areas-we-serve',
   image: PHOTOS.exterior,
   imageAlt: 'RKC Automotive serving the south Denver metro from Englewood, CO',

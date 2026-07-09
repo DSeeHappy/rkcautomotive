@@ -108,12 +108,10 @@ function checkMetadata() {
     }
 
     const titleMatch =
-      content.match(/title:\s*['"`]([^'"`]+)['"`]/) ||
       content.match(/createServicePageMetadata\(\s*\n?\s*['"]([^'"]+)['"]/) ||
-      content.match(/createServicePageMetadata\(\s*['"]([^'"]+)['"]/);
-    const descMatch =
-      content.match(/description:\s*\n?\s*['"]([^'"]+)['"]/) ||
-      content.match(/createServicePageMetadata\(\s*['"][^'"]+['"],\s*\n?\s*['"]([^'"]+)['"]/);
+      content.match(/createPageMetadata\(\{[\s\S]*?title:\s*['"]([^'"]+)['"]/) ||
+      content.match(/title:\s*['"`]([^'"`]+)['"`]/);
+    const descMatch = extractPageDescription(content);
 
     if (titleMatch) {
       const title = titleMatch[1];
@@ -127,7 +125,7 @@ function checkMetadata() {
     }
 
     if (descMatch) {
-      const desc = descMatch[1];
+      const desc = descMatch;
       if (descriptions.has(desc)) warnings.push(`Duplicate description on ${route} and ${descriptions.get(desc)}`);
       descriptions.set(desc, route);
       if (desc.length < 120 || desc.length > 170) {
@@ -178,18 +176,49 @@ function checkRobotsAndSitemap() {
   }
 }
 
+function extractPageDescription(content) {
+  const serviceDouble = content.match(
+    /createServicePageMetadata\(\s*\n?\s*['"][^'"]+['"],\s*\n?\s*"([^"]+)"/,
+  );
+  if (serviceDouble) return serviceDouble[1];
+
+  const serviceSingle = content.match(
+    /createServicePageMetadata\(\s*\n?\s*['"][^'"]+['"],\s*\n?\s*'([^']+)'/,
+  );
+  if (serviceSingle) return serviceSingle[1];
+
+  const pageMeta = content.match(/createPageMetadata\(\{[\s\S]*?description:\s*\n?\s*['"]([^'"]+)['"]/);
+  if (pageMeta) return pageMeta[1];
+
+  const generic = content.match(/description:\s*\n?\s*['"]([^'"]+)['"]/);
+  return generic ? generic[1] : null;
+}
+
+function getAreaMetaDescription(slug, serviceAreasContent) {
+  const slugIdx = serviceAreasContent.indexOf(`'${slug}'`);
+  if (slugIdx === -1) return null;
+  const blockStart = serviceAreasContent.lastIndexOf('area(', slugIdx);
+  const blockEnd = serviceAreasContent.indexOf('\n  ),', slugIdx);
+  if (blockStart === -1 || blockEnd === -1) return null;
+  const block = serviceAreasContent.slice(blockStart, blockEnd);
+  const whyClose = block.lastIndexOf('],');
+  if (whyClose === -1) return null;
+  const tail = block.slice(whyClose + 2);
+  const metaMatch = tail.match(/\n\s*'((?:[^'\\]|\\.)*)'\s*$/);
+  return metaMatch ? metaMatch[1].replace(/\\'/g, "'") : null;
+}
+
 function checkAreaPages() {
   const areaRoutes = extractAreaRoutes();
-  const sitemapContent = read('lib/seo.ts');
+  const serviceAreasContent = read('lib/serviceAreas.ts');
   for (const href of areaRoutes) {
-    if (!sitemapContent.includes("...SERVICE_AREAS_DATA.map((a) => a.href)")) {
-      // dynamic inclusion is fine
-    }
     const slug = href.replace('/areas-we-serve/', '');
-    const metaMatch = read('lib/serviceAreas.ts').match(
-      new RegExp(`slug:\\s*'${slug}'[\\s\\S]*?metaDescription:\\s*'([^']+)'`),
-    );
-    if (!metaMatch) warnings.push(`Area ${slug}: no metaDescription found`);
+    const metaDescription = getAreaMetaDescription(slug, serviceAreasContent);
+    if (!metaDescription) {
+      warnings.push(`Area ${slug}: no metaDescription found`);
+    } else if (metaDescription.length < 120 || metaDescription.length > 170) {
+      warnings.push(`Area ${slug}: metaDescription length ${metaDescription.length} (ideal 150-160)`);
+    }
   }
   console.log(`Area routes found: ${areaRoutes.length}`);
   return areaRoutes;

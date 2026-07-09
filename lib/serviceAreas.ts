@@ -595,7 +595,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       'AC and heating diagnostics',
       'Locally owned Englewood shop',
     ],
-    'Auto repair near Glendale, CO and the Cherry Creek corridor. RKC Automotive on W Evans Ave. Call (720) 749-3965.'
+    'Auto repair near Glendale, CO and the Cherry Creek corridor. RKC Automotive on W Evans Ave — brakes, diagnostics, oil changes. Call (720) 749-3965.'
   ),
   area(
     'Wheat Ridge',
@@ -682,7 +682,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       'Quality oil changes and fluid services',
       'No high-pressure sales tactics',
     ],
-    'Auto repair near Bow Mar, CO. RKC Automotive in Englewood — minutes from Bow Mar Lake. Call (720) 749-3965.'
+    'Auto repair near Bow Mar, CO and Bow Mar Lake. RKC Automotive in Englewood — ASE-certified maintenance minutes away. Call (720) 749-3965.'
   ),
   area(
     'Columbine',
@@ -712,7 +712,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       'Family-friendly service',
       '30+ years in the south metro',
     ],
-    'Auto repair serving Columbine & Columbine Valley, CO. RKC Automotive in Englewood — minutes away. Call (720) 749-3965.'
+    'Auto repair serving Columbine and Columbine Valley, CO. RKC Automotive in Englewood — ASE-certified, minutes away. Call (720) 749-3965.'
   ),
   area(
     'Arvada',
@@ -830,7 +830,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       'Electrical diagnostics',
       'Fair, transparent pricing',
     ],
-    'Auto repair near Edgewater, CO and Sloans Lake. RKC Automotive in Englewood. Call (720) 749-3965.'
+    'Auto repair near Edgewater, CO and Sloans Lake. RKC Automotive in Englewood — brakes, diagnostics, oil changes. Call (720) 749-3965.'
   ),
 ];
 

@@ -5,7 +5,7 @@ import { createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
   'Car Battery Testing & Replacement in Englewood, CO | RKC Automotive',
-  "Free battery testing and professional battery replacement in Englewood, CO. Don't get stranded. Call (720) 749-3965 for battery service today.",
+  'Free battery testing and professional battery replacement in Englewood, CO. Charging-system checks included — do not get stranded. Call (720) 749-3965 today.',
   'battery-testing-englewood-co',
   PHOTOS.teamCuevas,
   'Battery Testing at RKC Automotive Englewood CO',
