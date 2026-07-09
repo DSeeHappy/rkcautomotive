@@ -4,13 +4,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
+import Breadcrumbs, { type BreadcrumbItem } from '@/app/components/ui/Breadcrumbs';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 
 type PageHeroProps = {
   title: string;
   description: string;
-  breadcrumbs?: { label: string; href?: string }[];
+  breadcrumbs?: BreadcrumbItem[];
   eyebrow?: string;
   imageSrc?: string;
   imageAlt?: string;
@@ -36,22 +37,7 @@ export default function PageHero({
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-20 sm:px-6 sm:pb-20 lg:px-8">
         {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-white/60">
-              {breadcrumbs.map((crumb, i) => (
-                <li key={`${crumb.label}-${i}`} className="flex items-center gap-2">
-                  {i > 0 && <span className="text-white/30">/</span>}
-                  {crumb.href ? (
-                    <Link href={crumb.href} className="hover:text-white">
-                      {crumb.label}
-                    </Link>
-                  ) : (
-                    <span className="text-white">{crumb.label}</span>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </nav>
+          <Breadcrumbs items={breadcrumbs} className="mb-6" variant="light" />
         )}
         {eyebrow && (
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">{eyebrow}</p>

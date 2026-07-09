@@ -8,7 +8,7 @@ import {
   SERVICE_AREAS_DATA,
 } from '@/lib/serviceAreas';
 import JsonLd from '@/app/components/JsonLd';
-import { BUSINESS, PHOTOS } from '@/lib/constants';
+import { BUSINESS, PHOTOS, TOP_AREA_SERVICES } from '@/lib/constants';
 import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
@@ -129,6 +129,34 @@ export default async function CityServiceAreaPage({ params }: Props) {
                 </ul>
               </div>
             </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[color:var(--line)] bg-[color:var(--accent-gray-light)] py-16 sm:py-20">
+        <div className="wrap">
+          <FadeIn className="mb-10 max-w-3xl">
+            <h2 className="font-display text-4xl tracking-wide text-foreground">
+              Popular services for {area.name} drivers
+            </h2>
+            <p className="mt-3 text-ink-muted">
+              From our Englewood shop on W Evans Ave — {area.distanceFromShop} from {area.name} — we handle the repairs
+              neighbors call about most.
+            </p>
+          </FadeIn>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {TOP_AREA_SERVICES.map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 transition hover:border-primary-green/40 hover:text-primary-green"
+              >
+                <span className="font-semibold text-foreground group-hover:text-primary-green">
+                  {service.name} in Englewood
+                </span>
+                <p className="mt-1 text-sm text-ink-muted">{service.description}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

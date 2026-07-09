@@ -51,6 +51,10 @@ export default function ServicesPage() {
         description="From preventative maintenance to diesel, transmission, and extended-warranty repairs — ASE-certified technicians behind every job at our Englewood shop."
         imageSrc={PHOTOS.interior}
         imageAlt="Auto repair service bays at RKC Automotive in Englewood, CO"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Services' },
+        ]}
       />
 
       <section className="py-20 sm:py-24">

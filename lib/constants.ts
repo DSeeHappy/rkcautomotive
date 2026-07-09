@@ -612,6 +612,101 @@ export const FEATURED_SERVICES = SERVICES.filter((s) =>
   ].includes(s.name)
 );
 
+/** Strategic cross-links between service pages — 2–3 related slugs per service */
+export const RELATED_SERVICES: Record<string, string[]> = {
+  'engine-diagnostics-englewood-co': [
+    'check-engine-light-englewood-co',
+    'engine-rebuilds-englewood-co',
+    'camshaft-lifter-repair-englewood-co',
+  ],
+  'check-engine-light-englewood-co': [
+    'engine-diagnostics-englewood-co',
+    'exhaust-system-englewood-co',
+    'engine-rebuilds-englewood-co',
+  ],
+  'engine-rebuilds-englewood-co': [
+    'camshaft-lifter-repair-englewood-co',
+    'engine-diagnostics-englewood-co',
+    'transmission-services-englewood-co',
+  ],
+  'camshaft-lifter-repair-englewood-co': [
+    'engine-rebuilds-englewood-co',
+    'engine-diagnostics-englewood-co',
+    'oil-changes-englewood-co',
+  ],
+  'brake-repair-englewood-co': [
+    'suspension-steering-englewood-co',
+    'preventative-maintenance-englewood-co',
+    'oil-changes-englewood-co',
+  ],
+  'suspension-steering-englewood-co': [
+    'brake-repair-englewood-co',
+    'preventative-maintenance-englewood-co',
+    'oil-changes-englewood-co',
+  ],
+  'transmission-services-englewood-co': [
+    'engine-diagnostics-englewood-co',
+    'engine-rebuilds-englewood-co',
+    'preventative-maintenance-englewood-co',
+  ],
+  'oil-changes-englewood-co': [
+    'preventative-maintenance-englewood-co',
+    'engine-diagnostics-englewood-co',
+    'check-engine-light-englewood-co',
+  ],
+  'preventative-maintenance-englewood-co': [
+    'oil-changes-englewood-co',
+    'brake-repair-englewood-co',
+    'battery-testing-englewood-co',
+  ],
+  'heating-ac-englewood-co': [
+    'electrical-system-englewood-co',
+    'engine-diagnostics-englewood-co',
+    'preventative-maintenance-englewood-co',
+  ],
+  'electrical-system-englewood-co': [
+    'battery-testing-englewood-co',
+    'engine-diagnostics-englewood-co',
+    'check-engine-light-englewood-co',
+  ],
+  'battery-testing-englewood-co': [
+    'electrical-system-englewood-co',
+    'engine-diagnostics-englewood-co',
+    'preventative-maintenance-englewood-co',
+  ],
+  'exhaust-system-englewood-co': [
+    'check-engine-light-englewood-co',
+    'engine-diagnostics-englewood-co',
+    'preventative-maintenance-englewood-co',
+  ],
+};
+
+const SERVICE_BY_SLUG = new Map(SERVICES.map((service) => [service.slug, service]));
+
+export function getRelatedServices(slug: string): ServiceItem[] {
+  const relatedSlugs = RELATED_SERVICES[slug];
+  if (!relatedSlugs) {
+    return SERVICES.filter((service) => service.slug !== slug).slice(0, 3);
+  }
+
+  return relatedSlugs.flatMap((relatedSlug) => {
+    const service = SERVICE_BY_SLUG.get(relatedSlug);
+    return service ? [service] : [];
+  });
+}
+
+/** Top services linked from city / area landing pages */
+export const TOP_AREA_SERVICES = SERVICES.filter((service) =>
+  [
+    'Engine Diagnostics',
+    'Brake Repair',
+    'Oil Changes',
+    'Transmission Services',
+    'Preventative Maintenance',
+    'Check Engine Light',
+  ].includes(service.name),
+);
+
 export const STATS = [
   { value: '30+', label: 'Years Serving', sublabel: 'Englewood & Denver Metro' },
   { value: '5,000+', label: 'Vehicles Serviced', sublabel: 'And counting every week' },

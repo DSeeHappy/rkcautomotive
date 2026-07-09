@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [ShieldCheck, CalendarCheck, Gauge];
 
@@ -63,6 +66,7 @@ export default function PreventativeMaintenanceContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Preventative Maintenance')}
         image={PHOTOS.brandedBay}
         imageAlt="Preventative Maintenance at RKC Automotive Englewood CO"
         eyebrow={"Scheduled care · Englewood, CO"}
@@ -111,7 +115,8 @@ export default function PreventativeMaintenanceContent() {
         intro={"Severe vs normal schedules, 30k/60k content, fleet plans, and why dealer menus oversell."}
         items={PREVENTATIVE_MAINTENANCE_PAGE_FAQ}
       />
-
+      <RelatedServices slug="preventative-maintenance-englewood-co" />
+      <ServiceAreaServed serviceLabel="preventative maintenance" />
       <ServiceFinalCTA
         title={"Build your maintenance plan"}
         description={"Visit RKC on Evans Ave with your mileage and manual. We quote what is due — not everything on a poster — at $120/hr labor plus parts."}

@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Wind, Thermometer, Snowflake];
 
@@ -64,6 +67,7 @@ export default function HeatingAcContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Heating & AC')}
         image={PHOTOS.interior}
         imageAlt="Heating & AC at RKC Automotive Englewood CO"
         eyebrow={"Climate control · Englewood, CO"}
@@ -112,7 +116,8 @@ export default function HeatingAcContent() {
         intro={"Recharge cost, compressor life, heater-core leaks, and R1234yf vs R134a systems."}
         items={HEATING_AC_PAGE_FAQ}
       />
-
+      <RelatedServices slug="heating-ac-englewood-co" />
+      <ServiceAreaServed serviceLabel="heating and AC repair" />
       <ServiceFinalCTA
         title={"AC blowing warm?"}
         description={"Schedule HVAC service at RKC on Evans Ave. Leak found, leak fixed, charged to spec — written estimate at $120/hr labor before compressor swaps."}

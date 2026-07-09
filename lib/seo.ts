@@ -60,6 +60,7 @@ export function getAllSiteRoutes(): string[] {
     '/',
     '/about',
     '/reviews',
+    '/contact',
     '/pricing',
     '/warranty',
     '/services',

@@ -38,6 +38,7 @@ import {
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 
 const RKC_RATE = 120;
@@ -80,6 +81,14 @@ export default function PricingContent() {
         <Image src={PHOTOS.teamCollab} alt="ASE-certified technicians collaborating at RKC Automotive in Englewood, CO" fill priority className="object-cover" sizes="100vw" />
         <div className="photo-veil absolute inset-0" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Pricing' },
+            ]}
+            className="mb-6"
+            variant="light"
+          />
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">Pricing</p>
           <p ref={rateReveal.ref} className="mt-4 font-display text-[clamp(5rem,16vw,10rem)] leading-[0.85] tracking-wide text-primary-green-light">
             {LABOR_RATE}

@@ -37,6 +37,10 @@ export default function FAQPage() {
         description="Straight talk on scheduling, pricing, warranties, and what to expect at RKC Automotive."
         imageSrc={PHOTOS.techCloseup}
         imageAlt="ASE-certified technician at RKC Automotive in Englewood, CO"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'FAQ' },
+        ]}
       />
 
       <section className="py-16 sm:py-20">

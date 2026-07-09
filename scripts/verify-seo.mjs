@@ -21,6 +21,9 @@ const ROUTES = [
   '/frequently-asked-questions',
   '/areas-we-serve',
   '/vehicles-we-service',
+  '/warranty',
+  '/privacy',
+  '/terms',
   '/services/brake-repair-englewood-co',
   '/services/engine-diagnostics-englewood-co',
   '/services/transmission-services-englewood-co',
@@ -47,6 +50,9 @@ const ROUTE_TO_FILE = {
   '/frequently-asked-questions': 'app/frequently-asked-questions/page.tsx',
   '/areas-we-serve': 'app/areas-we-serve/page.tsx',
   '/vehicles-we-service': 'app/vehicles-we-service/page.tsx',
+  '/warranty': 'app/warranty/page.tsx',
+  '/privacy': 'app/privacy/page.tsx',
+  '/terms': 'app/terms/page.tsx',
   '/services/brake-repair-englewood-co': 'app/services/brake-repair-englewood-co/page.tsx',
   '/services/engine-diagnostics-englewood-co': 'app/services/engine-diagnostics-englewood-co/page.tsx',
   '/services/transmission-services-englewood-co': 'app/services/transmission-services-englewood-co/page.tsx',
@@ -183,6 +189,16 @@ function checkRobotsAndSitemap() {
 }
 
 function extractPageDescription(content) {
+  const constDesc = content.match(
+    /const \w+_PAGE_DESCRIPTION\s*=\s*\n?\s*'((?:[^'\\]|\\.)*)'/,
+  );
+  if (constDesc) return constDesc[1].replace(/\\'/g, "'");
+
+  const constDescDouble = content.match(
+    /const \w+_PAGE_DESCRIPTION\s*=\s*\n?\s*"((?:[^"\\]|\\.)*)"/,
+  );
+  if (constDescDouble) return constDescDouble[1];
+
   const serviceDouble = content.match(
     /createServicePageMetadata\(\s*\n?\s*['"][^'"]+['"],\s*\n?\s*"([^"]+)"/,
   );
@@ -238,7 +254,7 @@ checkJsonLd();
 checkRobotsAndSitemap();
 const areaRoutes = checkAreaPages();
 
-const coreCount = 10;
+const coreCount = 14;
 const serviceCount = 13;
 const areaCount = areaRoutes.length;
 const totalRoutes = coreCount + serviceCount + areaCount;

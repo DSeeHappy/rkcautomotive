@@ -3,6 +3,7 @@
 import {
   Gauge, Zap, Activity,
 } from 'lucide-react';
+import Link from 'next/link';
 import { BUSINESS, ENGINE_DIAGNOSTICS_PAGE_FAQ, PHOTOS } from '@/lib/constants';
 import {
   ServiceCinematicHero,
@@ -13,7 +14,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Gauge, Zap, Activity];
 
@@ -63,6 +67,7 @@ export default function EngineDiagnosticsContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Engine Diagnostics')}
         image={PHOTOS.engineBay}
         imageAlt="Engine Diagnostics at RKC Automotive Englewood CO"
         eyebrow={"Diagnostics · Englewood, CO"}
@@ -74,7 +79,18 @@ export default function EngineDiagnosticsContent() {
 
       <ServiceRealityBand
         quote={"A stored code is a clue — not a diagnosis."}
-        body={"Parts stores read P0xxx codes for free, but codes only report which sensor or circuit tripped — not whether the sensor failed, a wire rubbed through, or the root cause is mechanical. Denver metro drivers often replace three oxygen sensors before finding a vacuum leak or burnt exhaust valve. At RKC we verify every code with live data, scope traces, and mechanical tests so you pay for the fix, not the guess."}
+        body={
+          <>
+            Parts stores read P0xxx codes for free, but codes only report which sensor or circuit tripped — not whether
+            the sensor failed, a wire rubbed through, or the root cause is mechanical. Denver metro drivers often replace
+            three oxygen sensors before finding a vacuum leak or burnt exhaust valve. At RKC we verify every code with
+            live data, scope traces, and mechanical tests so you pay for the fix, not the guess. When a{' '}
+            <Link href="/services/check-engine-light-englewood-co" className="font-semibold text-primary-green-light hover:text-white">
+              check engine light in Englewood
+            </Link>{' '}
+            points to misfire or fuel-trim faults, we isolate the root cause before recommending parts.
+          </>
+        }
       />
 
       <ServiceSymptomGrid
@@ -111,7 +127,8 @@ export default function EngineDiagnosticsContent() {
         intro={"Answers on diagnostic fees, live data, compression tests, and why we do not just clear codes."}
         items={ENGINE_DIAGNOSTICS_PAGE_FAQ}
       />
-
+      <RelatedServices slug="engine-diagnostics-englewood-co" />
+      <ServiceAreaServed serviceLabel="engine diagnostics" />
       <ServiceFinalCTA
         title={"Need engine diagnostics today?"}
         description={"Schedule at 2120 W Evans Ave. We find the root cause — misfire, vacuum leak, sensor fault, or mechanical wear — with tests you can understand before you approve the fix."}

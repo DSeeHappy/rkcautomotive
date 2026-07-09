@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [AlertCircle, Zap, Gauge];
 
@@ -64,6 +67,7 @@ export default function CheckEngineLightContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Check Engine Light')}
         image={PHOTOS.engineRebuild}
         imageAlt="Check Engine Light at RKC Automotive Englewood CO"
         eyebrow={"CEL diagnosis · Englewood, CO"}
@@ -112,7 +116,8 @@ export default function CheckEngineLightContent() {
         intro={"When you can drive, when you cannot, and what Colorado emissions needs after the light comes on."}
         items={CHECK_ENGINE_LIGHT_PAGE_FAQ}
       />
-
+      <RelatedServices slug="check-engine-light-englewood-co" />
+      <ServiceAreaServed serviceLabel="check engine light diagnosis" />
       <ServiceFinalCTA
         title={"Check engine light on?"}
         description={"Call or schedule at RKC Automotive on Evans Ave. We decode the code, test the system, and quote the real fix before clearing your MIL."}

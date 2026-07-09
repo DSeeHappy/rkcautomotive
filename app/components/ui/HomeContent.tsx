@@ -344,6 +344,9 @@ export default function HomeContent() {
               <Link href="/pricing" className="btn-ghost-light">
                 See pricing
               </Link>
+              <Link href="/warranty" className="btn-ghost-light">
+                Extended warranty
+              </Link>
               <Link href="/contact" className="btn-ghost-light">
                 Contact
               </Link>

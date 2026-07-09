@@ -53,6 +53,10 @@ export default function AboutPage() {
         description="Trusted automotive services for every make, model, and year — ASE-certified repairs at $120/hr with straight answers, fair pricing, and Hablamos Español."
         imageSrc={PHOTOS.teamCuevas}
         imageAlt="RKC Automotive ASE-certified technicians in Englewood, CO"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'About' },
+        ]}
       />
 
       <section className="py-24">

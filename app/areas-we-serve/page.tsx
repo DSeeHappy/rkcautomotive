@@ -52,6 +52,10 @@ export default function AreasPage() {
         description={`Centered in Englewood at ${BUSINESS.address.street}, RKC serves ${SERVICE_AREAS_DATA.length} cities across the south Denver metro — with neighborhood-level coverage and ASE-certified auto repair.`}
         imageSrc={PHOTOS.exterior}
         imageAlt="RKC Automotive shop serving the south Denver metro from Englewood, CO"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Areas We Serve' },
+        ]}
       />
 
       <section className="py-20 sm:py-24">

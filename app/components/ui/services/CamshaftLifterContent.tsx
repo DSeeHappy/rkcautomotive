@@ -33,7 +33,10 @@ import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
-import { SECTION_PAD, SECTION_HEADER, SECTION_HEADER_CENTER } from './servicesShared';
+import { SECTION_PAD, SECTION_HEADER, SECTION_HEADER_CENTER, getServiceBreadcrumbs } from './servicesShared';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { ServiceAreaServed } from './ServiceSharedSections';
+import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 
 const TRUST_PILLS = [
   { icon: Wrench, label: LABOR_RATE, sub: 'posted labor rate' },
@@ -191,6 +194,7 @@ export default function CamshaftLifterContent() {
         >
           <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end pb-20 sm:pb-24">
             <div className="max-w-4xl">
+              <Breadcrumbs items={getServiceBreadcrumbs('Camshaft & Lifters')} className="mb-6" variant="light" />
               <p
                 ref={eyebrow.ref}
                 className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
@@ -303,8 +307,15 @@ export default function CamshaftLifterContent() {
                 most commonly misdiagnosed. Additives, thicker oil, and &ldquo;just turn up the radio&rdquo; do not restore
                 cam lobe lift or replace collapsed lifters. Every mile with a persistent tick sends metal through oil
                 galleries and into main bearings you cannot see without teardown. If the tick stays at operating
-                temperature, accompanies a misfire, or worsens under load — schedule diagnostics before the repair
-                scope jumps from cam-and-lifter to full short-block.
+                temperature, accompanies a misfire, or worsens under load — schedule{' '}
+                <Link href="/services/engine-diagnostics-englewood-co" className="font-semibold text-primary-green-light hover:text-white">
+                  engine diagnostics in Englewood
+                </Link>{' '}
+                before the repair scope jumps from cam-and-lifter to a full{' '}
+                <Link href="/services/engine-rebuilds-englewood-co" className="font-semibold text-primary-green-light hover:text-white">
+                  engine rebuild
+                </Link>
+                .
               </p>
             </FadeIn>
           </div>
@@ -561,6 +572,9 @@ export default function CamshaftLifterContent() {
           </FadeIn>
         </div>
       </section>
+
+      <RelatedServices slug="camshaft-lifter-repair-englewood-co" />
+      <ServiceAreaServed serviceLabel="camshaft and lifter repair" />
 
       {/* 9 — Final CTA */}
       <section className="relative overflow-hidden">

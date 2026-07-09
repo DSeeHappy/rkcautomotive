@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Award, CalendarCheck, Phone, ShieldCheck, Users, Wrench } from 'lucide-react';
 import { ASE_ARIA_LABEL, ASE_URL, BUSINESS, LABOR_RATE, OTHER_WARRANTY_PROVIDERS, PHOTOS } from '@/lib/constants';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
@@ -61,6 +62,14 @@ export default function WarrantyHero() {
       >
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end pb-20 sm:pb-24">
           <div className="max-w-4xl">
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Extended Warranty' },
+              ]}
+              className="mb-6"
+              variant="light"
+            />
             <p
               ref={eyebrow.ref}
               className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"

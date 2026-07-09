@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { BUSINESS, GOOGLE_REVIEWS_URL, MAP_EMBED, PHOTOS } from '@/lib/constants';
 import ContactForm from '@/app/components/ui/ContactForm';
+import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import FadeIn from '@/app/components/ui/FadeIn';
 import SocialLinks from '@/app/components/ui/SocialLinks';
 import { createPageMetadata } from '@/lib/og';
@@ -75,6 +76,14 @@ export default function ContactPage() {
           />
           <div className="photo-veil absolute inset-0" />
           <div className="absolute inset-0 flex flex-col justify-end p-8 pt-28 sm:p-12 lg:p-16">
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Contact' },
+              ]}
+              className="mb-6"
+              variant="light"
+            />
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">Contact</p>
             <h1 className="mt-3 font-display text-5xl tracking-wide text-white sm:text-6xl lg:text-7xl">
               Reach the bay

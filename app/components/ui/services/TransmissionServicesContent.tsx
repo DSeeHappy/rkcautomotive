@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Cog, Gauge, AlertTriangle];
 
@@ -63,6 +66,7 @@ export default function TransmissionServicesContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Transmission Services')}
         image={PHOTOS.classicLift}
         imageAlt="Transmission Services at RKC Automotive Englewood CO"
         eyebrow={"Transmissions · Englewood, CO"}
@@ -111,7 +115,8 @@ export default function TransmissionServicesContent() {
         intro={"Fluid flush vs pan drop, CVT life, rebuild timelines, and when to stop driving a slipping unit."}
         items={TRANSMISSION_SERVICES_PAGE_FAQ}
       />
-
+      <RelatedServices slug="transmission-services-englewood-co" />
+      <ServiceAreaServed serviceLabel="transmission service" />
       <ServiceFinalCTA
         title={"Transmission acting up?"}
         description={"Schedule diagnosis at RKC on Evans Ave. We read fluid, scan TCM data, and quote the right fix — service, repair, or rebuild — before major money moves."}

@@ -39,6 +39,10 @@ export default function VehiclesPage() {
         description="From daily drivers to classics and European imports — ASE-certified tools and experience for every vehicle."
         imageSrc={PHOTOS.classicLift}
         imageAlt="Classic vehicle on lift at RKC Automotive in Englewood, CO"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Vehicles We Service' },
+        ]}
       />
 
       <VehicleCategoryCards />

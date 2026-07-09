@@ -34,6 +34,10 @@ export default function PrivacyPage() {
         eyebrow="Legal"
         title="Privacy Policy"
         description="How RKC Automotive handles information you share with us."
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Privacy Policy' },
+        ]}
       />
 
       <section className="py-20">

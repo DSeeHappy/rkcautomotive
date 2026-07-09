@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Battery, Zap, Thermometer];
 
@@ -63,6 +66,7 @@ export default function BatteryTestingContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Battery Testing')}
         image={PHOTOS.teamCuevas}
         imageAlt="Battery Testing at RKC Automotive Englewood CO"
         eyebrow={"Starting power · Englewood, CO"}
@@ -111,7 +115,8 @@ export default function BatteryTestingContent() {
         intro={"Battery life in Colorado, AGM vs flooded, alternator testing, and BMS reset on newer cars."}
         items={BATTERY_TESTING_PAGE_FAQ}
       />
-
+      <RelatedServices slug="battery-testing-englewood-co" />
+      <ServiceAreaServed serviceLabel="battery testing" />
       <ServiceFinalCTA
         title={"Battery worried you?"}
         description={"Stop by RKC on Evans Ave for a free test with charging-system check. Replace only when data says so — same-day install available."}

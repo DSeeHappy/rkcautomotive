@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Zap, Battery, AlertTriangle];
 
@@ -63,6 +66,7 @@ export default function ElectricalSystemContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Electrical System')}
         image={PHOTOS.teamInspect}
         imageAlt="Electrical System at RKC Automotive Englewood CO"
         eyebrow={"Electrical · Englewood, CO"}
@@ -111,7 +115,8 @@ export default function ElectricalSystemContent() {
         intro={"Battery vs alternator, parasitic drain causes, and when a no-start is a starter."}
         items={ELECTRICAL_SYSTEM_PAGE_FAQ}
       />
-
+      <RelatedServices slug="electrical-system-englewood-co" />
+      <ServiceAreaServed serviceLabel="electrical system repair" />
       <ServiceFinalCTA
         title={"Electrical problem leaving you stranded?"}
         description={"Diagnose starting and charging at RKC on Evans Ave. Tested circuits, quoted repairs, $120/hr labor — before you buy parts that do not fix the fault."}

@@ -32,7 +32,10 @@ import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
-import { SECTION_PAD, SECTION_HEADER, SECTION_HEADER_CENTER } from './servicesShared';
+import { SECTION_PAD, SECTION_HEADER, SECTION_HEADER_CENTER, getServiceBreadcrumbs } from './servicesShared';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { ServiceAreaServed } from './ServiceSharedSections';
+import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 
 const TRUST_PILLS = [
   { icon: Wrench, label: LABOR_RATE, sub: 'posted labor rate' },
@@ -219,6 +222,7 @@ export default function EngineRebuildsContent() {
         >
           <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end pb-20 sm:pb-24">
             <div className="max-w-4xl">
+              <Breadcrumbs items={getServiceBreadcrumbs('Engine Rebuilds')} className="mb-6" variant="light" />
               <p
                 ref={eyebrow.ref}
                 className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
@@ -322,8 +326,20 @@ export default function EngineRebuildsContent() {
               High-mileage commuters, skipped oil changes, and overheating events open bearing clearances and destroy ring
               seal. Colorado towing on I-25 and mountain grades accelerates wear on domestic V8s and turbo imports alike.
               When compression is uneven and oil consumption climbs, the block needs to come apart — measured, machined,
-              and rebuilt to spec. RKC has rebuilt engines for Englewood, Denver, Littleton, and south-metro drivers who
-              needed the job done once, not twice.
+              and rebuilt to spec. Not every tick or misfire needs a full rebuild — start with{' '}
+              <Link href="/services/engine-diagnostics-englewood-co" className="font-semibold text-primary-green-light hover:text-white">
+                engine diagnostics in Englewood
+              </Link>{' '}
+              or{' '}
+              <Link href="/services/camshaft-lifter-repair-englewood-co" className="font-semibold text-primary-green-light hover:text-white">
+                camshaft and lifter repair
+              </Link>{' '}
+              when valvetrain wear is the root cause. Third-party{' '}
+              <Link href="/warranty" className="font-semibold text-primary-green-light hover:text-white">
+                extended warranty claims
+              </Link>{' '}
+              for powertrain work are handled in-house at our posted {LABOR_RATE} rate. RKC has rebuilt engines for
+              Englewood, Denver, Littleton, and south-metro drivers who needed the job done once, not twice.
             </p>
           </FadeIn>
         </div>
@@ -593,6 +609,9 @@ export default function EngineRebuildsContent() {
           </FadeIn>
         </div>
       </section>
+
+      <RelatedServices slug="engine-rebuilds-englewood-co" />
+      <ServiceAreaServed serviceLabel="engine rebuilds" />
 
       {/* 9 — Final CTA */}
       <section className="relative overflow-hidden">

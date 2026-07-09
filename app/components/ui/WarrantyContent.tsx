@@ -106,6 +106,49 @@ export default function WarrantyContent() {
 
       <WarrantyProviderIndex />
 
+      <section className="border-y border-[color:var(--line)] bg-white py-16 sm:py-20">
+        <div className="wrap">
+          <FadeIn className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Powertrain warranty work</p>
+            <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">
+              Heavy warranty repairs we handle daily
+            </h2>
+            <p className="mt-4 text-lg text-ink-muted">
+              Extended warranty administrators approve teardown, powertrain, and drivability claims when documentation is
+              complete. RKC specializes in the high-dollar jobs adjusters scrutinize most:
+            </p>
+          </FadeIn>
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            {[
+              {
+                href: '/services/engine-rebuilds-englewood-co',
+                title: 'Engine rebuilds in Englewood',
+                detail: 'Short-block and long-block teardown with magnaflux, machine-shop coordination, and adjuster-ready documentation.',
+              },
+              {
+                href: '/services/engine-diagnostics-englewood-co',
+                title: 'Engine diagnostics in Englewood',
+                detail: 'Failure codes, live data, compression tests, and photos formatted for warranty review before teardown authorization.',
+              },
+              {
+                href: '/services/transmission-services-englewood-co',
+                title: 'Transmission service in Englewood',
+                detail: 'Fluid analysis, pan inspection, valve-body repair, and overhaul quotes with Mitchell/AllData labor support.',
+              },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-2xl border border-[color:var(--line)] bg-[var(--background)] p-6 transition hover:border-primary-green/40 hover:bg-primary-green/5"
+              >
+                <span className="font-semibold text-foreground group-hover:text-primary-green">{item.title}</span>
+                <p className="mt-2 text-sm text-ink-muted">{item.detail}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ — centered like Pricing */}
       <section className={`${SECTION_PAD} bg-[var(--background)]`}>
         <div className="wrap">

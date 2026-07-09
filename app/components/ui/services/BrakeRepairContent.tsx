@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Disc, Gauge, AlertTriangle];
 
@@ -64,6 +67,7 @@ export default function BrakeRepairContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Brake Repair')}
         image={PHOTOS.undercarriage}
         imageAlt="Brake Repair Service at RKC Automotive Englewood CO"
         eyebrow={"Brake systems · Englewood, CO"}
@@ -112,7 +116,8 @@ export default function BrakeRepairContent() {
         intro={"Straight answers on pad life, rotor resurfacing, ABS lights, and what Colorado driving does to your stopping system."}
         items={BRAKE_REPAIR_PAGE_FAQ}
       />
-
+      <RelatedServices slug="brake-repair-englewood-co" />
+      <ServiceAreaServed serviceLabel="brake repair" />
       <ServiceFinalCTA
         title={"Ready for a brake inspection?"}
         description={"Free visual inspection at 2120 W Evans Ave. We measure, explain, and quote — pads, rotors, fluid, or calipers — at $120/hr labor plus parts before any work begins."}

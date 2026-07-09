@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Droplet, Gauge, Thermometer];
 
@@ -63,6 +66,7 @@ export default function OilChangesContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Oil Changes')}
         image={PHOTOS.teamCollab}
         imageAlt="Oil Changes at RKC Automotive Englewood CO"
         eyebrow={"Maintenance · Englewood, CO"}
@@ -111,7 +115,8 @@ export default function OilChangesContent() {
         intro={"Synthetic intervals, filter quality, and what Colorado severe service means for your engine."}
         items={OIL_CHANGES_PAGE_FAQ}
       />
-
+      <RelatedServices slug="oil-changes-englewood-co" />
+      <ServiceAreaServed serviceLabel="oil changes" />
       <ServiceFinalCTA
         title={"Due for an oil change?"}
         description={"Walk in or schedule at RKC Automotive on Evans Ave. Correct spec, honest inspection, and $120/hr labor on anything beyond the basic service."}

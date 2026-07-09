@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Settings, Gauge, AlertTriangle];
 
@@ -63,6 +66,7 @@ export default function SuspensionSteeringContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Suspension & Steering')}
         image={PHOTOS.techCloseup}
         imageAlt="Suspension & Steering at RKC Automotive Englewood CO"
         eyebrow={"Ride & handling · Englewood, CO"}
@@ -111,7 +115,8 @@ export default function SuspensionSteeringContent() {
         intro={"Strut life, alignment frequency, ball joint safety, and when tire wear is a suspension problem."}
         items={SUSPENSION_STEERING_PAGE_FAQ}
       />
-
+      <RelatedServices slug="suspension-steering-englewood-co" />
+      <ServiceAreaServed serviceLabel="suspension and steering repair" />
       <ServiceFinalCTA
         title={"Handling feel off?"}
         description={"Inspect suspension and steering at RKC on Evans Ave. We find the clunk, fix the joint, align the geometry — at transparent $120/hr labor."}

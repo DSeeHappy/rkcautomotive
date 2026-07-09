@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import {
   AlertTriangle,
@@ -20,9 +21,11 @@ import {
   ASE_URL,
   BUSINESS,
   LABOR_RATE,
+  SERVICE_AREAS_DATA,
   type FAQItem,
 } from '@/lib/constants';
 import { PHOTOS } from '@/lib/photos';
+import Breadcrumbs, { type BreadcrumbItem } from '@/app/components/ui/Breadcrumbs';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
@@ -48,6 +51,7 @@ export type ServiceHeroProps = {
   description: string;
   primaryCta: ServiceCta;
   secondaryCta: ServiceCta;
+  breadcrumbs?: BreadcrumbItem[];
 };
 
 export function ServiceCinematicHero({
@@ -58,6 +62,7 @@ export function ServiceCinematicHero({
   description,
   primaryCta,
   secondaryCta,
+  breadcrumbs,
 }: ServiceHeroProps) {
   const reduce = usePrefersReducedMotion();
   const { sectionRef, bgRef, contentRef } = useGsapParallax<HTMLElement>(reduce, {
@@ -101,6 +106,9 @@ export function ServiceCinematicHero({
       >
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end pb-20 sm:pb-24">
           <div className="max-w-4xl">
+            {breadcrumbs && breadcrumbs.length > 0 && (
+              <Breadcrumbs items={breadcrumbs} className="mb-6" variant="light" />
+            )}
             <p
               ref={eyebrowRef.ref}
               className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
@@ -178,7 +186,7 @@ export function ServiceCinematicHero({
 export type ServiceRealityBandProps = {
   eyebrow?: string;
   quote: string;
-  body: string;
+  body: ReactNode;
 };
 
 export function ServiceRealityBand({ eyebrow = 'Reality check', quote, body }: ServiceRealityBandProps) {
@@ -526,6 +534,48 @@ export function ServiceFinalCTA({
               Get directions
             </MotionAnchor>
           </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+const FEATURED_SERVICE_AREAS = ['Englewood', 'Denver', 'Aurora', 'Littleton', 'Lakewood', 'Centennial'] as const;
+
+export type ServiceAreaServedProps = {
+  serviceLabel: string;
+};
+
+export function ServiceAreaServed({ serviceLabel }: ServiceAreaServedProps) {
+  const featuredAreas = SERVICE_AREAS_DATA.filter((area) =>
+    FEATURED_SERVICE_AREAS.includes(area.name as (typeof FEATURED_SERVICE_AREAS)[number]),
+  );
+
+  return (
+    <section className="border-t border-[color:var(--line)] bg-[var(--background)] py-12 sm:py-16">
+      <div className="wrap">
+        <FadeIn>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Service area</p>
+          <h2 className="mt-3 font-display text-3xl tracking-wide text-foreground sm:text-4xl">
+            {serviceLabel} serving Englewood &amp; Denver metro
+          </h2>
+          <p className="mt-4 max-w-3xl text-ink-muted">
+            RKC Automotive at {BUSINESS.address.full} provides {serviceLabel} for drivers across the south Denver metro.
+            We welcome customers from{' '}
+            {featuredAreas.map((area, index) => (
+              <span key={area.slug}>
+                {index > 0 && (index === featuredAreas.length - 1 ? ', and ' : ', ')}
+                <Link href={area.href} className="font-semibold text-primary-blue hover:text-primary-green">
+                  {area.name}
+                </Link>
+              </span>
+            ))}
+            .{' '}
+            <Link href="/areas-we-serve" className="font-semibold text-primary-blue hover:text-primary-green">
+              View all {SERVICE_AREAS_DATA.length} cities we serve
+            </Link>
+            .
+          </p>
         </FadeIn>
       </div>
     </section>

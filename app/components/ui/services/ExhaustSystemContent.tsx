@@ -13,7 +13,10 @@ import {
   ServiceLaborBand,
   ServiceFAQSection,
   ServiceFinalCTA,
+  ServiceAreaServed,
 } from './ServiceSharedSections';
+import RelatedServices from '@/app/components/ui/RelatedServices';
+import { getServiceBreadcrumbs } from './servicesShared';
 
 const icons = [Volume2, Wind, AlertTriangle];
 
@@ -63,6 +66,7 @@ export default function ExhaustSystemContent() {
   return (
     <div>
       <ServiceCinematicHero
+        breadcrumbs={getServiceBreadcrumbs('Exhaust System')}
         image={PHOTOS.undercarriage}
         imageAlt="Exhaust System at RKC Automotive Englewood CO"
         eyebrow={"Exhaust & emissions · Englewood, CO"}
@@ -111,7 +115,8 @@ export default function ExhaustSystemContent() {
         intro={"Catalytic converter cost, emissions tests, manifold cracks, and aftermarket exhaust legality in Colorado."}
         items={EXHAUST_SYSTEM_PAGE_FAQ}
       />
-
+      <RelatedServices slug="exhaust-system-englewood-co" />
+      <ServiceAreaServed serviceLabel="exhaust system repair" />
       <ServiceFinalCTA
         title={"Exhaust noise or emissions code?"}
         description={"Inspect exhaust at RKC on Evans Ave. Leak sealed, catalyst verified, monitors ready — $120/hr labor on every repair."}

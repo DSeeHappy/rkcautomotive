@@ -9,7 +9,7 @@ import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 export const metadata = createPageMetadata({
   title: 'Terms of Service | RKC Automotive',
   description:
-    'Terms of service for RKC Automotive auto repair in Englewood, CO — estimates, approvals, pricing, and website use.',
+    'Terms of service for RKC Automotive auto repair in Englewood, CO — written estimates, customer approvals, posted $120/hr labor, and website use policies.',
   path: '/terms',
   titleAbsolute: true,
 });
@@ -34,6 +34,10 @@ export default function TermsPage() {
         eyebrow="Legal"
         title="Terms of Service"
         description="Website use and repair service terms for RKC Automotive customers."
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Terms of Service' },
+        ]}
       />
 
       <section className="py-20">
