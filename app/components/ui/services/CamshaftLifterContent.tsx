@@ -35,7 +35,7 @@ import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 import { SECTION_PAD, SECTION_HEADER, SECTION_HEADER_CENTER, getServiceBreadcrumbs } from './servicesShared';
 import RelatedServices from '@/app/components/ui/RelatedServices';
-import { ServiceAreaServed } from './ServiceSharedSections';
+import { ServiceAreaServed, ServiceFinalCTA } from './ServiceSharedSections';
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 
 const TRUST_PILLS = [
@@ -576,54 +576,14 @@ export default function CamshaftLifterContent() {
       <RelatedServices slug="camshaft-lifter-repair-englewood-co" />
       <ServiceAreaServed serviceLabel="camshaft and lifter repair" />
 
-      {/* 9 — Final CTA */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={PHOTOS.exteriorBay}
-            alt="RKC Automotive shop exterior in Englewood Colorado — camshaft and lifter repair"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="photo-veil-deep absolute inset-0" />
-        </div>
-        <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
-          <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">
-              Stop the tick
-            </p>
-            <h2 className="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">
-              Schedule valvetrain diagnostics today
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-white/75">
-              Bring your vehicle to {BUSINESS.address.full}. We diagnose before recommending cam replacement — and we
-              will not start work until you approve a written estimate at {LABOR_RATE} labor plus parts.
-            </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
-                <Phone className="size-5" />
-                {BUSINESS.phone}
-              </MotionAnchor>
-              <Link href="/contact" className="btn-ghost-light">
-                <CalendarCheck className="size-5" />
-                Book service
-              </Link>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-white/50">
-              <span>{BUSINESS.address.full}</span>
-              <span aria-hidden>·</span>
-              <MotionAnchor
-                href={BUSINESS.directionsUrl}
-                className="inline-flex items-center gap-1.5 text-white/60 transition hover:text-white"
-              >
-                <MapPin className="size-4" />
-                Get directions
-              </MotionAnchor>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <ServiceFinalCTA
+        eyebrow="Stop the tick"
+        title="Schedule valvetrain diagnostics today"
+        description={`Bring your vehicle to ${BUSINESS.address.full}. We diagnose before recommending cam replacement — and we will not start work until you approve a written estimate at ${LABOR_RATE} labor plus parts.`}
+        primaryCta={{ href: BUSINESS.phoneHref, label: BUSINESS.phone }}
+        secondaryCta={{ href: '/contact', label: 'Book service' }}
+        imageAlt="RKC Automotive shop exterior in Englewood Colorado — camshaft and lifter repair"
+      />
     </div>
   );
 }

@@ -1050,7 +1050,7 @@ function buildDeepDive(ctx: ModelServiceContext & { yearRange: string; serviceId
     relatedServiceSlug: template.relatedServiceSlug,
     relatedTitle: \`Related \${ctx.model} services\`,
     serviceAreaLabel: \`\${ctx.model} \${template.serviceName.toLowerCase()}\`,
-    finalCtaTitle: \`\${ctx.model} due for \${template.serviceName.toLowerCase()}?\`,
+    finalCtaTitle: \`\${ctx.model} \${template.serviceName.toLowerCase()} in Englewood\`,
     finalCtaDescription: \`Call or schedule at RKC Automotive on Evans Ave. We service \${ctx.brandName} \${ctx.model} vehicles with honest estimates and \${ctx.brandName}-level expertise — without dealership wait times.\`,
     metaDescription: \`\${ctx.brandName} \${ctx.model} \${template.serviceName.toLowerCase()} in Englewood, CO. \${template.focus}. Written estimates, \${LABOR_RATE} labor. Call \${BUSINESS.phone}.\`,
     metaKeywords: \`\${ctx.model} \${template.serviceName} Englewood CO, \${ctx.brandName} \${ctx.model} repair Denver, \${ctx.model} mechanic Colorado\`,
