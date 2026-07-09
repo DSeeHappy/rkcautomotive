@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { BUSINESS } from './constants';
 
-/** Canonical metadata uses www; apex→www redirect stays disabled until DNS/SSL 525 is fixed (see next.config.ts). */
+/** Canonical metadata uses apex (live host). Switch to www once DNS/SSL 525 is fixed (see next.config.ts). */
 export const SITE_URL = BUSINESS.website;
 export const SITE_NAME = BUSINESS.name;
 export const OG_LOCALE = 'en_US';

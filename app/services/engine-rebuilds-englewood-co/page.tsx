@@ -1,7 +1,7 @@
 import JsonLd from '@/app/components/JsonLd';
 import EngineRebuildsContent from '@/app/components/ui/services/EngineRebuildsContent';
 import { ENGINE_REBUILDS_PAGE_FAQ, PHOTOS } from '@/lib/constants';
-import { createServicePageMetadata } from '@/lib/og';
+import { createServicePageMetadata, SITE_URL } from '@/lib/og';
 import { createBreadcrumbSchema, createFAQPageSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
@@ -20,7 +20,7 @@ const schema = {
   provider: {
     '@type': 'AutomotiveBusiness',
     name: 'RKC Automotive',
-    image: 'https://www.rkcautomotive.com/images/shop-exterior.webp',
+    image: `${SITE_URL}/images/shop-exterior.webp`,
     telephone: '+1-720-749-3965',
     address: {
       '@type': 'PostalAddress',
@@ -31,7 +31,7 @@ const schema = {
       addressCountry: 'US',
     },
     geo: { '@type': 'GeoCoordinates', latitude: '39.6711', longitude: '-105.0239' },
-    url: 'https://www.rkcautomotive.com',
+    url: SITE_URL,
     priceRange: '$$',
     openingHoursSpecification: [
       {

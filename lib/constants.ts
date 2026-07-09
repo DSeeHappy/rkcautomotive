@@ -50,7 +50,8 @@ export const BUSINESS = {
   },
   directionsUrl: 'https://share.google/hRQ6WsLJdoo0DwUlu',
   textHref: 'sms:+17207493965',
-  website: 'https://www.rkcautomotive.com',
+  // Apex is live; www returns Cloudflare 525 until DNS/SSL is fixed — keep canonical on apex.
+  website: 'https://rkcautomotive.com',
   hours: {
     weekdays: 'Mon–Fri: 8:00 AM – 6:00 PM',
     saturday: 'Sat: 8:00 AM – 12:00 PM',
