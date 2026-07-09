@@ -70,6 +70,9 @@ export function getAllSiteRoutes(): string[] {
     '/terms',
     '/areas-we-serve',
     '/vehicles-we-service',
+    '/vehicles/toyota/rav4/timing-belt-water-pump-englewood-co',
+    '/vehicles/toyota/rav4/pre-winter-service-englewood-co',
+    '/vehicles/toyota/rav4/check-engine-light-englewood-co',
     ...SERVICES.map((s) => s.href),
     ...SERVICE_AREAS_DATA.map((a) => a.href),
   ];

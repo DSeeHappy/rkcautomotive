@@ -1972,3 +1972,147 @@ export const VEHICLE_CATEGORIES = [
 
 export const MAP_EMBED =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3071.8!2d-105.0125!3d39.6785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c7e5c5c5c5c5c%3A0x0!2s2120%20W%20Evans%20Ave%2C%20Englewood%2C%20CO%2080110!5e0!3m2!1sen!2sus!4v1700000000000';
+
+export const RAV4_TIMING_BELT_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Which Toyota RAV4 years need a timing belt instead of a chain?',
+    answer:
+      '2001–2005 RAV4 models with 1AZ-FE 2.0L and 2004–2012 models with 2AZ-FE 2.4L use timing belts. 2013 and newer RAV4 gas models with 2AR-FE or A25A-FKS engines use timing chains. Hybrid RAV4s from 2016 also use chains. RKC verifies your VIN and engine code before quoting belt labor — installing a belt kit on a chain-driven RAV4 is wasted money.',
+  },
+  {
+    question: 'Is the 2AZ-FE RAV4 engine interference or non-interference?',
+    answer:
+      'The 2.4L 2AZ-FE and 2.0L 1AZ-FE are interference engines. If the timing belt strips teeth or the tensioner fails, pistons contact open valves — typically bending multiple valves per cylinder. Repair requires cylinder head removal and machine work, often $3,500–$6,000+ versus scheduled belt service around $900–$1,400 at RKC.',
+  },
+  {
+    question: 'Should I replace the water pump when I replace the timing belt?',
+    answer:
+      'Yes on belt-driven 2AZ-FE and 1AZ-FE RAV4s. The water pump sits behind the same timing cover and is driven by the timing belt. Pump bearing wear opens the weep hole and contaminates the belt with coolant. Replacing belt without pump when seepage is present guarantees a repeat teardown within months.',
+  },
+  {
+    question: 'What is the Toyota timing belt interval for RAV4 in Colorado?',
+    answer:
+      'Toyota specifies 90,000 miles or 72 months for 1AZ-FE and 2AZ-FE timing belts. Denver metro severe service — mountain towing, short trips, extreme temperature swings — supports the 72-month ceiling even when mileage is lower. RKC documents service date and mileage so you know when the next interval is due.',
+  },
+  {
+    question: 'What are signs my RAV4 timing belt is failing?',
+    answer:
+      'Ticking at hot idle from a dry tensioner, coolant seepage at the water pump weep hole, oil migration from cam seals onto the belt, and chirping from a seized idler pulley are common warnings. Many failures give no warning at all — which is why Toyota publishes a mileage interval rather than wait-for-symptoms replacement.',
+  },
+  {
+    question: 'Do you replace tensioner and idler pulleys with the belt?',
+    answer:
+      'Always. Tensioner hydraulic dampers and idler bearings share the same service life as the belt. Replacing belt alone while leaving a worn tensioner is the most common cause of premature second failure. RKC includes tensioner, idler, cam seals, crank seal, and coolant in the standard belt quote.',
+  },
+  {
+    question: 'How much does RAV4 timing belt service cost at RKC?',
+    answer:
+      'Complete belt, water pump, tensioner, idler, seals, and coolant service on 2AZ-FE RAV4 typically runs $900–$1,400 plus parts at our posted $120/hr labor rate. You receive a written estimate before we remove the timing cover. Head rebuild after belt failure starts around $3,500 — preventive service is dramatically cheaper.',
+  },
+  {
+    question: 'Can I drive my RAV4 if the timing belt is overdue?',
+    answer:
+      'Every mile on an overdue interference-engine belt is gambling. RKC recommends scheduling belt service immediately when mileage exceeds 90,000 or age exceeds 72 months. If you hear new ticking, see coolant at the pump weep hole, or experience belt squeal, stop driving and arrange tow service — partial belt failure can jump timing without warning.',
+  },
+  {
+    question: 'Does my 2018 or newer RAV4 need timing belt service?',
+    answer:
+      'No. 2013+ RAV4 gas models use timing chains inspected at high mileage for stretch and tensioner wear — a different service scope. Hybrid RAV4s also use chains with separate inverter coolant maintenance. Bring your VIN to RKC and we will confirm which platform you have before quoting.',
+  },
+];
+
+export const RAV4_PRE_WINTER_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'When should I schedule RAV4 pre-winter service in Colorado?',
+    answer:
+      'Book in September or October before the first sustained freeze — Englewood and Denver metro typically see hard cold by late October. Batteries fail on the first 10°F morning, not during a mild September afternoon. Early scheduling avoids the November rush when every shop is booked with no-start tow-ins.',
+  },
+  {
+    question: 'What battery CCA rating does my RAV4 need for Colorado winter?',
+    answer:
+      'Follow the CCA rating on your factory battery label — most RAV4s require 550–700 CCA depending on engine and trim. RKC load-tests at rated CCA, not just open-circuit voltage. A battery at 12.4V resting can still fail under starter load at 0°F. Replace when conductance falls below 70% of rated CCA.',
+  },
+  {
+    question: 'Does RAV4 AWD need fluid service before ski season?',
+    answer:
+      'Yes on a schedule. Rear differential and transfer coupling fluid degrades from heat and moisture intrusion. Shudder on tight turns, groaning from the rear in parking lots, and delayed AWD engagement signal degraded fluid — not immediate clutch failure. Fresh Toyota-spec gear oil before I-70 season costs far less than coupling repair after a winter of neglect.',
+  },
+  {
+    question: 'What coolant freeze point is safe for Englewood altitude?',
+    answer:
+      'We target −34°F protection minimum at 5,280 feet using refractometer testing — not color guessing. Weak coolant risks ice expansion in block passages and heater core blockage on sub-zero Federal Blvd mornings. RKC pressure-tests the cap and inspects hoses for swelling while sampling freeze point.',
+  },
+  {
+    question: 'What oil viscosity should my RAV4 use in winter?',
+    answer:
+      '2013+ gas and hybrid RAV4s specify 0W-20 synthetic — the 0W prefix protects cold starts below 10°F. Older 2AZ-FE models may specify 5W-30 per the under-hood label. Using heavier oil than specified hurts cold-flow protection. Short Englewood commutes qualify as severe service regardless of viscosity.',
+  },
+  {
+    question: 'What extra checks does a RAV4 Hybrid need before winter?',
+    answer:
+      'Hybrid RAV4s add inverter coolant level and pump operation, hybrid battery cooling intake inspection, and 12V auxiliary battery load test — the HV system depends on strong 12V for contactor closure on cold mornings. Inverter coolant is separate from engine coolant and easy to overlook until power limiting warnings appear.',
+  },
+  {
+    question: 'How deep should tire tread be for I-70 winter driving?',
+    answer:
+      'RKC recommends minimum 5/32-inch tread on all four corners for snow and slush on I-70 and Loveland Pass approaches. All-season tires below that threshold hydroplane on Eisenhower Tunnel slush. We measure tread depth, check TPMS sensor function, and verify spare pressure as part of pre-winter inspection.',
+  },
+  {
+    question: 'Do I need a block heater for my RAV4 in Denver?',
+    answer:
+      'Most Colorado RAV4 owners do fine without block heaters using 0W-20 oil and a healthy battery. If you park outdoors below 0°F regularly or have an older 2AZ-FE with 5W-30, an engine block heater reduces cold-start wear. RKC inspects block heater cord and element condition if your vehicle is equipped.',
+  },
+  {
+    question: 'How much does RAV4 pre-winter inspection cost?',
+    answer:
+      'Multi-point pre-winter inspection at RKC typically runs $89–$129 depending on hybrid and AWD depth. Repairs are quoted separately at $120/hr posted labor — you approve each item before work begins. The written report prioritizes critical fixes before I-70 season versus monitor-through-spring items.',
+  },
+];
+
+export const RAV4_CHECK_ENGINE_PAGE_FAQ: FAQItem[] = [
+  {
+    question: 'Why does my RAV4 keep setting P0420 catalytic converter codes?',
+    answer:
+      'P0420 means downstream O2 sensor activity suggests reduced catalyst efficiency. On high-mileage 2AZ-FE RAV4s, oil consumption fouls plugs, causes misfire, and degrades the catalyst — replacing the converter without addressing oil use returns the code. RKC graphs upstream versus downstream O2 waveforms and measures oil consumption before quoting catalyst replacement.',
+  },
+  {
+    question: 'Is 2AZ-FE oil consumption related to my check engine light?',
+    answer:
+      'Often yes. Third-generation RAV4 2AZ-FE engines commonly consume oil past 120,000 miles from ring land wear. Oil-fouled plugs and coils misfire under load, dumping unburned fuel into the exhaust and setting P0420 or P030x codes. Oil consumption is a mechanical root cause — not fixed by sensors or converters alone.',
+  },
+  {
+    question: 'Can I drive my RAV4 with a steady check engine light?',
+    answer:
+      'Usually yes for steady MIL without misfire — schedule diagnosis within days. Steady P0420 without active misfire counters is not emergency but should not run months. Steady P0171 lean with rough idle needs prompt attention. Any flashing MIL means stop driving except to safety — catalyst damage is active.',
+  },
+  {
+    question: 'What does a flashing check engine light mean on a RAV4?',
+    answer:
+      'Flashing MIL under throttle means catalyst-damaging misfire. Unburned fuel is entering the exhaust and overheating the catalytic converter. Stop driving, reduce load, and tow if flashing continues. Common RAV4 causes include failed coil-on-plug, oil-fouled plugs on 2AZ-FE, and injector faults. RKC triages flashing codes as priority appointments.',
+  },
+  {
+    question: 'Can a parts store scan diagnose my RAV4 hybrid check engine light?',
+    answer:
+      'Generic OBD readers often miss hybrid P0Axx, P0Cxx, and transaxle codes stored in modules beyond basic powertrain. RAV4 Hybrid faults for inverter temperature, battery block performance, and clutch control require Toyota-capable scan tools. RKC reads hybrid and AWD modules with bidirectional test capability.',
+  },
+  {
+    question: 'What causes P0171 lean codes on Toyota RAV4?',
+    answer:
+      'P0171/P0174 lean codes on RAV4 commonly trace to vacuum leaks at the PCV hose, intake manifold gasket, cracked air intake boot, or weak MAF readings — worsened by Denver altitude where fuel trim already runs leaner. RKC smoke-tests the intake and verifies live fuel trim before recommending mass airflow or O2 sensor replacement.',
+  },
+  {
+    question: 'How does RKC diagnose RAV4 check engine lights?',
+    answer:
+      'We classify codes by family and severity, capture freeze-frame data, analyze live fuel trim and O2 activity, smoke-test for lean faults, compression-test when misfire follows mechanical pattern, and read hybrid/AWD modules where applicable. Diagnostic fee starts at $99 and credits toward approved repair at $120/hr posted labor.',
+  },
+  {
+    question: 'Will clearing my check engine light pass Colorado emissions?',
+    answer:
+      'No if monitors reset to not-ready. Colorado emissions requires readiness monitors complete since the last code clear — catalyst, O2, EVAP, and others. A parts-store erase with MIL off still fails inspection. RKC repairs the fault, then coaches your drive cycle so monitors set on your Englewood commute before your test appointment.',
+  },
+  {
+    question: 'What AWD-related codes appear on RAV4 check engine lights?',
+    answer:
+      'AWD RAV4s can set coupling overheat, driveshaft disconnect actuator, and wheel-speed correlation codes — often after tight parking-lot turns or degraded transfer fluid. Codes may appear in chassis or driveline modules, not just powertrain. RKC tests coupling engagement, inspects fluid condition, and verifies actuator response before recommending module replacement.',
+  },
+];

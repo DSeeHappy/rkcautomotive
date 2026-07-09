@@ -1113,6 +1113,15 @@ const MODEL_SERVICE_IDS: Record<string, string[]> = {
   ],
 };
 
+/** Model-specific deep-dive page href overrides (sparse). */
+const MODEL_SERVICE_HREFS: Record<string, Partial<Record<string, string>>> = {
+  'toyota-rav4': {
+    'timing-belt': '/vehicles/toyota/rav4/timing-belt-water-pump-englewood-co',
+    'pre-winter': '/vehicles/toyota/rav4/pre-winter-service-englewood-co',
+    'check-engine': '/vehicles/toyota/rav4/check-engine-light-englewood-co',
+  },
+};
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -1143,6 +1152,8 @@ export function getModelCommonServices(
 ): ModelCommonService[] {
   const ctx: ModelServiceContext = { brandSlug, brandName, model, vehicleType };
   const ids = resolveServiceIds(ctx);
+  const modelKey = `${brandSlug}-${slugify(model)}`;
+  const hrefOverrides = MODEL_SERVICE_HREFS[modelKey];
 
   return ids
     .map((id) => {
@@ -1152,7 +1163,7 @@ export function getModelCommonServices(
         id: def.id,
         title: buildTitle(model, def.name),
         description: def.describe(ctx),
-        href: def.href,
+        href: hrefOverrides?.[id] ?? def.href,
       };
     })
     .filter((s): s is ModelCommonService => s !== null);
