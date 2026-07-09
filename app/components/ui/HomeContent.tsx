@@ -11,7 +11,7 @@ import {
   PROCESS_STEPS,
   SERVICES,
   STATS,
-  TESTIMONIALS,
+  VERIFIED_REVIEWS_4_PLUS,
   TRUST_BADGES,
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
@@ -215,7 +215,7 @@ export default function HomeContent() {
               Real quotes from Google and Facebook — no placeholders, no invented names.
             </p>
           </FadeIn>
-          <ReviewCards reviews={TESTIMONIALS} />
+          <ReviewCards reviews={VERIFIED_REVIEWS_4_PLUS} />
         </div>
       </section>
 
