@@ -56,7 +56,7 @@ export function MotionAnchor({
       ref={ref}
       href={href}
       className={mergedClassName}
-      {...(isTel ? { 'data-phone-link': '' } : {})}
+      {...(isTel ? { 'data-phone-link': '', 'data-cfemail': 'false' } : {})}
       {...rest}
     >
       {children}

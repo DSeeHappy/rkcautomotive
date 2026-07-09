@@ -34,7 +34,7 @@ export default function PhoneLink({
   useRestoreTelHref(href, ref);
 
   return (
-    <a ref={ref} href={href} data-phone-link="" {...rest}>
+    <a ref={ref} href={href} data-phone-link="" data-cfemail="false" {...rest}>
       {children}
     </a>
   );
