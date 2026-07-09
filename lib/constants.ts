@@ -370,6 +370,9 @@ export type FAQItem = { question: string; answer: string };
 export const PRICING_COMPARISON_DISCLAIMER =
   'Typical labor rates and fees reported by Englewood and Denver metro drivers. Actual charges vary by vehicle, brand, and shop location.' as const;
 
+export const PRICING_TIERS_DISCLAIMER =
+  'Starting prices assume typical conditions. Parts vary by vehicle, and we may find additional issues during inspection. If anything changes, you get a written change order before we proceed — no surprise charges.' as const;
+
 export const PRICING_COMPARISON = [
   {
     name: 'Dealership',

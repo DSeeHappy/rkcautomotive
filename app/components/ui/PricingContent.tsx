@@ -30,6 +30,7 @@ import {
   PRICING_PHILOSOPHY,
   PRICING_SAVINGS_SCENARIOS,
   PRICING_TIERS,
+  PRICING_TIERS_DISCLAIMER,
 } from '@/lib/constants';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
@@ -468,6 +469,16 @@ export default function PricingContent() {
             </p>
           </FadeIn>
 
+          <FadeIn className="mx-auto mb-10 max-w-5xl rounded-[1.75rem] border border-primary-blue/20 bg-primary-blue/5 px-6 py-5 sm:px-8">
+            <div className="flex gap-4">
+              <FileText className="mt-0.5 size-5 shrink-0 text-primary-blue" aria-hidden />
+              <p className="text-sm leading-relaxed text-ink-muted">
+                <span className="font-semibold text-primary-blue">How starting prices work:</span>{' '}
+                {PRICING_TIERS_DISCLAIMER}
+              </p>
+            </div>
+          </FadeIn>
+
           <div className="mx-auto max-w-5xl space-y-12">
             {PRICING_TIERS.map((tier, ti) => (
               <FadeIn key={tier.category} delay={ti * 0.05}>
@@ -505,10 +516,14 @@ export default function PricingContent() {
             ))}
           </div>
 
-          <FadeIn className="mx-auto mt-10 max-w-5xl rounded-[1.75rem] border border-primary-blue/15 bg-primary-blue/5 px-6 py-5 text-center text-sm text-ink-muted sm:px-8">
-            All prices are starting estimates and vary by make, model, and condition. Labor billed at {LABOR_RATE}.
-            Diagnostic fees applied toward approved repairs. Free multi-point inspection with any service — no upsell
-            pressure.
+          <FadeIn className="mx-auto mt-10 max-w-5xl rounded-[1.75rem] border border-primary-blue/15 bg-primary-blue/5 px-6 py-5 text-center text-sm leading-relaxed text-ink-muted sm:px-8">
+            Final cost depends on parts and your vehicle&apos;s condition — we may find more issues once we&apos;re
+            under the hood.{' '}
+            <span className="font-semibold text-primary-blue">
+              You always get a written change order before we do additional work.
+            </span>{' '}
+            Labor billed at {LABOR_RATE}. Diagnostic fees applied toward approved repairs. Free multi-point inspection
+            with any service — no upsell pressure.
           </FadeIn>
         </div>
       </section>
