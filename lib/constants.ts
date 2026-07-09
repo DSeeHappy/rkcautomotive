@@ -22,6 +22,12 @@ export const GOOGLE_REVIEWS_URL = 'https://share.google/i1wZ38efUAtcyUqnp';
 export const FACEBOOK_URL = 'https://www.facebook.com/RKCAutomotive/';
 export const INSTAGRAM_URL = 'https://www.instagram.com/rkcautomotive/';
 export const YAHOO_LOCAL_URL = 'https://local.yahoo.com/info-235125355-rkc-automotive-englewood/';
+export const MAPQUEST_URL =
+  'https://www.mapquest.com/us/colorado/rkc-automotive-549200387';
+export const CHAMBER_OF_COMMERCE_URL =
+  'https://www.chamberofcommerce.com/business-directory/colorado/englewood/mechanic/2026525603-rkc-automotive';
+export const FINDGLOCAL_URL =
+  'https://www.findglocal.com/US/Englewood/110566205285143/RKC-Automotive';
 export const ASE_URL = 'https://www.ase.com/';
 export const ASE_ARIA_LABEL =
   'ASE — National Institute for Automotive Service Excellence (opens in new tab)';
@@ -34,6 +40,19 @@ export const SOCIAL_LINKS = [
 export const DIRECTORY_LINKS = [
   { name: 'Google Reviews', href: GOOGLE_REVIEWS_URL, label: 'Google reviews' },
   { name: 'Yahoo Local', href: YAHOO_LOCAL_URL, label: 'Yahoo Local' },
+  { name: 'MapQuest', href: MAPQUEST_URL, label: 'MapQuest' },
+  { name: 'Chamber of Commerce', href: CHAMBER_OF_COMMERCE_URL, label: 'Chamber of Commerce' },
+  { name: 'FindGlocal', href: FINDGLOCAL_URL, label: 'FindGlocal' },
+] as const;
+
+export const SAME_AS = [
+  FACEBOOK_URL,
+  INSTAGRAM_URL,
+  GOOGLE_REVIEWS_URL,
+  YAHOO_LOCAL_URL,
+  MAPQUEST_URL,
+  CHAMBER_OF_COMMERCE_URL,
+  FINDGLOCAL_URL,
 ] as const;
 
 export const BUSINESS = {

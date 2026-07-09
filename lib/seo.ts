@@ -1,14 +1,11 @@
 import type { MetadataRoute } from 'next';
 import {
   BUSINESS,
-  FACEBOOK_URL,
-  GOOGLE_REVIEWS_URL,
-  INSTAGRAM_URL,
   OPENING_HOURS_SCHEMA,
+  SAME_AS,
   SERVICE_AREAS,
   SERVICES,
   VERIFIED_REVIEWS_4_PLUS,
-  YAHOO_LOCAL_URL,
   type FAQItem,
 } from './constants';
 import { SERVICE_AREAS_DATA } from './serviceAreas';
@@ -65,8 +62,6 @@ const POSTAL_ADDRESS = {
   postalCode: BUSINESS.address.zip,
   addressCountry: 'US',
 };
-
-const SAME_AS = [FACEBOOK_URL, INSTAGRAM_URL, GOOGLE_REVIEWS_URL, YAHOO_LOCAL_URL];
 
 const SCHEMA_OPENING_HOURS = ['Mo-Fr 08:00-18:00', 'Sa 08:00-12:00'] as const;
 
@@ -263,7 +258,7 @@ export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
     openingHours: SCHEMA_OPENING_HOURS,
     openingHoursSpecification: OPENING_HOURS_SCHEMA,
     areaServed: areaServedValue,
-    sameAs: [FACEBOOK_URL, INSTAGRAM_URL],
+    sameAs: [...SAME_AS],
     ...(aggregateRating ? { aggregateRating } : {}),
   };
 }
@@ -292,7 +287,7 @@ export function createHomepageAutoRepairSchema() {
     openingHours: [...SCHEMA_OPENING_HOURS],
     openingHoursSpecification: OPENING_HOURS_SCHEMA,
     areaServed: HOMEPAGE_AREA_SERVED,
-    sameAs: [FACEBOOK_URL, INSTAGRAM_URL],
+    sameAs: [...SAME_AS],
     ...(aggregateRating ? { aggregateRating } : {}),
   };
 }
