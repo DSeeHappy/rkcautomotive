@@ -57,7 +57,7 @@ function prefersMp4First(): boolean {
 }
 
 function getInitialPhase(): Phase {
-  if (typeof document === 'undefined') return 'checking';
+  if (typeof document === 'undefined') return 'done';
   if (document.documentElement.dataset.splash === 'skip') return 'done';
   return 'checking';
 }
@@ -335,6 +335,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           className="fixed inset-0 z-[9999] h-screen w-screen bg-black"
           aria-busy="true"
           aria-label="Loading RKC Automotive"
+          suppressHydrationWarning
         />
       ) : (
         <div
