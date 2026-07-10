@@ -18,7 +18,9 @@ const SPLASH_EXIT_MS = 550;
 const SKIP_APPEAR_MS = 1500;
 const MOBILE_SKIP_APPEAR_MS = 900;
 /** Hard cap — splash always exits even if video is broken */
-const MAX_SPLASH_MS = 6000;
+const MAX_SPLASH_MS = 3000;
+/** If React is still in checking, force homepage (no timers were scheduled yet) */
+const CHECKING_PHASE_MAX_MS = 800;
 /** If video has not started by then, hand off anyway */
 const VIDEO_START_TIMEOUT_MS = 2500;
 const MOBILE_VIDEO_START_TIMEOUT_MS = 1800;
@@ -73,6 +75,22 @@ function dispatchSplashReady() {
   window.dispatchEvent(new Event(SPLASH_READY_EVENT));
 }
 
+function safeGetSession(key: string): string | null {
+  try {
+    return sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeSetSession(key: string, value: string): void {
+  try {
+    sessionStorage.setItem(key, value);
+  } catch {
+    /* private browsing / storage blocked */
+  }
+}
+
 export default function SplashScreen({ children }: SplashScreenProps) {
   const [phase, setPhase] = useState<Phase>(getInitialPhase);
   const [splashExiting, setSplashExiting] = useState(false);
@@ -115,7 +133,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
       window.clearTimeout(forceDismissRef.current);
       forceDismissRef.current = null;
     }
-    sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+    safeSetSession(SPLASH_SESSION_KEY, '1');
     setShowSkip(false);
     pauseVideo(videoRef.current);
     setSplashExiting(true);
@@ -160,17 +178,33 @@ export default function SplashScreen({ children }: SplashScreenProps) {
   }, [fallbackPrefadeMs, scheduleForceDismiss, schedulePrefade]);
 
   useEffect(() => {
+    const id = window.setTimeout(() => {
+      if (!dismissedRef.current) finishSplash();
+    }, MAX_SPLASH_MS);
+    return () => window.clearTimeout(id);
+  }, [finishSplash]);
+
+  useEffect(() => {
     if (phase !== 'checking') return;
 
-    const seen = sessionStorage.getItem(SPLASH_SESSION_KEY);
+    const checkingTimeout = window.setTimeout(() => {
+      if (dismissedRef.current) return;
+      setPhase('done');
+      document.body.style.overflow = '';
+      dispatchSplashReady();
+    }, CHECKING_PHASE_MAX_MS);
+
+    const seen = safeGetSession(SPLASH_SESSION_KEY);
     if (seen) {
+      window.clearTimeout(checkingTimeout);
       setPhase('done');
       dispatchSplashReady();
       return;
     }
 
     if (shouldSkipSplashEntirely()) {
-      sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+      window.clearTimeout(checkingTimeout);
+      safeSetSession(SPLASH_SESSION_KEY, '1');
       setPhase('done');
       dispatchSplashReady();
       return;
@@ -180,6 +214,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     beginSplash();
 
     return () => {
+      window.clearTimeout(checkingTimeout);
       clearTimers();
       document.body.style.overflow = '';
     };
@@ -194,8 +229,13 @@ export default function SplashScreen({ children }: SplashScreenProps) {
   useEffect(() => {
     if (phase !== 'playing') return;
 
+    scheduleForceDismiss();
+
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+      schedulePrefade(600);
+      return;
+    }
 
     let videoStarted = false;
 
@@ -271,6 +311,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
   }, [
     phase,
     schedulePrefade,
+    scheduleForceDismiss,
     startHandoff,
     skipAppearMs,
     fadeBeforeEndMs,
