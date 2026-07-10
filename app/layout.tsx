@@ -11,7 +11,6 @@ import SplashScreen from './components/ui/SplashScreen';
 import JsonLd from './components/JsonLd';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
 import { createOrganizationSchema, createWebSiteSchema } from '@/lib/seo';
-import { RKC_LOGO_VIDEO_MP4, RKC_LOGO_VIDEO_WEBM } from '@/lib/logo';
 
 const bebas = Bebas_Neue({
   weight: '400',
@@ -51,15 +50,11 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
-/** Inline boot: skip repeat visits, preload splash assets before React hydrates. */
-const SPLASH_BOOT_SCRIPT = `(function(){try{var k='rkc-splash-seen';if(sessionStorage.getItem(k)){document.documentElement.dataset.splash='skip';return;}if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){sessionStorage.setItem(k,'1');document.documentElement.dataset.splash='skip';return;}var c=navigator.connection;if(c&&(c.saveData||c.effectiveType==='slow-2g'||c.effectiveType==='2g')){sessionStorage.setItem(k,'1');document.documentElement.dataset.splash='skip';return;}var m=window.matchMedia('(max-width: 639px)').matches;var head=document.head;var l=document.createElement('link');l.rel='preload';l.as='video';l.href=m?'${RKC_LOGO_VIDEO_MP4}':'${RKC_LOGO_VIDEO_WEBM}';l.setAttribute('fetchpriority','high');head.appendChild(l);}catch(e){}})();`;
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <head>
         <meta name="msvalidate.01" content={BING_SITE_VERIFICATION} />
-        <script dangerouslySetInnerHTML={{ __html: SPLASH_BOOT_SCRIPT }} />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />

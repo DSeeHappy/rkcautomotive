@@ -32,9 +32,13 @@ export function ensureScrollTrigger(): Promise<typeof import('gsap/ScrollTrigger
       });
     };
 
-    if (sessionStorage.getItem('rkc-splash-seen')) {
-      activate();
-      return;
+    try {
+      if (sessionStorage.getItem('rkc-splash-seen')) {
+        activate();
+        return;
+      }
+    } catch {
+      /* private browsing / storage blocked */
     }
 
     window.addEventListener('rkc-splash-ready', activate, { once: true });
