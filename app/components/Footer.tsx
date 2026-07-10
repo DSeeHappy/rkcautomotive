@@ -29,7 +29,7 @@ export default function Footer() {
             {BUSINESS.phone}
           </PhoneLink>
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Visit</h4>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Visit</p>
             <ul className="space-y-3 text-sm text-white/65">
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-primary-blue-light" />
@@ -49,7 +49,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Explore</h4>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Explore</p>
             <ul className="space-y-2">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.href}>
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-2 lg:col-span-2">
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Services</h4>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Services</p>
             <div className="flex flex-wrap gap-2">
               {SERVICES.map((service) => (
                 <Link
@@ -78,9 +78,9 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-8">
-          <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">
             Connect &amp; reviews
-          </h4>
+          </p>
           <SocialLinks variant="light" />
         </div>
 
