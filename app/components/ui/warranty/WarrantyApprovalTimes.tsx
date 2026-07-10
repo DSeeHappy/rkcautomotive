@@ -57,50 +57,43 @@ const TIMELINE: {
   },
 ];
 
-function TimelineNode({ card }: { card: (typeof TIMELINE)[number] }) {
+function TimelineMarker({ card }: { card: (typeof TIMELINE)[number] }) {
   const Icon = card.icon;
 
   return (
-    <div className="relative flex flex-col items-center text-center lg:items-start lg:text-left">
-      <div className="relative z-10 mb-6 hidden lg:flex lg:w-full lg:items-center">
-        <span
-          className={`flex size-14 shrink-0 items-center justify-center rounded-2xl ${card.accentBg} ring-2 ${card.accentRing}`}
-        >
-          <Icon className={`size-7 ${card.accent}`} aria-hidden />
-        </span>
-        <span className={`ml-4 font-display text-4xl tracking-wide text-primary-blue/15`}>{card.step}</span>
-      </div>
-
-      <article className="group relative h-full w-full overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)]">
-        <div
-          aria-hidden
-          className={`pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-60 ${card.accent}`}
-        />
-
-        <div className="mb-5 flex items-center justify-between gap-3 lg:hidden">
-          <span
-            className={`flex size-12 items-center justify-center rounded-2xl ${card.accentBg} ring-1 ${card.accentRing}`}
-          >
-            <Icon className={`size-6 ${card.accent}`} aria-hidden />
-          </span>
-          <span className="font-display text-3xl tracking-wide text-primary-blue/20">{card.step}</span>
-        </div>
-
-        <span
-          className={`inline-block rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide ${card.accentBg} ${card.accent}`}
-        >
-          {card.timeframe}
-        </span>
-        <h3 className="mt-4 font-display text-2xl tracking-wide text-primary-blue sm:text-[1.65rem]">
-          {card.title}
-        </h3>
-        {card.paragraphs.map((paragraph) => (
-          <p key={paragraph.slice(0, 36)} className="mt-4 text-sm leading-relaxed text-ink-muted sm:text-base">
-            {paragraph}
-          </p>
-        ))}
-      </article>
+    <div className="flex flex-col items-center gap-3 text-center">
+      <span
+        className={`relative z-10 flex size-14 items-center justify-center rounded-2xl border-4 border-[var(--background)] ${card.accentBg} ring-2 ${card.accentRing}`}
+      >
+        <Icon className={`size-7 ${card.accent}`} aria-hidden />
+      </span>
+      <span className="font-display text-4xl tracking-wide text-primary-blue/15">{card.step}</span>
     </div>
+  );
+}
+
+function TimelineCard({ card }: { card: (typeof TIMELINE)[number] }) {
+  return (
+    <article className="group relative h-full w-full overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)]">
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-60 ${card.accent}`}
+      />
+
+      <span
+        className={`inline-block rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide ${card.accentBg} ${card.accent}`}
+      >
+        {card.timeframe}
+      </span>
+      <h3 className="mt-4 font-display text-2xl tracking-wide text-primary-blue sm:text-[1.65rem]">
+        {card.title}
+      </h3>
+      {card.paragraphs.map((paragraph) => (
+        <p key={paragraph.slice(0, 36)} className="mt-4 text-sm leading-relaxed text-ink-muted sm:text-base">
+          {paragraph}
+        </p>
+      ))}
+    </article>
   );
 }
 
@@ -121,31 +114,23 @@ export default function WarrantyApprovalTimes() {
           </p>
         </FadeIn>
 
-        <div className="relative mb-2 hidden lg:block">
+        <div className="relative">
           <div
             aria-hidden
-            className="absolute left-[8%] right-[8%] top-7 h-0.5 bg-gradient-to-r from-emerald-400/30 via-amber-400/50 to-sky-400/30"
+            className="pointer-events-none absolute inset-x-[16.666%] top-7 hidden h-0.5 bg-gradient-to-r from-emerald-400/30 via-amber-400/50 to-sky-400/30 lg:block"
           />
-          <div className="grid grid-cols-3 gap-8">
-            {TIMELINE.map((card) => (
-              <div key={card.title} className="flex justify-start pl-0">
-                <span
-                  className={`relative z-10 flex size-14 items-center justify-center rounded-full border-4 border-[var(--background)] ${card.accentBg}`}
-                >
-                  <card.icon className={`size-6 ${card.accent}`} aria-hidden />
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        <Stagger className="grid gap-8 lg:grid-cols-3 lg:gap-8" stagger={0.08} delay={0.05}>
-          {TIMELINE.map((card) => (
-            <StaggerItem key={card.title}>
-              <TimelineNode card={card} />
-            </StaggerItem>
-          ))}
-        </Stagger>
+          <Stagger className="grid gap-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0" stagger={0.08} delay={0.05}>
+            {TIMELINE.map((card) => (
+              <StaggerItem key={card.title} className="flex flex-col items-center">
+                <div className="mb-6 lg:mb-10">
+                  <TimelineMarker card={card} />
+                </div>
+                <TimelineCard card={card} />
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
       </div>
     </section>
   );
