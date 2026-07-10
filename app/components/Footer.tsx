@@ -84,8 +84,24 @@ export default function Footer() {
           <SocialLinks variant="light" />
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-8 text-center text-sm text-white/40">
-          <p>© {year} {BUSINESS.name}. All rights reserved. · ASE Certified · Englewood, Colorado</p>
+        <div className="mt-14 border-t border-white/10 pt-8 text-center">
+          <p className="text-base font-semibold text-white/80 sm:text-lg">
+            Website built by{' '}
+            <a
+              href="https://molecule.work"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-primary-green-light underline-offset-4 transition-colors hover:text-primary-green hover:underline"
+            >
+              molecule.work
+            </a>
+          </p>
+          <p className="mt-1.5 text-sm text-white/50">
+            Premium web design for Colorado businesses
+          </p>
+          <p className="mt-5 text-sm text-white/40">
+            © {year} {BUSINESS.name}. All rights reserved. · ASE Certified · Englewood, Colorado
+          </p>
         </div>
       </div>
     </footer>
