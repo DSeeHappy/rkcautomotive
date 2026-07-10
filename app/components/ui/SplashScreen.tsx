@@ -1,12 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  getSplashVideoSources,
-  RKC_LOGO_CARD_SIZE,
-  RKC_LOGO_CARD_WEBP,
-} from '@/lib/logo';
+import { getSplashVideoSources } from '@/lib/logo';
 
 const SPLASH_SESSION_KEY = 'rkc-splash-seen';
 export const SPLASH_READY_EVENT = 'rkc-splash-ready';
@@ -22,9 +17,13 @@ const SPLASH_EXIT_MS = 550;
 /** Skip button appears after intro has started */
 const SKIP_APPEAR_MS = 1500;
 const MOBILE_SKIP_APPEAR_MS = 900;
-/** Poster-only fallback when video cannot play */
-const POSTER_FALLBACK_MS = 2200;
-const MOBILE_POSTER_FALLBACK_MS = 1600;
+/** Hard cap — splash always exits even if video is broken */
+const MAX_SPLASH_MS = 6000;
+/** If video has not started by then, hand off anyway */
+const VIDEO_START_TIMEOUT_MS = 2500;
+const MOBILE_VIDEO_START_TIMEOUT_MS = 1800;
+/** Quick exit when video errors */
+const VIDEO_ERROR_EXIT_MS = 800;
 
 /** Full-bleed cover; scale down slightly on portrait phones so logo + AUTOMOTIVE stay visible */
 const VIDEO_CLASS =
@@ -57,9 +56,7 @@ function prefersMp4First(): boolean {
 
 function getInitialPhase(): Phase {
   if (typeof document === 'undefined') return 'checking';
-  const splash = document.documentElement.dataset.splash;
-  if (splash === 'skip') return 'done';
-  if (splash === 'play') return 'playing';
+  if (document.documentElement.dataset.splash === 'skip') return 'done';
   return 'checking';
 }
 
@@ -76,29 +73,8 @@ function dispatchSplashReady() {
   window.dispatchEvent(new Event(SPLASH_READY_EVENT));
 }
 
-function SplashPoster({ instant = false }: { instant?: boolean }) {
-  return (
-    <div className="flex h-full w-full items-center justify-center bg-black">
-      <Image
-        src={RKC_LOGO_CARD_WEBP}
-        alt=""
-        width={RKC_LOGO_CARD_SIZE}
-        height={RKC_LOGO_CARD_SIZE}
-        priority
-        fetchPriority="high"
-        aria-hidden
-        className={`h-auto w-[min(56vw,220px)] rounded-2xl shadow-[0_10px_32px_-8px_rgba(0,0,0,0.55)] sm:w-[min(40vw,280px)] ${
-          instant ? 'opacity-100' : 'opacity-100'
-        }`}
-        sizes="(max-width: 640px) 220px, 280px"
-      />
-    </div>
-  );
-}
-
 export default function SplashScreen({ children }: SplashScreenProps) {
   const [phase, setPhase] = useState<Phase>(getInitialPhase);
-  const [videoPlaying, setVideoPlaying] = useState(false);
   const [splashExiting, setSplashExiting] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
   const [mp4First] = useState(prefersMp4First);
@@ -110,12 +86,15 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     isMobileViewport() ? MOBILE_FALLBACK_PREFADE_MS : FALLBACK_PREFADE_MS,
   );
   const timersRef = useRef<number[]>([]);
+  const forceDismissRef = useRef<number | null>(null);
   const mobileRef = useRef(isMobileViewport());
 
   const fadeBeforeEndMs = mobileRef.current ? MOBILE_FADE_BEFORE_END_MS : FADE_BEFORE_END_MS;
   const fallbackPrefadeMs = mobileRef.current ? MOBILE_FALLBACK_PREFADE_MS : FALLBACK_PREFADE_MS;
   const skipAppearMs = mobileRef.current ? MOBILE_SKIP_APPEAR_MS : SKIP_APPEAR_MS;
-  const posterFallbackMs = mobileRef.current ? MOBILE_POSTER_FALLBACK_MS : POSTER_FALLBACK_MS;
+  const videoStartTimeoutMs = mobileRef.current
+    ? MOBILE_VIDEO_START_TIMEOUT_MS
+    : VIDEO_START_TIMEOUT_MS;
 
   const clearTimers = useCallback(() => {
     timersRef.current.forEach((id) => window.clearTimeout(id));
@@ -132,6 +111,10 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     if (dismissedRef.current) return;
     dismissedRef.current = true;
     clearTimers();
+    if (forceDismissRef.current !== null) {
+      window.clearTimeout(forceDismissRef.current);
+      forceDismissRef.current = null;
+    }
     sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
     setShowSkip(false);
     pauseVideo(videoRef.current);
@@ -165,6 +148,17 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     [addTimer, clearTimers, skipAppearMs, startHandoff],
   );
 
+  const scheduleForceDismiss = useCallback(() => {
+    if (forceDismissRef.current !== null) return;
+    forceDismissRef.current = window.setTimeout(() => finishSplash(), MAX_SPLASH_MS);
+  }, [finishSplash]);
+
+  const beginSplash = useCallback(() => {
+    document.body.style.overflow = 'hidden';
+    schedulePrefade(fallbackPrefadeMs);
+    scheduleForceDismiss();
+  }, [fallbackPrefadeMs, scheduleForceDismiss, schedulePrefade]);
+
   useEffect(() => {
     if (phase !== 'checking') return;
 
@@ -183,14 +177,13 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     }
 
     setPhase('playing');
-    document.body.style.overflow = 'hidden';
-    schedulePrefade(fallbackPrefadeMs);
+    beginSplash();
 
     return () => {
       clearTimers();
       document.body.style.overflow = '';
     };
-  }, [phase, clearTimers, schedulePrefade, fallbackPrefadeMs]);
+  }, [phase, beginSplash, clearTimers]);
 
   useEffect(() => {
     if (phase === 'done') {
@@ -204,6 +197,18 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     const video = videoRef.current;
     if (!video) return;
 
+    let videoStarted = false;
+
+    const markStarted = () => {
+      videoStarted = true;
+    };
+
+    const tryPlay = () => {
+      void video.play().then(markStarted).catch(() => {
+        /* video start timeout / error handlers will exit splash */
+      });
+    };
+
     const onLoadedMetadata = () => {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
       const prefadeMs = Math.max(
@@ -214,11 +219,12 @@ export default function SplashScreen({ children }: SplashScreenProps) {
       schedulePrefade(prefadeMs);
     };
 
-    const onCanPlayThrough = () => {
-      setVideoPlaying(true);
-      void video.play().catch(() => {
-        /* keep poster visible; poster fallback timer handles exit */
-      });
+    const onCanPlay = () => {
+      tryPlay();
+    };
+
+    const onPlaying = () => {
+      markStarted();
     };
 
     const onTimeUpdate = () => {
@@ -232,23 +238,32 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     };
 
     const onError = () => {
-      schedulePrefade(posterFallbackMs);
+      schedulePrefade(VIDEO_ERROR_EXIT_MS);
     };
 
     video.addEventListener('loadedmetadata', onLoadedMetadata);
-    video.addEventListener('canplaythrough', onCanPlayThrough);
+    video.addEventListener('canplay', onCanPlay);
+    video.addEventListener('canplaythrough', onCanPlay);
+    video.addEventListener('playing', onPlaying);
     video.addEventListener('timeupdate', onTimeUpdate);
     video.addEventListener('ended', onEnded);
     video.addEventListener('error', onError);
 
-    video.load();
+    addTimer(() => {
+      if (!videoStarted) {
+        schedulePrefade(Math.min(fallbackPrefadeMs, 1200));
+      }
+    }, videoStartTimeoutMs);
 
     if (video.readyState >= 1) onLoadedMetadata();
-    if (video.readyState >= 4) onCanPlayThrough();
+    if (video.readyState >= 2) onCanPlay();
+    tryPlay();
 
     return () => {
       video.removeEventListener('loadedmetadata', onLoadedMetadata);
-      video.removeEventListener('canplaythrough', onCanPlayThrough);
+      video.removeEventListener('canplay', onCanPlay);
+      video.removeEventListener('canplaythrough', onCanPlay);
+      video.removeEventListener('playing', onPlaying);
       video.removeEventListener('timeupdate', onTimeUpdate);
       video.removeEventListener('ended', onEnded);
       video.removeEventListener('error', onError);
@@ -259,7 +274,9 @@ export default function SplashScreen({ children }: SplashScreenProps) {
     startHandoff,
     skipAppearMs,
     fadeBeforeEndMs,
-    posterFallbackMs,
+    fallbackPrefadeMs,
+    videoStartTimeoutMs,
+    addTimer,
   ]);
 
   if (phase === 'done') {
@@ -277,9 +294,7 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           className="fixed inset-0 z-[9999] h-screen w-screen bg-black"
           aria-busy="true"
           aria-label="Loading RKC Automotive"
-        >
-          <SplashPoster instant />
-        </div>
+        />
       ) : (
         <div
           id="splash-screen"
@@ -294,22 +309,19 @@ export default function SplashScreen({ children }: SplashScreenProps) {
           <div className="absolute inset-0 overflow-hidden bg-black">
             <video
               ref={videoRef}
+              autoPlay
               muted
               playsInline
-              preload="metadata"
+              preload="auto"
               // @ts-expect-error fetchPriority is valid on video in modern browsers
               fetchPriority="high"
-              className={`${VIDEO_CLASS} transition-opacity duration-300 ${
-                videoPlaying ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={VIDEO_CLASS}
               aria-hidden
             >
               {videoSources.map((source) => (
                 <source key={source.src} src={source.src} type={source.type} />
               ))}
             </video>
-
-            {!videoPlaying && <SplashPoster instant />}
           </div>
 
           <button
