@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
-import { ScrollTrigger } from '@/lib/gsap';
+import { ensureScrollTrigger } from '@/lib/gsap';
 
 type GsapProviderProps = {
   children: React.ReactNode;
@@ -13,7 +13,9 @@ export default function GsapProvider({ children }: GsapProviderProps) {
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
-      ScrollTrigger.refresh(true);
+      void ensureScrollTrigger().then((ScrollTrigger) => {
+        ScrollTrigger.refresh(true);
+      });
     });
     return () => cancelAnimationFrame(id);
   }, [pathname]);

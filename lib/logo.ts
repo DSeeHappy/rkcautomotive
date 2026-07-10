@@ -1,5 +1,11 @@
 export const RKC_LOGO_VIDEO_WEBM = '/videos/rkc-logo-animation.webm';
 export const RKC_LOGO_VIDEO_MP4 = '/videos/rkc-logo-animation.mp4';
+/**
+ * Optional lite WebM (<500 KB). Add `public/videos/rkc-logo-animation-lite.webm`
+ * after re-encoding for fastest mobile splash. Falls back to full sources.
+ */
+export const RKC_LOGO_VIDEO_LITE_WEBM = '/videos/rkc-logo-animation-lite.webm';
+
 /** Preferred splash intro source (WebM); MP4 used as fallback in SplashScreen */
 export const RKC_LOGO_VIDEO = RKC_LOGO_VIDEO_WEBM;
 
@@ -24,6 +30,20 @@ export const NAV_LOGO_SCROLLED_HEIGHT = { base: 56, sm: 64, lg: 72 } as const;
 
 /** Nav logo scale at top (transparent) vs compact scrolled size */
 export const NAV_LOGO_TOP_SCALE = { base: 1.5, sm: 1.65, lg: 1.8 } as const;
+
+export type SplashVideoSource = { src: string; type: string };
+
+/** MP4-first on mobile (smaller + hardware decode); WebM-first on desktop. */
+export function getSplashVideoSources(preferMp4First: boolean): SplashVideoSource[] {
+  const mp4: SplashVideoSource = { src: RKC_LOGO_VIDEO_MP4, type: 'video/mp4' };
+  const webm: SplashVideoSource = { src: RKC_LOGO_VIDEO_WEBM, type: 'video/webm' };
+  return preferMp4First ? [mp4, webm] : [webm, mp4];
+}
+
+/** Preload href — smallest format for the connection (MP4 is ~180 KB smaller today). */
+export function getSplashVideoPreloadHref(preferMp4First: boolean): string {
+  return preferMp4First ? RKC_LOGO_VIDEO_MP4 : RKC_LOGO_VIDEO_WEBM;
+}
 
 export function getNavTopScale(): number {
   if (typeof window === 'undefined') return NAV_LOGO_TOP_SCALE.sm;
