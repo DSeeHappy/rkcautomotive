@@ -1,7 +1,4 @@
 import { SERVICE_AREAS_DATA } from '../lib/serviceAreas.ts';
-import fs from 'node:fs';
-import path from 'node:path';
-
 const denver = SERVICE_AREAS_DATA.find((a) => a.slug === 'denver-co');
 const denverUnique = new Set(
   denver?.neighborhoods.map((n) => n.flag).filter((f) => f.includes('/neighborhoods/denver/')) ?? []
@@ -24,7 +21,6 @@ for (const area of SERVICE_AREAS_DATA) {
 }
 
 if (denver) {
-  const wv = denver.neighborhoods.filter((n) => n.flag.includes('/neighborhoods/denver/'));
   const tbd = denver.neighborhoods.filter((n) => n.flag === '/images/flags/denver.svg');
   console.log('Denver detail:');
   console.log(`  Wikimedia neighborhood flags: ${denverUnique.size} unique files`);

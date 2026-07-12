@@ -44,15 +44,15 @@ export default function PageHero({
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">{eyebrow}</p>
         )}
         <h1
-          ref={heading.ref}
+          ref={heading}
           className="mt-3 max-w-4xl font-display text-5xl tracking-wide text-white sm:text-6xl lg:text-7xl"
         >
           {title}
         </h1>
-        <p ref={desc.ref} className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl">
+        <p ref={desc} className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl">
           {description}
         </p>
-        <div ref={ctas.ref} className="mt-8 flex flex-wrap gap-3">
+        <div ref={ctas} className="mt-8 flex flex-wrap gap-3">
           <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
             <Phone className="size-5" />
             {BUSINESS.phone}

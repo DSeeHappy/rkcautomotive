@@ -338,16 +338,19 @@ export default function HomeContent() {
       </section>
 
       {/* CTA band with photo */}
-      <section className="relative isolate overflow-hidden">
+      <section className="relative isolate overflow-hidden" aria-labelledby="home-cta-heading">
         <div className="absolute inset-0">
-          <Image src={PHOTOS.exterior} alt="RKC Automotive shop exterior" fill className="object-cover" sizes="100vw" />
+          <Image src={PHOTOS.exterior} alt="" fill className="object-cover" sizes="100vw" aria-hidden />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
         <div className="relative wrap py-28 text-center sm:py-36">
           <FadeIn>
-            <p className="font-display text-6xl tracking-wide text-white sm:text-7xl lg:text-8xl">
+            <h2
+              id="home-cta-heading"
+              className="font-display text-6xl tracking-wide text-white sm:text-7xl lg:text-8xl"
+            >
               Ready when you are
-            </p>
+            </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg text-white/80">
               Same-day openings when available. Call the bay or send a message — we&apos;ll get you a clear next step.
             </p>

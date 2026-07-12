@@ -1,4 +1,3 @@
-import { VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import type { VehicleType } from '@/lib/vehicleModels';
 
 export type ModelCommonService = {

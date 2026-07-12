@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { Phone } from 'lucide-react';
 import JsonLd from '@/app/components/JsonLd';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
@@ -8,9 +8,13 @@ import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import VehicleCategoryCards from '@/app/components/ui/VehicleCategoryCards';
 import BrandSection from '@/app/components/ui/BrandSection';
-import VehicleDeepDiveCrawlLinks from '@/app/components/ui/VehicleDeepDiveCrawlLinks';
 import { createPageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
+
+const VehicleDeepDiveCrawlLinks = dynamic(
+  () => import('@/app/components/ui/VehicleDeepDiveCrawlLinks'),
+  { loading: () => <div className="min-h-[12rem] border-t border-[color:var(--line)]" aria-hidden /> },
+);
 
 export const metadata = createPageMetadata({
   title: 'All Makes & Models | Auto Repair Englewood, CO',

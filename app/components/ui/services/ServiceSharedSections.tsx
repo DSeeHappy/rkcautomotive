@@ -169,21 +169,21 @@ export function ServiceCinematicHero({
               <Breadcrumbs items={breadcrumbs} className="mb-6" variant="light" />
             )}
             <p
-              ref={eyebrowRef.ref}
+              ref={eyebrowRef}
               className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
             >
               {eyebrow}
             </p>
             <h1
-              ref={titleRef.ref}
+              ref={titleRef}
               className="mt-4 font-display text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white"
             >
               {title}
             </h1>
-            <p ref={descriptionRef.ref} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
+            <p ref={descriptionRef} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
               {description}
             </p>
-            <div ref={ctasRef.ref} className="mt-8 flex flex-wrap items-center gap-4">
+            <div ref={ctasRef} className="mt-8 flex flex-wrap items-center gap-4">
               <Link href={primaryCta.href} className="btn-green">
                 <CalendarCheck className="size-5" />
                 {primaryCta.label}

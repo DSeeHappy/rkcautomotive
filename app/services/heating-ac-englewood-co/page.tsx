@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Auto AC & Heating Repair | R134a, R1234yf | Englewood, CO",
-  "Expert auto AC repair and heating service in Englewood, CO. R134a and R1234yf recharge, EPA-compliant leak detection, compressor and heater core repair for Denver metro. Call (720) 749-3965.",
+  "Auto AC and heating repair in Englewood, CO. R134a and R1234yf recharge, leak testing, compressor and heater-core service. Call (720) 749-3965.",
   "heating-ac-englewood-co",
   PHOTOS.interior,
   "Heating & AC at RKC Automotive Englewood CO",

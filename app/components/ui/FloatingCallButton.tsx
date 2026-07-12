@@ -8,7 +8,7 @@ import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 export default function FloatingCallButton() {
   const reduce = usePrefersReducedMotion();
-  const { ref } = useGsapReveal<HTMLDivElement>({
+  const ref = useGsapReveal<HTMLDivElement>({
     delay: 1.2,
     y: 24,
     scale: 0.9,

@@ -672,11 +672,12 @@ function accentAt(index: number) {
 function getBrandFailureSnippet(brandSlug: string, model: string): string | undefined {
   const profile = getBrandFailureProfile(brandSlug);
   if (!profile) return undefined;
-  const match = profile.failureProfiles.find((f) =>
-    profile.commonModels.some(
-      (m) => m.toLowerCase() === model.toLowerCase() || model.toLowerCase().includes(m.toLowerCase()),
-    ),
+  const isCommonModel = profile.commonModels.some(
+    (commonModel) =>
+      commonModel.toLowerCase() === model.toLowerCase() ||
+      model.toLowerCase().includes(commonModel.toLowerCase()),
   );
+  const match = isCommonModel ? profile.failureProfiles[0] : undefined;
   if (match) return `${match.title}: ${match.description}`;
   return profile.failureProfiles[0]
     ? `${profile.failureProfiles[0].title}: ${profile.failureProfiles[0].description}`

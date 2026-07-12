@@ -72,14 +72,14 @@ export default function WarrantyHero() {
               variant="light"
             />
             <p
-              ref={eyebrow.ref}
+              ref={eyebrow}
               className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
             >
               Warranty advocacy · Englewood, CO
             </p>
 
             <h1
-              ref={title.ref}
+              ref={title}
               className="mt-4 font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.95] tracking-wide text-white"
             >
               We Accept{' '}
@@ -89,12 +89,12 @@ export default function WarrantyHero() {
               Extended Warranties
             </h1>
 
-            <p ref={description.ref} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
+            <p ref={description} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
               Don&apos;t battle claims adjusters alone. RKC manages diagnostics, teardown authorizations, denial
               appeals, and parts quality — from drop-off through approved repair.
             </p>
 
-            <div ref={ctas.ref} className="mt-8 flex flex-wrap items-center gap-4">
+            <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
               <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                 <Phone className="size-5" />
                 Call {BUSINESS.phone}

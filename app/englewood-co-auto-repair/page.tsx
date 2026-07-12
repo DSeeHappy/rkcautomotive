@@ -35,11 +35,9 @@ export default function LocationPage() {
       <JsonLd
         data={[
           createLocalBusinessSchema({
-            pageUrl: '/englewood-co-auto-repair',
             description:
               'ASE-certified auto repair at 2120 W Evans Ave, Englewood, CO 80110. Serving the Denver south metro.',
             areaServed: 'Englewood',
-            includeRating: true,
           }),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },

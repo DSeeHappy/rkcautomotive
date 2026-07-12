@@ -5,7 +5,6 @@ import {
   SAME_AS,
   SERVICE_AREAS,
   SERVICES,
-  VERIFIED_REVIEWS_4_PLUS,
   type FAQItem,
 } from './constants';
 import { SERVICE_AREAS_DATA } from './serviceAreas';
@@ -16,6 +15,7 @@ import { getAllModelHubRoutes } from './modelHubRoutes';
 
 export const SITEMAP_SHARD_IDS = ['core', 'services', 'cities', 'vehicles'] as const;
 export type SitemapShardId = (typeof SITEMAP_SHARD_IDS)[number];
+export const LOCAL_BUSINESS_ID = `${SITE_URL}/#localbusiness`;
 
 const CORE_ROUTES = [
   '/',
@@ -101,20 +101,9 @@ export function getRoutesForSitemapShard(shardId: SitemapShardId): string[] {
   }
 }
 
-/** ISO date (YYYY-MM-DD) for sitemap lastmod fields */
-export function formatSitemapLastMod(date: Date = new Date()): string {
-  return date.toISOString().slice(0, 10);
-}
-
-export function getSitemapShardLastModified(_shardId: SitemapShardId): Date {
-  return new Date();
-}
-
 export function buildSitemapEntries(paths: string[]): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   return paths.map((path) => ({
     url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
-    lastModified,
     changeFrequency: path.startsWith('/services/') || path.startsWith('/areas-we-serve/')
       ? ('monthly' as const)
       : ('weekly' as const),
@@ -138,27 +127,11 @@ export function getAllSiteRoutes(): string[] {
   return SITEMAP_SHARD_IDS.flatMap((shardId) => getRoutesForSitemapShard(shardId));
 }
 
-export function createAggregateRating() {
-  const rated = VERIFIED_REVIEWS_4_PLUS.filter((r) => r.rating !== undefined);
-  if (rated.length === 0) return undefined;
-
-  const sum = rated.reduce((acc, r) => acc + (r.rating ?? 0), 0);
-  const avg = sum / rated.length;
-
-  return {
-    '@type': 'AggregateRating' as const,
-    ratingValue: avg.toFixed(1),
-    reviewCount: String(rated.length),
-    bestRating: '5',
-    worstRating: '4',
-  };
-}
-
 export function createOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
+    '@type': ['AutoRepair', 'Organization'],
+    '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     url: SITE_URL,
     logo: absoluteUrl('/images/logo.png'),
@@ -166,6 +139,16 @@ export function createOrganizationSchema() {
     telephone: '+1-720-749-3965',
     email: BUSINESS.email,
     address: POSTAL_ADDRESS,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: BUSINESS_GEO.latitude,
+      longitude: BUSINESS_GEO.longitude,
+    },
+    openingHoursSpecification: OPENING_HOURS_SCHEMA,
+    openingHours: [...SCHEMA_OPENING_HOURS],
+    priceRange: '$$',
+    hasMap: HAS_MAP_URL,
+    areaServed: DEFAULT_AREA_SERVED,
     sameAs: SAME_AS,
     description: BUSINESS.shortDescription,
   };
@@ -178,7 +161,7 @@ export function createWebSiteSchema() {
     '@id': `${SITE_URL}/#website`,
     name: BUSINESS.name,
     url: SITE_URL,
-    publisher: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': LOCAL_BUSINESS_ID },
     inLanguage: 'en-US',
   };
 }
@@ -189,10 +172,8 @@ type AreaServedInput =
   | Array<string | { name: string; type?: 'City' | 'AdministrativeArea' }>;
 
 type LocalBusinessOptions = {
-  pageUrl?: string;
   description?: string;
   areaServed?: AreaServedInput;
-  includeRating?: boolean;
 };
 
 function normalizeAreaServed(areaServed: AreaServedInput) {
@@ -228,20 +209,16 @@ function resolveAreaServed(areaServed: AreaServedInput) {
 
 export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
   const {
-    pageUrl = '/',
     description = BUSINESS.shortDescription,
     areaServed = DEFAULT_AREA_SERVED,
-    includeRating = true,
   } = options;
 
   const areaServedValue = resolveAreaServed(areaServed as AreaServedInput);
 
-  const aggregateRating = includeRating ? createAggregateRating() : undefined;
-
   return {
     '@context': 'https://schema.org',
     '@type': 'AutoRepair',
-    '@id': `${absoluteUrl(pageUrl)}#business`,
+    '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     image: absoluteUrl(PHOTOS.exterior),
     url: SITE_URL,
@@ -259,17 +236,15 @@ export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
     openingHoursSpecification: OPENING_HOURS_SCHEMA,
     areaServed: areaServedValue,
     sameAs: [...SAME_AS],
-    ...(aggregateRating ? { aggregateRating } : {}),
   };
 }
 
 /** Homepage AutoRepair schema — exact structure for local SEO audits. */
 export function createHomepageAutoRepairSchema() {
-  const aggregateRating = createAggregateRating();
-
   return {
     '@context': 'https://schema.org',
     '@type': 'AutoRepair',
+    '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     url: SITE_URL,
     telephone: '+1-720-749-3965',
@@ -288,7 +263,6 @@ export function createHomepageAutoRepairSchema() {
     openingHoursSpecification: OPENING_HOURS_SCHEMA,
     areaServed: HOMEPAGE_AREA_SERVED,
     sameAs: [...SAME_AS],
-    ...(aggregateRating ? { aggregateRating } : {}),
   };
 }
 
@@ -319,17 +293,7 @@ export function createServiceSchema(
     description,
     url: absoluteUrl(servicePath),
     provider: {
-      '@type': 'AutoRepair',
-      name: BUSINESS.name,
-      url: SITE_URL,
-      telephone: '+1-720-749-3965',
-      address: POSTAL_ADDRESS,
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: String(BUSINESS_GEO.latitude),
-        longitude: String(BUSINESS_GEO.longitude),
-      },
-      openingHoursSpecification: OPENING_HOURS_SCHEMA,
+      '@id': LOCAL_BUSINESS_ID,
     },
     areaServed: {
       '@type': 'City',
@@ -383,7 +347,7 @@ export function createAboutPageSchema() {
     url: absoluteUrl('/about'),
     description:
       'Learn about RKC Automotive — ASE-certified auto repair in Englewood, CO with 30+ years of honest service.',
-    mainEntity: { '@id': `${SITE_URL}/#organization` },
+    mainEntity: { '@id': LOCAL_BUSINESS_ID },
   };
 }
 
@@ -414,7 +378,7 @@ export function createWebPageSchema(name: string, description: string, path: str
     description,
     url: absoluteUrl(path),
     isPartOf: { '@id': `${SITE_URL}/#website` },
-    about: { '@id': `${SITE_URL}/#organization` },
+    about: { '@id': LOCAL_BUSINESS_ID },
   };
 }
 
@@ -423,12 +387,10 @@ const WARRANTY_PAGE_DESCRIPTION =
 
 /** AutoRepair schema scoped to the extended warranty landing page */
 export function createWarrantyAutoRepairSchema() {
-  const aggregateRating = createAggregateRating();
-
   return {
     '@context': 'https://schema.org',
     '@type': 'AutoRepair',
-    '@id': `${absoluteUrl('/warranty')}#business`,
+    '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     url: absoluteUrl('/warranty'),
     telephone: '+1-720-749-3965',
@@ -452,7 +414,6 @@ export function createWarrantyAutoRepairSchema() {
       'Teardown authorization',
       'Warranty claim denial appeals',
     ],
-    ...(aggregateRating ? { aggregateRating } : {}),
   };
 }
 

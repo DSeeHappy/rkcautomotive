@@ -16,7 +16,7 @@ export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
-  const { ref: navRef } = useGsapReveal<HTMLElement>({ y: -20, duration: 0.7 });
+  const navRef = useGsapReveal<HTMLElement>({ y: -20, duration: 0.7 });
   const links = NAV_LINKS.filter((l) => l.name !== 'Home');
 
   useEffect(() => {
@@ -56,6 +56,7 @@ export default function Navigation() {
               >
                 <PopoverButton
                   ref={servicesButtonRef}
+                  aria-label="Services menu"
                   className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold outline-none transition-colors ${
                     scrolled
                       ? 'text-foreground hover:bg-black/5 hover:text-primary-green'

@@ -73,7 +73,10 @@ function ServiceAreaCard({
             <h3 className="font-display text-3xl tracking-wide text-white transition group-hover:text-primary-green sm:text-4xl">
               {area.name}
             </h3>
-            <ArrowRight className="size-5 shrink-0 text-primary-green opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+            <ArrowRight
+              className="size-5 shrink-0 text-primary-green opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100"
+              aria-hidden
+            />
           </div>
           <p className="mt-2 text-sm leading-relaxed text-white/85">{area.description}</p>
           <div className="mt-4 flex flex-1 flex-col">

@@ -92,18 +92,18 @@ export default function PricingContent() {
             variant="light"
           />
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">Pricing</p>
-          <p ref={rateReveal.ref} className="mt-4 font-display text-[clamp(5rem,16vw,10rem)] leading-[0.85] tracking-wide text-primary-green-light">
+          <p ref={rateReveal} className="mt-4 font-display text-[clamp(5rem,16vw,10rem)] leading-[0.85] tracking-wide text-primary-green-light">
             {LABOR_RATE}
           </p>
-          <h1 ref={titleReveal.ref} className="mt-1 max-w-4xl font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">
+          <h1 ref={titleReveal} className="mt-1 max-w-4xl font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">
             Beat dealers on price and service.
           </h1>
-          <p ref={descReveal.ref} className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl">
+          <p ref={descReveal} className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl">
             ASE-certified Englewood shop. Dealers charge $180–220/hr. National chains quote $140–160/hr in menu packages
             with shop fees — but rarely post a flat rate. Typical local shops often charge {LOCAL_SHOP_RATE_RANGE} but
             rarely publish it online. We charge {LABOR_RATE}, publish it here, and get you back on the road.
           </p>
-          <div ref={ctaReveal.ref} className="mt-8 flex flex-wrap gap-3">
+          <div ref={ctaReveal} className="mt-8 flex flex-wrap gap-3">
             <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
               <Phone className="size-5" />
               {BUSINESS.phone}

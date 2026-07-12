@@ -13,7 +13,6 @@ import {
   Phone,
   ShieldCheck,
   Volume2,
-  Wrench,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import {
@@ -213,26 +212,26 @@ export default function EngineRebuildsContent() {
             <div className="max-w-4xl">
               <Breadcrumbs items={getServiceBreadcrumbs('Engine Rebuilds')} className="mb-6" variant="light" />
               <p
-                ref={eyebrow.ref}
+                ref={eyebrow}
                 className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
               >
                 Machine shop · Englewood, CO
               </p>
 
               <h1
-                ref={title.ref}
+                ref={title}
                 className="mt-4 font-display text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white"
               >
                 Precision Engine Rebuilding &amp; Remanufacturing in Englewood, CO
               </h1>
 
-              <p ref={description.ref} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
+              <p ref={description} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
                 Rod knock, low oil pressure, or blow-by past the rings? We pull, strip, machine, blueprint, and rebuild
                 domestic and import engines down to the bare block — with a written estimate and your approval before the
                 first bolt comes off our Evans Ave bay.
               </p>
 
-              <div ref={ctas.ref} className="mt-8 flex flex-wrap items-center gap-4">
+              <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
                 <Link href="/contact" className="btn-green">
                   <CalendarCheck className="size-5" />
                   Request Rebuild Estimate

@@ -15,7 +15,7 @@ type RevealOptions = {
 
 export function useGsapReveal<T extends HTMLElement>(
   options: RevealOptions = {},
-): { ref: RefObject<T | null>; reduce: boolean } {
+): RefObject<T | null> {
   const ref = useRef<T>(null);
   const reduce = usePrefersReducedMotion();
   const { delay = 0, y = 24, duration = 0.7, scale, dependencies = [] } = options;
@@ -50,5 +50,5 @@ export function useGsapReveal<T extends HTMLElement>(
     { scope: ref, dependencies: [reduce, delay, y, duration, scale, ...dependencies] },
   );
 
-  return { ref, reduce };
+  return ref;
 }

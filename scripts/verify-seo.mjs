@@ -186,6 +186,9 @@ function checkRobotsAndSitemap() {
     const robots = read('app/robots.ts');
     if (!robots.includes('sitemap')) errors.push('app/robots.ts missing sitemap reference');
     if (!robots.includes('SITE_URL')) errors.push('app/robots.ts must reference SITE_URL');
+    if (!robots.includes('/sitemap-index')) {
+      errors.push('app/robots.ts must advertise the sharded sitemap index');
+    }
   }
 
   if (fs.existsSync(path.join(root, 'public/sitemap.xml'))) {
@@ -193,6 +196,8 @@ function checkRobotsAndSitemap() {
   }
   if (!fs.existsSync(path.join(root, 'app/sitemap-index/route.ts'))) {
     errors.push('Missing app/sitemap-index/route.ts sitemap index handler');
+  } else if (read('app/sitemap-index/route.ts').includes('<lastmod>')) {
+    errors.push('Sitemap index must not publish synthetic lastmod dates');
   }
   if (fs.existsSync(path.join(root, 'public/robots.txt'))) {
     warnings.push('public/robots.txt exists — may conflict with app/robots.ts');

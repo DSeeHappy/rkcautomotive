@@ -6,6 +6,7 @@ import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { BUSINESS } from '@/lib/constants';
 import { buildModelHubPath, getAllModelHubParams } from '@/lib/modelHubRoutes';
+import { getModelReliabilitySnapshot } from '@/lib/modelReliabilityNotes';
 import { createPageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createItemListSchema, createWebPageSchema } from '@/lib/seo';
 import { getModelsByBrand, resolveModelImage } from '@/lib/vehicleModels';
@@ -50,6 +51,8 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
   const hubPath = buildModelHubPath(make, vehicle.model);
   const image = resolveModelImage(vehicle);
   const siblingModels = getModelsByBrand(make).filter((m) => m.slug !== vehicle.slug);
+  const modelSnapshot = getModelReliabilitySnapshot(make, model);
+  const heroDescription = modelSnapshot?.intro ?? vehicle.description;
 
   return (
     <div>
@@ -79,7 +82,7 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
       <PageHero
         eyebrow={`${vehicle.brandName} ${vehicle.model}`}
         title={`${vehicle.brandName} ${vehicle.model} repair in Englewood`}
-        description={vehicle.description}
+        description={heroDescription}
         imageSrc={image}
         imageAlt={`${vehicle.brandName} ${vehicle.model} service at RKC Automotive Englewood CO`}
         breadcrumbs={[
@@ -131,6 +134,52 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {modelSnapshot ? (
+        <section className="border-b border-[color:var(--line)] bg-[color:var(--accent-gray-light)] py-16 sm:py-20">
+          <div className="wrap">
+            <FadeIn className="max-w-3xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
+                {vehicle.brandName} {vehicle.model} at RKC
+              </p>
+              <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">
+                Model-specific issues we see in Colorado
+              </h2>
+              <p className="mt-4 text-lg text-ink-muted">{modelSnapshot.intro}</p>
+            </FadeIn>
+
+            <ul className="mt-10 grid gap-4 md:grid-cols-3">
+              {modelSnapshot.bullets.map((bullet) => (
+                <li
+                  key={bullet.label}
+                  className="rounded-2xl border border-[color:var(--line)] bg-white p-6"
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary-green">
+                    {bullet.label}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-muted">{bullet.text}</p>
+                </li>
+              ))}
+            </ul>
+
+            {modelSnapshot.faqs.length > 0 ? (
+              <div className="mt-12">
+                <h3 className="font-display text-3xl tracking-wide text-foreground">
+                  {vehicle.model} FAQs
+                </h3>
+                <dl className="mt-6 space-y-6">
+                  {modelSnapshot.faqs.map((faq) => (
+                    <div key={faq.question} className="rounded-2xl border border-[color:var(--line)] bg-white p-6">
+                      <dt className="font-semibold text-foreground">{faq.question}</dt>
+                      <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{faq.answer}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       {siblingModels.length > 0 && brand ? (
         <section className="border-b border-[color:var(--line)] bg-[color:var(--accent-gray-light)] py-16 sm:py-20">

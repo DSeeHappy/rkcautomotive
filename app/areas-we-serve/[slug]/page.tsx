@@ -45,10 +45,8 @@ export default async function CityServiceAreaPage({ params }: Props) {
       <JsonLd
         data={[
           createLocalBusinessSchema({
-            pageUrl: area.href,
             description: area.metaDescription,
             areaServed: { name: area.name, type: 'City' },
-            includeRating: true,
           }),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },

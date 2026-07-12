@@ -1,5 +1,3 @@
-import fs from 'node:fs';
-
 const API =
   'https://commons.wikimedia.org/w/api.php?action=parse&page=Flags_of_counties_and_municipalities_in_Colorado&prop=text&format=json';
 const res = await fetch(API, {

@@ -11,13 +11,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const outPath = path.join(root, 'lib', 'modelDeepDiveContent.ts');
 
-const ACCENTS = [
-  { accent: 'text-amber-400', accentBg: 'bg-amber-500/10', accentBorder: 'border-amber-500/25' },
-  { accent: 'text-red-400', accentBg: 'bg-red-500/10', accentBorder: 'border-red-500/25' },
-  { accent: 'text-sky-400', accentBg: 'bg-sky-500/10', accentBorder: 'border-sky-500/25' },
-  { accent: 'text-emerald-400', accentBg: 'bg-emerald-500/10', accentBorder: 'border-emerald-500/25' },
-];
-
 const SERVICES = [
   {
     id: 'four-wheel-drive',

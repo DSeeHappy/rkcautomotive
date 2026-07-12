@@ -32,10 +32,24 @@ export const metadata: Metadata = {
   },
   description:
     'ASE-certified engine and auto repair in Englewood, CO. Diagnostics, transmission, brakes & maintenance at $120/hr. Call (720) 749-3965. Hablamos Español.',
-  manifest: '/site.webmanifest',
+  applicationName: 'RKC Automotive',
+  category: 'automotive',
+  creator: 'RKC Automotive',
+  publisher: 'RKC Automotive',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  manifest: '/manifest.webmanifest',
   icons: {
     icon: '/icon.png',
-    apple: '/icon.png',
   },
   openGraph: rootOpenGraphDefaults,
   twitter: rootTwitterDefaults,
@@ -57,11 +71,20 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="msvalidate.01" content={BING_SITE_VERIFICATION} />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only"
+        >
+          Skip to main content
+        </a>
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
         <GsapProvider>
           <SplashScreen>
             <Navigation />
-            <main className="min-h-screen pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
+            <main
+              id="main-content"
+              className="min-h-screen pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0"
+            >
               {children}
             </main>
             <Footer />

@@ -11,7 +11,7 @@ import {
 } from '@/lib/seo';
 
 const WARRANTY_PAGE_DESCRIPTION =
-  'We handle the entire third-party warranty claims process directly. From teardown authorizations to fighting corporate denials with Endurance, CarShield, CARCHEX, and Zurich.';
+  'Extended warranty repair in Englewood, CO. We manage diagnostics, teardown approvals, claims, and denial appeals with major warranty providers. Call today.';
 
 export const metadata = createPageMetadata({
   title: 'Extended Warranty Repair in Englewood, CO | RKC Automotive',

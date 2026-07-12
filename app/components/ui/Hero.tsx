@@ -57,7 +57,7 @@ export default function Hero() {
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end">
           <div className="pb-24 sm:pb-28 lg:pb-32">
             <div className="max-w-3xl text-left xl:max-w-4xl">
-              <div ref={headline.ref}>
+              <div ref={headline}>
                 <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">
                   Englewood, CO · Hablamos Español
                 </p>
@@ -72,7 +72,7 @@ export default function Hero() {
                 </p>
               </div>
 
-              <div ref={ctas.ref} className="mt-8 flex flex-wrap items-center gap-4">
+              <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
                 <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                   <Phone className="size-5" />
                   Call Now — {BUSINESS.phone}
@@ -83,7 +83,7 @@ export default function Hero() {
               </div>
 
               <div
-                ref={alert.ref}
+                ref={alert}
                 className="mt-8 max-w-xl rounded-2xl border border-amber-400/30 bg-amber-500/10 p-5 backdrop-blur-sm"
               >
                 <div className="flex items-start gap-3">

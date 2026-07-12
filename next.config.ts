@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  compress: true,
   // NOTE: Apex → www redirect is intentionally disabled until www DNS/SSL is fixed
   // (https://www.rkcautomotive.com currently returns 525). Re-enable in redirects()
   // or vercel.json once www resolves correctly, then set BUSINESS.website to www.
@@ -14,12 +16,38 @@ const nextConfig: NextConfig = {
             key: 'Cache-Control',
             value: 'public, max-age=0, must-revalidate, no-transform',
           },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Content-Security-Policy-Report-Only',
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://upload.wikimedia.org; font-src 'self' data:; connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'",
+          },
         ],
       },
     ];
   },
   async redirects() {
     return [
+      {
+        source: '/site.webmanifest',
+        destination: '/manifest.webmanifest',
+        permanent: true,
+      },
       {
         source: '/faq',
         destination: '/frequently-asked-questions',

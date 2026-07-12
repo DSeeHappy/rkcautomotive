@@ -185,26 +185,26 @@ export default function CamshaftLifterContent() {
             <div className="max-w-4xl">
               <Breadcrumbs items={getServiceBreadcrumbs('Camshaft & Lifters')} className="mb-6" variant="light" />
               <p
-                ref={eyebrow.ref}
+                ref={eyebrow}
                 className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
               >
                 Valvetrain · Englewood, CO
               </p>
 
               <h1
-                ref={title.ref}
+                ref={title}
                 className="mt-4 font-display text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white"
               >
                 Camshaft Replacement &amp; Hydraulic Lifter Repair in Englewood, CO
               </h1>
 
-              <p ref={description.ref} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
+              <p ref={description} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
                 Eliminate engine ticking, localized misfires, and valvetrain metal wear before it destroys your block.
                 Expert diagnostics and full cam-and-lifter restoration for HEMI, GM AFM/DFM, and high-mileage
                 overhead-valve engines — with approval before we order parts.
               </p>
 
-              <div ref={ctas.ref} className="mt-8 flex flex-wrap items-center gap-4">
+              <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
                 <Link href="/contact" className="btn-green">
                   <CalendarCheck className="size-5" />
                   Book Valvetrain Service

@@ -84,7 +84,7 @@ export default function BrandModelPicker({ brand, reliabilitySnapshot }: BrandMo
       <div className="mt-5 border-t border-white/10 pt-5">
         <div className="flex items-center gap-2">
           <MousePointerClick className="size-4 shrink-0 text-primary-green-light" aria-hidden />
-          <h4 className="text-sm font-semibold text-white">Select your {brand.name} model</h4>
+          <p className="text-sm font-semibold text-white">Select your {brand.name} model</p>
         </div>
         <p className="mt-1.5 pl-6 text-xs leading-relaxed text-white/60">
           Tap a model for common issues and service links

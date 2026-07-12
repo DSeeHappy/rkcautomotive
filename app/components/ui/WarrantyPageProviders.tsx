@@ -67,6 +67,7 @@ function LogoMarquee({ providers }: { providers: readonly WarrantyProvider[] }) 
               <Image
                 src={provider.logo}
                 alt=""
+                aria-hidden
                 width={100}
                 height={40}
                 className="h-8 w-auto max-w-[5.5rem] object-contain brightness-0 invert opacity-80"

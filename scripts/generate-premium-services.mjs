@@ -1103,14 +1103,7 @@ const ICON_IMPORTS = {
 };
 
 function generateContent(svc) {
-  const icons = svc.symptomIcons.map((name) => ICON_IMPORTS[name] || 'Gauge');
-  const iconImportList = [...new Set([...icons, 'BUSINESS'])];
   const lucideImports = [...new Set(svc.symptomIcons.map((n) => ICON_IMPORTS[n] || 'Gauge'))].join(', ');
-
-  const symptomsWithIcons = svc.symptoms.map((sym, i) => ({
-    ...sym,
-    icon: `icons[${i}]`,
-  }));
 
   return `'use client';
 

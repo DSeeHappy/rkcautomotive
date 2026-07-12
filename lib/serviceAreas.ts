@@ -23,9 +23,6 @@ export type ServiceArea = {
 /** Wikimedia Commons and official municipal flag sources */
 const WIKI = 'https://commons.wikimedia.org/wiki/File:';
 const WIKI_EN = 'https://en.wikipedia.org/wiki/File:';
-const ARAPAHOE = '/images/flags/arapahoe-county.svg';
-const DOUGLAS = '/images/flags/douglas-county.svg';
-const JEFFERSON = '/images/flags/jefferson-county.svg';
 const ARAPAHOE_COUNTY_SOURCE =
   `${WIKI}Flag_of_Arapahoe_County,_Colorado.svg — Arapahoe County flag (no municipal flag published)`;
 const DOUGLAS_COUNTY_SOURCE =

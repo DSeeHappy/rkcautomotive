@@ -30,7 +30,7 @@ export default function ReviewsPage() {
     <div>
       <JsonLd
         data={[
-          createLocalBusinessSchema({ pageUrl: '/reviews', includeRating: true }),
+          createLocalBusinessSchema(),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Reviews', path: '/reviews' },

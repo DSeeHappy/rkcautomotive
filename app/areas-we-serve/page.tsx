@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone } from 'lucide-react';
 import JsonLd from '@/app/components/JsonLd';
 import { BUSINESS, PHOTOS, SERVICE_AREAS_DATA } from '@/lib/constants';
 import { HERO_IMAGE_SIZES } from '@/lib/photos';
@@ -73,7 +72,7 @@ export default function AreasPage() {
               dealerships and chains.
             </p>
           </FadeIn>
-          <ServiceAreaGrid showAllNeighborhoods />
+          <ServiceAreaGrid />
         </div>
       </section>
 

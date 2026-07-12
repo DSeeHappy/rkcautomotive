@@ -300,6 +300,7 @@ export default function AnimatedLogo({
     return (
       <Link
         href={href}
+        aria-label="RKC Automotive home"
         className="inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green focus-visible:ring-offset-2 rounded-xl"
       >
         {content}
