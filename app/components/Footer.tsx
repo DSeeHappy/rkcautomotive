@@ -26,7 +26,7 @@ export default function Footer() {
             </p>
           </div>
           <PhoneLink className="btn-green shrink-0 self-start lg:self-end">
-            <Phone className="size-5" />
+            <Phone className="size-5" aria-hidden />
             {BUSINESS.phone}
           </PhoneLink>
         </div>
@@ -102,7 +102,8 @@ export default function Footer() {
           >
             <Image
               src="/molecule-logo.png"
-              alt="Molecule Work"
+              alt=""
+              aria-hidden
               width={40}
               height={40}
               className="h-10 w-10 rounded-lg opacity-90 ring-1 ring-white/15 transition group-hover:opacity-100 group-hover:ring-primary-green/40"

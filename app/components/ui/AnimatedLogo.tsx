@@ -67,7 +67,10 @@ function LogoImage({
   className = '',
   onDarkBackground = false,
   scrolled,
-}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground' | 'scrolled'>) {
+  decorative = false,
+}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground' | 'scrolled'> & {
+  decorative?: boolean;
+}) {
   const v = variant ?? 'nav';
   const useCard = useCardAsset(v, onDarkBackground, scrolled);
   const src = useCard ? RKC_LOGO_CARD_PNG : v === 'nav' ? RKC_LOGO_NAV_WEBP : RKC_LOGO_PNG;
@@ -88,7 +91,8 @@ function LogoImage({
   return (
     <Image
       src={src}
-      alt="RKC Automotive"
+      alt={decorative ? '' : 'RKC Automotive'}
+      aria-hidden={decorative || undefined}
       width={width}
       height={height}
       quality={95}
@@ -170,7 +174,8 @@ function NavScrollLogo({
         >
           <Image
             src={RKC_LOGO_NAV_WEBP}
-            alt="RKC Automotive"
+            alt=""
+            aria-hidden
             width={RKC_LOGO_WIDTH}
             height={RKC_LOGO_HEIGHT}
             quality={95}
@@ -189,7 +194,8 @@ function NavScrollLogo({
           <div className={navScrolledCardClass}>
             <Image
               src={RKC_LOGO_NAV_WEBP}
-              alt={scrolled ? 'RKC Automotive' : ''}
+              alt=""
+              aria-hidden
               width={RKC_LOGO_WIDTH}
               height={RKC_LOGO_HEIGHT}
               quality={95}
@@ -210,7 +216,10 @@ function LogoContent({
   className = '',
   onDarkBackground = false,
   scrolled,
-}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground' | 'scrolled'>) {
+  decorative = false,
+}: Pick<AnimatedLogoProps, 'variant' | 'className' | 'onDarkBackground' | 'scrolled'> & {
+  decorative?: boolean;
+}) {
   const reduce = usePrefersReducedMotion();
   const v = variant ?? 'nav';
   const isNav = v === 'nav';
@@ -274,7 +283,12 @@ function LogoContent({
         ref={containerRef}
         className={isNav ? 'flex max-h-full items-center py-0.5' : isHero ? 'p-0' : ''}
       >
-        <LogoImage variant={v} onDarkBackground={onDarkBackground} scrolled={scrolled} />
+        <LogoImage
+          variant={v}
+          onDarkBackground={onDarkBackground}
+          scrolled={scrolled}
+          decorative={decorative}
+        />
       </div>
     </div>
   );
@@ -293,6 +307,7 @@ export default function AnimatedLogo({
       className={className}
       onDarkBackground={onDarkBackground}
       scrolled={scrolled}
+      decorative={Boolean(href)}
     />
   );
 

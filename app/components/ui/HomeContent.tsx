@@ -293,7 +293,7 @@ export default function HomeContent() {
         </div>
       </section>
 
-      <BrandSection />
+      <BrandSection homepage />
 
       {/* Service areas grid */}
       <section className="border-y border-[color:var(--line)] bg-white py-24 sm:py-28">
@@ -356,7 +356,7 @@ export default function HomeContent() {
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
-                <Phone className="size-5" />
+                <Phone className="size-5" aria-hidden />
                 {BUSINESS.phone}
               </MotionAnchor>
               <Link href="/pricing" className="btn-ghost-light">

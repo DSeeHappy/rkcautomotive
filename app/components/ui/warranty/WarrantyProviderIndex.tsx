@@ -51,8 +51,7 @@ function ProviderListItem({ name }: { name: string }) {
       {showLogo && provider?.logo ? (
         <Image
           src={provider.logo}
-          alt=""
-          aria-hidden
+          alt={`${provider.name} warranty provider logo`}
           width={80}
           height={32}
           className="h-6 w-auto max-w-[5rem] shrink-0 object-contain brightness-0 invert opacity-85"

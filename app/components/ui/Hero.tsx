@@ -74,7 +74,7 @@ export default function Hero() {
 
               <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
                 <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
-                  <Phone className="size-5" />
+                  <Phone className="size-5" aria-hidden />
                   Call Now — {BUSINESS.phone}
                 </MotionAnchor>
                 <Link href="/contact" className="btn-ghost-light">

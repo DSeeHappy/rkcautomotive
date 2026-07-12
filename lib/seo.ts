@@ -130,7 +130,7 @@ export function getAllSiteRoutes(): string[] {
 export function createOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': ['AutoRepair', 'Organization'],
+    '@type': 'AutoRepair',
     '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     url: SITE_URL,

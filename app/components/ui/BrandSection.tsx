@@ -1,11 +1,16 @@
 import BrandMarquee from './BrandMarquee';
 import BrandTabs from './BrandTabs';
 
-export default function BrandSection() {
+type BrandSectionProps = {
+  /** Homepage audit: avoid duplicate h3 panel titles in the tab carousel */
+  homepage?: boolean;
+};
+
+export default function BrandSection({ homepage = false }: BrandSectionProps) {
   return (
     <section id="brands" className="scroll-mt-28 bg-white">
       <BrandMarquee />
-      <BrandTabs />
+      <BrandTabs plainPanelTitles={homepage} />
     </section>
   );
 }

@@ -64,7 +64,7 @@ export default function Navigation() {
                   }`}
                 >
                   Services
-                  <ChevronDown className="size-4 opacity-70" />
+                  <ChevronDown className="size-4 opacity-70" aria-hidden />
                 </PopoverButton>
                 <PopoverPanel
                   transition
@@ -83,7 +83,7 @@ export default function Navigation() {
                           href="/warranty"
                           className="inline-flex items-center gap-2 rounded-xl border border-primary-green/25 bg-white px-4 py-3 text-sm font-semibold text-primary-green transition-colors hover:bg-primary-green/8"
                         >
-                          <Shield className="size-4" />
+                          <Shield className="size-4" aria-hidden />
                           Extended warranty
                         </Link>
                       </div>
@@ -155,7 +155,7 @@ export default function Navigation() {
             href={BUSINESS.phoneHref}
             className="ml-2 inline-flex items-center gap-2 rounded-full bg-primary-green px-5 py-2.5 text-sm font-bold text-white shadow-[0_10px_28px_-10px_rgba(14,133,54,0.7)]"
           >
-            <Phone className="size-4" />
+            <Phone className="size-4" aria-hidden />
             {BUSINESS.phone}
           </MotionAnchor>
         </div>
@@ -221,7 +221,7 @@ export default function Navigation() {
           </div>
           <div className="border-t border-white/10 p-4">
             <PhoneLink className="btn-green w-full justify-center">
-              <Phone className="size-5" />
+              <Phone className="size-5" aria-hidden />
               Call {BUSINESS.phone}
             </PhoneLink>
           </div>

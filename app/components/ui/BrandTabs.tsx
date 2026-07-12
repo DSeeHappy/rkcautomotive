@@ -13,7 +13,7 @@ import BrandLogo from './BrandLogo';
 import BrandModelPicker from './BrandModelPicker';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 
-export default function BrandTabs() {
+export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitles?: boolean }) {
   return (
     <FadeIn className="wrap pb-20 pt-12 sm:pb-24 sm:pt-16">
       <div className="mb-10 max-w-3xl">
@@ -42,6 +42,7 @@ export default function BrandTabs() {
               <Tab
                 key={brand.slug}
                 data-brand-tab
+                aria-label={`${brand.name} brand diagnostics`}
                 className="brand-tab group flex cursor-pointer items-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-3 py-2 text-xs font-semibold text-ink-muted shadow-sm outline-none transition-colors sm:px-4 sm:py-2.5 sm:text-sm data-selected:border-transparent data-selected:bg-[#0c1222] data-selected:text-white data-hover:border-primary-green/40 data-hover:bg-white data-hover:text-foreground data-focus-visible:ring-2 data-focus-visible:ring-primary-green/30"
               >
                 <BrandLogo
@@ -99,9 +100,15 @@ export default function BrandTabs() {
                       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
                         {brand.category === 'domestic' ? 'Domestic' : 'Import'} · Serviced at RKC Englewood
                       </p>
-                      <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                        {profile?.name ?? brand.name} Diagnostics
-                      </h3>
+                      {plainPanelTitles ? (
+                        <p className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
+                          {profile?.name ?? brand.name} Diagnostics
+                        </p>
+                      ) : (
+                        <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
+                          {profile?.name ?? brand.name} Diagnostics
+                        </h3>
+                      )}
                     </div>
                     <Link
                       href="/vehicles-we-service#brands"

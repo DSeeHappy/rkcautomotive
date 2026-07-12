@@ -334,7 +334,14 @@ export function ServiceProcessTimeline({
     <section className="relative overflow-hidden bg-[#0c1222] py-24 text-white sm:py-28">
       {bgImage && (
         <div className="absolute inset-0 opacity-25">
-          <Image src={bgImage} alt={bgImageAlt ?? ''} fill className="object-cover" sizes={HERO_IMAGE_SIZES} />
+          <Image
+            src={bgImage}
+            alt={bgImageAlt ?? ''}
+            aria-hidden={bgImageAlt ? undefined : true}
+            fill
+            className="object-cover"
+            sizes={HERO_IMAGE_SIZES}
+          />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
       )}
