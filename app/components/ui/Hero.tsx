@@ -21,7 +21,10 @@ export default function Hero() {
   const alert = useGsapReveal<HTMLDivElement>({ delay: 0.4, y: 16, duration: 0.6 });
 
   return (
-    <section ref={sectionRef} className="relative isolate min-h-[100svh] overflow-hidden bg-[#0c1222]">
+    <section
+      ref={sectionRef}
+      className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]"
+    >
       <div ref={bgRef} className="hero-media-layer absolute inset-0">
         <Image
           src={PHOTOS.heroMain}
@@ -52,62 +55,60 @@ export default function Hero() {
 
       <div
         ref={contentRef}
-        className="relative z-10 flex min-h-[100svh] flex-col px-4 pt-20 sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
+        className="relative z-10 flex min-h-[58svh] flex-col px-4 pt-20 sm:min-h-[65svh] sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end">
-          <div className="pb-24 sm:pb-28 lg:pb-32">
-            <div className="max-w-3xl text-left xl:max-w-4xl">
-              <div ref={headline}>
-                <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">
-                  Englewood, CO · Hablamos Español
-                </p>
-                <h1 className="mt-4 font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white">
-                  Auto Repair &amp; Diagnostics in Englewood, CO You Can Trust
-                </h1>
-                <p className="mt-5 max-w-xl text-lg font-medium text-white/85 sm:text-xl">
-                  Diagnostics • Engine Repair • Transmission • Brakes • Maintenance
-                </p>
-                <p className="mt-3 text-base text-white/75 sm:text-lg">
-                  Service area: Englewood, Denver, Littleton, Aurora &amp; surrounding
-                </p>
-              </div>
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center pb-12 text-center sm:pb-16">
+          <div className="w-full max-w-3xl xl:max-w-4xl">
+            <div ref={headline}>
+              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">
+                Englewood, CO · Hablamos Español
+              </p>
+              <h1 className="mt-4 font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white">
+                Auto Repair &amp; Diagnostics in Englewood, CO You Can Trust
+              </h1>
+              <p className="mx-auto mt-5 max-w-xl text-lg font-medium text-white/85 sm:text-xl">
+                Diagnostics • Engine Repair • Transmission • Brakes • Maintenance
+              </p>
+              <p className="mt-3 text-base text-white/75 sm:text-lg">
+                Service area: Englewood, Denver, Littleton, Aurora &amp; surrounding
+              </p>
+            </div>
 
-              <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
-                <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
-                  <Phone className="size-5" aria-hidden />
-                  Call Now — {BUSINESS.phone}
-                </MotionAnchor>
-                <Link href="/contact" className="btn-ghost-light">
-                  Book Service
-                </Link>
-              </div>
+            <div ref={ctas} className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
+                <Phone className="size-5" aria-hidden />
+                Call Now — {BUSINESS.phone}
+              </MotionAnchor>
+              <Link href="/contact" className="btn-ghost-light">
+                Book Service
+              </Link>
+            </div>
 
-              <div
-                ref={alert}
-                className="mt-8 max-w-xl rounded-2xl border border-amber-400/30 bg-[rgba(12,18,34,0.82)] p-5"
-              >
-                <div className="flex items-start gap-3">
-                  <AlertTriangle className="mt-0.5 size-5 shrink-0 text-amber-300" aria-hidden />
-                  <div>
-                    <p className="font-bold text-white">Check engine light or no-start?</p>
-                    <p className="mt-1 text-sm text-white/75">
-                      Call now for same-day diagnostics when bays are open — we find the real problem, not just the
-                      code.
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-3">
-                      <MotionAnchor
-                        href={BUSINESS.phoneHref}
-                        className="text-sm font-bold text-primary-green-light underline-offset-4 hover:underline"
-                      >
-                        Emergency: {BUSINESS.phone}
-                      </MotionAnchor>
-                      <Link
-                        href="/services/check-engine-light-englewood-co"
-                        className="text-sm font-semibold text-white/80 underline-offset-4 hover:text-white hover:underline"
-                      >
-                        Check engine help →
-                      </Link>
-                    </div>
+            <div
+              ref={alert}
+              className="mx-auto mt-8 max-w-xl rounded-2xl border border-amber-400/30 bg-[rgba(12,18,34,0.82)] p-5 text-left"
+            >
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="mt-0.5 size-5 shrink-0 text-amber-300" aria-hidden />
+                <div>
+                  <p className="font-bold text-white">Check engine light or no-start?</p>
+                  <p className="mt-1 text-sm text-white/75">
+                    Call now for same-day diagnostics when bays are open — we find the real problem, not just the
+                    code.
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3">
+                    <MotionAnchor
+                      href={BUSINESS.phoneHref}
+                      className="text-sm font-bold text-primary-green-light underline-offset-4 hover:underline"
+                    >
+                      Emergency: {BUSINESS.phone}
+                    </MotionAnchor>
+                    <Link
+                      href="/services/check-engine-light-englewood-co"
+                      className="text-sm font-semibold text-white/80 underline-offset-4 hover:text-white hover:underline"
+                    >
+                      Check engine help →
+                    </Link>
                   </div>
                 </div>
               </div>
