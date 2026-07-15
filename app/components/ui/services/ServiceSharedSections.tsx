@@ -163,10 +163,10 @@ export function ServiceCinematicHero({
         ref={contentRef}
         className="relative z-10 flex min-h-[70svh] flex-col px-4 pt-20 sm:min-h-[78svh] sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end pb-20 sm:pb-24">
-          <div className="max-w-4xl">
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-end pb-20 text-center sm:pb-24">
+          <div className="mx-auto w-full max-w-3xl">
             {breadcrumbs && breadcrumbs.length > 0 && (
-              <Breadcrumbs items={breadcrumbs} className="mb-6" variant="light" />
+              <Breadcrumbs items={breadcrumbs} className="mb-6 flex justify-center" variant="light" />
             )}
             <p
               ref={eyebrowRef}
@@ -180,10 +180,13 @@ export function ServiceCinematicHero({
             >
               {title}
             </h1>
-            <p ref={descriptionRef} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
+            <p
+              ref={descriptionRef}
+              className="mx-auto mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl"
+            >
               {description}
             </p>
-            <div ref={ctasRef} className="mt-8 flex flex-wrap items-center gap-4">
+            <div ref={ctasRef} className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link href={primaryCta.href} className="btn-green">
                 <CalendarCheck className="size-5" />
                 {primaryCta.label}
@@ -195,8 +198,8 @@ export function ServiceCinematicHero({
             </div>
           </div>
 
-          <div className="relative z-20 mt-10 lg:mt-12">
-            <HeroTrustPills pills={TRUST_PILLS} />
+          <div className="relative z-20 mt-10 w-full lg:mt-12">
+            <HeroTrustPills pills={TRUST_PILLS} className="flex flex-wrap justify-center gap-3" />
           </div>
         </div>
       </div>
