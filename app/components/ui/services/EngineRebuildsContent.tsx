@@ -180,7 +180,7 @@ export default function EngineRebuildsContent() {
   return (
     <div>
       {/* 1 — Cinematic hero */}
-      <section ref={sectionRef} className="relative isolate min-h-[70svh] overflow-hidden bg-[#0c1222] sm:min-h-[78svh]">
+      <section ref={sectionRef} className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]">
         <div ref={bgRef} className="absolute inset-0">
           <Image
             src={PHOTOS.engineRebuild}
@@ -206,11 +206,11 @@ export default function EngineRebuildsContent() {
 
         <div
           ref={contentRef}
-          className="relative z-10 flex min-h-[70svh] flex-col px-4 pt-20 sm:min-h-[78svh] sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
+          className="relative z-10 flex min-h-[58svh] flex-col px-4 pt-20 sm:min-h-[65svh] sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
         >
-          <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end pb-20 sm:pb-24">
+          <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center pb-12 text-center sm:pb-16">
             <div className="max-w-4xl">
-              <Breadcrumbs items={getServiceBreadcrumbs('Engine Rebuilds')} className="mb-6" variant="light" />
+              <Breadcrumbs items={getServiceBreadcrumbs('Engine Rebuilds')} className="mb-6 flex justify-center" variant="light" />
               <p
                 ref={eyebrow}
                 className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
@@ -225,13 +225,13 @@ export default function EngineRebuildsContent() {
                 Precision Engine Rebuilding &amp; Remanufacturing in Englewood, CO
               </h1>
 
-              <p ref={description} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
+              <p ref={description} className="mx-auto mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
                 Rod knock, low oil pressure, or blow-by past the rings? We pull, strip, machine, blueprint, and rebuild
                 domestic and import engines down to the bare block — with a written estimate and your approval before the
                 first bolt comes off our Evans Ave bay.
               </p>
 
-              <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
+              <div ref={ctas} className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link href="/contact" className="btn-green">
                   <CalendarCheck className="size-5" />
                   Request Rebuild Estimate

@@ -135,7 +135,7 @@ export function ServiceCinematicHero({
   const ctasRef = useGsapReveal<HTMLDivElement>({ delay: 0.22, y: 12, duration: 0.5 });
 
   return (
-    <section ref={sectionRef} className="relative isolate min-h-[70svh] overflow-hidden bg-[#0c1222] sm:min-h-[78svh]">
+    <section ref={sectionRef} className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]">
       <div ref={bgRef} className="absolute inset-0">
         <Image
           src={image}
@@ -161,9 +161,9 @@ export function ServiceCinematicHero({
 
       <div
         ref={contentRef}
-        className="relative z-10 flex min-h-[70svh] flex-col px-4 pt-20 sm:min-h-[78svh] sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
+        className="relative z-10 flex min-h-[58svh] flex-col px-4 pt-20 sm:min-h-[65svh] sm:px-6 sm:pt-22 lg:px-8 lg:pt-24"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-end pb-20 text-center sm:pb-24">
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center pb-12 text-center sm:pb-16">
           <div className="mx-auto w-full max-w-3xl">
             {breadcrumbs && breadcrumbs.length > 0 && (
               <Breadcrumbs items={breadcrumbs} className="mb-6 flex justify-center" variant="light" />
