@@ -65,7 +65,9 @@ export default function ContactPage() {
 
       {/* Split full-bleed photo + form — agency quality */}
       <section className="relative min-h-[100svh] lg:grid lg:grid-cols-2">
-        <div className="relative min-h-[42svh] lg:min-h-full">
+        {/* Flow layout (not absolute inset + justify-end): tall mobile copy must grow the panel
+            instead of overflowing upward under the fixed transparent nav. */}
+        <div className="relative flex min-h-[52svh] flex-col justify-end lg:min-h-full">
           <Image
             src={PHOTOS.exterior}
             alt="RKC Automotive shop exterior on W Evans Ave"
@@ -75,7 +77,7 @@ export default function ContactPage() {
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
           <div className="photo-veil absolute inset-0" />
-          <div className="absolute inset-0 flex flex-col justify-end p-8 pt-20 sm:p-12 lg:p-16">
+          <div className="relative z-10 flex flex-col p-8 pt-24 sm:p-12 sm:pt-28 lg:p-16 lg:pt-32">
             <Breadcrumbs
               items={[
                 { label: 'Home', href: '/' },

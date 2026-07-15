@@ -63,8 +63,13 @@ export default function Navigation() {
           : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between overflow-visible px-4 sm:h-[4.5rem] sm:px-6 lg:h-20 lg:px-8">
-        <AnimatedLogo variant="nav" href="/" scrolled={scrolled} className="min-h-0 max-h-full" />
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 overflow-visible px-4 sm:h-[4.5rem] sm:px-6 lg:h-20 lg:px-8">
+        <AnimatedLogo
+          variant="nav"
+          href="/"
+          scrolled={scrolled}
+          className="relative z-10 min-h-0 max-h-full shrink-0"
+        />
 
         <div className="hidden items-center gap-1 lg:flex">
           <Popover className="relative">
@@ -191,7 +196,7 @@ export default function Navigation() {
 
         <button
           type="button"
-          className={`rounded-full p-2.5 lg:hidden ${scrolled ? 'text-foreground' : 'text-white'}`}
+          className={`shrink-0 rounded-full p-2.5 lg:hidden ${scrolled ? 'text-foreground' : 'text-white'}`}
           onClick={() => setOpen(true)}
           aria-label="Open menu"
         >
