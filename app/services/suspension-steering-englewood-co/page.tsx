@@ -25,7 +25,7 @@ export default function SuspensionSteeringPage() {
             "Suspension and steering repair in Englewood, CO — shocks, struts, ball joints, and alignment from ASE-certified techs. Serving Denver south metro. Call (720) 749-3965.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(SUSPENSION_STEERING_PAGE_FAQ),
+          createFAQPageSchema(SUSPENSION_STEERING_PAGE_FAQ, '/services/suspension-steering-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

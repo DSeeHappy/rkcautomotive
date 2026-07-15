@@ -24,7 +24,7 @@ export default function FAQPage() {
     <div>
       <JsonLd
         data={[
-          createFAQPageSchema(ALL_FAQS),
+          createFAQPageSchema(ALL_FAQS, '/frequently-asked-questions'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'FAQ', path: '/frequently-asked-questions' },

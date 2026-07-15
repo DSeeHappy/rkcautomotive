@@ -64,7 +64,7 @@ export default function CamshaftLifterRepairPage() {
       <JsonLd
         data={[
           schema,
-          createFAQPageSchema(CAMSHAFT_LIFTER_PAGE_FAQ),
+          createFAQPageSchema(CAMSHAFT_LIFTER_PAGE_FAQ, '/services/camshaft-lifter-repair-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

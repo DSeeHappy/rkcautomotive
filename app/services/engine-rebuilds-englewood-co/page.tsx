@@ -64,7 +64,7 @@ export default function EngineRebuildsPage() {
       <JsonLd
         data={[
           schema,
-          createFAQPageSchema(ENGINE_REBUILDS_PAGE_FAQ),
+          createFAQPageSchema(ENGINE_REBUILDS_PAGE_FAQ, '/services/engine-rebuilds-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

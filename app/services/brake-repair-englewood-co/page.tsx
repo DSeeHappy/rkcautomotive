@@ -25,7 +25,7 @@ export default function BrakeRepairPage() {
             "Professional brake repair and service in Englewood, CO. Brake pads, rotors, calipers, and complete brake system service. Call (720) 749-3965 for same-day service.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(BRAKE_REPAIR_PAGE_FAQ),
+          createFAQPageSchema(BRAKE_REPAIR_PAGE_FAQ, '/services/brake-repair-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

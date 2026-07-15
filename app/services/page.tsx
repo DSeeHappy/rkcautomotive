@@ -42,6 +42,7 @@ export default function ServicesPage() {
               url: s.href,
               description: s.description,
             })),
+            '/services',
           ),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },

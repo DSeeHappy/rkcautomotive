@@ -25,7 +25,7 @@ export default function PreventativeMaintenancePage() {
             "Preventative maintenance in Englewood, CO. Scheduled service keeps your vehicle reliable and prevents costly repairs across the Denver south metro. Call (720) 749-3965.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(PREVENTATIVE_MAINTENANCE_PAGE_FAQ),
+          createFAQPageSchema(PREVENTATIVE_MAINTENANCE_PAGE_FAQ, '/services/preventative-maintenance-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

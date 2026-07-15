@@ -28,7 +28,7 @@ export default function PricingPage() {
             'Posted $120/hr labor rate for ASE-certified auto repair in Englewood, CO.',
             '/pricing',
           ),
-          createFAQPageSchema(PRICING_PAGE_FAQ),
+          createFAQPageSchema(PRICING_PAGE_FAQ, '/pricing'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Pricing', path: '/pricing' },

@@ -8,6 +8,7 @@ import {
   ASE_URL,
   BUSINESS,
   FEATURED_SERVICES,
+  HOMEPAGE_FAQS,
   PHOTOS,
   PROCESS_STEPS,
   SERVICES,
@@ -19,6 +20,7 @@ import {
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
 import BrandSection from './BrandSection';
+import FAQAccordion from './FAQAccordion';
 import Hero from './Hero';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 import ReviewCards from './ReviewCards';
@@ -334,6 +336,29 @@ export default function HomeContent() {
             </p>
           </FadeIn>
           <ReviewCards reviews={VERIFIED_REVIEWS_4_PLUS} />
+        </div>
+      </section>
+
+      {/* Compact FAQ — AI answer readiness + common scheduling questions */}
+      <section className="border-t border-[color:var(--line)] bg-white py-24 sm:py-28" aria-labelledby="home-faq-heading">
+        <div className="wrap">
+          <FadeIn className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">FAQ</p>
+            <h2 id="home-faq-heading" className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
+              Quick answers before you call
+            </h2>
+            <p className="mt-4 text-ink-muted">
+              Same-day openings, written estimates, and how we work — more on the full FAQ page.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.06} className="mx-auto max-w-3xl">
+            <FAQAccordion items={HOMEPAGE_FAQS} defaultOpenFirst />
+            <div className="mt-8 text-center">
+              <Link href="/frequently-asked-questions" className="btn-blue">
+                All FAQs
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

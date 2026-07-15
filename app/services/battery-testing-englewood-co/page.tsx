@@ -25,7 +25,7 @@ export default function BatteryTestingPage() {
             "Free battery testing and professional battery replacement in Englewood, CO. Charging-system checks included — do not get stranded. Call (720) 749-3965 today.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(BATTERY_TESTING_PAGE_FAQ),
+          createFAQPageSchema(BATTERY_TESTING_PAGE_FAQ, '/services/battery-testing-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

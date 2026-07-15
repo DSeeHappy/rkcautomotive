@@ -25,7 +25,7 @@ export default function OilChangesPage() {
             "Fast, affordable oil changes in Englewood, CO — conventional, synthetic, and high-mileage oil with fluid top-off. Serving Denver south metro. Call (720) 749-3965.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(OIL_CHANGES_PAGE_FAQ),
+          createFAQPageSchema(OIL_CHANGES_PAGE_FAQ, '/services/oil-changes-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

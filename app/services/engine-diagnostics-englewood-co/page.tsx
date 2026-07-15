@@ -25,7 +25,7 @@ export default function EngineDiagnosticsPage() {
             "Expert engine diagnostics and repair in Englewood, CO. Advanced equipment for all makes and models in the Denver south metro. Call (720) 749-3965 for service.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(ENGINE_DIAGNOSTICS_PAGE_FAQ),
+          createFAQPageSchema(ENGINE_DIAGNOSTICS_PAGE_FAQ, '/services/engine-diagnostics-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

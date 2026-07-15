@@ -81,7 +81,7 @@ export default async function ModelServiceDeepDivePage({ params }: PageProps) {
             serviceDescription,
             content.path,
           ),
-          createFAQPageSchema(content.faqItems),
+          createFAQPageSchema(content.faqItems, content.path),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Vehicles We Service', path: '/vehicles-we-service' },

@@ -39,6 +39,7 @@ export default function AreasPage() {
               url: a.href,
               description: a.metaDescription,
             })),
+            '/areas-we-serve',
           ),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },

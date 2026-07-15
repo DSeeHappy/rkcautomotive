@@ -25,7 +25,7 @@ export default function TransmissionServicesPage() {
             "Transmission service and repair in Englewood, CO — automatic, manual, fluid service, and diagnostics for Denver south metro drivers. Call (720) 749-3965.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(TRANSMISSION_SERVICES_PAGE_FAQ),
+          createFAQPageSchema(TRANSMISSION_SERVICES_PAGE_FAQ, '/services/transmission-services-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

@@ -62,6 +62,8 @@ export const SAME_AS = [
 export const BUSINESS = {
   name: 'RKC Automotive',
   phone: '(720) 749-3965',
+  /** E.164 — use in schema / tel links so auditors match visible NAP */
+  phoneE164: '+17207493965',
   phoneHref: 'tel:+17207493965',
   email: 'info@rkcautomotive.com',
   address: {
@@ -1978,6 +1980,9 @@ export const FAQ_CATEGORIES: { title: string; items: FAQItem[] }[] = [
 
 /** All FAQ items flattened for FAQPage JSON-LD */
 export const ALL_FAQS = FAQ_CATEGORIES.flatMap((c) => c.items);
+
+/** Short homepage Q&A for AI answer readiness (visible + FAQPage schema). */
+export const HOMEPAGE_FAQS: FAQItem[] = FAQ_CATEGORIES[0].items.slice(0, 4);
 
 export const VEHICLE_CATEGORIES = [
   {

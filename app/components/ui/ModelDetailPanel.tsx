@@ -9,6 +9,7 @@ import { BUSINESS } from '@/lib/constants';
 import type { VehicleBrand } from '@/lib/vehicleBrands';
 import { getCategoryImage, type VehicleModel } from '@/lib/vehicleModels';
 import { getVehicleImage } from '@/lib/vehicleImages';
+import { buildModelHubPath } from '@/lib/modelHubRoutes';
 import { createItemListSchema } from '@/lib/seo';
 import BrandLogo from './BrandLogo';
 import ModelCommonServicesSection from './ModelCommonServicesSection';
@@ -58,6 +59,7 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
       url: service.href,
       description: service.description,
     })),
+    buildModelHubPath(brand.slug, model.model),
   );
 
   return (

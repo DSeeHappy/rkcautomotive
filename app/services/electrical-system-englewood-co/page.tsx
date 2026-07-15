@@ -25,7 +25,7 @@ export default function ElectricalSystemPage() {
             "Expert auto electrical repair in Englewood, CO. Battery, alternator, starter, wiring, and electrical diagnostics. Call (720) 749-3965 for reliable electrical service.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(ELECTRICAL_SYSTEM_PAGE_FAQ),
+          createFAQPageSchema(ELECTRICAL_SYSTEM_PAGE_FAQ, '/services/electrical-system-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

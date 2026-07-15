@@ -25,7 +25,7 @@ export default function ExhaustSystemPage() {
             "Exhaust system repair in Englewood, CO — mufflers, catalytic converters, pipes, and emissions service for Denver south metro drivers. Call (720) 749-3965.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(EXHAUST_SYSTEM_PAGE_FAQ),
+          createFAQPageSchema(EXHAUST_SYSTEM_PAGE_FAQ, '/services/exhaust-system-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

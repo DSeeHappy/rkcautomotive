@@ -25,7 +25,7 @@ export default function HeatingAcPage() {
             "Expert auto AC repair and heating service in Englewood, CO. R134a and R1234yf recharge, EPA-compliant leak detection, compressor and heater core repair for Denver metro. Call (720) 749-3965.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(HEATING_AC_PAGE_FAQ),
+          createFAQPageSchema(HEATING_AC_PAGE_FAQ, '/services/heating-ac-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

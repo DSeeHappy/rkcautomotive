@@ -25,7 +25,7 @@ export default function CheckEngineLightPage() {
             "Check engine light diagnosis in Englewood, CO. Find the real problem — not every sensor on the diagram — with ASE-certified diagnostics. Call (720) 749-3965.",
             SERVICE_PATH,
           ),
-          createFAQPageSchema(CHECK_ENGINE_LIGHT_PAGE_FAQ),
+          createFAQPageSchema(CHECK_ENGINE_LIGHT_PAGE_FAQ, '/services/check-engine-light-englewood-co'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Services', path: '/services' },

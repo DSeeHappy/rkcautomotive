@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { CheckCircle, Send } from 'lucide-react';
 import { gsap } from '@/lib/gsap';
+import Link from 'next/link';
 import { BUSINESS } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
@@ -143,6 +144,15 @@ export default function ContactForm() {
         <Send className="size-4" />
         Send message
       </button>
+
+      <p className="text-xs leading-relaxed text-ink-muted">
+        By sending this message, you agree that RKC Automotive may use your contact details to
+        respond to your request. See our{' '}
+        <Link href="/privacy" className="font-semibold text-primary-green underline-offset-2 hover:underline">
+          Privacy Policy
+        </Link>
+        .
+      </p>
 
       <p className="text-sm text-ink-muted">
         Or call{' '}

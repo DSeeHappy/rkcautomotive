@@ -70,6 +70,7 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
               url: service.href,
               description: service.description,
             })),
+            hubPath,
           ),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },

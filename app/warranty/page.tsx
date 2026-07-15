@@ -33,7 +33,7 @@ export default function WarrantyPage() {
           ),
           createWarrantyServiceSchema(),
           createWarrantyAutoRepairSchema(),
-          createFAQPageSchema(WARRANTY_PAGE_FAQ),
+          createFAQPageSchema(WARRANTY_PAGE_FAQ, '/warranty'),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Extended Warranty', path: '/warranty' },

@@ -1,7 +1,12 @@
 import HomeContent from './components/ui/HomeContent';
 import JsonLd from './components/JsonLd';
+import { HOMEPAGE_FAQS } from '@/lib/constants';
 import { createPageMetadata } from '@/lib/og';
-import { createHomepageAutoRepairSchema, createBreadcrumbSchema } from '@/lib/seo';
+import {
+  createBreadcrumbSchema,
+  createFAQPageSchema,
+  createHomepageAutoRepairSchema,
+} from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Auto Repair Englewood, CO | RKC Automotive',
@@ -21,6 +26,7 @@ export default function HomePage() {
       <JsonLd
         data={[
           createHomepageAutoRepairSchema(),
+          createFAQPageSchema(HOMEPAGE_FAQS, '/'),
           createBreadcrumbSchema([{ name: 'Home', path: '/' }]),
         ]}
       />

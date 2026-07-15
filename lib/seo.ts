@@ -13,6 +13,9 @@ import { absoluteUrl, SITE_URL } from './og';
 import { getAllModelDeepDiveRoutes } from './modelDeepDiveRoutes';
 import { getAllModelHubRoutes } from './modelHubRoutes';
 
+/** AutoRepair is a LocalBusiness subtype; emit both so NAP auditors recognize the entity. */
+const LOCAL_BUSINESS_TYPES = ['AutoRepair', 'LocalBusiness'] as const;
+
 export const SITEMAP_SHARD_IDS = ['core', 'services', 'cities', 'vehicles'] as const;
 export type SitemapShardId = (typeof SITEMAP_SHARD_IDS)[number];
 export const LOCAL_BUSINESS_ID = `${SITE_URL}/#localbusiness`;
@@ -130,13 +133,13 @@ export function getAllSiteRoutes(): string[] {
 export function createOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'AutoRepair',
+    '@type': [...LOCAL_BUSINESS_TYPES],
     '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     url: SITE_URL,
     logo: absoluteUrl('/images/logo.png'),
     image: absoluteUrl(PHOTOS.exterior),
-    telephone: '+1-720-749-3965',
+    telephone: BUSINESS.phoneE164,
     email: BUSINESS.email,
     address: POSTAL_ADDRESS,
     geo: {
@@ -217,12 +220,12 @@ export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'AutoRepair',
+    '@type': [...LOCAL_BUSINESS_TYPES],
     '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     image: absoluteUrl(PHOTOS.exterior),
     url: SITE_URL,
-    telephone: '+1-720-749-3965',
+    telephone: BUSINESS.phoneE164,
     email: BUSINESS.email,
     priceRange: '$$',
     description,
@@ -243,11 +246,11 @@ export function createLocalBusinessSchema(options: LocalBusinessOptions = {}) {
 export function createHomepageAutoRepairSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'AutoRepair',
+    '@type': [...LOCAL_BUSINESS_TYPES],
     '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     url: SITE_URL,
-    telephone: '+1-720-749-3965',
+    telephone: BUSINESS.phoneE164,
     logo: absoluteUrl('/images/rkc-logo-card.png'),
     image: absoluteUrl(PHOTOS.heroMain),
     description: HOMEPAGE_AUTO_REPAIR_DESCRIPTION,
@@ -267,9 +270,12 @@ export function createHomepageAutoRepairSchema() {
 }
 
 export function createBreadcrumbSchema(items: BreadcrumbItem[]) {
+  const leafPath = [...items].reverse().find((item) => item.path)?.path ?? '/';
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl(leafPath)}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -285,13 +291,16 @@ export function createServiceSchema(
   servicePath: string,
   areaName = 'Englewood',
 ) {
+  const url = absoluteUrl(servicePath);
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${url}#service`,
     serviceType,
     name: serviceType,
     description,
-    url: absoluteUrl(servicePath),
+    url,
     provider: {
       '@id': LOCAL_BUSINESS_ID,
     },
@@ -307,10 +316,11 @@ export function createServiceSchema(
   };
 }
 
-export function createFAQPageSchema(faqs: FAQItem[]) {
+export function createFAQPageSchema(faqs: FAQItem[], pagePath = '/frequently-asked-questions') {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    '@id': `${absoluteUrl(pagePath)}#faq`,
     mainEntity: faqs.map((item) => ({
       '@type': 'Question',
       name: item.question,
@@ -326,12 +336,14 @@ export function createContactPageSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
+    '@id': `${absoluteUrl('/contact')}#contactpage`,
     name: 'Contact RKC Automotive',
     url: absoluteUrl('/contact'),
     mainEntity: {
-      '@type': 'AutoRepair',
+      '@type': [...LOCAL_BUSINESS_TYPES],
+      '@id': LOCAL_BUSINESS_ID,
       name: BUSINESS.name,
-      telephone: '+1-720-749-3965',
+      telephone: BUSINESS.phoneE164,
       email: BUSINESS.email,
       address: POSTAL_ADDRESS,
       url: SITE_URL,
@@ -343,6 +355,7 @@ export function createAboutPageSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
+    '@id': `${absoluteUrl('/about')}#aboutpage`,
     name: `About ${BUSINESS.name}`,
     url: absoluteUrl('/about'),
     description:
@@ -354,10 +367,12 @@ export function createAboutPageSchema() {
 export function createItemListSchema(
   name: string,
   items: { name: string; url: string; description?: string }[],
+  pagePath?: string,
 ) {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
+    ...(pagePath ? { '@id': `${absoluteUrl(pagePath)}#itemlist` } : {}),
     name,
     numberOfItems: items.length,
     itemListElement: items.map((item, index) => ({
@@ -371,12 +386,15 @@ export function createItemListSchema(
 }
 
 export function createWebPageSchema(name: string, description: string, path: string) {
+  const url = absoluteUrl(path);
+
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
+    '@id': `${url}#webpage`,
     name,
     description,
-    url: absoluteUrl(path),
+    url,
     isPartOf: { '@id': `${SITE_URL}/#website` },
     about: { '@id': LOCAL_BUSINESS_ID },
   };
@@ -389,11 +407,11 @@ const WARRANTY_PAGE_DESCRIPTION =
 export function createWarrantyAutoRepairSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'AutoRepair',
+    '@type': [...LOCAL_BUSINESS_TYPES],
     '@id': LOCAL_BUSINESS_ID,
     name: BUSINESS.name,
     url: absoluteUrl('/warranty'),
-    telephone: '+1-720-749-3965',
+    telephone: BUSINESS.phoneE164,
     email: BUSINESS.email,
     image: absoluteUrl(PHOTOS.engineBay),
     description: WARRANTY_PAGE_DESCRIPTION,
