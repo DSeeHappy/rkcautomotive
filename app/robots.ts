@@ -4,7 +4,10 @@ import { SITE_URL } from '@/lib/og';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: '*', allow: '/' },
+      {
+        userAgent: '*',
+        allow: ['/', '/llms.txt', '/.well-known/llms.txt'],
+      },
       { userAgent: 'Bingbot', allow: '/' },
     ],
     sitemap: `${SITE_URL}/sitemap-index`,

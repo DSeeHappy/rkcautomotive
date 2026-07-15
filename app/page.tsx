@@ -5,7 +5,7 @@ import { createPageMetadata } from '@/lib/og';
 import {
   createBreadcrumbSchema,
   createFAQPageSchema,
-  createHomepageAutoRepairSchema,
+  createWebPageSchema,
 } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
@@ -25,7 +25,13 @@ export default function HomePage() {
     <div>
       <JsonLd
         data={[
-          createHomepageAutoRepairSchema(),
+          // LocalBusiness/AutoRepair comes from root layout only — avoid a second
+          // conflicting org block with a different image/areaServed/description.
+          createWebPageSchema(
+            'Auto Repair Englewood, CO | RKC Automotive',
+            'ASE-certified auto repair in Englewood, CO. Diagnostics, transmission, brakes & maintenance at $120/hr. Serving Denver metro.',
+            '/',
+          ),
           createFAQPageSchema(HOMEPAGE_FAQS, '/'),
           createBreadcrumbSchema([{ name: 'Home', path: '/' }]),
         ]}

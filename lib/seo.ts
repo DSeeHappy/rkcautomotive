@@ -13,12 +13,21 @@ import { absoluteUrl, SITE_URL } from './og';
 import { getAllModelDeepDiveRoutes } from './modelDeepDiveRoutes';
 import { getAllModelHubRoutes } from './modelHubRoutes';
 
-/** AutoRepair is a LocalBusiness subtype; emit both so NAP auditors recognize the entity. */
-const LOCAL_BUSINESS_TYPES = ['AutoRepair', 'LocalBusiness'] as const;
+/** AutoRepair is a LocalBusiness subtype; LocalBusiness first helps NAP auditors that match that type literally. */
+const LOCAL_BUSINESS_TYPES = ['LocalBusiness', 'AutoRepair'] as const;
 
 export const SITEMAP_SHARD_IDS = ['core', 'services', 'cities', 'vehicles'] as const;
 export type SitemapShardId = (typeof SITEMAP_SHARD_IDS)[number];
 export const LOCAL_BUSINESS_ID = `${SITE_URL}/#localbusiness`;
+
+/** Stable fragment ids — homepage uses `/#frag` so @id always includes a slash before `#`. */
+export function schemaEntityId(pagePath: string, fragment: string): string {
+  const url = absoluteUrl(pagePath);
+  if (url === SITE_URL || pagePath === '/') {
+    return `${SITE_URL}/#${fragment}`;
+  }
+  return `${url}#${fragment}`;
+}
 
 const CORE_ROUTES = [
   '/',
@@ -275,7 +284,7 @@ export function createBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    '@id': `${absoluteUrl(leafPath)}#breadcrumb`,
+    '@id': schemaEntityId(leafPath, 'breadcrumb'),
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -296,7 +305,7 @@ export function createServiceSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${url}#service`,
+    '@id': schemaEntityId(servicePath, 'service'),
     serviceType,
     name: serviceType,
     description,
@@ -317,18 +326,25 @@ export function createServiceSchema(
 }
 
 export function createFAQPageSchema(faqs: FAQItem[], pagePath = '/frequently-asked-questions') {
+  const pageId = schemaEntityId(pagePath, 'faq');
+
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${absoluteUrl(pagePath)}#faq`,
-    mainEntity: faqs.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
+    '@id': pageId,
+    mainEntity: faqs.map((item, index) => {
+      const questionId = `${pageId}/question-${index + 1}`;
+      return {
+        '@type': 'Question',
+        '@id': questionId,
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          '@id': `${questionId}/answer`,
+          text: item.answer,
+        },
+      };
+    }),
   };
 }
 
@@ -336,7 +352,7 @@ export function createContactPageSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    '@id': `${absoluteUrl('/contact')}#contactpage`,
+    '@id': schemaEntityId('/contact', 'contactpage'),
     name: 'Contact RKC Automotive',
     url: absoluteUrl('/contact'),
     mainEntity: {
@@ -355,7 +371,7 @@ export function createAboutPageSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    '@id': `${absoluteUrl('/about')}#aboutpage`,
+    '@id': schemaEntityId('/about', 'aboutpage'),
     name: `About ${BUSINESS.name}`,
     url: absoluteUrl('/about'),
     description:
@@ -372,7 +388,7 @@ export function createItemListSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    ...(pagePath ? { '@id': `${absoluteUrl(pagePath)}#itemlist` } : {}),
+    ...(pagePath ? { '@id': schemaEntityId(pagePath, 'itemlist') } : {}),
     name,
     numberOfItems: items.length,
     itemListElement: items.map((item, index) => ({
@@ -391,7 +407,7 @@ export function createWebPageSchema(name: string, description: string, path: str
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    '@id': `${url}#webpage`,
+    '@id': schemaEntityId(path, 'webpage'),
     name,
     description,
     url,

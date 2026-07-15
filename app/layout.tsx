@@ -8,6 +8,7 @@ import MobileStickyBar from './components/ui/MobileStickyBar';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import GsapProvider from './components/ui/GsapProvider';
 import SplashScreen from './components/ui/SplashScreen';
+import GoogleAnalytics from './components/GoogleAnalytics';
 import JsonLd from './components/JsonLd';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
 import { createOrganizationSchema, createWebSiteSchema } from '@/lib/seo';
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <head>
         <meta name="msvalidate.01" content={BING_SITE_VERIFICATION} />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
         <a
@@ -77,6 +79,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to main content
         </a>
+        {/* Single sitewide AutoRepair/LocalBusiness NAP — pages must not emit a second org with a different telephone/image. */}
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
         <GsapProvider>
           <SplashScreen>
@@ -93,6 +96,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </SplashScreen>
         </GsapProvider>
         <Analytics />
+        <GoogleAnalytics />
       </body>
     </html>
   );

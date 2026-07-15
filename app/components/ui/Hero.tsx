@@ -29,6 +29,7 @@ export default function Hero() {
             alt="RKC Automotive green shop bay entrance in Englewood"
             fill
             priority
+            fetchPriority="high"
             className={`object-cover object-[78%_56%] sm:object-[74%_53%] lg:object-[70%_50%] ${reduce ? '' : 'ken-burns'}`}
             sizes={HERO_IMAGE_SIZES}
           />
