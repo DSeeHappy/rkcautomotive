@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Car, Globe2, Sparkles } from 'lucide-react';
 import { VEHICLE_CATEGORIES } from '@/lib/constants';
-import { getBrandByName } from '@/lib/vehicleBrands';
+import { getCategoryBrandLogo } from '@/lib/vehicleBrands';
 import BrandLogo from './BrandLogo';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 
@@ -38,16 +38,18 @@ const CATEGORY_STYLE = {
 } as const;
 
 function BrandPill({ name }: { name: string }) {
-  const brand = getBrandByName(name);
+  const brand = getCategoryBrandLogo(name);
+  // Featured makes scroll to BrandTabs; others stay on the category overview.
+  const href = brand?.featured ? '#brands' : '#makes';
 
   return (
     <Link
-      href="/#brands"
+      href={href}
       className="group/pill inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-white/90 px-3.5 py-2 text-sm font-semibold text-foreground shadow-[0_4px_14px_-8px_rgba(12,18,34,0.25)] transition duration-200 hover:-translate-y-0.5 hover:border-primary-green/45 hover:bg-white hover:shadow-[0_10px_24px_-12px_rgba(14,133,54,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/35"
     >
       {brand ? (
         <span className="flex size-6 items-center justify-center rounded-full bg-[var(--background)] ring-1 ring-[color:var(--line)] transition group-hover/pill:ring-primary-green/30">
-          <BrandLogo slug={brand.slug} color={brand.color} size={14} />
+          <BrandLogo slug={brand.slug} color={brand.color} size={14} src={brand.logoPath} />
         </span>
       ) : (
         <span className="flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-primary-blue/10 to-primary-green/10 text-[10px] font-bold uppercase tracking-wide text-primary-blue ring-1 ring-[color:var(--line)]">
@@ -61,7 +63,7 @@ function BrandPill({ name }: { name: string }) {
 
 export default function VehicleCategoryCards() {
   return (
-    <section className="relative z-0 overflow-hidden py-20 sm:py-24">
+    <section id="makes" className="relative z-0 scroll-mt-28 overflow-hidden py-20 sm:py-24">
       <div
         className="pointer-events-none absolute inset-0 opacity-60"
         style={{
@@ -136,7 +138,7 @@ export default function VehicleCategoryCards() {
 
                   <div className="relative mt-8 border-t border-[color:var(--line)]/80 pt-5">
                     <Link
-                      href="/#brands"
+                      href="#brands"
                       className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-green transition hover:text-primary-green-dark"
                     >
                       Explore featured brands
