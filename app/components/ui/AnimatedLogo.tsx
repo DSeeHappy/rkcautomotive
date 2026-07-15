@@ -30,14 +30,14 @@ type AnimatedLogoProps = {
 
 const sizeClass = {
   hero: 'w-[min(56vw,184px)] sm:w-[min(48vw,216px)] lg:w-[min(24vw,240px)] h-auto',
-  nav: 'h-14 max-h-[calc(100%-8px)] w-auto object-contain sm:h-16 lg:h-[4.5rem]',
+  nav: 'h-11 max-h-full w-auto object-contain object-left sm:h-12 lg:h-14',
   footer: 'h-16 w-auto sm:h-[4.5rem]',
 } as const;
 
 const navSizes = '(max-width: 640px) 140px, (max-width: 1024px) 160px, 180px';
 
 const navScrolledImgClass =
-  'block h-14 max-h-[calc(100%-8px)] w-auto object-contain select-none sm:h-16 lg:h-[4.5rem]';
+  'block h-11 max-h-full w-auto select-none object-contain object-left sm:h-12 lg:h-14';
 
 const navScrolledCardClass = 'rounded-lg bg-white p-0.5 shadow-sm';
 
@@ -241,7 +241,9 @@ function LogoContent({
         delay: isHero ? 0.08 : 0,
         ease: 'power2.out',
         onComplete: () => {
-          if (wrapperRef.current) gsap.set(wrapperRef.current, { clearProps: 'willChange' });
+          if (wrapperRef.current) {
+            gsap.set(wrapperRef.current, { clearProps: 'willChange,opacity,transform' });
+          }
         },
       });
     },

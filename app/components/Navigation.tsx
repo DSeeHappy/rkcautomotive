@@ -12,11 +12,18 @@ import { useGsapReveal } from '@/lib/useGsapReveal';
 
 const serviceBySlug = Object.fromEntries(SERVICES.map((s) => [s.slug, s]));
 
+/** Site chrome above page stacking contexts (GSAP transforms / isolate / cards). */
+const NAV_Z = 'z-[100]';
+const POPOVER_Z = 'z-[110]';
+const MOBILE_MENU_Z = 'z-[120]';
+
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
-  const navRef = useGsapReveal<HTMLElement>({ y: -20, duration: 0.7 });
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Opacity-only reveal — transform on fixed nav creates a stacking context that traps the dropdown under page layers in Chrome
+  const navRef = useGsapReveal<HTMLElement>({ y: 0, duration: 0.55 });
   const links = NAV_LINKS.filter((l) => l.name !== 'Home');
 
   useEffect(() => {
@@ -26,20 +33,37 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = (close: () => void) => {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
+      close();
+      closeTimerRef.current = null;
+    }, 160);
+  };
+
   return (
     <nav
       ref={navRef}
-      className={`fixed inset-x-0 top-0 z-50 ${
+      className={`fixed inset-x-0 top-0 ${NAV_Z} overflow-visible ${
         scrolled
-          ? 'glass-nav overflow-hidden shadow-[0_8px_40px_-20px_rgba(12,18,34,0.35)]'
-          : 'overflow-visible bg-transparent'
+          ? 'glass-nav shadow-[0_8px_40px_-20px_rgba(12,18,34,0.35)]'
+          : 'bg-transparent'
       }`}
     >
-      <div
-        className={`mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[4.5rem] lg:h-20 sm:px-6 lg:px-8 ${
-          scrolled ? 'overflow-hidden' : 'overflow-visible'
-        }`}
-      >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between overflow-visible px-4 sm:h-[4.5rem] sm:px-6 lg:h-20 lg:px-8">
         <AnimatedLogo variant="nav" href="/" scrolled={scrolled} className="min-h-0 max-h-full" />
 
         <div className="hidden items-center gap-1 lg:flex">
@@ -48,10 +72,11 @@ export default function Navigation() {
               <div
                 className="relative"
                 onMouseEnter={() => {
+                  clearCloseTimer();
                   if (!servicesOpen) servicesButtonRef.current?.click();
                 }}
                 onMouseLeave={() => {
-                  if (servicesOpen) closeServices();
+                  if (servicesOpen) scheduleClose(closeServices);
                 }}
               >
                 <PopoverButton
@@ -67,10 +92,14 @@ export default function Navigation() {
                   <ChevronDown className="size-4 opacity-70" aria-hidden />
                 </PopoverButton>
                 <PopoverPanel
+                  portal
+                  anchor="bottom"
                   transition
-                  className="absolute left-1/2 top-full z-50 w-[44rem] -translate-x-1/2 pt-3 transition data-closed:translate-y-2 data-closed:opacity-0"
+                  onMouseEnter={clearCloseTimer}
+                  onMouseLeave={() => scheduleClose(closeServices)}
+                  className={`${POPOVER_Z} w-[min(44rem,calc(100vw-2rem))] pt-3 transition data-closed:translate-y-2 data-closed:opacity-0`}
                 >
-                  <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl">
+                  <div className="overflow-hidden rounded-2xl border border-white/20 bg-white shadow-2xl">
                     <div className="border-b border-[color:var(--line)] bg-gradient-to-r from-primary-green/8 to-primary-blue/8 p-4">
                       <div className="flex flex-wrap gap-2">
                         <Link
@@ -171,8 +200,10 @@ export default function Navigation() {
       </div>
 
       <Dialog open={open} onClose={setOpen} className="lg:hidden">
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col overflow-y-auto bg-[#0c1222] text-white">
+        <div className={`fixed inset-0 ${MOBILE_MENU_Z} bg-black/50`} />
+        <DialogPanel
+          className={`fixed inset-y-0 right-0 ${MOBILE_MENU_Z} flex w-full max-w-sm flex-col overflow-y-auto bg-[#0c1222] text-white`}
+        >
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-4 sm:px-6 sm:py-5">
             <AnimatedLogo variant="nav" href="/" onDarkBackground />
             <button type="button" onClick={() => setOpen(false)} className="p-2" aria-label="Close menu">

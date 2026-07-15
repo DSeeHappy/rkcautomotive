@@ -61,7 +61,7 @@ function BrandPill({ name }: { name: string }) {
 
 export default function VehicleCategoryCards() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24">
+    <section className="relative z-0 overflow-hidden py-20 sm:py-24">
       <div
         className="pointer-events-none absolute inset-0 opacity-60"
         style={{
@@ -96,7 +96,7 @@ export default function VehicleCategoryCards() {
             return (
               <StaggerItem key={cat.title}>
                 <article
-                  className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-8 shadow-[0_24px_70px_-36px_rgba(12,18,34,0.28)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_32px_80px_-32px_rgba(28,61,145,0.22)]"
+                  className="group relative z-0 flex h-full flex-col overflow-hidden rounded-[1.75rem] border p-8 shadow-[0_24px_70px_-36px_rgba(12,18,34,0.28)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_32px_80px_-32px_rgba(28,61,145,0.22)]"
                   style={{
                     background: style.gradient,
                     borderColor: style.border,

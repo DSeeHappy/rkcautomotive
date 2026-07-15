@@ -32,11 +32,11 @@ export default function PageHero({
   const ctas = useGsapReveal<HTMLDivElement>({ delay: 0.2, y: 12, duration: 0.5 });
 
   return (
-    <section className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] pt-20 sm:min-h-[64svh] xl:pt-24">
+    <section className="relative z-0 overflow-hidden bg-[#0c1222] pt-20 min-h-[58svh] sm:min-h-[64svh] xl:pt-24">
       <Image src={imageSrc} alt={heroAlt} fill priority className="object-cover" sizes={HERO_IMAGE_SIZES} />
       <div className="photo-veil absolute inset-0" />
 
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-20 sm:px-6 sm:pb-20 lg:px-8">
+      <div className="relative mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-20 sm:px-6 sm:pb-20 lg:px-8">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <Breadcrumbs items={breadcrumbs} className="mb-6" variant="light" />
         )}

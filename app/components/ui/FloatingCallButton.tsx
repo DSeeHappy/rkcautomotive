@@ -20,7 +20,7 @@ export default function FloatingCallButton() {
       <MotionAnchor
         href={BUSINESS.phoneHref}
         aria-label={`Call ${BUSINESS.phone}`}
-        className="fixed bottom-5 right-5 z-40 hidden items-center gap-2 rounded-full bg-primary-green px-5 py-3.5 text-sm font-bold text-white shadow-[0_16px_48px_-8px_rgba(14,133,54,0.65)] lg:bottom-8 lg:right-8 lg:flex"
+        className="fixed bottom-5 right-5 z-[80] hidden items-center gap-2 rounded-full bg-primary-green px-5 py-3.5 text-sm font-bold text-white shadow-[0_16px_48px_-8px_rgba(14,133,54,0.65)] lg:bottom-8 lg:right-8 lg:flex"
       >
         <Phone className="size-5" aria-hidden />
         <span className="hidden sm:inline">Call Now</span>
@@ -29,7 +29,7 @@ export default function FloatingCallButton() {
   }
 
   return (
-    <div ref={ref} className="fixed bottom-5 right-5 z-40 hidden lg:bottom-8 lg:right-8 lg:block">
+    <div ref={ref} className="fixed bottom-5 right-5 z-[80] hidden lg:bottom-8 lg:right-8 lg:block">
       <MotionAnchor
         href={BUSINESS.phoneHref}
         aria-label={`Call ${BUSINESS.phone}`}

@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { CheckCircle, Send } from 'lucide-react';
-import { gsap } from '@/lib/gsap';
+import { ensureScrollTrigger, gsap } from '@/lib/gsap';
 import Link from 'next/link';
 import { BUSINESS } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
@@ -21,21 +21,39 @@ export default function ContactForm() {
     () => {
       if (reduce || !formRef.current) return;
 
-      gsap.set(formRef.current, { opacity: 0, y: 20, willChange: 'transform, opacity' });
-      gsap.to(formRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: formRef.current,
-          start: 'top 90%',
-          once: true,
-        },
-        onComplete: () => {
-          if (formRef.current) gsap.set(formRef.current, { clearProps: 'willChange' });
-        },
+      let cancelled = false;
+      const ctx = gsap.context(() => {});
+
+      void ensureScrollTrigger().then(() => {
+        if (cancelled || !formRef.current) return;
+
+        ctx.add(() => {
+          gsap.fromTo(
+            formRef.current,
+            { opacity: 0, y: 20, willChange: 'transform, opacity' },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: 'power2.out',
+              immediateRender: false,
+              scrollTrigger: {
+                trigger: formRef.current,
+                start: 'top 90%',
+                once: true,
+              },
+              onComplete: () => {
+                if (formRef.current) gsap.set(formRef.current, { clearProps: 'willChange,opacity,transform' });
+              },
+            },
+          );
+        });
       });
+
+      return () => {
+        cancelled = true;
+        ctx.revert();
+      };
     },
     { scope: formRef, dependencies: [reduce] },
   );

@@ -12,12 +12,17 @@ export default function GsapProvider({ children }: GsapProviderProps) {
   const pathname = usePathname();
 
   useEffect(() => {
+    let active = true;
     const id = requestAnimationFrame(() => {
       void ensureScrollTrigger().then((ScrollTrigger) => {
+        if (!active) return;
         ScrollTrigger.refresh(true);
       });
     });
-    return () => cancelAnimationFrame(id);
+    return () => {
+      active = false;
+      cancelAnimationFrame(id);
+    };
   }, [pathname]);
 
   return <>{children}</>;

@@ -28,8 +28,8 @@ export const RKC_LOGO_CARD_SIZE = 1040;
 /** Nav logo — compact when scrolled (px) */
 export const NAV_LOGO_SCROLLED_HEIGHT = { base: 56, sm: 64, lg: 72 } as const;
 
-/** Nav logo scale at top (transparent) vs compact scrolled size */
-export const NAV_LOGO_TOP_SCALE = { base: 1.5, sm: 1.65, lg: 1.8 } as const;
+/** Nav logo scale at top (transparent) vs compact scrolled size — keep ≤1.2 so Chrome overflow clip never crops the mark */
+export const NAV_LOGO_TOP_SCALE = { base: 1.12, sm: 1.15, lg: 1.18 } as const;
 
 export type SplashVideoSource = { src: string; type: string };
 

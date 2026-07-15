@@ -3,7 +3,7 @@
 import { TabList } from '@headlessui/react';
 import { useRef, type ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
-import { gsap } from '@/lib/gsap';
+import { ensureScrollTrigger, gsap } from '@/lib/gsap';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 type AnimatedBrandTabListProps = {
@@ -24,29 +24,44 @@ export default function AnimatedBrandTabList({
     () => {
       if (reduce || !ref.current) return;
 
-      const tabs = ref.current.querySelectorAll<HTMLElement>('[data-brand-tab]');
-      if (!tabs.length) return;
+      let cancelled = false;
+      const ctx = gsap.context(() => {});
 
-      gsap.fromTo(
-        tabs,
-        { opacity: 0, y: 22, scale: 0.88, willChange: 'transform, opacity' },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.55,
-          stagger: 0.045,
-          ease: 'back.out(1.4)',
-          scrollTrigger: {
-            trigger: ref.current,
-            start: 'top 88%',
-            once: true,
-          },
-          onComplete: () => {
-            gsap.set(tabs, { clearProps: 'willChange,opacity,transform' });
-          },
-        },
-      );
+      void ensureScrollTrigger().then(() => {
+        if (cancelled || !ref.current) return;
+
+        const tabs = ref.current.querySelectorAll<HTMLElement>('[data-brand-tab]');
+        if (!tabs.length) return;
+
+        ctx.add(() => {
+          gsap.fromTo(
+            tabs,
+            { opacity: 0, y: 22, scale: 0.88, willChange: 'transform, opacity' },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.55,
+              stagger: 0.045,
+              ease: 'back.out(1.4)',
+              immediateRender: false,
+              scrollTrigger: {
+                trigger: ref.current,
+                start: 'top 88%',
+                once: true,
+              },
+              onComplete: () => {
+                gsap.set(tabs, { clearProps: 'willChange,opacity,transform' });
+              },
+            },
+          );
+        });
+      });
+
+      return () => {
+        cancelled = true;
+        ctx.revert();
+      };
     },
     { scope: ref, dependencies: [reduce] },
   );

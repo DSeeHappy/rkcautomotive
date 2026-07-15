@@ -34,7 +34,7 @@ export default function HomeContent() {
       <Hero />
 
       {/* Trust strip — local SEO signals */}
-      <section className="relative z-10 -mt-10 border-y border-[color:var(--line)] bg-white">
+      <section className="relative z-0 -mt-10 border-y border-[color:var(--line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-[color:var(--line)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {[
             {
@@ -59,7 +59,7 @@ export default function HomeContent() {
       </section>
 
       {/* Animated stats — horizontal cinematic strip, not gray cards */}
-      <section className="relative z-10 border-b border-[color:var(--line)] bg-white/90 backdrop-blur-md">
+      <section className="relative z-0 border-b border-[color:var(--line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-[color:var(--line)] lg:grid-cols-4">
           {STATS.map((stat, i) => (
             <FadeIn key={stat.label} delay={i * 0.06} className="px-6 py-10 sm:px-8">

@@ -157,7 +157,7 @@ body {
 }
 
 .btn-ghost-light {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20;
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/15 px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-white/25;
 }
 
 .btn-outline {
@@ -169,10 +169,26 @@ body {
 }
 
 .glass-nav {
-  background: var(--glass);
+  /* Solid frosted look — avoid backdrop-filter over Ken Burns / GSAP layers (Chrome GPU smear) */
+  background: rgba(247, 248, 250, 0.97);
   border-bottom: 1px solid rgba(12, 18, 34, 0.06);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media (prefers-reduced-transparency: no-preference) {
+    .glass-nav {
+      background: var(--glass);
+      backdrop-filter: blur(12px) saturate(1.2);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    }
+  }
+}
+
+/* Chrome/WebKit: neutralize compositing bugs over large animated layers */
+.hero-media-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .photo-veil {
@@ -204,15 +220,17 @@ body {
 
 @keyframes kenburns {
   from {
-    transform: scale(1);
+    transform: scale(1.04);
   }
   to {
-    transform: scale(1.08);
+    transform: scale(1.1);
   }
 }
 
 .ken-burns {
-  animation: kenburns 18s ease-out forwards;
+  animation: kenburns 22s ease-out forwards;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 @keyframes brand-tab-bounce {

@@ -37,7 +37,7 @@ function StickyAction({ href, label, icon: Icon, ariaLabel }: StickyActionProps)
 export default function MobileStickyBar() {
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#0c1222]/95 pb-[env(safe-area-inset-bottom,0px)] backdrop-blur-md lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-[90] border-t border-white/10 bg-[#0c1222] pb-[env(safe-area-inset-bottom,0px)] lg:hidden"
       aria-label="Quick contact actions"
     >
       <div className="flex w-full">

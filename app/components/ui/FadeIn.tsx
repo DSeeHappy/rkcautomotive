@@ -2,7 +2,7 @@
 
 import { useRef, type ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
-import { gsap } from '@/lib/gsap';
+import { ensureScrollTrigger, gsap } from '@/lib/gsap';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 type FadeInProps = {
@@ -20,25 +20,40 @@ export default function FadeIn({ children, className, delay = 0, y = 36 }: FadeI
     () => {
       if (reduce || !ref.current) return;
 
-      gsap.fromTo(
-        ref.current,
-        { opacity: 0, y, willChange: 'transform, opacity' },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.75,
-          delay,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: ref.current,
-            start: 'top 90%',
-            once: true,
-          },
-          onComplete: () => {
-            if (ref.current) gsap.set(ref.current, { clearProps: 'willChange,opacity,transform' });
-          },
-        },
-      );
+      let cancelled = false;
+      const ctx = gsap.context(() => {});
+
+      void ensureScrollTrigger().then(() => {
+        if (cancelled || !ref.current) return;
+
+        ctx.add(() => {
+          gsap.fromTo(
+            ref.current,
+            { opacity: 0, y, willChange: 'transform, opacity' },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.75,
+              delay,
+              ease: 'power2.out',
+              immediateRender: false,
+              scrollTrigger: {
+                trigger: ref.current,
+                start: 'top 90%',
+                once: true,
+              },
+              onComplete: () => {
+                if (ref.current) gsap.set(ref.current, { clearProps: 'willChange,opacity,transform' });
+              },
+            },
+          );
+        });
+      });
+
+      return () => {
+        cancelled = true;
+        ctx.revert();
+      };
     },
     { scope: ref, dependencies: [reduce, delay, y] },
   );
@@ -69,29 +84,44 @@ export function Stagger({ children, className, delay = 0, stagger = 0.1 }: Stagg
     () => {
       if (reduce || !ref.current) return;
 
-      const items = ref.current.children;
-      if (!items.length) return;
+      let cancelled = false;
+      const ctx = gsap.context(() => {});
 
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 28, willChange: 'transform, opacity' },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger,
-          delay,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: ref.current,
-            start: 'top 92%',
-            once: true,
-          },
-          onComplete: () => {
-            gsap.set(items, { clearProps: 'willChange,opacity,transform' });
-          },
-        },
-      );
+      void ensureScrollTrigger().then(() => {
+        if (cancelled || !ref.current) return;
+
+        const items = ref.current.children;
+        if (!items.length) return;
+
+        ctx.add(() => {
+          gsap.fromTo(
+            items,
+            { opacity: 0, y: 28, willChange: 'transform, opacity' },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              stagger,
+              delay,
+              ease: 'power2.out',
+              immediateRender: false,
+              scrollTrigger: {
+                trigger: ref.current,
+                start: 'top 92%',
+                once: true,
+              },
+              onComplete: () => {
+                gsap.set(items, { clearProps: 'willChange,opacity,transform' });
+              },
+            },
+          );
+        });
+      });
+
+      return () => {
+        cancelled = true;
+        ctx.revert();
+      };
     },
     { scope: ref, dependencies: [reduce, delay, stagger] },
   );

@@ -13,8 +13,8 @@ import { useGsapReveal } from '@/lib/useGsapReveal';
 export default function Hero() {
   const reduce = usePrefersReducedMotion();
   const { sectionRef, bgRef, contentRef } = useGsapParallax<HTMLElement>(reduce, {
-    yPercent: 18,
-    fadeTo: 0.35,
+    yPercent: 12,
+    fadeTo: 0.55,
   });
   const headline = useGsapReveal<HTMLDivElement>({ delay: 0.35, y: 28, duration: 0.8 });
   const ctas = useGsapReveal<HTMLDivElement>({ delay: 0.22, y: 20, duration: 0.7 });
@@ -22,31 +22,30 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className="relative isolate min-h-[100svh] overflow-hidden bg-[#0c1222]">
-      <div ref={bgRef} className="absolute inset-0">
-        <div className="absolute inset-0 origin-[78%_56%] scale-[0.94] sm:origin-[74%_53%] sm:scale-[0.97] lg:origin-[70%_50%] lg:scale-[1.05]">
-          <Image
-            src={PHOTOS.heroMain}
-            alt="RKC Automotive green shop bay entrance in Englewood"
-            fill
-            priority
-            fetchPriority="high"
-            className={`object-cover object-[78%_56%] sm:object-[74%_53%] lg:object-[70%_50%] ${reduce ? '' : 'ken-burns'}`}
-            sizes={HERO_IMAGE_SIZES}
-          />
-        </div>
+      <div ref={bgRef} className="hero-media-layer absolute inset-0">
+        <Image
+          src={PHOTOS.heroMain}
+          alt="RKC Automotive green shop bay entrance in Englewood"
+          fill
+          priority
+          fetchPriority="high"
+          className={`object-cover object-[78%_56%] sm:object-[74%_53%] lg:object-[70%_50%] ${reduce ? '' : 'ken-burns'}`}
+          sizes={HERO_IMAGE_SIZES}
+        />
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(12, 18, 34, 0.45) 0%, rgba(12, 18, 34, 0.22) 38%, rgba(12, 18, 34, 0.68) 100%), linear-gradient(90deg, rgba(14, 133, 54, 0.18) 0%, transparent 55%, rgba(28, 61, 145, 0.1) 100%)',
+              'linear-gradient(180deg, rgba(12, 18, 34, 0.42) 0%, rgba(12, 18, 34, 0.2) 40%, rgba(12, 18, 34, 0.72) 100%)',
           }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c1222]/88 via-[#0c1222]/18 to-[#0c1222]/10"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1222]/72 via-[#0c1222]/12 to-transparent lg:from-[#0c1222]/60 lg:via-[#0c1222]/5 lg:to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c1222]/88 via-[#0c1222]/14 to-transparent"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1222]/68 via-[#0c1222]/08 to-transparent lg:from-[#0c1222]/55 lg:via-transparent lg:to-transparent"
           aria-hidden
         />
       </div>
@@ -85,7 +84,7 @@ export default function Hero() {
 
               <div
                 ref={alert}
-                className="mt-8 max-w-xl rounded-2xl border border-amber-400/30 bg-amber-500/10 p-5 backdrop-blur-sm"
+                className="mt-8 max-w-xl rounded-2xl border border-amber-400/30 bg-[rgba(12,18,34,0.82)] p-5"
               >
                 <div className="flex items-start gap-3">
                   <AlertTriangle className="mt-0.5 size-5 shrink-0 text-amber-300" aria-hidden />

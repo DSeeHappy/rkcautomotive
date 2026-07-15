@@ -14,6 +14,11 @@ type SplashScreenProps = {
  */
 export default function SplashScreen({ children }: SplashScreenProps) {
   useEffect(() => {
+    try {
+      sessionStorage.setItem('rkc-splash-seen', '1');
+    } catch {
+      /* private browsing / storage blocked */
+    }
     window.dispatchEvent(new Event(SPLASH_READY_EVENT));
   }, []);
 

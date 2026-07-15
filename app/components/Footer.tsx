@@ -10,7 +10,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-[#0c1222] text-white">
+    <footer className="relative z-0 overflow-hidden bg-[#0c1222] text-white">
       <div className="absolute inset-0 opacity-30" aria-hidden>
         <Image src={PHOTOS.interior} alt="" fill className="object-cover" sizes="100vw" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c1222] via-[#0c1222]/90 to-[#0c1222]/70" />
@@ -18,21 +18,21 @@ export default function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         {/* Brand */}
-        <div className="grid gap-8 border-b border-white/10 pb-12 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div className="space-y-4">
+        <div className="flex flex-col gap-6 border-b border-white/10 pb-12 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-lg space-y-4">
             <AnimatedLogoStatic variant="footer" onDarkBackground className="rounded-xl shadow-[0_8px_24px_-10px_rgba(0,0,0,0.45)]" />
-            <p className="max-w-lg text-base leading-relaxed text-white/60 sm:text-lg">
+            <p className="text-base leading-relaxed text-white/60 sm:text-lg">
               ASE-certified auto repair on W Evans Ave — honest diagnostics, quality parts, 30+ years serving Englewood &amp; Denver metro.
             </p>
           </div>
-          <PhoneLink className="btn-green shrink-0 self-start lg:self-end">
+          <PhoneLink className="btn-green w-fit shrink-0">
             <Phone className="size-5" aria-hidden />
             {BUSINESS.phone}
           </PhoneLink>
         </div>
 
         {/* Visit + Explore */}
-        <div className="mt-12 grid gap-10 border-b border-white/10 pb-12 sm:grid-cols-2 lg:gap-16">
+        <div className="mt-12 grid gap-10 border-b border-white/10 pb-12 sm:grid-cols-2 lg:gap-12">
           <div>
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Visit</p>
             <ul className="space-y-4 text-sm text-white/65">
@@ -55,10 +55,10 @@ export default function Footer() {
 
           <div>
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">Explore</p>
-            <ul className="grid gap-2 sm:grid-cols-2">
+            <ul className="grid grid-cols-2 content-start gap-x-6 gap-y-2">
               {FOOTER_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-white/65 transition-colors hover:text-white">
+                <li key={link.href} className="min-w-0">
+                  <Link href={link.href} className="text-sm leading-snug text-white/65 transition-colors hover:text-white">
                     {link.name}
                   </Link>
                 </li>

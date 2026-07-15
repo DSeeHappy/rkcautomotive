@@ -8,7 +8,7 @@ type BrandSectionProps = {
 
 export default function BrandSection({ homepage = false }: BrandSectionProps) {
   return (
-    <section id="brands" className="scroll-mt-28 bg-white">
+    <section id="brands" className="relative z-0 scroll-mt-28 bg-white">
       <BrandMarquee />
       <BrandTabs plainPanelTitles={homepage} />
     </section>

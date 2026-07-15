@@ -10,48 +10,43 @@ gsap.defaults({
 
 let scrollTriggerReady = false;
 let scrollTriggerModule: typeof import('gsap/ScrollTrigger').ScrollTrigger | null = null;
+let scrollTriggerPromise: Promise<typeof import('gsap/ScrollTrigger').ScrollTrigger> | null = null;
 
-/** Defer ScrollTrigger until after splash / first paint to cut main-thread work during intro. */
+/**
+ * Register ScrollTrigger before any scrub/reveal tweens run.
+ * Splash is disabled — activate immediately on the client so parallax
+ * configs never fall through as plain tweens (Chrome: navy seam + faded hero).
+ */
 export function ensureScrollTrigger(): Promise<typeof import('gsap/ScrollTrigger').ScrollTrigger> {
   if (scrollTriggerModule) return Promise.resolve(scrollTriggerModule);
+  if (scrollTriggerPromise) return scrollTriggerPromise;
+
   if (typeof window === 'undefined') {
-    return import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+    scrollTriggerPromise = import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
       scrollTriggerModule = ScrollTrigger;
       return ScrollTrigger;
     });
+    return scrollTriggerPromise;
   }
 
-  return new Promise((resolve) => {
-    const activate = () => {
-      if (scrollTriggerReady) return;
+  scrollTriggerPromise = import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+    if (!scrollTriggerReady) {
+      gsap.registerPlugin(ScrollTrigger);
       scrollTriggerReady = true;
-      void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
-        scrollTriggerModule = ScrollTrigger;
-        resolve(ScrollTrigger);
-      });
-    };
-
+    }
+    scrollTriggerModule = ScrollTrigger;
     try {
-      if (sessionStorage.getItem('rkc-splash-seen')) {
-        activate();
-        return;
-      }
+      sessionStorage.setItem('rkc-splash-seen', '1');
     } catch {
       /* private browsing / storage blocked */
     }
-
-    window.addEventListener('rkc-splash-ready', activate, { once: true });
-
-    if (typeof window.requestIdleCallback === 'function') {
-      window.requestIdleCallback(activate, { timeout: 6000 });
-    } else {
-      window.setTimeout(activate, 3000);
-    }
+    return ScrollTrigger;
   });
+
+  return scrollTriggerPromise;
 }
 
-/** Lazy proxy — defers ScrollTrigger import until ensureScrollTrigger resolves. */
+/** Lazy proxy — methods wait until ensureScrollTrigger resolves. */
 export const ScrollTrigger = new Proxy({} as typeof import('gsap/ScrollTrigger').ScrollTrigger, {
   get(_target, prop) {
     if (scrollTriggerModule) {
