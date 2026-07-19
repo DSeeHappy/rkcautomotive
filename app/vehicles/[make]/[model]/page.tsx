@@ -26,7 +26,14 @@ export async function generateMetadata({ params }: PageProps) {
   const vehicle = getModelsByBrand(make).find(
     (m) => slugifyModel(m.model) === model,
   );
-  if (!vehicle) return {};
+  if (!vehicle) {
+    return createPageMetadata({
+      title: 'Vehicle Not Found',
+      description: 'The vehicle page you requested was not found.',
+      path: '/vehicles-we-service',
+      robots: { index: false, follow: true },
+    });
+  }
 
   const path = buildModelHubPath(make, vehicle.model);
   const image = resolveModelImage(vehicle);

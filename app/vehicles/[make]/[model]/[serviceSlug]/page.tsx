@@ -20,7 +20,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps) {
   const { make, model, serviceSlug } = await params;
   const content = getModelDeepDiveContent(make, model, serviceSlug);
-  if (!content) return {};
+  if (!content) {
+    return createPageMetadata({
+      title: 'Service Guide Not Found',
+      description: 'The vehicle service guide you requested was not found.',
+      path: '/vehicles-we-service',
+      robots: { index: false, follow: true },
+    });
+  }
 
   const vehicle = getModelsByBrand(make).find(
     (m) => m.model.toLowerCase().replace(/[^a-z0-9]+/g, '-') === model,

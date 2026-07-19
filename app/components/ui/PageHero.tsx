@@ -33,7 +33,15 @@ export default function PageHero({
 
   return (
     <section className="relative z-0 overflow-hidden bg-[#0c1222] pt-20 min-h-[58svh] sm:min-h-[64svh] xl:pt-24">
-      <Image src={imageSrc} alt={heroAlt} fill priority className="object-cover" sizes={HERO_IMAGE_SIZES} />
+      <Image
+        src={imageSrc}
+        alt={heroAlt}
+        fill
+        priority
+        fetchPriority="high"
+        className="object-cover"
+        sizes={HERO_IMAGE_SIZES}
+      />
       <div className="photo-veil absolute inset-0" />
 
       <div className="relative mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-20 sm:px-6 sm:pb-20 lg:px-8">

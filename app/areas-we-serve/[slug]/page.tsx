@@ -24,7 +24,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const area = getServiceAreaBySlug(slug);
-  if (!area) return { title: 'Area Not Found' };
+  if (!area) {
+    return createPageMetadata({
+      title: 'Area Not Found',
+      description: 'The service area page you requested was not found.',
+      path: '/areas-we-serve',
+      robots: { index: false, follow: true },
+    });
+  }
 
   return createPageMetadata({
     title: `Auto Repair in ${area.name}, CO`,

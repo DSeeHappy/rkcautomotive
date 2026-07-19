@@ -10,7 +10,8 @@ export default function robots(): MetadataRoute.Robots {
       },
       { userAgent: 'Bingbot', allow: '/' },
     ],
-    sitemap: `${SITE_URL}/sitemap-index`,
+    // Conventional /sitemap.xml rewrites to the sharded index; keep /sitemap-index explicit for auditors.
+    sitemap: [`${SITE_URL}/sitemap.xml`, `${SITE_URL}/sitemap-index`],
     host: SITE_URL,
   };
 }

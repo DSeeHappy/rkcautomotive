@@ -17,13 +17,17 @@ const bebas = Bebas_Neue({
   weight: '400',
   variable: '--font-bebas',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 const manrope = Manrope({
   variable: '--font-manrope',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
 });
+
+const BING_SITE_VERIFICATION = 'F95A402B999BC67315CA610B07111B57';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -48,6 +52,12 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+  // Prefer Metadata API over a raw <head> tag so verification survives metadata merges.
+  verification: {
+    other: {
+      'msvalidate.01': BING_SITE_VERIFICATION,
+    },
+  },
   manifest: '/manifest.webmanifest',
   icons: {
     icon: '/icon.png',
@@ -55,8 +65,6 @@ export const metadata: Metadata = {
   openGraph: rootOpenGraphDefaults,
   twitter: rootTwitterDefaults,
 };
-
-const BING_SITE_VERIFICATION = 'F95A402B999BC67315CA610B07111B57';
 
 export const viewport: Viewport = {
   themeColor: '#0e8536',
@@ -69,7 +77,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <head>
-        <meta name="msvalidate.01" content={BING_SITE_VERIFICATION} />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>

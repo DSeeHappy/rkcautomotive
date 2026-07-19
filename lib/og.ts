@@ -34,6 +34,8 @@ function normalizePath(path: string): string {
 }
 
 export function absoluteUrl(path: string): string {
+  // Remote assets (vehicle Wikimedia/Unsplash) are already absolute — do not prefix SITE_URL.
+  if (/^https?:\/\//i.test(path)) return path;
   const normalized = normalizePath(path);
   return normalized === '/' ? SITE_URL : `${SITE_URL}${normalized}`;
 }
@@ -41,7 +43,7 @@ export function absoluteUrl(path: string): string {
 export function ogImage(path: string, alt: string) {
   return [
     {
-      url: path,
+      url: absoluteUrl(path),
       width: OG_IMAGE_WIDTH,
       height: OG_IMAGE_HEIGHT,
       alt,
@@ -114,17 +116,23 @@ export function createServicePageMetadata(
   });
 }
 
+const ROOT_TITLE = 'RKC Automotive — Engine & Auto Repair Experts in Englewood, CO';
+const ROOT_DESCRIPTION =
+  'ASE-certified engine and auto repair in Englewood, CO. Diagnostics, brakes, oil changes & more. Call (720) 749-3965. Hablamos Español.';
+
 export const rootOpenGraphDefaults: Metadata['openGraph'] = {
+  title: ROOT_TITLE,
+  description: ROOT_DESCRIPTION,
+  url: SITE_URL,
   siteName: SITE_NAME,
   locale: OG_LOCALE,
   type: 'website',
-  images: [DEFAULT_OG_IMAGE],
+  images: ogImage(DEFAULT_OG_IMAGE.url, DEFAULT_OG_IMAGE.alt),
 };
 
 export const rootTwitterDefaults: Metadata['twitter'] = {
   card: 'summary_large_image',
-  title: 'RKC Automotive — Engine & Auto Repair Experts in Englewood, CO',
-  description:
-    'ASE-certified engine and auto repair in Englewood, CO. Diagnostics, brakes, oil changes & more. Call (720) 749-3965. Hablamos Español.',
+  title: ROOT_TITLE,
+  description: ROOT_DESCRIPTION,
   images: [absoluteUrl(DEFAULT_OG_IMAGE.url)],
 };

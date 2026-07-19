@@ -26,7 +26,6 @@ export default function BrandLogo({ slug, color, size = 32, className = '', src 
         WebkitMaskPosition: 'center',
         maskPosition: 'center',
         // Alpha mode so black-on-transparent PNG/SVG silhouettes reveal brand color
-        WebkitMaskSourceType: 'alpha',
         maskMode: 'alpha',
       }}
       aria-hidden
