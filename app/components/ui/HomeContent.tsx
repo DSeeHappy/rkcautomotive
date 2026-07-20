@@ -18,7 +18,6 @@ import {
   LABOR_RATE,
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
-import GeoCiteFacts from './GeoCiteFacts';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 import { MotionAnchor } from './MotionLink';
 import { useLanguage } from '@/lib/language';
@@ -47,8 +46,6 @@ export default function HomeContent() {
           ))}
         </div>
       </section>
-
-      <GeoCiteFacts />
 
       {/* Animated stats — horizontal cinematic strip, not gray cards */}
       <section className="relative z-0 border-b border-[color:var(--line)] bg-white">

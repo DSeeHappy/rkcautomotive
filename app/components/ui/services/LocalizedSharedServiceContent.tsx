@@ -15,7 +15,6 @@ import {
   ServiceTechnicalSection,
 } from './ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
-import GeoCiteFacts from '@/app/components/ui/GeoCiteFacts';
 import { getServiceBreadcrumbs } from './servicesShared';
 import { useLanguage } from '@/lib/language';
 
@@ -129,8 +128,6 @@ export default function LocalizedSharedServiceContent({
           label: `${t.hero.callPrefix} ${BUSINESS.phone}`,
         }}
       />
-
-      <GeoCiteFacts />
 
       <ServiceRealityBand quote={t.reality.quote} body={t.reality.body} />
 

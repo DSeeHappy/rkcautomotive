@@ -15,7 +15,6 @@ import {
   ServiceTechnicalSection,
 } from '@/app/components/ui/services/ServiceSharedSections';
 import RelatedServices from '@/app/components/ui/RelatedServices';
-import GeoCiteFacts from '@/app/components/ui/GeoCiteFacts';
 import ModelSiblingServices, { type ModelServiceLink } from '@/app/components/ui/vehicles/ModelSiblingServices';
 import { BUSINESS } from '@/lib/constants';
 import { useLanguage } from '@/lib/language';
@@ -87,8 +86,6 @@ export default function ModelServiceDeepDiveContent({
         primaryCta={{ href: '/contact', label: content.primaryCtaLabel }}
         secondaryCta={{ href: BUSINESS.phoneHref, label: copy.deepDive.call(BUSINESS.phone) }}
       />
-
-      <GeoCiteFacts />
 
       <ServiceRealityBand
         quote={content.realityQuote}
