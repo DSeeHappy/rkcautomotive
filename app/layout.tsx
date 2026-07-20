@@ -68,9 +68,6 @@ export const metadata: Metadata = {
     },
   },
   manifest: '/manifest.webmanifest',
-  icons: {
-    icon: '/icon.png',
-  },
   openGraph: rootOpenGraphDefaults,
   twitter: rootTwitterDefaults,
 };

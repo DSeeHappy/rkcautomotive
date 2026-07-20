@@ -12,6 +12,7 @@
     "generate:knowledge-catalog": "node scripts/generate-knowledge-catalog.mjs",
     "ingest:oem-vehicle-data": "node scripts/ingest-oem-vehicle-data.mjs",
     "sync:vehicle-images": "node scripts/sync-vehicle-images.mjs",
+    "generate:favicons": "node scripts/generate-favicons.mjs",
     "verify:seo": "node scripts/verify-seo.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "spark:multi-engine-geo": "node scripts/spark-multi-engine-geo.mjs",
