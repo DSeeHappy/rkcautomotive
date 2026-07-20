@@ -168,6 +168,11 @@ const MODEL_RELIABILITY_SNAPSHOTS: ModelReliabilitySnapshot[] = [
   },
 ];
 
+/** All shop-observation reliability snapshots — not OEM-verified specs. */
+export function getAllModelReliabilitySnapshots(): readonly ModelReliabilitySnapshot[] {
+  return MODEL_RELIABILITY_SNAPSHOTS;
+}
+
 export function getModelReliabilitySnapshot(
   brandSlug: string,
   modelSlug: string,

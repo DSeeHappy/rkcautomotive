@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import JsonLd from '@/app/components/JsonLd';
 import ModelHubContent from '@/app/components/ui/vehicles/ModelHubContent';
+import ModelKnowledgeOverview from '@/app/components/ui/vehicles/ModelKnowledgeOverview';
+import { getModelKnowledgeOverview } from '@/lib/knowledge';
 import { buildModelHubPath, getAllModelHubParams } from '@/lib/modelHubRoutes';
 import { getModelReliabilitySnapshot } from '@/lib/modelReliabilityNotes';
 import { createPageMetadata } from '@/lib/og';
@@ -58,6 +60,7 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
   const siblingModels = getModelsByBrand(make).filter((m) => m.slug !== vehicle.slug);
   const modelSnapshot = getModelReliabilitySnapshot(make, model);
   const heroDescription = modelSnapshot?.intro ?? vehicle.description;
+  const knowledgeOverview = getModelKnowledgeOverview(make, model);
 
   return (
     <div>
@@ -93,6 +96,14 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
         modelSnapshot={modelSnapshot ?? null}
         heroDescription={heroDescription}
       />
+
+      {knowledgeOverview?.isPilot ? (
+        <ModelKnowledgeOverview
+          overview={knowledgeOverview}
+          brandName={vehicle.brandName}
+          modelName={vehicle.model}
+        />
+      ) : null}
     </div>
   );
 }

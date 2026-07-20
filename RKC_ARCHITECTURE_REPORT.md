@@ -320,3 +320,22 @@ Aggregate file: `scripts/.spark-logs/phase1-arch-audit-retry.json`.
 ---
 
 *End of Phase 1. Success criterion met: honest architecture report + roadmap. No product rewrite shipped.*
+
+---
+
+## 9. Phase 2 update (July 20, 2026)
+
+**Status:** Foundation shipped — see `PHASE2_NOTES.md` for full detail.
+
+| Deliverable | Location |
+|---|---|
+| Knowledge types + verified field helpers | `lib/knowledge/` |
+| Catalog migration (127 models, 19 makes) | `lib/knowledge/buildCatalog.ts` |
+| Postgres DDL mirror | `lib/knowledge/db-schema.ts` |
+| JSON snapshot export | `data/knowledge/catalog.snapshot.json` |
+| Pilot authority UI | `/vehicles/toyota/rav4`, `/vehicles/toyota/4runner` → `ModelKnowledgeOverview` |
+| Spark batch logs | `scripts/.spark-logs/phase2-foundation-*.json` |
+
+**Policy unchanged:** OEM specs remain empty until sourced; shop observations labeled separately from verified facts.
+
+**Next:** Phase 3 — expand authority layout and promote claims with citations.
