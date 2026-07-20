@@ -79,15 +79,18 @@ export function createPageMetadata({
   const url = absoluteUrl(path);
   const ogTitle = resolveDisplayTitle(title, titleAbsolute);
   const images = ogImage(image, imageAlt);
-  // Only set when HAS_LOCALE_URL_SEGMENTS — never hreflang two langs to one URL.
+  // Only when HAS_LOCALE_URL_SEGMENTS and paths differ — never hreflang two langs to one URL.
   const localePaths = getLocaleAlternateLanguagePaths(path);
-  const languages = localePaths
-    ? {
-        en: absoluteUrl(localePaths.en),
-        es: absoluteUrl(localePaths.es),
-        'x-default': absoluteUrl(localePaths['x-default']),
-      }
-    : undefined;
+  const enHref = localePaths ? absoluteUrl(localePaths.en) : undefined;
+  const esHref = localePaths ? absoluteUrl(localePaths.es) : undefined;
+  const languages =
+    localePaths && enHref && esHref && enHref !== esHref
+      ? {
+          en: enHref,
+          es: esHref,
+          'x-default': absoluteUrl(localePaths['x-default']),
+        }
+      : undefined;
 
   return {
     title: titleAbsolute ? { absolute: title } : title,

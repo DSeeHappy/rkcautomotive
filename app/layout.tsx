@@ -11,6 +11,7 @@ import SplashScreen from './components/ui/SplashScreen';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import JsonLd from './components/JsonLd';
 import { LanguageProvider } from '@/lib/language';
+import { CRAWLABLE_HTML_LANG } from '@/lib/i18n/localeSeo';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
 import { createOrganizationSchema, createWebSiteSchema } from '@/lib/seo';
 import DocumentLang from './components/ui/DocumentLang';
@@ -82,8 +83,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // Crawlable default is English. Client toggle updates documentElement.lang for a11y only — see lib/i18n/localeSeo.ts
+  // llms.txt rel=alternate is MIME-type discovery, not hreflang (do not add hreflang here).
   return (
-    <html lang="en">
+    <html lang={CRAWLABLE_HTML_LANG}>
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
       </head>

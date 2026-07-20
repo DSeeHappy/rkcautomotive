@@ -113,6 +113,12 @@ export function getRoutesForSitemapShard(shardId: SitemapShardId): string[] {
   }
 }
 
+/**
+ * English-only sitemap URLs today.
+ * Do NOT add MetadataRoute alternates / xhtml:link hreflang until
+ * `HAS_LOCALE_URL_SEGMENTS` is true and real `/es` (or host) pages exist —
+ * see lib/i18n/localeSeo.ts and Google localized-versions (sitemap method).
+ */
 export function buildSitemapEntries(paths: string[]): MetadataRoute.Sitemap {
   return paths.map((path) => ({
     url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,

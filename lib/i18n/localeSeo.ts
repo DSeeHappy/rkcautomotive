@@ -16,6 +16,16 @@
  * - When real `/es/...` (or subdomain/ccTLD) pages exist, add bidirectional hreflang + sitemap
  *   xhtml:link alternates, keep English canonicals for English URLs, and link users between versions.
  *
+ * localized-versions activation checklist (when HAS_LOCALE_URL_SEGMENTS becomes true):
+ * - Pick ONE primary signal method (HTML link tags via Metadata `alternates.languages`,
+ *   HTTP Link headers, or sitemap xhtml:link) — all three are equivalent; do not maintain three.
+ * - Each language URL must list itself and every other variant (reciprocal / return links).
+ * - Alternate hrefs must be absolute (https://…), not protocol-relative or path-only.
+ * - Use ISO 639-1 language (+ optional ISO 3166-1 Alpha-2 region); never region-only codes.
+ * - Include hreflang="x-default" for unmatched languages (language selector or English fallback).
+ * - Do not combine hreflang with unrelated link attributes (e.g. media) on the same <link>.
+ * - Sitemap: every <url> gets identical child xhtml:link set including self.
+ *
  * Local shop default: keep the toggle for bilingual visitors; English remains the crawlable default.
  * Optional later: a few high-value `/es` landings (home, contact, key services) — not sitewide routing.
  */
@@ -57,6 +67,11 @@ export function getLocaleAlternateLanguagePaths(
         ? englishPath
         : `/${englishPath}`;
   const es = en === '/' ? '/es' : `/es${en}`;
+
+  // Defense: never claim two languages for one URL (Google common mistake / invalid cluster).
+  if (en === es) {
+    return undefined;
+  }
 
   return {
     en,
