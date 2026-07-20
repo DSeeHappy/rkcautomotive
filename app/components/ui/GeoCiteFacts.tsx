@@ -7,7 +7,14 @@ import { geoCiteCopy } from '@/lib/geoCiteCopy';
  * Answer-first, verifiable shop facts for Bing GEO / AI citations.
  * data-snippet marks text Bing may cite; visible to users (no cloaking).
  */
-export default function GeoCiteFacts({ className = '' }: { className?: string }) {
+export default function GeoCiteFacts({
+  className = '',
+  areaOneLiner,
+}: {
+  className?: string;
+  /** City-specific cite line (areas-we-serve pages) — data-snippet for Bing GEO. */
+  areaOneLiner?: string;
+}) {
   const { lang } = useLanguage();
   const c = geoCiteCopy(lang);
 
@@ -20,7 +27,15 @@ export default function GeoCiteFacts({ className = '' }: { className?: string })
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
           {lang === 'es' ? 'Hechos verificables' : 'Verifiable facts'}
         </p>
-        <p data-snippet className="mt-3 max-w-3xl text-lg font-medium text-[#0c1222] sm:text-xl">
+        {areaOneLiner ? (
+          <p data-snippet className="mt-3 max-w-3xl text-lg font-medium text-[#0c1222] sm:text-xl">
+            {areaOneLiner}
+          </p>
+        ) : null}
+        <p
+          data-snippet
+          className={`max-w-3xl text-lg font-medium text-[#0c1222] sm:text-xl ${areaOneLiner ? 'mt-4' : 'mt-3'}`}
+        >
           {c.shopOneLiner}
         </p>
         <ul className="mt-6 grid gap-3 text-sm text-[#0c1222]/80 sm:grid-cols-2 sm:text-base">

@@ -102,10 +102,10 @@ function sparkChat(model, user, max_tokens = 350) {
   }
 }
 
-/** Prefer smart (fast/short) then research. */
+/** Prefer research (Nemotron 1M); failover smart if reasoning dump or reset. */
 function spark(user, label, max_tokens = 350) {
   let lastErr;
-  for (const model of [DS_SMART, DS_RESEARCH]) {
+  for (const model of [DS_RESEARCH, DS_SMART]) {
     for (let attempt = 1; attempt <= 2; attempt++) {
       try {
         const out = sparkChat(model, user, max_tokens);

@@ -10,6 +10,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { collectSitemapRoutes } from './collect-sitemap-routes.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -31,46 +32,7 @@ function parseArgs(argv) {
 }
 
 function readSeoRoutes() {
-  const seoPath = path.join(root, 'lib/seo.ts');
-  const content = fs.readFileSync(seoPath, 'utf8');
-  if (!content.includes('getAllSiteRoutes')) {
-    throw new Error('lib/seo.ts missing getAllSiteRoutes()');
-  }
-
-  const routes = new Set(['/']);
-
-  const coreMatch = content.match(/const CORE_ROUTES = \[([\s\S]*?)\] as const/);
-  if (coreMatch) {
-    for (const m of coreMatch[1].matchAll(/'([^']+)'/g)) routes.add(m[1]);
-  }
-
-  for (const m of content.matchAll(/SERVICES\.map\(\(s\) => s\.href\)/g)) {
-    void m;
-  }
-  const servicesFile = path.join(root, 'lib/constants.ts');
-  const constants = fs.readFileSync(servicesFile, 'utf8');
-  const servicesBlock = constants.match(/export const SERVICES = \[([\s\S]*?)\] as const/);
-  if (servicesBlock) {
-    for (const m of servicesBlock[1].matchAll(/href:\s*'([^']+)'/g)) routes.add(m[1]);
-  }
-
-  const areasFile = path.join(root, 'lib/serviceAreas.ts');
-  const areas = fs.readFileSync(areasFile, 'utf8');
-  for (const m of areas.matchAll(/href:\s*'(\/areas-we-serve\/[^']+)'/g)) routes.add(m[1]);
-
-  const hubFile = path.join(root, 'lib/modelHubRoutes.ts');
-  if (fs.existsSync(hubFile)) {
-    const hub = fs.readFileSync(hubFile, 'utf8');
-    for (const m of hub.matchAll(/['"`](\/vehicles\/[^'"`]+)['"`]/g)) routes.add(m[1]);
-  }
-
-  const diveFile = path.join(root, 'lib/modelDeepDiveRoutes.ts');
-  if (fs.existsSync(diveFile)) {
-    const dive = fs.readFileSync(diveFile, 'utf8');
-    for (const m of dive.matchAll(/['"`](\/vehicles\/[^'"`]+)['"`]/g)) routes.add(m[1]);
-  }
-
-  return [...routes].map((route) => (route === '/' ? SITE_URL : `${SITE_URL}${route}`));
+  return collectSitemapRoutes();
 }
 
 async function submitBatch(urlList) {
@@ -93,8 +55,9 @@ async function main() {
 
   let urls = cliUrls;
   if (flags.has('sitemap')) {
-    urls = readSeoRoutes();
-    console.log(`Collected ${urls.length} URLs from sitemap routes`);
+    const routes = readSeoRoutes();
+    urls = routes.map((route) => (route === '/' ? SITE_URL : `${SITE_URL}${route}`));
+    console.log(`Collected ${urls.length} URLs from getAllSiteRoutes()`);
   } else if (urls.length === 0) {
     urls = [SITE_URL];
   }

@@ -15,6 +15,7 @@ import { CRAWLABLE_HTML_LANG } from '@/lib/i18n/localeSeo';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
 import { createOrganizationSchema, createWebSiteSchema } from '@/lib/seo';
 import DocumentLang from './components/ui/DocumentLang';
+import GeoCiteFactsSite from './components/ui/GeoCiteFactsSite';
 import SkipToContent from './components/ui/SkipToContent';
 
 const bebas = Bebas_Neue({
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               >
                 {children}
               </main>
+              <GeoCiteFactsSite />
               <Footer />
               <MobileStickyBar />
               <FloatingCallButton />

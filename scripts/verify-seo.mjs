@@ -305,6 +305,10 @@ function checkDeadMetaKeywords() {
   if (!read('lib/seo.ts').includes('createShopPersonSchemas')) {
     errors.push('lib/seo.ts missing createShopPersonSchemas() E-E-A-T Person markup');
   }
+  const layout = read('app/layout.tsx');
+  if (!layout.includes('GeoCiteFactsSite')) {
+    errors.push('app/layout.tsx must render GeoCiteFactsSite for sitewide Bing GEO cite facts');
+  }
   if (/changeFrequency|priority:/.test(read('lib/seo.ts').match(/buildSitemapEntries[\s\S]*?\n\}/)?.[0] || '')) {
     warnings.push('buildSitemapEntries still emits priority/changefreq (Google ignores both)');
   }
