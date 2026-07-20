@@ -109,20 +109,29 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
 
                 <div className="relative z-10 p-6 sm:p-10">
                   <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
-                        {brand.category === 'domestic' ? brandsCopy.domestic : brandsCopy.import} ·{' '}
-                        {brandsCopy.servicedAt}
-                      </p>
-                      {plainPanelTitles ? (
-                        <p className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                          {brandName} {brandsCopy.diagnostics}
+                    <div className="flex min-w-0 items-start gap-4">
+                      <BrandLogo
+                        slug={brand.slug}
+                        color="#ffffff"
+                        size={48}
+                        src={brand.logoPath}
+                        className="mt-1 shrink-0 sm:!size-14"
+                      />
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+                          {brand.category === 'domestic' ? brandsCopy.domestic : brandsCopy.import} ·{' '}
+                          {brandsCopy.servicedAt}
                         </p>
-                      ) : (
-                        <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                          {brandName} {brandsCopy.diagnostics}
-                        </h3>
-                      )}
+                        {plainPanelTitles ? (
+                          <p className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
+                            {brandName} {brandsCopy.diagnostics}
+                          </p>
+                        ) : (
+                          <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
+                            {brandName} {brandsCopy.diagnostics}
+                          </h3>
+                        )}
+                      </div>
                     </div>
                     <Link
                       href="/vehicles-we-service#brands"

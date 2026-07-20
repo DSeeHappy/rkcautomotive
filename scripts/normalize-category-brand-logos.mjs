@@ -33,12 +33,29 @@ function toMaskSvg(raw, title) {
   return `<svg role="img" viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><title>${title}</title>${inner}</svg>\n`;
 }
 
+/** Crop combined emblem+wordmark Lexus SVG to the oval L only (wordmark is illegible as a CSS mask). */
+function lexusEmblemMask(raw) {
+  const cleaned = raw
+    .replace(/<\?xml[^>]*>/g, '')
+    .replace(/style="fill:#000;fill-rule:evenodd"/g, 'fill="#000000" fill-rule="evenodd"');
+  const pathMatch = cleaned.match(/<path[^>]*d="([^"]+)"[^>]*\/?>/);
+  if (!pathMatch) throw new Error('Lexus source missing path');
+  const parts = pathMatch[1].split(/(?=M\s)/);
+  const emblem = [];
+  for (const part of parts) {
+    const x = parseFloat((part.match(/M\s*([\d.]+)/) || [])[1] || '0');
+    if (x > 200) break;
+    emblem.push(part.trim());
+  }
+  const d = emblem.join(' ').trim();
+  return `<svg role="img" viewBox="12 14 142 106" xmlns="http://www.w3.org/2000/svg"><title>Lexus</title><path fill="#000000" fill-rule="evenodd" d="${d}"/></svg>\n`;
+}
+
 const jobs = [
   { src: 'gmc-icon.svg', dest: 'gmc.svg', title: 'GMC' },
   { src: 'buick-icon.svg', dest: 'buick.svg', title: 'Buick' },
   { src: 'lincoln-icon.svg', dest: 'lincoln.svg', title: 'Lincoln' },
   { src: 'dodge-icon.svg', dest: 'dodge.svg', title: 'Dodge' },
-  { src: 'lexus-icon.svg', dest: 'lexus.svg', title: 'Lexus' },
 ];
 
 for (const job of jobs) {
@@ -46,5 +63,9 @@ for (const job of jobs) {
   fs.writeFileSync(path.join(out, job.dest), toMaskSvg(raw, job.title));
   console.log('wrote', job.dest);
 }
+
+const lexusRaw = fs.readFileSync(path.join(tmp, 'lexus.svg'), 'utf8');
+fs.writeFileSync(path.join(out, 'lexus.svg'), lexusEmblemMask(lexusRaw));
+console.log('wrote lexus.svg (oval emblem)');
 
 // Prefer WorldVectorLogo Buick — Wikimedia trace includes a solid black square that breaks CSS masks.
