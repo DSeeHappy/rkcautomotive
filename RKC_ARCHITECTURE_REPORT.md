@@ -337,6 +337,8 @@ Aggregate file: `scripts/.spark-logs/phase1-arch-audit-retry.json`.
 | Phase 3 section builder | `lib/knowledge/phase3Sections.ts` |
 | Spark batch logs | `scripts/.spark-logs/phase2-foundation-*.json`, `phase2-burst-*.json`, `phase2-expand-*.json` |
 
-**Policy unchanged:** OEM specs remain empty until sourced; shop observations labeled separately from verified facts.
+**Policy:** OEM specs populate from verified kimi data pack (`data/knowledge/oem-pack.json`) when a catalog model matches; gaps stay `"Unable to verify with available data."` Shop observations labeled separately.
 
-**Next:** Phase 3 — expand pilots to more makes; populate Engineering/Comparison only with cited OEM rows.
+**OEM ingest (2026-07-20):** `npm run ingest:oem-vehicle-data` — 75 pack models, **74/127** site hubs verified. Coverage: `data/knowledge/oem-coverage.json`.
+
+**Next:** Split generations/years/trims when pack adds trim-level rows; expand pack to remaining 53 catalog models.

@@ -141,9 +141,29 @@ Decisions pipe: `scripts/.spark-logs/PHASE2_SPARK_DECISIONS.md`
 - Engineering, Enthusiast, Comparison show `"Unable to verify with available data."` until sourced
 - Brand-level shop observations in catalog (`brandReliabilityNotes`) — not copied into model Ownership
 - Done: Honda Civic/Accord/CR-V/Pilot, Ford F-150/Explorer/Escape/Mustang, Chevy Silverado/Tahoe/Equinox/Malibu, Jeep Wrangler/Grand Cherokee/Gladiator richer Ownership via Spark-structured notes
+- **OEM pack ingest (2026-07-20):** `npm run ingest:oem-vehicle-data` → `data/knowledge/oem-pack.json` (75 models from kimi pack). **74/127** catalog hubs now show verified OEM specs + Engineering/Enthusiast/Comparison; **53** remain unverified (not in pack). See `data/knowledge/oem-coverage.json`.
 - Next: remaining stub models; generations with sourced OEM data
 - Split generations with sourced OEM data
 - Populate spec fields only when `review_status = verified` and confidence ≥ medium
+
+---
+
+## OEM data pack ingest (2026-07-20)
+
+| Item | Detail |
+|---|---|
+| **Source** | `C:\Users\BS\Documents\kimi\workspace\rkc-vehicle-data\` (19 make `.md` files, EPA pull scripts) |
+| **Pipeline** | `scripts/lib/parseOemMarkdown.mjs` (deterministic) → `scripts/ingest-oem-vehicle-data.mjs` (Spark validate, fail-closed) |
+| **Output** | `data/knowledge/oem-pack.json`, `data/knowledge/oem-coverage.json` |
+| **Runtime** | `lib/knowledge/oemPack.ts` + `queries.getModelKnowledgeOverview()` |
+| **UI** | `ModelKnowledgeOverview` — OEM spec grid + Phase 3 Engineering/Enthusiast/Comparison when pack data exists |
+| **EPA refresh** | `scripts/epa/epa_pull*.py` copied from pack for future MPG refresh |
+| **Coverage** | 75 pack models → **74 verified** on site hubs; 53 catalog models still `"Unable to verify"`; 1 pack-only (`ford-fusion`, no site hub) |
+| **Spark proof** | ingest: smart + research `routingVerified`; `spark-telemetry-live.mjs` PASS |
+
+**Slug mapping:** `mercedes-benz` → `mercedes`, `Silverado 1500` → `silverado`, `Ram 1500/2500` → `1500`/`2500`, `Optima/K5` → `k5`, `Golf/GTI` → `golf`.
+
+**Not invented:** Parser stores verbatim pack text; inline `"Not verified — needs OEM source"` → `confidence: medium` with note; empty-only fields → `confidence: none` (hidden).
 
 ---
 

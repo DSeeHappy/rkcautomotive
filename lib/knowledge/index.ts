@@ -28,8 +28,20 @@ export {
   unverifiedField,
 } from '@/lib/knowledge/verified';
 
-export { buildPhase3Sections } from '@/lib/knowledge/phase3Sections';
+export {
+  buildPhase3Sections,
+} from '@/lib/knowledge/phase3Sections';
 export type { Phase3SectionId } from '@/lib/knowledge/phase3Sections';
+
+export {
+  buildOemSpecOverviewItems,
+  buildVehicleSpecsFromOem,
+  getOemCoverageStats,
+  getOemModelRecord,
+  getOemPackVersion,
+  hasOemModelData,
+} from '@/lib/knowledge/oemPack';
+export type { OemFieldRecord, OemModelRecord } from '@/lib/knowledge/oemPack';
 
 export {
   getClaimsForModel,

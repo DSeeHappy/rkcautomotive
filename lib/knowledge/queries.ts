@@ -5,6 +5,15 @@ import {
   UNABLE_TO_VERIFY,
 } from '@/lib/knowledge/constants';
 import { KNOWLEDGE_CATALOG, KNOWLEDGE_OWNERSHIP_MODEL_IDS } from '@/lib/knowledge/buildCatalog';
+import {
+  buildOemPhase3Item,
+  buildOemSpecOverviewItems,
+  buildVehicleSpecsFromOem,
+  countVerifiedSpecFields,
+  getOemSources,
+  hasOemModelData,
+  mergeSpecCategoriesWithOem,
+} from '@/lib/knowledge/oemPack';
 import { buildPhase3Sections } from '@/lib/knowledge/phase3Sections';
 import { createEmptyVehicleSpecs, SPEC_CATEGORY_ORDER } from '@/lib/knowledge/specs';
 import { isDisplayableConfidence } from '@/lib/knowledge/verified';
@@ -129,17 +138,56 @@ function buildShopObservationsSection(modelId: string): ModelOverviewSection | n
   };
 }
 
-function buildSpecsOverviewSection(_model: ModelRecord): ModelOverviewSection {
-  // Spark p2-schema-design: never populate Specs without verified sources.
+function buildSpecsOverviewSection(model: ModelRecord): ModelOverviewSection {
+  const oemItems = buildOemSpecOverviewItems(model.id);
+  const oemSources = getOemSources(model.id);
+
+  if (oemItems.length === 0) {
+    return {
+      id: 'oem-specs',
+      title: 'OEM specifications',
+      items: [],
+      reviewStatus: 'unverified',
+      confidence: 'none',
+      sources: [],
+      emptyMessage: UNABLE_TO_VERIFY,
+    };
+  }
+
   return {
     id: 'oem-specs',
     title: 'OEM specifications',
-    items: [],
-    reviewStatus: 'unverified',
-    confidence: 'none',
-    sources: [],
-    emptyMessage: UNABLE_TO_VERIFY,
+    items: oemItems,
+    reviewStatus: 'verified',
+    confidence: 'high',
+    sources: oemSources,
   };
+}
+
+function enrichPhase3WithOem(
+  sections: ModelOverviewSection[],
+  modelId: string,
+): ModelOverviewSection[] {
+  const oemSources = getOemSources(modelId);
+  const fieldMap = {
+    engineering: buildOemPhase3Item(modelId, 'engineering'),
+    enthusiast: buildOemPhase3Item(modelId, 'enthusiast'),
+    comparison: buildOemPhase3Item(modelId, 'comparison'),
+  } as const;
+
+  return sections.map((section) => {
+    const oemItem = fieldMap[section.id as keyof typeof fieldMap];
+    if (!oemItem) return section;
+
+    return {
+      ...section,
+      items: [oemItem],
+      reviewStatus: 'verified',
+      confidence: oemItem.confidence,
+      sources: oemSources,
+      emptyMessage: undefined,
+    };
+  });
 }
 
 /** Authority overview for model hub pages — verified facts only, honest gaps elsewhere. */
@@ -159,12 +207,18 @@ export function getModelKnowledgeOverview(
   if (shopSection) sections.push(shopSection);
   sections.push(buildSpecsOverviewSection(model));
 
-  const phase3Sections = isPilot ? buildPhase3Sections(model, modelClaims) : [];
+  const basePhase3 = isPilot ? buildPhase3Sections(model, modelClaims) : [];
+  const phase3Sections = hasOemModelData(model.id)
+    ? enrichPhase3WithOem(basePhase3, model.id)
+    : basePhase3;
 
-  // Phase 2: no verified OEM spec rows — collapse scaffold instead of 12 empty cards.
   const empty = createEmptyVehicleSpecs();
-  const specCategories = SPEC_CATEGORY_ORDER.map((id) => empty[id]);
-  const hasVerifiedSpecs = false;
+  const baseCategories = SPEC_CATEGORY_ORDER.map((id) => empty[id]);
+  const oemSpecs = buildVehicleSpecsFromOem(model.id);
+  const specCategories = oemSpecs
+    ? mergeSpecCategoriesWithOem(baseCategories, model.id)
+    : baseCategories;
+  const hasVerifiedSpecs = oemSpecs ? countVerifiedSpecFields(oemSpecs) > 0 : false;
 
   return {
     modelId: model.id,

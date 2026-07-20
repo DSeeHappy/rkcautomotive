@@ -6,15 +6,18 @@ const EN = {
   eyebrow: 'Vehicle intelligence',
   heading: (brand: string, model: string) => `${brand} ${model} — verified overview`,
   intro:
-    'Facts below come from RKC’s curated catalog and sourced image metadata. OEM horsepower, torque, and trim specs are not shown until verified — never fabricated.',
+    'Facts below combine RKC’s curated catalog with OEM-verified specifications sourced from manufacturer materials, fueleconomy.gov, and NHTSA records (July 2026). Empty fields stay unavailable — never fabricated.',
   pilotNote:
-    'Knowledge layer active — Phase 3 authority sections wired. Ownership populates from modelReliabilityNotes and brandFailureProfiles commonModels when available.',
+    'Knowledge layer active — OEM specs populate from verified data pack when available. Ownership uses modelReliabilityNotes and brandFailureProfiles.',
   phase3Heading: 'Authority sections',
   phase3Intro:
-    'Overview and Ownership show verified catalog identity and RKC shop observations. Engineering, Enthusiast, and Comparison stay empty until sourced — never fabricated.',
+    'Overview and Ownership show catalog identity and RKC shop observations. Engineering, Enthusiast, and Comparison populate from verified OEM pack data when available.',
   specScaffoldTitle: 'Specification categories (awaiting verified data)',
+  specScaffoldTitleVerified: 'OEM specification categories',
   specScaffoldIntro:
     'These categories are scaffolded for future OEM-sourced rows. Empty fields remain unavailable rather than invented.',
+  specScaffoldIntroVerified:
+    'Verified OEM data from the July 2026 research pack — generation-level specs with cited sources. Inline gaps marked in source remain honest.',
   specScaffoldCollapsed:
     'OEM horsepower, torque, MPG, and dimensions are not shown until verified against a licensed source — we never fabricate spec numbers.',
   unverifiedCategory: UNABLE_TO_VERIFY,
@@ -30,15 +33,18 @@ const ES = {
   eyebrow: 'Inteligencia vehicular',
   heading: (brand: string, model: string) => `${brand} ${model} — resumen verificado`,
   intro:
-    'Los datos siguientes provienen del catálogo curado de RKC y metadatos de imágenes con fuente. No mostramos caballos de fuerza, torque ni especificaciones por trim OEM hasta verificarlas — nunca inventadas.',
+    'Los datos siguientes combinan el catálogo curado de RKC con especificaciones OEM verificadas de materiales del fabricante, fueleconomy.gov y registros NHTSA (julio 2026). Los campos vacíos permanecen no disponibles — nunca inventados.',
   pilotNote:
-    'Capa de conocimiento activa — secciones de autoridad Fase 3 conectadas. Propiedad se llena con notas del taller (modelReliabilityNotes y brandFailureProfiles) cuando existen.',
+    'Capa de conocimiento activa — especificaciones OEM del paquete verificado cuando existen. Propiedad usa modelReliabilityNotes y brandFailureProfiles.',
   phase3Heading: 'Secciones de autoridad',
   phase3Intro:
-    'Resumen y Propiedad muestran identidad del catálogo y observaciones del taller RKC. Ingeniería, Entusiasta y Comparación permanecen vacías hasta tener fuentes — nunca inventadas.',
+    'Resumen y Propiedad muestran identidad del catálogo y observaciones del taller. Ingeniería, Entusiasta y Comparación se llenan con datos OEM verificados cuando existen.',
   specScaffoldTitle: 'Categorías de especificación (pendientes de datos verificados)',
+  specScaffoldTitleVerified: 'Categorías de especificación OEM',
   specScaffoldIntro:
     'Estas categorías están preparadas para filas OEM con fuente. Los campos vacíos permanecen no disponibles en lugar de inventarse.',
+  specScaffoldIntroVerified:
+    'Datos OEM verificados del paquete de investigación de julio 2026 — especificaciones por generación con fuentes citadas.',
   specScaffoldCollapsed:
     'No mostramos caballos de fuerza, torque, MPG ni dimensiones OEM hasta verificarlos con una fuente con licencia — nunca inventamos cifras.',
   unverifiedCategory: 'No se puede verificar con los datos disponibles.',

@@ -179,20 +179,41 @@ export default function ModelKnowledgeOverview({
           ) : overview.hasVerifiedSpecs ? (
             <div className="rounded-2xl border border-[color:var(--line)] bg-[color:var(--accent-gray-light)] p-6 sm:p-8">
               <h3 className="font-display text-2xl tracking-wide text-foreground">
-                {copy.specScaffoldTitle}
+                {copy.specScaffoldTitleVerified}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{copy.specScaffoldIntro}</p>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {overview.specCategories.map((category) => (
-                  <li
-                    key={category.category}
-                    className="rounded-xl border border-[color:var(--line)] bg-white px-4 py-3 text-sm text-ink-muted"
-                  >
-                    <span className="font-semibold text-foreground">{category.label}</span>
-                    <span className="mt-1 block text-xs">{copy.unverifiedCategory}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                {copy.specScaffoldIntroVerified}
+              </p>
+              <div className="mt-6 space-y-6">
+                {overview.specCategories.map((category) => {
+                  const populated = category.fields.filter(
+                    (field) => field.verified.value !== null,
+                  );
+                  if (populated.length === 0) return null;
+                  return (
+                    <div
+                      key={category.category}
+                      className="rounded-xl border border-[color:var(--line)] bg-white p-5"
+                    >
+                      <h4 className="font-display text-lg tracking-wide text-foreground">
+                        {category.label}
+                      </h4>
+                      <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+                        {populated.map((field) => (
+                          <div key={field.key}>
+                            <dt className="text-xs font-bold uppercase tracking-[0.14em] text-primary-green">
+                              {field.label}
+                            </dt>
+                            <dd className="mt-1 text-sm leading-relaxed text-ink-muted">
+                              {field.verified.displayValue}
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           ) : null}
         </div>
