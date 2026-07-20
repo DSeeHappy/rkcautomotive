@@ -13,9 +13,11 @@ const SOURCE = path.join(ROOT, "public/images/rkc-favicon-source.png");
 const BRAND_GREEN = "#0e8536";
 
 async function composeIcon(size) {
-  const borderPx = Math.max(2, Math.round(size * 0.015));
-  const logoScale = 0.78;
-  const inner = size - borderPx * 2;
+  // Thicker ring + more padding so the mark stays visible at 16–32px tab sizes
+  // on both dark and light browser chrome.
+  const ringPx = Math.max(3, Math.round(size * 0.075));
+  const logoScale = 0.64;
+  const inner = size - ringPx * 2;
   const logoSize = Math.round(inner * logoScale);
   const offset = Math.round((size - logoSize) / 2);
 
@@ -27,7 +29,7 @@ async function composeIcon(size) {
   const frame = Buffer.from(
     `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
       <rect width="${size}" height="${size}" fill="#000000"/>
-      <rect x="${borderPx / 2}" y="${borderPx / 2}" width="${size - borderPx}" height="${size - borderPx}" fill="none" stroke="${BRAND_GREEN}" stroke-width="${borderPx}"/>
+      <rect x="${ringPx / 2}" y="${ringPx / 2}" width="${size - ringPx}" height="${size - ringPx}" fill="none" stroke="${BRAND_GREEN}" stroke-width="${ringPx}"/>
     </svg>`,
   );
 
@@ -41,7 +43,7 @@ async function writePng(outputPath, size) {
 }
 
 async function writeIco(outputPath) {
-  const sizes = [16, 32, 48];
+  const sizes = [16, 24, 32, 48, 64];
   const pngBuffers = await Promise.all(sizes.map((size) => composeIcon(size)));
   const ico = await toIco(pngBuffers);
   await fs.writeFile(outputPath, ico);
