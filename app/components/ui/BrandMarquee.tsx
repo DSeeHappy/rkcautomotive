@@ -21,6 +21,7 @@ export default function BrandMarquee() {
               slug={brand.slug}
               color={brand.color}
               size={28}
+              src={brand.logoPath}
               className="transition group-hover:scale-110 sm:!size-8"
             />
             <span className="font-display text-2xl tracking-wide text-foreground/70 transition group-hover:text-foreground sm:text-3xl">

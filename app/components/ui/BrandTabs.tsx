@@ -54,6 +54,7 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
                   slug={brand.slug}
                   color={brand.color}
                   size={20}
+                  src={brand.logoPath}
                   className="brand-tab-logo group-data-selected:!bg-white"
                 />
                 <span className="relative z-[1]">{brand.name}</span>
@@ -101,6 +102,7 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
                     slug={brand.slug}
                     color="#ffffff"
                     size={320}
+                    src={brand.logoPath}
                     className="!size-[min(52vw,18rem)] sm:!size-[min(40vw,22rem)] lg:!size-[24rem]"
                   />
                 </div>

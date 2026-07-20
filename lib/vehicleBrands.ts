@@ -292,7 +292,7 @@ export const VEHICLE_BRANDS: VehicleBrand[] = [
   {
     name: 'Lexus',
     slug: 'lexus',
-    logoPath: '/images/brands/lexus.png',
+    logoPath: '/images/brands/lexus.svg',
     color: '#1A1A1A',
     category: 'import',
     commonModels: [
@@ -435,10 +435,10 @@ const CATEGORY_BRAND_LOGOS: CategoryBrandLogo[] = [
   { name: 'Ram', slug: 'ram', color: '#880033', featured: true },
   { name: 'Jeep', slug: 'jeep', color: '#1B3B34', featured: true },
   { name: 'Chrysler', slug: 'chrysler', color: '#1A1A1A', featured: false },
-  { name: 'Dodge', slug: 'dodge', color: '#BA0C2F', featured: false, logoPath: '/images/brands/dodge.png' },
-  { name: 'Lincoln', slug: 'lincoln', color: '#1C1C1C', featured: false, logoPath: '/images/brands/lincoln.png' },
+  { name: 'Dodge', slug: 'dodge', color: '#BA0C2F', featured: false, logoPath: '/images/brands/dodge.svg' },
+  { name: 'Lincoln', slug: 'lincoln', color: '#1C1C1C', featured: false, logoPath: '/images/brands/lincoln.svg' },
   { name: 'Cadillac', slug: 'cadillac', color: '#A39161', featured: false },
-  { name: 'Buick', slug: 'buick', color: '#C8102E', featured: false, logoPath: '/images/brands/buick.png' },
+  { name: 'Buick', slug: 'buick', color: '#C8102E', featured: false, logoPath: '/images/brands/buick.svg' },
   { name: 'Tesla', slug: 'tesla', color: '#CC0000', featured: true },
   // Import / Asian
   { name: 'Toyota', slug: 'toyota', color: '#EB0A1E', featured: true },
@@ -450,7 +450,7 @@ const CATEGORY_BRAND_LOGOS: CategoryBrandLogo[] = [
   { name: 'Kia', slug: 'kia', color: '#BB162C', featured: true },
   { name: 'Mitsubishi', slug: 'mitsubishi', color: '#E60012', featured: false },
   { name: 'Acura', slug: 'acura', color: '#000000', featured: true },
-  { name: 'Lexus', slug: 'lexus', color: '#1A1A1A', featured: true, logoPath: '/images/brands/lexus.png' },
+  { name: 'Lexus', slug: 'lexus', color: '#1A1A1A', featured: true, logoPath: '/images/brands/lexus.svg' },
   // European
   { name: 'BMW', slug: 'bmw', color: '#0066B1', featured: true },
   { name: 'Mercedes-Benz', slug: 'mercedes', color: '#242424', featured: true },

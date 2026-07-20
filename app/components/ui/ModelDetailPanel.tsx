@@ -164,7 +164,13 @@ export default function ModelDetailPanel({ model, brand, open, onClose }: ModelD
 
                     <div className="flex-1 p-6 sm:p-8">
                       <div className="flex items-start gap-4">
-                        <BrandLogo slug={brand.slug} color={brand.color} size={40} className="shrink-0" />
+                        <BrandLogo
+                          slug={brand.slug}
+                          color={brand.color}
+                          size={40}
+                          src={brand.logoPath}
+                          className="shrink-0"
+                        />
                         <p className="text-base leading-relaxed text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)]">
                           {model.description}
                         </p>
