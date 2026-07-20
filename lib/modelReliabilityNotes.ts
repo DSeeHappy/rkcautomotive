@@ -166,6 +166,450 @@ const MODEL_RELIABILITY_SNAPSHOTS: ModelReliabilitySnapshot[] = [
       },
     ],
   },
+  // --- Spark-structured from brandFailureProfiles (2026-07-20); drift stripped ---
+  {
+    id: 'honda-civic',
+    intro:
+      'The Honda Civic L15B7 engine is subject to oil dilution where fuel mixes into the oil during cold idling, thinning viscosity and potentially wearing cam lobes. The 10-speed transmission may exhibit harsh shifts in 3rd and 4th gears under load.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'Oil dilution occurs on cold idles, thinning viscosity and wearing cam lobes. The 10-speed transmission can have harsh 3rd-4th gear shifts under load.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Denver winters worsen dilution on short trips when the 1.5L turbo struggles to reach operating temperature.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid 2016–2021 Civic 1.5T models if they are only driven on short, stop-and-go winter commutes (severe oil dilution risk).',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Why is the 2016–2021 Civic 1.5T discouraged in Denver?',
+        answer:
+          'Denver winters worsen oil dilution caused by fuel mixing into the oil during cold idles, which thins viscosity and wears cam lobes.',
+      },
+    ],
+  },
+  {
+    id: 'honda-accord',
+    intro:
+      'The Honda Accord has shop-observed V6 VCM-related mount damage and oil fouling, plus 10-speed transmission harshness under load.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'V6 VCM engines may suffer from cylinder deactivation that shreds mounts and causes oil blow-by to foul plugs on cylinders 1–4. The 10-speed transmission can exhibit harsh shifting in 3rd–4th gears under load.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Unable to verify with available data.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid V6 models without an oil-fouled plug check unless a VCM muzzler is installed.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the primary risk of the V6 VCM system?',
+        answer:
+          'Cylinder deactivation can shred mounts and cause oil blow-by to foul plugs on cylinders 1–4.',
+      },
+      {
+        question: 'How does the 10-speed transmission behave under load?',
+        answer: 'It can be harsh during 3rd–4th gear shifts under load.',
+      },
+    ],
+  },
+  {
+    id: 'honda-cr-v',
+    intro:
+      'The Honda CR-V with the L15B7 engine is subject to oil dilution where fuel mixes into the oil during cold idling, thinning viscosity and potentially wearing cam lobes.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'Fuel mixes into oil on cold idles, thins viscosity, and wears cam lobes.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Denver winters worsen dilution.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid 2016–2021 CR-V 1.5T on short winter trips.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the primary mechanical risk of oil dilution in this engine?',
+        answer: 'It thins viscosity and wears cam lobes.',
+      },
+      {
+        question: 'Which model years and engine should be avoided for short winter trips?',
+        answer: '2016–2021 CR-V 1.5T.',
+      },
+    ],
+  },
+  {
+    id: 'honda-pilot',
+    intro:
+      'The Honda Pilot V6 is associated with VCM cylinder deactivation that shreds mounts and oil blow-by that fouls plugs on cylinders 1–4. The 10-speed transmission may exhibit harsh shifting in 3rd–4th gears under load.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'V6 VCM cylinder deactivation shreds mounts; oil blow-by fouls plugs on cylinders 1–4; 10-speed transmission causes harsh 3rd–4th shifting under load.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Unable to verify with available data.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid V6 without an oil-fouled plug check unless a VCM muzzler is installed.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What are the primary mechanical risks for the Pilot V6?',
+        answer:
+          'VCM cylinder deactivation can shred mounts, and oil blow-by often fouls plugs on cylinders 1–4.',
+      },
+      {
+        question: 'How should the 10-speed transmission be monitored?',
+        answer: 'Watch for harsh shifting in 3rd and 4th gears when under load.',
+      },
+    ],
+  },
+  {
+    id: 'ford-f-150',
+    intro:
+      'Ford F-150 models with EcoBoost engines and the 10R80 transmission show cold-start cam phaser rattle, CDF bushing-related gear hunting, and elevated transmission temperatures when towing on I-70.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'EcoBoost cam phaser rattle on cold starts is linked to timing chain stretch. The 10R80 transmission may experience gear hunting and power loss due to CDF bushing wear. Early 2017–2019 10-speed F-150s are noted for erratic shifts.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Pulling heavy trailers up the I-70 mountain corridor spikes 10R80 transmission fluid temperatures.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid early 2017–2019 10-speed F-150s showing erratic shifts without pulling transmission adaptive learning values.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What causes the rattle on cold starts in EcoBoost F-150s?',
+        answer:
+          'The rattle is associated with cam phaser issues and can indicate timing chain stretch.',
+      },
+      {
+        question: 'Which F-150 years are flagged for 10-speed shift issues?',
+        answer: 'Early 2017–2019 10-speed F-150s are noted for erratic shifts.',
+      },
+    ],
+  },
+  {
+    id: 'ford-explorer',
+    intro:
+      'The Ford Explorer is associated with 3.5L Duratec internal water-pump failure that dumps coolant into oil, and 10R80 CDF bushing gear hunting.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'The 3.5L Duratec internal water pump can dump coolant into the oil, which destroys bearings. The 10R80 transmission is prone to gear hunting caused by CDF bushing failure.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'I-70 towing spikes 10R80 transmission fluid temperatures.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid Explorers with the 3.5L Cyclone/Duratec V6 unless there is proof the internal water pump has been replaced.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What causes bearing destruction in the 3.5L Duratec engine?',
+        answer: 'The internal water pump can dump coolant into the oil, leading to bearing failure.',
+      },
+      {
+        question: 'What causes gear hunting in the 10R80 transmission?',
+        answer: 'Gear hunting is caused by CDF bushing failure.',
+      },
+    ],
+  },
+  {
+    id: 'ford-escape',
+    intro:
+      'Ford Escape EcoBoost platforms show cam phaser rattle on cold starts linked to timing chain stretch. Brand notes also flag I-70 corridor transmission fluid temperature spikes.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'EcoBoost cam phaser rattle on cold starts is linked to timing chain stretch.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'I-70 corridor spikes transmission fluid temperatures.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Unable to verify with available data.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What causes the cam phaser rattle on Escape EcoBoost models?',
+        answer:
+          'The rattle on cold starts in EcoBoost models is associated with timing chain stretch.',
+      },
+    ],
+  },
+  {
+    id: 'ford-mustang',
+    intro:
+      'EcoBoost Mustangs show cam phaser rattle on cold starts that can indicate timing chain stretch.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'EcoBoost cam phaser rattle on cold starts can indicate timing chain stretch.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Unable to verify with available data.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Unable to verify with available data.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What causes the rattle in EcoBoost Mustangs on cold starts?',
+        answer:
+          'The rattle is associated with cam phaser issues which can lead to timing chain stretch.',
+      },
+    ],
+  },
+  {
+    id: 'chevrolet-silverado',
+    intro:
+      'The Chevrolet Silverado is associated with AFM/DFM lifter collapse that gouges the camshaft and introduces steel shards into the oil, plus 8L90 torque converter shudder resembling rumble strips.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: '5.3/6.2 AFM/DFM lifter collapse gouges cam, steel shards in oil. 8L90 torque converter shudder like rumble strips.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Unable to verify with available data.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid 2014–2021 V8 trucks without lifter delete or extensive valvetrain service history. Avoid any 8-speed GM truck displaying a shudder above 40 mph.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the risk associated with 2014–2021 V8 Silverados?',
+        answer:
+          'These models are at risk for AFM/DFM lifter collapse which can gouge the cam and cause steel shards to enter the oil system, particularly without a lifter delete or service history.',
+      },
+      {
+        question: 'What transmission issue should be monitored?',
+        answer:
+          'The 8L90 torque converter may exhibit shudder that feels like rumble strips, specifically above 40 mph.',
+      },
+    ],
+  },
+  {
+    id: 'chevrolet-tahoe',
+    intro:
+      'The Chevrolet Tahoe shares 5.3L/6.2L AFM/DFM lifter collapse and 8L90 shudder risks with other GM truck platforms.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: '5.3L and 6.2L V8 engines with AFM/DFM are prone to lifter collapse which can gouge the camshaft and cause steel shards to enter the oil system. The 8L90 transmission may exhibit shudder, particularly above 40 mph.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'High altitude and freeze conditions contribute to moisture buildup in GM turbo PCV lines (brand shop note).',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid 2014–2021 V8 models without a lifter delete or documented valvetrain history. Avoid vehicles exhibiting 8-speed shudder above 40 mph.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What are the primary risks on Tahoe 5.3L and 6.2L V8 engines?',
+        answer:
+          'AFM/DFM lifter collapse can gouge the camshaft and send steel shards into the oil.',
+      },
+      {
+        question: 'Which model years and configurations should be avoided?',
+        answer:
+          'Avoid 2014–2021 V8 models unless they have documented lifter-delete history. Also avoid vehicles with 8-speed shudder above 40 mph.',
+      },
+    ],
+  },
+  {
+    id: 'chevrolet-equinox',
+    intro:
+      'The 1.5L Turbo LYX Equinox is associated with PCV freeze-up where moisture freezes, crankcase pressure builds, and the rear main seal blows.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'Moisture in the PCV system can freeze, causing a blockage that leads to excessive crankcase pressure and rear main seal failure.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'High altitude and freezing temperatures accelerate moisture buildup in turbo PCV lines.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Unable to verify with available data.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What causes rear main seal failure on the 1.5L Turbo LYX Equinox?',
+        answer:
+          'Moisture freezing in the PCV system blocks ventilation and causes crankcase pressure to blow out the rear main seal.',
+      },
+      {
+        question: 'Why is this issue more relevant in Colorado?',
+        answer:
+          'Altitude and freezing temperatures contribute to increased moisture buildup in the turbo PCV lines.',
+      },
+    ],
+  },
+  {
+    id: 'chevrolet-malibu',
+    intro:
+      'The 1.5L Turbo (LYX) Malibu is susceptible to PCV freeze-up that can lead to rear main seal failure.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'Moisture in the PCV system can freeze, causing crankcase pressure to build up and blow the rear main seal.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'High altitude and freezing temperatures contribute to moisture accumulation in the turbo PCV lines.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Unable to verify with available data.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What causes the rear main seal to fail on the 1.5L Turbo Malibu?',
+        answer:
+          'Moisture in the PCV system freezes, leading to increased crankcase pressure that blows the rear main seal.',
+      },
+      {
+        question: 'Why is this issue more common in Colorado?',
+        answer:
+          'The combination of high altitude and freezing temperatures promotes moisture buildup in the turbo PCV lines.',
+      },
+    ],
+  },
+  {
+    id: 'jeep-wrangler',
+    intro:
+      'Jeep Wranglers show 3.6L Pentastar rocker needle-bearing seizure (tick/misfire) and death wobble from track-bar bushings or steering-box play.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'The 3.6 Pentastar engine is prone to rocker needle bearing seizure, which causes a tick or misfire. Death wobble is often caused by worn track bar bushings or steering box play.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Rocky Mountain trail driving puts extreme lateral stress on Jeep front-end components; heavy-duty track bars are a common necessity.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid Pentastar engines exhibiting a sharp metallic tick from the valve covers.',
+      },
+    ],
+    faqs: [
+      {
+        question: "What causes 'death wobble' in a Jeep Wrangler?",
+        answer:
+          'Death wobble is typically caused by worn track bar bushings or play in the steering box.',
+      },
+      {
+        question: 'What should I avoid when buying a Jeep with a 3.6 Pentastar?',
+        answer:
+          'Avoid Pentastar engines that exhibit a sharp metallic tick, which indicates potential rocker needle bearing seizure.',
+      },
+    ],
+  },
+  {
+    id: 'jeep-grand-cherokee',
+    intro:
+      'The Jeep Grand Cherokee is associated with 3.6 Pentastar rocker needle-bearing seizures and plastic oil filter housing cracks that pool oil and coolant in the valley.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: '3.6 Pentastar rocker needle bearings may seize, causing a tick or misfire. The plastic oil filter housing can crack, leading to oil and coolant pooling in the valley.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Unable to verify with available data.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Avoid Pentastar engines exhibiting a metallic tick; use a flashlight to check the valley for pooled oil.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What are the signs of these 3.6 Pentastar failures?',
+        answer:
+          'Signs include rocker needle bearing seizures resulting in a tick or misfire, and cracks in the plastic oil filter housing that cause oil and coolant to pool in the valley.',
+      },
+      {
+        question: 'How can I inspect for oil pooling in the valley?',
+        answer:
+          'Use a flashlight to check the valley for pooled oil, which may indicate a cracked plastic oil filter housing.',
+      },
+    ],
+  },
+  {
+    id: 'jeep-gladiator',
+    intro:
+      'Jeep Gladiators share 3.6 Pentastar rocker needle-bearing seizure and death wobble (track-bar bushings / steering-box play) with other Jeep platforms.',
+    bullets: [
+      {
+        label: 'Common issues',
+        text: 'The 3.6 Pentastar engine may suffer from rocker needle bearing seizures, leading to ticking noises and misfires. Death wobble is often caused by worn track bar bushings or play in the steering box.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Trail driving places significant stress on front-end components; heavy-duty track bars are a common upgrade.',
+      },
+      {
+        label: 'Service notes',
+        text: 'Unable to verify with available data.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What causes the 3.6 Pentastar to tick or misfire?',
+        answer:
+          'Seized rocker needle bearings in the 3.6 Pentastar can cause ticking noises and engine misfires.',
+      },
+      {
+        question: 'How is death wobble typically addressed on the Gladiator?',
+        answer:
+          'Death wobble is addressed by worn track bar bushings or steering box play; heavy-duty track bars are a common upgrade.',
+      },
+    ],
+  },
 ];
 
 /** All shop-observation reliability snapshots — not OEM-verified specs. */

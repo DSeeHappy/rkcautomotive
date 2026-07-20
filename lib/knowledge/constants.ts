@@ -11,13 +11,31 @@ export const KNOWLEDGE_WIRED_BRAND_SLUGS = BRAND_RELIABILITY_SNAPSHOTS.map(
   (snapshot) => snapshot.id,
 ) as readonly string[];
 
-/** Toyota models with full modelReliabilityNotes snapshots (richer than failure-profile stubs). */
+/**
+ * Models with full modelReliabilityNotes snapshots (richer than failure-profile stubs).
+ * Toyota batch + Spark-structured Honda/Ford/Chevy/Jeep (2026-07-20).
+ */
 export const KNOWLEDGE_PILOT_MODEL_IDS = [
   'toyota-rav4',
   'toyota-4runner',
   'toyota-highlander',
   'toyota-camry',
   'toyota-corolla',
+  'honda-civic',
+  'honda-accord',
+  'honda-cr-v',
+  'honda-pilot',
+  'ford-f-150',
+  'ford-explorer',
+  'ford-escape',
+  'ford-mustang',
+  'chevrolet-silverado',
+  'chevrolet-tahoe',
+  'chevrolet-equinox',
+  'chevrolet-malibu',
+  'jeep-wrangler',
+  'jeep-grand-cherokee',
+  'jeep-gladiator',
 ] as const;
 
 export type KnowledgePilotModelId = (typeof KNOWLEDGE_PILOT_MODEL_IDS)[number];
