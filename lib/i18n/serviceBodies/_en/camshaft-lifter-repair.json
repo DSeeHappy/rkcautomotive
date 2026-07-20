@@ -1,0 +1,135 @@
+{
+  "breadcrumb": "Camshaft & Lifters",
+  "hero": {
+    "imageAlt": "Valvetrain and camshaft repair at RKC Automotive in Englewood, CO",
+    "eyebrow": "Valvetrain · Englewood, CO",
+    "title": "Camshaft Replacement & Hydraulic Lifter Repair in Englewood, CO",
+    "description": "Eliminate engine ticking, localized misfires, and valvetrain metal wear before it destroys your block. Expert diagnostics and full cam-and-lifter restoration for HEMI, GM AFM/DFM, and high-mileage overhead-valve engines — with approval before we order parts.",
+    "primaryCta": "Book Valvetrain Service",
+    "callPrefix": "Call"
+  },
+  "reality": {
+    "quote": "That tick isn't going away on its own",
+    "body": "A rhythmic tick from the valve cover is one of the most searched engine noises in Colorado — and the most commonly misdiagnosed. Additives, thicker oil, and “just turn up the radio” do not restore cam lobe lift or replace collapsed lifters. Every mile with a persistent tick sends metal through oil galleries and into main bearings you cannot see without teardown. If the tick stays at operating temperature, accompanies a misfire, or worsens under load — schedule engine diagnostics in Englewood, engine rebuild ."
+  },
+  "symptoms": {
+    "eyebrow": "Valve train",
+    "title": "The infamous engine tick explained",
+    "intro": "Hydraulic lifters rely on oil pressure to maintain zero lash. When they bleed down, seize, or collapse permanently, the cam lobe takes the punishment — and the failure mode depends on your engine family. We diagnose before quoting; these are the patterns we see daily in the Denver metro.",
+    "cards": [
+      {
+        "title": "HEMI lifter tick",
+        "body": "Chrysler 5.7/6.4 HEMI engines are infamous for MDS lifter collapse that hammers cam lobes. A cold-start tick that stays after warm-up is often valvetrain — not exhaust. We confirm with oil-pressure data, borescope, and filter media inspection before quoting a cam-and-lifter kit."
+      },
+      {
+        "title": "GM AFM / DFM collapse",
+        "body": "GM Active Fuel Management and Dynamic Fuel Management lifters stick or collapse, causing misfires and cam lobe damage on trucks and SUVs common in Colorado. Deletion kits are an option we discuss honestly after diagnosis — not before we know the failure mode.",
+        "warning": "Driving on a collapsed AFM lifter can destroy the cam quickly."
+      },
+      {
+        "title": "General hydraulic lifter bleed-down",
+        "body": "Any OHV engine can tick from bled-down lifters after oil changes with the wrong viscosity, sludge, or long idle intervals. We separate sticky VVT solenoids and injector tick from true valvetrain wear before you approve teardown."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Diagnostics first",
+    "title": "The diagnostic strategy",
+    "intro": "We do not swap a cam because the internet said so. Physical measurement, borescope inspection, and filter debris analysis build the evidence chain before you approve valvetrain work — saving Englewood and Denver metro drivers from paying for a top-end job when the real issue is a sticking VVT solenoid, collapsed AFM tower, or a single bad injector masquerading as valvetrain noise.",
+    "bgImageAlt": "Technicians diagnosing valvetrain issues at RKC Automotive Englewood CO",
+    "steps": [
+      {
+        "title": "Valvetrain clearance measurement",
+        "body": "Where the engine design allows, we measure intake and exhaust side clearance against factory spec. Out-of-spec readings on one cylinder point to collapsed lifters or worn lobes before we pull the intake or valve covers for visual confirmation. Clearance data also rules out misdiagnosed exhaust leaks and injector tick that sound similar from the driver seat."
+      },
+      {
+        "title": "Borescope lobe inspection",
+        "body": "A borescope through the spark-plug hole — or oil-cap opening on overhead-cam layouts — lets us inspect lobe shape and follower wear without committing to full teardown first. Flat spots, blue discoloration from hammering, and chipped lobes show up on camera before you approve cam replacement. We save images when findings support the repair recommendation."
+      },
+      {
+        "title": "Oil filter debris analysis",
+        "body": "Metallic glitter or bronze-colored material in the filter media means the valvetrain is already shedding material downstream. We correlate filter findings with compression tests, leak-down results, and scan-tool misfire counts. That combination tells us whether top-end work is sufficient or if wear has migrated to bearings that require short-block inspection."
+      }
+    ]
+  },
+  "checklist": {
+    "eyebrow": "Full restoration",
+    "title": "Complete valvetrain component restoration",
+    "intro": "When the cam is worn, partial repair is false economy. We replace the full cam assembly with a quality unit matched to your VIN, install a matched lifter set, inspect every supporting component, and flush oil galleries before buttoning up — so the tick does not come back in six months with metal in the filter.",
+    "groups": [
+      {
+        "category": "Cam & lifters",
+        "items": [
+          "Complete cam assembly matched to VIN and engine family",
+          "Full lifter set — never reuse collapsed units",
+          "Lifter bores cleaned and inspected for scoring"
+        ]
+      },
+      {
+        "category": "Supporting hardware",
+        "items": [
+          "Pushrods inspected for straightness and end-cup wear",
+          "Valve springs checked for tension, height, and coil bind",
+          "Rocker arms and trunnion bearings where applicable"
+        ]
+      },
+      {
+        "category": "Sealing & cleanup",
+        "items": [
+          "Valve stem seals replaced while heads are accessible",
+          "Timing cover and front crank seal as needed",
+          "Oil gallery flush to remove debris from the failure"
+        ]
+      },
+      {
+        "category": "Verification",
+        "items": [
+          "Compression and leak-down after assembly",
+          "Oil pressure check at hot idle before return",
+          "Road test and misfire count verification on scan tool"
+        ]
+      }
+    ]
+  },
+  "labor": {
+    "title": "Written approval before cam & lifter work",
+    "description": "Valvetrain repair labor is billed at our posted $120/hr using published book times for cam-in-block and overhead-cam layouts. You receive a written estimate with parts and labor separated — and we do not order cam kits or open the engine until you approve scope. Whether you drive a ticking 5.7 HEMI or a Silverado with AFM misfires, diagnosis and repair happen under one roof on Evans Ave."
+  },
+  "faq": {
+    "title": "camshaft-lifter-repair questions",
+    "intro": "Answers on HEMI tick, AFM lifter failure, cam replacement scope, and when a noise means stop driving."
+  },
+  "areaLabel": "camshaft and lifter repair",
+  "finalCta": {
+    "title": "Schedule valvetrain diagnostics today",
+    "description": "Schedule camshaft and lifter diagnosis at 2120 W Evans Ave. We confirm the tick, scope the valvetrain, and quote a written repair plan at $120/hr before teardown.",
+    "secondaryCta": "Book service"
+  },
+  "relatedSlug": "camshaft-lifter-repair-englewood-co",
+  "faqs": [
+    {
+      "question": "Is the HEMI lifter tick always a cam and lifter problem?",
+      "answer": "Not always — exhaust manifold leaks, VVT actuator rattle, and fuel injector tick can sound similar. That is why we measure valvetrain clearance where possible, borescope cam lobes, and correlate misfire data before quoting cam replacement. When roller lifters have collapsed and lobes show flat spots, partial repair is false economy: the tick returns and metal circulates through the oil galleries. Confirmed lobe damage means full cam assembly and matched lifter set."
+    },
+    {
+      "question": "What is AFM/DFM and why does it cause lifter failures on GM trucks?",
+      "answer": "Active Fuel Management (AFM) and Dynamic Fuel Management (DFM) disable cylinders under light load by collapsing lifters via oil-pressure solenoids. Over time, stuck solenoids, deferred oil changes, and low-tension valve springs accelerate lifter collapse and cam lobe wear on cylinders 1, 4, 6, or 7 depending on engine family. Silverado, Sierra, Tahoe, and Yukon owners across the Denver metro often see misfire codes before the tick becomes constant. We diagnose AFM-related failures before recommending repair scope."
+    },
+    {
+      "question": "Should I delete AFM when replacing the cam and lifters?",
+      "answer": "AFM delete kits disable the cylinder-deactivation hardware and use non-AFM lifters and a non-AFM cam profile. Some owners choose delete after repeated AFM failures; others prefer a stock replacement cam and lifters to maintain factory fuel-economy behavior. We explain both paths — parts cost, labor difference, and emissions implications — without pushing either option. The right choice depends on how you use the truck and whether you want to eliminate the failure mode entirely."
+    },
+    {
+      "question": "Can I drive with an engine tick until my appointment?",
+      "answer": "A faint cold-start tick that fades as oil pressure builds may be tolerable for a short window if you have an appointment scheduled. A tick that persists at operating temperature, accompanies a misfire, or worsens under load means the valvetrain is actively damaging itself — continued driving sends metal through bearings you cannot inspect without teardown. If oil pressure drops or the engine runs rough, stop driving and arrange a tow. We would rather diagnose a still-salvageable top end than quote a full short-block because metal migrated downstream."
+    },
+    {
+      "question": "Do you replace pushrods, springs, and stem seals during cam work?",
+      "answer": "When the heads are accessible, we inspect pushrods for straightness and end-cup wear, check valve spring height and tension, and replace stem seals while the valvetrain is apart. Reusing collapsed lifters or fatigued springs guarantees comebacks. Our valvetrain restoration checklist covers cam assembly, full lifter set, pushrods, springs, seals, and an oil gallery flush to remove debris from the failure — all scoped in a written estimate at $120/hr labor before parts are ordered."
+    },
+    {
+      "question": "How much does cam and lifter replacement cost compared to a full rebuild?",
+      "answer": "Cam-in-block overhead-valve jobs and overhead-cam layouts differ widely in labor hours and parts cost. A confirmed valvetrain repair on a pushrod V8 is typically a fraction of a full short-block rebuild — but only when the block, crank, and bearings are still healthy. Oil filter debris analysis and compression testing tell us whether top-end work is sufficient or if wear has already reached the bottom end. We never recommend a rebuild when a cam job solves the problem, and we never patch one lifter when the cam is scored."
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "breadcrumb": "Engine Rebuilds",
+  "hero": {
+    "imageAlt": "ASE-certified technicians rebuilding an engine at RKC Automotive in Englewood, CO",
+    "eyebrow": "Machine shop · Englewood, CO",
+    "title": "Precision Engine Rebuilding & Remanufacturing in Englewood, CO",
+    "description": "Rod knock, low oil pressure, or blow-by past the rings? We pull, strip, machine, blueprint, and rebuild domestic and import engines down to the bare block — with a written estimate and your approval before the first bolt comes off our Evans Ave bay.",
+    "primaryCta": "Request Rebuild Estimate",
+    "callPrefix": "Call"
+  },
+  "reality": {
+    "quote": "A tired block doesn't get better with another bottle of additive.",
+    "body": "High-mileage commuters, skipped oil changes, and overheating events open bearing clearances and destroy ring seal. Colorado towing on I-25 and mountain grades accelerates wear on domestic V8s and turbo imports alike. When compression is uneven and oil consumption climbs, the block needs to come apart — measured, machined, and rebuilt to spec. Not every tick or misfire needs a full rebuild — start with engine diagnostics in Englewood, camshaft and lifter repair, extended warranty claims for powertrain work are handled in-house at our posted $120/hr rate. RKC has rebuilt engines for Englewood, Denver, Littleton, and south-metro drivers who needed the job done once, not twice."
+  },
+  "symptoms": {
+    "eyebrow": "Warning signs",
+    "title": "Symptoms of a tired block",
+    "intro": "An engine past its useful life rarely fails all at once. Warning signs accumulate quietly — until a drive home from the mountains turns into an expensive tow. These three failure modes mean internal wear, not a quick external fix.",
+    "cards": [
+      {
+        "title": "Blow-by past the rings",
+        "body": "Compression gases slip past worn piston rings and pressurize the crankcase. You notice oil weeping from seals, a oily residue around the PCV breather, and blue-gray smoke under load — especially climbing I-70 toward the Eisenhower Tunnel with a loaded trailer. Blow-by is not a seal problem; it is ring-to-wall clearance that has opened beyond spec. Additives cannot restore the bore finish or ring tension your block needs."
+      },
+      {
+        "title": "Low oil pressure at hot idle",
+        "body": "A healthy engine holds oil pressure once warm — typically 20 psi or more at hot idle depending on the spec sheet. When main and rod bearing clearances wear past tolerance, oil escapes faster than the pump can maintain volume. The gauge drops when you stop at a light in Englewood summer traffic, then recovers slightly off idle. That pattern traces to bearing wear inside the block, not a faulty sender. Thicker oil masks the symptom briefly; it does not fix the clearance."
+      },
+      {
+        "title": "Rod knock — spun bearings",
+        "body": "Rod knock is the unmistakable hammering from the oil pan — a rhythmic metallic beat that rises with RPM. It means a rod bearing has spun, wiped, or begun transferring material to the crank journal. This is not a lifter tick and not a exhaust leak. Every mile driven after rod knock starts risks trashing the crank, block bore, and rod itself. Tow the vehicle. Do not limp home hoping the noise fades.",
+        "warning": "Stop driving immediately — rod knock destroys cranks fast."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Machine shop",
+    "title": "Blueprinting from bare casting to balanced assembly",
+    "intro": "A proper rebuild is not bolt-on parts — it is a documented machine-shop workflow. Every step below gets measured, photographed when findings change scope, and signed off before reassembly begins.",
+    "bgImageAlt": "Engine bay service and machine shop work at RKC Automotive Englewood CO",
+    "steps": [
+      {
+        "title": "Strip to bare casting",
+        "body": "The engine comes off the vehicle and onto a stand. Every fastener, plug, and accessory is cataloged. We separate the short block from heads, oil pan, and front cover so each component can be measured independently. Colorado winters and deferred coolant service often leave scale in water jackets — stripping clean is the only way to inspect what the block actually looks like inside."
+      },
+      {
+        "title": "Hot tank & degrease",
+        "body": "Castings go through hot tank cleaning to remove sludge, carbon, and rust scale from oil galleries and coolant passages. Sludge alone does not cause failure, but it hides cracks and prevents accurate magnaflux results. Clean metal reveals the casting's true condition before we commit to bore and hone work — and before you approve machine-shop charges on a block that might not be salvageable."
+      },
+      {
+        "title": "Magnaflux crack inspection",
+        "body": "Magnaflux applies magnetic particle inspection to ferrous castings, revealing hairline cracks around cylinder bores, main webbing, and bellhousing bolt bosses. A crack that looks like a stain on a dirty block becomes obvious under UV light after magnaflux. Finding a crack here saves you from assembling a fresh rotating kit into a block that will fail again — we document findings with photos before scope changes."
+      },
+      {
+        "title": "Bore & hone with torque plates",
+        "body": "Cylinders are bored to oversize only when wear or scoring demands it, then honed to the final finish with torque plates installed. Torque plates simulate head-bolt clamping load so the bore roundness you measure on the hone matches what the engine sees at running temperature. Skipping torque plates is how shops end up with oval bores and broken ring seal after a few thousand miles."
+      },
+      {
+        "title": "Deck surface resurfacing",
+        "body": "The block deck and cylinder head mating surfaces are measured for flatness and resurfaced when out of spec. MLS head gaskets — common on modern domestic and import engines — tolerate almost zero imperfection. A warped deck from overheating or head-bolt stretch causes combustion seal failure and coolant intrusion. We surface to the minimum spec, not the maximum cut, to preserve compression height."
+      },
+      {
+        "title": "Dynamic balance assembly",
+        "body": "Crankshafts are mic'd, polished, or ground to undersize as needed. Rod and piston assemblies are weighed and matched; the rotating assembly is dynamically balanced so vibration does not hammer bearings at highway speed. Balance work is what separates a rebuilt engine that feels new from one that buzzes through the steering wheel on C-470. Every measurement goes on the build sheet you receive at pickup."
+      }
+    ]
+  },
+  "checklist": {
+    "eyebrow": "Parts & assembly",
+    "title": "The component checklist",
+    "intro": "Not every failure requires the same depth of work. We quote both paths when inspection supports it — so\r\n              you choose based on head condition, budget, and how long you plan to keep the vehicle.",
+    "groups": [
+      {
+        "category": "Pistons & rings",
+        "items": [
+          "Hypereutectic or forged pistons sized to final bore measurement",
+          "File-fit moly or ductile iron rings per bore with end gap checked",
+          "Pin bore and ring land inspection before assembly"
+        ]
+      },
+      {
+        "category": "Bearings & rotating assembly",
+        "items": [
+          "Clevite or King rod and main bearings sized to measured clearances",
+          "Crank journal polish or grind to next undersize when scored",
+          "Rod reconditioning or replacement when big-end ovality is out of spec"
+        ]
+      },
+      {
+        "category": "Lubrication & timing",
+        "items": [
+          "High-volume or OEM-spec oil pump matched to engine family",
+          "Timing chain or belt kit with guides and tensioners",
+          "Cam bearings, freeze plugs, and galley plug replacement"
+        ]
+      },
+      {
+        "category": "Sealing & hardware",
+        "items": [
+          "Full gasket set — MLS head gaskets when spec requires",
+          "Rear main seal, front cover seal, and valve cover gaskets",
+          "ARP or OEM-critical fasteners torqued to sequence spec"
+        ]
+      }
+    ]
+  },
+  "labor": {
+    "title": "Labor transparency on every rebuild",
+    "description": "Major engine work is a significant investment. We bill at our posted $120/hr rate using AllData and Mitchell book times as a baseline — but every rebuild starts with a written estimate before teardown. If magnaflux reveals a crack, journals are scored beyond grind limits, or head damage changes scope, we call with photos. Nothing moves forward without your approval."
+  },
+  "faq": {
+    "title": "engine-rebuilds questions",
+    "intro": "Straight answers on short-block vs. long-block scope, timelines, turbo rebuilds, and why machine-shop blueprinting beats a junkyard swap."
+  },
+  "areaLabel": "engine rebuilds",
+  "finalCta": {
+    "title": "Ready for a rebuild estimate?",
+    "description": "Book a consultation at 2120 W Evans Ave. We review symptoms, discuss short-block vs. long-block options, and provide a written estimate at $120/hr labor plus parts — before teardown begins.",
+    "secondaryCta": "Request estimate"
+  },
+  "relatedSlug": "engine-rebuilds-englewood-co",
+  "faqs": [
+    {
+      "question": "How do I know if I need a full engine rebuild vs. a top-end repair?",
+      "answer": "Bottom-end symptoms — rod knock, low oil pressure at hot idle, metallic debris in the oil filter, or blow-by pressurizing the crankcase — point to bearing and ring wear that requires pulling the short block. Top-end-only issues like a single-cylinder misfire or valvetrain tick may need cam and head work without a full rebuild. We run compression, leak-down, and oil-pressure tests before recommending teardown scope so you are not paying for a long-block when a short-block or valvetrain job solves the problem."
+    },
+    {
+      "question": "What is the difference between a short-block and a long-block rebuild?",
+      "answer": "A short-block includes the block, crankshaft, connecting rods, pistons, rings, bearings, oil pump, and timing components — everything below the cylinder heads. A long-block adds fully reconditioned cylinder heads, valvetrain hardware, and often the intake manifold. Short-blocks make sense when heads are reusable; long-blocks are the turnkey choice when heads are cracked, warped, or have valve-seat damage. We quote both options when applicable so you can choose based on inspection findings and budget."
+    },
+    {
+      "question": "How long does an engine rebuild take at RKC Automotive?",
+      "answer": "Timeline depends on machine-shop queue, parts availability, and whether we find hidden damage after teardown. A straightforward domestic V8 short-block rebuild typically runs several weeks from approval to installation — machine work, parts ordering, and assembly each take real time. We provide a realistic window at estimate time and call with photos if magnaflux, bore measurements, or crank journal condition changes the schedule."
+    },
+    {
+      "question": "Can you rebuild turbocharged or high-performance engines?",
+      "answer": "Yes. Turbo and forced-induction engines demand tighter clearances, forged or hypereutectic piston selection matched to boost levels, and careful deck and head-surface preparation. We blueprint rotating assemblies for balance and document every machine-shop measurement. Whether you daily-drive a EcoBoost F-150 or tow with a Cummins, the same written-estimate and approval-before-teardown process applies at our posted $120/hr labor rate."
+    },
+    {
+      "question": "Do you offer a warranty on rebuilt engines?",
+      "answer": "We stand behind our machine work and assembly with a written warranty on labor and installed parts — terms depend on scope and components used. Rebuilt engines also benefit from proper break-in procedures: specific oil change intervals, avoiding sustained high load for the first miles, and verifying oil pressure before you leave the lot. We walk you through break-in requirements at pickup so the investment lasts."
+    },
+    {
+      "question": "Why rebuild instead of installing a crate engine or used junkyard motor?",
+      "answer": "Crate engines are convenient but expensive and may not match your VIN-specific accessories, sensors, or emissions hardware. Junkyard swaps are a gamble — unknown maintenance history, hidden overheating damage, and no machine-shop verification. A rebuild uses your block when it passes magnaflux and bore inspection, restores known clearances, and lets you upgrade pistons, rings, and bearings to address the failure mode that caused the original problem. For many Englewood and Denver metro drivers, that is the best balance of cost and long-term reliability."
+    }
+  ]
+}

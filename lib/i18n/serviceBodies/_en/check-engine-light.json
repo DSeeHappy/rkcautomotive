@@ -1,0 +1,231 @@
+{
+  "breadcrumb": "Check Engine Light",
+  "hero": {
+    "imageAlt": "Check Engine Light at RKC Automotive Englewood CO",
+    "eyebrow": "CEL diagnosis · Englewood, CO",
+    "title": "Check Engine Light Diagnosis in Englewood, CO",
+    "description": "Steady or flashing MIL? We decode P0xxx powertrain and emissions codes, separate critical faults from monitor-not-ready, and verify the root cause before recommending repairs — diagnostic fee applied toward approved work.",
+    "primaryCta": "Diagnose My CEL",
+    "callPrefix": "Call"
+  },
+  "reality": {
+    "quote": "Clearing the light is not fixing the problem.",
+    "body": "A erased code without repair means monitors reset and your next emissions test may fail — or the flashing light returns under load with catalyst-damaging misfires. Englewood drivers sometimes drive for weeks with a steady CEL until fuel economy tanks or Colorado emissions flags the vehicle. We diagnose first, explain severity, and only clear codes after the fault is verified repaired."
+  },
+  "symptoms": {
+    "eyebrow": "CEL behavior",
+    "title": "What your check engine light is telling you",
+    "intro": "Not every illuminated MIL is equal. How it behaves — steady, flashing, or intermittent — changes how urgently you need service.",
+    "cards": [
+      {
+        "title": "Flashing check engine light",
+        "body": "A flashing MIL under load means catalyst-damaging misfire — unburned fuel is entering the exhaust and overheating the catalytic converter. Do not drive except to a safe stop and tow if necessary. Common causes include failed coil-on-plug, collapsed lifter, or injector short. We prioritize these appointments because every mile can add hundreds in catalyst replacement cost.",
+        "warning": "Flashing CEL = stop driving. Misfire can destroy your catalytic converter."
+      },
+      {
+        "title": "Steady light & emissions codes",
+        "body": "P0420/P0430 catalyst efficiency codes, EVAP small-leak P0442, and O2 heater circuit faults often present as a steady light with no drivability complaint. Colorado emissions testing reads readiness monitors — a quick clear without repair fails inspection two weeks later. We test catalyst upstream/downstream switching, smoke-test EVAP hoses, and verify heater current before quoting converters or gas caps."
+      },
+      {
+        "title": "Intermittent & pending codes",
+        "body": "Pending codes set before the MIL illuminates — valuable early warnings on cold-start misfires or marginal sensor performance. Intermittent faults need freeze-frame capture and road-test replication. A P0171 lean code that only appears on uphill merges toward the foothills is different from one at idle. We log data during test drives on local routes, not just in the bay."
+      }
+    ]
+  },
+  "technical": {
+    "eyebrow": "CEL decoded",
+    "title": "Flashing vs solid, emissions vs misfire, readiness monitors",
+    "intro": "Not every check engine light means the same urgency. How it behaves — steady, flashing, or intermittent — and which code family triggered determines whether you can commute tomorrow or need a tow today.",
+    "cards": [
+      {
+        "title": "Flashing MIL = catalyst-damaging misfire",
+        "body": "A flashing check engine light under load means unburned fuel is entering the exhaust and overheating the catalytic converter. Stop driving except to reach safety. Steady MIL with P030x codes still needs prompt service — but flashing is emergency priority at RKC because every mile adds catalyst cost."
+      },
+      {
+        "title": "Emissions vs misfire code families",
+        "body": "P0420/P0430 efficiency codes, EVAP P044x leaks, and O2 heater circuits often present as steady MIL with no drivability complaint. P030x misfires affect power and catalyst health. Each family has a distinct test path — we classify codes before recommending converters, coils, or gas caps."
+      },
+      {
+        "title": "Pending vs stored vs permanent codes",
+        "body": "Pending codes mean the PCM saw one failure cycle — early warning. Stored codes confirmed the fault and lit the MIL. Permanent codes on some platforms cannot clear until repaired and monitors complete. Clearing without repair fails Colorado emissions when monitors reset to not-ready."
+      },
+      {
+        "title": "Readiness monitors for Colorado emissions",
+        "body": "Monitors prove the PCM tested catalyst, O2, EVAP, EGR, and other systems since the last code clear. A quick erase at the parts store resets monitors — your Englewood emissions test fails even if the light is off. We run drive cycles after repair and coach your commute pattern so monitors set before inspection."
+      }
+    ],
+    "tableTitle": "CEL severity & code family guide",
+    "table": {
+      "caption": "Check engine light severity by code type",
+      "columns": [
+        "Behavior / code",
+        "Severity",
+        "Action"
+      ],
+      "rows": [
+        {
+          "label": "Flashing MIL + P030x",
+          "values": [
+            "Critical",
+            "Stop driving — tow if needed"
+          ],
+          "highlight": 1
+        },
+        {
+          "label": "Steady MIL + P0420/P0430",
+          "values": [
+            "Moderate",
+            "Schedule diagnosis — cat at risk if misfire present"
+          ]
+        },
+        {
+          "label": "Steady MIL + P044x EVAP",
+          "values": [
+            "Low–moderate",
+            "Smoke test — often cap or hose"
+          ]
+        },
+        {
+          "label": "Pending only (no MIL)",
+          "values": [
+            "Monitor",
+            "Early warning — diagnose before MIL sets"
+          ]
+        },
+        {
+          "label": "MIL off, monitors N/R",
+          "values": [
+            "Emissions fail",
+            "Drive cycle or complete repair first"
+          ],
+          "highlight": 1
+        }
+      ]
+    }
+  },
+  "process": {
+    "eyebrow": "CEL workflow",
+    "title": "From code scan to confirmed repair",
+    "intro": "We treat the check engine light as a starting point — not the diagnosis itself.",
+    "bgImageAlt": "Check Engine Light at RKC Automotive Englewood CO",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Code classification",
+        "body": "Powertrain P0xxx, chassis C-codes, and body B-codes are separated. We note pending vs. stored and whether monitors are incomplete from a recent battery disconnect."
+      },
+      {
+        "step": "02",
+        "title": "Severity assessment",
+        "body": "Flashing misfire, fuel trim limits, and over-temp flags get immediate triage. Steady emissions codes are scheduled with test-plan priority based on your inspection deadline."
+      },
+      {
+        "step": "03",
+        "title": "Component verification",
+        "body": "Sensor voltage, switch response, and wiring continuity confirm failed parts. We do not replace an O2 sensor because the code says O2 — we verify slow response or heater draw first."
+      },
+      {
+        "step": "04",
+        "title": "Monitor drive cycle",
+        "body": "After repair, we run drive cycles or advise your commute pattern so monitors set before emissions or before you assume the fix failed."
+      },
+      {
+        "step": "05",
+        "title": "Documented close-out",
+        "body": "You receive code history, test results, and invoice credit for diagnostic time when you approve the repair — transparent paperwork for warranty or emissions retest."
+      }
+    ]
+  },
+  "checklist": {
+    "eyebrow": "Code families",
+    "title": "Common CEL categories we diagnose",
+    "intro": "Englewood vehicles span decades of OBD-II strategy. These are the fault families we see most — each with distinct test paths.",
+    "groups": [
+      {
+        "category": "Emissions & EVAP",
+        "items": [
+          "Catalyst efficiency P0420/P0430 with live O2 comparison",
+          "EVAP leak detection — smoke test and purge valve command",
+          "Secondary air and EGR function on applicable platforms"
+        ]
+      },
+      {
+        "category": "Fuel & air metering",
+        "items": [
+          "Lean/rich codes P0171/P0174 with smoke and fuel trim analysis",
+          "MAF/MAP correlation and vacuum-leak isolation",
+          "Injector balance and fuel pressure specification checks"
+        ]
+      },
+      {
+        "category": "Ignition & misfire",
+        "items": [
+          "Coil-on-plug scope patterns and swap verification",
+          "Compression test when misfire follows mechanical pattern",
+          "AFM/DFM and valvetrain-related misfire isolation"
+        ]
+      },
+      {
+        "category": "Colorado specifics",
+        "items": [
+          "Emissions-test readiness monitor guidance",
+          "Altitude-related boost and fuel trim evaluation",
+          "Diesel DEF/SCR and particulate-filter codes on HD pickups"
+        ]
+      }
+    ]
+  },
+  "labor": {
+    "title": "CEL diagnostic pricing",
+    "description": "Check-engine diagnostics from $99 — credited toward approved repairs at our posted $120/hr labor rate. You pay for verification, not a parts cannon."
+  },
+  "faq": {
+    "title": "Check engine light questions",
+    "intro": "When you can drive, when you cannot, and what Colorado emissions needs after the light comes on."
+  },
+  "areaLabel": "check engine light diagnosis",
+  "finalCta": {
+    "title": "Check engine light on?",
+    "description": "Call or schedule at RKC Automotive on Evans Ave. We decode the code, test the system, and quote the real fix before clearing your MIL.",
+    "secondaryCta": "Book diagnosis"
+  },
+  "relatedSlug": "check-engine-light-englewood-co",
+  "faqs": [
+    {
+      "question": "Can I drive with the check engine light on?",
+      "answer": "A steady check engine light usually means you can drive short distances and schedule service soon — but fuel economy, emissions readiness, and catalyst health may be affected. A flashing check engine light indicates catalyst-damaging misfire; stop driving except to reach a safe location and arrange tow if needed. We triage flashing codes as priority appointments."
+    },
+    {
+      "question": "What does a P0420 catalytic converter code mean?",
+      "answer": "P0420 means the downstream oxygen sensor sees reduced catalyst efficiency. The converter may be worn, but exhaust leaks, upstream misfires, or lazy O2 sensors can set the same code. We compare upstream and downstream O2 activity and inspect for leaks before quoting converter replacement — a four-figure part that should not be guessed."
+    },
+    {
+      "question": "Will you clear my check engine light without fixing the problem?",
+      "answer": "We clear codes only after verifying the fault is repaired and monitors are ready where emissions apply. Clearing without repair fails Colorado emissions inspections and returns the light when the fault reoccurs — often within one drive cycle. Our goal is a light that stays off because the system is healthy."
+    },
+    {
+      "question": "How much does check engine light diagnosis cost?",
+      "answer": "Diagnosis starts from $99 and credits toward approved repairs at our posted $120/hr labor rate. Complex multi-code or intermittent faults may require additional test time — we call before exceeding the initial scope. You receive code definitions, test results, and a written repair estimate before authorization."
+    },
+    {
+      "question": "What is the difference between pending and stored codes?",
+      "answer": "Pending codes mean the PCM detected a fault once but has not confirmed it on a second drive cycle — early warning for developing problems. Stored codes confirmed the fault and illuminated the MIL. Permanent codes on some vehicles cannot clear until the underlying issue is repaired and monitors complete. We explain which type you have and what it implies for emissions testing."
+    },
+    {
+      "question": "Can a loose gas cap cause a check engine light?",
+      "answer": "Yes — EVAP small-leak codes like P0442 often trace to loose, missing, or cracked gas caps and vent hoses. We smoke-test the EVAP system to confirm cap vs. hose vs. purge-valve faults. It is a inexpensive fix when the cap seals poorly, but we verify rather than assume so you are not back in a week with the same code."
+    },
+    {
+      "question": "What is the difference between a flashing and steady check engine light?",
+      "answer": "A steady MIL means a confirmed fault that should be diagnosed soon — emissions, sensor, or efficiency codes are common. A flashing MIL under load indicates catalyst-damaging misfire; continued driving can overheat and destroy the catalytic converter. Flashing codes get priority scheduling at RKC — we triage before parts-store code clears."
+    },
+    {
+      "question": "What are OBD-II readiness monitors and why do they matter in Colorado?",
+      "answer": "Readiness monitors prove the PCM has tested emissions systems since the last code clear — catalyst, O2 sensors, EVAP, EGR, and others. Clearing codes without repair resets monitors to \"not ready\" and fails Colorado emissions even if the MIL is off. We explain which monitors are incomplete, run drive cycles after repair, and coach your commute pattern so monitors set before your inspection appointment."
+    },
+    {
+      "question": "How do misfire codes differ from emissions efficiency codes?",
+      "answer": "P030x misfire codes affect drivability, fuel economy, and catalyst health — often coils, injectors, or mechanical compression loss. P0420/P0430 efficiency codes mean downstream O2 activity is low — worn catalyst, exhaust leak, or upstream misfire. EVAP P044x codes are leak detection, not misfire. Each family has a distinct test path — we classify codes before recommending parts."
+    }
+  ]
+}

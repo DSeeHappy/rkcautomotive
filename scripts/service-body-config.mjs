@@ -1,0 +1,15 @@
+﻿export const SERVICE_CONFIGS = [
+  { slug: 'battery-testing', file: 'BatteryTestingContent.tsx', faq: 'BATTERY_TESTING_PAGE_FAQ', related: 'battery-testing-englewood-co' },
+  { slug: 'brake-repair', file: 'BrakeRepairContent.tsx', faq: 'BRAKE_REPAIR_PAGE_FAQ', related: 'brake-repair-englewood-co' },
+  { slug: 'camshaft-lifter-repair', file: 'CamshaftLifterContent.tsx', faq: 'CAMSHAFT_LIFTER_PAGE_FAQ', related: 'camshaft-lifter-repair-englewood-co', custom: true },
+  { slug: 'check-engine-light', file: 'CheckEngineLightContent.tsx', faq: 'CHECK_ENGINE_LIGHT_PAGE_FAQ', related: 'check-engine-light-englewood-co' },
+  { slug: 'electrical-system', file: 'ElectricalSystemContent.tsx', faq: 'ELECTRICAL_SYSTEM_PAGE_FAQ', related: 'electrical-system-englewood-co' },
+  { slug: 'engine-diagnostics', file: 'EngineDiagnosticsContent.tsx', faq: 'ENGINE_DIAGNOSTICS_PAGE_FAQ', related: 'engine-diagnostics-englewood-co', realityLink: '/services/check-engine-light-englewood-co' },
+  { slug: 'engine-rebuilds', file: 'EngineRebuildsContent.tsx', faq: 'ENGINE_REBUILDS_PAGE_FAQ', related: 'engine-rebuilds-englewood-co', custom: true },
+  { slug: 'exhaust-system', file: 'ExhaustSystemContent.tsx', faq: 'EXHAUST_SYSTEM_PAGE_FAQ', related: 'exhaust-system-englewood-co' },
+  { slug: 'heating-ac', file: 'HeatingAcContent.tsx', faq: 'HEATING_AC_PAGE_FAQ', related: 'heating-ac-englewood-co', custom: true },
+  { slug: 'oil-changes', file: 'OilChangesContent.tsx', faq: 'OIL_CHANGES_PAGE_FAQ', related: 'oil-changes-englewood-co' },
+  { slug: 'preventative-maintenance', file: 'PreventativeMaintenanceContent.tsx', faq: 'PREVENTATIVE_MAINTENANCE_PAGE_FAQ', related: 'preventative-maintenance-englewood-co' },
+  { slug: 'suspension-steering', file: 'SuspensionSteeringContent.tsx', faq: 'SUSPENSION_STEERING_PAGE_FAQ', related: 'suspension-steering-englewood-co' },
+  { slug: 'transmission-services', file: 'TransmissionServicesContent.tsx', faq: 'TRANSMISSION_SERVICES_PAGE_FAQ', related: 'transmission-services-englewood-co' },
+];

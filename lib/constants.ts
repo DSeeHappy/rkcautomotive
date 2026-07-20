@@ -1862,7 +1862,7 @@ export const FAQ_CATEGORIES: { title: string; items: FAQItem[] }[] = [
       {
         question: 'How long will my repair take?',
         answer:
-          'Repair time varies depending on the service. Oil changes typically take 30-45 minutes. Brake jobs take 1-3 hours. More complex repairs may take a full day or require overnight service.',
+          'Repair time depends on the service you need and what we find during inspection. Pick a service on our site or tell us what you need when you call — we will give you a realistic window for your vehicle. Many maintenance visits finish the same day; complex diagnostics or parts-order jobs may take longer. Call (720) 749-3965 for an estimate based on your make and model.',
       },
       {
         question: 'Do you work on all makes and models?',

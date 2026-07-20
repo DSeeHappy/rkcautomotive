@@ -7,7 +7,13 @@ import FadeIn from '@/app/components/ui/FadeIn';
 import { BUSINESS } from '@/lib/constants';
 import { buildModelHubPath } from '@/lib/modelHubRoutes';
 import { useLanguage } from '@/lib/language';
-import { localizedModelServiceTitle, vehicleCopy } from '@/lib/i18n/vehicleCopy';
+import {
+  localizedModelServiceDescription,
+  localizedModelServiceTitle,
+  localizedVehicleDescription,
+  vehicleCopy,
+} from '@/lib/i18n/vehicleCopy';
+import { localizeReliabilitySnapshot } from '@/lib/i18n/reliabilitySnapshotsEs';
 import type { ModelReliabilitySnapshot } from '@/lib/modelReliabilityNotes';
 import type { VehicleModel } from '@/lib/vehicleModels';
 
@@ -31,15 +37,27 @@ export default function ModelHubContent({
   const { lang } = useLanguage();
   const copy = vehicleCopy(lang).hub;
   const brand = brandName ?? vehicle.brandName;
+  const snapshot =
+    modelSnapshot && lang === 'es'
+      ? localizeReliabilitySnapshot(modelSnapshot, lang)
+      : modelSnapshot;
+  const vLabel = vehicleCopy(lang).deepDive.vehicleLabel[vehicle.vehicleType] ?? vehicle.vehicleType;
+  const resolvedHero =
+    snapshot?.intro ??
+    localizedVehicleDescription(vehicle.brandName, vehicle.model, vLabel, lang, heroDescription);
 
   return (
     <div lang={lang}>
       <PageHero
         eyebrow={`${vehicle.brandName} ${vehicle.model}`}
         title={copy.repairTitle(vehicle.brandName, vehicle.model)}
-        description={heroDescription}
+        description={resolvedHero}
         imageSrc={image}
-        imageAlt={`${vehicle.brandName} ${vehicle.model} service at RKC Automotive Englewood CO`}
+        imageAlt={
+          lang === 'es'
+            ? `Servicio ${vehicle.brandName} ${vehicle.model} en RKC Automotive Englewood CO`
+            : `${vehicle.brandName} ${vehicle.model} service at RKC Automotive Englewood CO`
+        }
         breadcrumbs={[
           { label: copy.home, href: '/' },
           { label: copy.vehiclesCrumb, href: '/vehicles-we-service' },
@@ -71,7 +89,15 @@ export default function ModelHubContent({
                   <span className="font-semibold text-foreground group-hover:text-primary-green">
                     {localizedModelServiceTitle(vehicle.model, service.id, lang)}
                   </span>
-                  <span className="mt-2 line-clamp-3 text-sm text-ink-muted">{service.description}</span>
+                  <span className="mt-2 line-clamp-3 text-sm text-ink-muted">
+                    {localizedModelServiceDescription(
+                      vehicle.brandName,
+                      vehicle.model,
+                      service.id,
+                      lang,
+                      service.description,
+                    )}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -89,7 +115,7 @@ export default function ModelHubContent({
         </div>
       </section>
 
-      {modelSnapshot ? (
+      {snapshot ? (
         <section className="border-b border-[color:var(--line)] bg-[color:var(--accent-gray-light)] py-16 sm:py-20">
           <div className="wrap">
             <FadeIn className="max-w-3xl">
@@ -99,11 +125,11 @@ export default function ModelHubContent({
               <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">
                 {copy.issuesHeading}
               </h2>
-              <p className="mt-4 text-lg text-ink-muted">{modelSnapshot.intro}</p>
+              <p className="mt-4 text-lg text-ink-muted">{snapshot.intro}</p>
             </FadeIn>
 
             <ul className="mt-10 grid gap-4 md:grid-cols-3">
-              {modelSnapshot.bullets.map((bullet) => (
+              {snapshot.bullets.map((bullet) => (
                 <li
                   key={bullet.label}
                   className="rounded-2xl border border-[color:var(--line)] bg-white p-6"
@@ -116,13 +142,13 @@ export default function ModelHubContent({
               ))}
             </ul>
 
-            {modelSnapshot.faqs.length > 0 ? (
+            {snapshot.faqs.length > 0 ? (
               <div className="mt-12">
                 <h3 className="font-display text-3xl tracking-wide text-foreground">
                   {copy.faqsHeading(vehicle.model)}
                 </h3>
                 <dl className="mt-6 space-y-6">
-                  {modelSnapshot.faqs.map((faq) => (
+                  {snapshot.faqs.map((faq) => (
                     <div key={faq.question} className="rounded-2xl border border-[color:var(--line)] bg-white p-6">
                       <dt className="font-semibold text-foreground">{faq.question}</dt>
                       <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{faq.answer}</dd>

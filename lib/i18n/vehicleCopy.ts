@@ -247,3 +247,29 @@ export function localizedModelServiceTitle(
   const esName = getDeepDiveServiceEs(serviceId)?.serviceName ?? enName;
   return VEHICLE_COPY.es.hub.serviceTitle(model, esName);
 }
+
+/** Short hub-card description — full catalog.describe stays EN for SEO; ES uses template. */
+export function localizedModelServiceDescription(
+  brandName: string,
+  model: string,
+  serviceId: string,
+  lang: Lang,
+  fallback: string,
+): string {
+  if (lang !== 'es') return fallback;
+  const es = getDeepDiveServiceEs(serviceId);
+  const focus = es?.focus ?? es?.serviceName ?? serviceId;
+  return `RKC inspecciona y repara ${focus} en su ${brandName} ${model} con presupuestos por escrito en Englewood. Diagnóstico honesto y servicio listo para Colorado.`;
+}
+
+/** Hub hero / vehicle blurb when no reliability snapshot intro. */
+export function localizedVehicleDescription(
+  brandName: string,
+  model: string,
+  vehicleTypeLabel: string,
+  lang: Lang,
+  fallback: string,
+): string {
+  if (lang !== 'es') return fallback;
+  return `RKC Automotive en Englewood atiende ${brandName} ${model} (${vehicleTypeLabel}) con mantenimiento según agenda de fábrica, diagnósticos honestos e inspecciones listas para Colorado. Del cambio de aceite a servicios de intervalo mayor, nuestro equipo certificado ASE mantiene su ${model} confiable en I-25 y en la montaña.`;
+}

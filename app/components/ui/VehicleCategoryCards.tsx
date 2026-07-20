@@ -6,6 +6,8 @@ import { VEHICLE_CATEGORIES } from '@/lib/constants';
 import { getCategoryBrandLogo } from '@/lib/vehicleBrands';
 import BrandLogo from './BrandLogo';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
+import { useLanguage } from '@/lib/language';
+import { vehiclesCopy } from '@/lib/vehiclesCopy';
 
 const CATEGORY_STYLE = {
   Domestic: {
@@ -39,7 +41,6 @@ const CATEGORY_STYLE = {
 
 function BrandPill({ name }: { name: string }) {
   const brand = getCategoryBrandLogo(name);
-  // Featured makes scroll to BrandTabs; others stay on the category overview.
   const href = brand?.featured ? '#brands' : '#makes';
 
   return (
@@ -62,8 +63,11 @@ function BrandPill({ name }: { name: string }) {
 }
 
 export default function VehicleCategoryCards() {
+  const { lang } = useLanguage();
+  const copy = vehiclesCopy(lang).categories;
+
   return (
-    <section id="makes" className="relative z-0 scroll-mt-28 overflow-hidden py-20 sm:py-24">
+    <section id="makes" lang={lang} className="relative z-0 scroll-mt-28 overflow-hidden py-20 sm:py-24">
       <div
         className="pointer-events-none absolute inset-0 opacity-60"
         style={{
@@ -80,20 +84,16 @@ export default function VehicleCategoryCards() {
 
       <div className="wrap relative">
         <FadeIn className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Vehicle makes</p>
-          <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">
-            Domestic, import &amp; European
-          </h2>
-          <p className="mt-4 text-lg text-ink-muted">
-            Every major manufacturer on Colorado roads — same ASE-certified team, transparent pricing, and dealer-level
-            diagnostics without the dealership experience.
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{copy.eyebrow}</p>
+          <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">{copy.title}</h2>
+          <p className="mt-4 text-lg text-ink-muted">{copy.intro}</p>
         </FadeIn>
 
         <Stagger className="mt-14 grid gap-8 lg:grid-cols-3" stagger={0.12} delay={0.08}>
           {VEHICLE_CATEGORIES.map((cat) => {
             const style = CATEGORY_STYLE[cat.title];
             const Icon = style.icon;
+            const title = copy.titles[cat.title] ?? cat.title;
 
             return (
               <StaggerItem key={cat.title}>
@@ -121,10 +121,8 @@ export default function VehicleCategoryCards() {
                       <Icon className="size-5" style={{ color: style.accent }} aria-hidden />
                     </div>
                     <div>
-                      <h3 className="font-display text-3xl tracking-wide text-primary-blue">{cat.title}</h3>
-                      <p className="mt-1 text-sm text-ink-muted">
-                        {cat.brands.length} makes serviced at RKC Englewood
-                      </p>
+                      <h3 className="font-display text-3xl tracking-wide text-primary-blue">{title}</h3>
+                      <p className="mt-1 text-sm text-ink-muted">{copy.makesServiced(cat.brands.length)}</p>
                     </div>
                   </div>
 
@@ -141,7 +139,7 @@ export default function VehicleCategoryCards() {
                       href="#brands"
                       className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-green transition hover:text-primary-green-dark"
                     >
-                      Explore featured brands
+                      {copy.exploreBrands}
                       <span aria-hidden className="transition group-hover:translate-x-0.5">
                         →
                       </span>

@@ -1,20 +1,46 @@
 'use client';
 
+import { useMemo } from 'react';
 import { ChevronDown } from 'lucide-react';
 import type { FAQItem } from '@/lib/constants';
+import { applyRepairTimeFaq } from '@/lib/serviceDurations';
+import { useSelectedService } from '@/lib/useSelectedService';
 
 type FAQAccordionProps = {
   items: FAQItem[];
   /** Open the first item by default — keeps one answer visible for scannability. */
   defaultOpenFirst?: boolean;
+  /**
+   * Force a service duration key (page slug or short alias).
+   * When omitted, detected from URL / query / session.
+   */
+  serviceKey?: string | null;
+  /** Rewrite the repair-time FAQ when a service is known (default true). */
+  adaptRepairTimeFaq?: boolean;
+  /** If a service is known and no repair-time FAQ exists, append one. */
+  injectRepairTimeFaq?: boolean;
 };
 
-export default function FAQAccordion({ items, defaultOpenFirst = false }: FAQAccordionProps) {
+export default function FAQAccordion({
+  items,
+  defaultOpenFirst = false,
+  serviceKey: serviceKeyProp = null,
+  adaptRepairTimeFaq = true,
+  injectRepairTimeFaq = false,
+}: FAQAccordionProps) {
+  const detectedService = useSelectedService(serviceKeyProp);
+  const displayItems = useMemo(() => {
+    if (!adaptRepairTimeFaq) return items;
+    return applyRepairTimeFaq(items, detectedService, {
+      injectIfMissing: injectRepairTimeFaq,
+    });
+  }, [adaptRepairTimeFaq, detectedService, injectRepairTimeFaq, items]);
+
   return (
     <div className="overflow-hidden rounded-2xl border border-[color:var(--line)] bg-white shadow-[0_1px_0_rgba(12,18,34,0.04)] divide-y divide-[color:var(--line)]">
-      {items.map((item, index) => (
+      {displayItems.map((item, index) => (
         <details
-          key={item.question}
+          key={`${item.question}-${index}`}
           className="group bg-white open:bg-gradient-to-r open:from-primary-green/[0.06] open:via-white open:to-white hover:bg-primary-green/[0.03] open:hover:bg-gradient-to-r"
           open={defaultOpenFirst && index === 0 ? true : undefined}
         >

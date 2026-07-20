@@ -11,6 +11,7 @@ import FadeIn from '@/app/components/ui/FadeIn';
 import { CrossCityServiceLinks, NearbyCityLinks } from '@/app/components/ui/seo/AdjacentSeoLinks';
 import { useLanguage } from '@/lib/language';
 import { areaCopy } from '@/lib/i18n/areaCopy';
+import { areaBodyCopy } from '@/lib/i18n/areaBodies';
 import { localizedServiceDescription, localizedServiceName } from '@/lib/siteCopy';
 
 type AreaSlugContentProps = {
@@ -21,25 +22,34 @@ type AreaSlugContentProps = {
 export default function AreaSlugContent({ area, slug }: AreaSlugContentProps) {
   const { lang } = useLanguage();
   const copy = areaCopy(lang);
+  const body = areaBodyCopy(slug, lang);
+  const description = body?.description ?? area.description;
+  const directions = body?.directions ?? area.directions;
+  const whyChoose = body?.whyChoose ?? area.whyChoose;
+  const localParagraphs = body?.localParagraphs ?? area.localParagraphs;
 
   return (
     <div lang={lang}>
       <PageHero
         eyebrow={copy.servingEyebrow(area.name)}
         title={copy.heroTitle(area.name)}
-        description={area.description}
+        description={description}
         breadcrumbs={[
           { label: copy.home, href: '/' },
           { label: copy.areasCrumb, href: '/areas-we-serve' },
           { label: area.name },
         ]}
         imageSrc={PHOTOS.exterior}
-        imageAlt={`Auto repair serving ${area.name}, CO from RKC Automotive in Englewood`}
+        imageAlt={
+          lang === 'es'
+            ? `Reparación automotriz para ${area.name}, CO desde RKC Automotive en Englewood`
+            : `Auto repair serving ${area.name}, CO from RKC Automotive in Englewood`
+        }
       />
 
       <section className="border-b border-[color:var(--line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-[color:var(--line)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          {area.whyChoose.slice(0, 3).map((item) => (
+          {whyChoose.slice(0, 3).map((item) => (
             <div key={item} className="flex items-center gap-3 px-6 py-5">
               <span className="size-2 shrink-0 rounded-full bg-primary-green" />
               <p className="text-sm font-semibold text-foreground">{item}</p>
@@ -54,8 +64,8 @@ export default function AreaSlugContent({ area, slug }: AreaSlugContentProps) {
             <h2 className="font-display text-4xl tracking-wide text-foreground sm:text-5xl">
               {copy.repairHeading(area.name)}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">{area.description}</p>
-            {area.localParagraphs.map((paragraph) => (
+            <p className="mt-4 text-lg text-ink-muted">{description}</p>
+            {localParagraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 48)} className="mt-4 text-lg leading-relaxed text-ink-muted">
                 {paragraph}
               </p>
@@ -101,7 +111,7 @@ export default function AreaSlugContent({ area, slug }: AreaSlugContentProps) {
                   {copy.whyHeading(area.name)}
                 </h3>
                 <ul className="mt-6 space-y-4">
-                  {area.whyChoose.map((item) => (
+                  {whyChoose.map((item) => (
                     <li key={item} className="flex gap-3 text-sm leading-relaxed text-ink-muted">
                       <span className="mt-1.5 size-2 shrink-0 rounded-full bg-primary-green" />
                       {item}
@@ -151,7 +161,7 @@ export default function AreaSlugContent({ area, slug }: AreaSlugContentProps) {
             <h2 className="font-display text-4xl tracking-wide text-foreground">
               {copy.directionsHeading(area.name)}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">{area.directions}</p>
+            <p className="mt-4 text-lg text-ink-muted">{directions}</p>
             <p className="mt-4 text-sm text-ink-muted">
               {copy.shopAddress}{' '}
               <a

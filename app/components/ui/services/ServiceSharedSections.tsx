@@ -24,7 +24,11 @@ import {
   SERVICE_AREAS_DATA,
   type FAQItem,
 } from '@/lib/constants';
-import { getPopularDeepDivesForServicePage, getPlatformDiagnosticsForServicePage } from '@/lib/serviceDeepDiveLinks';
+import {
+  getPopularDeepDivesForServicePage,
+  getPlatformDiagnosticsForServicePage,
+  localizeServiceDeepDiveLinkTitle,
+} from '@/lib/serviceDeepDiveLinks';
 import { getFeaturedServiceCities } from '@/lib/adjacentSeoLinks';
 import { HERO_IMAGE_SIZES, PHOTOS } from '@/lib/photos';
 import Breadcrumbs, { type BreadcrumbItem } from '@/app/components/ui/Breadcrumbs';
@@ -876,7 +880,7 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
                     className="group block rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 transition hover:border-primary-green/40 hover:bg-primary-green/5"
                   >
                     <span className="font-semibold text-foreground group-hover:text-primary-green">
-                      {link.title}
+                      {localizeServiceDeepDiveLinkTitle(link, lang)}
                     </span>
                   </Link>
                 </li>
@@ -899,7 +903,7 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
                     className="group block rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 transition hover:border-primary-green/40 hover:bg-primary-green/5"
                   >
                     <span className="font-semibold text-foreground group-hover:text-primary-green">
-                      {link.title}
+                      {localizeServiceDeepDiveLinkTitle(link, lang)}
                     </span>
                   </Link>
                 </li>

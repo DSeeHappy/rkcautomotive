@@ -1,9 +1,13 @@
-import { getServiceCatalogEntry } from '@/lib/modelCommonServices';
+import { getServiceCatalogEntry, parseServiceIdFromSlug } from '@/lib/modelCommonServices';
 import { VEHICLE_MODELS } from '@/lib/vehicleModels';
+import type { Lang } from '@/lib/language';
+import { localizedModelServiceTitle } from '@/lib/i18n/vehicleCopy';
 
 export type ServiceDeepDiveLink = {
   href: string;
   title: string;
+  model?: string;
+  serviceId?: string;
 };
 
 const FEATURED_BRAND_MODELS = [
@@ -57,7 +61,12 @@ function buildDeepDiveLinks(
     const match = vehicle.commonServices.find((service) => serviceIds.has(service.id));
     if (!match) continue;
 
-    links.push({ href: match.href, title: match.title });
+    links.push({
+      href: match.href,
+      title: match.title,
+      model: vehicle.model,
+      serviceId: match.id,
+    });
     if (links.length >= limit) break;
   }
 
@@ -66,7 +75,12 @@ function buildDeepDiveLinks(
       if (links.length >= limit) break;
       const match = vehicle.commonServices.find((service) => serviceIds.has(service.id));
       if (!match || links.some((link) => link.href === match.href)) continue;
-      links.push({ href: match.href, title: match.title });
+      links.push({
+        href: match.href,
+        title: match.title,
+        model: vehicle.model,
+        serviceId: match.id,
+      });
     }
   }
 
@@ -91,4 +105,20 @@ export function getPlatformDiagnosticsForServicePage(
     PLATFORM_BRAND_MODELS,
     limit,
   );
+}
+
+/** Localize deep-dive link title for ES mode (proper nouns kept). */
+export function localizeServiceDeepDiveLinkTitle(link: ServiceDeepDiveLink, lang: Lang): string {
+  if (lang !== 'es') return link.title;
+  if (link.model && link.serviceId) {
+    return localizedModelServiceTitle(link.model, link.serviceId, lang);
+  }
+  const parts = link.href.split('/').filter(Boolean);
+  if (parts[0] !== 'vehicles' || parts.length < 4) return link.title;
+  const vehicle = VEHICLE_MODELS.find(
+    (m) => m.brand === parts[1] && m.model.toLowerCase().replace(/[^a-z0-9]+/g, '-') === parts[2],
+  );
+  const serviceId = parseServiceIdFromSlug(parts[3]);
+  if (!vehicle || !serviceId) return link.title;
+  return localizedModelServiceTitle(vehicle.model, serviceId, lang);
 }

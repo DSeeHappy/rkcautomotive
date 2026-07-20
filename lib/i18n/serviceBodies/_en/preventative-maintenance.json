@@ -1,0 +1,230 @@
+{
+  "breadcrumb": "Preventative Maintenance",
+  "hero": {
+    "imageAlt": "Preventative Maintenance at RKC Automotive Englewood CO",
+    "eyebrow": "Scheduled care · Englewood, CO",
+    "title": "Preventative Maintenance in Englewood, CO",
+    "description": "Factory-interval service done honestly — oil, fluids, filters, belts, and milestone inspections at 30k/60k/90k — with a written plan that fixes what is due, not everything on a generic menu.",
+    "primaryCta": "Plan My Service",
+    "callPrefix": "Call"
+  },
+  "reality": {
+    "quote": "Deferred maintenance is a payment plan — with interest.",
+    "body": "Skipping a $150 coolant flush does not save money when a $1,800 head gasket follows. Englewood commuters stacking miles on I-25 and mountain weekends qualify for severe schedules on most owner manuals — yet dash reminders stretch intervals for marketing. We read your manual, log your mileage, and quote only the services that protect the engine, trans, and brakes you rely on daily."
+  },
+  "symptoms": {
+    "eyebrow": "Milestone science",
+    "title": "What preventative maintenance actually prevents",
+    "intro": "Maintenance is not generic — timing belts, CVT fluid, and spark intervals are engine-specific failure prevention.",
+    "cards": [
+      {
+        "title": "30k / 60k / 90k milestones",
+        "body": "Honda 60k includes trans fluid and spark plugs; Toyota has coolant first-drain intervals; German cars need brake-fluid time changes regardless of mileage. We build milestone packages from your VIN spec — not a one-size coupon sheet. Each item is tied to a failure mode: belt service prevents valve crash, fluid service prevents CVT slip."
+      },
+      {
+        "title": "Colorado severe-duty factors",
+        "body": "Short trips, idling in winter, towing through the foothills, and salted roads push you into severe tables — shorter oil, brake fluid, and trans intervals. Altitude and heat stress cooling systems. We label your service file severe or normal based on how you actually drive, not how the dash average looks."
+      },
+      {
+        "title": "Inspection before upsell",
+        "body": "Multi-point inspection finds cracked serpentine belts, seeping water pumps, and torn CV boots before they strand you. We photograph wear when it matters, recommend fixes with priority levels — safety first, convenience second, cosmetic never pressured. No 27-point printout designed to sell cabin filters you changed last month."
+      }
+    ]
+  },
+  "technical": {
+    "eyebrow": "Maintenance schedules",
+    "title": "30/60/90k milestones & fluid exchange intervals",
+    "intro": "Factory maintenance is VIN-specific — not a generic coupon. We build milestone packages from your owner manual tables with due-now vs due-soon priority so you spend on prevention, not emergency tow bills.",
+    "cards": [
+      {
+        "title": "30k / 60k / 90k milestone content",
+        "body": "Honda 60k includes trans fluid and spark plugs; Toyota specifies coolant first-drain intervals; German cars need brake-fluid time changes regardless of mileage. Timing-belt service on interference engines prevents valve crash worth thousands. We quote each line at $120/hr — you approve the bundle before work starts."
+      },
+      {
+        "title": "Fluid exchange intervals",
+        "body": "Engine coolant at 60k–100k, brake fluid every 2–3 years, transmission fluid at 30k–60k on severe schedules, differential and transfer-case on AWD at 30k–60k. Fluids break down by time and heat — not mileage alone. Denver heat and salt qualify as severe for most commuters."
+      },
+      {
+        "title": "Belt, brake & suspension at service visits",
+        "body": "Serpentine belt crack scan, brake pad thickness, ball-joint play — caught at maintenance before they become repairs. We photograph wear when it matters and prioritize safety-first items. No 27-point printout designed to sell cabin filters you changed last month."
+      },
+      {
+        "title": "Fleet & multi-vehicle logging",
+        "body": "Commercial accounts receive scheduled logging, consolidated invoicing, and priority booking when available. Each vehicle gets due-now vs due-soon lists — oil, brakes, inspections — so fleet managers are not guessing which unit needs service this week."
+      }
+    ],
+    "tableTitle": "Typical fluid exchange intervals (severe schedule)",
+    "tableIntro": "Always verify against your owner manual — this illustrates why deferred fluid service leads to expensive failures.",
+    "table": {
+      "caption": "Preventative maintenance fluid exchange intervals",
+      "columns": [
+        "Fluid",
+        "Typical severe interval",
+        "Failure if deferred"
+      ],
+      "rows": [
+        {
+          "label": "Engine oil",
+          "values": [
+            "5,000 mi / 6 mo",
+            "Turbo bearing coke, sludge"
+          ],
+          "highlight": 2
+        },
+        {
+          "label": "Coolant",
+          "values": [
+            "60k–100k / 5 yr",
+            "Head gasket, heater core clog"
+          ]
+        },
+        {
+          "label": "Brake fluid",
+          "values": [
+            "2–3 years",
+            "Moisture, ABS corrosion"
+          ]
+        },
+        {
+          "label": "Transmission",
+          "values": [
+            "30k–60k severe",
+            "Slip, overheat, rebuild"
+          ]
+        },
+        {
+          "label": "Diff / transfer case",
+          "values": [
+            "30k–60k AWD",
+            "Gear wear, chatter"
+          ]
+        }
+      ]
+    }
+  },
+  "process": {
+    "eyebrow": "Maintenance plan",
+    "title": "How we build your service schedule",
+    "intro": "VIN-specific intervals, honest inspection, and logged history — so the next visit picks up where we left off.",
+    "bgImageAlt": "Preventative Maintenance at RKC Automotive Englewood CO",
+    "steps": [
+      {
+        "step": "01",
+        "title": "History & mileage review",
+        "body": "Prior service records, current mileage, and driving pattern — commute, tow, or mixed — set the interval table."
+      },
+      {
+        "step": "02",
+        "title": "Due-now vs due-soon",
+        "body": "Items past interval flagged safety-critical first. Due-soon items quoted for planning — no batch scare packaging."
+      },
+      {
+        "step": "03",
+        "title": "Fluid & filter service",
+        "body": "Oil, coolant, brake, trans, and differential per spec. Filters matched to engine and cabin air quality needs."
+      },
+      {
+        "step": "04",
+        "title": "Belt, brake & suspension check",
+        "body": "Belt deflection and crack scan, brake thickness, ball-joint play — caught at maintenance before they become repairs."
+      },
+      {
+        "step": "05",
+        "title": "Log & remind",
+        "body": "Sticker and digital notes for next due mileage/date. Fleet accounts get consolidated invoicing."
+      }
+    ]
+  },
+  "checklist": {
+    "eyebrow": "Service menu",
+    "title": "Preventative services we schedule",
+    "intro": "Everything your owner manual expects — performed at RKC with $120/hr labor transparency.",
+    "groups": [
+      {
+        "category": "Fluids",
+        "items": [
+          "Engine oil and filter per spec",
+          "Coolant exchange with OEM chemistry",
+          "Brake, power-steering, and washer fluid checks"
+        ]
+      },
+      {
+        "category": "Filters & belts",
+        "items": [
+          "Engine, cabin, and fuel filters",
+          "Serpentine and timing belt inspection",
+          "Timing belt/water-pump packages on interference engines"
+        ]
+      },
+      {
+        "category": "Drivetrain",
+        "items": [
+          "Transmission fluid service — drain/fill or exchange per manual",
+          "Differential and transfer-case fluids on AWD/4WD",
+          "Spark plugs and coil inspection at mileage"
+        ]
+      },
+      {
+        "category": "Fleet & family",
+        "items": [
+          "Multi-vehicle maintenance scheduling",
+          "Priority booking for commercial accounts",
+          "Pre-trip inspection before mountain travel season"
+        ]
+      }
+    ]
+  },
+  "labor": {
+    "title": "Maintenance labor transparency",
+    "description": "Scheduled maintenance labor at $120/hr with parts listed line-by-line. Milestone packages quoted as a whole — you approve the bundle before we start."
+  },
+  "faq": {
+    "title": "Preventative maintenance questions",
+    "intro": "Severe vs normal schedules, 30k/60k content, fleet plans, and why dealer menus oversell."
+  },
+  "areaLabel": "preventative maintenance",
+  "finalCta": {
+    "title": "Build your maintenance plan",
+    "description": "Visit RKC on Evans Ave with your mileage and manual. We quote what is due — not everything on a poster — at $120/hr labor plus parts.",
+    "secondaryCta": "Schedule service"
+  },
+  "relatedSlug": "preventative-maintenance-englewood-co",
+  "faqs": [
+    {
+      "question": "What is the difference between normal and severe maintenance schedules?",
+      "answer": "Severe schedules shorten oil, fluid, and inspection intervals for short trips, towing, dusty conditions, and extreme temperatures — all common in Colorado. Owner manuals default to normal in marketing copy, but Denver commuting often qualifies as severe. We classify your driving honestly and quote intervals that match reality."
+    },
+    {
+      "question": "What is included in a 30k / 60k / 90k service?",
+      "answer": "Milestones are VIN-specific — not generic. A 60k Honda may need trans fluid and spark plugs; a Toyota may need coolant exchange; German cars need brake-fluid time changes. We build packages from your manual tables: fluids, filters, belts, plugs, and inspections due at that mileage. You approve the bundle before work starts."
+    },
+    {
+      "question": "Will maintenance at RKC void my factory warranty?",
+      "answer": "No. Federal Magnuson-Moss law protects your right to service at independent shops when proper procedures and parts are used. We document maintenance with invoices and fluid specs your warranty claims may request."
+    },
+    {
+      "question": "How do I know which maintenance my car actually needs?",
+      "answer": "We read the owner manual interval tables, check your mileage and prior service history, and inspect wear items. Due-now vs. due-soon items are separated — we do not sell a 90k package at 45k miles unless items are legitimately early due to age or condition."
+    },
+    {
+      "question": "Do you offer fleet preventative maintenance plans?",
+      "answer": "Yes — commercial accounts receive scheduled logging, consolidated invoicing, and priority booking when available. We track oil, brake, and inspection intervals per vehicle so fleet managers are not guessing which unit is due."
+    },
+    {
+      "question": "Why is preventative maintenance cheaper than waiting for breakdowns?",
+      "answer": "Coolant exchanges cost far less than head gaskets from overheating. Timing-belt service prevents valve interference damage worth thousands. Trans fluid service extends life vs. slip and overhaul. Maintenance spends small dollars on schedule instead of large dollars on emergency tow and collateral damage."
+    },
+    {
+      "question": "What fluids should be exchanged at 30k, 60k, and 90k?",
+      "answer": "Intervals are VIN-specific — not universal. Common milestones: engine coolant at 60k–100k, brake fluid every 2–3 years, transmission fluid at 30k–60k on severe schedules, differential and transfer-case on AWD at 30k–60k. We build your list from the owner manual table, not a generic shop poster."
+    },
+    {
+      "question": "What is included in a typical 60k service package?",
+      "answer": "A Honda 60k may include trans fluid, spark plugs, and valve adjustment inspection. Toyota often specifies coolant first drain. German vehicles need brake-fluid time changes regardless of mileage. We quote each line item with labor at $120/hr — you approve the bundle before work starts, not a mystery \"60k special.\""
+    },
+    {
+      "question": "How do I track maintenance for multiple vehicles or a fleet?",
+      "answer": "We log mileage, services performed, and next-due items on each invoice. Fleet accounts receive consolidated billing and priority booking when available. Each vehicle gets a due-now vs. due-soon list — oil, brakes, inspections — so managers are not guessing which unit needs service this week."
+    }
+  ]
+}

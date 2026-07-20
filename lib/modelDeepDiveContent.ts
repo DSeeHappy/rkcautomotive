@@ -6,6 +6,7 @@
 import type { FAQItem } from '@/lib/constants';
 import { BUSINESS, LABOR_RATE } from '@/lib/constants';
 import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
+import { BRAND_CONTENT_ES } from '@/lib/i18n/brandContentEs';
 import { getDeepDiveServiceEs } from '@/lib/i18n/deepDiveServiceEs';
 import { vehicleCopy } from '@/lib/i18n/vehicleCopy';
 import type { Lang } from '@/lib/language';
@@ -676,7 +677,13 @@ function accentAt(index: number) {
   return palette[index % palette.length];
 }
 
-function getBrandFailureSnippet(brandSlug: string, model: string): string | undefined {
+function getBrandFailureSnippet(brandSlug: string, model: string, lang: Lang = 'en'): string | undefined {
+  if (lang === 'es') {
+    const es = BRAND_CONTENT_ES[brandSlug];
+    if (!es?.failureProfiles?.[0]) return undefined;
+    const match = es.failureProfiles[0];
+    return `${match.title}: ${match.description}`;
+  }
   const profile = getBrandFailureProfile(brandSlug);
   if (!profile) return undefined;
   const isCommonModel = profile.commonModels.some(
@@ -712,7 +719,7 @@ function buildDeepDive(
     template.typeNotes[ctx.vehicleType] ??
     template.typeNotes.sedan ??
     t.typeNoteFallback(ctx.brandName, ctx.model, vLabel);
-  const failureSnippet = lang === 'en' ? getBrandFailureSnippet(ctx.brandSlug, ctx.model) : undefined;
+  const failureSnippet = getBrandFailureSnippet(ctx.brandSlug, ctx.model, lang);
   const catalogDesc =
     lang === 'es'
       ? `RKC inspecciona y repara ${template.focus} en su ${ctx.brandName} ${ctx.model} con presupuestos por escrito en Englewood.`
@@ -733,7 +740,9 @@ function buildDeepDive(
     lang === 'es'
       ? [
           `Los dueños de ${ctx.brandName} ${ctx.model} en Englewood, Littleton y el sur del área metro de Denver dependen de ${template.focus} para mantenerse confiables con los cambios de altitud, ciclos de congelación y el tráfico de I-25. ${catalogDesc}`,
-          `RKC publica ${LABOR_RATE} de mano de obra, entrega presupuestos por escrito antes de desarmar y documenta hallazgos para que los dueños de ${ctx.model} sepan exactamente qué desgastó Colorado — no lo que un vendedor adivinó. ${LOCAL}`,
+          failureSnippet
+            ? `Nota de plataforma para conductores ${ctx.brandName}: ${failureSnippet} RKC inspecciona estos patrones en cada visita de ${serviceLower} del ${ctx.model} — no solo el síntoma inmediato por el que llegó.`
+            : `RKC publica ${LABOR_RATE} de mano de obra, entrega presupuestos por escrito antes de desarmar y documenta hallazgos para que los dueños de ${ctx.model} sepan exactamente qué desgastó Colorado — no lo que un vendedor adivinó. ${LOCAL}`,
           `${typeNote} Ya sea que su ${ctx.model} sea un viajero diario por Evans Ave o un remolcador de fin de semana en I-70, igualamos piezas y fluidos a especificaciones ${ctx.brandName} y explicamos qué falló, por qué falló y qué evita reparaciones repetidas.`,
         ]
       : [
