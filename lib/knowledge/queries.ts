@@ -119,6 +119,7 @@ function buildShopObservationsSection(modelId: string): ModelOverviewSection | n
     (claim) =>
       claim.reviewStatus === 'shop_observation' &&
       claim.topic !== 'faq' &&
+      claim.topic !== 'shop_observation' &&
       !PHASE3_OWNERSHIP_TOPICS.has(claim.topic),
   );
   if (claims.length === 0) return null;

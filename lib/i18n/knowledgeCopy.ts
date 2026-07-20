@@ -20,6 +20,7 @@ const EN = {
     'Verified OEM data from the July 2026 research pack — generation-level specs with cited sources. Inline gaps marked in source remain honest.',
   specScaffoldCollapsed:
     'OEM horsepower, torque, MPG, and dimensions are not shown until verified against a licensed source — we never fabricate spec numbers.',
+  sourcesLabel: 'Sources',
   unverifiedCategory: UNABLE_TO_VERIFY,
   badges: {
     verified: 'Catalog verified',
@@ -47,6 +48,7 @@ const ES = {
     'Datos OEM verificados del paquete de investigación de julio 2026 — especificaciones por generación con fuentes citadas.',
   specScaffoldCollapsed:
     'No mostramos caballos de fuerza, torque, MPG ni dimensiones OEM hasta verificarlos con una fuente con licencia — nunca inventamos cifras.',
+  sourcesLabel: 'Fuentes',
   unverifiedCategory: 'No se puede verificar con los datos disponibles.',
   badges: {
     verified: 'Catálogo verificado',
