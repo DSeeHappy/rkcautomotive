@@ -7,6 +7,8 @@ import { getBrandFailureProfile } from '@/lib/brandFailureProfiles';
 import { getBrandReliabilitySnapshot } from '@/lib/brandReliabilityNotes';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { BUSINESS } from '@/lib/constants';
+import { useLanguage } from '@/lib/language';
+import { homeCopy } from '@/lib/homeCopy';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import AnimatedBrandTabList from './AnimatedBrandTabList';
 import BrandLogo from './BrandLogo';
@@ -14,17 +16,19 @@ import BrandModelPicker from './BrandModelPicker';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 
 export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitles?: boolean }) {
+  const { lang } = useLanguage();
+  const brandsCopy = homeCopy(lang).brands;
+
   return (
     <FadeIn className="wrap pb-20 pt-12 sm:pb-24 sm:pt-16">
       <div className="mb-10 max-w-3xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">All makes &amp; models</p>
-        <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">
-          Expert diagnostics for every brand we work on
-        </h2>
-        <p className="mt-4 text-lg text-ink-muted">
-          RKC Automotive in Englewood services Toyota, Ford, BMW, Subaru, and every major make on Colorado roads.
-          Select a brand for hyper-specific failure profiles, buyer warnings, and local altitude context.
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
+          {brandsCopy.eyebrow}
         </p>
+        <h2 className="mt-3 font-display text-4xl tracking-wide text-foreground sm:text-5xl">
+          {brandsCopy.title}
+        </h2>
+        <p className="mt-4 text-lg text-ink-muted">{brandsCopy.intro}</p>
       </div>
 
       <TabGroup>
@@ -32,12 +36,12 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
           <div className="mb-4">
             <div className="flex items-center gap-2">
               <MousePointerClick className="size-4 shrink-0 text-primary-green" aria-hidden />
-              <p className="text-sm font-semibold text-foreground sm:text-base">Pick your make</p>
+              <p className="text-sm font-semibold text-foreground sm:text-base">{brandsCopy.pickMake}</p>
             </div>
-            <p className="mt-1.5 pl-6 text-sm leading-relaxed text-ink-muted">Tap a brand below</p>
+            <p className="mt-1.5 pl-6 text-sm leading-relaxed text-ink-muted">{brandsCopy.tapBrand}</p>
           </div>
 
-          <AnimatedBrandTabList aria-label="Vehicle makes" className="flex flex-wrap gap-2 md:gap-2">
+          <AnimatedBrandTabList aria-label={brandsCopy.ariaMakes} className="flex flex-wrap gap-2 md:gap-2">
             {VEHICLE_BRANDS.map((brand) => (
               <Tab
                 key={brand.slug}

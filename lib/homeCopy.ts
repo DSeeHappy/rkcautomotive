@@ -44,6 +44,74 @@ export const HOME_COPY = {
       serviceLabel: 'Service',
       openService: 'Open service',
       allServices: (n: number) => `All ${n} services`,
+      cards: {
+        'brake-repair-englewood-co': {
+          name: 'Brake Repair',
+          description: 'Pads, rotors, and complete brake system service.',
+        },
+        'engine-diagnostics-englewood-co': {
+          name: 'Engine Diagnostics',
+          description:
+            'Advanced diagnostics for check-engine lights, drivability, diesel, and electrical issues.',
+        },
+        'heating-ac-englewood-co': {
+          name: 'Heating & AC',
+          description: 'Climate control diagnostics and repair.',
+        },
+        'oil-changes-englewood-co': {
+          name: 'Oil Changes',
+          description: 'Conventional and synthetic oil service.',
+        },
+        'battery-testing-englewood-co': {
+          name: 'Battery Testing',
+          description: 'Free testing and reliable replacements.',
+        },
+        'preventative-maintenance-englewood-co': {
+          name: 'Preventative Maintenance',
+          description: 'Stay ahead of problems with scheduled care.',
+        },
+      },
+    },
+    competitive: [
+      {
+        title: 'Rate you can see before you call',
+        description:
+          'National chains quote menu packages by ZIP code — labor rates and shop supply fees vary by location and rarely appear as a flat hourly rate online. RKC posts $120/hr so you can compare hours × rate + parts before you drive over.',
+      },
+      {
+        title: 'Same crew, not a rotating line',
+        description:
+          'High-volume chain stores run appointment queues with different technicians each visit. At RKC you talk to the same ASE-certified crew — Ray, Oscar, and the team who have been turning wrenches in this Englewood bay for 30+ years.',
+      },
+      {
+        title: 'Open until 6 PM weekdays',
+        description:
+          'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no online appointment form required.',
+      },
+      {
+        title: 'No oversell. Real diagnostics.',
+        description:
+          'Chain shops often bundle "free" inspections with coupon-driven add-ons — fluid flushes, filter packages, store credit offers. We diagnose the actual problem, explain what is urgent vs. what can wait, and fix only what you approve.',
+      },
+    ],
+    trustBadges: [
+      'ASE Certified',
+      '$120/hr Posted Online',
+      '30+ Years Experience',
+      'Written Estimates',
+      'Same-Day Service',
+      'All Makes & Models',
+      'Hablamos Español',
+      'Locally Owned',
+    ],
+    brands: {
+      eyebrow: 'All makes & models',
+      title: 'Expert diagnostics for every brand we work on',
+      intro:
+        'RKC Automotive in Englewood services Toyota, Ford, BMW, Subaru, and every major make on Colorado roads. Select a brand for hyper-specific failure profiles, buyer warnings, and local altitude context.',
+      pickMake: 'Pick your make',
+      tapBrand: 'Tap a brand below',
+      ariaMakes: 'Vehicle makes',
     },
     process: {
       eyebrow: 'How it works',
@@ -107,6 +175,28 @@ export const HOME_COPY = {
       title: 'Quick answers before you call',
       intro: 'Same-day openings, written estimates, and how we work — more on the full FAQ page.',
       allFaqs: 'All FAQs',
+      items: [
+        {
+          question: 'Do you offer same-day service in Englewood?',
+          answer:
+            "Yes! We offer same-day service for many repairs and maintenance. Call us at (720) 749-3965 before 2 PM and we'll do our best to get you in the same day. Some complex repairs may require overnight service depending on parts availability and diagnostic time.",
+        },
+        {
+          question: 'Do you provide written estimates before starting work?',
+          answer:
+            "Absolutely. We always provide detailed written estimates before beginning any repair work. You'll know exactly what needs to be done and how much it will cost before we start. No surprise charges — ever.",
+        },
+        {
+          question: 'What forms of payment do you accept?',
+          answer:
+            'We accept cash, all major credit cards (Visa, Mastercard, Discover, American Express), and debit cards.',
+        },
+        {
+          question: 'How long will my repair take?',
+          answer:
+            'Repair time depends on the service you need and what we find during inspection. Pick a service on our site or tell us what you need when you call — we will give you a realistic window for your vehicle. Many maintenance visits finish the same day; complex diagnostics or parts-order jobs may take longer. Call (720) 749-3965 for an estimate based on your make and model.',
+        },
+      ],
     },
     cta: {
       title: 'Ready when you are',
@@ -169,6 +259,74 @@ export const HOME_COPY = {
       serviceLabel: 'Servicio',
       openService: 'Ver servicio',
       allServices: (n: number) => `Los ${n} servicios`,
+      cards: {
+        'brake-repair-englewood-co': {
+          name: 'Reparación de frenos',
+          description: 'Pastillas, discos y servicio completo del sistema de frenos.',
+        },
+        'engine-diagnostics-englewood-co': {
+          name: 'Diagnóstico de motor',
+          description:
+            'Diagnóstico avanzado para luz de check engine, manejabilidad, diésel y fallas eléctricas.',
+        },
+        'heating-ac-englewood-co': {
+          name: 'Calefacción y A/C',
+          description: 'Diagnóstico y reparación del sistema de clima.',
+        },
+        'oil-changes-englewood-co': {
+          name: 'Cambios de aceite',
+          description: 'Servicio de aceite convencional y sintético.',
+        },
+        'battery-testing-englewood-co': {
+          name: 'Prueba de batería',
+          description: 'Pruebas gratis y reemplazos confiables.',
+        },
+        'preventative-maintenance-englewood-co': {
+          name: 'Mantenimiento preventivo',
+          description: 'Anticípese a los problemas con cuidado programado.',
+        },
+      },
+    },
+    competitive: [
+      {
+        title: 'Tarifa que puede ver antes de llamar',
+        description:
+          'Las cadenas nacionales cotizan paquetes por código postal — las tarifas de mano de obra y cargos de taller varían por ubicación y rara vez aparecen como una tarifa fija por hora en línea. RKC publica $120/hr para que pueda comparar horas × tarifa + piezas antes de venir.',
+      },
+      {
+        title: 'El mismo equipo, no una fila rotativa',
+        description:
+          'Los talleres de alto volumen manejan citas con técnicos distintos en cada visita. En RKC habla con el mismo equipo certificado ASE — Ray, Oscar y el equipo que ha trabajado en esta bahía de Englewood por más de 30 años.',
+      },
+      {
+        title: 'Abiertos hasta las 6 PM entre semana',
+        description:
+          'Muchos talleres de Englewood cierran a las 5 PM entre semana. Nosotros estamos abiertos hasta las 6 PM de lunes a viernes y aceptamos visitas sin cita cuando hay espacio en la bahía — sin formulario de cita en línea obligatorio.',
+      },
+      {
+        title: 'Sin ventas excesivas. Diagnóstico real.',
+        description:
+          'Las cadenas a menudo agrupan inspecciones “gratis” con extras impulsados por cupones — lavados de fluidos, paquetes de filtros, crédito de tienda. Diagnosticamos el problema real, explicamos qué es urgente y qué puede esperar, y solo reparamos lo que usted aprueba.',
+      },
+    ],
+    trustBadges: [
+      'Certificado ASE',
+      '$120/hr publicado en línea',
+      'Más de 30 años de experiencia',
+      'Presupuestos por escrito',
+      'Servicio el mismo día',
+      'Todas las marcas y modelos',
+      'Hablamos Español',
+      'De propiedad local',
+    ],
+    brands: {
+      eyebrow: 'Todas las marcas y modelos',
+      title: 'Diagnóstico experto para cada marca que atendemos',
+      intro:
+        'RKC Automotive en Englewood da servicio a Toyota, Ford, BMW, Subaru y todas las marcas principales en las carreteras de Colorado. Seleccione una marca para perfiles de fallas específicas, avisos al comprador y contexto de altitud local.',
+      pickMake: 'Elija su marca',
+      tapBrand: 'Toque una marca abajo',
+      ariaMakes: 'Marcas de vehículos',
     },
     process: {
       eyebrow: 'Cómo funciona',
@@ -233,6 +391,28 @@ export const HOME_COPY = {
       intro:
         'Cupos el mismo día, presupuestos por escrito y cómo trabajamos — más en la página completa de preguntas frecuentes.',
       allFaqs: 'Todas las preguntas',
+      items: [
+        {
+          question: '¿Ofrecen servicio el mismo día en Englewood?',
+          answer:
+            '¡Sí! Ofrecemos servicio el mismo día para muchas reparaciones y mantenimientos. Llámenos al (720) 749-3965 antes de las 2 PM e haremos lo posible por atenderlo el mismo día. Algunas reparaciones complejas pueden requerir servicio de un día para otro según disponibilidad de piezas y tiempo de diagnóstico.',
+        },
+        {
+          question: '¿Dan presupuestos por escrito antes de empezar el trabajo?',
+          answer:
+            'Por supuesto. Siempre damos presupuestos detallados por escrito antes de comenzar cualquier reparación. Sabrá exactamente qué hay que hacer y cuánto costará antes de empezar. Sin cargos sorpresa — nunca.',
+        },
+        {
+          question: '¿Qué formas de pago aceptan?',
+          answer:
+            'Aceptamos efectivo, todas las tarjetas de crédito principales (Visa, Mastercard, Discover, American Express) y tarjetas de débito.',
+        },
+        {
+          question: '¿Cuánto tardará mi reparación?',
+          answer:
+            'El tiempo depende del servicio que necesite y de lo que encontremos en la inspección. Elija un servicio en nuestro sitio o cuéntenos qué necesita al llamar — le daremos una ventana realista para su vehículo. Muchas visitas de mantenimiento terminan el mismo día; diagnósticos complejos o trabajos con pedido de piezas pueden tomar más. Llame al (720) 749-3965 para una estimación según su marca y modelo.',
+        },
+      ],
     },
     cta: {
       title: 'Listos cuando usted lo esté',

@@ -8,14 +8,12 @@ import {
   ASE_URL,
   BUSINESS,
   FEATURED_SERVICES,
-  HOMEPAGE_FAQS,
   PHOTOS,
   PROCESS_STEPS,
   SERVICES,
   STATS,
   VERIFIED_REVIEWS_4_PLUS,
   TRUST_BADGES,
-  COMPETITIVE_POSITIONING,
   LABOR_RATE,
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
@@ -82,6 +80,8 @@ export default function HomeContent() {
           <div className="space-y-5">
             {FEATURED_SERVICES.map((service, i) => {
               const reverse = i % 2 === 1;
+              const card =
+                copy.services.cards[service.slug as keyof typeof copy.services.cards] ?? service;
               return (
                 <FadeIn key={service.href} delay={i * 0.04}>
                   <Link
@@ -105,9 +105,9 @@ export default function HomeContent() {
                         0{i + 1} · {copy.services.serviceLabel}
                       </p>
                       <h3 className="mt-3 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                        {service.name}
+                        {card.name}
                       </h3>
-                      <p className="mt-4 max-w-md text-base text-white/70">{service.description}</p>
+                      <p className="mt-4 max-w-md text-base text-white/70">{card.description}</p>
                       <span className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-primary-green-light transition group-hover:gap-3">
                         {copy.services.openService} <span aria-hidden>→</span>
                       </span>
@@ -188,7 +188,7 @@ export default function HomeContent() {
           </div>
 
           <Stagger className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4" stagger={0.08}>
-            {COMPETITIVE_POSITIONING.map((item) => (
+            {copy.competitive.map((item) => (
               <StaggerItem key={item.title}>
                 <div className="h-full rounded-2xl border border-[color:var(--line)] bg-white p-6 sm:p-8">
                   <h3 className="text-lg font-bold leading-snug text-primary-blue sm:text-xl">{item.title}</h3>
@@ -200,10 +200,10 @@ export default function HomeContent() {
 
           <FadeIn className="mt-16 border-t border-[color:var(--line)] pt-12">
             <ul className="grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-              {TRUST_BADGES.map((badge) => (
-                <li key={badge} className="flex items-center gap-3 text-sm font-semibold">
+              {copy.trustBadges.map((badge, i) => (
+                <li key={TRUST_BADGES[i]} className="flex items-center gap-3 text-sm font-semibold">
                   <span className="size-2 shrink-0 rounded-full bg-primary-green" />
-                  {badge === 'ASE Certified' ? (
+                  {TRUST_BADGES[i] === 'ASE Certified' ? (
                     <a
                       href={ASE_URL}
                       target="_blank"
@@ -347,7 +347,11 @@ export default function HomeContent() {
             <p className="mt-4 text-ink-muted">{copy.faq.intro}</p>
           </FadeIn>
           <FadeIn delay={0.06} className="mx-auto max-w-3xl">
-            <FAQAccordion items={HOMEPAGE_FAQS} defaultOpenFirst />
+            <FAQAccordion
+              items={[...copy.faq.items]}
+              defaultOpenFirst
+              adaptRepairTimeFaq={lang === 'en'}
+            />
             <div className="mt-8 text-center">
               <Link href="/frequently-asked-questions" className="btn-blue">
                 {copy.faq.allFaqs}
