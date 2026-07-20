@@ -79,6 +79,7 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // Crawlable default is English. Client toggle updates documentElement.lang for a11y only — see lib/i18n/localeSeo.ts
   return (
     <html lang="en">
       <head>

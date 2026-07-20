@@ -1,5 +1,9 @@
 'use client';
 
+/**
+ * Client EN|ES UX toggle only. SSR/metadata stay English; see `lib/i18n/localeSeo.ts`.
+ * Do not add hreflang until distinct `/es` (or equivalent) URLs exist.
+ */
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 export type Lang = 'en' | 'es';
@@ -32,6 +36,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLangState(readStoredLang());
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const setLang = (next: Lang) => {
     setLangState(next);

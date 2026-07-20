@@ -163,6 +163,8 @@ export function createOrganizationSchema() {
     areaServed: DEFAULT_AREA_SERVED,
     sameAs: SAME_AS,
     description: BUSINESS.shortDescription,
+    // Bilingual staff signal — not a claim of separate indexed language URLs.
+    knowsLanguage: ['en', 'es'],
   };
 }
 
@@ -317,11 +319,7 @@ export function createServiceSchema(
       '@type': 'City',
       name: areaName,
     },
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      priceCurrency: 'USD',
-    },
+    // No Offer / AggregateRating — hollow InStock offers and invented ratings fail Rich Results.
   };
 }
 
