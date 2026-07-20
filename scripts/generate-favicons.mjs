@@ -2,10 +2,10 @@
  * Favicon pipeline for the official RKC mark.
  *
  * - Animated source (`public/images/rkc-favicon-source.png`, APNG) is never
- *   overwritten. It is copied as-is to `public/favicon.png` so browsers that
- *   support APNG keep the bolt/oval motion.
- * - Static fallbacks (`app/icon.png`, `app/apple-icon.png`, `app/favicon.ico`)
- *   are generated from the first frame only (sharp drops animation frames).
+ *   re-encoded. It is copied as-is to `public/images/rkc-logo-animated.png`
+ *   for the in-page header logo (where APNG motion renders reliably).
+ * - Static fallbacks (`app/icon.png`, `app/apple-icon.png`, `app/favicon.ico`,
+ *   `public/images/rkc-logo-animated-static.png`) use the first frame only.
  */
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -14,7 +14,8 @@ import toIco from "to-ico";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const ANIMATED_SOURCE = path.join(ROOT, "public/images/rkc-favicon-source.png");
-const ANIMATED_PUBLIC = path.join(ROOT, "public/favicon.png");
+const ANIMATED_HEADER = path.join(ROOT, "public/images/rkc-logo-animated.png");
+const ANIMATED_STATIC = path.join(ROOT, "public/images/rkc-logo-animated-static.png");
 const BRAND_GREEN = "#0e8536";
 
 async function assertAnimatedSource() {
@@ -28,9 +29,16 @@ async function assertAnimatedSource() {
 }
 
 /** Copy the official APNG unchanged — never re-encode (that would kill animation). */
-async function writeAnimatedFavicon(sourceBuf) {
-  await fs.writeFile(ANIMATED_PUBLIC, sourceBuf);
-  console.log(`wrote ${path.relative(ROOT, ANIMATED_PUBLIC)} (APNG, animation preserved)`);
+async function writeAnimatedHeaderLogo(sourceBuf) {
+  await fs.writeFile(ANIMATED_HEADER, sourceBuf);
+  console.log(`wrote ${path.relative(ROOT, ANIMATED_HEADER)} (APNG, animation preserved)`);
+}
+
+/** Static first frame for reduced-motion header fallback. */
+async function writeAnimatedStaticFallback() {
+  const png = await sharp(ANIMATED_SOURCE).png().toBuffer();
+  await fs.writeFile(ANIMATED_STATIC, png);
+  console.log(`wrote ${path.relative(ROOT, ANIMATED_STATIC)} (static first frame)`);
 }
 
 /**
@@ -75,7 +83,8 @@ async function writeIco(outputPath) {
 }
 
 const sourceBuf = await assertAnimatedSource();
-await writeAnimatedFavicon(sourceBuf);
+await writeAnimatedHeaderLogo(sourceBuf);
+await writeAnimatedStaticFallback();
 await writePng(path.join(ROOT, "app/icon.png"), 512);
 await writePng(path.join(ROOT, "app/apple-icon.png"), 180);
 await writeIco(path.join(ROOT, "app/favicon.ico"));

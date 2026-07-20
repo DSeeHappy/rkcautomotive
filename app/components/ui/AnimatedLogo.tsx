@@ -7,10 +7,12 @@ import { useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import {
   getNavTopScale,
+  RKC_LOGO_ANIMATED_APNG,
+  RKC_LOGO_ANIMATED_SIZE,
+  RKC_LOGO_ANIMATED_STATIC,
   RKC_LOGO_CARD_PNG,
   RKC_LOGO_CARD_SIZE,
   RKC_LOGO_HEIGHT,
-  RKC_LOGO_NAV_WEBP,
   RKC_LOGO_PNG,
   RKC_LOGO_WIDTH,
 } from '@/lib/logo';
@@ -36,7 +38,7 @@ const sizeClass = {
 
 const navSizes = '(max-width: 640px) 140px, (max-width: 1024px) 160px, 180px';
 
-const navScrolledImgClass =
+const navMarkImgClass =
   'block h-11 max-h-full w-auto select-none object-contain object-left sm:h-12 lg:h-14';
 
 const navScrolledCardClass = 'rounded-lg bg-white p-0.5 shadow-sm';
@@ -46,9 +48,6 @@ const heroCardClass =
 
 const navLightClass =
   'drop-shadow-[0_2px_10px_rgba(12,18,34,0.14)] drop-shadow-[0_0_1px_rgba(12,18,34,0.08)]';
-
-const navDarkCardClass =
-  'rounded-lg shadow-[0_8px_28px_-10px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.2)]';
 
 function useCardAsset(
   variant: AnimatedLogoVariant,
@@ -62,6 +61,32 @@ function useCardAsset(
   return false;
 }
 
+function NavMarkImage({
+  className = '',
+  decorative = false,
+}: {
+  className?: string;
+  decorative?: boolean;
+}) {
+  const reduce = usePrefersReducedMotion();
+  const src = reduce ? RKC_LOGO_ANIMATED_STATIC : RKC_LOGO_ANIMATED_APNG;
+
+  return (
+    <Image
+      src={src}
+      alt={decorative ? '' : 'RKC Automotive'}
+      aria-hidden={decorative || undefined}
+      width={RKC_LOGO_ANIMATED_SIZE}
+      height={RKC_LOGO_ANIMATED_SIZE}
+      unoptimized
+      fetchPriority="low"
+      sizes={navSizes}
+      className={[navMarkImgClass, className].filter(Boolean).join(' ')}
+      draggable={false}
+    />
+  );
+}
+
 function LogoImage({
   variant = 'nav',
   className = '',
@@ -72,8 +97,12 @@ function LogoImage({
   decorative?: boolean;
 }) {
   const v = variant ?? 'nav';
+  if (v === 'nav') {
+    return <NavMarkImage className={className} decorative={decorative} />;
+  }
+
   const useCard = useCardAsset(v, onDarkBackground, scrolled);
-  const src = useCard ? RKC_LOGO_CARD_PNG : v === 'nav' ? RKC_LOGO_NAV_WEBP : RKC_LOGO_PNG;
+  const src = useCard ? RKC_LOGO_CARD_PNG : RKC_LOGO_PNG;
   const width = useCard ? RKC_LOGO_CARD_SIZE : RKC_LOGO_WIDTH;
   const height = useCard ? RKC_LOGO_CARD_SIZE : RKC_LOGO_HEIGHT;
 
@@ -81,8 +110,6 @@ function LogoImage({
     'block select-none',
     sizeClass[v],
     v === 'hero' && useCard ? heroCardClass : '',
-    v === 'nav' && useCard ? navDarkCardClass : '',
-    v === 'nav' && !useCard ? navLightClass : '',
     className,
   ]
     .filter(Boolean)
@@ -97,13 +124,11 @@ function LogoImage({
       height={height}
       quality={95}
       priority={v === 'hero'}
-      fetchPriority={v === 'nav' ? 'low' : v === 'hero' ? 'high' : undefined}
+      fetchPriority={v === 'hero' ? 'high' : undefined}
       sizes={
         v === 'hero'
           ? '(max-width: 640px) 184px, (max-width: 1024px) 216px, 240px'
-          : v === 'nav'
-            ? navSizes
-            : '(max-width: 640px) 128px, 144px'
+          : '(max-width: 640px) 128px, 144px'
       }
       className={imageClass}
       draggable={false}
@@ -173,18 +198,7 @@ function NavScrollLogo({
           style={{ opacity: scrolled ? 0 : 1 }}
           aria-hidden={scrolled || undefined}
         >
-          <Image
-            src={RKC_LOGO_NAV_WEBP}
-            alt=""
-            aria-hidden
-            width={RKC_LOGO_WIDTH}
-            height={RKC_LOGO_HEIGHT}
-            quality={95}
-            sizes={navSizes}
-            fetchPriority="low"
-            className={`${navScrolledImgClass} ${navLightClass}`}
-            draggable={false}
-          />
+          <NavMarkImage decorative className={navLightClass} />
         </div>
         <div
           ref={cardRef}
@@ -193,18 +207,7 @@ function NavScrollLogo({
           aria-hidden={!scrolled || undefined}
         >
           <div className={navScrolledCardClass}>
-            <Image
-              src={RKC_LOGO_NAV_WEBP}
-              alt=""
-              aria-hidden
-              width={RKC_LOGO_WIDTH}
-              height={RKC_LOGO_HEIGHT}
-              quality={95}
-              sizes={navSizes}
-              fetchPriority="low"
-              className={navScrolledImgClass}
-              draggable={false}
-            />
+            <NavMarkImage decorative />
           </div>
         </div>
       </div>

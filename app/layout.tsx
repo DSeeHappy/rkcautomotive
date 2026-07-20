@@ -68,13 +68,13 @@ export const metadata: Metadata = {
     },
   },
   manifest: '/manifest.webmanifest',
-  // Animated APNG first (Chrome/Firefox); static PNG/ICO remain as fallbacks.
+  // Static tab icons only — animated APNG lives in the header logo (AnimatedLogo).
   icons: {
     icon: [
-      { url: '/favicon.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/icon.png', type: 'image/png', sizes: '512x512' },
     ],
-    shortcut: '/favicon.png',
+    shortcut: '/favicon.ico',
     apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: rootOpenGraphDefaults,
@@ -94,8 +94,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang={CRAWLABLE_HTML_LANG}>
       <head>
-        {/* Prefer animated APNG favicon; Next also emits static app/icon + favicon.ico. */}
-        <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>

@@ -25,6 +25,12 @@ export const RKC_LOGO_HEIGHT = 1123;
 /** Square white-card asset dimensions */
 export const RKC_LOGO_CARD_SIZE = 1040;
 
+/** Animated APNG brand mark — in-page header only (tab favicon stays static) */
+export const RKC_LOGO_ANIMATED_APNG = '/images/rkc-logo-animated.png';
+/** First APNG frame — prefers-reduced-motion / static fallback */
+export const RKC_LOGO_ANIMATED_STATIC = '/images/rkc-logo-animated-static.png';
+export const RKC_LOGO_ANIMATED_SIZE = 64;
+
 /** Nav logo — compact when scrolled (px) */
 export const NAV_LOGO_SCROLLED_HEIGHT = { base: 56, sm: 64, lg: 72 } as const;
 
