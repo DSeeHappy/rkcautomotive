@@ -13,7 +13,7 @@ import PageCTAs from '@/app/components/ui/PageCTAs';
 import FadeIn from '@/app/components/ui/FadeIn';
 import JsonLd from '@/app/components/JsonLd';
 import { createPageMetadata } from '@/lib/og';
-import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
+import { createBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Customer Reviews | RKC Automotive Englewood, CO',
@@ -30,7 +30,7 @@ export default function ReviewsPage() {
     <div>
       <JsonLd
         data={[
-          createLocalBusinessSchema(),
+          // LocalBusiness/AutoRepair NAP comes from root layout only — no AggregateRating.
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'Reviews', path: '/reviews' },

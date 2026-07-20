@@ -5,7 +5,7 @@ import { createServicePageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
-  "Preventative Maintenance | Englewood, CO",
+  "Preventative Maintenance in Englewood, CO | RKC Automotive",
   "Preventative maintenance in Englewood, CO. Scheduled service keeps your vehicle reliable and prevents costly repairs across the Denver south metro. Call (720) 749-3965.",
   "preventative-maintenance-englewood-co",
   PHOTOS.brandedBay,

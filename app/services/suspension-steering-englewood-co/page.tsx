@@ -5,7 +5,7 @@ import { createServicePageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from '@/lib/seo';
 
 export const metadata = createServicePageMetadata(
-  "Suspension & Steering Repair | Englewood, CO",
+  "Suspension & Steering Repair in Englewood, CO | RKC Automotive",
   "Suspension and steering repair in Englewood, CO — shocks, struts, ball joints, and alignment from ASE-certified techs. Serving Denver south metro. Call (720) 749-3965.",
   "suspension-steering-englewood-co",
   PHOTOS.techCloseup,

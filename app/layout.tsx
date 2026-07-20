@@ -54,7 +54,11 @@ export const metadata: Metadata = {
     },
   },
   // Prefer Metadata API over a raw <head> tag so verification survives metadata merges.
+  // Set GOOGLE_SITE_VERIFICATION in Vercel env from Search Console → HTML tag method.
   verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+      : {}),
     other: {
       'msvalidate.01': BING_SITE_VERIFICATION,
     },
