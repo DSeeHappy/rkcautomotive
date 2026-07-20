@@ -11,15 +11,12 @@ import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
-
-const STAT_PILLS = [
-  { icon: Wrench, label: LABOR_RATE, sub: 'posted labor rate' },
-  { icon: Users, label: '13+', sub: 'warranty partners' },
-  { icon: Award, label: 'ASE', sub: 'certified techs', href: ASE_URL },
-  { icon: ShieldCheck, label: '30+ yrs', sub: 'Englewood shop' },
-] as const;
+import { useLanguage } from '@/lib/language';
+import { siteCopy } from '@/lib/siteCopy';
 
 export default function WarrantyHero() {
+  const { lang } = useLanguage();
+  const shell = siteCopy(lang).shells.warranty;
   const reduce = usePrefersReducedMotion();
   const { sectionRef, bgRef, contentRef } = useGsapParallax<HTMLElement>(reduce, {
     yPercent: 16,
@@ -32,8 +29,15 @@ export default function WarrantyHero() {
 
   const partnerCount = 13 + OTHER_WARRANTY_PROVIDERS.length;
 
+  const statPills = [
+    { icon: Wrench, label: LABOR_RATE, sub: shell.trustSubs.labor },
+    { icon: Users, label: '13+', sub: shell.trustSubs.partners },
+    { icon: Award, label: 'ASE', sub: shell.trustSubs.ase, href: ASE_URL },
+    { icon: ShieldCheck, label: '30+ yrs', sub: shell.trustSubs.shop },
+  ] as const;
+
   return (
-    <section ref={sectionRef} className="relative isolate min-h-[70svh] overflow-hidden bg-[#0c1222] sm:min-h-[78svh]">
+    <section lang={lang} ref={sectionRef} className="relative isolate min-h-[70svh] overflow-hidden bg-[#0c1222] sm:min-h-[78svh]">
       <div ref={bgRef} className="absolute inset-0">
         <Image
           src={PHOTOS.engineRebuild}
@@ -65,8 +69,8 @@ export default function WarrantyHero() {
           <div className="max-w-4xl">
             <Breadcrumbs
               items={[
-                { label: 'Home', href: '/' },
-                { label: 'Extended Warranty' },
+                { label: shell.home, href: '/' },
+                { label: shell.crumb },
               ]}
               className="mb-6"
               variant="light"
@@ -75,40 +79,53 @@ export default function WarrantyHero() {
               ref={eyebrow}
               className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light"
             >
-              Warranty advocacy · Englewood, CO
+              {shell.eyebrow}
             </p>
 
             <h1
               ref={title}
               className="mt-4 font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.95] tracking-wide text-white"
             >
-              We Accept{' '}
-              <span className="bg-gradient-to-r from-primary-green-light via-emerald-300 to-primary-green-light bg-clip-text text-transparent">
-                All Major
-              </span>{' '}
-              Extended Warranties
+              {lang === 'es' ? (
+                <>
+                  Aceptamos{' '}
+                  <span className="bg-gradient-to-r from-primary-green-light via-emerald-300 to-primary-green-light bg-clip-text text-transparent">
+                    todas las
+                  </span>{' '}
+                  garantías extendidas principales
+                </>
+              ) : (
+                <>
+                  We Accept{' '}
+                  <span className="bg-gradient-to-r from-primary-green-light via-emerald-300 to-primary-green-light bg-clip-text text-transparent">
+                    All Major
+                  </span>{' '}
+                  Extended Warranties
+                </>
+              )}
             </h1>
 
             <p ref={description} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
-              Don&apos;t battle claims adjusters alone. RKC manages diagnostics, teardown authorizations, denial
-              appeals, and parts quality — from drop-off through approved repair.
+              {lang === 'es'
+                ? 'No pelee solo con los ajustadores de reclamos. RKC gestiona diagnóstico, autorizaciones de desarmado, apelaciones de denegación y calidad de piezas — desde la entrega hasta la reparación aprobada.'
+                : "Don't battle claims adjusters alone. RKC manages diagnostics, teardown authorizations, denial appeals, and parts quality — from drop-off through approved repair."}
             </p>
 
             <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
               <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                 <Phone className="size-5" />
-                Call {BUSINESS.phone}
+                {shell.call(BUSINESS.phone)}
               </MotionAnchor>
               <Link href="/contact" className="btn-ghost-light">
                 <CalendarCheck className="size-5" />
-                Schedule Warranty Diagnostic
+                {lang === 'es' ? 'Agendar diagnóstico de garantía' : 'Schedule Warranty Diagnostic'}
               </Link>
             </div>
           </div>
 
           <div className="relative z-20 mt-10 lg:mt-12">
             <HeroTrustPills
-              pills={STAT_PILLS.map((pill) => ({
+              pills={statPills.map((pill) => ({
                 ...pill,
                 label: pill.label === '13+' ? `${partnerCount}+` : pill.label,
               }))}
