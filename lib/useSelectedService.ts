@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { usePathname } from 'next/navigation';
 import {
   normalizeServiceDurationKey,
@@ -8,6 +8,24 @@ import {
   readPersistedSelectedService,
   serviceKeyFromPathname,
 } from '@/lib/serviceDurations';
+
+const SELECTED_SERVICE_CHANGE = 'rkc-selected-service-change';
+
+function subscribeSelectedService(onStoreChange: () => void) {
+  window.addEventListener(SELECTED_SERVICE_CHANGE, onStoreChange);
+  window.addEventListener('storage', onStoreChange);
+  return () => {
+    window.removeEventListener(SELECTED_SERVICE_CHANGE, onStoreChange);
+    window.removeEventListener('storage', onStoreChange);
+  };
+}
+
+function readClientSelectedService(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  const fromQuery = normalizeServiceDurationKey(params.get('service'));
+  if (fromQuery) return fromQuery;
+  return readPersistedSelectedService();
+}
 
 /**
  * Resolve the customer's selected service from:
@@ -18,35 +36,20 @@ import {
  */
 export function useSelectedService(override?: string | null): string | null {
   const pathname = usePathname();
-  const [resolved, setResolved] = useState<string | null>(() =>
-    normalizeServiceDurationKey(override) ?? serviceKeyFromPathname(pathname),
+
+  const fromOverride = normalizeServiceDurationKey(override);
+  const fromPath = serviceKeyFromPathname(pathname);
+  const fromClient = useSyncExternalStore(
+    subscribeSelectedService,
+    readClientSelectedService,
+    () => null,
   );
 
+  const resolved = fromOverride ?? fromPath ?? fromClient;
+
   useEffect(() => {
-    const fromOverride = normalizeServiceDurationKey(override);
-    if (fromOverride) {
-      persistSelectedService(fromOverride);
-      setResolved(fromOverride);
-      return;
-    }
-
-    const params = new URLSearchParams(window.location.search);
-    const fromQuery = normalizeServiceDurationKey(params.get('service'));
-    if (fromQuery) {
-      persistSelectedService(fromQuery);
-      setResolved(fromQuery);
-      return;
-    }
-
-    const fromPath = serviceKeyFromPathname(pathname);
-    if (fromPath) {
-      persistSelectedService(fromPath);
-      setResolved(fromPath);
-      return;
-    }
-
-    setResolved(readPersistedSelectedService());
-  }, [override, pathname]);
+    if (resolved) persistSelectedService(resolved);
+  }, [resolved]);
 
   return resolved;
 }

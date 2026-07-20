@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useSyncExternalStore } from 'react';
 import { useGSAP } from '@gsap/react';
 import { CheckCircle, Send } from 'lucide-react';
 import { ensureScrollTrigger, gsap } from '@/lib/gsap';
@@ -17,9 +17,42 @@ import {
   servicePageSlugFromKey,
 } from '@/lib/serviceDurations';
 
+const CONTACT_SERVICE_CHANGE = 'rkc-contact-service-change';
+
+function subscribeContactService(onStoreChange: () => void) {
+  window.addEventListener(CONTACT_SERVICE_CHANGE, onStoreChange);
+  window.addEventListener('storage', onStoreChange);
+  return () => {
+    window.removeEventListener(CONTACT_SERVICE_CHANGE, onStoreChange);
+    window.removeEventListener('storage', onStoreChange);
+  };
+}
+
+function resolveContactServiceSlug(): string {
+  const params = new URLSearchParams(window.location.search);
+  const fromQuery = params.get('service');
+  if (fromQuery) {
+    const slug =
+      SERVICES.find((s) => s.slug === fromQuery)?.slug ??
+      servicePageSlugFromKey(fromQuery) ??
+      SERVICES.find((s) => s.name.toLowerCase() === fromQuery.toLowerCase())?.slug;
+    if (slug) {
+      persistSelectedService(slug);
+      return slug;
+    }
+    persistSelectedService(fromQuery);
+  }
+
+  return servicePageSlugFromKey(readPersistedSelectedService()) ?? '';
+}
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
-  const [serviceSlug, setServiceSlug] = useState('');
+  const serviceSlug = useSyncExternalStore(
+    subscribeContactService,
+    resolveContactServiceSlug,
+    () => '',
+  );
   const reduce = usePrefersReducedMotion();
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
@@ -27,25 +60,10 @@ export default function ContactForm() {
   const { lang } = useLanguage();
   const copy = siteCopy(lang).contactForm;
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const fromQuery = params.get('service');
-    if (fromQuery) {
-      const slug =
-        SERVICES.find((s) => s.slug === fromQuery)?.slug ??
-        servicePageSlugFromKey(fromQuery) ??
-        SERVICES.find((s) => s.name.toLowerCase() === fromQuery.toLowerCase())?.slug;
-      if (slug) {
-        setServiceSlug(slug);
-        persistSelectedService(slug);
-        return;
-      }
-      persistSelectedService(fromQuery);
-    }
-
-    const persistedSlug = servicePageSlugFromKey(readPersistedSelectedService());
-    if (persistedSlug) setServiceSlug(persistedSlug);
-  }, []);
+  function updateServiceSlug(value: string) {
+    persistSelectedService(value || null);
+    window.dispatchEvent(new Event(CONTACT_SERVICE_CHANGE));
+  }
 
   useGSAP(
     () => {
@@ -190,11 +208,7 @@ export default function ContactForm() {
           name="service"
           className="field"
           value={serviceSlug}
-          onChange={(e) => {
-            const value = e.target.value;
-            setServiceSlug(value);
-            persistSelectedService(value || null);
-          }}
+          onChange={(e) => updateServiceSlug(e.target.value)}
         >
           <option value="">{copy.notSure}</option>
           {SERVICES.map((service) => (

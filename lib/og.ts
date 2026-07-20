@@ -105,7 +105,7 @@ export function createPageMetadata({
       : undefined;
 
   return {
-    title: titleAbsolute ? { absolute: title } : title,
+    title: titleAbsolute || title.includes(SITE_NAME) ? { absolute: title } : title,
     description: resolvedDescription,
     ...(robots ? { robots } : {}),
     alternates: {

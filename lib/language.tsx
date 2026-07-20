@@ -4,11 +4,18 @@
  * Client EN|ES UX toggle only. SSR/metadata stay English; see `lib/i18n/localeSeo.ts`.
  * Do not add hreflang until distinct `/es` (or equivalent) URLs exist.
  */
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useCallback,
+  useSyncExternalStore,
+  type ReactNode,
+} from 'react';
 
 export type Lang = 'en' | 'es';
 
 const STORAGE_KEY = 'rkc-lang';
+const LANG_CHANGE = 'rkc-lang-change';
 
 type LanguageContextValue = {
   lang: Lang;
@@ -28,23 +35,27 @@ function readStoredLang(): Lang {
   return 'en';
 }
 
+function subscribeLang(onStoreChange: () => void) {
+  window.addEventListener(LANG_CHANGE, onStoreChange);
+  window.addEventListener('storage', onStoreChange);
+  return () => {
+    window.removeEventListener(LANG_CHANGE, onStoreChange);
+    window.removeEventListener('storage', onStoreChange);
+  };
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('en');
-  const [ready, setReady] = useState(false);
+  const lang = useSyncExternalStore(subscribeLang, readStoredLang, () => 'en' as Lang);
+  const ready = useSyncExternalStore(subscribeLang, () => true, () => false);
 
-  useEffect(() => {
-    setLangState(readStoredLang());
-    setReady(true);
-  }, []);
-
-  const setLang = (next: Lang) => {
-    setLangState(next);
+  const setLang = useCallback((next: Lang) => {
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
     } catch {
       /* ignore */
     }
-  };
+    window.dispatchEvent(new Event(LANG_CHANGE));
+  }, []);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, ready }}>
