@@ -257,6 +257,155 @@ export const VEHICLE_BRANDS: VehicleBrand[] = [
       'Volkswagen drivers across the south Denver metro choose RKC for European import expertise without the dealership markup. From a Golf daily commuter to an Atlas hauling the family to the mountains, our Englewood shop keeps your VW performing at its best in Colorado conditions.',
     ],
   },
+
+  {
+    name: 'GMC',
+    slug: 'gmc',
+    logoPath: '/images/brands/gmc.svg',
+    color: '#C41230',
+    category: 'domestic',
+    commonModels: [
+      'Sierra 1500',
+      'Yukon',
+      'Terrain',
+      'Acadia',
+      'Canyon',
+      'Sierra HD',
+      'Yukon XL',
+    ],
+    services: [
+      'Engine diagnostics & tune‑up',
+      'Brake service & rotor resurfacing',
+      'Transmission fluid exchange',
+      'Suspension & steering inspection',
+      'Oil change & filter replacement',
+    ],
+    coloradoNotes:
+      'At our Englewood shop we understand Colorado’s high‑altitude driving and seasonal weather, so we tailor GMC maintenance to keep your truck or SUV performing reliably from mountain passes to city streets.',
+    paragraphs: [
+      'At RKC Englewood, our ASE‑certified technicians specialize in GMC vehicles, from the rugged Sierra 1500 and Canyon to the family‑friendly Yukon, Terrain, Acadia, and Sierra HD. We understand the unique demands of Colorado driving and keep your GMC performing at its best.',
+      'Located on West Evans Avenue in Englewood, we’re proud to serve the local community with honest, transparent service that Colorado drivers trust. Whether you need routine maintenance or a complex repair, our shop is equipped to handle every GMC model with precision.',
+      'Schedule your appointment today and experience the RKC Englewood difference — expert care, genuine parts, and a commitment to keeping your GMC ready for the road ahead.',
+    ],
+  },
+
+  {
+    name: 'Lexus',
+    slug: 'lexus',
+    logoPath: '/images/brands/lexus.png',
+    color: '#1A1A1A',
+    category: 'import',
+    commonModels: [
+      'RX',
+      'ES',
+      'NX',
+      'GX',
+      'IS',
+      'UX',
+      'TX',
+    ],
+    services: [
+      'Oil change & filter replacement',
+      'Brake pad inspection & service',
+      'Tire rotation & wheel alignment',
+      'Battery health check & replacement',
+      'Comprehensive multi-point inspection',
+    ],
+    coloradoNotes:
+      'Lexus vehicles in Colorado benefit from regular coolant checks due to altitude‑related temperature swings and winter road salt. Keeping tires properly inflated and using winter‑grade oil helps maintain performance on mountain roads.',
+    paragraphs: [
+      'At RKC Automotive in Englewood, CO, our certified technicians specialize in Lexus service, from routine maintenance to complex repairs on models like the RX, ES, and NX. We use factory‑approved parts and diagnostic tools to keep your luxury vehicle performing at its best. Trust our Englewood shop for reliable, Lexus‑focused care.',
+      'Drivers of the Lexus GX, IS, UX, and TX know they can count on RKC Automotive’s Englewood location for expert attention to every detail. Our team stays current with Lexus technical bulletins and offers services ranging from oil changes to transmission work. Experience the peace of mind that comes with a shop that understands your Lexus.',
+      'Located conveniently in Englewood, CO, RKC Automotive provides comprehensive Lexus care tailored to models such as the RX, ES, NX, GX, IS, UX, and TX. We prioritize transparent communication, competitive pricing, and timely service to keep you on the road with confidence. Choose our Englewood shop for Lexus expertise you can rely on.',
+    ],
+  },
+
+  {
+    name: 'Acura',
+    slug: 'acura',
+    logoPath: '/images/brands/acura.svg',
+    color: '#000000',
+    category: 'import',
+    commonModels: [
+      'MDX',
+      'TLX',
+      'RDX',
+      'Integra',
+      'TLX Type S',
+      'MDX Type S',
+      'ZDX',
+    ],
+    services: [
+      'Oil and filter change with synthetic blend',
+      'Brake inspection and pad replacement',
+      'Tire rotation and wheel alignment',
+      'Transmission fluid flush and filter change',
+      'Multi-point vehicle inspection',
+    ],
+    coloradoNotes:
+      'At Colorado\'s high altitude, Acura engines may run leaner; regular tuning and using the correct octane fuel helps maintain performance. Winter road salt and freeze‑thaw cycles increase corrosion risk, so undercarriage washing and rust protection are recommended.',
+    paragraphs: [
+      'At RKC Automotive in Englewood, CO, we specialize in Acura service and repair, covering models from the MDX to the TLX Type S. Our certified technicians use factory‑grade tools to keep your Acura running smoothly.',
+      'Whether you drive an RDX, Integra, or the high‑performance ZDX, our Englewood shop offers comprehensive diagnostics, maintenance, and performance upgrades tailored to each Acura model. Trust us to preserve the luxury and reliability you expect.',
+      'From routine oil changes to complex engine work on the MDX Type S and TLX Type S, RKC Automotive’s Englewood location delivers prompt, transparent service with a focus on customer satisfaction. Experience Acura care that keeps you ahead on Colorado roads.',
+    ],
+  },
+
+  {
+    name: 'Tesla',
+    slug: 'tesla',
+    logoPath: '/images/brands/tesla.svg',
+    color: '#CC0000',
+    category: 'domestic',
+    commonModels: [
+      'Model 3',
+      'Model Y',
+      'Model S',
+      'Model X',
+      'Cybertruck',
+    ],
+    services: [
+      'Battery health diagnostics',
+      'Over‑the‑air software update',
+      'Brake pad and rotor inspection',
+      'Tire rotation and alignment',
+      'Charging system and connector check',
+    ],
+    coloradoNotes:
+      'Tesla batteries can experience reduced range in Colorado’s high altitude and cold winters; regular thermal management checks help maintain performance. Also, road salt and gravel can accelerate wear on brakes and undercarriage components, so frequent inspections are recommended.',
+    paragraphs: [
+      'RKC Automotive in Englewood, CO provides expert Tesla service for all current models, including the Model 3, Model Y, Model S, Model X, and the innovative Cybertruck. Our ASE‑certified technicians use factory‑approved tools and genuine Tesla parts to ensure every repair meets the highest standards.',
+      'Located conveniently in Englewood, our shop offers fast diagnostics, software updates, and routine maintenance tailored to each Tesla vehicle’s unique electric drivetrain. We understand the importance of keeping your Tesla running efficiently and safely on Colorado roads.',
+      'At RKC Automotive Englewood, customer satisfaction drives everything we do—from transparent pricing to flexible appointment scheduling. Trust our experienced team to keep your Tesla performing at peak condition, whether you drive a Model 3 or the futuristic Cybertruck.',
+    ],
+  },
+
+  {
+    name: 'Alfa Romeo',
+    slug: 'alfa-romeo',
+    logoPath: '/images/brands/alfa-romeo.svg',
+    color: '#981E32',
+    category: 'import',
+    commonModels: [
+      'Giulia',
+      'Stelvio',
+      'Tonale',
+    ],
+    services: [
+      'Oil change with synthetic blend',
+      'Brake pad replacement and rotor inspection',
+      'Wheel alignment and suspension check',
+      'Engine diagnostic scan and ECU update',
+      'Tire rotation, balancing, and pressure adjustment',
+    ],
+    coloradoNotes:
+      'At Colorado\'s higher altitude, Alfa Romeo engines may run leaner; we adjust fuel mixtures during service. Winter driving demands proper tire tread and coolant protection, which we verify for Giulia, Stelvio, and Tonale models.',
+    paragraphs: [
+      'At RKC Automotive in Englewood, CO, we specialize in Alfa Romeo service, offering expert care for the Giulia, Stelvio, and Tonale. Our ASE‑certified technicians use factory‑grade tools to keep your Italian performance sedan or SUV running at peak efficiency. Trust us to deliver the precision and passion your Alfa deserves.',
+      'Englewood drivers choose RKC Automotive for Alfa Romeo maintenance because we combine local convenience with world‑class expertise. From routine oil changes on the Giulia to advanced diagnostics on the Stelvio and Tonale, we tailor every service to your vehicle’s specific needs. Experience transparent pricing and a commitment to keeping your Alfa on the road longer.',
+      'When your Alfa Romeo needs repair or performance tuning in Englewood, CO, RKC Automotive is the go‑to shop for genuine parts and skilled craftsmanship. We understand the unique engineering of the Giulia, Stelvio, and Tonale, ensuring each repair restores the thrill of driving. Schedule your appointment today and feel the difference of expert Alfa Romeo care.',
+    ],
+  },
 ];
 
 export function getBrandBySlug(slug: string): VehicleBrand | undefined {
@@ -282,7 +431,7 @@ const CATEGORY_BRAND_LOGOS: CategoryBrandLogo[] = [
   // Domestic
   { name: 'Ford', slug: 'ford', color: '#002D72', featured: true },
   { name: 'Chevrolet', slug: 'chevrolet', color: '#CD9834', featured: true },
-  { name: 'GMC', slug: 'gmc', color: '#C41230', featured: false },
+  { name: 'GMC', slug: 'gmc', color: '#C41230', featured: true },
   { name: 'Ram', slug: 'ram', color: '#880033', featured: true },
   { name: 'Jeep', slug: 'jeep', color: '#1B3B34', featured: true },
   { name: 'Chrysler', slug: 'chrysler', color: '#1A1A1A', featured: false },
@@ -290,6 +439,7 @@ const CATEGORY_BRAND_LOGOS: CategoryBrandLogo[] = [
   { name: 'Lincoln', slug: 'lincoln', color: '#1C1C1C', featured: false, logoPath: '/images/brands/lincoln.png' },
   { name: 'Cadillac', slug: 'cadillac', color: '#A39161', featured: false },
   { name: 'Buick', slug: 'buick', color: '#C8102E', featured: false, logoPath: '/images/brands/buick.png' },
+  { name: 'Tesla', slug: 'tesla', color: '#CC0000', featured: true },
   // Import / Asian
   { name: 'Toyota', slug: 'toyota', color: '#EB0A1E', featured: true },
   { name: 'Honda', slug: 'honda', color: '#E40521', featured: true },
@@ -299,13 +449,14 @@ const CATEGORY_BRAND_LOGOS: CategoryBrandLogo[] = [
   { name: 'Hyundai', slug: 'hyundai', color: '#002C5F', featured: true },
   { name: 'Kia', slug: 'kia', color: '#BB162C', featured: true },
   { name: 'Mitsubishi', slug: 'mitsubishi', color: '#E60012', featured: false },
-  { name: 'Acura', slug: 'acura', color: '#000000', featured: false },
-  { name: 'Lexus', slug: 'lexus', color: '#1A1A1A', featured: false, logoPath: '/images/brands/lexus.png' },
+  { name: 'Acura', slug: 'acura', color: '#000000', featured: true },
+  { name: 'Lexus', slug: 'lexus', color: '#1A1A1A', featured: true, logoPath: '/images/brands/lexus.png' },
   // European
   { name: 'BMW', slug: 'bmw', color: '#0066B1', featured: true },
   { name: 'Mercedes-Benz', slug: 'mercedes', color: '#242424', featured: true },
   { name: 'Audi', slug: 'audi', color: '#BB0A30', featured: true },
   { name: 'Volkswagen', slug: 'volkswagen', color: '#001E50', featured: true },
+  { name: 'Alfa Romeo', slug: 'alfa-romeo', color: '#981E32', featured: true },
   { name: 'Volvo', slug: 'volvo', color: '#003057', featured: false },
   { name: 'Land Rover', slug: 'land-rover', color: '#005A2B', featured: false },
   { name: 'Porsche', slug: 'porsche', color: '#1A1A1A', featured: false },

@@ -263,6 +263,125 @@ export const BRAND_RELIABILITY_SNAPSHOTS: BrandReliabilitySnapshot[] = [
       },
     ],
   },
+
+  {
+    id: 'gmc',
+    reliablePicks: [
+      'Sierra 1500',
+      'Yukon',
+      'Terrain',
+      'Canyon',
+      'Sierra HD',
+    ],
+    bullets: [
+      {
+        label: 'Generally solid',
+        text: 'Sierra 1500, Yukon, Terrain, Canyon, Sierra HD — solid when maintenance is documented.',
+      },
+      {
+        label: 'Higher scrutiny',
+        text: 'We recommend bringing your GMC to our Englewood, CO shop for regular maintenance to catch potential issues early and keep your vehicle running smoothly.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Living in Colorado means dealing with harsh weather and rough roads, so keeping your GMC in top shape at RKC Automotive is essential for reliability.',
+      },
+    ],
+  },
+
+  {
+    id: 'lexus',
+    reliablePicks: [
+      'Lexus RX',
+      'Lexus ES',
+      'Lexus NX',
+    ],
+    bullets: [
+      {
+        label: 'Generally solid',
+        text: 'Lexus RX, Lexus ES, Lexus NX — solid when maintenance is documented.',
+      },
+      {
+        label: 'Higher scrutiny',
+        text: 'While generally robust, older RX models require specific attention to transmission fluid and suspension bushings to prevent premature wear in Colorado\'s variable conditions.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Our Englewood technicians specialize in maintaining Lexus reliability against the harsh effects of high-altitude UV exposure and road salt corrosion common in the Rockies.',
+      },
+    ],
+  },
+
+  {
+    id: 'acura',
+    reliablePicks: [
+      '2022 Acura Integra',
+      '2021 Acura RDX',
+      '2023 Acura MDX',
+    ],
+    bullets: [
+      {
+        label: 'Generally solid',
+        text: '2022 Acura Integra, 2021 Acura RDX, 2023 Acura MDX — solid when maintenance is documented.',
+      },
+      {
+        label: 'Higher scrutiny',
+        text: 'While Acura vehicles are generally robust, owners should monitor for infotainment glitches and potential transmission fluid leaks in older TL and MDX models.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Our Englewood ASE-certified technicians specialize in maintaining Acura\'s precision engineering against Colorado\'s varied terrain and seasonal road salt.',
+      },
+    ],
+  },
+
+  {
+    id: 'tesla',
+    reliablePicks: [
+      'Model 3',
+      'Model Y',
+      'Model S',
+      'Model X',
+      '2023+ Cybertruck',
+    ],
+    bullets: [
+      {
+        label: 'Generally solid',
+        text: 'Model 3, Model Y, Model S, Model X, 2023+ Cybertruck — solid when maintenance is documented.',
+      },
+      {
+        label: 'Higher scrutiny',
+        text: 'At RKC Automotive in Englewood, we recommend buyers have an independent ASE-certified technician inspect the battery health and software calibration history, as these vehicles lack traditional dealer-only diagnostic tools.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'Our Englewood shop specializes in preparing Tesla EVs for Colorado\'s high-altitude driving and harsh winter conditions by ensuring battery thermal management systems are optimized for cold-weather efficiency.',
+      },
+    ],
+  },
+
+  {
+    id: 'alfa-romeo',
+    reliablePicks: [
+      '2018-2020 Giulia Ti',
+      '2017-2019 Stelvio Ti',
+      '2022+ Tonale Veloce',
+    ],
+    bullets: [
+      {
+        label: 'Generally solid',
+        text: '2018-2020 Giulia Ti, 2017-2019 Stelvio Ti, 2022+ Tonale Veloce — solid when maintenance is documented.',
+      },
+      {
+        label: 'Higher scrutiny',
+        text: 'Alfa Romeo vehicles require strict adherence to manufacturer-specific maintenance schedules and specialized diagnostic tools to prevent electrical gremlins and turbocharger failures common in their high-performance engines.',
+      },
+      {
+        label: 'Colorado angle',
+        text: 'As Englewood’s premier ASE-certified specialists, RKC Automotive provides the precise Italian expertise needed to keep your Giulia, Stelvio, or Tonale running with the reliability of a German sedan.',
+      },
+    ],
+  },
 ];
 
 export function getBrandReliabilitySnapshot(slug: string): BrandReliabilitySnapshot | undefined {

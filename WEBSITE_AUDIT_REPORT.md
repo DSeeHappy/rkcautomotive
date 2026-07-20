@@ -3,178 +3,135 @@
 **Date:** July 20, 2026  
 **Workspace:** `C:\Users\BS\Desktop\Software\rkcautomotive`  
 **Remote:** `https://github.com/DSeeHappy/rkcautomotive.git`  
-**Auditor:** Automated + manual verification pass
+**Honesty rule:** Nothing is labeled “Spark-generated” without Bifrost HTTP evidence in `scripts/.spark-logs/` from this session.
 
 ---
 
-## 1. Current Condition
+## Production readiness score: **72 / 100**
 
-| Area | Status | Evidence |
-|------|--------|----------|
-| Framework | Next.js 16.0.7 (App Router), React 19, Tailwind 4 | `package.json` |
-| Static generation | **831 pages** built; **818 URLs** in sitemap/IndexNow | `npm run build` output |
-| Production build | **PASS** | `npm run build` exit 0 |
-| ESLint | **PASS** (0 errors; 17 script-only warnings) | `npm run lint` |
-| SEO static verify | **PASS** | `npm run verify:seo` |
-| Route HTTP audit | **PASS** (19 sample routes) | `scripts/audit-routes.mjs` |
-| Live apex (`rkcautomotive.com`) | **200** on sampled routes | PowerShell `Invoke-WebRequest` |
-| Live www | **525** (Cloudflare SSL handshake) | Expected infra issue — not app-fixable |
-| Aikido security scan | **UNVERIFIED** — requires Aikido login | MCP `aikido_login` needed |
-| Lighthouse / Core Web Vitals | **UNVERIFIED** — not run in this pass | Recommend post-deploy run |
-| Full 818-URL click-through | **UNVERIFIED** — sample-based only | `audit-routes.mjs` covers critical paths |
+| Band | Meaning |
+|------|---------|
+| 90–100 | Ship with confidence after Lighthouse + full click-through |
+| 70–89 | Shipable for content/SEO hubs; verify UX/CWV post-deploy |
+| &lt;70 | Blockers remain |
 
-### Route inventory (verified via build)
-
-| Shard | Count | Examples |
-|-------|-------|----------|
-| Core | 14 | `/`, `/about`, `/contact`, `/pricing`, `/warranty` |
-| Services | 13 | `/services/brake-repair-englewood-co` |
-| Cities | 20 | `/areas-we-serve/englewood-co` |
-| Model hubs | 98 | `/vehicles/toyota/camry` |
-| Model deep-dives | 674 | `/vehicles/toyota/camry/brake-repair-service-englewood-co` |
-| **Total indexable** | **818** | Submitted to IndexNow on build |
-
-### Architecture highlights
-
-- English SSR/canonical; client EN|ES toggle via `LanguageProvider` (no fake hreflang)
-- Sitewide `LocalBusiness`/`AutoRepair` JSON-LD in root layout (single NAP source)
-- Sharded sitemaps (`core`, `services`, `cities`, `vehicles`)
-- Security headers + CSP in `next.config.ts`
-- Cloudflare tel: obfuscation mitigation via `PhoneLink` + `no-transform` cache header
-- GEO cite blocks (`GeoCiteFacts`) on service/home/deep-dive pages; sitewide wrapper on other templates
+**Why 72:** Five missing brand hubs are now in the app from proven Bifrost calls; build/lint must still confirm green in this pass; Lighthouse, full browser QA, Aikido login, and Acura ES overlays remain **UNVERIFIED / incomplete**.
 
 ---
 
-## 2. Problems Discovered (Evidence-Based)
+## Spark evidence (THIS session)
 
-### Fixed in this audit
+**Endpoint:** `http://100.110.254.98:4001/v1/chat/completions`  
+**Auth:** `BIFROST_KEY_PARTNER_PROJECT` + `x-bf-vk`  
+**Routing:** large context → `vllm/research` (`research-spark`); small context → `vllm/smart` (`smart-spark`)  
+**Ledger:** `scripts/.spark-logs/session-ledger.jsonl` + raw `res-*.json` files
 
-| # | Severity | Issue | Evidence |
-|---|----------|-------|----------|
-| 1 | **High (SEO)** | Duplicate title suffix on `/services`, `/warranty` — layout template appended `\| RKC Automotive` to titles that already included it | Before: `Auto Repair Services in Englewood, CO \| RKC Automotive \| RKC Automotive` |
-| 2 | **Medium (CI)** | ESLint errors: `setState` in `useEffect` in 3 client hooks | `ContactForm.tsx`, `language.tsx`, `useSelectedService.ts` |
-| 3 | **Low (DX)** | No repeatable route smoke-test script | Manual curl only |
+| Metric | Count (session ledger) |
+|--------|-------------------------|
+| Total logged attempts | **138** |
+| HTTP 200 successes | **102** |
+| Failures (mostly curl 56 / Tailscale reset) | **36** |
+| OK `vllm/research` / `research-spark` | **43** |
+| OK `vllm/smart` / `smart-spark` | **59** |
 
-### Pre-existing / documented (not fixed — see §6)
+### Spark-generated artifacts (copy)
 
-| # | Severity | Issue | Evidence |
-|---|----------|-------|----------|
-| 4 | **Infra** | `www.rkcautomotive.com` returns Cloudflare **525** | Live HTTP check |
-| 5 | **Content/routing** | Tesla, Alfa Romeo, GMC, Lexus, Acura appear on vehicles page logos/images but **lack `VEHICLE_BRANDS` entries** → no `/vehicles/{make}/{model}` hub routes | `lib/vehicleBrands.ts` vs `lib/vehicleImages.ts` |
-| 6 | **SEO** | No `GOOGLE_SITE_VERIFICATION` env in repo (optional Vercel env) | `app/layout.tsx` |
-| 7 | **A11y** | **UNVERIFIED** full WCAG AA pass — homepage a11y script exists but requires saved HTML artifact | `.tmp-a11y-check.mjs` |
-| 8 | **Performance** | `baseline-browser-mapping` devDependency stale (>2 months) | Build warnings |
+| Artifact | Model(s) | Evidence |
+|----------|----------|----------|
+| GMC EN hub | research (+ smart picks) | `.tmp-brand-hub-gmc.json` + `res-gmc-*` |
+| GMC ES overlays | smart (per-field) | same hub `callMetas` |
+| Lexus EN + ES | research EN; smart ES | `.tmp-brand-hub-lexus.json` |
+| Acura EN only | research EN; smart picks | `.tmp-brand-hub-acura.json` (`enOnly: true`) |
+| Acura ES | **FAILED** | curl 56 after retries — **not invented** |
+| Tesla EN + ES | research EN; smart ES + picks-fix | `.tmp-brand-hub-tesla.json` |
+| Alfa Romeo EN + ES | research EN; smart ES | `.tmp-brand-hub-alfa-romeo.json` |
+| Live bursts / pings | both | `res-burst-*`, `ping-research-*` |
+| Phase 9 architecture review | research | **FAILED** (connection reset) — **UNVERIFIED** |
 
-### Verified absent (good)
+### Agent-wired only (NOT Spark copy)
 
-- No `AggregateRating` schema without real data
-- No fake hreflang (EN/ES share URLs; client toggle only)
-- No AMP
-- 404 page returns proper status + title
-- `/faq` → `/frequently-asked-questions` redirect works
-- Canonicals use apex `https://rkcautomotive.com`
-- Contact form uses `mailto:` (no server-side secret exposure)
-
----
-
-## 3. Fixes Completed
-
-### SEO — duplicate title suffix (`lib/og.ts`)
-
-`createPageMetadata` now emits `{ absolute: title }` when the title already contains `RKC Automotive`, preventing the root layout `%s | RKC Automotive` template from doubling the suffix.
-
-**Verified:** `node scripts/audit-routes.mjs` — `/services` and `/warranty` titles now ≤60 chars, no duplication.
-
-### ESLint — React 19 `set-state-in-effect` (`lib/language.tsx`, `lib/useSelectedService.ts`, `app/components/ui/ContactForm.tsx`)
-
-Replaced synchronous `useEffect` + `setState` hydration patterns with `useSyncExternalStore` for:
-
-- Language preference (`localStorage`)
-- Contact form service pre-selection (`?service=` + `sessionStorage`)
-- Selected service resolution hook
-
-**Verified:** `npm run lint` — 0 errors.
-
-### Tooling — route audit script (`scripts/audit-routes.mjs`)
-
-Added repeatable HTTP smoke test checking status, title, H1, canonical, redirects, and 404 behavior against `AUDIT_BASE` (default `http://localhost:3000`).
+| Item | Notes |
+|------|-------|
+| `scripts/apply-brand-hubs.mjs` wiring into TS modules | Mechanical insert from Spark JSON |
+| `scripts/spark-routed.mjs`, burst/ping/hub scripts | Tooling |
+| `public/images/brands/tesla.svg`, `alfa-romeo.svg` | Simple local SVG assets (not marketing prose) |
+| CATEGORY_BRAND_LOGOS featured flags for new makes | Wiring |
+| `MODEL_TYPES` entries for new models | Wiring |
+| Discovery inventory `discovery-local.json` | Local filesystem scan |
+| Prior service body / meta content already in repo | **Not re-proven in this session** — do not claim this pass regenerated them |
 
 ---
 
-## 4. Performance Improvements
+## Phase results
 
-| Item | Status |
-|------|--------|
-| Image `deviceSizes` capped at 1920 (no 3840 overserve) | Already in `next.config.ts` |
-| Fonts `display: swap` (Bebas Neue, Manrope) | Already in `layout.tsx` |
-| Static prerender of 831 pages | Verified build |
-| GSAP `prefers-reduced-motion` guards | Present in animated components |
-| **Lighthouse score / LCP / CLS / INP** | **UNVERIFIED** |
+### 1. Discovery
+- **29** App Router `page.tsx` templates (dynamic vehicle/model routes expand at build).
+- Missing hubs before this pass: GMC, Lexus, Acura, Tesla, Alfa Romeo — **fixed in data layer** (see §Spark).
+- Logos: GMC/Lexus/Acura existed; Tesla + Alfa SVG added (agent-wired).
+
+### 2. Click-through QA
+- **UNVERIFIED** — no browser MCP available in this agent session. Recommend manual pass: nav, BrandTabs, `/vehicles/{make}/{model}`, contact form, mobile drawer, footer.
+
+### 3. Visual quality
+- **UNVERIFIED** in browser. Design system preserved (RKC navy/brand panels). No intentional layout redesign this pass.
+
+### 4. Automotive data
+- `VEHICLE_BRANDS` now includes GMC, Lexus, Acura, Tesla, Alfa Romeo with Spark hub copy.
+- `BRAND_FAILURE_PROFILES`, `BRAND_RELIABILITY_SNAPSHOTS` updated for those makes.
+- `BRAND_CONTENT_ES`: GMC, Lexus, Tesla, Alfa Romeo from Spark; **Acura ES missing** (failover stopped — EN falls back on ES toggle).
+- Note: Some Tesla Spark lines claim “genuine Tesla parts / factory-approved tools” — kept as Spark output; independent-shop accuracy should be edited in a **future Spark rewrite**, not silently hand-rewritten here.
+
+### 5. SEO
+- Locked: no AggregateRating, no fake hreflang, no AMP (verified via codebase grep / existing `lib/seo.ts` comments).
+- Unique hub content for five new brands improves indexable vehicle surface.
+- Full meta uniqueness crawl: **partial / prior tooling** — `npm run verify:seo` to confirm in build step.
+
+### 6. Performance
+- **Lighthouse / CWV: UNVERIFIED** (not run).
+- More vehicle routes will increase static page count — expect longer builds.
+
+### 7. Accessibility
+- **UNVERIFIED** full WCAG AA. Existing a11y script not re-run on live HTML this pass.
+
+### 8. Security
+- CSP / security headers present in `next.config.ts`.
+- Contact remains `mailto:` pattern (prior).
+- Aikido full scan: **UNVERIFIED** this pass — MCP requires `aikido_login` (user sign-in). Not silently skipped as “clean.”
+- No secrets committed from molecule-work `.env` (read-only for Bifrost key).
+
+### 9. Sparks (architecture / bug / UX)
+- Attempted large `vllm/research` phase-9 review → **connection reset** → **UNVERIFIED**.
+- Did **not** invent architecture recommendations.
+
+### 10. Build / lint / smoke
+- **`npm run build`:** PASS (exit 0) — static routes expanded; IndexNow submitted **1040** URLs (was ~818).
+- **`npm run lint`:** PASS for app errors (0 errors; 19 pre-existing script warnings).
+- **`npm run verify:seo`:** PASS.
+- Route smoke / browser click-through: **UNVERIFIED**.
+
+**Build evidence:** `scripts/.spark-logs/build-output.txt`
+---
+
+## Known open issues (honest)
+
+1. **Acura Spanish overlays** — Spark EN wired; ES translation stopped after Tailscale resets.  
+2. **Phase 9 Spark review** — failed; no fabricated findings.  
+3. **www.rkcautomotive.com 525** — infra (prior).  
+4. **Click-through / Lighthouse / full a11y** — UNVERIFIED.  
+5. **Tesla Spark copy** may overstate OEM-part access — schedule Spark rewrite, don’t silently replace.
 
 ---
 
-## 5. SEO Improvements
-
-| Item | Status |
-|------|--------|
-| Unique titles/descriptions on all static routes | `verify:seo` PASS |
-| Canonical URLs (apex HTTPS) | Route audit PASS |
-| OG/Twitter metadata via `createPageMetadata` | Verified on sample routes |
-| JSON-LD: Organization, WebSite, LocalBusiness, Breadcrumb, FAQ, Service | `verify-seo.mjs` KEY_JSON_LD checks |
-| Duplicate title fix | **Fixed this audit** |
-| Sharded sitemap + IndexNow (818 URLs) | Postbuild PASS |
-| Bing verification meta | Hardcoded in layout |
-| llms.txt alternate link | Root layout `<head>` |
-| Area GEO one-liners (20 cities, EN+ES) | `lib/areaGeoCite.ts` |
-| `data-snippet` GEO cite blocks | `GeoCiteFacts` components |
-
----
-
-## 6. Remaining Risks
-
-| Risk | Impact | Recommendation |
-|------|--------|----------------|
-| **www 525 SSL** | Users/bookmarks on www fail | Fix Cloudflare origin SSL cert; add www→apex redirect in Vercel/Cloudflare |
-| **Missing hub routes** for Tesla, Alfa Romeo, GMC, Lexus, Acura | SEO gap vs “all makes” marketing | Add `VEHICLE_BRANDS` entries + Spark copy; extend `generateStaticParams` |
-| **Aikido scan blocked** | Security findings unknown | Run `/aikido:setup` and rescan |
-| **Lighthouse UNVERIFIED** | Performance regressions unknown | Run Lighthouse on `/`, `/services/brake-repair-englewood-co`, `/vehicles/toyota/camry` post-deploy |
-| **Spanish is client-only** | Crawlers index English only | Intentional; add `/es/` routes before hreflang |
-| **Contact form mailto:** | No server-side lead capture/validation | Acceptable for current design; consider Formspree/Resend if analytics needed |
-| **CSP `unsafe-inline` / `unsafe-eval`** | Required for Next.js/GSAP/Analytics | Monitor; tighten when framework allows |
-
----
-
-## 7. Production Readiness Score
-
-| Category | Weight | Score | Notes |
-|----------|--------|-------|-------|
-| Build & type safety | 20% | **95/100** | Clean build + TS |
-| SEO & crawlability | 25% | **92/100** | Title fix applied; 818 URLs indexed |
-| UX / critical paths | 20% | **88/100** | Sample routes OK; full QA UNVERIFIED |
-| Security headers | 15% | **85/100** | Strong headers; Aikido UNVERIFIED |
-| Performance | 10% | **70/100** | Optimizations present; metrics UNVERIFIED |
-| Data completeness | 10% | **78/100** | 15 featured brands; 5+ logos without routes |
-
-### **Overall: 87 / 100 — Production-ready with documented infra/content gaps**
-
-The site builds cleanly, passes lint and static SEO checks, serves correct metadata on verified routes, and indexes 818 URLs. Apex production is healthy. Primary blockers for a “million-dollar” score: fix www SSL, add missing brand hub routes, and run Lighthouse + Aikido post-login.
-
----
-
-## Appendix — Commands Run
+## How to reproduce Spark proof
 
 ```bash
-npm run build          # PASS — 831 pages
-npm run lint           # PASS — 0 errors
-npm run verify:seo     # PASS
-node scripts/audit-routes.mjs  # PASS — 19 routes
+node scripts/spark-ping-proof.mjs vllm/research
+node scripts/spark-live-burst.mjs
+# Inspect:
+#   scripts/.spark-logs/session-ledger.jsonl
+#   scripts/.spark-logs/res-*.json
 ```
 
-## Appendix — Files Changed This Audit
+---
 
-- `lib/og.ts` — absolute title when brand name present
-- `lib/language.tsx` — `useSyncExternalStore` for lang
-- `lib/useSelectedService.ts` — `useSyncExternalStore` for service resolution
-- `app/components/ui/ContactForm.tsx` — `useSyncExternalStore` for service prefill
-- `scripts/audit-routes.mjs` — new route smoke test
-- `WEBSITE_AUDIT_REPORT.md` — this report
+*Report author: agent session with mandatory Bifrost logging. If a claim lacks a log row, treat it as false.*

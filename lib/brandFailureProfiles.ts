@@ -372,6 +372,175 @@ export const BRAND_FAILURE_PROFILES: BrandFailureProfile[] = [
     coloradoNotes:
       "Standard plastic cooling components degrade even faster when exposed to the extreme expansion and contraction cycles driven by Colorado's intense alpine temperature shifts.",
   },
+
+  {
+    id: 'gmc',
+    name: 'GMC',
+    commonModels: [
+      'Sierra 1500',
+      'Yukon',
+      'Terrain',
+      'Acadia',
+      'Canyon',
+      'Sierra HD',
+      'Yukon XL',
+    ],
+    failureProfiles: [
+      {
+        title: 'Transmission Slip in Sierra 1500 & Canyon',
+        description:
+          'Owners often report delayed shifts or a noticeable slip when accelerating, especially after 80k miles. RKC’s ASE‑certified techs in Englewood check fluid condition, valve body wear, and perform a road test to confirm if a rebuild or software update is needed.',
+      },
+      {
+        title: 'Electrical Gremlins in Yukon & Yukon XL',
+        description:
+          'Intermittent dashboard lights, faulty battery drain, and issues with the infotainment system are common. Our Englewood shop runs a full CAN‑bus scan, tests alternator output, and inspects wiring harnesses for corrosion from Colorado’s winter road salt.',
+      },
+      {
+        title: 'Suspension Wear on Terrain & Acadia',
+        description:
+          'Front struts and rear shock absorbers tend to wear unevenly, leading to a bouncy ride and premature tire wear. RKC’s diagnostics include a bounce test, visual inspection for leaks, and alignment check to keep your GMC handling smooth on Englewood’s streets.',
+      },
+    ],
+    buyerWarning:
+      'When buying a used GMC in the Englewood area, always request a full diagnostic scan and service history before signing; hidden transmission or electrical issues can turn a good deal into costly repairs, especially with Colorado’s fluctuating temperatures and road‑salt exposure.',
+    coloradoNotes:
+      'At our Englewood shop we understand Colorado’s high‑altitude driving and seasonal weather, so we tailor GMC maintenance to keep your truck or SUV performing reliably from mountain passes to city streets.',
+  },
+
+  {
+    id: 'lexus',
+    name: 'Lexus',
+    commonModels: [
+      'RX',
+      'ES',
+      'NX',
+      'GX',
+      'IS',
+      'UX',
+      'TX',
+    ],
+    failureProfiles: [
+      {
+        title: 'Hybrid Battery Capacity Loss',
+        description:
+          'Across RX, ES, NX, UX, and TX hybrids, owners report gradual reduction in electric-only range and occasional hybrid system warnings after 80k-100k miles. Degradation is often accelerated by frequent short trips and extreme temperatures, requiring battery reconditioning or replacement to restore fuel economy.',
+      },
+      {
+        title: '8‑Speed Transmission Rough Shifts',
+        description:
+          'RX, ES, IS, and GX models equipped with the 8‑speed automatic sometimes exhibit harsh 1‑2 or 2‑3 shifts, especially when cold. Symptoms include shudder, delayed engagement, and occasional fault codes (P0700/P0730). Root causes range from worn clutch packs to outdated TCM software; a fluid change and TCM update often resolve early‑stage issues.',
+      },
+      {
+        title: 'Infotainment Touchscreen Freeze/Reboot Loop',
+        description:
+          'The Entune 3.0 system in NX, UX, TX, and newer ES models can freeze, reboot repeatedly, or lose Bluetooth/Apple CarPlay connectivity. This is frequently traced to corrupted firmware or a failing eMMC storage chip. Dealers typically reflash the unit; persistent cases may require module replacement.',
+      },
+    ],
+    buyerWarning:
+      'When buying a used Lexus from these lineups, prioritize vehicles with documented hybrid battery health (if applicable), recent transmission service, and up‑to‑date infotainment software; ask for service records showing any TCM updates, battery conditioning, or screen repairs, and consider a pre‑purchase diagnostic scan to catch hidden hybrid or transmission faults before committing.',
+    coloradoNotes:
+      'Lexus vehicles in Colorado benefit from regular coolant checks due to altitude‑related temperature swings and winter road salt. Keeping tires properly inflated and using winter‑grade oil helps maintain performance on mountain roads.',
+  },
+
+  {
+    id: 'acura',
+    name: 'Acura',
+    commonModels: [
+      'MDX',
+      'TLX',
+      'RDX',
+      'Integra',
+      'TLX Type S',
+      'MDX Type S',
+      'ZDX',
+    ],
+    failureProfiles: [
+      {
+        title: 'Transmission Shudder in TLX Type S',
+        description:
+          'Owners of the 2022‑2024 Acura TLX Type S frequently report a noticeable shudder or hesitation during low‑speed acceleration, especially when the transmission is cold. The issue is often traced to wear in the dual‑clutch transmission’s clutch packs or a software calibration that does not adequately manage torque delivery. A dealer‑performed transmission fluid change and updated TCM software can mitigate the symptom, but in some cases clutch replacement is required.',
+      },
+      {
+        title: 'Excessive Oil Consumption in MDX',
+        description:
+          'The 3.5L V6 engine in the 2017‑2022 Acura MDX (including the Type S variant) has been known to consume oil at a rate exceeding 1 quart per 1,000 miles, particularly under high‑load driving. Root causes include worn piston rings and valve guide seals that allow oil to enter the combustion chamber. Regular oil level checks and using a higher‑viscosity oil can slow consumption, but many owners eventually need a piston ring replacement or engine rebuild to resolve the issue.',
+      },
+      {
+        title: 'Infotainment Screen Glitches in RDX',
+        description:
+          'Acura RDX models from 2019‑2023 occasionally experience intermittent freezing, touch‑screen unresponsiveness, or spontaneous reboot of the infotainment system. The problem is linked to a software bug in the Android‑based head unit that can be triggered by certain Bluetooth pairings or USB media files. Updating the system to the latest firmware usually resolves the glitches; persistent cases may require replacement of the head unit module.',
+      },
+    ],
+    buyerWarning:
+      'When considering a used Acura MDX, TLX, RDX, Integra, TLX Type S, MDX Type S, or ZDX, prioritize obtaining a complete service history and insist on a pre‑purchase inspection that includes a transmission test drive, oil consumption check, and infotainment system evaluation. Pay special attention to any recorded transmission fluid changes, oil top‑ups, or software updates, as neglect in these areas can lead to costly repairs shortly after purchase. If the seller cannot provide documentation or the inspection reveals unresolved issues, factor in potential repair costs or consider walking away.',
+    coloradoNotes:
+      'At Colorado\'s high altitude, Acura engines may run leaner; regular tuning and using the correct octane fuel helps maintain performance. Winter road salt and freeze‑thaw cycles increase corrosion risk, so undercarriage washing and rust protection are recommended.',
+  },
+
+  {
+    id: 'tesla',
+    name: 'Tesla',
+    commonModels: [
+      'Model 3',
+      'Model Y',
+      'Model S',
+      'Model X',
+      'Cybertruck',
+    ],
+    failureProfiles: [
+      {
+        title: 'High‑Voltage Battery Coolant Leak',
+        description:
+          'Coolant loss from the HV battery pack’s internal loops can trigger over‑temperature warnings, reduced power, and eventually trigger a safe‑shutdown. Independent shops can pressure‑test the coolant system, inspect seals, and replace damaged hoses or the battery coolant pump.',
+      },
+      {
+        title: '12‑V Auxiliary Battery Failure',
+        description:
+          'The 12‑V system powers electronics, door locks, and the HV contactor relay. A weak or failing 12‑V battery leads to intermittent instrument cluster glitches, inability to wake the vehicle, and false HV fault codes. Testing with a load‑tester and replacing the AGM battery resolves most issues.',
+      },
+      {
+        title: 'Brake and Suspension Wear',
+        description:
+          'Regenerative braking reduces pad wear but uneven rotor corrosion and bushing degradation are common on Model 3/Y and S/X. Symptoms include pulsation, noise, and reduced ride comfort. Independent shops can measure rotor thickness, replace pads, and service control arm bushings or air‑suspension struts as needed.',
+      },
+    ],
+    buyerWarning:
+      'When buying a used Tesla, verify that the high‑voltage battery coolant system has no leaks and that the 12‑V auxiliary battery holds a charge; ask for recent service records showing brake pad thickness, rotor condition, and suspension bushing integrity, as neglected items can lead to costly HV safety shutdowns or drivetrain limitations despite the vehicle’s low mileage.',
+    coloradoNotes:
+      'Tesla batteries can experience reduced range in Colorado’s high altitude and cold winters; regular thermal management checks help maintain performance. Also, road salt and gravel can accelerate wear on brakes and undercarriage components, so frequent inspections are recommended.',
+  },
+
+  {
+    id: 'alfa-romeo',
+    name: 'Alfa Romeo',
+    commonModels: [
+      'Giulia',
+      'Stelvio',
+      'Tonale',
+    ],
+    failureProfiles: [
+      {
+        title: 'Electrical System Gremlins',
+        description:
+          'Intermittent CAN bus faults causing infotainment freeze, instrument cluster warnings, and occasional battery drain; often traced to loose ground straps or software glitches.',
+      },
+      {
+        title: 'Dual-Clutch Transmission Issues',
+        description:
+          'Shudder or harsh engagement during low-speed shifts, especially after cold starts; may require clutch wear inspection, fluid change, or TCU software update.',
+      },
+      {
+        title: 'Suspension and Steering Wear',
+        description:
+          'Premature wear of front control arm bushings and steering rack mounts leading to clunking noises, vague steering feel, and uneven tire wear; alignment checks often reveal drift.',
+      },
+    ],
+    buyerWarning:
+      'When considering a used Giulia, Stelvio, or Tonale, verify a complete service history, check for any open recalls, and insist on a pre‑purchase inspection that includes a CAN bus scan, transmission shift quality test, and a thorough suspension/steering evaluation; electrical gremlins, DCT shudder, and bushing wear are common costly issues that may not be evident without a detailed look.',
+    coloradoNotes:
+      'At Colorado\'s higher altitude, Alfa Romeo engines may run leaner; we adjust fuel mixtures during service. Winter driving demands proper tire tread and coolant protection, which we verify for Giulia, Stelvio, and Tonale models.',
+  },
 ];
 
 export function getBrandFailureProfile(slug: string): BrandFailureProfile | undefined {

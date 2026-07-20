@@ -185,6 +185,50 @@ const MODEL_TYPES: Record<string, Record<string, VehicleType>> = {
     'ID.4': 'ev',
     Taos: 'suv',
   },
+
+  gmc: {
+    'Sierra 1500': 'truck',
+    Yukon: 'suv',
+    Terrain: 'suv',
+    Acadia: 'suv',
+    Canyon: 'truck',
+    'Sierra HD': 'truck',
+    'Yukon XL': 'suv',
+  },
+
+  lexus: {
+    RX: 'luxury',
+    ES: 'luxury',
+    NX: 'suv',
+    GX: 'suv',
+    IS: 'luxury',
+    UX: 'suv',
+    TX: 'suv',
+  },
+
+  acura: {
+    MDX: 'suv',
+    TLX: 'sedan',
+    RDX: 'suv',
+    Integra: 'sedan',
+    'TLX Type S': 'performance',
+    'MDX Type S': 'suv',
+    ZDX: 'ev',
+  },
+
+  tesla: {
+    'Model 3': 'ev',
+    'Model Y': 'ev',
+    'Model S': 'ev',
+    'Model X': 'ev',
+    Cybertruck: 'truck',
+  },
+
+  'alfa-romeo': {
+    Giulia: 'sedan',
+    Stelvio: 'suv',
+    Tonale: 'suv',
+  },
 };
 
 const BASE_INTERVALS: MaintenanceInterval[] = [

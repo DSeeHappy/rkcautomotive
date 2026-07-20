@@ -389,4 +389,116 @@ export const BRAND_CONTENT_ES: Record<string, BrandContentEs> = {
     coloradoAngle:
       'Los módulos plásticos de enfriamiento odian nuestros ciclos alpine de congelación-deshielo — olor dulce bajo el capó es señal de alejarse.',
   },
+
+  gmc: {
+    failureProfiles: [
+      {
+        title: 'Deslizamiento de transmisión en Sierra 1500 y Canyon',
+        description:
+          'Los propietarios suelen reportar cambios de marcha retrasados o un deslizamiento notable al acelerar, especialmente después de los 80,000 millas. Los técnicos certificados por ASE de RKC en Englewood revisan el estado del fluido, el desgaste del cuerpo de válvulas y realizan una prueba en carretera para confirmar si se necesita una reconstrucción o una actualización de software.',
+      },
+      {
+        title: 'Gremlins eléctricos en Yukon y Yukon XL',
+        description:
+          'Las luces intermitentes del tablero, el drenaje defectuoso de la batería y los problemas con el sistema de infoentretenimiento son comunes. Nuestra tienda en Englewood realiza un escaneo completo del bus CAN, prueba la salida del alternador e inspecciona los arneses de cableado en busca de corrosión causada por la sal de las carreteras en invierno en Colorado.',
+      },
+      {
+        title: 'Desgaste de la suspensión en terrenos difíciles y en el GMC Acadia',
+        description:
+          'Los amortiguadores delanteros y los amortiguadores traseros tienden a desgastarse de manera desigual, lo que provoca un viaje irregular y un desgaste prematuro de los neumáticos. Los diagnósticos de RKC incluyen una prueba de rebote, una inspección visual para detectar fugas y una verificación de la alineación para mantener el manejo suave de su GMC en las calles de Englewood.',
+      },
+    ],
+    buyerWarning:
+      'Al comprar un GMC usado en la zona de Englewood, solicite siempre un escaneo de diagnóstico completo y el historial de servicio antes de firmar; los problemas ocultos de transmisión o eléctricos pueden convertir una buena oferta en costosas reparaciones, especialmente con las fluctuaciones de temperatura y la exposición a la sal en las carreteras de Colorado.',
+    coloradoNotes:
+      'En nuestra tienda de Englewood comprendemos las condiciones de conducción a gran altitud y el clima estacional de Colorado, por lo que adaptamos el mantenimiento de GMC para que su camión o SUV funcione de manera confiable, desde los pasos de montaña hasta las calles de la ciudad.',
+    higherScrutiny:
+      'Le recomendamos llevar su GMC a nuestro taller en Englewood, CO, para mantenimiento regular y así detectar posibles problemas a tiempo, manteniendo su vehículo funcionando sin contratiempos.',
+    coloradoAngle:
+      'Vivir en Colorado significa lidiar con el clima severo y las carreteras en mal estado, por lo que mantener su GMC en óptimas condiciones en RKC Automotive es esencial para garantizar su fiabilidad.',
+  },
+
+  lexus: {
+    failureProfiles: [
+      {
+        title: 'Pérdida de capacidad de la batería híbrida',
+        description:
+          'En los modelos híbridos RX, ES, NX, UX y TX, los propietarios reportan una reducción gradual en la autonomía en modo eléctrico y advertencias ocasionales del sistema híbrido después de 80.000 a 100.000 millas. La degradación suele acelerarse con viajes cortos frecuentes y temperaturas extremas, lo que requiere la recondicionamiento o el reemplazo de la batería para restaurar la eficiencia de combustible.',
+      },
+      {
+        title: 'Cambios bruscos en la transmisión de 8 velocidades',
+        description:
+          'Los modelos RX, ES, IS y GX equipados con la transmisión automática de 8 velocidades a veces presentan cambios bruscos entre las marchas 1‑2 o 2‑3, especialmente cuando el motor está frío. Los síntomas incluyen vibraciones, retraso en el acoplamiento y códigos de falla ocasionales (P0700/P0730). Las causas raíz varían desde juegos de embragues desgastados hasta software desactualizado de la unidad de control de la transmisión (TCM); un cambio de fluido y una actualización del software de la TCM suelen resolver los problemas en etapas tempranas.',
+      },
+      {
+        title: 'Congelamiento o bucle de reinicio de la pantalla táctil de infoentretenimiento',
+        description:
+          'El sistema Entune 3.0 en los modelos NX, UX, TX y ES más recientes puede congelarse, reiniciarse repetidamente o perder la conectividad de Bluetooth/Apple CarPlay. Esto suele deberse a un firmware corrupto o a un chip de almacenamiento eMMC defectuoso. Los concesionarios suelen reprogramar la unidad; en los casos persistentes, puede ser necesario reemplazar el módulo.',
+      },
+    ],
+    buyerWarning:
+      'Al comprar un Lexus usado de estas líneas, priorice vehículos con un historial documentado de salud de la batería híbrida (si aplica), servicio reciente de transmisión y software de infoentretenimiento actualizado; solicite registros de servicio que muestren actualizaciones de la TCM, acondicionamiento de la batería o reparaciones de pantalla, y considere realizar un escaneo de diagnóstico previo a la compra para detectar fallas ocultas en el sistema híbrido o la transmisión antes de tomar una decisión.',
+    coloradoNotes:
+      'Los vehículos Lexus en Colorado se benefician de revisiones regulares del líquido refrigerante debido a los cambios de temperatura relacionados con la altitud y la sal de las carreteras en invierno. Mantener los neumáticos correctamente inflados y utilizar aceite de grado invernal ayuda a mantener el rendimiento en las carreteras de montaña.',
+    higherScrutiny:
+      'Aunque generalmente son robustos, los modelos RX más antiguos requieren atención específica al fluido de transmisión y a los bujes de la suspensión para prevenir un desgaste prematuro en las condiciones variables de Colorado.',
+    coloradoAngle:
+      'Nuestros técnicos en Englewood se especializan en mantener la confiabilidad de Lexus frente a los efectos adversos de la exposición a los rayos UV a gran altitud y la corrosión por sal en las carreteras, comunes en las Montañas Rocosas.',
+  },
+
+  tesla: {
+    failureProfiles: [
+      {
+        title: 'Fuga de líquido refrigerante de la batería de alta tensión',
+        description:
+          'La pérdida de líquido refrigerante de los circuitos internos del paquete de batería de alta tensión puede desencadenar advertencias de sobrecalentamiento, reducción de potencia y, eventualmente, un apagado de seguridad. Los talleres independientes pueden realizar pruebas de presión del sistema de refrigerante, inspeccionar los sellos y reemplazar las mangueras dañadas o la bomba de refrigerante de la batería.',
+      },
+      {
+        title: 'Fallo de la batería auxiliar de 12 V',
+        description:
+          'El sistema de 12 V alimenta la electrónica, las cerraduras de las puertas y el relé del contactor de alta tensión. Una batería de 12 V débil o en mal estado provoca fallas intermitentes en el tablero de instrumentos, imposibilidad de activar el vehículo y códigos de falla falsos de alta tensión. La prueba con un probador de carga y la sustitución de la batería AGM resuelven la mayoría de los problemas.',
+      },
+      {
+        title: 'Desgaste de frenos y suspensión',
+        description:
+          'El frenado regenerativo reduce el desgaste de las pastillas, pero la corrosión desigual de los discos y la degradación de las bujes son comunes en los modelos 3/Y y S/X. Los síntomas incluyen pulsación, ruido y reducción de la comodidad de la conducción. Los talleres independientes pueden medir el grosor de los discos, reemplazar las pastillas y dar servicio a los bujes de los brazos de control o a los struts de suspensión neumática según sea necesario.',
+      },
+    ],
+    buyerWarning:
+      'Al comprar un Tesla usado, verifique que el sistema de refrigerante de la batería de alta tensión no tenga fugas y que la batería auxiliar de 12 V mantenga la carga; solicite registros de servicio recientes que muestren el grosor de las pastillas de freno, el estado de los discos y la integridad de las bujías de la suspensión, ya que los elementos descuidados pueden provocar apagados de seguridad costosos del sistema HV o limitaciones del tren motriz, a pesar del bajo kilometraje del vehículo.',
+    coloradoNotes:
+      'Las baterías de Tesla pueden experimentar una reducción de autonomía en Colorado debido a la gran altitud y los inviernos fríos; las revisiones periódicas del sistema de gestión térmica ayudan a mantener el rendimiento. Además, la sal de las carreteras y la grava pueden acelerar el desgaste de los frenos y los componentes del chasis, por lo que se recomiendan inspecciones frecuentes.',
+    higherScrutiny:
+      'En RKC Automotive en Englewood, recomendamos que los compradores soliciten a un técnico independiente certificado por ASE que inspeccione el estado de la batería y el historial de calibración del software, ya que estos vehículos carecen de las herramientas de diagnóstico exclusivas de los concesionarios.',
+    coloradoAngle:
+      'Nuestra tienda en Englewood se especializa en preparar los vehículos eléctricos Tesla para la conducción a gran altitud y las duras condiciones invernales de Colorado, asegurando que los sistemas de gestión térmica de la batería estén optimizados para una eficiencia en climas fríos.',
+  },
+
+  'alfa-romeo': {
+    failureProfiles: [
+      {
+        title: 'Gremlins del sistema eléctrico',
+        description:
+          'Fallas intermitentes del bus CAN que provocan congelamiento del sistema de infoentretenimiento, advertencias en el tablero de instrumentos y drenaje ocasional de la batería; a menudo se rastrean hasta correas de tierra sueltas o errores de software.',
+      },
+      {
+        title: 'Problemas con la transmisión de doble embrague',
+        description:
+          'Temblores o cambios bruscos durante las cambios de marcha a baja velocidad, especialmente después de los arranques en frío; puede ser necesario inspeccionar el desgaste del embrague, cambiar el fluido o actualizar el software de la TCU.',
+      },
+      {
+        title: 'Desgaste de la suspensión y la dirección',
+        description:
+          'Desgaste prematuro de los bujes de los brazos de control delanteros y los soportes de la cremallera de dirección, lo que provoca ruidos de golpeteo, sensación de dirección imprecisa y desgaste irregular de los neumáticos; las verificaciones de alineación a menudo revelan desviación.',
+      },
+    ],
+    buyerWarning:
+      'Al considerar un Giulia, Stelvio o Tonale usados, verifique un historial de servicio completo, revise si hay recalls pendientes y exija una inspección previa a la compra que incluya un escaneo del bus CAN, una prueba de la calidad de los cambios de la transmisión y una evaluación exhaustiva de la suspensión y la dirección; los problemas eléctricos, el temblor de la DCT y el desgaste de las bujías son problemas costosos comunes que pueden no ser evidentes sin un examen detallado.',
+    coloradoNotes:
+      'A mayor altitud en Colorado, los motores de Alfa Romeo pueden funcionar con mezcla más pobre; ajustamos las mezclas de combustible durante el servicio. La conducción invernal exige un dibujo de neumáticos adecuado y protección del anticongelante, lo cual verificamos para los modelos Giulia, Stelvio y Tonale.',
+    higherScrutiny:
+      'Los vehículos Alfa Romeo requieren un estricto cumplimiento de los programas de mantenimiento específicos del fabricante y herramientas de diagnóstico especializadas para prevenir problemas eléctricos y fallos del turbocompresor, comunes en sus motores de alto rendimiento.',
+    coloradoAngle:
+      'Como especialistas certificados por ASE en Englewood, RKC Automotive ofrece la experiencia precisa en vehículos italianos necesaria para mantener su Giulia, Stelvio o Tonale funcionando con la fiabilidad de un sedán alemán.',
+  },
 };
