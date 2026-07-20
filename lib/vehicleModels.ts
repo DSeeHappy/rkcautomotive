@@ -470,6 +470,15 @@ export function resolveModelImage(model: VehicleModel): string {
   return resolveVehicleImageSrc(record) ?? model.image;
 }
 
+/** Hub/OG resolver — local WebP when synced; hotlink licensed source when fallbackNeeded. */
+export function resolveModelImageForHub(model: VehicleModel): string {
+  const record = getVehicleImage(model.brand, model.brandName, model.model).record;
+  const src = resolveVehicleImageSrc(record);
+  if (src) return src;
+  if (record?.sourceUrl?.startsWith('http')) return record.sourceUrl;
+  return model.image;
+}
+
 export function resolveModel3dUrl(model: VehicleModel): string {
   return model.model3dUrl ?? MODEL_3D_URLS[model.vehicleType];
 }

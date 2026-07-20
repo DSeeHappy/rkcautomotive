@@ -6,6 +6,14 @@ const CONTENT_SECURITY_POLICY =
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  // fs.existsSync on public/ paths previously traced ~400MB into vehicle hub lambdas.
+  outputFileTracingExcludes: {
+    "*": [
+      "./public/**",
+      "./scripts/**",
+      "./data/**",
+    ],
+  },
   // Preferred domain is apex (https://rkcautomotive.com). www currently returns
   // Cloudflare 525 — once www SSL works, add a permanent www → apex redirect here
   // (or in vercel.json). Do not flip BUSINESS.website / SITE_URL to www.

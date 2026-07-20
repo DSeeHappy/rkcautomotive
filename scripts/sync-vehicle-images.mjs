@@ -169,7 +169,9 @@ const entries = rows.map((row) => {
   const model = row.Model;
   const publicPath = row['Recommended Save Path'].replace(/^\/public/, '');
   const sourceUrl = row['Best Image URL / Source Reference'];
-  const fallbackNeeded = row['Fallback Needed'] === 'Yes';
+  const destPath = publicPathToFs(publicPath);
+  const fallbackNeeded =
+    row['Fallback Needed'] === 'Yes' || !fs.existsSync(destPath);
 
   return {
     make,
