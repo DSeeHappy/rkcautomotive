@@ -501,4 +501,32 @@ export const BRAND_CONTENT_ES: Record<string, BrandContentEs> = {
     coloradoAngle:
       'Como especialistas certificados por ASE en Englewood, RKC Automotive ofrece la experiencia precisa en vehículos italianos necesaria para mantener su Giulia, Stelvio o Tonale funcionando con la fiabilidad de un sedán alemán.',
   },
+
+  acura: {
+    failureProfiles: [
+      {
+        title: 'Temblores en la transmisión del TLX Type S',
+        description:
+          'Los propietarios del Acura TLX Type S de 2022 a 2024 informan frecuentemente de un temblor o vacilación notables durante la aceleración a baja velocidad, especialmente cuando la transmisión está fría. El problema suele deberse al desgaste de los grupos de embrague de la transmisión de doble embrague o a una calibración de software que no gestiona adecuadamente la entrega de torque. Un cambio de fluido de transmisión realizado por un distribuidor y la actualización del software de la TCM pueden mitigar el síntoma, pero en algunos casos es necesario reemplazar el embrague.',
+      },
+      {
+        title: 'Consumo excesivo de aceite en MDX',
+        description:
+          'El motor V6 de 3.5 L del Acura MDX de los años 2017‑2022 (incluida la variante Type S) ha presentado el problema de consumir aceite a un ritmo superior a 1 cuarto cada 1,000 millas, especialmente bajo condiciones de conducción con alta carga. Las causas raíz incluyen anillos de pistón desgastados y sellos de guías de válvulas que permiten que el aceite ingrese a la cámara de combustión. Las revisiones regulares del nivel de aceite y el uso de un aceite de mayor viscosidad pueden reducir el consumo, pero muchos propietarios eventualmente necesitarán reemplazar los anillos del pistón o reconstruir el motor para resolver el problema.',
+      },
+      {
+        title: 'Fallos en la pantalla de infoentretenimiento del RDX',
+        description:
+          'Los modelos Acura RDX de 2019 a 2023 presentan de manera ocasional congelamientos intermitentes, falta de respuesta en la pantalla táctil o reinicios espontáneos del sistema de infoentretenimiento. El problema está relacionado con un error de software en la unidad principal basada en Android, que puede activarse mediante ciertas combinaciones de emparejamiento Bluetooth o archivos multimedia USB. Actualizar el sistema al último firmware suele resolver los fallos; los casos persistentes pueden requerir el reemplazo del módulo de la unidad principal.',
+      },
+    ],
+    buyerWarning:
+      'Al considerar un Acura MDX, TLX, RDX, Integra, TLX Type S, MDX Type S o ZDX de segunda mano, priorice obtener un historial de servicio completo y exija una inspección previa a la compra que incluya una prueba de manejo de la transmisión, una verificación del consumo de aceite y una evaluación del sistema de infoentretenimiento. Preste especial atención a cualquier cambio de fluido de transmisión registrado, reabastecimiento de aceite o actualizaciones de software, ya que descuidar estas áreas puede provocar reparaciones costosas poco después de la compra. Si el vendedor no puede proporcionar documentación o la inspección revela problemas sin resolver, tenga en cuenta los posibles costos de reparación o considere retirarse.',
+    coloradoNotes:
+      'En la alta altitud de Colorado, los motores de Acura pueden funcionar con una mezcla más pobre; el ajuste regular y el uso de combustible con la octanaje correcto ayudan a mantener el rendimiento. La sal utilizada para deshielar las carreteras en invierno y los ciclos de congelación y descongelación aumentan el riesgo de corrosión, por lo que se recomienda lavar el chasis y aplicar protección contra la oxidación.',
+    higherScrutiny:
+      'Aunque los vehículos Acura son generalmente robustos, los propietarios deben vigilar posibles fallos en el sistema de infoentretenimiento y fugas potenciales de fluido de transmisión en los modelos TL y MDX más antiguos.',
+    coloradoAngle:
+      'Nuestros técnicos certificados ASE en Englewood se especializan en mantener la ingeniería de precisión de Acura frente al variado terreno de Colorado y la sal de las carreteras en temporada.',
+  },
 };
