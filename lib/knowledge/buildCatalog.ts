@@ -18,7 +18,7 @@ import {
 } from '@/lib/knowledge/mapFailureProfileClaims';
 import { buildVerifiedField } from '@/lib/knowledge/verified';
 
-const CATALOG_VERSION = 'phase2-oem-pack-2026-07-20';
+const CATALOG_VERSION = 'phase2-oem-pack-2026-07-20-v2';
 
 function parseYearRange(range: string): { start: number; end: number | null } | null {
   const normalized = range.replace(/\u2013/g, '-').replace(/\u2014/g, '-');

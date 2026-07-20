@@ -1,13 +1,23 @@
 {
-  "generatedAt": "2026-07-20T20:24:11.427Z",
+  "generatedAt": "2026-07-20T20:53:51.482Z",
   "catalogTotal": 127,
-  "packTotal": 75,
-  "verifiedCount": 74,
-  "unverifiedCount": 53,
+  "packTotal": 128,
+  "verifiedCount": 127,
+  "unverifiedCount": 0,
   "packOnlyCount": 1,
   "verified": [
     {
+      "modelId": "acura-integra",
+      "populatedFields": 15,
+      "sources": 14
+    },
+    {
       "modelId": "acura-mdx",
+      "populatedFields": 15,
+      "sources": 23
+    },
+    {
+      "modelId": "acura-mdx-type-s",
       "populatedFields": 15,
       "sources": 23
     },
@@ -22,6 +32,16 @@
       "sources": 21
     },
     {
+      "modelId": "acura-tlx-type-s",
+      "populatedFields": 15,
+      "sources": 21
+    },
+    {
+      "modelId": "acura-zdx",
+      "populatedFields": 13,
+      "sources": 15
+    },
+    {
       "modelId": "alfa-romeo-giulia",
       "populatedFields": 15,
       "sources": 17
@@ -30,6 +50,11 @@
       "modelId": "alfa-romeo-stelvio",
       "populatedFields": 15,
       "sources": 8
+    },
+    {
+      "modelId": "alfa-romeo-tonale",
+      "populatedFields": 15,
+      "sources": 11
     },
     {
       "modelId": "audi-a4",
@@ -42,6 +67,16 @@
       "sources": 15
     },
     {
+      "modelId": "audi-e-tron",
+      "populatedFields": 15,
+      "sources": 11
+    },
+    {
+      "modelId": "audi-q3",
+      "populatedFields": 15,
+      "sources": 14
+    },
+    {
       "modelId": "audi-q5",
       "populatedFields": 15,
       "sources": 13
@@ -50,6 +85,11 @@
       "modelId": "audi-q7",
       "populatedFields": 15,
       "sources": 14
+    },
+    {
+      "modelId": "audi-s4",
+      "populatedFields": 15,
+      "sources": 10
     },
     {
       "modelId": "bmw-3-series",
@@ -62,6 +102,21 @@
       "sources": 16
     },
     {
+      "modelId": "bmw-i4",
+      "populatedFields": 15,
+      "sources": 12
+    },
+    {
+      "modelId": "bmw-m3",
+      "populatedFields": 15,
+      "sources": 13
+    },
+    {
+      "modelId": "bmw-x1",
+      "populatedFields": 15,
+      "sources": 12
+    },
+    {
       "modelId": "bmw-x3",
       "populatedFields": 15,
       "sources": 13
@@ -70,6 +125,11 @@
       "modelId": "bmw-x5",
       "populatedFields": 15,
       "sources": 14
+    },
+    {
+      "modelId": "chevrolet-colorado",
+      "populatedFields": 14,
+      "sources": 18
     },
     {
       "modelId": "chevrolet-equinox",
@@ -87,6 +147,11 @@
       "sources": 20
     },
     {
+      "modelId": "chevrolet-suburban",
+      "populatedFields": 14,
+      "sources": 12
+    },
+    {
       "modelId": "chevrolet-tahoe",
       "populatedFields": 14,
       "sources": 13
@@ -94,6 +159,16 @@
     {
       "modelId": "chevrolet-traverse",
       "populatedFields": 14,
+      "sources": 12
+    },
+    {
+      "modelId": "ford-bronco",
+      "populatedFields": 15,
+      "sources": 23
+    },
+    {
+      "modelId": "ford-edge",
+      "populatedFields": 15,
       "sources": 12
     },
     {
@@ -117,7 +192,17 @@
       "sources": 14
     },
     {
+      "modelId": "ford-ranger",
+      "populatedFields": 15,
+      "sources": 12
+    },
+    {
       "modelId": "gmc-acadia",
+      "populatedFields": 15,
+      "sources": 12
+    },
+    {
+      "modelId": "gmc-canyon",
       "populatedFields": 15,
       "sources": 12
     },
@@ -125,6 +210,11 @@
       "modelId": "gmc-sierra-1500",
       "populatedFields": 15,
       "sources": 17
+    },
+    {
+      "modelId": "gmc-sierra-hd",
+      "populatedFields": 15,
+      "sources": 9
     },
     {
       "modelId": "gmc-terrain",
@@ -135,6 +225,11 @@
       "modelId": "gmc-yukon",
       "populatedFields": 15,
       "sources": 12
+    },
+    {
+      "modelId": "gmc-yukon-xl",
+      "populatedFields": 15,
+      "sources": 10
     },
     {
       "modelId": "honda-accord",
@@ -152,6 +247,11 @@
       "sources": 10
     },
     {
+      "modelId": "honda-hr-v",
+      "populatedFields": 15,
+      "sources": 8
+    },
+    {
       "modelId": "honda-odyssey",
       "populatedFields": 15,
       "sources": 5
@@ -162,9 +262,29 @@
       "sources": 13
     },
     {
+      "modelId": "honda-ridgeline",
+      "populatedFields": 15,
+      "sources": 6
+    },
+    {
       "modelId": "hyundai-elantra",
       "populatedFields": 15,
       "sources": 13
+    },
+    {
+      "modelId": "hyundai-ioniq-5",
+      "populatedFields": 15,
+      "sources": 15
+    },
+    {
+      "modelId": "hyundai-kona",
+      "populatedFields": 15,
+      "sources": 12
+    },
+    {
+      "modelId": "hyundai-palisade",
+      "populatedFields": 15,
+      "sources": 14
     },
     {
       "modelId": "hyundai-santa-fe",
@@ -192,14 +312,34 @@
       "sources": 13
     },
     {
+      "modelId": "jeep-gladiator",
+      "populatedFields": 15,
+      "sources": 9
+    },
+    {
       "modelId": "jeep-grand-cherokee",
       "populatedFields": 15,
       "sources": 26
     },
     {
+      "modelId": "jeep-renegade",
+      "populatedFields": 15,
+      "sources": 8
+    },
+    {
+      "modelId": "jeep-wagoneer",
+      "populatedFields": 15,
+      "sources": 9
+    },
+    {
       "modelId": "jeep-wrangler",
       "populatedFields": 15,
       "sources": 24
+    },
+    {
+      "modelId": "kia-ev6",
+      "populatedFields": 15,
+      "sources": 8
     },
     {
       "modelId": "kia-forte",
@@ -217,14 +357,29 @@
       "sources": 10
     },
     {
+      "modelId": "kia-soul",
+      "populatedFields": 15,
+      "sources": 8
+    },
+    {
       "modelId": "kia-sportage",
       "populatedFields": 15,
       "sources": 9
     },
     {
+      "modelId": "kia-telluride",
+      "populatedFields": 15,
+      "sources": 8
+    },
+    {
       "modelId": "lexus-es",
       "populatedFields": 15,
       "sources": 14
+    },
+    {
+      "modelId": "lexus-gx",
+      "populatedFields": 15,
+      "sources": 12
     },
     {
       "modelId": "lexus-is",
@@ -242,6 +397,16 @@
       "sources": 12
     },
     {
+      "modelId": "lexus-tx",
+      "populatedFields": 15,
+      "sources": 11
+    },
+    {
+      "modelId": "lexus-ux",
+      "populatedFields": 15,
+      "sources": 10
+    },
+    {
       "modelId": "mercedes-c-class",
       "populatedFields": 15,
       "sources": 17
@@ -250,6 +415,11 @@
       "modelId": "mercedes-e-class",
       "populatedFields": 15,
       "sources": 12
+    },
+    {
+      "modelId": "mercedes-gla",
+      "populatedFields": 15,
+      "sources": 5
     },
     {
       "modelId": "mercedes-glc",
@@ -262,6 +432,16 @@
       "sources": 11
     },
     {
+      "modelId": "mercedes-s-class",
+      "populatedFields": 15,
+      "sources": 7
+    },
+    {
+      "modelId": "mercedes-sprinter",
+      "populatedFields": 15,
+      "sources": 4
+    },
+    {
       "modelId": "nissan-altima",
       "populatedFields": 15,
       "sources": 12
@@ -270,6 +450,16 @@
       "modelId": "nissan-frontier",
       "populatedFields": 15,
       "sources": 12
+    },
+    {
+      "modelId": "nissan-kicks",
+      "populatedFields": 15,
+      "sources": 10
+    },
+    {
+      "modelId": "nissan-murano",
+      "populatedFields": 15,
+      "sources": 14
     },
     {
       "modelId": "nissan-pathfinder",
@@ -297,6 +487,36 @@
       "sources": 16
     },
     {
+      "modelId": "ram-3500",
+      "populatedFields": 15,
+      "sources": 11
+    },
+    {
+      "modelId": "ram-promaster",
+      "populatedFields": 15,
+      "sources": 10
+    },
+    {
+      "modelId": "ram-promaster-city",
+      "populatedFields": 15,
+      "sources": 6
+    },
+    {
+      "modelId": "ram-rebel",
+      "populatedFields": 15,
+      "sources": 7
+    },
+    {
+      "modelId": "ram-trx",
+      "populatedFields": 15,
+      "sources": 8
+    },
+    {
+      "modelId": "subaru-ascent",
+      "populatedFields": 15,
+      "sources": 8
+    },
+    {
       "modelId": "subaru-crosstrek",
       "populatedFields": 15,
       "sources": 13
@@ -312,9 +532,24 @@
       "sources": 15
     },
     {
+      "modelId": "subaru-legacy",
+      "populatedFields": 15,
+      "sources": 11
+    },
+    {
       "modelId": "subaru-outback",
       "populatedFields": 15,
       "sources": 12
+    },
+    {
+      "modelId": "subaru-wrx",
+      "populatedFields": 15,
+      "sources": 12
+    },
+    {
+      "modelId": "tesla-cybertruck",
+      "populatedFields": 15,
+      "sources": 17
     },
     {
       "modelId": "tesla-model-3",
@@ -327,9 +562,19 @@
       "sources": 28
     },
     {
+      "modelId": "tesla-model-x",
+      "populatedFields": 15,
+      "sources": 21
+    },
+    {
       "modelId": "tesla-model-y",
       "populatedFields": 15,
       "sources": 21
+    },
+    {
+      "modelId": "toyota-4runner",
+      "populatedFields": 15,
+      "sources": 5
     },
     {
       "modelId": "toyota-camry",
@@ -347,6 +592,11 @@
       "sources": 8
     },
     {
+      "modelId": "toyota-prius",
+      "populatedFields": 15,
+      "sources": 5
+    },
+    {
       "modelId": "toyota-rav4",
       "populatedFields": 15,
       "sources": 6
@@ -357,9 +607,19 @@
       "sources": 10
     },
     {
+      "modelId": "volkswagen-atlas",
+      "populatedFields": 15,
+      "sources": 12
+    },
+    {
       "modelId": "volkswagen-golf",
       "populatedFields": 15,
       "sources": 16
+    },
+    {
+      "modelId": "volkswagen-id-4",
+      "populatedFields": 14,
+      "sources": 7
     },
     {
       "modelId": "volkswagen-jetta",
@@ -372,225 +632,17 @@
       "sources": 9
     },
     {
+      "modelId": "volkswagen-taos",
+      "populatedFields": 15,
+      "sources": 9
+    },
+    {
       "modelId": "volkswagen-tiguan",
       "populatedFields": 15,
       "sources": 15
     }
   ],
-  "unverified": [
-    {
-      "modelId": "acura-integra",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "acura-mdx-type-s",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "acura-tlx-type-s",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "acura-zdx",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "alfa-romeo-tonale",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "audi-e-tron",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "audi-q3",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "audi-s4",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "bmw-i4",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "bmw-m3",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "bmw-x1",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "chevrolet-colorado",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "chevrolet-suburban",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ford-bronco",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ford-edge",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ford-ranger",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "gmc-canyon",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "gmc-sierra-hd",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "gmc-yukon-xl",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "honda-hr-v",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "honda-ridgeline",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "hyundai-ioniq-5",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "hyundai-kona",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "hyundai-palisade",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "jeep-gladiator",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "jeep-renegade",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "jeep-wagoneer",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "kia-ev6",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "kia-soul",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "kia-telluride",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "lexus-gx",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "lexus-tx",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "lexus-ux",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "mercedes-gla",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "mercedes-s-class",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "mercedes-sprinter",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "nissan-kicks",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "nissan-murano",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ram-3500",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ram-promaster",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ram-promaster-city",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ram-rebel",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "ram-trx",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "subaru-ascent",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "subaru-legacy",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "subaru-wrx",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "tesla-cybertruck",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "tesla-model-x",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "toyota-4runner",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "toyota-prius",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "volkswagen-atlas",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "volkswagen-id-4",
-      "reason": "not_in_oem_pack"
-    },
-    {
-      "modelId": "volkswagen-taos",
-      "reason": "not_in_oem_pack"
-    }
-  ],
+  "unverified": [],
   "packOnly": [
     {
       "modelId": "ford-fusion",
@@ -598,41 +650,90 @@
     }
   ],
   "spark": {
+    "routingVerified": true,
     "research": {
       "routingVerified": true
     },
     "smart": {
       "routingVerified": true,
-      "validation": {
-        "ok": true,
-        "mappings": [
-          {
-            "modelId": "chevrolet-silverado",
-            "valid": true,
-            "note": "Standard naming convention."
-          },
-          {
-            "modelId": "kia-k5",
-            "valid": false,
-            "note": "Model name 'Optima / K5' is historically inaccurate for the K5; Optima was a distinct predecessor model. K5 replaced Optima in 2020. Suggest 'K5' only."
-          },
-          {
-            "modelId": "mercedes-c-class",
-            "valid": true,
-            "note": "Standard naming convention."
-          },
-          {
-            "modelId": "ram-1500",
-            "valid": true,
-            "note": "Standard naming convention."
-          },
-          {
-            "modelId": "volkswagen-golf",
-            "valid": true,
-            "note": "GTI is a trim/variant of the Golf, not a separate model ID in most OEM catalogs. 'Golf' covers both."
-          }
-        ]
-      }
+      "batches": 3,
+      "validation": [
+        {
+          "modelId": "chevrolet-silverado",
+          "valid": true,
+          "note": "Standard naming convention for Chevrolet Silverado 1500."
+        },
+        {
+          "modelId": "ram-1500",
+          "valid": true,
+          "note": "Standard naming convention for Ram 1500."
+        },
+        {
+          "modelId": "ram-3500",
+          "valid": true,
+          "note": "Standard naming convention for Ram 3500."
+        },
+        {
+          "modelId": "ram-promaster",
+          "valid": true,
+          "note": "Standard naming convention for Ram ProMaster."
+        },
+        {
+          "modelId": "ram-trx",
+          "valid": true,
+          "note": "Standard naming convention for Ram 1500 TRX."
+        },
+        {
+          "modelId": "ram-rebel",
+          "valid": true,
+          "note": "Ram is a distinct brand under Stellantis; 'ram' is the correct makeSlug. Rebel is a trim/model variant of the Ram 1500."
+        },
+        {
+          "modelId": "kia-k5",
+          "valid": true,
+          "note": "Kia K5 replaced the Optima; 'kia' is the correct makeSlug. Mapping is accurate for current/recent generations."
+        },
+        {
+          "modelId": "volkswagen-golf",
+          "valid": true,
+          "note": "Volkswagen Golf and GTI share platform and naming conventions; 'volkswagen' is the correct makeSlug."
+        },
+        {
+          "modelId": "volkswagen-atlas",
+          "valid": true,
+          "note": "Atlas Cross Sport is a variant of the Atlas; 'volkswagen' is the correct makeSlug."
+        },
+        {
+          "modelId": "mercedes-c-class",
+          "valid": true,
+          "note": "Mercedes-Benz is often abbreviated as 'mercedes' in slugs; 'mercedes' is the correct makeSlug."
+        },
+        {
+          "modelId": "audi-e-tron",
+          "valid": true,
+          "note": "Correct mapping for Audi e-tron (Q8 e-tron)"
+        },
+        {
+          "modelId": "jeep-wagoneer",
+          "valid": true,
+          "note": "Correct mapping for Jeep Wagoneer / Grand Wagoneer"
+        },
+        {
+          "modelId": "gmc-sierra-hd",
+          "valid": true,
+          "note": "Correct mapping for GMC Sierra HD"
+        },
+        {
+          "modelId": "acura-tlx-type-s",
+          "valid": true,
+          "note": "Correct mapping for Acura TLX Type S"
+        },
+        {
+          "modelId": "acura-mdx-type-s",
+          "valid": true,
+          "note": "Correct mapping for Acura MDX Type S"
+        }
+      ]
     }
   }
 }

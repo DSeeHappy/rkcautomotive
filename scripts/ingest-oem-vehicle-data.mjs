@@ -55,12 +55,160 @@ function loadCatalogModelIds() {
 function copyEpaScripts() {
   const dest = path.join(ROOT, 'scripts', 'epa');
   fs.mkdirSync(dest, { recursive: true });
-  for (const name of ['epa_pull.py', 'epa_pull2.py', 'epa_pull3.py', 'epa_pull4.py']) {
+  for (const name of [
+    'epa_pull.py',
+    'epa_pull2.py',
+    'epa_pull3.py',
+    'epa_pull4.py',
+    'epa_pull5.py',
+  ]) {
     const src = path.join(DATA_PACK, name);
     if (fs.existsSync(src)) {
       fs.copyFileSync(src, path.join(dest, name));
     }
   }
+}
+
+/** Trim chips covered inside parent pack sections — alias, never invent. */
+function expandTrimAliases(models) {
+  const byId = Object.fromEntries(models.map((m) => [m.modelId, m]));
+  const aliases = [
+    { modelId: 'acura-tlx-type-s', parentId: 'acura-tlx', modelName: 'TLX Type S', modelSlug: 'tlx-type-s' },
+    { modelId: 'acura-mdx-type-s', parentId: 'acura-mdx', modelName: 'MDX Type S', modelSlug: 'mdx-type-s' },
+  ];
+  const out = [...models];
+  for (const alias of aliases) {
+    const parent = byId[alias.parentId];
+    if (!parent || byId[alias.modelId]) continue;
+    out.push({
+      ...parent,
+      modelId: alias.modelId,
+      modelSlug: alias.modelSlug,
+      modelName: alias.modelName,
+      subtitle: parent.subtitle
+        ? `${parent.subtitle} · Type S trim covered in parent section`
+        : 'Type S trim covered in parent section',
+    });
+  }
+  return out;
+}
+
+const SLUG_EDGE_CASES = [
+  'chevrolet-silverado',
+  'ram-1500',
+  'ram-3500',
+  'ram-promaster',
+  'ram-trx',
+  'ram-rebel',
+  'kia-k5',
+  'volkswagen-golf',
+  'volkswagen-atlas',
+  'mercedes-c-class',
+  'audi-e-tron',
+  'jeep-wagoneer',
+  'gmc-sierra-hd',
+  'acura-tlx-type-s',
+  'acura-mdx-type-s',
+];
+
+function chunkArray(arr, size) {
+  const chunks = [];
+  for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
+  return chunks;
+}
+
+function validateSlugMappingsBatched(parsed, catalogIds) {
+  const packById = Object.fromEntries(parsed.map((m) => [m.modelId, m]));
+  const edgeCases = SLUG_EDGE_CASES.map((id) => {
+    const rec = packById[id];
+    return rec
+      ? { modelId: rec.modelId, modelName: rec.modelName, makeSlug: rec.makeSlug }
+      : { modelId: id, modelName: null, makeSlug: id.split('-')[0], note: 'missing_from_parser' };
+  });
+
+  const smartBatches = [];
+  for (const batch of chunkArray(edgeCases, 5)) {
+    const smart = sparkWithRetry(
+      {
+        model: MODEL_SMART,
+        label: 'oem-ingest-slug-validate',
+        max_tokens: 400,
+        timeoutSec: 90,
+        messages: [
+          {
+            role: 'system',
+            content:
+              'RKC OEM ingest validator. Return ONLY JSON {"ok":true,"mappings":[{"modelId","valid":boolean,"note"}]}. Never invent specs.',
+          },
+          {
+            role: 'user',
+            content: `Validate these pack→catalog slug mappings look correct for RKC site:\n${JSON.stringify(batch)}`,
+          },
+        ],
+      },
+      'oem slug validation',
+    );
+    smartBatches.push({
+      routingVerified: smart.telemetry.routingVerified,
+      validation: extractJsonObject(smart.content),
+    });
+  }
+
+  const research = sparkWithRetry(
+    {
+      model: MODEL_RESEARCH,
+      label: 'oem-ingest-map-research',
+      max_tokens: 220,
+      timeoutSec: 90,
+      messages: [
+        {
+          role: 'system',
+          content:
+            'You are a JSON emitter. Output ONLY a single JSON object. No markdown, no prose before or after.',
+        },
+        {
+          role: 'user',
+          content: `{"task":"oem_slug_map","catalogModels":${catalogIds.length},"packModels":${parsed.length},"edgeCases":${SLUG_EDGE_CASES.length}}`,
+        },
+      ],
+    },
+    'oem mapping research',
+  );
+
+  let researchJson;
+  try {
+    researchJson = extractJsonObject(research.content);
+  } catch {
+    researchJson = {
+      strategy: 'Deterministic markdown parser maps make files to catalog slugs.',
+      slugRules: [
+        'mercedes-benz→mercedes',
+        'Silverado 1500→silverado',
+        'Ram 1500→1500',
+        'Ram 3500→3500',
+        'Type S chips alias parent TLX/MDX sections',
+      ],
+      gaps: catalogIds.filter((id) => !parsed.some((m) => m.modelId === id)).slice(0, 8),
+      verifiedCountEstimate: parsed.length,
+    };
+  }
+
+  const allRoutingVerified =
+    research.telemetry.routingVerified && smartBatches.every((b) => b.routingVerified);
+
+  return {
+    routingVerified: allRoutingVerified,
+    research: {
+      routingVerified: research.telemetry.routingVerified,
+      strategy: researchJson.strategy,
+      gaps: researchJson.gaps,
+    },
+    smart: {
+      routingVerified: smartBatches.every((b) => b.routingVerified),
+      batches: smartBatches.length,
+      validation: smartBatches.flatMap((b) => b.validation.mappings ?? []),
+    },
+  };
 }
 
 function buildCoverageReport(packModels, catalogIds) {
@@ -136,14 +284,15 @@ function main() {
   copyEpaScripts();
   console.log('Copied EPA pull scripts → scripts/epa/');
 
-  const parsed = parseAllMakeFiles(DATA_PACK, fs);
-  console.log(`Parsed ${parsed.length} models from make markdown files`);
+  const parsedRaw = parseAllMakeFiles(DATA_PACK, fs);
+  const parsed = expandTrimAliases(parsedRaw);
+  console.log(`Parsed ${parsedRaw.length} models + ${parsed.length - parsedRaw.length} trim aliases`);
 
   const catalogIds = loadCatalogModelIds();
 
   // Write pack from parser first — Spark validates mapping only, never alters field text.
   const basePack = {
-    version: 'kimi-pack-2026-07-20',
+    version: 'kimi-pack-2026-07-20-v2',
     generatedAt: new Date().toISOString(),
     sourceDir: DATA_PACK,
     models: Object.fromEntries(parsed.map((m) => [m.modelId, m])),
@@ -152,86 +301,12 @@ function main() {
   fs.writeFileSync(OUT_FILE, `${JSON.stringify(basePack, null, 2)}\n`, 'utf8');
   console.log(`Wrote parser output → ${OUT_FILE}`);
 
-  // Spark research — mapping strategy (logged, does not alter data)
-  const packIds = parsed.map((m) => m.modelId);
-
-  // Smart first (more reliable on Bifrost), then research
-  const edgeCases = parsed
-    .filter((m) =>
-      ['chevrolet-silverado', 'ram-1500', 'kia-k5', 'volkswagen-golf', 'mercedes-c-class'].includes(
-        m.modelId,
-      ),
-    )
-    .map((m) => ({ modelId: m.modelId, modelName: m.modelName, makeSlug: m.makeSlug }));
-
-  const smart = sparkWithRetry(
-    {
-      model: MODEL_SMART,
-      label: 'oem-ingest-slug-validate',
-      max_tokens: 350,
-      timeoutSec: 90,
-      messages: [
-        {
-          role: 'system',
-          content:
-            'RKC OEM ingest validator. Return ONLY JSON {"ok":true,"mappings":[{"modelId","valid":boolean,"note"}]}. Never invent specs.',
-        },
-        {
-          role: 'user',
-          content: `Validate these pack→catalog slug mappings look correct for RKC site:\n${JSON.stringify(edgeCases)}`,
-        },
-      ],
-    },
-    'oem slug validation',
-  );
-  const smartJson = extractJsonObject(smart.content);
-  console.log('Spark smart routingVerified:', smart.telemetry.routingVerified);
-
-  const research = sparkWithRetry(
-    {
-      model: MODEL_RESEARCH,
-      label: 'oem-ingest-map-research',
-      max_tokens: 160,
-      timeoutSec: 90,
-      messages: [
-        {
-          role: 'system',
-          content:
-            'You are a JSON emitter. Output ONLY a single JSON object. No markdown, no prose before or after.',
-        },
-        {
-          role: 'user',
-          content: `{"task":"oem_slug_map","catalogModels":${catalogIds.length},"packModels":${packIds.length}}`,
-        },
-      ],
-    },
-    'oem mapping research',
-  );
-  let researchJson;
-  try {
-    researchJson = extractJsonObject(research.content);
-  } catch {
-    researchJson = {
-      strategy: 'Deterministic markdown parser maps make files to catalog slugs.',
-      slugRules: ['mercedes-benz→mercedes', 'Silverado 1500→silverado', 'Ram 1500→1500'],
-      gaps: catalogIds.filter((id) => !packIds.includes(id)).slice(0, 5),
-      verifiedCountEstimate: packIds.length,
-    };
-  }
-  console.log('Spark research routingVerified:', research.telemetry.routingVerified);
+  const spark = validateSlugMappingsBatched(parsed, catalogIds);
+  console.log('Spark smart batches:', spark.smart.batches, 'routingVerified:', spark.routingVerified);
 
   const pack = {
     ...basePack,
-    spark: {
-      research: {
-        routingVerified: research.telemetry.routingVerified,
-        strategy: researchJson.strategy,
-      },
-      smart: {
-        routingVerified: smart.telemetry.routingVerified,
-        validation: smartJson,
-      },
-    },
+    spark,
   };
 
   fs.writeFileSync(OUT_FILE, `${JSON.stringify(pack, null, 2)}\n`, 'utf8');
@@ -249,7 +324,7 @@ function main() {
   console.log(`Pack-only (no hub): ${coverage.packOnlyCount}`);
   console.log(`Report: ${path.relative(ROOT, COVERAGE_FILE)}`);
 
-  if (!research.telemetry.routingVerified || !smart.telemetry.routingVerified) {
+  if (!spark.routingVerified) {
     console.error('FAIL: Spark routing not verified');
     process.exit(1);
   }

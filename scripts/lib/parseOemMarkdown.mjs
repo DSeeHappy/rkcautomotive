@@ -67,8 +67,18 @@ export function modelHeaderToCatalogSlug(makeSlug, header) {
     'chevrolet:silverado 1500': 'silverado',
     'ram:ram 1500': '1500',
     'ram:ram 2500': '2500',
+    'ram:ram 3500': '3500',
+    'ram:ram promaster': 'promaster',
+    'ram:ram promaster city': 'promaster-city',
+    'ram:ram 1500 trx': 'trx',
+    'ram:ram 1500 rebel': 'rebel',
     'kia:optima / k5': 'k5',
     'volkswagen:golf / gti': 'golf',
+    'volkswagen:atlas (incl. atlas cross sport)': 'atlas',
+    'audi:e-tron (q8 e-tron)': 'e-tron',
+    'jeep:wagoneer / grand wagoneer': 'wagoneer',
+    'gmc:sierra hd (2500hd / 3500hd)': 'sierra-hd',
+    'gmc:sierra 1500': 'sierra-1500',
   };
   const key = `${makeSlug}:${normalized}`;
   if (overrides[key]) return overrides[key];

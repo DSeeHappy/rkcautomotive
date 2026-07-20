@@ -339,6 +339,6 @@ Aggregate file: `scripts/.spark-logs/phase1-arch-audit-retry.json`.
 
 **Policy:** OEM specs populate from verified kimi data pack (`data/knowledge/oem-pack.json`) when a catalog model matches; gaps stay `"Unable to verify with available data."` Shop observations labeled separately.
 
-**OEM ingest (2026-07-20):** `npm run ingest:oem-vehicle-data` — 75 pack models, **74/127** site hubs verified. Coverage: `data/knowledge/oem-coverage.json`.
+**OEM ingest (2026-07-20 v2):** `npm run ingest:oem-vehicle-data` — 128 pack models (126 parsed + 2 Type S aliases), **127/127** site hubs verified. Coverage: `data/knowledge/oem-coverage.json`.
 
 **Next:** Split generations/years/trims when pack adds trim-level rows; expand pack to remaining 53 catalog models.
