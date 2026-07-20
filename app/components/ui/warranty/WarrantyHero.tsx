@@ -13,10 +13,12 @@ import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 import { useLanguage } from '@/lib/language';
 import { siteCopy } from '@/lib/siteCopy';
+import { warrantyCopy } from '@/lib/i18n/warrantyCopy';
 
 export default function WarrantyHero() {
   const { lang } = useLanguage();
   const shell = siteCopy(lang).shells.warranty;
+  const hero = warrantyCopy(lang).hero;
   const reduce = usePrefersReducedMotion();
   const { sectionRef, bgRef, contentRef } = useGsapParallax<HTMLElement>(reduce, {
     yPercent: 16,
@@ -86,29 +88,15 @@ export default function WarrantyHero() {
               ref={title}
               className="mt-4 font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.95] tracking-wide text-white"
             >
-              {lang === 'es' ? (
-                <>
-                  Aceptamos{' '}
-                  <span className="bg-gradient-to-r from-primary-green-light via-emerald-300 to-primary-green-light bg-clip-text text-transparent">
-                    todas las
-                  </span>{' '}
-                  garantías extendidas principales
-                </>
-              ) : (
-                <>
-                  We Accept{' '}
-                  <span className="bg-gradient-to-r from-primary-green-light via-emerald-300 to-primary-green-light bg-clip-text text-transparent">
-                    All Major
-                  </span>{' '}
-                  Extended Warranties
-                </>
-              )}
+              {hero.titleBefore}{' '}
+              <span className="bg-gradient-to-r from-primary-green-light via-emerald-300 to-primary-green-light bg-clip-text text-transparent">
+                {hero.titleHighlight}
+              </span>{' '}
+              {hero.titleAfter}
             </h1>
 
             <p ref={description} className="mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl">
-              {lang === 'es'
-                ? 'No pelee solo con los ajustadores de reclamos. RKC gestiona diagnóstico, autorizaciones de desarmado, apelaciones de denegación y calidad de piezas — desde la entrega hasta la reparación aprobada.'
-                : "Don't battle claims adjusters alone. RKC manages diagnostics, teardown authorizations, denial appeals, and parts quality — from drop-off through approved repair."}
+              {hero.description}
             </p>
 
             <div ref={ctas} className="mt-8 flex flex-wrap items-center gap-4">
@@ -118,7 +106,7 @@ export default function WarrantyHero() {
               </MotionAnchor>
               <Link href="/contact" className="btn-ghost-light">
                 <CalendarCheck className="size-5" />
-                {lang === 'es' ? 'Agendar diagnóstico de garantía' : 'Schedule Warranty Diagnostic'}
+                {hero.scheduleCta}
               </Link>
             </div>
           </div>

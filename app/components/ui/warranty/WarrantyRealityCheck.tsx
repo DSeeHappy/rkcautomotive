@@ -3,31 +3,17 @@
 import { Clock, FileCheck, Shield } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { useLanguage } from '@/lib/language';
+import { warrantyCopy } from '@/lib/i18n/warrantyCopy';
 
-const STATS: { icon: LucideIcon; value: string; label: string; detail: string }[] = [
-  {
-    icon: Clock,
-    value: '1–7 days',
-    label: 'Typical approval window',
-    detail: 'Component claims in 1–3 days · powertrain 3–7+',
-  },
-  {
-    icon: FileCheck,
-    value: '500+',
-    label: 'Claims handled',
-    detail: 'Extended warranty diagnostics & submissions',
-  },
-  {
-    icon: Shield,
-    value: '30+ yrs',
-    label: 'Shop experience',
-    detail: 'ASE-certified Englewood bay since day one',
-  },
-];
+const STAT_ICONS: LucideIcon[] = [Clock, FileCheck, Shield];
 
 export default function WarrantyRealityCheck() {
+  const { lang } = useLanguage();
+  const copy = warrantyCopy(lang).realityCheck;
+
   return (
-    <section className="relative overflow-hidden bg-[#0c1222] py-20 sm:py-24">
+    <section lang={lang} className="relative overflow-hidden bg-[#0c1222] py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-30"
@@ -44,20 +30,17 @@ export default function WarrantyRealityCheck() {
       <div className="wrap relative">
         <FadeIn className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light">
-            Warranty advocacy
+            {copy.eyebrow}
           </p>
           <blockquote className="mt-6 font-display text-[clamp(1.75rem,4.5vw,3.25rem)] leading-[1.05] tracking-wide text-white">
-            &ldquo;We fight the claim so you don&apos;t fight the adjuster.&rdquo;
+            &ldquo;{copy.quote}&rdquo;
           </blockquote>
-          <p className="mx-auto mt-5 max-w-2xl text-base text-white/65 sm:text-lg">
-            Extended warranty companies profit when claims stall or get denied. RKC documents every failure, negotiates
-            teardown authorizations, and escalates when adjusters play games.
-          </p>
+          <p className="mx-auto mt-5 max-w-2xl text-base text-white/65 sm:text-lg">{copy.body}</p>
         </FadeIn>
 
         <div className="mt-14 grid divide-y divide-white/10 border-y border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          {STATS.map((stat, i) => {
-            const Icon = stat.icon;
+          {copy.stats.map((stat, i) => {
+            const Icon = STAT_ICONS[i] ?? Shield;
             return (
               <FadeIn key={stat.label} delay={i * 0.08} className="px-6 py-10 sm:px-8">
                 <Icon className="size-8 text-primary-green-light" aria-hidden />

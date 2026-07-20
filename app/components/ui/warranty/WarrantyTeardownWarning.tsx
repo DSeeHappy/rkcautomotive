@@ -4,11 +4,15 @@ import Image from 'next/image';
 import { AlertTriangle, Camera, FileWarning, Info, Wrench } from 'lucide-react';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { PHOTOS } from '@/lib/constants';
+import { useLanguage } from '@/lib/language';
+import { warrantyCopy } from '@/lib/i18n/warrantyCopy';
 
 export default function WarrantyTeardownWarning() {
+  const { lang } = useLanguage();
+  const copy = warrantyCopy(lang).teardown;
+
   return (
-    <section className="relative overflow-hidden py-0">
-      {/* Full-width alert banner */}
+    <section lang={lang} className="relative overflow-hidden py-0">
       <div className="relative border-y-2 border-amber-500/50 bg-gradient-to-br from-[#1a1208] via-[#0c1222] to-[#0c1222]">
         <div
           aria-hidden
@@ -20,53 +24,36 @@ export default function WarrantyTeardownWarning() {
         />
 
         <div className="wrap relative py-16 sm:py-20">
-          {/* Alert header strip */}
           <FadeIn>
             <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 px-6 py-5 backdrop-blur-sm sm:px-8">
               <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500/25 ring-2 ring-amber-400/40">
                 <AlertTriangle className="size-8 text-amber-300" aria-hidden />
               </span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-amber-300">
-                  Critical warning — read before authorizing teardown
-                </p>
-                <p className="mt-1 font-display text-2xl tracking-wide text-white sm:text-3xl">
-                  The Teardown Authorization Trap
-                </p>
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-amber-300">{copy.alertEyebrow}</p>
+                <p className="mt-1 font-display text-2xl tracking-wide text-white sm:text-3xl">{copy.alertTitle}</p>
               </div>
             </div>
           </FadeIn>
 
           <div className="mt-12 grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
-            {/* Copy column */}
             <FadeIn className="lg:col-span-7">
               <h2 className="font-display text-[clamp(1.75rem,4vw,3rem)] leading-[1.05] tracking-wide text-white">
-                Your Engine Won&apos;t Run — But the Warranty Won&apos;t Pay to Find Out Why
+                {copy.title}
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
-                When your engine or transmission fails catastrophically, the warranty company will not
-                authorize internal inspection until you sign a teardown authorization — committing you
-                to pay for disassembly labor if the adjuster denies the claim.
-              </p>
+              <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">{copy.body}</p>
 
               <div className="mt-8 rounded-2xl border border-amber-400/30 bg-amber-500/[0.08] p-6 sm:p-8">
                 <div className="flex items-start gap-4">
                   <Info className="mt-0.5 size-6 shrink-0 text-amber-300" aria-hidden />
                   <div>
-                    <h3 className="text-lg font-bold text-amber-100">What you need to know</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">
-                      If the internal failure is covered, the warranty reimburses teardown labor along with
-                      the repair. If the adjuster finds sludge, a pre-existing crack, or an excluded
-                      component — you absorb the cost, often{' '}
-                      <span className="font-bold text-amber-200">$800 to $2,500</span> before a single
-                      covered part is replaced.
-                    </p>
+                    <h3 className="text-lg font-bold text-amber-100">{copy.infoTitle}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">{copy.infoBody}</p>
                   </div>
                 </div>
               </div>
             </FadeIn>
 
-            {/* Photo / illustration column */}
             <FadeIn delay={0.08} className="relative lg:col-span-5">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] ring-2 ring-amber-500/30">
                 <Image
@@ -80,16 +67,13 @@ export default function WarrantyTeardownWarning() {
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="flex items-center gap-3">
                     <Wrench className="size-6 text-amber-300" aria-hidden />
-                    <p className="text-sm font-semibold text-white/90">
-                      Document every fastener before you sign anything
-                    </p>
+                    <p className="text-sm font-semibold text-white/90">{copy.photoCaption}</p>
                   </div>
                 </div>
               </div>
             </FadeIn>
           </div>
 
-          {/* Warranty pays vs You pay — dramatic split */}
           <FadeIn delay={0.12} className="mt-12">
             <div className="grid overflow-hidden rounded-[1.75rem] border border-white/10 sm:grid-cols-2">
               <div className="border-b border-white/10 bg-gradient-to-br from-red-950/80 to-red-900/20 p-8 sm:border-b-0 sm:border-r sm:p-10">
@@ -97,18 +81,14 @@ export default function WarrantyTeardownWarning() {
                   <span className="flex size-11 items-center justify-center rounded-xl bg-red-500/20 ring-1 ring-red-400/30">
                     <FileWarning className="size-6 text-red-400" aria-hidden />
                   </span>
-                  <h3 className="font-display text-2xl tracking-wide text-red-200">You pay</h3>
+                  <h3 className="font-display text-2xl tracking-wide text-red-200">{copy.youPayTitle}</h3>
                 </div>
                 <ul className="mt-6 space-y-3 text-sm leading-relaxed text-white/70 sm:text-base">
-                  <li className="flex gap-2">
-                    <span className="text-red-400">✕</span> Excluded failures or neglect
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-red-400">✕</span> Pre-existing conditions
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-red-400">✕</span> Teardown labor + parts already ordered
-                  </li>
+                  {copy.youPayItems.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="text-red-400">✕</span> {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="bg-gradient-to-br from-emerald-950/60 to-primary-green/10 p-8 sm:p-10">
@@ -117,30 +97,22 @@ export default function WarrantyTeardownWarning() {
                     <Camera className="size-6 text-primary-green-light" aria-hidden />
                   </span>
                   <h3 className="font-display text-2xl tracking-wide text-primary-green-light">
-                    Warranty pays
+                    {copy.warrantyPaysTitle}
                   </h3>
                 </div>
                 <ul className="mt-6 space-y-3 text-sm leading-relaxed text-white/70 sm:text-base">
-                  <li className="flex gap-2">
-                    <span className="text-primary-green-light">✓</span> Covered internal failure confirmed
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-primary-green-light">✓</span> Teardown labor reimbursed
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-primary-green-light">✓</span> Repair + approved parts covered
-                  </li>
+                  {copy.warrantyPaysItems.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="text-primary-green-light">✓</span> {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.16} className="mt-10 max-w-4xl">
-            <p className="border-t border-white/10 pt-8 text-base leading-relaxed text-white/60">
-              Never authorize a teardown at a shop that cannot show you documented failure evidence
-              first. RKC runs preliminary diagnostics — compression tests, oil analysis, borescope
-              inspection — to build the strongest possible case before you assume financial risk.
-            </p>
+            <p className="border-t border-white/10 pt-8 text-base leading-relaxed text-white/60">{copy.footer}</p>
           </FadeIn>
         </div>
       </div>

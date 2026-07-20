@@ -12,6 +12,8 @@ import {
   type WarrantyProvider,
 } from '@/lib/constants';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { useLanguage } from '@/lib/language';
+import { warrantyCopy, warrantyProviderIntro } from '@/lib/i18n/warrantyCopy';
 import { SECTION_PAD } from './warrantyShared';
 
 const TOTAL_PROVIDERS = WARRANTY_PROVIDER_INDEX.reduce(
@@ -27,7 +29,6 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   'Institutional & Specialized': Landmark,
 };
 
-/** Map index display names to canonical provider records */
 function resolveWarrantyProvider(indexName: string): WarrantyProvider | undefined {
   const exact = getWarrantyProvider(indexName);
   if (exact) return exact;
@@ -40,7 +41,13 @@ function resolveWarrantyProvider(indexName: string): WarrantyProvider | undefine
   );
 }
 
-function ProviderListItem({ name }: { name: string }) {
+function ProviderListItem({
+  name,
+  openClaimsPortal,
+}: {
+  name: string;
+  openClaimsPortal: string;
+}) {
   const provider = resolveWarrantyProvider(name);
   const [logoFailed, setLogoFailed] = useState(false);
   const showLogo = provider?.logo && !logoFailed;
@@ -83,8 +90,8 @@ function ProviderListItem({ name }: { name: string }) {
           href={provider.claimsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          title={`${name} — open claims portal`}
-          aria-label={`${name} — open claims portal in new tab`}
+          title={`${name} — ${openClaimsPortal}`}
+          aria-label={`${name} — ${openClaimsPortal} in new tab`}
           className={itemClass}
         >
           {content}
@@ -97,8 +104,11 @@ function ProviderListItem({ name }: { name: string }) {
 }
 
 export default function WarrantyProviderIndex() {
+  const { lang } = useLanguage();
+  const copy = warrantyCopy(lang).providerIndex;
+
   return (
-    <section className={`relative overflow-hidden ${SECTION_PAD} bg-[#0c1222]`}>
+    <section lang={lang} className={`relative overflow-hidden ${SECTION_PAD} bg-[#0c1222]`}>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-40"
@@ -115,15 +125,11 @@ export default function WarrantyProviderIndex() {
       <div className="wrap relative">
         <FadeIn className="mb-14 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">
-            Warranty administrators
+            {copy.eyebrow}
           </p>
-          <h2 className="mt-3 font-display text-5xl tracking-wide text-white sm:text-6xl">
-            Extended Warranty Administrators We Work With
-          </h2>
+          <h2 className="mt-3 font-display text-5xl tracking-wide text-white sm:text-6xl">{copy.title}</h2>
           <p className="mt-4 text-lg text-white/75">
-            {TOTAL_PROVIDERS} administrators across direct, broker, and institutional programs — including{' '}
-            {VERIFIED_PROVIDER_COUNT} verified active partners with direct claims portals. RKC submits
-            diagnostics, negotiates approvals, and tracks your claim through completion.
+            {warrantyProviderIntro(lang, TOTAL_PROVIDERS, VERIFIED_PROVIDER_COUNT)}
           </p>
           <div
             aria-hidden
@@ -135,6 +141,7 @@ export default function WarrantyProviderIndex() {
           <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03] backdrop-blur-sm divide-y divide-white/10">
             {WARRANTY_PROVIDER_INDEX.map((group) => {
               const Icon = CATEGORY_ICONS[group.category] ?? Building2;
+              const categoryLabel = copy.categories[group.category as keyof typeof copy.categories] ?? group.category;
               return (
                 <Disclosure key={group.category} defaultOpen={group.category === 'Direct Administrators'}>
                   {({ open }) => (
@@ -146,10 +153,10 @@ export default function WarrantyProviderIndex() {
                           </span>
                           <div>
                             <h3 className="font-display text-2xl tracking-wide text-white sm:text-3xl">
-                              {group.category}
+                              {categoryLabel}
                             </h3>
                             <p className="mt-0.5 text-sm text-white/50">
-                              {group.providers.length} providers
+                              {group.providers.length} {copy.providersLabel}
                             </p>
                           </div>
                         </div>
@@ -161,10 +168,14 @@ export default function WarrantyProviderIndex() {
                       <DisclosurePanel className="border-t border-white/10 px-6 pb-8 pt-2 sm:px-10">
                         <ul
                           className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3"
-                          aria-label={`${group.category} warranty providers`}
+                          aria-label={`${categoryLabel} warranty providers`}
                         >
                           {group.providers.map((name) => (
-                            <ProviderListItem key={name} name={name} />
+                            <ProviderListItem
+                              key={name}
+                              name={name}
+                              openClaimsPortal={copy.openClaimsPortal}
+                            />
                           ))}
                         </ul>
                       </DisclosurePanel>
@@ -177,13 +188,7 @@ export default function WarrantyProviderIndex() {
         </FadeIn>
 
         <FadeIn delay={0.12} className="mt-10 max-w-3xl">
-          <p className="text-sm leading-relaxed text-white/45">
-            Verified partners (with logos) link to their claims portals. This index covers direct
-            administrators, marketing brokers, and institutional warranty programs. RKC Automotive is
-            an independent repair facility — we are not affiliated with, endorsed by, or acting as an
-            agent for any company listed above. Coverage acceptance depends on your specific contract
-            terms and administrator policies.
-          </p>
+          <p className="text-sm leading-relaxed text-white/45">{copy.disclaimer}</p>
         </FadeIn>
       </div>
     </section>

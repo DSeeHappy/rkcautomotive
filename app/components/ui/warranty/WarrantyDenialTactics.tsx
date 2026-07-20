@@ -3,9 +3,30 @@
 import { Ban, Droplets, Link2 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
+import { useLanguage } from '@/lib/language';
+import { warrantyCopy } from '@/lib/i18n/warrantyCopy';
 import { SECTION_PAD, SECTION_HEADER } from './warrantyShared';
 
-const DENIAL_TACTICS: {
+const TACTIC_ICONS: LucideIcon[] = [Ban, Droplets, Link2];
+const TACTIC_STYLES = [
+  {
+    accent: 'text-red-400',
+    accentBg: 'bg-red-500/10',
+    accentBorder: 'border-red-500/25',
+  },
+  {
+    accent: 'text-amber-400',
+    accentBg: 'bg-amber-500/10',
+    accentBorder: 'border-amber-500/25',
+  },
+  {
+    accent: 'text-sky-400',
+    accentBg: 'bg-sky-500/10',
+    accentBorder: 'border-sky-500/25',
+  },
+] as const;
+
+type TacticItem = {
   icon: LucideIcon;
   tactic: string;
   adjusterClaim: string;
@@ -14,44 +35,17 @@ const DENIAL_TACTICS: {
   accentBg: string;
   accentBorder: string;
   featured?: boolean;
-}[] = [
-  {
-    icon: Ban,
-    tactic: 'Pre-Existing Condition',
-    adjusterClaim:
-      'Adjusters argue the failed component showed wear before your policy took effect — especially on high-mileage vehicles. They cite inspection photos, prior repair orders, or vague language in your contract about "gradual deterioration."',
-    rkcResponse:
-      'RKC pulls OBD-II freeze-frame data captured at the moment of failure. Freeze frames timestamp exactly when a sensor reading went out of range — proving the component operated within spec until a sudden, catastrophic event. Combined with prior scan history when available, this evidence directly contradicts gradual-wear denial arguments.',
-    accent: 'text-red-400',
-    accentBg: 'bg-red-500/10',
-    accentBorder: 'border-red-500/25',
-    featured: true,
-  },
-  {
-    icon: Droplets,
-    tactic: 'Lack of Maintenance',
-    adjusterClaim:
-      'Sludge in the valve cover, dark oil on the dipstick, or missing dealer stamps become grounds for total claim denial. Powertrain administrators use maintenance exclusions more aggressively than any other contract clause.',
-    rkcResponse:
-      'We distinguish cosmetic sludge from mechanical neglect. Oil analysis, bearing inspection photos, and metallurgical evidence of sudden failure prove catastrophic failure rather than incremental neglect.',
-    accent: 'text-amber-400',
-    accentBg: 'bg-amber-500/10',
-    accentBorder: 'border-amber-500/25',
-  },
-  {
-    icon: Link2,
-    tactic: 'Consequential Damage Loophole',
-    adjusterClaim:
-      'Your covered water pump failed and destroyed the timing belt and cylinder head — but the adjuster approves only the water pump. They classify everything else as "consequential damage" from an excluded wear item.',
-    rkcResponse:
-      'RKC documents the complete sequence of failure before disassembly. When a covered component failure directly causes downstream damage, we cite contract language requiring administrators to cover consequential repairs.',
-    accent: 'text-sky-400',
-    accentBg: 'bg-sky-500/10',
-    accentBorder: 'border-sky-500/25',
-  },
-];
+};
 
-function TacticCard({ item, index }: { item: (typeof DENIAL_TACTICS)[number]; index: number }) {
+function TacticCard({
+  item,
+  index,
+  labels,
+}: {
+  item: TacticItem;
+  index: number;
+  labels: { tacticLabel: string; adjusterClaimLabel: string; ourFightLabel: string };
+}) {
   const Icon = item.icon;
 
   return (
@@ -71,7 +65,7 @@ function TacticCard({ item, index }: { item: (typeof DENIAL_TACTICS)[number]; in
           </span>
           <div>
             <p className={`text-xs font-bold uppercase tracking-[0.2em] ${item.accent}`}>
-              Tactic {index + 1}
+              {labels.tacticLabel} {index + 1}
             </p>
             <h3 className="font-display text-2xl tracking-wide text-primary-blue sm:text-[1.65rem]">
               {item.tactic}
@@ -81,11 +75,11 @@ function TacticCard({ item, index }: { item: (typeof DENIAL_TACTICS)[number]; in
       </div>
       <div className="flex flex-1 flex-col gap-5 px-8 py-7">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">What adjusters claim</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">{labels.adjusterClaimLabel}</p>
           <p className="mt-2.5 text-sm leading-relaxed text-ink-muted sm:text-base">{item.adjusterClaim}</p>
         </div>
         <div className="mt-auto rounded-2xl border border-primary-green/20 bg-primary-green/[0.06] p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-green">Our fight</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-green">{labels.ourFightLabel}</p>
           <p className="mt-2.5 text-sm leading-relaxed text-foreground sm:text-base">{item.rkcResponse}</p>
         </div>
       </div>
@@ -94,33 +88,48 @@ function TacticCard({ item, index }: { item: (typeof DENIAL_TACTICS)[number]; in
 }
 
 export default function WarrantyDenialTactics() {
-  const [featured, ...rest] = DENIAL_TACTICS;
+  const { lang } = useLanguage();
+  const copy = warrantyCopy(lang).denialTactics;
+  const tactics: TacticItem[] = copy.tactics.map((item, i) => ({
+    ...item,
+    icon: TACTIC_ICONS[i] ?? Ban,
+    ...TACTIC_STYLES[i],
+    featured: i === 0,
+  }));
+  const [featured, ...rest] = tactics;
 
   return (
-    <section className={`${SECTION_PAD} bg-white`}>
+    <section lang={lang} className={`${SECTION_PAD} bg-white`}>
       <div className="wrap">
         <FadeIn className={SECTION_HEADER}>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
-            Fighting back
-          </p>
-          <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-            Denial Tactics &amp; RKC Counter-Measures
-          </h2>
-          <p className="mt-4 text-lg text-ink-muted">
-            Extended warranty companies deny roughly 30–40% of initial claims. The denials follow
-            predictable patterns — and each one has a technical counter when your shop documents
-            evidence properly.
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{copy.eyebrow}</p>
+          <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">{copy.title}</h2>
+          <p className="mt-4 text-lg text-ink-muted">{copy.intro}</p>
         </FadeIn>
 
-        {/* Bento grid: 1 large + 2 small */}
         <Stagger className="grid gap-6 lg:grid-cols-2 lg:grid-rows-2 lg:gap-6" stagger={0.08} delay={0.05}>
           <StaggerItem className="lg:row-span-2">
-            <TacticCard item={featured} index={0} />
+            <TacticCard
+              item={featured}
+              index={0}
+              labels={{
+                tacticLabel: copy.tacticLabel,
+                adjusterClaimLabel: copy.adjusterClaimLabel,
+                ourFightLabel: copy.ourFightLabel,
+              }}
+            />
           </StaggerItem>
           {rest.map((item, i) => (
             <StaggerItem key={item.tactic}>
-              <TacticCard item={item} index={i + 1} />
+              <TacticCard
+                item={item}
+                index={i + 1}
+                labels={{
+                  tacticLabel: copy.tacticLabel,
+                  adjusterClaimLabel: copy.adjusterClaimLabel,
+                  ourFightLabel: copy.ourFightLabel,
+                }}
+              />
             </StaggerItem>
           ))}
         </Stagger>

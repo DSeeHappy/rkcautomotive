@@ -2,84 +2,22 @@
 
 import { Check, Minus, PackageCheck, PackageX, ShieldCheck, X } from 'lucide-react';
 import FadeIn from '@/app/components/ui/FadeIn';
+import { useLanguage } from '@/lib/language';
+import { warrantyCopy } from '@/lib/i18n/warrantyCopy';
 import { SECTION_PAD, SECTION_HEADER } from './warrantyShared';
 
 type TierTone = 'red' | 'muted' | 'highlight';
 type RowDataKey = 'warranty' | 'chain' | 'rkc';
 
-const COMPARISON_TIERS = [
-  {
-    id: 'warranty',
-    label: 'Warranty mandate',
-    value: 'LKQ / salvage',
-    dataKey: 'warranty' as const satisfies RowDataKey,
-    highlight: false,
-    tone: 'red' as const satisfies TierTone,
-    summary:
-      'Administrators mandate salvage or the cheapest reman on their vendor list — minimal oversight before install.',
-  },
-  {
-    id: 'chain',
-    label: 'Typical chain',
-    value: 'Lowest reman',
-    dataKey: 'chain' as const satisfies RowDataKey,
-    highlight: false,
-    tone: 'muted' as const satisfies TierTone,
-    summary:
-      'National chains source from the same low-cost reman vendors — whatever lot arrives gets installed, no rejection process.',
-  },
-  {
-    id: 'rkc',
-    label: 'RKC standard',
-    value: 'Tier-one reman',
-    dataKey: 'rkc' as const satisfies RowDataKey,
-    highlight: true,
-    tone: 'highlight' as const satisfies TierTone,
-    summary:
-      'We specify tier-one remanufacturers with ISO-certified processes and reject substandard lots before they touch your vehicle.',
-  },
-] as const;
-
-const COMPARISON_ROWS = [
-  {
-    key: 'source' as const,
-    label: 'Part source',
-    warranty: 'LKQ salvage / cheapest reman',
-    chain: 'Vendor-list reman only — lowest approved option',
-    rkc: 'Tier-one reman or OEM when allowed',
-  },
-  {
-    key: 'quality' as const,
-    label: 'Quality control',
-    warranty: 'Minimal — lowest bidder wins',
-    chain: 'Install whatever arrives — no on-delivery inspection',
-    rkc: 'On-delivery inspection & rejection',
-  },
-  {
-    key: 'docs' as const,
-    label: 'Documentation',
-    warranty: 'Authorization number only',
-    chain: 'Basic invoice — no lot photos or rejection records',
-    rkc: 'Timestamped photos + written rejections',
-  },
-  {
-    key: 'outcome' as const,
-    label: 'Your outcome',
-    warranty: 'May fail again in 12 months',
-    chain: 'Variable — depends on part lot and vendor batch',
-    rkc: 'Repair built to last your coverage term',
-  },
-];
-
-function tierIcon(tier: (typeof COMPARISON_TIERS)[number]) {
-  if (tier.highlight) return Check;
-  if (tier.tone === 'red') return X;
+function tierIcon(highlight: boolean, tone: TierTone) {
+  if (highlight) return Check;
+  if (tone === 'red') return X;
   return Minus;
 }
 
-function tierIconClass(tier: (typeof COMPARISON_TIERS)[number], onHighlight = false) {
-  if (tier.highlight) return onHighlight ? 'text-primary-green-light' : 'text-primary-green';
-  if (tier.tone === 'red') return 'text-red-400';
+function tierIconClass(highlight: boolean, tone: TierTone, onHighlight = false) {
+  if (highlight) return onHighlight ? 'text-primary-green-light' : 'text-primary-green';
+  if (tone === 'red') return 'text-red-400';
   return 'text-amber-500';
 }
 
@@ -94,9 +32,16 @@ function tierPillClass(tone: TierTone) {
 function TierHeader({
   tier,
   variant,
+  yourShop,
 }: {
-  tier: (typeof COMPARISON_TIERS)[number];
+  tier: {
+    label: string;
+    value: string;
+    highlight: boolean;
+    tone: TierTone;
+  };
   variant: 'pill' | 'card' | 'table';
+  yourShop: string;
 }) {
   const labelClass =
     variant === 'table'
@@ -133,7 +78,7 @@ function TierHeader({
         </span>
         {tier.highlight && (
           <span className="mt-1 block text-[10px] font-semibold normal-case tracking-normal text-primary-green-light">
-            Your shop
+            {yourShop}
           </span>
         )}
       </>
@@ -149,7 +94,7 @@ function TierHeader({
       <p className={`${valueSize} ${valueClass}`}>{tier.value}</p>
       {variant === 'card' && tier.highlight && (
         <span className="mt-2 inline-block rounded-full bg-primary-green px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
-          Your shop
+          {yourShop}
         </span>
       )}
     </>
@@ -157,35 +102,34 @@ function TierHeader({
 }
 
 export default function WarrantyPartsBattle() {
+  const { lang } = useLanguage();
+  const copy = warrantyCopy(lang).partsBattle;
+
+  const tiers = [
+    { ...copy.tiers[0], id: 'warranty', dataKey: 'warranty' as const satisfies RowDataKey, highlight: false, tone: 'red' as const satisfies TierTone },
+    { ...copy.tiers[1], id: 'chain', dataKey: 'chain' as const satisfies RowDataKey, highlight: false, tone: 'muted' as const satisfies TierTone },
+    { ...copy.tiers[2], id: 'rkc', dataKey: 'rkc' as const satisfies RowDataKey, highlight: true, tone: 'highlight' as const satisfies TierTone },
+  ];
+
   return (
-    <section className={`${SECTION_PAD} bg-[var(--background)]`}>
+    <section lang={lang} className={`${SECTION_PAD} bg-[var(--background)]`}>
       <div className="wrap">
         <FadeIn className={SECTION_HEADER}>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
-            Parts quality
-          </p>
-          <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-            LKQ Salvage vs. Quality Remanufactured
-          </h2>
-          <p className="mt-4 text-lg text-ink-muted">
-            Warranty administrators mandate the cheapest parts available. RKC inspects, rejects, and
-            documents every component before it goes on your vehicle.
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{copy.eyebrow}</p>
+          <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">{copy.title}</h2>
+          <p className="mt-4 text-lg text-ink-muted">{copy.intro}</p>
         </FadeIn>
 
-        {/* Desktop comparison table */}
         <FadeIn className="hidden lg:block">
           <div className="overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white shadow-[0_20px_60px_-40px_rgba(12,18,34,0.25)]">
             <table className="w-full text-left">
-              <caption className="sr-only">
-                Comparison of warranty-mandated parts vs RKC Automotive quality standards
-              </caption>
+              <caption className="sr-only">{copy.tableCaption}</caption>
               <thead>
                 <tr className="border-b border-[color:var(--line)] bg-[var(--background)]">
                   <th scope="col" className="px-8 py-5 text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">
                     &nbsp;
                   </th>
-                  {COMPARISON_TIERS.map((tier) => (
+                  {tiers.map((tier) => (
                     <th
                       key={tier.id}
                       scope="col"
@@ -193,25 +137,25 @@ export default function WarrantyPartsBattle() {
                         tier.highlight ? 'bg-primary-blue text-white' : 'text-foreground'
                       }`}
                     >
-                      <TierHeader tier={tier} variant="table" />
+                      <TierHeader tier={tier} variant="table" yourShop={copy.yourShop} />
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {COMPARISON_ROWS.map((row, ri) => (
+                {copy.rows.map((row, ri) => (
                   <tr
-                    key={row.key}
-                    className={ri < COMPARISON_ROWS.length - 1 ? 'border-b border-[color:var(--line)]' : ''}
+                    key={row.label}
+                    className={ri < copy.rows.length - 1 ? 'border-b border-[color:var(--line)]' : ''}
                   >
                     <th scope="row" className="px-8 py-5 text-sm font-bold text-foreground">
                       {row.label}
                     </th>
-                    {COMPARISON_TIERS.map((tier) => {
-                      const RowIcon = tierIcon(tier);
+                    {tiers.map((tier) => {
+                      const RowIcon = tierIcon(tier.highlight, tier.tone);
                       return (
                         <td
-                          key={`${tier.id}-${row.key}`}
+                          key={`${tier.id}-${row.label}`}
                           className={`px-6 py-5 text-sm ${
                             tier.highlight
                               ? 'bg-primary-blue/5 font-semibold text-primary-blue'
@@ -220,7 +164,7 @@ export default function WarrantyPartsBattle() {
                         >
                           <span className="flex items-start gap-2">
                             <RowIcon
-                              className={`mt-0.5 size-4 shrink-0 ${tierIconClass(tier, tier.highlight)}`}
+                              className={`mt-0.5 size-4 shrink-0 ${tierIconClass(tier.highlight, tier.tone, tier.highlight)}`}
                               aria-hidden
                             />
                             <span className="min-w-0 flex-1">{row[tier.dataKey]}</span>
@@ -235,20 +179,19 @@ export default function WarrantyPartsBattle() {
           </div>
         </FadeIn>
 
-        {/* Mobile / tablet — each column groups tier header + card */}
         <FadeIn className="lg:hidden">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-4">
-            {COMPARISON_TIERS.map((tier) => {
-              const RowIcon = tierIcon(tier);
+            {tiers.map((tier) => {
+              const RowIcon = tierIcon(tier.highlight, tier.tone);
               return (
                 <div key={tier.id} className="flex min-w-0 flex-col gap-3">
                   <div
                     className={`rounded-2xl px-4 py-4 text-center sm:px-5 sm:py-5 ${tierPillClass(tier.tone)}`}
                   >
-                    <TierHeader tier={tier} variant="pill" />
+                    <TierHeader tier={tier} variant="pill" yourShop={copy.yourShop} />
                     {tier.highlight && (
                       <span className="mt-2 inline-block rounded-full bg-primary-green px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
-                        Your shop
+                        {copy.yourShop}
                       </span>
                     )}
                   </div>
@@ -261,8 +204,8 @@ export default function WarrantyPartsBattle() {
                     }`}
                   >
                     <dl className="space-y-4">
-                      {COMPARISON_ROWS.map((row) => (
-                        <div key={row.key}>
+                      {copy.rows.map((row) => (
+                        <div key={row.label}>
                           <dt
                             className={`text-xs font-bold uppercase tracking-[0.16em] ${
                               tier.highlight ? 'text-white/60' : 'text-ink-muted'
@@ -276,7 +219,7 @@ export default function WarrantyPartsBattle() {
                             }`}
                           >
                             <RowIcon
-                              className={`mt-0.5 size-4 shrink-0 ${tierIconClass(tier, tier.highlight)}`}
+                              className={`mt-0.5 size-4 shrink-0 ${tierIconClass(tier.highlight, tier.tone, tier.highlight)}`}
                               aria-hidden
                             />
                             <span className="min-w-0 flex-1 leading-relaxed">{row[tier.dataKey]}</span>
@@ -300,39 +243,27 @@ export default function WarrantyPartsBattle() {
           </div>
         </FadeIn>
 
-        {/* Context cards */}
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <FadeIn delay={0.05}>
             <div className="h-full overflow-hidden rounded-[1.75rem] border border-red-500/20 bg-white">
               <div className="flex items-center gap-3 border-b border-red-500/15 bg-red-500/[0.06] px-8 py-5">
                 <PackageX className="size-6 text-red-500" aria-hidden />
-                <h3 className="text-xl font-bold text-foreground">What warranty companies push</h3>
+                <h3 className="text-xl font-bold text-foreground">{copy.warrantyPushTitle}</h3>
               </div>
-              <p className="px-8 py-6 text-base leading-relaxed text-ink-muted">
-                LKQ parts sourced from salvage yards cost the warranty company a fraction of a
-                remanufactured unit. When LKQ inventory is unavailable, administrators authorize the
-                cheapest reman from their vendor list — minimal quality control, short warranties.
-              </p>
+              <p className="px-8 py-6 text-base leading-relaxed text-ink-muted">{copy.warrantyPushBody}</p>
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
             <div className="h-full overflow-hidden rounded-[1.75rem] border border-primary-green/25 bg-white">
               <div className="flex items-center gap-3 border-b border-primary-green/20 bg-primary-green/[0.06] px-8 py-5">
                 <ShieldCheck className="size-6 text-primary-green" aria-hidden />
-                <h3 className="text-xl font-bold text-foreground">How RKC fights for better parts</h3>
+                <h3 className="text-xl font-bold text-foreground">{copy.rkcFightTitle}</h3>
               </div>
               <div className="space-y-4 px-8 py-6">
-                <p className="text-base leading-relaxed text-ink-muted">
-                  Every provider-supplied part is inspected on delivery. Parts that fail inspection are
-                  photographed, rejected in writing, and returned — adjusters cannot override without
-                  escalating to a supervisor.
-                </p>
+                <p className="text-base leading-relaxed text-ink-muted">{copy.rkcFightBody}</p>
                 <div className="flex items-start gap-3 rounded-2xl border border-primary-green/20 bg-primary-green/[0.05] p-5">
                   <PackageCheck className="mt-0.5 size-5 shrink-0 text-primary-green" aria-hidden />
-                  <p className="text-sm leading-relaxed text-foreground">
-                    When your contract allows remanufactured components, we specify tier-one
-                    remanufacturers with ISO-certified processes.
-                  </p>
+                  <p className="text-sm leading-relaxed text-foreground">{copy.rkcFightCallout}</p>
                 </div>
               </div>
             </div>

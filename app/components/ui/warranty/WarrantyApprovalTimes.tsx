@@ -4,62 +4,36 @@ import { Clock, Gauge, Zap } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
+import { useLanguage } from '@/lib/language';
+import { warrantyCopy } from '@/lib/i18n/warrantyCopy';
 import { SECTION_PAD, SECTION_HEADER } from './warrantyShared';
 
-const TIMELINE: {
-  step: string;
-  icon: LucideIcon;
-  title: string;
-  timeframe: string;
-  accent: string;
-  accentBg: string;
-  accentRing: string;
-  paragraphs: string[];
-}[] = [
+const TIMELINE_ICONS: LucideIcon[] = [Zap, Gauge, Clock];
+const TIMELINE_ACCENTS = [
   {
-    step: '01',
-    icon: Zap,
-    title: 'Standard Component Claims',
-    timeframe: '1–3 business days',
     accent: 'text-emerald-400',
     accentBg: 'bg-emerald-500/15',
     accentRing: 'ring-emerald-400/30',
-    paragraphs: [
-      'Alternators, starters, brake master cylinders, and similar single-component failures follow a predictable approval path once we submit structured evidence packages with photos, scan data, and AllData labor times.',
-      'Adjusters see hundreds of claims daily — vague descriptions get pushed to the back of the queue. RKC formats documentation exactly how claims departments expect.',
-    ],
   },
   {
-    step: '02',
-    icon: Gauge,
-    title: 'Major Powertrain Claims',
-    timeframe: '3–7+ business days',
     accent: 'text-amber-400',
     accentBg: 'bg-amber-500/15',
     accentRing: 'ring-amber-400/30',
-    paragraphs: [
-      'Engine, transmission, and differential failures trigger field inspectors, teardown authorizations, and maintenance-history scrutiny. These claims routinely stretch a full week or longer.',
-      'RKC plans for this timeline upfront so you are not left without a vehicle wondering what happened to your claim.',
-    ],
   },
   {
-    step: '03',
-    icon: Clock,
-    title: 'How RKC Accelerates Approval',
-    timeframe: 'Direct adjuster access',
     accent: 'text-sky-400',
     accentBg: 'bg-sky-500/15',
     accentRing: 'ring-sky-400/30',
-    paragraphs: [
-      'We maintain direct lines to claims departments at Endurance, CarShield, Royal Administration, and other major administrators — not the general customer service number.',
-      'Every submission includes digital evidence: timestamped photos, OBD-II freeze-frame data, fluid analysis, and labor at our transparent $120/hr rate.',
-    ],
   },
-];
+] as const;
 
-function TimelineMarker({ card }: { card: (typeof TIMELINE)[number] }) {
-  const Icon = card.icon;
-
+function TimelineMarker({
+  card,
+  icon: Icon,
+}: {
+  card: { step: string; accent: string; accentBg: string; accentRing: string };
+  icon: LucideIcon;
+}) {
   return (
     <div className="flex flex-col items-center gap-3 text-center">
       <span
@@ -72,7 +46,11 @@ function TimelineMarker({ card }: { card: (typeof TIMELINE)[number] }) {
   );
 }
 
-function TimelineCard({ card }: { card: (typeof TIMELINE)[number] }) {
+function TimelineCard({
+  card,
+}: {
+  card: { timeframe: string; title: string; paragraphs: readonly string[]; accent: string; accentBg: string };
+}) {
   return (
     <article className="group relative h-full w-full overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)]">
       <div
@@ -98,20 +76,20 @@ function TimelineCard({ card }: { card: (typeof TIMELINE)[number] }) {
 }
 
 export default function WarrantyApprovalTimes() {
+  const { lang } = useLanguage();
+  const copy = warrantyCopy(lang).approvalTimes;
+  const timeline = copy.timeline.map((item, i) => ({
+    ...item,
+    ...TIMELINE_ACCENTS[i],
+  }));
+
   return (
-    <section className={`${SECTION_PAD} bg-[var(--background)]`}>
+    <section lang={lang} className={`${SECTION_PAD} bg-[var(--background)]`}>
       <div className="wrap">
         <FadeIn className={SECTION_HEADER}>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
-            The harsh reality
-          </p>
-          <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-            How Long Does Approval Actually Take?
-          </h2>
-          <p className="mt-4 text-lg text-ink-muted">
-            Warranty companies advertise fast claims. The reality at independent shops is measured in business days — and
-            major powertrain failures can take a week or more.
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{copy.eyebrow}</p>
+          <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">{copy.title}</h2>
+          <p className="mt-4 text-lg text-ink-muted">{copy.intro}</p>
         </FadeIn>
 
         <div className="relative">
@@ -121,14 +99,17 @@ export default function WarrantyApprovalTimes() {
           />
 
           <Stagger className="grid gap-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0" stagger={0.08} delay={0.05}>
-            {TIMELINE.map((card) => (
-              <StaggerItem key={card.title} className="flex flex-col items-center">
-                <div className="mb-6 lg:mb-10">
-                  <TimelineMarker card={card} />
-                </div>
-                <TimelineCard card={card} />
-              </StaggerItem>
-            ))}
+            {timeline.map((card, i) => {
+              const Icon = TIMELINE_ICONS[i] ?? Clock;
+              return (
+                <StaggerItem key={card.title} className="flex flex-col items-center">
+                  <div className="mb-6 lg:mb-10">
+                    <TimelineMarker card={card} icon={Icon} />
+                  </div>
+                  <TimelineCard card={card} />
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </div>
