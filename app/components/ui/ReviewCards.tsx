@@ -7,6 +7,8 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap';
 import { GOOGLE_REVIEWS_URL, VERIFIED_REVIEWS_4_PLUS, type VerifiedReview } from '@/lib/constants';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
+import { useLanguage } from '@/lib/language';
+import { siteCopy } from '@/lib/siteCopy';
 
 const ROTATION_INTERVAL_MS = 15000;
 const COMPACT_INDICATOR_THRESHOLD = 10;
@@ -44,12 +46,12 @@ function useVisibleCount() {
   return count;
 }
 
-function ReviewCard({ review }: { review: VerifiedReview }) {
+function ReviewCard({ review, starsLabel }: { review: VerifiedReview; starsLabel: (n: number) => string }) {
   return (
     <blockquote className="flex h-full flex-col justify-between rounded-3xl border border-[color:var(--line)] bg-white p-8 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.35)] [color-scheme:light]">
       <div>
         {review.rating ? (
-          <p className="text-primary-green" aria-label={`${review.rating} out of 5 stars`}>
+          <p className="text-primary-green" aria-label={starsLabel(review.rating)}>
             {'★'.repeat(review.rating)}
           </p>
         ) : null}
@@ -71,7 +73,15 @@ function ReviewCard({ review }: { review: VerifiedReview }) {
   );
 }
 
-function AnimatedReviewSlot({ review, reduceMotion }: { review: VerifiedReview; reduceMotion: boolean }) {
+function AnimatedReviewSlot({
+  review,
+  reduceMotion,
+  starsLabel,
+}: {
+  review: VerifiedReview;
+  reduceMotion: boolean;
+  starsLabel: (n: number) => string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const key = reviewKey(review);
 
@@ -94,7 +104,7 @@ function AnimatedReviewSlot({ review, reduceMotion }: { review: VerifiedReview; 
 
   return (
     <div ref={ref} className="h-full">
-      <ReviewCard review={review} />
+      <ReviewCard review={review} starsLabel={starsLabel} />
     </div>
   );
 }
@@ -106,6 +116,8 @@ export default function ReviewCards({
   rotate,
   intervalMs = ROTATION_INTERVAL_MS,
 }: ReviewCardsProps) {
+  const { lang } = useLanguage();
+  const chrome = siteCopy(lang).reviewsChrome;
   const reduceMotion = usePrefersReducedMotion();
   const visibleCount = useVisibleCount();
   const shouldRotate = rotate ?? reviews.length > visibleCount;
@@ -159,7 +171,7 @@ export default function ReviewCards({
   const progressPercent = reviews.length > 0 ? ((currentIndex + 1) / reviews.length) * 100 : 0;
 
   return (
-    <div className={className}>
+    <div lang={lang} className={className}>
       {shouldRotate ? (
         <div className="mb-6 flex items-center justify-center gap-2">
           <span className="relative flex size-2" aria-hidden>
@@ -167,7 +179,7 @@ export default function ReviewCards({
             <span className="relative inline-flex size-2 rounded-full bg-primary-green" />
           </span>
           <span className="text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">
-            Live verified reviews
+            {chrome.liveVerified}
           </span>
         </div>
       ) : null}
@@ -183,7 +195,7 @@ export default function ReviewCards({
           }
         }}
         aria-roledescription="carousel"
-        aria-label="Verified customer reviews"
+        aria-label={chrome.carouselLabel}
         aria-live="polite"
       >
         {shouldRotate ? (
@@ -192,7 +204,11 @@ export default function ReviewCards({
               const review = visibleReviews[slot]!;
               return (
                 <div key={slot} className="min-h-[280px]">
-                  <AnimatedReviewSlot review={review} reduceMotion={reduceMotion} />
+                  <AnimatedReviewSlot
+                    review={review}
+                    reduceMotion={reduceMotion}
+                    starsLabel={chrome.stars}
+                  />
                 </div>
               );
             })}
@@ -200,20 +216,20 @@ export default function ReviewCards({
         ) : (
           <div className={`grid gap-6 ${gridClass}`}>
             {visibleReviews.map((review) => (
-              <ReviewCard key={reviewKey(review)} review={review} />
+              <ReviewCard key={reviewKey(review)} review={review} starsLabel={chrome.stars} />
             ))}
           </div>
         )}
 
         {shouldRotate ? (
           useCompactIndicator ? (
-            <div className="mt-8 flex items-end gap-4" aria-label="Review rotation progress">
+            <div className="mt-8 flex items-end gap-4" aria-label={chrome.progressLabel}>
               <div className="min-w-0 flex-1 space-y-2">
                 <div className="flex items-center justify-between text-xs text-ink-muted">
-                  <span>
-                    Review {currentIndex + 1} of {reviews.length}
+                  <span>{chrome.reviewOf(currentIndex + 1, reviews.length)}</span>
+                  <span className="font-medium text-primary-green">
+                    {chrome.verifiedCount(reviews.length)}
                   </span>
-                  <span className="font-medium text-primary-green">{reviews.length} verified</span>
                 </div>
                 <div
                   className="h-1.5 overflow-hidden rounded-full bg-[color:var(--line)]"
@@ -221,7 +237,7 @@ export default function ReviewCards({
                   aria-valuemin={1}
                   aria-valuemax={reviews.length}
                   aria-valuenow={currentIndex + 1}
-                  aria-label={`Showing review ${currentIndex + 1} of ${reviews.length}`}
+                  aria-label={chrome.reviewOf(currentIndex + 1, reviews.length)}
                 >
                   <div
                     className="h-full rounded-full bg-primary-green transition-all duration-300 ease-out"
@@ -230,27 +246,27 @@ export default function ReviewCards({
                 </div>
               </div>
               <div className="flex shrink-0 gap-2">
-                <button type="button" onClick={goToPrevious} aria-label="Previous review" className={navButtonClass}>
+                <button type="button" onClick={goToPrevious} aria-label={chrome.previous} className={navButtonClass}>
                   <ChevronLeft className="size-5" aria-hidden />
                 </button>
-                <button type="button" onClick={goToNext} aria-label="Next review" className={navButtonClass}>
+                <button type="button" onClick={goToNext} aria-label={chrome.next} className={navButtonClass}>
                   <ChevronRight className="size-5" aria-hidden />
                 </button>
               </div>
             </div>
           ) : (
             <div className="mt-8 flex items-center justify-center gap-4">
-              <button type="button" onClick={goToPrevious} aria-label="Previous review" className={navButtonClass}>
+              <button type="button" onClick={goToPrevious} aria-label={chrome.previous} className={navButtonClass}>
                 <ChevronLeft className="size-5" aria-hidden />
               </button>
-              <div className="flex gap-2" role="tablist" aria-label="Review slides">
+              <div className="flex gap-2" role="tablist" aria-label={chrome.slides}>
                 {reviews.map((review, index) => (
                   <button
                     key={reviewKey(review)}
                     type="button"
                     role="tab"
                     aria-selected={index === currentIndex}
-                    aria-label={`Show review from ${review.author}`}
+                    aria-label={chrome.showFrom(review.author)}
                     onClick={() => goToIndex(index)}
                     className={`h-2 rounded-full transition-all duration-300 ${
                       index === currentIndex
@@ -260,7 +276,7 @@ export default function ReviewCards({
                   />
                 ))}
               </div>
-              <button type="button" onClick={goToNext} aria-label="Next review" className={navButtonClass}>
+              <button type="button" onClick={goToNext} aria-label={chrome.next} className={navButtonClass}>
                 <ChevronRight className="size-5" aria-hidden />
               </button>
             </div>
@@ -271,18 +287,18 @@ export default function ReviewCards({
       {showCtas ? (
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="btn-green">
-            Read our Google reviews
+            {chrome.readGoogle}
             <ExternalLink className="size-4" aria-hidden />
           </a>
           <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="btn-blue">
-            Leave a Google review
+            {chrome.leaveGoogle}
             <ExternalLink className="size-4" aria-hidden />
           </a>
           <Link
             href="/contact"
             className="inline-flex items-center justify-center rounded-full border border-[color:var(--line)] bg-white px-7 py-3.5 text-base font-semibold text-foreground transition hover:border-primary-green/40 hover:text-primary-green"
           >
-            Contact the shop
+            {chrome.contactShop}
           </Link>
         </div>
       ) : null}
