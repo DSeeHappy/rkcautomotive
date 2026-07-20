@@ -96,7 +96,8 @@ function LogoImage({
       width={width}
       height={height}
       quality={95}
-      priority={v === 'hero' || v === 'nav'}
+      priority={v === 'hero'}
+      fetchPriority={v === 'nav' ? 'low' : v === 'hero' ? 'high' : undefined}
       sizes={
         v === 'hero'
           ? '(max-width: 640px) 184px, (max-width: 1024px) 216px, 240px'
@@ -179,8 +180,8 @@ function NavScrollLogo({
             width={RKC_LOGO_WIDTH}
             height={RKC_LOGO_HEIGHT}
             quality={95}
-            priority
             sizes={navSizes}
+            fetchPriority="low"
             className={`${navScrolledImgClass} ${navLightClass}`}
             draggable={false}
           />
@@ -199,8 +200,8 @@ function NavScrollLogo({
               width={RKC_LOGO_WIDTH}
               height={RKC_LOGO_HEIGHT}
               quality={95}
-              priority
               sizes={navSizes}
+              fetchPriority="low"
               className={navScrolledImgClass}
               draggable={false}
             />

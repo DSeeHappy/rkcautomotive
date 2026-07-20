@@ -190,6 +190,7 @@ export function ServiceCinematicHero({
           alt={imageAlt}
           fill
           priority
+          fetchPriority="high"
           className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
           sizes={HERO_IMAGE_SIZES}
         />

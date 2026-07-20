@@ -1,13 +1,13 @@
 # RKC Automotive — Production Audit Report
 
-**Date:** July 20, 2026 (session continued)  
+**Date:** July 20, 2026 (Lighthouse follow-up)  
 **Workspace:** `C:\Users\BS\Desktop\Software\rkcautomotive`  
 **Remote:** `https://github.com/DSeeHappy/rkcautomotive.git`  
 **Honesty rule:** Nothing is labeled “Spark-generated” without Bifrost HTTP evidence in `scripts/.spark-logs/`.
 
 ---
 
-## Production readiness score: **78 / 100**
+## Production readiness score: **82 / 100**
 
 | Band | Meaning |
 |------|---------|
@@ -15,7 +15,44 @@
 | 70–89 | Shipable for content/SEO hubs; verify CWV/a11y post-deploy |
 | &lt;70 | Blockers remain |
 
-**Why 78:** All five missing brand hubs (GMC, Lexus, Acura, Tesla, Alfa Romeo) are Spark-backed EN+ES and live in templates; build PASS; route smoke PASS including new hubs. Still **UNVERIFIED:** Lighthouse/CWV, full browser UX, Aikido (login required).
+**Why 82:** Lighthouse mobile CLI verified on production (5 key pages). CLS **0** sitewide; SEO **100** on all samples. Home performance **67** (LCP 3.8 s, TBT 740 ms) — code fixes applied this pass; re-run after deploy. Inner pages **84–93**. Full browser a11y + Aikido still UNVERIFIED.
+
+---
+
+## Lighthouse / Core Web Vitals (VERIFIED — CLI)
+
+**Tool:** `npx lighthouse` v13.4.0 · mobile form factor · July 20, 2026  
+**Script:** `scripts/lighthouse-audit.mjs`  
+**Raw JSON:** `scripts/.spark-logs/lh-*.json` · summary `scripts/.spark-logs/lh-summary-prod.json`
+
+### Production (`https://rkcautomotive.com`)
+
+| Page | Perf | A11y | BP | SEO | LCP | CLS | TBT |
+|------|-----:|-----:|---:|----:|-----|----:|----:|
+| Home `/` | **67** | 97 | 96 | 100 | 3.8 s | **0** | 740 ms |
+| Service (brake) | 84 | 96 | 100 | 100 | 3.8 s | **0** | 250 ms |
+| Vehicle hub (GMC Sierra) | 93 | 96 | 96 | 100 | 3.1 s | **0** | 90 ms |
+| Area (Englewood) | 93 | 96 | 100 | 100 | 2.9 s | **0** | 140 ms |
+| Contact | 93 | 97 | 100 | 100 | 3.1 s | **0** | 70 ms |
+
+**Notes:**
+- **CLS:** No layout-shift issues detected on any sample page.
+- **INP:** Not measured in this Lighthouse run (field CWV still UNVERIFIED).
+- **Home bottleneck:** LCP element is hero image (`hero-main.webp`); TBT driven by client JS (GSAP, nav, analytics).
+- **Local dev inflated LCP** (8–16 s) — Next dev mode; use production URL or `npm run build && npm run start` for honest perf numbers.
+- **Spark prose review:** **FAILED** this session — Bifrost curl 56 (4 attempts logged in `session-ledger.jsonl`). Scores above are from Lighthouse CLI only, not AI-generated.
+
+### Fixes applied (this pass)
+
+| Fix | Target | File(s) |
+|-----|--------|---------|
+| SSR hero LCP image (server `Image` + client overlay) | Home LCP | `HomeHero.tsx`, `HomeHeroClient.tsx`, `page.tsx` |
+| Deprioritize nav logo preload vs hero | Home LCP contention | `AnimatedLogo.tsx` (`fetchPriority="low"`, no nav `priority`) |
+| Dynamic import below-fold home sections | Home TBT | `HomeContent.tsx` (`BrandSection`, `ReviewCards`, etc.) |
+| `fetchPriority="high"` on service cinematic heroes | Service LCP | `ServiceSharedSections.tsx` |
+| Lighthouse audit script + bundle helper | Reproducibility | `scripts/lighthouse-audit.mjs`, `scripts/lighthouse-bundle.mjs` |
+
+**Re-verify after deploy:** `LH_BASE=https://rkcautomotive.com node scripts/lighthouse-audit.mjs`
 
 ---
 
@@ -86,11 +123,13 @@
 - New brand model hubs have unique titles/H1s/canonicals (smoke-verified).
 
 ### 6. Performance
-- **Lighthouse / CWV: UNVERIFIED**.
+- **Lighthouse / CWV: VERIFIED (lab)** — see § Lighthouse above. Home perf 67 pre-fix deploy; inner pages 84–93. CLS 0.
+- **Field INP / CrUX:** UNVERIFIED.
 - Larger SSG surface (1040 URLs) — expect longer builds.
 
 ### 7. Accessibility
-- **UNVERIFIED** full WCAG AA.
+- **Lighthouse a11y:** 96–97 on all 5 sample pages (automated only).
+- **Full WCAG AA browser QA:** UNVERIFIED.
 
 ### 8. Security
 - CSP / security headers in `next.config.ts`.
@@ -120,10 +159,13 @@ From `phase9-review.json` (`vllm/smart`):
 
 ## Open / known
 
-1. Lighthouse, full a11y, Aikido login — UNVERIFIED  
-2. `www` Cloudflare 525 — infra (prior)  
-3. Tesla OEM-wording — optional Spark rewrite  
-4. Dependabot advisories on GitHub remote — separate from this content pass  
+1. Re-run production Lighthouse after deploy to confirm home LCP/TBT gains from SSR hero split  
+2. Full interactive a11y browser QA — UNVERIFIED  
+3. Aikido — skipped (login required)  
+4. Bifrost Spark LH prose review — failed curl 56 this session  
+5. `www` Cloudflare 525 — infra (prior)  
+6. Tesla OEM-wording — optional Spark rewrite  
+7. Dependabot advisories on GitHub remote — separate from this content pass  
 
 ---
 

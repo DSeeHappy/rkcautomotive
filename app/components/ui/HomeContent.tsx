@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Award, Phone } from 'lucide-react';
@@ -17,17 +18,17 @@ import {
   LABOR_RATE,
 } from '@/lib/constants';
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
-import BrandSection from './BrandSection';
-import FAQAccordion from './FAQAccordion';
 import GeoCiteFacts from './GeoCiteFacts';
-import Hero from './Hero';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
-import ReviewCards from './ReviewCards';
-import ServiceAreaGrid from './ServiceAreaGrid';
 import { MotionAnchor } from './MotionLink';
 import { useLanguage } from '@/lib/language';
 import { homeCopy } from '@/lib/homeCopy';
 import { localizedServiceDescription, localizedServiceName } from '@/lib/siteCopy';
+
+const BrandSection = dynamic(() => import('./BrandSection'), { ssr: true });
+const ReviewCards = dynamic(() => import('./ReviewCards'), { ssr: true });
+const ServiceAreaGrid = dynamic(() => import('./ServiceAreaGrid'), { ssr: true });
+const FAQAccordion = dynamic(() => import('./FAQAccordion'), { ssr: true });
 
 export default function HomeContent() {
   const { lang } = useLanguage();
@@ -35,8 +36,6 @@ export default function HomeContent() {
 
   return (
     <div lang={lang}>
-      <Hero />
-
       {/* Trust strip — local SEO signals */}
       <section className="relative z-0 -mt-10 border-y border-[color:var(--line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-[color:var(--line)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">

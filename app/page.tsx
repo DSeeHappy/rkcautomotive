@@ -1,4 +1,5 @@
 import HomeContent from './components/ui/HomeContent';
+import HomeHero from './components/ui/HomeHero';
 import JsonLd from './components/JsonLd';
 import { HOMEPAGE_FAQS } from '@/lib/constants';
 import { createPageMetadata } from '@/lib/og';
@@ -34,6 +35,7 @@ export default function HomePage() {
           createBreadcrumbSchema([{ name: 'Home', path: '/' }]),
         ]}
       />
+      <HomeHero />
       <HomeContent />
     </div>
   );
