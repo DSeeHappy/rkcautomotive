@@ -1,20 +1,11 @@
-'use client';
+import BrandSection from '@/app/components/ui/BrandSection';
+import VehicleDeepDiveCrawlLinks from '@/app/components/ui/VehicleDeepDiveCrawlLinks';
 
-import dynamic from 'next/dynamic';
-
-const BrandSection = dynamic(() => import('@/app/components/ui/BrandSection'), {
-  ssr: false,
-  loading: () => <div className="min-h-[16rem] border-t border-[color:var(--line)]" aria-hidden />,
-});
-
-const VehicleDeepDiveCrawlLinks = dynamic(
-  () => import('@/app/components/ui/VehicleDeepDiveCrawlLinks'),
-  {
-    ssr: false,
-    loading: () => <div className="min-h-[12rem] border-t border-[color:var(--line)]" aria-hidden />,
-  },
-);
-
+/**
+ * Below-fold vehicles page sections.
+ * Server-rendered so Googlebot (mobile-first) sees brand panels + model crawl links
+ * in the initial HTML — do not wrap these in next/dynamic with ssr:false.
+ */
 export default function VehiclesBelowFoldSections() {
   return (
     <>

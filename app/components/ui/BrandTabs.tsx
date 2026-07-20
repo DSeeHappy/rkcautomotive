@@ -65,6 +65,9 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
             return (
               <TabPanel
                 key={brand.slug}
+                // Keep inactive panels in the DOM so mobile-first crawlers see all brand copy/links
+                // (Headless UI unmounts inactive panels by default).
+                unmount={false}
                 className="relative overflow-hidden rounded-[2rem] shadow-[0_32px_80px_-24px_rgba(12,18,34,0.55)]"
               >
                 <div
