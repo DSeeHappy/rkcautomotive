@@ -17,16 +17,18 @@ export async function generateStaticParams() {
   return getAllModelDeepDiveParams();
 }
 
+/** Unknown deep-dive URLs → real 404 (avoids soft-404 / thin __next_error__ shells). */
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: PageProps) {
   const { make, model, serviceSlug } = await params;
   const content = getModelDeepDiveContent(make, model, serviceSlug);
   if (!content) {
-    return createPageMetadata({
-      title: 'Service Guide Not Found',
+    return {
+      title: { absolute: 'Service Guide Not Found | RKC Automotive' },
       description: 'The vehicle service guide you requested was not found.',
-      path: '/vehicles-we-service',
       robots: { index: false, follow: true },
-    });
+    };
   }
 
   const vehicle = getModelsByBrand(make).find(

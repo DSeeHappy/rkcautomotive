@@ -21,18 +21,20 @@ export function generateStaticParams() {
   return getAllModelHubParams();
 }
 
+/** Unknown make/model URLs → real 404 (not a thin JS error shell). */
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: PageProps) {
   const { make, model } = await params;
   const vehicle = getModelsByBrand(make).find(
     (m) => slugifyModel(m.model) === model,
   );
   if (!vehicle) {
-    return createPageMetadata({
-      title: 'Vehicle Not Found',
+    return {
+      title: { absolute: 'Vehicle Not Found | RKC Automotive' },
       description: 'The vehicle page you requested was not found.',
-      path: '/vehicles-we-service',
       robots: { index: false, follow: true },
-    });
+    };
   }
 
   const path = buildModelHubPath(make, vehicle.model);

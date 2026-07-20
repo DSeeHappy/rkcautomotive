@@ -21,16 +21,18 @@ export function generateStaticParams() {
   return getAllServiceAreaSlugs().map((slug) => ({ slug }));
 }
 
+/** Unknown city slugs → real 404 with SSR not-found HTML (Google meaningful status codes). */
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const area = getServiceAreaBySlug(slug);
   if (!area) {
-    return createPageMetadata({
-      title: 'Area Not Found',
+    return {
+      title: { absolute: 'Area Not Found | RKC Automotive' },
       description: 'The service area page you requested was not found.',
-      path: '/areas-we-serve',
       robots: { index: false, follow: true },
-    });
+    };
   }
 
   return createPageMetadata({
