@@ -6,11 +6,16 @@ import { AlertTriangle, Phone } from 'lucide-react';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
 import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import LanguageToggle from '@/app/components/ui/LanguageToggle';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
+import { useLanguage } from '@/lib/language';
+import { homeCopy } from '@/lib/homeCopy';
 
 export default function Hero() {
+  const { lang } = useLanguage();
+  const copy = homeCopy(lang);
   const reduce = usePrefersReducedMotion();
   const { sectionRef, bgRef, contentRef } = useGsapParallax<HTMLElement>(reduce, {
     yPercent: 12,
@@ -24,6 +29,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]"
+      lang={lang}
     >
       <div ref={bgRef} className="hero-media-layer absolute inset-0">
         <Image
@@ -60,27 +66,28 @@ export default function Hero() {
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center pb-12 text-center sm:pb-16">
           <div className="w-full max-w-3xl xl:max-w-4xl">
             <div ref={headline}>
+              <div className="mb-4 flex justify-center">
+                <LanguageToggle variant="hero" />
+              </div>
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">
-                Englewood, CO · Hablamos Español
+                {copy.hero.location}
               </p>
               <h1 className="mt-4 font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.98] tracking-wide text-white">
-                Auto Repair &amp; Diagnostics in Englewood, CO You Can Trust
+                {copy.hero.headline}
               </h1>
               <p className="mx-auto mt-5 max-w-xl text-lg font-medium text-white/85 sm:text-xl">
-                Diagnostics • Engine Repair • Transmission • Brakes • Maintenance
+                {copy.hero.servicesLine}
               </p>
-              <p className="mt-3 text-base text-white/75 sm:text-lg">
-                Service area: Englewood, Denver, Littleton, Aurora &amp; surrounding
-              </p>
+              <p className="mt-3 text-base text-white/75 sm:text-lg">{copy.hero.serviceArea}</p>
             </div>
 
             <div ref={ctas} className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                 <Phone className="size-5" aria-hidden />
-                Call Now — {BUSINESS.phone}
+                {copy.hero.callNow} — {BUSINESS.phone}
               </MotionAnchor>
               <Link href="/contact" className="btn-ghost-light">
-                Book Service
+                {copy.hero.bookService}
               </Link>
             </div>
 
@@ -91,23 +98,20 @@ export default function Hero() {
               <div className="flex items-start gap-3">
                 <AlertTriangle className="mt-0.5 size-5 shrink-0 text-amber-300" aria-hidden />
                 <div>
-                  <p className="font-bold text-white">Check engine light or no-start?</p>
-                  <p className="mt-1 text-sm text-white/75">
-                    Call now for same-day diagnostics when bays are open — we find the real problem, not just the
-                    code.
-                  </p>
+                  <p className="font-bold text-white">{copy.hero.alertTitle}</p>
+                  <p className="mt-1 text-sm text-white/75">{copy.hero.alertBody}</p>
                   <div className="mt-3 flex flex-wrap gap-3">
                     <MotionAnchor
                       href={BUSINESS.phoneHref}
                       className="text-sm font-bold text-primary-green-light underline-offset-4 hover:underline"
                     >
-                      Emergency: {BUSINESS.phone}
+                      {copy.hero.emergency}: {BUSINESS.phone}
                     </MotionAnchor>
                     <Link
                       href="/services/check-engine-light-englewood-co"
                       className="text-sm font-semibold text-white/80 underline-offset-4 hover:text-white hover:underline"
                     >
-                      Check engine help →
+                      {copy.hero.checkEngineHelp}
                     </Link>
                   </div>
                 </div>

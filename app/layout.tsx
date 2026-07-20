@@ -10,6 +10,7 @@ import GsapProvider from './components/ui/GsapProvider';
 import SplashScreen from './components/ui/SplashScreen';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import JsonLd from './components/JsonLd';
+import { LanguageProvider } from '@/lib/language';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
 import { createOrganizationSchema, createWebSiteSchema } from '@/lib/seo';
 
@@ -88,20 +89,22 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </a>
         {/* Single sitewide AutoRepair/LocalBusiness NAP — pages must not emit a second org with a different telephone/image. */}
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
-        <GsapProvider>
-          <SplashScreen>
-            <Navigation />
-            <main
-              id="main-content"
-              className="relative z-0 min-h-screen pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0"
-            >
-              {children}
-            </main>
-            <Footer />
-            <MobileStickyBar />
-            <FloatingCallButton />
-          </SplashScreen>
-        </GsapProvider>
+        <LanguageProvider>
+          <GsapProvider>
+            <SplashScreen>
+              <Navigation />
+              <main
+                id="main-content"
+                className="relative z-0 min-h-screen pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0"
+              >
+                {children}
+              </main>
+              <Footer />
+              <MobileStickyBar />
+              <FloatingCallButton />
+            </SplashScreen>
+          </GsapProvider>
+        </LanguageProvider>
         <Analytics />
         <GoogleAnalytics />
       </body>

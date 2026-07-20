@@ -4,6 +4,8 @@ import { useRef } from 'react';
 import { Phone, MessageSquare, MapPin, type LucideIcon } from 'lucide-react';
 import { BUSINESS } from '@/lib/constants';
 import { useRestoreTelHref } from '@/app/components/ui/PhoneLink';
+import { useLanguage } from '@/lib/language';
+import { homeCopy } from '@/lib/homeCopy';
 
 const actionClassName =
   'flex min-h-14 min-w-0 flex-1 basis-0 flex-col items-center justify-center gap-1 border-l border-white/10 px-1 py-2.5 text-xs font-bold leading-none text-white first:border-l-0';
@@ -35,29 +37,33 @@ function StickyAction({ href, label, icon: Icon, ariaLabel }: StickyActionProps)
 }
 
 export default function MobileStickyBar() {
+  const { lang } = useLanguage();
+  const copy = homeCopy(lang);
+
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-[90] border-t border-white/10 bg-[#0c1222] pb-[env(safe-area-inset-bottom,0px)] lg:hidden"
-      aria-label="Quick contact actions"
+      aria-label={copy.sticky.ariaLabel}
+      lang={lang}
     >
       <div className="flex w-full">
         <StickyAction
           href={BUSINESS.phoneHref}
-          label="Call"
+          label={copy.sticky.call}
           icon={Phone}
-          ariaLabel={`Call ${BUSINESS.phone}`}
+          ariaLabel={`${copy.sticky.call} ${BUSINESS.phone}`}
         />
         <StickyAction
           href={BUSINESS.textHref}
-          label="Text"
+          label={copy.sticky.text}
           icon={MessageSquare}
-          ariaLabel="Text RKC Automotive"
+          ariaLabel={`${copy.sticky.text} RKC Automotive`}
         />
         <StickyAction
           href={BUSINESS.directionsUrl}
-          label="Directions"
+          label={copy.sticky.directions}
           icon={MapPin}
-          ariaLabel="Get directions to RKC Automotive"
+          ariaLabel={copy.sticky.directions}
         />
       </div>
     </nav>
