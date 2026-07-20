@@ -24,16 +24,7 @@ import {
   BUSINESS,
   LABOR_RATE,
   PHOTOS,
-  PRICING_COMPARISON,
-  PRICING_COMPARISON_DISCLAIMER,
-  PRICING_COMPARISON_ROWS,
-  PRICING_PAGE_FAQ,
-  PRICING_PHILOSOPHY,
-  PRICING_SAVINGS_SCENARIOS,
-  PRICING_TIERS,
-  PRICING_TIERS_DISCLAIMER,
   LOCAL_SHOP_RATE_RANGE,
-  COMPETITIVE_POSITIONING,
 } from '@/lib/constants';
 import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
@@ -44,13 +35,15 @@ import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 import { useLanguage } from '@/lib/language';
 import { siteCopy } from '@/lib/siteCopy';
+import { pricingCopy } from '@/lib/i18n/pricingCopy';
+import { homeCopy } from '@/lib/homeCopy';
 
 const RKC_RATE = 120;
 const DEALER_RATE = 180;
 const CHAIN_RATE = 150;
 const LOCAL_RATE = 155;
 
-const PHILOSOPHY_ICONS: Record<(typeof PRICING_PHILOSOPHY)[number]['icon'], LucideIcon> = {
+const PHILOSOPHY_ICONS: Record<string, LucideIcon> = {
   rate: CircleDollarSign,
   shield: ShieldCheck,
   wrench: Wrench,
@@ -75,6 +68,8 @@ function laborCost(hours: number, rate: number) {
 export default function PricingContent() {
   const { lang } = useLanguage();
   const shell = siteCopy(lang).shells.pricing;
+  const body = pricingCopy(lang);
+  const competitive = homeCopy(lang).competitive;
   const rateReveal = useGsapReveal<HTMLParagraphElement>({ y: 20, duration: 0.7 });
   const titleReveal = useGsapReveal<HTMLHeadingElement>({ delay: 0.08, y: 24, duration: 0.7 });
   const descReveal = useGsapReveal<HTMLParagraphElement>({ delay: 0.16, y: 16, duration: 0.6 });
@@ -161,53 +156,48 @@ export default function PricingContent() {
         </div>
       </section>
 
-      {/* Dealer vs chain vs RKC comparison */}
+      {/* Dealer vs chain vs local vs RKC comparison */}
       <section className={`bg-[var(--background)] ${SECTION_PAD}`}>
         <div className="wrap">
           <FadeIn className={SECTION_HEADER}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Compare</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{body.compare.eyebrow}</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Dealer vs chain vs local vs RKC
+              {body.compare.title}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Same ASE-certified work. Different labor rates, different transparency. Here is what Englewood and Denver
-              metro drivers typically pay — and whether you can see the rate before you call.
-            </p>
+            <p className="mt-4 text-lg text-ink-muted">{body.compare.intro}</p>
           </FadeIn>
 
           {/* Rate highlight bar */}
           <FadeIn className="mb-10">
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {[
-                { label: 'Dealership', rate: '$180–220/hr', tone: 'muted' as const },
-                { label: 'Chain shop', rate: '$140–160/hr', tone: 'muted' as const },
-                { label: 'Typical local shop', rate: LOCAL_SHOP_RATE_RANGE, tone: 'muted' as const },
-                { label: 'RKC Automotive', rate: LABOR_RATE, tone: 'highlight' as const },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className={`rounded-2xl px-6 py-5 text-center ${
-                    item.tone === 'highlight'
-                      ? 'bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_20px_60px_-30px_rgba(28,61,145,0.55)] ring-2 ring-primary-green'
-                      : 'border border-[color:var(--line)] bg-white'
-                  }`}
-                >
-                  <p
-                    className={`text-xs font-bold uppercase tracking-[0.2em] ${
-                      item.tone === 'highlight' ? 'text-white/60' : 'text-ink-muted'
+              {body.compare.rateBar.map((item, idx) => {
+                const tone = idx === body.compare.rateBar.length - 1 ? 'highlight' : 'muted';
+                return (
+                  <div
+                    key={item.label}
+                    className={`rounded-2xl px-6 py-5 text-center ${
+                      tone === 'highlight'
+                        ? 'bg-gradient-to-b from-primary-blue to-primary-blue-dark text-white shadow-[0_20px_60px_-30px_rgba(28,61,145,0.55)] ring-2 ring-primary-green'
+                        : 'border border-[color:var(--line)] bg-white'
                     }`}
                   >
-                    {item.label}
-                  </p>
-                  <p
-                    className={`mt-2 font-display text-4xl tracking-wide ${
-                      item.tone === 'highlight' ? 'text-primary-green-light' : 'text-foreground'
-                    }`}
-                  >
-                    {item.rate}
-                  </p>
-                </div>
-              ))}
+                    <p
+                      className={`text-xs font-bold uppercase tracking-[0.2em] ${
+                        tone === 'highlight' ? 'text-white/60' : 'text-ink-muted'
+                      }`}
+                    >
+                      {item.label}
+                    </p>
+                    <p
+                      className={`mt-2 font-display text-4xl tracking-wide ${
+                        tone === 'highlight' ? 'text-primary-green-light' : 'text-foreground'
+                      }`}
+                    >
+                      {item.rate}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </FadeIn>
 
@@ -215,13 +205,13 @@ export default function PricingContent() {
           <FadeIn className="hidden lg:block">
             <div className="overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white shadow-[0_20px_60px_-40px_rgba(12,18,34,0.25)]">
               <table className="w-full text-left">
-                <caption className="sr-only">Comparison of labor rates and service practices in Englewood, Colorado</caption>
+                <caption className="sr-only">{body.compare.tableCaption}</caption>
                 <thead>
                   <tr className="border-b border-[color:var(--line)] bg-[var(--background)]">
                     <th scope="col" className="px-8 py-5 text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">
                       &nbsp;
                     </th>
-                    {PRICING_COMPARISON.map((col) => (
+                    {body.compare.shops.map((col) => (
                       <th
                         key={col.name}
                         scope="col"
@@ -232,7 +222,7 @@ export default function PricingContent() {
                         {col.name}
                         {col.highlight && (
                           <span className="mt-1 block text-[10px] font-semibold normal-case tracking-normal text-primary-green-light">
-                            Your shop
+                            {body.compare.yourShop}
                           </span>
                         )}
                       </th>
@@ -240,15 +230,15 @@ export default function PricingContent() {
                   </tr>
                 </thead>
                 <tbody>
-                  {PRICING_COMPARISON_ROWS.map((row, ri) => (
+                  {body.compare.rows.map((row, ri) => (
                     <tr
                       key={row.key}
-                      className={ri < PRICING_COMPARISON_ROWS.length - 1 ? 'border-b border-[color:var(--line)]' : ''}
+                      className={ri < body.compare.rows.length - 1 ? 'border-b border-[color:var(--line)]' : ''}
                     >
                       <th scope="row" className="px-8 py-5 text-sm font-bold text-foreground">
                         {row.label}
                       </th>
-                      {PRICING_COMPARISON.map((col) => (
+                      {body.compare.shops.map((col) => (
                         <td
                           key={`${col.name}-${row.key}`}
                           className={`px-6 py-5 text-sm ${
@@ -265,12 +255,12 @@ export default function PricingContent() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-5 text-center text-xs text-ink-muted">{PRICING_COMPARISON_DISCLAIMER}</p>
+            <p className="mt-5 text-center text-xs text-ink-muted">{body.compare.disclaimer}</p>
           </FadeIn>
 
           {/* Mobile cards */}
           <Stagger className="grid gap-6 lg:hidden" stagger={0.1}>
-            {PRICING_COMPARISON.map((shop) => (
+            {body.compare.shops.map((shop) => (
               <StaggerItem key={shop.name}>
                 <article
                   className={`overflow-hidden rounded-[1.75rem] p-6 ${
@@ -282,11 +272,11 @@ export default function PricingContent() {
                   <h3 className="font-display text-3xl tracking-wide">{shop.name}</h3>
                   {shop.highlight && (
                     <span className="mt-2 inline-block rounded-full bg-primary-green px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
-                      Your shop
+                      {body.compare.yourShop}
                     </span>
                   )}
                   <dl className="mt-6 space-y-4">
-                    {PRICING_COMPARISON_ROWS.map((row) => (
+                    {body.compare.rows.map((row) => (
                       <div key={row.key}>
                         <dt
                           className={`text-xs font-bold uppercase tracking-[0.16em] ${
@@ -305,7 +295,7 @@ export default function PricingContent() {
               </StaggerItem>
             ))}
           </Stagger>
-          <p className="mt-6 text-center text-xs text-ink-muted lg:hidden">{PRICING_COMPARISON_DISCLAIMER}</p>
+          <p className="mt-6 text-center text-xs text-ink-muted lg:hidden">{body.compare.disclaimer}</p>
         </div>
       </section>
 
@@ -313,17 +303,14 @@ export default function PricingContent() {
       <section className={`border-y border-[color:var(--line)] bg-white ${SECTION_PAD}`}>
         <div className="wrap">
           <FadeIn className={SECTION_HEADER}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Why it matters</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{body.why.eyebrow}</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Transparency you can verify
+              {body.why.title}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Plenty of Front Range shops advertise honest pricing — then ask you to request a quote before sharing
-              their hourly rate. RKC puts {LABOR_RATE} on the page so you can compare the full estimate upfront.
-            </p>
+            <p className="mt-4 text-lg text-ink-muted">{body.why.intro(LABOR_RATE)}</p>
           </FadeIn>
           <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
-            {COMPETITIVE_POSITIONING.map((item) => (
+            {competitive.map((item) => (
               <StaggerItem key={item.title}>
                 <article className="h-full rounded-[1.75rem] border border-[color:var(--line)] bg-[var(--background)] p-8">
                   <h3 className="font-display text-2xl tracking-wide text-primary-blue">{item.title}</h3>
@@ -339,18 +326,15 @@ export default function PricingContent() {
       <section className={`bg-white ${SECTION_PAD}`}>
         <div className="wrap">
           <FadeIn className={SECTION_HEADER}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Real math</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{body.math.eyebrow}</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              What {LABOR_RATE} means for you
+              {body.math.title(LABOR_RATE)}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Labor is where dealerships make their margin. Same job, same technician skill — different hourly rate.
-              Here is what you actually save.
-            </p>
+            <p className="mt-4 text-lg text-ink-muted">{body.math.intro}</p>
           </FadeIn>
 
           <Stagger className="grid gap-6 md:grid-cols-2" stagger={0.08}>
-            {PRICING_SAVINGS_SCENARIOS.map((scenario) => {
+            {body.math.scenarios.map((scenario) => {
               const rkc = laborCost(scenario.hours, RKC_RATE);
               const dealer = laborCost(scenario.hours, DEALER_RATE);
               const chain = laborCost(scenario.hours, CHAIN_RATE);
@@ -367,9 +351,7 @@ export default function PricingContent() {
                           <h3 className="font-display text-2xl tracking-wide text-primary-blue sm:text-3xl">
                             {scenario.title}
                           </h3>
-                          <p className="mt-1 text-sm text-ink-muted">
-                            ~{scenario.hours} hr{scenario.hours !== 1 ? 's' : ''} labor
-                          </p>
+                          <p className="mt-1 text-sm text-ink-muted">{body.math.hoursLabor(scenario.hours)}</p>
                         </div>
                         <Calculator className="size-8 shrink-0 text-primary-green" aria-hidden />
                       </div>
@@ -388,12 +370,16 @@ export default function PricingContent() {
                           <p className="mt-0.5 text-[10px] text-ink-muted">@ ~$155/hr</p>
                         </div>
                         <div className="rounded-xl bg-white p-4">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-muted">Chain</p>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-muted">
+                            {lang === 'es' ? 'Cadena' : 'Chain'}
+                          </p>
                           <p className="mt-1 font-display text-2xl tracking-wide text-foreground">{formatCurrency(chain)}</p>
                           <p className="mt-0.5 text-[10px] text-ink-muted">@ ~$150/hr</p>
                         </div>
                         <div className="rounded-xl bg-white p-4">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-muted">Dealer</p>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-muted">
+                            {lang === 'es' ? 'Conces.' : 'Dealer'}
+                          </p>
                           <p className="mt-1 font-display text-2xl tracking-wide text-foreground">{formatCurrency(dealer)}</p>
                           <p className="mt-0.5 text-[10px] text-ink-muted">@ ~$180/hr</p>
                         </div>
@@ -402,8 +388,7 @@ export default function PricingContent() {
                       <div className="flex items-center gap-3 rounded-xl bg-primary-green/10 px-4 py-3">
                         <TrendingDown className="size-5 shrink-0 text-primary-green" aria-hidden />
                         <p className="text-sm font-semibold text-primary-blue">
-                          Save {formatCurrency(savingsVsLocal)}+ vs. typical local shop · {formatCurrency(savingsVsDealer)}+
-                          vs. dealer
+                          {body.math.saveVs(formatCurrency(savingsVsLocal), formatCurrency(savingsVsDealer))}
                         </p>
                       </div>
 
@@ -417,10 +402,8 @@ export default function PricingContent() {
 
           <FadeIn className="mt-10 rounded-2xl border border-primary-blue/15 bg-primary-blue/5 px-6 py-5 sm:px-8">
             <p className="text-sm leading-relaxed text-ink-muted">
-              <span className="font-semibold text-primary-blue">The formula is simple:</span> labor hours × hourly rate
-              + parts. At RKC, the rate is always $120/hr. A 2-hour brake job is $240 in labor here — $310+ at a typical
-              local shop and $360+ at a $180/hr dealer. Parts are quoted separately at every shop; we do not hide
-              behind quote-only forms or bundled &quot;starting at&quot; prices.
+              <span className="font-semibold text-primary-blue">{body.math.formulaTitle}</span>{' '}
+              {body.math.formulaBody}
             </p>
           </FadeIn>
         </div>
@@ -452,14 +435,11 @@ export default function PricingContent() {
 
         <div className="wrap relative">
           <FadeIn className={`mx-auto ${SECTION_HEADER} text-center`}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Our philosophy</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{body.philosophy.eyebrow}</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Honest pricing. No overselling.
+              {body.philosophy.title}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              We are not the cheapest shop in Denver — we are the fair one. Lower overhead than a dealership, better
-              technicians than a chain, and zero pressure to approve work you do not need.
-            </p>
+            <p className="mt-4 text-lg text-ink-muted">{body.philosophy.intro}</p>
             <div
               aria-hidden
               className="mx-auto mt-8 h-px w-24 bg-gradient-to-r from-transparent via-primary-green to-transparent"
@@ -467,7 +447,7 @@ export default function PricingContent() {
           </FadeIn>
 
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-            {PRICING_PHILOSOPHY.map((point, index) => {
+            {body.philosophy.items.map((point, index) => {
               const Icon = PHILOSOPHY_ICONS[point.icon];
               const cardClassName =
                 'group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--line)] bg-white p-6 shadow-[0_20px_60px_-40px_rgba(12,18,34,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_-36px_rgba(28,61,145,0.28)] sm:p-8';
@@ -518,11 +498,11 @@ export default function PricingContent() {
             <div className="flex flex-wrap justify-center gap-4">
               <PhoneLink className="btn-green">
                 <Phone className="size-5" />
-                Get a written estimate
+                {body.philosophy.getEstimate}
               </PhoneLink>
               <Link href="/contact" className="btn-blue">
                 <FileText className="size-5" />
-                Request quote online
+                {body.philosophy.requestQuote}
               </Link>
             </div>
           </FadeIn>
@@ -533,28 +513,25 @@ export default function PricingContent() {
       <section className={`bg-white ${SECTION_PAD}`}>
         <div className="wrap">
           <FadeIn className={SECTION_HEADER}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Pricing</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{body.tiers.eyebrow}</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Starting prices, honest labor
+              {body.tiers.title}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Starting prices for common jobs — all at {LABOR_RATE} labor. Labor time estimates shown so you can do the
-              math yourself. Parts quoted separately where applicable.
-            </p>
+            <p className="mt-4 text-lg text-ink-muted">{body.tiers.intro(LABOR_RATE)}</p>
           </FadeIn>
 
           <FadeIn className="mx-auto mb-10 max-w-5xl rounded-[1.75rem] border border-primary-blue/20 bg-primary-blue/5 px-6 py-5 sm:px-8">
             <div className="flex gap-4">
               <FileText className="mt-0.5 size-5 shrink-0 text-primary-blue" aria-hidden />
               <p className="text-sm leading-relaxed text-ink-muted">
-                <span className="font-semibold text-primary-blue">How starting prices work:</span>{' '}
-                {PRICING_TIERS_DISCLAIMER}
+                <span className="font-semibold text-primary-blue">{body.tiers.howTitle}</span>{' '}
+                {body.tiers.disclaimer}
               </p>
             </div>
           </FadeIn>
 
           <div className="mx-auto max-w-5xl space-y-12">
-            {PRICING_TIERS.map((tier, ti) => (
+            {body.tiers.categories.map((tier, ti) => (
               <FadeIn key={tier.category} delay={ti * 0.05}>
                 <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-green">
                   {tier.category}
@@ -591,13 +568,9 @@ export default function PricingContent() {
           </div>
 
           <FadeIn className="mx-auto mt-10 max-w-5xl rounded-[1.75rem] border border-primary-blue/15 bg-primary-blue/5 px-6 py-5 text-center text-sm leading-relaxed text-ink-muted sm:px-8">
-            Final cost depends on parts and your vehicle&apos;s condition — we may find more issues once we&apos;re
-            under the hood.{' '}
-            <span className="font-semibold text-primary-blue">
-              You always get a written change order before we do additional work.
-            </span>{' '}
-            Labor billed at {LABOR_RATE}. Diagnostic fees applied toward approved repairs. Free multi-point inspection
-            with any service — no upsell pressure.
+            {body.tiers.footerBefore}{' '}
+            <span className="font-semibold text-primary-blue">{body.tiers.footerBold}</span>{' '}
+            {body.tiers.footerAfter(LABOR_RATE)}
           </FadeIn>
         </div>
       </section>
@@ -606,16 +579,14 @@ export default function PricingContent() {
       <section className={`bg-[var(--background)] ${SECTION_PAD}`}>
         <div className="wrap">
           <FadeIn className={`mx-auto ${SECTION_HEADER} text-center`}>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">FAQ</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{body.faq.eyebrow}</p>
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">
-              Pricing questions
+              {body.faq.title}
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Straight answers about our $120/hr rate — no fine print.
-            </p>
+            <p className="mt-4 text-lg text-ink-muted">{body.faq.intro}</p>
           </FadeIn>
           <FadeIn className="mx-auto max-w-3xl">
-            <FAQAccordion items={PRICING_PAGE_FAQ} />
+            <FAQAccordion items={[...body.faq.items]} />
           </FadeIn>
         </div>
       </section>
@@ -632,25 +603,22 @@ export default function PricingContent() {
               {LABOR_RATE}
             </p>
             <h2 className="mt-4 font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">
-              Ready for a straight answer?
+              {body.cta.title}
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-white/75">
-              Tell us what is going on with your vehicle. We will give you an honest estimate at {LABOR_RATE} — no
-              upsell, no runaround. ASE certified, 30+ years in Englewood.
-            </p>
+            <p className="mx-auto mt-4 max-w-lg text-white/75">{body.cta.body(LABOR_RATE)}</p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
                 <Phone className="size-5" />
                 {BUSINESS.phone}
               </MotionAnchor>
               <Link href="/contact" className="btn-ghost-light">
-                Get estimate
+                {body.cta.getEstimate}
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-md transition hover:bg-white/15"
               >
-                Contact
+                {body.cta.contact}
               </Link>
             </div>
             <p className="mt-6 text-sm text-white/50">
