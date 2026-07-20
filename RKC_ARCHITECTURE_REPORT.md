@@ -333,9 +333,10 @@ Aggregate file: `scripts/.spark-logs/phase1-arch-audit-retry.json`.
 | Catalog migration (127 models, 19 makes) | `lib/knowledge/buildCatalog.ts` |
 | Postgres DDL mirror | `lib/knowledge/db-schema.ts` |
 | JSON snapshot export | `data/knowledge/catalog.snapshot.json` |
-| Pilot authority UI | `/vehicles/toyota/rav4`, `/vehicles/toyota/4runner` → `ModelKnowledgeOverview` |
-| Spark batch logs | `scripts/.spark-logs/phase2-foundation-*.json` |
+| Pilot authority UI | 5 Toyota pilots (`rav4`, `4runner`, `highlander`, `camry`, `corolla`) → `ModelKnowledgeOverview` + Phase 3 shells |
+| Phase 3 section builder | `lib/knowledge/phase3Sections.ts` |
+| Spark batch logs | `scripts/.spark-logs/phase2-foundation-*.json`, `phase2-burst-*.json`, `phase2-expand-*.json` |
 
 **Policy unchanged:** OEM specs remain empty until sourced; shop observations labeled separately from verified facts.
 
-**Next:** Phase 3 — expand authority layout and promote claims with citations.
+**Next:** Phase 3 — expand pilots to more makes; populate Engineering/Comparison only with cited OEM rows.

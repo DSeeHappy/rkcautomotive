@@ -22,6 +22,9 @@ export {
   unverifiedField,
 } from '@/lib/knowledge/verified';
 
+export { buildPhase3Sections } from '@/lib/knowledge/phase3Sections';
+export type { Phase3SectionId } from '@/lib/knowledge/phase3Sections';
+
 export {
   getClaimsForModel,
   getKnowledgeCatalog,

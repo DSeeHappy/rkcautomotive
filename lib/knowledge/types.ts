@@ -142,6 +142,8 @@ export type ModelKnowledgeOverview = {
   modelId: string;
   isPilot: boolean;
   sections: ModelOverviewSection[];
+  /** Phase 3 authority shells — Overview / Engineering / Ownership / Enthusiast / Comparison */
+  phase3Sections: ModelOverviewSection[];
   specCategories: SpecCategory[];
   claims: ClaimRecord[];
 };

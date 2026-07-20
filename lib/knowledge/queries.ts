@@ -1,5 +1,6 @@
 import { KNOWLEDGE_PILOT_MODEL_IDS, UNABLE_TO_VERIFY } from '@/lib/knowledge/constants';
 import { KNOWLEDGE_CATALOG } from '@/lib/knowledge/buildCatalog';
+import { buildPhase3Sections } from '@/lib/knowledge/phase3Sections';
 import { createEmptyVehicleSpecs, SPEC_CATEGORY_ORDER } from '@/lib/knowledge/specs';
 import { isDisplayableConfidence } from '@/lib/knowledge/verified';
 import type {
@@ -122,10 +123,15 @@ export function getModelKnowledgeOverview(
   const model = getKnowledgeModelByMakeSlug(makeSlug, modelSlug);
   if (!model) return null;
 
+  const modelClaims = getClaimsForModel(model.id);
+  const isPilot = isKnowledgePilotModel(model.id);
+
   const sections: ModelOverviewSection[] = [buildIdentitySection(model)];
   const shopSection = buildShopObservationsSection(model.id);
   if (shopSection) sections.push(shopSection);
   sections.push(buildSpecsOverviewSection(model));
+
+  const phase3Sections = isPilot ? buildPhase3Sections(model, modelClaims) : [];
 
   // Scaffold empty category shells for UI (labels only) — values stay unverified.
   const empty = createEmptyVehicleSpecs();
@@ -133,10 +139,11 @@ export function getModelKnowledgeOverview(
 
   return {
     modelId: model.id,
-    isPilot: isKnowledgePilotModel(model.id),
+    isPilot,
     sections,
+    phase3Sections,
     specCategories,
-    claims: getClaimsForModel(model.id),
+    claims: modelClaims,
   };
 }
 

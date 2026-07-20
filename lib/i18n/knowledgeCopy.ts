@@ -8,6 +8,9 @@ const EN = {
   intro:
     'Facts below come from RKC’s curated catalog and sourced image metadata. OEM horsepower, torque, and trim specs are not shown until verified — never fabricated.',
   pilotNote: 'Phase 2 pilot page — knowledge layer foundation wired for authority expansion in Phase 3.',
+  phase3Heading: 'Authority sections',
+  phase3Intro:
+    'Overview and Ownership show verified catalog identity and RKC shop observations. Engineering, Enthusiast, and Comparison stay empty until sourced — never fabricated.',
   specScaffoldTitle: 'Specification categories (awaiting verified data)',
   specScaffoldIntro:
     'These categories are scaffolded for future OEM-sourced rows. Empty fields remain unavailable rather than invented.',
@@ -27,6 +30,9 @@ const ES = {
     'Los datos siguientes provienen del catálogo curado de RKC y metadatos de imágenes con fuente. No mostramos caballos de fuerza, torque ni especificaciones por trim OEM hasta verificarlas — nunca inventadas.',
   pilotNote:
     'Página piloto Fase 2 — capa de conocimiento conectada para expansión de autoridad en Fase 3.',
+  phase3Heading: 'Secciones de autoridad',
+  phase3Intro:
+    'Resumen y Propiedad muestran identidad del catálogo y observaciones del taller RKC. Ingeniería, Entusiasta y Comparación permanecen vacías hasta tener fuentes — nunca inventadas.',
   specScaffoldTitle: 'Categorías de especificación (pendientes de datos verificados)',
   specScaffoldIntro:
     'Estas categorías están preparadas para filas OEM con fuente. Los campos vacíos permanecen no disponibles en lugar de inventarse.',

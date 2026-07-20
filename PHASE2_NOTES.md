@@ -40,10 +40,10 @@ All HP, torque, dimensions, MPG, trim specs remain **empty** with `"Unable to ve
 
 ### 3. Pilot authority wiring
 
-- **Pilot hubs:** `/vehicles/toyota/rav4`, `/vehicles/toyota/4runner`
+- **Pilot hubs:** `/vehicles/toyota/{rav4,4runner,highlander,camry,corolla}` (5 models with `modelReliabilityNotes` claims)
 - Component: `ModelKnowledgeOverview.tsx`
-- Shows: model identity, shop observations (labeled), spec category scaffold with honest gaps
-- Other 125 hubs unchanged — knowledge catalog exists but UI gated to pilots
+- Shows: model identity, shop observations (labeled), Phase 3 authority shells (Overview / Engineering / Ownership / Enthusiast / Comparison), spec category scaffold with honest gaps
+- Other 122 hubs unchanged — knowledge catalog exists but UI gated to pilots
 
 ### 4. Storage approach
 
@@ -57,6 +57,7 @@ All HP, torque, dimensions, MPG, trim specs remain **empty** with `"Unable to ve
 |---|---|---|
 | `spark-phase2-retry.mjs` | 4/4 HTTP 200 (2 smart + 2 research) | `phase2-foundation-retry-*.json` |
 | `spark-phase2-burst.mjs` | 7/7 HTTP 200 (4 smart + 3 research) | `phase2-burst-*.json` |
+| `spark-phase2-expand.mjs` | 6/6 HTTP 200 (3 smart + 3 research) | `phase2-expand-*.json` |
 
 Raw responses: `scripts/.spark-logs/res-*-vllm_*.json`  
 Decisions pipe: `scripts/.spark-logs/PHASE2_SPARK_DECISIONS.md`
@@ -72,7 +73,7 @@ Decisions pipe: `scripts/.spark-logs/PHASE2_SPARK_DECISIONS.md`
 |---|---|
 | Schema with source/confidence | ✅ |
 | Existing catalog migrated without invented specs | ✅ |
-| Pilot pages wired to knowledge layer | ✅ (2 pilots) |
+| Pilot pages wired to knowledge layer | ✅ (5 Toyota pilots) |
 | Build + typecheck pass | ✅ (`npm run build`) |
 | Spark logs for schema batches | ✅ continuous HTTP 200 |
 
@@ -87,12 +88,14 @@ Decisions pipe: `scripts/.spark-logs/PHASE2_SPARK_DECISIONS.md`
 
 ---
 
-## Phase 3 preview
+## Phase 3 preview (started on pilots)
 
-- Expand authority layout to more models after claim promotion review
+- **Authority shells:** Overview / Engineering / Ownership / Enthusiast / Comparison (`lib/knowledge/phase3Sections.ts`)
+- Overview + Ownership populated from verified catalog identity + shop observations only
+- Engineering, Enthusiast, Comparison show `"Unable to verify with available data."` until sourced
+- Expand to more makes after claim promotion review
 - Split generations with sourced OEM data
 - Populate spec fields only when `review_status = verified` and confidence ≥ medium
-- Deduplicate deep-dive template sameness using verified claims
 
 ---
 
