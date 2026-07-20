@@ -1,4 +1,9 @@
-import { KNOWLEDGE_PILOT_MODEL_IDS, UNABLE_TO_VERIFY } from '@/lib/knowledge/constants';
+import {
+  isKnowledgeWiredBrand,
+  KNOWLEDGE_PILOT_MODEL_IDS,
+  KNOWLEDGE_WIRED_BRAND_SLUGS,
+  UNABLE_TO_VERIFY,
+} from '@/lib/knowledge/constants';
 import { KNOWLEDGE_CATALOG } from '@/lib/knowledge/buildCatalog';
 import { buildPhase3Sections } from '@/lib/knowledge/phase3Sections';
 import { createEmptyVehicleSpecs, SPEC_CATEGORY_ORDER } from '@/lib/knowledge/specs';
@@ -39,7 +44,19 @@ export function getClaimsForModel(modelId: string): ClaimRecord[] {
 }
 
 export function isKnowledgePilotModel(modelId: string): boolean {
+  const model = getKnowledgeModel(modelId);
+  if (!model) return false;
+  return isKnowledgeWiredBrand(model.manufacturerId);
+}
+
+export function isKnowledgeModelWithClaims(modelId: string): boolean {
   return (KNOWLEDGE_PILOT_MODEL_IDS as readonly string[]).includes(modelId);
+}
+
+export function getClaimsForManufacturer(manufacturerId: string): ClaimRecord[] {
+  return KNOWLEDGE_CATALOG.claims.filter(
+    (claim) => claim.entityType === 'manufacturer' && claim.entityId === manufacturerId,
+  );
 }
 
 function buildIdentitySection(model: ModelRecord): ModelOverviewSection {
@@ -125,6 +142,7 @@ export function getModelKnowledgeOverview(
 
   const modelClaims = getClaimsForModel(model.id);
   const isPilot = isKnowledgePilotModel(model.id);
+  const hasModelClaims = isKnowledgeModelWithClaims(model.id);
 
   const sections: ModelOverviewSection[] = [buildIdentitySection(model)];
   const shopSection = buildShopObservationsSection(model.id);
@@ -140,6 +158,7 @@ export function getModelKnowledgeOverview(
   return {
     modelId: model.id,
     isPilot,
+    hasModelClaims,
     sections,
     phase3Sections,
     specCategories,
@@ -163,6 +182,10 @@ export function getKnowledgeCatalogStats() {
     claims: catalog.claims.length,
     modelsWithYearRange,
     modelsWithClaims,
-    pilotModels: KNOWLEDGE_PILOT_MODEL_IDS.length,
+    wiredBrands: KNOWLEDGE_WIRED_BRAND_SLUGS.length,
+    modelsWithShopClaims: KNOWLEDGE_PILOT_MODEL_IDS.length,
+    wiredModels: KNOWLEDGE_CATALOG.models.filter((m) =>
+      isKnowledgeWiredBrand(m.manufacturerId),
+    ).length,
   };
 }

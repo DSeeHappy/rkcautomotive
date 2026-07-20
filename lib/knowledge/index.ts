@@ -1,6 +1,8 @@
 export {
   CONFIDENCE_DISPLAY_THRESHOLD,
+  isKnowledgeWiredBrand,
   KNOWLEDGE_PILOT_MODEL_IDS,
+  KNOWLEDGE_WIRED_BRAND_SLUGS,
   UNABLE_TO_VERIFY,
 } from '@/lib/knowledge/constants';
 export type { KnowledgePilotModelId } from '@/lib/knowledge/constants';
@@ -27,12 +29,14 @@ export type { Phase3SectionId } from '@/lib/knowledge/phase3Sections';
 
 export {
   getClaimsForModel,
+  getClaimsForManufacturer,
   getKnowledgeCatalog,
   getKnowledgeCatalogStats,
   getKnowledgeModel,
   getKnowledgeModelByMakeSlug,
   getManufacturerBySlug,
   getModelKnowledgeOverview,
+  isKnowledgeModelWithClaims,
   isKnowledgePilotModel,
 } from '@/lib/knowledge/queries';
 

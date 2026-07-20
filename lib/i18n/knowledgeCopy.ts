@@ -7,7 +7,8 @@ const EN = {
   heading: (brand: string, model: string) => `${brand} ${model} — verified overview`,
   intro:
     'Facts below come from RKC’s curated catalog and sourced image metadata. OEM horsepower, torque, and trim specs are not shown until verified — never fabricated.',
-  pilotNote: 'Phase 2 pilot page — knowledge layer foundation wired for authority expansion in Phase 3.',
+  pilotNote:
+    'Knowledge layer active — Phase 3 authority sections wired. Ownership populates only from model-specific shop notes when available.',
   phase3Heading: 'Authority sections',
   phase3Intro:
     'Overview and Ownership show verified catalog identity and RKC shop observations. Engineering, Enthusiast, and Comparison stay empty until sourced — never fabricated.',
@@ -29,7 +30,7 @@ const ES = {
   intro:
     'Los datos siguientes provienen del catálogo curado de RKC y metadatos de imágenes con fuente. No mostramos caballos de fuerza, torque ni especificaciones por trim OEM hasta verificarlas — nunca inventadas.',
   pilotNote:
-    'Página piloto Fase 2 — capa de conocimiento conectada para expansión de autoridad en Fase 3.',
+    'Capa de conocimiento activa — secciones de autoridad Fase 3 conectadas. Propiedad se llena solo con notas del taller por modelo cuando existen.',
   phase3Heading: 'Secciones de autoridad',
   phase3Intro:
     'Resumen y Propiedad muestran identidad del catálogo y observaciones del taller RKC. Ingeniería, Entusiasta y Comparación permanecen vacías hasta tener fuentes — nunca inventadas.',

@@ -1,10 +1,16 @@
+import { BRAND_RELIABILITY_SNAPSHOTS } from '@/lib/brandReliabilityNotes';
+
 /** Minimum confidence to treat a field as verified for display. */
 export const CONFIDENCE_DISPLAY_THRESHOLD = 'medium' as const;
 
 /** Shown when a spec or fact cannot be sourced. */
 export const UNABLE_TO_VERIFY = 'Unable to verify with available data.';
 
-/** Phase 2/3 pilot models wired for authority overview sections (shop-observation claims exist). */
+/** Makes with catalog + brandReliabilityNotes — all model hubs get Phase 3 authority shells. */export const KNOWLEDGE_WIRED_BRAND_SLUGS = BRAND_RELIABILITY_SNAPSHOTS.map(
+  (snapshot) => snapshot.id,
+) as readonly string[];
+
+/** Models with modelReliabilityNotes shop-observation claims (ownership section populated). */
 export const KNOWLEDGE_PILOT_MODEL_IDS = [
   'toyota-rav4',
   'toyota-4runner',
@@ -14,3 +20,7 @@ export const KNOWLEDGE_PILOT_MODEL_IDS = [
 ] as const;
 
 export type KnowledgePilotModelId = (typeof KNOWLEDGE_PILOT_MODEL_IDS)[number];
+
+export function isKnowledgeWiredBrand(slug: string): boolean {
+  return KNOWLEDGE_WIRED_BRAND_SLUGS.includes(slug);
+}

@@ -140,7 +140,10 @@ export type ModelOverviewItem = {
 
 export type ModelKnowledgeOverview = {
   modelId: string;
+  /** True when make has brandReliabilityNotes — hub wired to knowledge layer. */
   isPilot: boolean;
+  /** True when modelReliabilityNotes claims exist (ownership populated). */
+  hasModelClaims: boolean;
   sections: ModelOverviewSection[];
   /** Phase 3 authority shells — Overview / Engineering / Ownership / Enthusiast / Comparison */
   phase3Sections: ModelOverviewSection[];

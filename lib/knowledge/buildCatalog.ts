@@ -1,5 +1,6 @@
 import { slugifyModel } from '@/lib/modelCommonServices';
 import { getAllModelReliabilitySnapshots } from '@/lib/modelReliabilityNotes';
+import { BRAND_RELIABILITY_SNAPSHOTS } from '@/lib/brandReliabilityNotes';
 import { VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { getVehicleImageRecord } from '@/lib/vehicleImages';
 import { VEHICLE_MODELS } from '@/lib/vehicleModels';
@@ -13,7 +14,7 @@ import type {
 } from '@/lib/knowledge/types';
 import { buildVerifiedField } from '@/lib/knowledge/verified';
 
-const CATALOG_VERSION = 'phase2-expand-1';
+const CATALOG_VERSION = 'phase2-multi-make-1';
 
 function parseYearRange(range: string): { start: number; end: number | null } | null {
   const normalized = range.replace(/\u2013/g, '-').replace(/\u2014/g, '-');
@@ -100,9 +101,54 @@ function buildModels(): ModelRecord[] {
   });
 }
 
-function buildClaims(): ClaimRecord[] {
+function buildBrandClaims(): ClaimRecord[] {
   const createdAt = new Date().toISOString();
   const claims: ClaimRecord[] = [];
+
+  for (const snapshot of BRAND_RELIABILITY_SNAPSHOTS) {
+    claims.push({
+      id: `claim-brand-${snapshot.id}-reliable-picks`,
+      entityType: 'manufacturer',
+      entityId: snapshot.id,
+      topic: 'reliable-picks',
+      statement: snapshot.reliablePicks.join('; '),
+      confidence: 'medium',
+      reviewStatus: 'shop_observation',
+      sources: [
+        {
+          id: `rkc-shop-brand-${snapshot.id}`,
+          label: 'RKC shop observation (brand reliability notes)',
+        },
+      ],
+      createdAt,
+    });
+
+    for (const bullet of snapshot.bullets) {
+      claims.push({
+        id: `claim-brand-${snapshot.id}-${slugifyModel(bullet.label)}`,
+        entityType: 'manufacturer',
+        entityId: snapshot.id,
+        topic: slugifyModel(bullet.label),
+        statement: bullet.text,
+        confidence: 'medium',
+        reviewStatus: 'shop_observation',
+        sources: [
+          {
+            id: `rkc-shop-brand-${snapshot.id}`,
+            label: 'RKC shop observation (brand reliability notes)',
+          },
+        ],
+        createdAt,
+      });
+    }
+  }
+
+  return claims;
+}
+
+function buildClaims(): ClaimRecord[] {
+  const createdAt = new Date().toISOString();
+  const claims: ClaimRecord[] = [...buildBrandClaims()];
 
   for (const snapshot of getAllModelReliabilitySnapshots()) {
     claims.push({
