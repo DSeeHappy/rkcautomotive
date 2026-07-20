@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Exhaust System Repair in Englewood, CO | RKC Automotive",
-  "Exhaust system repair in Englewood, CO — mufflers, catalytic converters, pipes, and emissions service for Denver south metro drivers. Call (720) 749-3965.",
+  "Exhaust system repair in Englewood, CO — mufflers, catalytic converters, pipes, and emissions work. ASE shop. Call (720) 749-3965 today.",
   "exhaust-system-englewood-co",
   PHOTOS.undercarriage,
   "Exhaust System at RKC Automotive Englewood CO",
-  "exhaust repair Englewood CO, muffler replacement Denver, catalytic converter Colorado, emissions repair",
 );
 
 const SERVICE_PATH = "/services/exhaust-system-englewood-co";

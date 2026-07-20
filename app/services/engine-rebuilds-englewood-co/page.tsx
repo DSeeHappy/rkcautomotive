@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   'Complete Engine Rebuilds & Overhauls in Englewood, CO | RKC Automotive',
-  'Professional long-block and short-block engine rebuilding, machining, and blueprinting in Englewood. Precision piston rings, bearings, and complete block restoration.',
+  'Engine rebuilds in Englewood, CO — long-block, short-block, and machining with written estimates. ASE shop, $120/hr. Call (720) 749-3965.',
   'engine-rebuilds-englewood-co',
   PHOTOS.engineRebuild,
   'Engine rebuild and overhaul service at RKC Automotive Englewood CO',
-  'engine rebuild Englewood CO, long block rebuild Denver, short block overhaul, engine machining blueprinting',
 );
 
 const SERVICE_PATH = '/services/engine-rebuilds-englewood-co';

@@ -2,7 +2,7 @@ import { PHOTOS } from '@/lib/constants';
 import AboutContent from '@/app/components/ui/AboutContent';
 import { createPageMetadata } from '@/lib/og';
 import JsonLd from '@/app/components/JsonLd';
-import { createAboutPageSchema, createBreadcrumbSchema } from '@/lib/seo';
+import { createAboutPageSchema, createBreadcrumbSchema, createShopPersonSchemas } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'About RKC Automotive | ASE Auto Repair Englewood, CO',
@@ -19,6 +19,7 @@ export default function AboutPage() {
       <JsonLd
         data={[
           createAboutPageSchema(),
+          ...createShopPersonSchemas(),
           createBreadcrumbSchema([
             { name: 'Home', path: '/' },
             { name: 'About', path: '/about' },

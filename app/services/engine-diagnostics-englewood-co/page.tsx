@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Engine Diagnostics in Englewood, CO | RKC Automotive",
-  "Expert engine diagnostics and repair in Englewood, CO. Advanced equipment for all makes and models in the Denver south metro. Call (720) 749-3965 for service.",
+  "ASE engine diagnostics in Englewood, CO for every make and model. Confirm the real fault before parts. Posted $120/hr labor. Call (720) 749-3965.",
   "engine-diagnostics-englewood-co",
   PHOTOS.engineBay,
   "Engine Diagnostics at RKC Automotive Englewood CO",
-  "engine diagnostics Englewood CO, engine repair Denver, car diagnostics, check engine diagnosis",
 );
 
 const SERVICE_PATH = "/services/engine-diagnostics-englewood-co";

@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   'Camshaft & Hydraulic Lifter Repair in Englewood, CO | RKC Automotive',
-  'Expert replacement for worn camshaft lobes, collapsed hydraulic lifters, and valve-train failures. Fix your engine tick or misfire in the Denver metro area.',
+  'Camshaft and hydraulic lifter repair in Englewood, CO — AFM tick, HEMI valvetrain, and misfires. ASE diagnostics. Call (720) 749-3965.',
   'camshaft-lifter-repair-englewood-co',
   PHOTOS.classicEngine,
   'Camshaft and hydraulic lifter repair at RKC Automotive Englewood CO',
-  'camshaft repair Englewood CO, lifter tick Denver, hydraulic lifter replacement, valvetrain repair HEMI AFM',
 );
 
 const SERVICE_PATH = '/services/camshaft-lifter-repair-englewood-co';

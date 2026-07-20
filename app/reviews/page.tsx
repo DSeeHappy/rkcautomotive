@@ -22,7 +22,6 @@ export const metadata = createPageMetadata({
   path: '/reviews',
   image: PHOTOS.exterior,
   imageAlt: 'RKC Automotive shop exterior in Englewood, CO',
-  keywords: 'RKC Automotive reviews, auto repair reviews Englewood CO, mechanic reviews Denver',
 });
 
 export default function ReviewsPage() {

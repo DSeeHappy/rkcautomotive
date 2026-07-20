@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Brake Repair in Englewood, CO | Expert Brake Service | RKC Automotive",
-  "Professional brake repair and service in Englewood, CO. Brake pads, rotors, calipers, and complete brake system service. Call (720) 749-3965 for same-day service.",
+  "ASE-certified brake repair in Englewood, CO — pads, rotors, calipers, and fluid. Written estimates at our posted $120/hr labor rate. Call (720) 749-3965.",
   "brake-repair-englewood-co",
   PHOTOS.undercarriage,
   "Brake Repair Service at RKC Automotive Englewood CO",
-  "brake repair Englewood CO, brake service Denver, brake pads replacement, rotor resurfacing, brake inspection",
 );
 
 const SERVICE_PATH = "/services/brake-repair-englewood-co";

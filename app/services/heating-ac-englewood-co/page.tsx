@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Auto AC & Heating Repair in Englewood, CO | RKC Automotive",
-  "Auto AC and heating repair in Englewood, CO. R134a and R1234yf recharge, leak testing, compressor and heater-core service. Call (720) 749-3965.",
+  "Auto AC and heating repair in Englewood, CO — R134a and R1234yf recharge, leak testing, and compressors. ASE shop. Call (720) 749-3965.",
   "heating-ac-englewood-co",
   PHOTOS.interior,
   "Heating & AC at RKC Automotive Englewood CO",
-  "AC repair Englewood CO, R134a recharge Denver, R1234yf service Colorado, auto heating repair, AC compressor replacement, heater core leak, EPA Section 609",
 );
 
 const SERVICE_PATH = "/services/heating-ac-englewood-co";

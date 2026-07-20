@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Transmission Repair in Englewood, CO | RKC Automotive",
-  "Transmission service and repair in Englewood, CO — automatic, manual, fluid service, and diagnostics for Denver south metro drivers. Call (720) 749-3965.",
+  "Transmission repair in Englewood, CO — automatic, manual, CVT, and fluid service. ASE-certified techs at $120/hr. Call (720) 749-3965 today.",
   "transmission-services-englewood-co",
   PHOTOS.classicLift,
   "Transmission Services at RKC Automotive Englewood CO",
-  "transmission repair Englewood CO, transmission service Denver, CVT repair, automatic transmission fluid",
 );
 
 const SERVICE_PATH = "/services/transmission-services-englewood-co";

@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Suspension & Steering Repair in Englewood, CO | RKC Automotive",
-  "Suspension and steering repair in Englewood, CO — shocks, struts, ball joints, and alignment from ASE-certified techs. Serving Denver south metro. Call (720) 749-3965.",
+  "Suspension and steering repair in Englewood, CO — shocks, struts, ball joints, and alignment from ASE techs. Call (720) 749-3965.",
   "suspension-steering-englewood-co",
   PHOTOS.techCloseup,
   "Suspension & Steering at RKC Automotive Englewood CO",
-  "suspension repair Englewood CO, steering repair Denver, strut replacement, ball joint service",
 );
 
 const SERVICE_PATH = "/services/suspension-steering-englewood-co";

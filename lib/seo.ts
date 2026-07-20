@@ -118,25 +118,13 @@ export function getRoutesForSitemapShard(shardId: SitemapShardId): string[] {
  * Do NOT add MetadataRoute alternates / xhtml:link hreflang until
  * `HAS_LOCALE_URL_SEGMENTS` is true and real `/es` (or host) pages exist —
  * see lib/i18n/localeSeo.ts and Google localized-versions (sitemap method).
+ *
+ * Google ignores `<priority>` and `<changefreq>` — omit them per Search Central.
+ * Include only absolute canonical URLs; add lastmod only when verifiably accurate.
  */
 export function buildSitemapEntries(paths: string[]): MetadataRoute.Sitemap {
   return paths.map((path) => ({
     url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
-    changeFrequency: path.startsWith('/services/') || path.startsWith('/areas-we-serve/')
-      ? ('monthly' as const)
-      : ('weekly' as const),
-    priority:
-      path === '/'
-        ? 1
-        : path === '/englewood-co-auto-repair' || path === '/contact'
-          ? 0.9
-          : path.startsWith('/services/')
-            ? 0.8
-            : path.startsWith('/areas-we-serve/')
-              ? 0.7
-              : path.startsWith('/vehicles/')
-                ? 0.65
-                : 0.75,
   }));
 }
 
@@ -180,10 +168,44 @@ export function createWebSiteSchema() {
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     name: BUSINESS.name,
+    alternateName: ['RKC Auto Repair', 'RKC Automotive Englewood'],
     url: SITE_URL,
     publisher: { '@id': LOCAL_BUSINESS_ID },
     inLanguage: 'en-US',
   };
+}
+
+/** E-E-A-T: shop leadership cited in verified reviews and About copy. */
+export function createShopPersonSchemas() {
+  const aboutPage = absoluteUrl('/about');
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': `${aboutPage}#ray`,
+      name: 'Ray',
+      jobTitle: 'Owner & ASE-Certified Technician',
+      worksFor: { '@id': LOCAL_BUSINESS_ID },
+      url: aboutPage,
+      knowsAbout: [
+        'Engine diagnostics',
+        'Engine rebuilds',
+        'Transmission repair',
+        'Brake service',
+        'Auto electrical repair',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': `${aboutPage}#oscar`,
+      name: 'Oscar',
+      jobTitle: 'ASE-Certified Technician',
+      worksFor: { '@id': LOCAL_BUSINESS_ID },
+      url: aboutPage,
+      knowsAbout: ['Fleet maintenance', 'Engine diagnostics', 'Preventative maintenance'],
+    },
+  ];
 }
 
 type AreaServedInput =

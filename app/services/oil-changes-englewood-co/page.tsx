@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Oil Change Service in Englewood, CO | RKC Automotive",
-  "Fast, affordable oil changes in Englewood, CO — conventional, synthetic, and high-mileage oil with fluid top-off. Serving Denver south metro. Call (720) 749-3965.",
+  "Oil changes in Englewood, CO — conventional, synthetic, and high-mileage with top-off. ASE-certified shop, $120/hr labor. Call (720) 749-3965.",
   "oil-changes-englewood-co",
   PHOTOS.teamCollab,
   "Oil Changes at RKC Automotive Englewood CO",
-  "oil change Englewood CO, synthetic oil Denver, high mileage oil service, fluid top off",
 );
 
 const SERVICE_PATH = "/services/oil-changes-englewood-co";

@@ -29,7 +29,6 @@ export type PageMetadataOptions = {
   image?: string;
   imageAlt?: string;
   type?: 'website' | 'article';
-  keywords?: string | string[];
   robots?: Metadata['robots'];
 };
 
@@ -65,6 +64,19 @@ function resolveDisplayTitle(title: string, titleAbsolute?: boolean): string {
   return `${title} | ${SITE_NAME}`;
 }
 
+/**
+ * Soft-clamp meta descriptions for SERP-friendly length (~140–160).
+ * Pattern adapted from molecule-work `fitDescription` — truncates on word boundary.
+ */
+export function fitDescription(description: string, max = 160): string {
+  const trimmed = description.trim().replace(/\s+/g, ' ');
+  if (trimmed.length <= max) return trimmed;
+  const slice = trimmed.slice(0, max - 1);
+  const lastSpace = slice.lastIndexOf(' ');
+  const base = lastSpace > 80 ? slice.slice(0, lastSpace) : slice;
+  return `${base.replace(/[,;:.!?-]+$/, '')}…`;
+}
+
 export function createPageMetadata({
   title,
   description,
@@ -73,11 +85,11 @@ export function createPageMetadata({
   image = DEFAULT_OG_IMAGE.url,
   imageAlt = DEFAULT_OG_IMAGE.alt,
   type = 'website',
-  keywords,
   robots,
 }: PageMetadataOptions): Metadata {
   const url = absoluteUrl(path);
   const ogTitle = resolveDisplayTitle(title, titleAbsolute);
+  const resolvedDescription = fitDescription(description);
   const images = ogImage(image, imageAlt);
   // Only when HAS_LOCALE_URL_SEGMENTS and paths differ — never hreflang two langs to one URL.
   const localePaths = getLocaleAlternateLanguagePaths(path);
@@ -94,8 +106,7 @@ export function createPageMetadata({
 
   return {
     title: titleAbsolute ? { absolute: title } : title,
-    description,
-    ...(keywords ? { keywords } : {}),
+    description: resolvedDescription,
     ...(robots ? { robots } : {}),
     alternates: {
       canonical: url,
@@ -103,7 +114,7 @@ export function createPageMetadata({
     },
     openGraph: {
       title: ogTitle,
-      description,
+      description: resolvedDescription,
       url,
       type,
       siteName: SITE_NAME,
@@ -113,7 +124,7 @@ export function createPageMetadata({
     twitter: {
       card: 'summary_large_image',
       title: ogTitle,
-      description,
+      description: resolvedDescription,
       images: [absoluteUrl(image)],
     },
   };
@@ -125,7 +136,6 @@ export function createServicePageMetadata(
   slug: string,
   imagePath: string,
   imageAlt: string,
-  keywords?: string | string[],
 ): Metadata {
   return createPageMetadata({
     title,
@@ -134,7 +144,6 @@ export function createServicePageMetadata(
     titleAbsolute: true,
     image: imagePath,
     imageAlt,
-    keywords,
   });
 }
 

@@ -16,8 +16,6 @@ export const metadata = createPageMetadata({
   titleAbsolute: true,
   image: '/og/rkc-automotive-og.jpg',
   imageAlt: 'RKC Automotive — Auto repair in Englewood, CO',
-  keywords:
-    'auto repair Englewood CO, engine repair Denver, mechanic Englewood, transmission repair, brake repair, oil change',
 });
 
 export default function HomePage() {

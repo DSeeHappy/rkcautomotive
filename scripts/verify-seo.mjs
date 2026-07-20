@@ -266,12 +266,41 @@ function checkAreaPages() {
   return areaRoutes;
 }
 
+function checkDeadMetaKeywords() {
+  const files = [
+    'lib/og.ts',
+    'app/page.tsx',
+    'app/reviews/page.tsx',
+    'app/vehicles/[make]/[model]/[serviceSlug]/page.tsx',
+  ];
+  for (const file of files) {
+    if (!fs.existsSync(path.join(root, file))) continue;
+    const content = read(file);
+    if (file === 'lib/og.ts' && content.includes('keywords?:')) {
+      errors.push('lib/og.ts still accepts keywords (Google ignores meta keywords)');
+    }
+    if (file !== 'lib/og.ts' && /keywords:\s*['"]/.test(content)) {
+      warnings.push(`${file}: still sets meta keywords (ignored by Google)`);
+    }
+  }
+  if (!read('lib/og.ts').includes('fitDescription')) {
+    errors.push('lib/og.ts missing fitDescription() clamp for meta descriptions');
+  }
+  if (!read('lib/seo.ts').includes('createShopPersonSchemas')) {
+    errors.push('lib/seo.ts missing createShopPersonSchemas() E-E-A-T Person markup');
+  }
+  if (/changeFrequency|priority:/.test(read('lib/seo.ts').match(/buildSitemapEntries[\s\S]*?\n\}/)?.[0] || '')) {
+    warnings.push('buildSitemapEntries still emits priority/changefreq (Google ignores both)');
+  }
+}
+
 console.log('RKC Automotive SEO Verification\n');
 
 extractSitemapRoutes();
 checkMetadata();
 checkJsonLd();
 checkRobotsAndSitemap();
+checkDeadMetaKeywords();
 const areaRoutes = checkAreaPages();
 
 const coreCount = 14;

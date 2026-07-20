@@ -644,7 +644,6 @@ export type ModelDeepDiveContent = {
   finalCtaTitle: string;
   finalCtaDescription: string;
   metaDescription: string;
-  metaKeywords: string;
 };
 
 function vehicleLabel(type: VehicleType, lang: Lang = 'en'): string {
@@ -1178,9 +1177,8 @@ function buildDeepDive(
     finalCtaDescription: t.finalCtaDescription(ctx.brandName, ctx.model),
     metaDescription:
       lang === 'es'
-        ? `${template.serviceName} de ${ctx.brandName} ${ctx.model} en Englewood, CO. ${template.focus}. Presupuestos por escrito, mano de obra ${LABOR_RATE}. Llame al ${BUSINESS.phone}.`
-        : `${ctx.brandName} ${ctx.model} ${serviceLower} in Englewood, CO. ${template.focus}. Written estimates, ${LABOR_RATE} labor. Call ${BUSINESS.phone}.`,
-    metaKeywords: `${ctx.model} ${template.serviceName} Englewood CO, ${ctx.brandName} ${ctx.model} repair Denver, ${ctx.model} mechanic Colorado`,
+        ? `${template.serviceName} de ${ctx.brandName} ${ctx.model} (${ctx.yearRange}) en Englewood, CO. ${template.focus}. Presupuestos por escrito, mano de obra ${LABOR_RATE}. Llame al ${BUSINESS.phone}.`
+        : `${ctx.brandName} ${ctx.model} (${ctx.yearRange}) ${serviceLower} in Englewood, CO. ${template.focus}. Written estimates, ${LABOR_RATE} labor. Call ${BUSINESS.phone}.`,
   };
 }
 

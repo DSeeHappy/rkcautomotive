@@ -6,11 +6,10 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Auto Electrical System Repair in Englewood, CO | RKC Automotive",
-  "Expert auto electrical repair in Englewood, CO. Battery, alternator, starter, wiring, and electrical diagnostics. Call (720) 749-3965 for reliable electrical service.",
+  "Auto electrical repair in Englewood, CO — alternator, starter, wiring, and parasitic-draw diagnosis by ASE techs. Call (720) 749-3965.",
   "electrical-system-englewood-co",
   PHOTOS.teamInspect,
   "Electrical System at RKC Automotive Englewood CO",
-  "auto electrical repair Englewood CO, alternator replacement Denver, starter repair, wiring diagnostics",
 );
 
 const SERVICE_PATH = "/services/electrical-system-englewood-co";

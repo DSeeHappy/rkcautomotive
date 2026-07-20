@@ -49,7 +49,6 @@ export async function generateMetadata({ params }: PageProps) {
     titleAbsolute: true,
     image,
     imageAlt,
-    keywords: content.metaKeywords,
   });
 }
 

@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps) {
 
   return createPageMetadata({
     title: `${vehicle.brandName} ${vehicle.model} Repair in Englewood, CO`,
-    description: `RKC Automotive services ${vehicle.brandName} ${vehicle.model} in Englewood, CO — ${vehicle.commonServices.length} model-specific repair guides, factory maintenance, and ASE-certified diagnostics.`,
+    description: `RKC Automotive services ${vehicle.brandName} ${vehicle.model} (${vehicle.yearRange}) in Englewood, CO — ${vehicle.commonServices.length} model-specific repair guides, factory maintenance, and ASE-certified diagnostics at $120/hr.`,
     path,
     image,
     imageAlt: `${vehicle.brandName} ${vehicle.model} service at RKC Automotive Englewood CO`,
