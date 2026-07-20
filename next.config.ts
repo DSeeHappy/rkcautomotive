@@ -6,9 +6,9 @@ const CONTENT_SECURITY_POLICY =
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
-  // NOTE: Apex → www redirect is intentionally disabled until www DNS/SSL is fixed
-  // (https://www.rkcautomotive.com currently returns 525). Re-enable in redirects()
-  // or vercel.json once www resolves correctly, then set BUSINESS.website to www.
+  // Preferred domain is apex (https://rkcautomotive.com). www currently returns
+  // Cloudflare 525 — once www SSL works, add a permanent www → apex redirect here
+  // (or in vercel.json). Do not flip BUSINESS.website / SITE_URL to www.
   async headers() {
     return [
       {

@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { BUSINESS } from './constants';
 
-/** Canonical metadata uses apex (live host). Switch to www once DNS/SSL 525 is fixed (see next.config.ts). */
+/**
+ * Preferred host for canonicals, sitemaps, and OG URLs: apex HTTPS.
+ * When www SSL is fixed, redirect www → apex — do not flip SITE_URL to www.
+ * @see next.config.ts
+ */
 export const SITE_URL = BUSINESS.website;
 export const SITE_NAME = BUSINESS.name;
 export const OG_LOCALE = 'en_US';
@@ -30,7 +34,11 @@ export type PageMetadataOptions = {
 
 function normalizePath(path: string): string {
   if (!path || path === '/') return '/';
-  return path.startsWith('/') ? path : `/${path}`;
+  const withSlash = path.startsWith('/') ? path : `/${path}`;
+  // Match Vercel/Next non-trailing-slash URLs (trailing slash 308s to this form).
+  return withSlash.length > 1 && withSlash.endsWith('/')
+    ? withSlash.replace(/\/+$/, '')
+    : withSlash;
 }
 
 export function absoluteUrl(path: string): string {

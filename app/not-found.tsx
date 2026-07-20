@@ -1,17 +1,20 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
 import { BUSINESS, FOOTER_LINKS } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
-import { createPageMetadata } from '@/lib/og';
 
-export const metadata = createPageMetadata({
+/**
+ * No self-canonical / og:url here — not-found is served for many missing URLs.
+ * Inventing https://…/404 would send Google a false consolidation target.
+ * @see https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+ */
+export const metadata: Metadata = {
   title: 'Page Not Found | RKC Automotive Englewood, CO',
   description:
     'This page could not be found. Visit RKC Automotive for ASE-certified auto repair in Englewood, CO. Call (720) 749-3965 or browse our services.',
-  path: '/404',
-  titleAbsolute: true,
   robots: { index: false, follow: true },
-});
+};
 
 export default function NotFound() {
   return (
