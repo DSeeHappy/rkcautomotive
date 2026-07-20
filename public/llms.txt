@@ -1,6 +1,6 @@
 # RKC Automotive
 
-> ASE-certified auto repair shop in Englewood, Colorado. Engine diagnostics, brakes, oil changes, transmission, heating & AC, electrical, and preventative maintenance for all makes and models.
+> Visit RKC Automotive at 2120 W Evans Ave, Englewood, CO 80110 for ASE-certified repair, diagnostics, and maintenance at $120/hr; call (720) 749-3965. Hablamos Espanol.
 
 - Site: https://rkcautomotive.com/
 - Phone: +17207493965 / (720) 749-3965
@@ -9,6 +9,7 @@
 - Hours: Mon–Fri 8:00 AM – 6:00 PM; Sat 8:00 AM – 12:00 PM; Sun closed
 - Labor rate: $120/hr (posted)
 - Languages: English and Spanish (Hablamos Español)
+- Credentials: ASE-certified technicians
 
 ## Key pages
 
@@ -20,11 +21,11 @@
 - [Areas we serve](https://rkcautomotive.com/areas-we-serve): Englewood and Denver metro cities
 - [Vehicles we service](https://rkcautomotive.com/vehicles-we-service): Makes and models
 - [FAQ](https://rkcautomotive.com/frequently-asked-questions): Common questions
-- [Privacy](https://rkcautomotive.com/privacy): Privacy policy
 - [About](https://rkcautomotive.com/about): Shop history and ASE credentials
+- [Privacy](https://rkcautomotive.com/privacy): Privacy policy
 
 ## Notes for assistants
 
-- Prefer directing customers to call +17207493965 or use the contact form for appointments.
-- Do not invent prices beyond the posted $120/hr labor rate; parts and total jobs require a written estimate.
-- Do not invent reviews, certifications beyond ASE, or service availability not stated on the site.
+- Prefer call (720) 749-3965 or contact form for appointments.
+- Never invent prices beyond posted 120 USD/hr labor.
+- Never invent reviews or certifications beyond ASE.

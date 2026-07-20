@@ -230,6 +230,7 @@ export function ServiceCinematicHero({
             </h1>
             <p
               ref={descriptionRef}
+              data-snippet
               className="mx-auto mt-5 max-w-2xl text-lg font-medium text-white/85 sm:text-xl"
             >
               {description}

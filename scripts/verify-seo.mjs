@@ -180,15 +180,31 @@ function checkJsonLd() {
 }
 
 function checkRobotsAndSitemap() {
-  if (!fs.existsSync(path.join(root, 'app/robots.ts'))) {
-    errors.push('Missing app/robots.ts');
+  const robotsRoute = path.join(root, 'app/robots.txt/route.ts');
+  const robotsLib = path.join(root, 'lib/robotsTxt.ts');
+  if (!fs.existsSync(robotsRoute) || !fs.existsSync(robotsLib)) {
+    errors.push('Missing app/robots.txt/route.ts + lib/robotsTxt.ts (plain-text robots for Clean-param)');
   } else {
-    const robots = read('app/robots.ts');
-    if (!robots.includes('sitemap')) errors.push('app/robots.ts missing sitemap reference');
-    if (!robots.includes('SITE_URL')) errors.push('app/robots.ts must reference SITE_URL');
-    if (!robots.includes('/sitemap-index')) {
-      errors.push('app/robots.ts must advertise the sharded sitemap index');
+    const robots = read('lib/robotsTxt.ts');
+    if (!robots.includes('Sitemap:')) errors.push('lib/robotsTxt.ts missing Sitemap lines');
+    if (!robots.includes('sitemap-index')) {
+      errors.push('lib/robotsTxt.ts must advertise the sharded sitemap index');
     }
+    if (!robots.includes('OAI-SearchBot')) {
+      errors.push('lib/robotsTxt.ts must allow OAI-SearchBot (ChatGPT search citations)');
+    }
+    if (!robots.includes('Clean-param:')) {
+      errors.push('lib/robotsTxt.ts must include Yandex Clean-param');
+    }
+    if (!robots.includes('GPTBot') || !robots.includes('Disallow')) {
+      errors.push('lib/robotsTxt.ts must block training crawlers (GPTBot etc.)');
+    }
+    if (/\bnoarchive\b|\bnocache\b/i.test(robots)) {
+      errors.push('robots must not emit noarchive/nocache (Bing Copilot citation killers)');
+    }
+  }
+  if (fs.existsSync(path.join(root, 'app/robots.ts'))) {
+    warnings.push('app/robots.ts exists — prefer app/robots.txt/route.ts only (MetadataRoute cannot emit Clean-param)');
   }
 
   if (fs.existsSync(path.join(root, 'public/sitemap.xml'))) {
@@ -200,7 +216,7 @@ function checkRobotsAndSitemap() {
     errors.push('Sitemap index must not publish synthetic lastmod dates');
   }
   if (fs.existsSync(path.join(root, 'public/robots.txt'))) {
-    warnings.push('public/robots.txt exists — may conflict with app/robots.ts');
+    warnings.push('public/robots.txt exists — may conflict with app/robots.txt/route.ts');
   }
 
   if (!fs.existsSync(path.join(root, 'app/not-found.tsx'))) {

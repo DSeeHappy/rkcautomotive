@@ -19,6 +19,7 @@ import {
 import { SERVICE_AREAS_DATA } from '@/lib/serviceAreas';
 import BrandSection from './BrandSection';
 import FAQAccordion from './FAQAccordion';
+import GeoCiteFacts from './GeoCiteFacts';
 import Hero from './Hero';
 import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 import ReviewCards from './ReviewCards';
@@ -47,6 +48,8 @@ export default function HomeContent() {
           ))}
         </div>
       </section>
+
+      <GeoCiteFacts />
 
       {/* Animated stats — horizontal cinematic strip, not gray cards */}
       <section className="relative z-0 border-b border-[color:var(--line)] bg-white">

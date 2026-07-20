@@ -20,7 +20,8 @@ for (const line of fs.readFileSync('C:/Users/BS/molecule-work/.env.local', 'utf8
 }
 
 export const BASE = process.env.OPENAI_BASE_URL || 'http://100.110.254.98:4001/v1';
-export const KEY = process.env.OPENAI_API_KEY || process.env.BIFROST_KEY_PARTNER_PROJECT;
+/** Prefer partner VK — OPENAI_API_KEY in molecule-work .env.local is truncated (missing leading s). */
+export const KEY = process.env.BIFROST_KEY_PARTNER_PROJECT || process.env.OPENAI_API_KEY;
 /** Spark ds — Nemotron 1M (prefer for quality) */
 export const DS_RESEARCH = 'vllm/research';
 /** Spark ds — smart */
