@@ -64,7 +64,7 @@ export const AREA_BODIES: Record<string, { en: AreaBodyCopy; es: AreaBodyCopy }>
         "Hablamos Español — equipo de servicio bilingüe"
       ],
       "localParagraphs": [
-        null,
+        "Los conductores de Wash Park, Platt Park y University Hills suelen llegar en menos de 15 minutos por S Broadway o Hampden — más rápido que enfrentar el tráfico hacia un concesionario al norte.",
         "Los conductores de Capitol Hill, Five Points y RiNo acuden a RKC cuando desean una segunda opinión sobre los códigos de la luz del motor, sin el sobreprecio de la agencia."
       ]
     }
@@ -94,7 +94,7 @@ export const AREA_BODIES: Record<string, { en: AreaBodyCopy; es: AreaBodyCopy }>
         "Precios transparentes — sin cargos sorpresa"
       ],
       "localParagraphs": [
-        null,
+        "Los residentes de Historic Main Street y Grant Ranch se dirigen al norte por Santa Fe o Broadway — nuestro taller en W Evans Ave está a un trayecto directo desde la mayoría de los barrios de Littleton.",
         "Las familias de Ken Caryl y Columbine Hills confían en RKC para el mantenimiento de múltiples vehículos porque explicamos cada línea de la estimación antes de que comience el trabajo."
       ]
     }
@@ -274,7 +274,7 @@ export const AREA_BODIES: Record<string, { en: AreaBodyCopy; es: AreaBodyCopy }>
         "Programas de mantenimiento preventivo"
       ],
       "localParagraphs": [
-        null,
+        "Los residentes de Cherry Hills Country Club y Gallup Gardens aprecian nuestro enfoque sin presión — servicio profesional tanto para vehículos premium como de uso diario.",
         "Estamos a minutos de la Avenida Quincy y de la frontera de Greenwood Village, por la Hampden o la University — convenientes para el mantenimiento preventivo entre temporadas."
       ]
     }
@@ -365,7 +365,7 @@ export const AREA_BODIES: Record<string, { en: AreaBodyCopy; es: AreaBodyCopy }>
       ],
       "localParagraphs": [
         "Los conductores del corredor de Cherry Creek y de la Avenida Colorado están a 10 minutos de nuestro taller, un lugar popular para inspecciones de frenos y diagnósticos del aire acondicionado.",
-        null
+        "Los residentes de Village East y Creekside toman Leetsdale hacia el oeste hasta Broadway hacia el sur para reparaciones completas sin cruzar el centro."
       ]
     }
   },
@@ -425,7 +425,7 @@ export const AREA_BODIES: Record<string, { en: AreaBodyCopy; es: AreaBodyCopy }>
       ],
       "localParagraphs": [
         "Los conductores de Red Rocks y el cañón de Bear Creek nos visitan antes de sus viajes de montaña para inspecciones de frenos, suspensión y revisión previa al viaje.",
-        null
+        "Los residentes de Mount Vernon Country Club y del centro de Morrison toman la Hwy 285 hacia el este hasta Wadsworth — planifique tiempo extra en noches de conciertos, pero el servicio de rutina es rápido."
       ]
     }
   },
@@ -544,7 +544,7 @@ export const AREA_BODIES: Record<string, { en: AreaBodyCopy; es: AreaBodyCopy }>
         "Piezas y mano de obra de calidad"
       ],
       "localParagraphs": [
-        null,
+        "Las familias de Stonegate y The Pinery se dirigen al norte por Parker Rd o la I-25 hasta nuestro taller en Englewood para diagnósticos de transmisión y motor.",
         "Los residentes de Stroh Ranch y Meridian Village programan el mantenimiento preventivo antes de que se intensifiquen los desplazamientos al inicio del año escolar."
       ]
     }
@@ -574,8 +574,8 @@ export const AREA_BODIES: Record<string, { en: AreaBodyCopy; es: AreaBodyCopy }>
         "Todas las marcas y modelos"
       ],
       "localParagraphs": [
-        null,
-        null
+        "Los conductores del centro de Golden y Coal Creek toman la 6th o Colfax hacia el este hasta Wadsworth — RKC es una parada confiable antes de conducir por cañadas y montaña.",
+        "Los viajeros de North Golden y Golden Gate Canyon visitan para trabajo de frenos y batería antes de que el clima invernal afecte las rutas de Lookout Mountain."
       ]
     }
   },

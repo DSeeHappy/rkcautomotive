@@ -1,6 +1,6 @@
 import type { Lang } from '@/lib/language';
 
-/** Service page body copy — ES via Bifrost Spark vllm/smart (smart-spark). */
+/** Service page body — ES via Bifrost Nemotron (vllm/research/research-spark + vllm/smart/smart-spark). */
 export const BRAKE_REPAIR_BODY = {
   en: {
   "breadcrumb": "Brake Repair",
@@ -235,66 +235,66 @@ export const BRAKE_REPAIR_BODY = {
   "breadcrumb": "Reparación de frenos",
   "hero": {
     "imageAlt": "Servicio de reparación de frenos en RKC Automotive Englewood CO",
-    "eyebrow": "Sistemas de frenos · Englewood, CO",
-    "title": "Reparación y servicio de frenos experto en Englewood, CO",
-    "description": "¿Ruido al frenar, vibración o pedal blando? Inspeccionamos pastillas, discos, calibradores y hardware ABS con una estimación por escrito antes de que se toque cualquier herramienta — aperturas el mismo día cuando las piezas están disponibles en nuestra tienda de Evans Ave.",
+    "eyebrow": "Sistemas de freno · Englewood, CO",
+    "title": "Reparación y servicio experto de frenos en Englewood, CO",
+    "description": "¿Ruido de molienda, vibración o un pedal blando? Inspeccionamos pastillas, discos, pinzas y el hardware ABS con un presupuesto escrito antes de que se apriete cualquier llave — aperturas el mismo día cuando las piezas están disponibles en nuestro taller de Evans Ave.",
     "primaryCta": "Programar servicio de frenos",
-    "callPrefix": "Llama"
+    "callPrefix": "Llamada"
   },
   "reality": {
-    "quote": "Los discos deformados no se arreglan con un cambio de pastillas de tienda de repuestos.",
-    "body": "Los descensos por las montañas de Colorado en la I-70 y el tráfico de arranca y para en Santa Fe Drive calientan los discos más allá de su límite térmico. Las pastillas por sí solas no pueden corregir la vibración del pedal ni la activación del ABS a baja velocidad: la superficie de fricción necesita medición, no suposiciones. Los conductores de Englewood que esperan hasta que haya desgaste metal contra metal terminan pagando también por las pinzas y los cubos. Medimos el grosor de los discos, verificamos los sensores de desgaste de las pastillas y probamos la humedad del fluido antes de cotizar lo que realmente necesitan tus frenos."
+    "quote": "Los rotores deformados no se arreglan solos con un cambio de pastillas de la tienda de repuestos.",
+    "body": "Los descensos de montaña en Colorado en la I-70 y el tráfico de arranque y parada en Santa Fe Drive calientan los rotores más allá de su temple. Las pastillas por sí solas no pueden curar la pulsación del pedal ni la activación del ABS a baja velocidad — la superficie de fricción necesita medición, no conjeturas. Los conductores de Englewood que esperan el rozamiento metal contra metal pagan también por las pinzas y los bujes. Medimos el grosor del rotor, verificamos los sensores de desgaste de las pastillas y probamos la humedad del fluido antes de cotizar lo que realmente necesitan tus frenos."
   },
   "symptoms": {
     "eyebrow": "Señales de advertencia",
     "title": "Cuando tus frenos te están diciendo algo",
-    "intro": "Los problemas de frenos rara vez se anuncian primero con una luz en el tablero. La sensación del pedal, el ruido y la desviación del volante cambian gradualmente, hasta que una parada de emergencia en Broadway expone cuánto poder de frenado has perdido.",
+    "intro": "Los problemas de frenos rara vez se anuncian primero con una luz en el tablero. La sensación del pedal, el ruido y la desviación del volante cambian gradualmente, hasta que una parada de emergencia en Broadway revela cuánto poder de frenado has perdido.",
     "cards": [
       {
         "title": "Pulsación del pedal y discos deformados",
-        "body": "La pulsación a través del volante o del pedal de freno durante una frenada suave indica que la superficie de fricción del disco presenta zonas altas, lo cual suele deberse al sobrecalentamiento en descensos prolongados hacia Idaho Springs o a un par de apriete desigual de las tuercas de las ruedas tras un cambio de neumáticos. El rectificado solo es viable cuando el espesor permanece por encima de la especificación mínima; muchos discos modernos son demasiado delgados para ser mecanizados y requieren reemplazo. Medimos la excentricidad y el espesor con un indicador de carátula, no con un juicio visual."
+        "body": "La vibración a través del volante o el pedal de freno durante una frenada suave indica que la superficie de fricción del disco presenta puntos altos, a menudo causados por sobrecalentamiento en largas bajadas hacia Idaho Springs o por un par de apriete desigual de las tuercas de las ruedas después de un cambio de neumáticos. El rectificado solo es viable cuando el espesor permanece por encima del mínimo especificado; muchos discos modernos son demasiado delgados para ser mecanizados y requieren reemplazo. Medimos la excentricidad y el espesor con un indicador de carátula, no con un juicio visual."
       },
       {
-        "title": "Desgaste por frotamiento y metal contra metal",
-        "body": "Las pestañas de advertencia están diseñadas para alertar antes de que el acero toque al acero. Una vez que escuches un sonido de frotamiento, la placa de respaldo de la pastilla está mecanizando el rotor y generando calor que vidria el compuesto de la pastilla y sobrecalienta los pistones de la pinza. Continuar conduciendo daña los rotores más allá de su recuperación y puede trabar una pinza, convirtiendo un cambio de pastillas en pastillas, rotores, herrajes y una reconstrucción de la pinza. Si escuchas frotamiento, programa el servicio esta semana, no el próximo mes.",
-        "warning": "El desgaste por fricción entre piezas metálicas destruye rápidamente los discos y las pinzas de freno."
+        "title": "Desgaste por molienda y metal contra metal",
+        "body": "Las pestañas de chirrido están diseñadas para advertir antes de que el acero toque al acero. Una vez que escuches un sonido de molienda, la placa de respaldo del pastillo está mecanizando el rotor y generando calor que vidria el compuesto del pastillo y sobrecalienta los pistones de la pinza. Continuar conduciendo daña los rotores más allá de su recuperación y puede trabar una pinza, convirtiendo un trabajo de pastillos en pastillos, rotores, accesorios y una reconstrucción de la pinza. Si escuchas un sonido de molienda, programa servicio esta semana, no el próximo mes.",
+        "warning": "El desgaste metal contra metal destruye rápidamente los discos y las pinzas de freno."
       },
       {
-        "title": "Pedal blando y contaminación del líquido de frenos",
-        "body": "Un pedal que se hunde hacia el piso — especialmente después de estar estacionado toda la noche — se debe a la absorción de humedad por el líquido de frenos, el paso interno de sellos en la bomba maestra o aire en el circuito hidráulico después de un servicio en las pinzas. El líquido de frenos es higroscópico; los ciclos de humedad y calor en Colorado hacen que el líquido DOT 3/4 supere su vida útil. Medimos el contenido de cobre y el punto de ebullición, luego realizamos el lavado o reparamos el componente que falló, no simplemente rellenamos el depósito y te enviamos a casa."
+        "title": "Contaminación del pedal suave y del fluido",
+        "body": "Un pedal que se hunde hacia el piso, especialmente después de haber estado estacionado toda la noche, puede deberse a la absorción de humedad por parte del fluido, al paso interno de fluido a través de los sellos del cilindro maestro, o a la presencia de aire en el circuito hidráulico después de un servicio en las pinzas. El fluido de frenos es higroscópico; la humedad y los ciclos de calor en Colorado aceleran el envejecimiento del fluido DOT 3/4 más allá de su vida útil. Analizamos el contenido de cobre y el punto de ebullición, luego realizamos el lavado o reparamos el componente defectuoso, no simplemente rellenamos el depósito y te enviamos a casa."
       }
     ]
   },
   "technical": {
     "eyebrow": "Ciencia de frenos",
-    "title": "Especificaciones de los rotores, fluido DOT, compuestos de pastillas y ABS",
-    "intro": "El frenado en las montañas de Colorado y el calor por frenadas frecuentes y paradas castigan las superficies de fricción y el fluido de frenos. Medimos el grosor de los rotores hasta el mínimo marcado, analizamos el contenido de cobre del fluido, igualamos el compuesto de las pastillas a su estilo de conducción y escaneamos los datos de velocidad de las ruedas del ABS, no simplemente cambiamos lo que sugiera el mostrador de repuestos.",
+    "title": "Especificaciones del rotor, fluido DOT, compuestos de pastillas y ABS",
+    "intro": "El frenado en montaña y las paradas frecuentes en el Colorado desgastan las superficies de fricción y el fluido de frenos. Medimos el grosor del rotor hasta el mínimo marcado, analizamos el contenido de cobre del fluido, seleccionamos la composición de las pastillas según tu estilo de conducción y escaneamos los datos de velocidad de las ruedas del sistema ABS, no simplemente cambiamos cualquier pieza que sugiera el mostrador de repuestos.",
     "cards": [
       {
-        "title": "Grosor mínimo del rotor y juego axial",
-        "body": "Cada rotor lleva estampado en la parte central (hat) su espesor mínimo — usualmente de 22 a 25 mm en los delanteros ventilados. Por debajo de la especificación, los rotores no pueden disipar el calor de forma segura en descensos prolongados por la I-70 y podrían agrietarse. Medimos el espesor con micrómetro y la desviación (runout) con indicador de carátula antes de recomendar rectificado vs. reemplazo. Muchos rotores modernos delgados son de un solo uso; los trabajos de pastillas incluyen rotores nuevos cuando el mecanizado no es seguro."
+        "title": "Grosor mínimo del rotor y juego",
+        "body": "Cada disco lleva un espesor mínimo estampado en la parte central — a menudo de 22–25 mm en los delanteros ventilados. Por debajo de la especificación, los discos no pueden disipar el calor de forma segura en las largas bajadas de la I-70 y pueden agrietarse. Medimos el espesor con micrómetro y la oscilación con indicador de carátula antes de recomendar rectificado o reemplazo. Muchos discos modernos delgados son de un solo uso; los trabajos de pastillas incluyen discos nuevos cuando el mecanizado no es seguro."
       },
       {
-        "title": "Líquido de frenos DOT 3, DOT 4 y DOT 5.1",
-        "body": "El DOT 3 y el DOT 4 son a base de glicol e higroscópicos: la humedad reduce el punto de ebullición y corroe los componentes internos del modulador ABS. El DOT 5.1 es compatible con los DOT 3/4, pero ofrece puntos de ebullición en seco y húmedo más altos. Nunca mezcles el DOT 5 de silicona con fluidos a base de glicol. Analizamos el contenido de cobre en ppm y el punto de ebullición, luego realizamos un lavado con el fluido especificado en la tapa y el manual del vehículo, no con fluido genérico de baja calidad."
+        "title": "Fluido de frenos DOT 3, DOT 4 y DOT 5.1",
+        "body": "El DOT 3 y el DOT 4 son a base de glicol e higroscópicos: la humedad reduce el punto de ebullición y corroe los componentes internos del modulador ABS. El DOT 5.1 es compatible con el DOT 3/4, pero tiene puntos de ebullición en seco y húmedo más altos. Nunca mezcle el DOT 5 de silicona con fluidos a base de glicol. Analizamos las ppm de cobre y el punto de ebullición, luego realizamos un enjuague con el fluido que especifican la tapa del depósito y el manual — no usamos fluido genérico a granel de las estaciones de servicio rápido."
       },
       {
-        "title": "Pastillas cerámicas, semimetálicas y de bajo contenido metálico",
-        "body": "Las pastillas cerámicas funcionan en silencio y generan poco polvo, ideales para conductores diarios. Las semimetálicas manejan mejor el calor para remolcar y subir pendientes montañosas. Las orgánicas de bajo contenido metálico son las originales (OEM) en muchos vehículos importados. Un compuesto incorrecto provoca chirridos, pérdida de frenado o desgaste acelerado de los discos. Ajustamos el material de la pastilla al tipo de disco, al diseño de la pinza y a si remolcas por las estribaciones."
+        "title": "Pastillas cerámicas, semi-metálicas y de bajo contenido metálico",
+        "body": "Las pastillas cerámicas funcionan en silencio y generan poco polvo, ideales para conductores diarios. Las semimetálicas manejan el calor para remolcar y pendientes de montaña. La orgánica de bajo contenido metálico es la original de fábrica en muchos importados. Un compuesto incorrecto causa chirrido, desvanecimiento o desgaste acelerado de los discos. Coincidimos el material de la pastilla con el tipo de disco, el diseño de la pinza y si remolcas por las estribaciones."
       },
       {
-        "title": "Módulo ABS y sensores de velocidad de rueda",
-        "body": "Los moduladores del ABS generan pulsos en las pinzas individuales durante las frenadas de emergencia. Los sensores de velocidad de las ruedas leen los anillos dentados en cada cubo: los desechos metálicos de las pastillas molidas, los anillos dentados agrietados o las puntas de los sensores corroídos activan las luces del ABS y una activación falsa a baja velocidad. Escaneamos las señales de velocidad de las ruedas y limpiamos los anillos dentados después del trabajo con las pastillas; es una omisión común después de moler las pastillas en las tiendas de descuento."
+        "title": "ABS módulo y sensores de velocidad de rueda",
+        "body": "Los moduladores ABS pulsan los calibres individuales durante las frenadas de pánico. Los sensores de velocidad de rueda leen los anillos de tono en cada cubo — los residuos metálicos de las pastillas al moler, los anillos de tono agrietados o las puntas de sensor corroídas activan las luces ABS y una activación falsa a baja velocidad. Medimos las señales de velocidad de rueda y limpiamos los anillos de tono después del trabajo de las pastillas — un descuido común después del molido en talleres de descuento."
       }
     ],
-    "tableTitle": "Clasificaciones de líquido de frenos DOT de un vistazo",
-    "tableIntro": "El punto de ebullición disminuye a medida que el fluido absorbe humedad: la humedad y los ciclos de calor en Colorado aceleran el envejecimiento.",
+    "tableTitle": "Clasificaciones de fluido de frenos DOT de un vistazo",
+    "tableIntro": "El punto de ebullición disminuye a medida que el fluido absorbe humedad — la humedad de Colorado y los ciclos de calor aceleran el envejecimiento.",
     "table": {
       "caption": "Comparación de especificaciones de fluido de frenos DOT",
       "columns": [
         "Especificación",
-        "BP seco",
-        "BP húmedo",
+        "Seco BP",
+        "Húmedo BP",
         "Notas"
       ],
       "rows": [
@@ -303,7 +303,7 @@ export const BRAKE_REPAIR_BODY = {
           "values": [
             "401°F (205°C)",
             "284°F (140°C)",
-            "Común en vehículos más antiguos; reemplazar cada 2-3 años"
+            "Común en vehículos más antiguos; enjuague cada 2–3 años"
           ]
         },
         {
@@ -319,7 +319,7 @@ export const BRAKE_REPAIR_BODY = {
           "values": [
             "500°F (260°C)",
             "356°F (180°C)",
-            "Basado en glicol de alta temperatura; NO silicona DOT 5"
+            "A base de glicol alta temperatura; NO silicona DOT 5"
           ]
         },
         {
@@ -328,136 +328,134 @@ export const BRAKE_REPAIR_BODY = {
             "500°F (260°C)",
             "No absorbe agua",
             "NO compatible con sistemas ABS/glicol"
-          ],
-          "highlight": "3"
+          ]
         }
       ]
     }
   },
   "process": {
     "eyebrow": "Nuestro proceso",
-    "title": "Desde la inspección hasta la parada verificada",
-    "intro": "Cada trabajo de frenos en RKC comienza con mediciones, no con suposiciones. Documentamos el grosor de las pastillas, el estado del rotor, la función del deslizador de la pinza y la salud del fluido antes de que apruebes las piezas.",
+    "title": "De la inspección a la parada verificada",
+    "intro": "Cada trabajo de frenos en RKC comienza con una medición, no con suposiciones. Documentamos el grosor de las pastillas, el estado del rotor, el funcionamiento del deslizamiento de la pinza y la salud del fluido antes de que apruebes las piezas.",
     "bgImageAlt": "Servicio de reparación de frenos en RKC Automotive Englewood CO",
     "steps": [
       {
         "step": "01",
-        "title": "Prueba en carretera y sensación del pedal",
-        "body": "Reproducimos pulsación, tirón y ruido bajo frenado controlado cuando es seguro. El recorrido del pedal y la activación del ABS a velocidades de estacionamiento nos indican si el problema es hidráulico, mecánico o relacionado con sensores antes de desmontar las ruedas."
+        "title": "Prueba de carretera y sensación del pedal",
+        "body": "Reproducimos la pulsación, el tirón y el ruido bajo frenado controlado cuando es seguro. El recorrido del pedal y la activación del ABS a velocidades de estacionamiento nos indican si el problema es hidráulico, mecánico o relacionado con sensores antes de que se quiten las ruedas."
       },
       {
         "step": "02",
         "title": "Medir rotores y pastillas",
-        "body": "Lecturas del micrómetro sobre el grosor del rotor y la oscilación, además de la profundidad del forro de las pastillas en los bordes interno y externo. El desgaste irregular indica guías de la pinza atascadas, mangueras colapsadas o problemas en el modulador ABS, no simplemente \"es hora de cambiar las pastillas\"."
+        "body": "Lecturas de micrómetro sobre el espesor y el desviado del rotor, además de la profundidad del revestimiento de las pastillas en los bordes interno y externo. El desgaste desigual indica deslizadores de pinza atascados, mangueras colapsadas o problemas del modulador ABS — no solo \"time for pads.\""
       },
       {
         "step": "03",
-        "title": "Revisión de pinzas y accesorios",
-        "body": "Se limpian y lubrican los pasadores deslizantes, los clips de apoyo y las orejetas de los soportes con grasa de frenos de alta temperatura. Los pasadores oxidados provocan desgaste solo en las pastillas externas y sobrecalentamiento. Cotizamos kits de accesorios cuando los clips están corroídos: un seguro económico contra ruidos recurrentes."
+        "title": "Revisión de pinzas y hardware",
+        "body": "Los pasadores de deslizamiento, los clips de apoyo y las orejas del soporte se limpian y lubrican con grasa para frenos de alta temperatura. Los pasadores atascados causan desgaste solo en la pastilla externa y sobrecalentamiento. Cotizamos kits de hardware cuando los clips están corroídos — un seguro económico contra el ruido de retorno."
       },
       {
         "step": "04",
-        "title": "Escaneo de fluidos y ABS",
-        "body": "El fluido contaminado con humedad se elimina cuando las tiras de prueba o las lecturas de ppm de cobre lo requieren. Los sensores de velocidad de las ruedas del ABS y los anillos dentados se inspeccionan en busca de residuos metálicos después del trabajo con pastillas; es una omisión común post-molienda que activa falsamente el ABS."
+        "title": "Fluido & ABS escaneo",
+        "body": "El fluido contaminado con humedad se enjuaga cuando las tiras de prueba o las lecturas de cobre en ppm lo exigen. Los sensores de velocidad de rueda ABS y los anillos de tono se inspeccionan en busca de restos metálicos después del trabajo de las pastillas — una omisión común después del rectificado que provoca una activación falsa de ABS."
       },
       {
         "step": "05",
-        "title": "Acondicionamiento y verificación final",
-        "body": "Las pastillas y discos nuevos requieren un procedimiento de acondicionamiento controlado: frenadas moderadas desde 40 mph sin llegar a detenerse por completo hasta que se forme la capa de transferencia. Realizamos pruebas de firmeza del pedal y funcionamiento del ABS antes de que abandones nuestras instalaciones en Englewood."
+        "title": "Rodado y verificación final",
+        "body": "Las pastillas y los discos nuevos necesitan un procedimiento de asentado controlado — paradas moderadas desde 40 mph sin detenerse completamente hasta que se forme la capa de transferencia. Probamos la firmeza del pedal y la función ABS antes de que salga de nuestro lote de Englewood."
       }
     ]
   },
   "checklist": {
-    "eyebrow": "Lo que reparamos",
+    "eyebrow": "Lo que servimos",
     "title": "Cobertura completa del sistema de frenos",
-    "intro": "Las pastillas y los discos son solo parte del sistema. Reparamos las capas hidráulicas y electrónicas que realmente convierten la fuerza del pedal en potencia de frenado.",
+    "intro": "Las pastillas y los discos son solo parte del sistema. Mantenemos las capas hidráulicas y electrónicas que realmente traducen la fuerza del pedal en potencia de frenado.",
     "groups": [
       {
         "category": "Componentes de fricción",
         "items": [
-          "Juegos de pastillas cerámicas y semimetálicas adaptados a tu estilo de conducción",
-          "Reemplazo de discos o mecanizado en el vehículo cuando el grosor lo permite",
-          "Reconstrucción de la pinza, servicio de guías y ajuste de las zapatas del freno de estacionamiento"
+          "Juegos de pastillas cerámicas y semimetálicas adaptadas a tu estilo de conducción",
+          "Reemplazo del rotor o mecanizado en el vehículo cuando el grosor lo permite",
+          "Reconstrucción de pinza, servicio de guías y ajuste de zapata de freno de estacionamiento"
         ]
       },
       {
         "category": "Hidráulica y ABS",
         "items": [
-          "Lavado del líquido de frenos con fluido con especificación DOT y prueba de humedad",
-          "Inspección del cilindro maestro, línea de frenos y manguera flexible",
-          "Limpieza del sensor de velocidad de rueda ABS y anillo dentado después de eventos con escombros"
+          "Lavado de líquido de frenos con fluido DOT-spec y prueba de humedad",
+          "Inspección del cilindro maestro, la línea de freno y la manguera flexible",
+          "Limpieza del sensor de velocidad de rueda ABS y del anillo de tono después de eventos de detritos"
         ]
       },
       {
         "category": "Inspección y seguridad",
         "items": [
-          "Inspección visual gratuita de frenos con cualquier visita de servicio",
-          "Presupuesto por escrito antes de ordenar las piezas",
-          "Prueba de carretera post-reparación y orientación para el asentamiento de nuevos materiales de fricción"
+          "Inspección visual gratuita de los frenos con cualquier visita de servicio",
+          "Estimado por escrito antes de ordenar las piezas",
+          "Guía de prueba de carretera y asentado después de la reparación para material de fricción nuevo"
         ]
       },
       {
-        "category": "Conductores de Englewood y la zona metropolitana",
+        "category": "conductores de Englewood y del área metropolitana",
         "items": [
-          "Evaluación de frenos para pendientes de montaña para conductores de la interestatal 70",
-          "Paquetes de frenos para cargas pesadas en flotas y camiones de trabajo",
+          "Evaluación de frenos de grado montañoso para usuarios de la I-70",
+          "Paquetes de frenos de carga pesada para flotas y camiones de trabajo",
           "Servicio el mismo día cuando las piezas están en stock — llame antes de las 2 PM"
         ]
       }
     ]
   },
-  "locale": "es-MX",
   "labor": {
-    "title": "Transparencia en la mano de obra en cada trabajo de frenos",
-    "description": "El trabajo de frenos nunca debería ser una factura misteriosa. Facturamos a nuestra tarifa publicada de $120/hr con los tiempos de mano de obra de AllData como referencia. Los alcances de pastillas y discos por eje, reconstrucción de la pinza y purga de fluido están documentados en su estimación por escrito antes de que ordenemos las piezas."
+    "title": "Transparencia laboral en cada trabajo de frenos",
+    "description": "El trabajo de frenos nunca debería ser una factura misteriosa. Cobramos a nuestra tarifa publicada de $120/hr con los tiempos de mano de obra de AllData como referencia. El alcance de pastillas y discos por eje, reconstrucción de pinzas y enjuague de fluido se documenta en su estimación escrita antes de ordenar las piezas."
   },
   "faq": {
     "title": "Preguntas sobre reparación de frenos",
-    "intro": "Respuestas directas sobre la vida útil de las pastillas, el rectificado de los discos, las luces de ABS y el impacto que tiene la conducción en Colorado sobre tu sistema de frenado."
+    "intro": "Respuestas directas sobre la vida útil de las pastillas, el rectificado de los discos, las luces ABS y lo que el manejo en Colorado hace a tu sistema de frenado."
   },
   "areaLabel": "reparación de frenos",
   "finalCta": {
     "title": "¿Listo para una inspección de frenos?",
-    "description": "Inspección visual gratuita en 2120 W Evans Ave. Medimos, explicamos y cotizamos — pastillas, discos, fluido o calibradores — a $120/hr de mano de obra más refacciones antes de iniciar cualquier trabajo.",
-    "secondaryCta": "Agendar en línea"
+    "description": "Inspección visual gratuita en 2120 W Evans Ave. Medimos, explicamos y cotizamos — pastillas, discos, líquido o pinzas — a $120/hr de mano de obra más piezas antes de que comience cualquier trabajo.",
+    "secondaryCta": "Programar en línea"
   },
-  "relatedSlug": "brake-repair-englewood-co",
+  "relatedSlug": "reparación-de-frenos-englewood-co",
   "faqs": [
     {
       "question": "¿Cómo sé si necesito pastillas de freno o discos nuevos?",
-      "answer": "Las pastillas deben reemplazarse cuando el grosor del material de fricción se acerca a los 3 mm o cuando los sensores de desgaste entran en contacto con el disco. Los discos requieren servicio cuando su grosor está por debajo de la especificación mínima, las superficies están rayadas por contacto metal contra metal, o la vibración del pedal indica una desviación circular. Medimos ambos con un micrómetro y un indicador de carátula, no adivinamos basándonos en los kilómetros. Muchos trabajos de pastillas en Englewood incluyen discos porque el ciclo térmico de Colorado deforma las superficies de fricción antes de que las pastillas lleguen al final de su vida útil."
+      "answer": "Las pastillas necesitan reemplazo cuando el grosor del revestimiento cae cerca de 3 mm o los sensores de desgaste contactan el rotor. Los rotores necesitan servicio cuando el grosor está por debajo de la especificación mínima, las superficies están rayadas por contacto metal contra metal, o la pulsación del pedal indica desviación. Medimos ambos con un micrómetro y un indicador de dial — no adivinamos a partir del kilometraje. Muchos trabajos de pastillas en Englewood incluyen rotores porque el ciclo de calor de Colorado deforma las superficies de fricción antes de que las pastillas alcancen su vida útil."
     },
     {
-      "question": "¿Por qué mi pedal de freno vibra cuando reduzco la velocidad?",
-      "answer": "La vibración del pedal bajo frenado ligero es un síntoma clásico de desalineación de los discos por sobrecalentamiento, común en descensos largos o por un apriete desigual de las tuercas de las ruedas. El rectificado solo es viable si el espesor del disco supera el mínimo marcado. Muchos discos modernos son demasiado delgados para mecanizarse y requieren reemplazo. Medimos la desalineación y el espesor antes de cotizar entre rectificar o cambiar los discos."
+      "question": "¿Por qué mi pedal de freno late cuando reduzco la velocidad?",
+      "answer": "La pulsación del pedal bajo frenado ligero es un clásico rotor runout deformado — a menudo por sobrecalentamiento en largas bajadas o torque desigual de los pernos de rueda. El Resurfacing solo funciona cuando el espesor del rotor permanece por encima del mínimo estampado. Muchos rotores modernos son demasiado delgados para mecanizar y requieren reemplazo. Medimos el runout y el espesor antes de cotizar el Resurfacing frente a rotores nuevos."
     },
     {
-      "question": "¿Con qué frecuencia se debe purgar el líquido de frenos en Colorado?",
-      "answer": "La mayoría de los fabricantes recomiendan cambiar el líquido de frenos cada 2 a 3 años, ya que el líquido DOT absorbe humedad, lo que reduce el punto de ebullición y promueve la corrosión interna. Los cambios de temperatura en Colorado aceleran la entrada de humedad. Analizamos el contenido de cobre y el estado del líquido; si pasa la prueba, no insistimos en un lavado. Si falla, cotizamos un lavado con la especificación DOT correcta para su vehículo."
+      "question": "¿Con qué frecuencia debe purgarse el líquido de frenos en Colorado?",
+      "answer": "La mayoría de los fabricantes recomiendan el cambio del líquido de frenos cada 2–3 años porque el líquido DOT absorbe humedad, lo que reduce el punto de ebullición y promueve la corrosión interna. Las variaciones de temperatura en Colorado aceleran la entrada de humedad. Probamos el contenido de cobre y la condición del líquido — si pasa, no insistimos en un lavado. Si falla, cotizamos un lavado con la especificación DOT correcta para su vehículo."
     },
     {
-      "question": "¿Puedo conducir con un ruido de frenado por molienda?",
-      "answer": "El chirrido indica que la placa de respaldo de la pastilla está contactando el rotor, lo que genera calor y puede glasear las pastillas, dañar los pistones de la pinza y rayar los rotores hasta hacerlos inservibles. Programa un servicio de inmediato. El frenado metal contra metal también aumenta la distancia de frenado, lo cual es peligroso en el tráfico del área metropolitana de Denver. Inspeccionamos la pinza en busca de daños cuando el chirrido ha continuado por más de unos días."
+      "question": "¿Puedo conducir con un ruido de freno de molienda?",
+      "answer": "El molido significa que la placa de soporte de la pastilla está contactando el rotor — generando calor que puede vidriar las pastillas, dañar los pistones de la caliper y marcar los rotores más allá de lo reparable. Programa el servicio inmediatamente. El frenado Metal-on-metal también aumenta la distancia de detención, lo cual es peligroso en el tráfico metropolitano de Denver. Inspeccionamos daños en la caliper cuando el molido ha continuado más de unos pocos días."
     },
     {
-      "question": "¿Realizan servicio en sistemas de frenos ABS y electrónicos?",
-      "answer": "Sí. Diagnosticamos sensores de velocidad de rueda ABS, residuos en el anillo de tono y problemas hidráulicos que activan las luces del ABS o una activación falsa a baja velocidad. Después del servicio de pastillas o discos, realizamos una prueba de carretera de la función ABS y verificamos la sensación del pedal. Los frenos de estacionamiento electrónicos en vehículos más nuevos requieren calibración con herramienta de escaneo después del servicio de las pastillas traseras; incluimos eso en el alcance cuando sea aplicable."
+      "question": "¿Atendemos sistemas ABS y de frenos electrónicos?",
+      "answer": "Sí. Diagnosticamos los sensores de velocidad de rueda ABS, los residuos del anillo de tono y los problemas hidráulicos que activan las luces ABS o una activación falsa a baja velocidad. Después del servicio de pastillas o discos, realizamos una prueba de ruta de la función ABS y verificamos la sensación del pedal. Los frenos de estacionamiento electrónico en vehículos más nuevos requieren calibrado con herramienta de escaneo después del servicio de pastillas traseras — lo incluimos en el alcance cuando corresponde."
     },
     {
       "question": "¿Cuánto cuesta la reparación de frenos en RKC Automotive?",
-      "answer": "El reemplazo de pastillas de freno por eje comienza en aproximadamente $189 más las piezas; el servicio de pastillas y discos desde unos $349 por eje — la mano de obra a nuestra tarifa publicada de $120/hora. Las reconstrucciones de pinzas, los cambios de fluido y las reparaciones relacionadas con ABS se cotizan por separado después de la inspección. Recibirá una estimación por escrito antes de que se pidan las piezas, sin cargos ocultos de suministros del taller en el total."
+      "answer": "El reemplazo de pastillas de freno por eje comienza alrededor de $189 más piezas; el servicio de pastillas y rotores parte de aproximadamente $349 por eje — mano de obra a nuestra tarifa publicada de $120/hora. Las reconstrucciones de pinzas, los enjuagues de fluido y las reparaciones relacionadas con el ABS se cotizan por separado después de la inspección. Recibe un presupuesto escrito antes de que se ordenen las piezas, sin cargos ocultos de suministros de taller en el total."
     },
     {
-      "question": "¿Cuál es el grosor mínimo del disco y por qué es importante?",
-      "answer": "Cada rotor tiene un grosor mínimo estampado en la cara o el borde — a menudo de 22–25 mm en los rotores ventilados delanteros. Por debajo del mínimo, el rotor no puede disipar el calor de manera segura y puede agrietarse bajo frenado en montaña en la I-70. Medimos cada rotor con micrómetro antes de recomendar rectificado vs. reemplazo. Muchos rotores modernos delgados son de un solo uso — se mecanizan una vez en su vida, si es que se mecanizan."
+      "question": "¿Cuál es el espesor mínimo del rotor y por qué es importante?",
+      "answer": "Cada rotor tiene un espesor mínimo estampado en el sombrero o el borde — a menudo 22–25 mm en los rotores delanteros ventilados. Por debajo del mínimo, el rotor no puede disipar el calor de forma segura y puede agrietarse bajo el frenado de montaña en la I-70. Medimos cada rotor con micrómetro antes de recomendar rectificar o reemplazar. Muchos rotores modernos delgados son de un solo uso — se mecanizan una sola vez en su vida, si es que lo hacen."
     },
     {
-      "question": "Pastillas de freno cerámicas vs semimetálicas: ¿cuál debo elegir?",
-      "answer": "Las pastillas cerâmicas funcionan en silencio y producen menos polvo, ideales para conductores diarios y vehículos de lujo. Las pastillas semimetálicas manejan mejor el calor para remolcar, pendientes de montaña y camiones de trabajo. Las pastillas orgánicas de bajo contenido metálico son las originales (OEM) en muchos vehículos importados. Ajustamos el compuesto a tu estilo de conducción, no te vendemos la pastilla más cara. Un compuesto incorrecto causa chirridos, pérdida de frenado o desgaste prematuro de los discos."
+      "question": "Cerámica vs pastillas de freno semimetálicas — ¿cuál debería elegir?",
+      "answer": "Ceramic pads funcionan más silenciosamente con menos polvo — ideales para los desplazamientos diarios y vehículos de lujo. Semi-metallic pads manejan mejor el calor para remolque, pendientes de montaña y camiones de trabajo. Low-metallic organic pads son OEM en muchas importaciones. Coincidimos el compuesto con su conducción — no hacemos upsell de la pastilla más cara. Un compuesto incorrecto causa chirrido, pérdida de frenado o desgaste prematuro del rotor."
     },
     {
-      "question": "¿Qué implica la reparación de un módulo ABS o un sensor de velocidad de rueda?",
-      "answer": "Los sensores de velocidad de rueda del ABS leen los anillos dentados en cada cubo. Los desechos metálicos del rectificado de frenos, los anillos dentados dañados o las puntas de los sensores corroídos activan las luces del ABS y la activación falsa a baja velocidad. Inspeccionamos los sensores después del trabajo con pastillas, limpiamos los anillos dentados y analizamos las señales de velocidad de rueda en una prueba en carretera. El reemplazo del módulo es poco común; la mayoría de los fallos del ABS se deben a sensores, cableado o válvulas hidráulicas."
+      "question": "¿En qué consiste la reparación de un módulo ABS o un sensor de velocidad de rueda?",
+      "answer": "Los sensores de velocidad de rueda ABS leen los anillos de tono en cada cubo. Los restos metálicos de la molienda de los frenos, los anillos de tono dañados o las puntas de los sensores corroídos activan las luces ABS y una activación falsa a baja velocidad. Inspeccionamos los sensores después del trabajo de las pastillas, limpiamos los anillos de tono y medimos las señales de velocidad de rueda en una prueba de carretera. El reemplazo del módulo es raro — la mayoría de las fallas ABS se deben a los sensores, el cableado o las válvulas hidráulicas."
     }
   ]
 },

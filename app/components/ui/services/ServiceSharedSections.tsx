@@ -364,13 +364,13 @@ export function ServiceSymptomGrid({
   );
 }
 
-export type ProcessStep = { step: string; title: string; body: string };
+export type ProcessStep = { step?: string; title: string; body: string };
 
 export type ServiceProcessTimelineProps = {
   eyebrow: string;
   title: string;
   intro: string;
-  steps: ProcessStep[];
+  steps: readonly ProcessStep[];
   bgImage?: string;
   bgImageAlt?: string;
 };
@@ -428,7 +428,7 @@ export function ServiceProcessTimeline({
   );
 }
 
-export type ChecklistGroup = { category: string; items: string[] };
+export type ChecklistGroup = { category: string; items: readonly string[] };
 
 export type ServiceChecklistGridProps = {
   eyebrow: string;
@@ -653,13 +653,13 @@ export function ServiceFinalCTA({
 
 export type ComparisonRow = {
   label: string;
-  values: string[];
-  highlight?: number;
+  values: readonly string[];
+  highlight?: number | string;
 };
 
 export type ServiceComparisonTableProps = {
-  columns: string[];
-  rows: ComparisonRow[];
+  columns: readonly string[];
+  rows: readonly ComparisonRow[];
   caption?: string;
 };
 

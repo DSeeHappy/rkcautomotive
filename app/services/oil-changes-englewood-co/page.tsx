@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Oil Change Service in Englewood, CO | RKC Automotive",
-  "Oil changes in Englewood, CO — conventional, synthetic, and high-mileage with top-off. ASE-certified shop, $120/hr labor. Call (720) 749-3965.",
+  "Oil changes in Englewood, CO — conventional, synthetic, and high-mileage with fluid top-off. ASE shop at $120/hr labor. Call (720) 749-3965.",
   "oil-changes-englewood-co",
   PHOTOS.teamCollab,
   "Oil Changes at RKC Automotive Englewood CO",

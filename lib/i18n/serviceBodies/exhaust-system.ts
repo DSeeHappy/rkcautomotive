@@ -1,6 +1,6 @@
 import type { Lang } from '@/lib/language';
 
-/** Service page body — ES via Bifrost Nemotron (vllm/smart/smart-spark + vllm/research/research-spark). */
+/** Service page body — ES via Bifrost Nemotron (vllm/research/research-spark + vllm/smart/smart-spark). */
 export const EXHAUST_SYSTEM_BODY = {
   en: {
   "breadcrumb": "Exhaust System",
@@ -231,59 +231,59 @@ export const EXHAUST_SYSTEM_BODY = {
   "hero": {
     "imageAlt": "Sistema de escape en RKC Automotive Englewood CO",
     "eyebrow": "Escape y emisiones · Englewood, CO",
-    "title": "Reparación de sistema de escape en Englewood, CO",
-    "description": "¿Ruidos de golpeteo, olor a huevo podrido o códigos P0420 de catalizador? Inspeccionamos colectores, tubos flexibles, convertidores y silenciadores; soldamos, ajustamos o reemplazamos con piezas que cumplen con las emisiones y proporcionamos estimados por escrito primero.",
+    "title": "Reparación del sistema de escape in Englewood, CO",
+    "description": "¿Ruidos de golpeteo, olor a huevo podrido o códigos P0420 de catalizador? Inspeccionamos colectores, tubos flexibles, convertidores y silenciadores; soldamos, abrochamos o reemplazamos con piezas compatibles con las emisiones y estimados por escrito primero.",
     "primaryCta": "Inspección de escape",
     "callPrefix": "Llamar"
   },
   "reality": {
-    "quote": "Un código P0420 de check-engine no siempre indica un convertidor catalítico defectuoso.",
-    "body": "Las fallas de encendido aguas arriba, los colectores de escape con fugas y los sensores de O2 lentos generan códigos de eficiencia en los convertidores que aún fluyen bien. Las estaciones de emisiones de Colorado no se preocupan por los matices: leen los monitores y los números de la tubería de escape. Comparamos las formas de onda de los sensores de O2 aguas arriba y aguas abajo, inspeccionamos en busca de fugas que introduzcan aire falso y solucionamos las causas raíz antes de cotizar convertidores que cumplen con CARB y cuestan cuatro cifras."
+    "quote": "Un código de motor de falla P0420 no siempre significa un convertidor catalítico defectuoso.",
+    "body": "Los fallos de encendido en la parte superior, las fugas en los colectores de escape y los sensores O2 lentos generan códigos de eficiencia en los convertidores que aún funcionan bien. Las estaciones de emisiones de Colorado no se preocupan por los matices: leen los monitores y los números de escape. Comparamos las formas de onda de los sensores O2 superior e inferior, inspeccionamos en busca de fugas que introduzcan aire falso y solucionamos las causas raíz antes de cotizar convertidores compatibles con CARB que cuestan cuatro cifras."
   },
   "symptoms": {
     "eyebrow": "Fallas en el sistema de escape",
     "title": "Síntomas de escape y emisiones",
-    "intro": "Los problemas de escape van desde ruidos molestos hasta pruebas de emisiones fallidas; cada uno requiere inspección bajo el vehículo, no una cotización de silenciador de catálogo.",
+    "intro": "Los problemas de escape van desde ruidos molestos hasta la falla en las pruebas de emisiones; cada uno requiere inspección bajo el vehículo, no una cotización de silenciador de catálogo.",
     "cards": [
       {
         "title": "Códigos de eficiencia catalítica",
-        "body": "Los códigos P0420/P0430 indican que el sensor de oxígeno posterior detecta muy poca actividad — lo cual puede deberse a un catalizador desgastado o a un problema con el sensor o su reporte. Las fugas de escape aguas arriba del convertidor permiten la entrada de oxígeno y simulan un fallo. Graficamos el cambio del sensor de O2, verificamos la presencia de grietas en el múltiple de escape y confirmamos que el ajuste de combustible no esté rico antes de recomendar la sustitución del convertidor."
+        "body": "Los códigos P0420/P0430 indican que el sensor de oxígeno posterior detecta muy poca actividad: catalizador desgastado, o un problema del sensor o de su reporte. Las fugas de escape aguas arriba del convertidor permiten la entrada de oxígeno y simulan una falla. Graficamos el cambio del sensor de O2, verificamos si hay grietas en el múltiple de escape y confirmamos que el ajuste de combustible no esté rico antes de recomendar el reemplazo del convertidor."
       },
       {
         "title": "Fugas, vibraciones y olores",
-        "body": "El chirrido al arrancar en frío que desaparece puede deberse a una fisura en el múltiple de escape, común en múltiples de hierro fundido y ciertos motores V8. Los fuelles de la manguera flexible se rompen en vehículos bajos y camiones con soportes de motor rotos. El monóxido de carbono no tiene olor; el olor a huevo podre indica sulfato del catalizador, lo que representa peligros diferentes. Levantamos cada vehículo, realizamos pruebas de humo en las articulaciones críticas y soldamos o reemplazamos secciones para sellar los gases de escape y evitar que entren a la cabina."
+        "body": "El sonido de golpeteo al arrancar en frío que se desvanece puede deberse a una fisura en el múltiple de escape, común en múltiples de hierro fundido y en ciertos motores V8. Los fuelles de la tubería flexible se desgarran en vehículos con suspensión rebajada y camiones con soportes de motor rotos. El monóxido de carbono no tiene olor; el olor a huevo podre indica sulfato del catalizador, lo que representa peligros diferentes. Levantamos cada vehículo, realizamos pruebas de humo en las uniones críticas y soldamos o reemplazamos secciones para sellar los gases y evitar que entren a la cabina."
       },
       {
         "title": "Cumplimiento de emisiones de Colorado",
-        "body": "Las emisiones en Englewood y el área metropolitana de Denver requieren monitores listos y el cumplimiento de los estándares de escape en los vehículos aplicables. La eliminación del convertidor catalítico hace que el vehículo no apruebe la inspección y conlleva riesgo de multas. Instalamos componentes compatibles con EPA/CARB, completamos los ciclos de conducción después de la reparación y documentamos el estado de preparación para que no tenga que volver a hacer fila dos veces."
+        "body": "Las emisiones en Englewood y el área metropolitana de Denver requieren monitores listos y aprobación de las normas de escape en los vehículos aplicables. La eliminación de los convertidores catalíticos hace que el vehículo no apruebe la inspección y conlleva el riesgo de multas. Instalamos componentes compatibles con la EPA y CARB, completamos los ciclos de conducción después de la reparación y documentamos el estado de los monitores para que no tenga que hacer cola dos veces."
       }
     ]
   },
   "technical": {
     "eyebrow": "Ciencia de las emisiones",
     "title": "Eficiencia catalítica, conmutación de O2 y cumplimiento de Colorado",
-    "intro": "P0420 no siempre indica un convertidor catalítico defectuoso: graficamos el comportamiento del sensor de O2, corregimos las fallas aguas arriba primero e instalamos componentes que cumplen con las normas de la EPA y CARB para que las pruebas de emisiones en Englewood se aprueben a la primera.",
+    "intro": "P0420 no siempre indica un convertidor catalítico defectuoso: graficamos el comportamiento del sensor de oxígeno, solucionamos primero las fallas upstream e instalamos componentes conformes con EPA/CARB para que las pruebas de emisiones en Englewood se aprueben a la primera.",
     "cards": [
       {
-        "title": "Prueba de eficiencia del catalizador",
-        "body": "Comparamos la conmutación del sensor de oxígeno aguas arriba y aguas abajo: un catalizador saludable muestra una actividad reducida aguas abajo. Las fugas de escape aguas arriba de los sensores, la mezcla rica y los fallos de encendido pueden generar el código P0420 incluso con un catalizador en buen estado. Solo cotizamos la sustitución del convertidor cuando los datos en tiempo real confirman una pérdida de eficiencia, no únicamente por el código."
+        "title": "Pruebas de eficiencia del catalizador",
+        "body": "Comparamos la conmutación de los sensores de oxígeno upstream y downstream: un catalizador saludable muestra una actividad reducida en downstream. Las fugas de escape upstream de los sensores, el ajuste de combustible rico y los fallos de encendido pueden generar el código P0420 incluso con un catalizador en buen estado. El reemplazo del convertidor se cotiza únicamente cuando los datos en vivo confirman una pérdida de eficiencia, no solo por el código."
       },
       {
-        "title": "Análisis de conmutación del sensor de oxígeno",
-        "body": "El sensor de O2 upstream debe cambiar entre mezcla rica y magra aproximadamente una vez por segundo en ralentí. El sensor downstream, en un catalizador saludable, se mantiene relativamente estable. Un cambio rápido del downstream que refleja al upstream indica una falla de eficiencia. Los sensores upstream lentos provocan fallas de mezcla rica/magra que imitan una falla del catalizador; graficamos ambos antes de cotizar convertidores de cuatro cifras."
+        "title": "Análisis de conmutación del sensor O2",
+        "body": "Upstream O2 debe cambiar de rico/pobre aproximadamente una vez por segundo en ralentí. Downstream en un cat saludable se mantiene relativamente estable. El cambio rápido de downstream refleja el upstream — territorio de falla de eficiencia. Los sensores upstream perezosos causan fallos rico/pobre que imitan la falla del cat — graficamos ambos antes de cotizar convertidores de cuatro cifras."
       },
       {
-        "title": "Grieta en el múltiple vs. ruido del silenciador",
-        "body": "El tic-tac al arranque en frío que se desvanece puede deberse a una grieta en el múltiple de escape — común en ciertos motores V8 y en línea. Las fuelles de la tubería flexible se desgarran en vehículos bajados. El ruido del protector térmico es independiente de los componentes internos del silenciador; inspeccionamos bajo el elevador antes de cotizar silenciadores, ya que soldar por puntos el protector puede solucionar el ruido con un costo mínimo."
+        "title": "Grieta del colector vs ruido del silenciador",
+        "body": "El tiqueo al arranque en frío que desaparece puede deberse a una grieta en el colector de escape fundido — común en ciertos motores V8 y en línea. El fuelle de la tubería flexible se rompe en vehículos bajados. El ruido del escudo térmico es independiente de los componentes internos del silenciador — inspeccionamos bajo el elevador antes de cotizar silenciadores cuando una soldadura de punta del escudo corrige el ruido con un costo mínimo."
       },
       {
-        "title": "Emisiones de Colorado y cumplimiento con CARB",
-        "body": "El área metropolitana de Denver exige catalizadores funcionales y monitores OBD-II listos en los vehículos aplicables. Los catalizadores manipulados o faltantes no superan la inspección y conllevan riesgo de multas. Instalamos convertidores conformes, completamos los ciclos de conducción después de la reparación y documentamos el estado de listo para que no tenga que hacer cola dos veces."
+        "title": "Emisiones de Colorado y cumplimiento de CARB",
+        "body": "El área metropolitana de Denver requiere catalizadores funcionando y monitores OBD-II listos en los vehículos aplicables. Los catalizadores manipulados o faltantes fallan la inspección y arriesgan multas. Instalamos convertidores cumplidores, completamos ciclos de manejo después de la reparación y documentamos la preparación para que no tengas que volver a hacer fila dos veces."
       }
     ],
-    "tableTitle": "Comportamiento del sensor de O2 frente a falla de escape",
+    "tableTitle": "Comportamiento del sensor O2 vs falla de escape",
     "table": {
-      "caption": "Patrones de conmutación del sensor de O2 y causas probables",
+      "caption": "Patrones de conmutación del sensor O2 y causas probables",
       "columns": [
         "Patrón",
         "Causa probable",
@@ -291,31 +291,31 @@ export const EXHAUST_SYSTEM_BODY = {
       ],
       "rows": [
         {
-          "label": "Conmutación aguas arriba, aguas abajo estable",
+          "label": "Cambio ascendente, flujo descendente estable",
           "values": [
-            "Catalizador en buen estado",
-            "Verificar si el código está presente — puede ser marginal"
+            "Catalizador saludable",
+            "Verifique si el código está presente — puede ser marginal"
           ]
         },
         {
-          "label": "Ambos conmutan rápidamente",
+          "label": "Ambos cambiando rápidamente",
           "values": [
             "Pérdida de eficiencia o fuga de escape",
             "Prueba de fuga + comparar formas de onda"
           ]
         },
         {
-          "label": "Arriba lento / atascado",
+          "label": "Ascendente lento / atascado",
           "values": [
             "Sensor o falla de combustible",
-            "Sensor de osciloscopio — no reemplazar el catalizador primero"
+            "Scope sensor — no reemplazar primero cat"
           ]
         },
         {
-          "label": "Código de ajuste rico + eficiencia",
+          "label": "Código de ajuste rico + código de eficiencia",
           "values": [
-            "Fallo de combustible que envenena el cat",
-            "Arreglar combustible antes del converter"
+            "Fallo de combustible que envenena el catalizador",
+            "Corrige el combustible antes del convertidor"
           ]
         }
       ]
@@ -329,57 +329,57 @@ export const EXHAUST_SYSTEM_BODY = {
     "steps": [
       {
         "step": "01",
-        "title": "Elevación & mapa visual",
+        "title": "Levantamiento y mapa visual",
         "body": "Colector, flex, soportes y carcasas del convertidor inspeccionados en busca de óxido, aplastamiento y evidencia de manipulación."
       },
       {
         "step": "02",
-        "title": "Fuga & datos O2",
-        "body": "Prueba de humo o presión en los colectores. Comparación de sonda O2 con herramienta de diagnóstico en crucero estable y ralentí."
+        "title": "Fuga y datos de O2",
+        "body": "Prueba de humo o presión en los colectores. Comparación de O2 con herramienta de escaneo a crucero estable y ralentí."
       },
       {
         "step": "03",
         "title": "Identificar la causa raíz primero",
-        "body": "Reparaciones de fallo de encendido, ajuste de combustible y fugas de escape antes de cotizar el convertidor cuando los datos lo respalden."
+        "body": "Reparaciones de falla de encendido, ajuste de combustible y fuga de escape antes de la cotización del convertidor cuando los datos lo respalden."
       },
       {
         "step": "04",
-        "title": "Reparación o reemplazo de sección",
-        "body": "Mufflers de calidad, tubos de ajuste directo y convertidores compatibles. Las soldaduras se lijan suavemente y los soportes están aislados de la vibración."
+        "title": "Reparación o reemplazo de la sección",
+        "body": "Mufflers de calidad, tubos de ajuste directo y convertidores compatibles. Soldaduras lijadas suaves, soportes aislados de la vibración."
       },
       {
         "step": "05",
         "title": "Verificación de emisiones",
-        "body": "Guía de preparación del Monitor y prueba de carretera para ruido. La Reexploración confirma la resolución del código cuando el convertidor era la falla."
+        "body": "Supervise la guía de preparación y la prueba de carretera para ruido. El re‑escaneo confirma la resolución del código cuando el convertidor era la falla."
       }
     ]
   },
   "checklist": {
     "eyebrow": "Componentes",
     "title": "Servicios de escape que realizamos",
-    "intro": "Desde las juntas del colector hasta el sistema cat-back completo, mantenemos su escape silencioso, sellado y legal en emisiones.",
+    "intro": "Desde manifold gaskets hasta cat-back completo, mantenemos su exhaust silencioso, sellado y conforme a las normas de emisiones.",
     "groups": [
       {
         "category": "Reparación",
         "items": [
-          "Extracción de juntas del colector y pernos",
-          "Reemplazo de Flex-pipe y tubería intermedia",
-          "Eliminación y reemplazo de silenciador y resonador (cumplidor)"
+          "Extracción de la junta del colector y los pernos",
+          "Reemplazo de flex-pipe y tubería intermedia",
+          "Eliminación y sustitución de silenciador y resonador (cumplimiento)"
         ]
       },
       {
         "category": "Emisiones",
         "items": [
-          "Reemplazo de convertidor catalítico — Cumplimiento CARB/EPA",
-          "Diagnóstico y reemplazo del sensor O2",
-          "Entrenamiento de monitoreo de ciclo de manejo post-reparación"
+          "Reemplazo del convertidor catalítico — CARB/EPA conforme",
+          "O2 sensor diagnóstico y reemplazo",
+          "Entrenamiento de ciclo de manejo de monitoreo post-reparación"
         ]
       },
       {
-        "category": "Personalizado y HD",
+        "category": "Personalizado & HD",
         "items": [
-          "Soporte de colgador de escape de camión y soporte de pila",
-          "Reemplazo de sección del cinturón de óxido con acero de calidad",
+          "Soporte de colgador de escape de camión y soporte de chimenea",
+          "Rust-belt reemplazo de sección con acero de calidad",
           "Soldadura y fabricación para secciones impares"
         ]
       },
@@ -387,7 +387,7 @@ export const EXHAUST_SYSTEM_BODY = {
         "category": "Inspección",
         "items": [
           "Evaluación de escape y emisiones antes de la compra",
-          "Triage de fallas de emisiones de Colorado",
+          "Colorado triaje de falla de emisiones",
           "Estimado por escrito antes de cortar la tubería"
         ]
       }
@@ -395,55 +395,55 @@ export const EXHAUST_SYSTEM_BODY = {
   },
   "labor": {
     "title": "Mano de obra para reparación de escape",
-    "description": "Mano de obra de escape a $120/hora con piezas compatibles detalladas. Los trabajos de convertidor incluyen verificación de O2 y asesoría de preparación — no solo instalación de pernos y borrado de códigos."
+    "description": "Mano de obra de escape a $120/hr con piezas cumplidoras detalladas. Los trabajos de Converter incluyen verificación de O2 y capacitación de preparación — no solo bolt-on y borrado de códigos."
   },
   "faq": {
     "title": "Preguntas sobre el sistema de escape",
-    "intro": "Costo del convertidor catalítico, pruebas de emisiones, grietas en el colector y legalidad de escapes aftermarket en Colorado."
+    "intro": "Costo del convertidor catalítico, pruebas de emisiones, grietas en el colector y legalidad del escape de posventa en Colorado."
   },
   "areaLabel": "reparación del sistema de escape",
   "finalCta": {
     "title": "¿Ruido de escape o código de emisiones?",
-    "description": "Inspección de escape en RKC en Evans Ave. Fuga sellada, catalizador verificado, monitores listos — $120/hr de mano de obra en cada reparación.",
+    "description": "Inspeccione el escape en RKC en Evans Ave. Fuga sellada, catalizador verificado, monitores listos — $120/hora de mano de obra en cada reparación.",
     "secondaryCta": "Programar inspección"
   },
-  "relatedSlug": "exhaust-system-englewood-co",
+  "relatedSlug": "sistema-de-escape-englewood-co",
   "faqs": [
     {
       "question": "¿Por qué recibí un código P0420 — necesito un nuevo convertidor catalítico?",
-      "answer": "P0420 indica que la eficiencia del catalizador está por debajo del umbral — pero las fugas upstream, los fallos de encendido y los sensores O2 lentos pueden generar el mismo código en un convertidor saludable. Graficamos el comportamiento del sensor O2 e inspeccionamos en busca de fugas de escape antes de cotizar el reemplazo del convertidor. Solucionar primero la causa raíz ahorra dinero cuando el cat no está realmente desgastado."
+      "answer": "P0420 indica que la eficiencia del catalizador está por debajo del umbral — pero las fugas upstream, los fallos de encendido y los sensores O2 perezosos pueden establecer el mismo código en un convertidor saludable. Graficamos el comportamiento del sensor O2 e inspeccionamos en busca de fugas de escape antes de cotizar el reemplazo del convertidor. Corregir la causa raíz primero ahorra dinero cuando el cat no está realmente desgastado."
     },
     {
-      "question": "¿Es legal retirar un convertidor catalítico en Colorado?",
-      "answer": "Las normas federales y de Colorado sobre emisiones requieren catalizadores funcionando en los vehículos aplicables. La eliminación falla la inspección de emisiones y puede resultar en multas. Instalamos convertidores de reemplazo compatibles con EPA/CARB y realizamos reparaciones completas que permiten que los monitores se activen antes de su prueba."
+      "question": "¿Es legal quitar un convertidor catalítico en Colorado?",
+      "answer": "Las normas federales y de Colorado sobre emisiones requieren catalizadores funcionando en los vehículos aplicables. La eliminación falla la inspección de emisiones y puede resultar en multas. Instalamos convertidores de reemplazo compatibles con EPA/CARB y realizamos reparaciones completas que permiten que los monitores se establezcan antes de su prueba."
     },
     {
       "question": "¿Qué causa el ruido de escape al ralentí?",
-      "answer": "Los escudos térmicos rotos, los aisladores de soporte fallados y los fuelles de tubo flexible sueltos vibran independientemente de los componentes internos del silenciador. Inspeccionamos bajo el elevador antes de cotizar silenciadores — a veces una soldadura de tack del escudo o el soporte soluciona el ruido con un costo mínimo."
+      "answer": "Los heat shields rotos, los hanger isolators fallidos y los flex-pipe bellows sueltos vibran independientemente de los muffler internals. Inspeccionamos bajo el elevador antes de cotizar los mufflers — a veces un shield tack-weld o un hanger arregla el ruido con costo mínimo."
     },
     {
-      "question": "¿Puede una fuga de escape activar la luz de check engine?",
-      "answer": "Las fugas aguas arriba de los sensores O2 permiten que el oxígeno entre en el flujo de escape, sesgando el ajuste de combustible y estableciendo códigos de mezcla pobre o de eficiencia. Las grietas en el colector son comunes en ciertos motores V8 y en línea — un tictac cuando está frío que desaparece al expandirse el metal. Realizamos pruebas de humo y de presión en las juntas críticas."
+      "question": "¿Puede una fuga en el sistema de escape encender la luz del motor?",
+      "answer": "Las fugas aguas arriba de los sensores de O2 permiten que el oxígeno entre en el flujo de escape, sesgando el ajuste de combustible y activando códigos de mezcla pobre o de eficiencia. Las grietas en el múltiple son comunes en ciertos motores V8 y en línea: suenan como un silbido cuando están fríos y desaparecen a medida que el metal se expande. Realizamos pruebas de humo y verificación de presión en las uniones críticas."
     },
     {
-      "question": "¿Cuánto cuesta reemplazar el convertidor catalítico?",
-      "answer": "Los convertidores son uno de los componentes de escape más costosos — a menudo piezas de $800–$2,500+ más mano de obra a $120/hora según el vehículo y los requisitos de cumplimiento de CARB. Confirmamos la falla con datos, primero corregimos las fallas de encendido o fugas contribuyentes, y cotizamos piezas compatibles antes de cortar la tubería."
+      "question": "¿Cuánto cuesta reemplazar el catalytic converter?",
+      "answer": "Los convertidores son entre los componentes de escape más costosos — a menudo piezas de $800–$2,500+ más mano de obra a $120/hora según el vehículo y los requisitos de cumplimiento de CARB. Confirmamos la falla con datos, arreglamos primero las fallas de encendido o fugas contribuyentes, y cotizamos piezas compatibles antes de cortar la tubería."
     },
     {
-      "question": "¿Solda el escape o usa piezas de sujeción?",
-      "answer": "Utilizamos secciones de ajuste directo, abrazaderas de calidad y soldadura donde corresponda para garantizar la durabilidad. Las bridas y las secciones flexibles se alinean para evitar grietas por esfuerzo. Todo el trabajo se presupuesta por escrito antes de que las antorchas o cortadores entren en contacto con el sistema."
+      "question": "¿Soldas el escape o usas piezas de sujeción?",
+      "answer": "Utilizamos secciones direct-fit, abrazaderas de calidad y soldadura donde corresponda para garantizar la durabilidad. Las bridas y las secciones flex se alinean para evitar grietas por esfuerzo. Todo el trabajo se presupuesta en un estimado escrito antes de que las antorchas o las herramientas de corte entren en contacto con el sistema."
     },
     {
-      "question": "¿Cómo prueba la eficiencia del convertidor catalítico?",
-      "answer": "Comparamos el cambio de los sensores O2 aguas arriba y aguas abajo — un catalizador sano muestra actividad reducida aguas abajo. También verificamos que los ajustes de combustible no estén funcionando ricos, buscamos fugas de escape aguas arriba de los sensores y confirmamos que no haya fallos de encendido que envenenen el catalizador. La sustitución del convertidor se cotiza solo cuando los datos confirman pérdida de eficiencia, no solo por el código P0420."
+      "question": "¿Cómo se prueba la eficiencia del convertidor catalítico?",
+      "answer": "Comparamos el cambio de los sensores O2 de entrada y salida — un catalizador saludable muestra actividad reducida en la salida. También verificamos que los ajustes de combustible no estén funcionando ricos, revisamos fugas de escape aguas arriba de los sensores y confirmamos que no haya fallos de encendido que envenenen el catalizador. La sustitución del convertidor se cotiza solo cuando los datos confirman pérdida de eficiencia, no solo por el código P0420."
     },
     {
-      "question": "¿Qué le dice el cambio del sensor O2 sobre la salud del sistema de escape?",
-      "answer": "El O2 upstream debe alternar entre mezcla rica y magra aproximadamente una vez por segundo en ralentí; el PCM utiliza esta señal para ajustar el combustible. El O2 downstream, con un catalizador en buen estado, se mantiene relativamente estable. Una conmutación rápida del downstream que refleje la del upstream indica problemas de eficiencia del catalizador. Los sensores upstream lentos provocan fallos de mezcla rica/magra que simulan un fallo del catalizador. Graficamos ambos sensores antes de cotizar los convertidores."
+      "question": "¿Qué le dice el cambio del sensor O2 sobre la salud del escape?",
+      "answer": "Upstream O2 debe cambiar de rico/pobre aproximadamente una vez por segundo en ralentí — el PCM usa esto para ajustar el combustible. Downstream O2 en un catalizador saludable se mantiene relativamente estable. El cambio rápido del downstream refleja al upstream — territorio de código de eficiencia. Los sensores upstream perezosos causan fallos rico/pobre que imitan la falla del catalizador. Graficamos ambos sensores antes de cotizar los catalizadores."
     },
     {
       "question": "¿Cuáles son los requisitos de emisiones de Colorado para reparaciones de escape?",
-      "answer": "Los vehículos de gasolina en el área metropolitana de Denver requieren pasar la preparación OBD-II y los estándares de escape donde aplique. Los catalizadores manipulados o faltantes no pasan la inspección. Instalamos convertidores compatibles con EPA/CARB, realizamos reparaciones completas que permiten que los monitores se activen, y orientamos los ciclos de conducción antes de su cita de emisiones — para que apruebe a la primera, no dos veces."
+      "answer": "Los vehículos de gasolina en el área metropolitana de Denver requieren pasar la preparación OBD-II y los estándares de escape donde aplique. Los catalizadores manipulados o faltantes no pasan la inspección. Instalamos convertidores compatibles con EPA/CARB, realizamos reparaciones completas que permiten que los monitores se activen, y orientamos los ciclos de conducción antes de su cita de emisiones — para que pase a la primera, no dos veces."
     }
   ]
 },

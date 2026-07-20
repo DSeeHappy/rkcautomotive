@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Preventative Maintenance in Englewood, CO | RKC Automotive",
-  "Preventative maintenance in Englewood, CO — scheduled service that prevents costly repairs. ASE shop at $120/hr. Call (720) 749-3965.",
+  "Preventative maintenance in Englewood, CO — scheduled service that prevents costly breakdowns across the Denver south metro. $120/hr. Call (720) 749-3965.",
   "preventative-maintenance-englewood-co",
   PHOTOS.brandedBay,
   "Preventative Maintenance at RKC Automotive Englewood CO",

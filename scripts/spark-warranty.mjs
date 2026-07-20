@@ -136,7 +136,7 @@ export function warrantyCopy(lang: Lang) {
     },
     faq: {
       ...WARRANTY_COPY.es.faq,
-      items: WARRANTY_COPY.es.faq.items as FAQItem[],
+      items: [...WARRANTY_COPY.es.faq.items] as FAQItem[],
     },
   };
 }

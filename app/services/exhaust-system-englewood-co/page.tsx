@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Exhaust System Repair in Englewood, CO | RKC Automotive",
-  "Exhaust system repair in Englewood, CO — mufflers, catalytic converters, pipes, and emissions work. ASE shop. Call (720) 749-3965 today.",
+  "Exhaust system repair in Englewood, CO — mufflers, catalytic converters, pipes, and emissions service. ASE shop at $120/hr. Call (720) 749-3965.",
   "exhaust-system-englewood-co",
   PHOTOS.undercarriage,
   "Exhaust System at RKC Automotive Englewood CO",

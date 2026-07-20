@@ -1,5 +1,5 @@
 export type ModelReliabilityBullet = {
-  label: 'Common issues' | 'Colorado angle' | 'Service notes';
+  label: string;
   text: string;
 };
 

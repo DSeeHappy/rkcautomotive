@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Auto AC & Heating Repair in Englewood, CO | RKC Automotive",
-  "Auto AC and heating repair in Englewood, CO — R134a and R1234yf recharge, leak testing, and compressors. ASE shop. Call (720) 749-3965.",
+  "Auto AC and heating repair in Englewood, CO — R134a and R1234yf recharge, leak testing, compressors. ASE shop at $120/hr. Call (720) 749-3965.",
   "heating-ac-englewood-co",
   PHOTOS.interior,
   "Heating & AC at RKC Automotive Englewood CO",

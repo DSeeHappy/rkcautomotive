@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   'Camshaft & Hydraulic Lifter Repair in Englewood, CO | RKC Automotive',
-  'Camshaft and hydraulic lifter repair in Englewood, CO — AFM tick, HEMI valvetrain, and misfires. ASE diagnostics. Call (720) 749-3965.',
+  'Camshaft and lifter repair in Englewood, CO — AFM tick, HEMI valvetrain, and misfires. ASE diagnostics at $120/hr. Call (720) 749-3965.',
   'camshaft-lifter-repair-englewood-co',
   PHOTOS.classicEngine,
   'Camshaft and hydraulic lifter repair at RKC Automotive Englewood CO',

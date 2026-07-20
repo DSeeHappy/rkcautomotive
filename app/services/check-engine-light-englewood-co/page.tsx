@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Check Engine Light Diagnosis in Englewood, CO | RKC Automotive",
-  "Check engine light diagnosis in Englewood, CO. ASE techs find the root cause — not every sensor on the diagram. Call (720) 749-3965 today.",
+  "Check engine light diagnosis in Englewood, CO. ASE techs find the root cause — not every sensor on the diagram. $120/hr labor. Call (720) 749-3965.",
   "check-engine-light-englewood-co",
   PHOTOS.engineRebuild,
   "Check Engine Light at RKC Automotive Englewood CO",

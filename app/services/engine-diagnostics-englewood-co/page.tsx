@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Engine Diagnostics in Englewood, CO | RKC Automotive",
-  "ASE engine diagnostics in Englewood, CO for every make and model. Confirm the real fault before parts. Posted $120/hr labor. Call (720) 749-3965.",
+  "ASE engine diagnostics in Englewood, CO for all makes and models. Find the real fault before parts. $120/hr labor. Call (720) 749-3965.",
   "engine-diagnostics-englewood-co",
   PHOTOS.engineBay,
   "Engine Diagnostics at RKC Automotive Englewood CO",

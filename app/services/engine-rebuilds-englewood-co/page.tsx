@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   'Complete Engine Rebuilds & Overhauls in Englewood, CO | RKC Automotive',
-  'Engine rebuilds in Englewood, CO — long-block, short-block, and machining with written estimates. ASE shop, $120/hr. Call (720) 749-3965.',
+  'Engine rebuilds in Englewood, CO — long-block, short-block, machining, and blueprinting. ASE shop with written estimates. Call (720) 749-3965.',
   'engine-rebuilds-englewood-co',
   PHOTOS.engineRebuild,
   'Engine rebuild and overhaul service at RKC Automotive Englewood CO',

@@ -18,31 +18,31 @@ const useSpark = process.argv.includes('--spark');
 /** Curated rewrites — 145–160 chars, fact-dense, unique (no keyword lists). */
 const CURATED = {
   'brake-repair-englewood-co':
-    'ASE-certified brake repair in Englewood, CO — pads, rotors, calipers, and fluid. Written estimates at $120/hr. Call (720) 749-3965.',
+    'ASE-certified brake repair in Englewood, CO — pads, rotors, calipers, and fluid. Written estimates at our posted $120/hr labor rate. Call (720) 749-3965.',
   'engine-diagnostics-englewood-co':
-    'ASE engine diagnostics in Englewood, CO for all makes. Find the real fault before parts. $120/hr labor. Call (720) 749-3965.',
+    'ASE engine diagnostics in Englewood, CO for all makes and models. Find the real fault before parts. $120/hr labor. Call (720) 749-3965.',
   'transmission-services-englewood-co':
-    'Transmission repair in Englewood, CO — automatic, manual, CVT, and fluid service. ASE techs, $120/hr. Call (720) 749-3965.',
+    'Transmission repair in Englewood, CO — automatic, manual, CVT, and fluid service. ASE techs at $120/hr labor. Call (720) 749-3965.',
   'oil-changes-englewood-co':
-    'Oil changes in Englewood, CO — conventional, synthetic, and high-mileage. ASE shop, $120/hr labor. Call (720) 749-3965.',
+    'Oil changes in Englewood, CO — conventional, synthetic, and high-mileage with fluid top-off. ASE shop at $120/hr labor. Call (720) 749-3965.',
   'check-engine-light-englewood-co':
-    'Check engine light diagnosis in Englewood, CO. ASE techs find the root cause — not every sensor. Call (720) 749-3965.',
+    'Check engine light diagnosis in Englewood, CO. ASE techs find the root cause — not every sensor on the diagram. $120/hr labor. Call (720) 749-3965.',
   'engine-rebuilds-englewood-co':
-    'Engine rebuilds in Englewood, CO — long-block, short-block, machining. ASE shop, written estimates. Call (720) 749-3965.',
+    'Engine rebuilds in Englewood, CO — long-block, short-block, machining, and blueprinting. ASE shop with written estimates. Call (720) 749-3965.',
   'camshaft-lifter-repair-englewood-co':
-    'Camshaft and lifter repair in Englewood, CO — AFM tick, HEMI valvetrain, misfires. ASE diagnostics. Call (720) 749-3965.',
+    'Camshaft and lifter repair in Englewood, CO — AFM tick, HEMI valvetrain, and misfires. ASE diagnostics at $120/hr. Call (720) 749-3965.',
   'battery-testing-englewood-co':
-    'Free battery testing and replacement in Englewood, CO with charging-system checks. ASE shop. Call (720) 749-3965.',
+    'Free battery testing and replacement in Englewood, CO with full charging-system checks. ASE-certified shop serving Denver south metro. Call (720) 749-3965.',
   'electrical-system-englewood-co':
-    'Auto electrical repair in Englewood, CO — alternator, starter, wiring, parasitic draw. ASE techs. Call (720) 749-3965.',
+    'Auto electrical repair in Englewood, CO — alternator, starter, wiring, and parasitic draw diagnosis. ASE-certified techs. Call (720) 749-3965.',
   'exhaust-system-englewood-co':
-    'Exhaust repair in Englewood, CO — mufflers, cats, pipes, and emissions. ASE shop, $120/hr. Call (720) 749-3965.',
+    'Exhaust system repair in Englewood, CO — mufflers, catalytic converters, pipes, and emissions service. ASE shop at $120/hr. Call (720) 749-3965.',
   'heating-ac-englewood-co':
-    'Auto AC and heating repair in Englewood, CO — R134a/R1234yf, leaks, compressors. ASE shop. Call (720) 749-3965.',
+    'Auto AC and heating repair in Englewood, CO — R134a and R1234yf recharge, leak testing, compressors. ASE shop at $120/hr. Call (720) 749-3965.',
   'preventative-maintenance-englewood-co':
-    'Preventative maintenance in Englewood, CO — scheduled service that prevents big repairs. $120/hr. Call (720) 749-3965.',
+    'Preventative maintenance in Englewood, CO — scheduled service that prevents costly breakdowns across the Denver south metro. $120/hr. Call (720) 749-3965.',
   'suspension-steering-englewood-co':
-    'Suspension and steering repair in Englewood, CO — shocks, struts, ball joints, alignment. Call (720) 749-3965.',
+    'ASE suspension and steering repair in Englewood, CO — shocks, struts, ball joints, and alignment. Denver south metro. $120/hr. Call (720) 749-3965.',
 };
 
 function loadEnv() {
@@ -137,6 +137,11 @@ for (const [slug, curated] of Object.entries(CURATED)) {
   const current = extractCurrentDescription(content);
   if (!current) {
     console.warn('no desc', slug);
+    continue;
+  }
+
+  if (current.length >= 145 && current.length <= 165) {
+    console.log(`${slug}: skip len=${current.length} (already in ideal range)`);
     continue;
   }
 

@@ -47,19 +47,19 @@ export type SharedServiceBody = {
     eyebrow: string;
     title: string;
     intro: string;
-    cards: { title: string; body: string; warning?: string }[];
+    cards: readonly { title: string; body: string; warning?: string }[];
   };
   technical?: {
     eyebrow: string;
     title: string;
     intro: string;
-    cards: { title: string; body: string }[];
+    cards: readonly { title: string; body: string }[];
     tableTitle?: string;
     tableIntro?: string;
     table?: {
       caption: string;
-      columns: string[];
-      rows: { label: string; values: string[]; highlight?: number }[];
+      columns: readonly string[];
+      rows: readonly { label: string; values: readonly string[]; highlight?: number | string }[];
     };
   };
   process: {
@@ -67,20 +67,20 @@ export type SharedServiceBody = {
     title: string;
     intro: string;
     bgImageAlt: string;
-    steps: { step?: string; title: string; body: string }[];
+    steps: readonly { step?: string; title: string; body: string }[];
   };
   checklist: {
     eyebrow: string;
     title: string;
     intro: string;
-    groups: { category: string; items: string[] }[];
+    groups: readonly { category: string; items: readonly string[] }[];
   };
   labor: { title: string; description: string };
   faq: { title: string; intro: string };
   areaLabel: string;
   finalCta: { title: string; description: string; secondaryCta: string };
   relatedSlug: string;
-  faqs: { question: string; answer: string }[];
+  faqs: readonly { question: string; answer: string }[];
 };
 
 type Props = {
