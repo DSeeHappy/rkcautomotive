@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
-const DELAY_MS = 5000;
+const DELAY_MS = 45000;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
