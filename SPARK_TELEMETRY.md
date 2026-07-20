@@ -63,13 +63,38 @@ Headers: `Authorization: Bearer …` + `x-bf-vk: …` (same key).
 
 ## Scripts using the client
 
-| Script | Role |
-|--------|------|
-| `scripts/spark-telemetry-live.mjs` | 1 smart + 1 research smoke test |
-| `scripts/spark-routed.mjs` | Phase 2 / hub batch router |
-| `scripts/spark-live-meter-proof.mjs` | Dashboard meter burst |
+| Script | Role | Status |
+|--------|------|--------|
+| `scripts/lib/sparkClient.mjs` | Fail-closed core client + telemetry ledger | ✅ |
+| `scripts/spark-telemetry-live.mjs` | 1 smart + 1 research smoke test | ✅ |
+| `scripts/spark-routed.mjs` | Phase 2 / hub batch router | ✅ |
+| `scripts/spark-live-meter-proof.mjs` | Dashboard meter burst | ✅ |
+| `scripts/spark-meter-proof.mjs` | Short smart/research meter ping burst | ✅ |
+| `scripts/spark-user-visible-proof.mjs` | User-visible proof strings (smart + research) | ✅ |
+| `scripts/spark-user-visible-research-fix.mjs` | Research proof in content or reasoning | ✅ |
+| `scripts/spark-wire-heartbeats.mjs` | Ownership wiring heartbeats | ✅ |
+| `scripts/spark-client.mjs` | Legacy ES translator (delegates to sparkClient) | ✅ |
+| `scripts/spark-phase2-*.mjs` | Phase 2 bursts via `spark-routed.mjs` | ✅ |
 
-Other spark scripts should migrate to `sparkClient.mjs` — see `scripts/spark-client.mjs` (legacy translator) for remaining callers.
+### Migration checklist (HTTP-200-only → sparkClient)
+
+- [x] `spark-routed.mjs`
+- [x] `spark-live-meter-proof.mjs`
+- [x] `spark-telemetry-live.mjs`
+- [x] `spark-meter-proof.mjs`
+- [x] `spark-user-visible-proof.mjs`
+- [x] `spark-user-visible-research-fix.mjs`
+- [x] `spark-wire-heartbeats.mjs`
+- [x] `spark-client.mjs`
+- [x] `spark-phase2-burst.mjs` (via spark-routed)
+- [x] `spark-phase2-expand.mjs` (via spark-routed)
+- [x] `spark-phase2-multi-make.mjs` (via spark-routed)
+- [x] `spark-phase2-ownership-audit.mjs` (via spark-routed)
+- [x] `spark-phase2-ownership-structured.mjs` (via spark-routed)
+- [x] `spark-phase2-hf-struct.mjs` (via spark-routed)
+- [x] `spark-phase2-own-struct-cont.mjs` (via spark-routed)
+
+Older one-off scripts (`spark-brand-hubs.mjs`, `spark-tiny.mjs`, etc.) still use raw curl — migrate when next touched.
 
 ## Migration note
 
