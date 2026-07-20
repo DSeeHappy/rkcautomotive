@@ -17,12 +17,18 @@ import {
 import RelatedServices from '@/app/components/ui/RelatedServices';
 import ModelSiblingServices, { type ModelServiceLink } from '@/app/components/ui/vehicles/ModelSiblingServices';
 import { BUSINESS } from '@/lib/constants';
-import type { ModelDeepDiveContent } from '@/lib/modelDeepDiveContent';
+import { useLanguage } from '@/lib/language';
+import { localizedModelServiceTitle, vehicleCopy } from '@/lib/i18n/vehicleCopy';
+import { getModelDeepDiveContent, type ModelDeepDiveContent } from '@/lib/modelDeepDiveContent';
+import { parseServiceIdFromSlug } from '@/lib/modelCommonServices';
 
 const SYMPTOM_ICONS = [AlertTriangle, Clock, Droplets, Gauge];
 
 type ModelServiceDeepDiveContentProps = {
   content: ModelDeepDiveContent;
+  make: string;
+  modelSlug: string;
+  serviceSlug: string;
   image: string;
   imageAlt: string;
   breadcrumbs: BreadcrumbItem[];
@@ -32,16 +38,44 @@ type ModelServiceDeepDiveContentProps = {
 };
 
 export default function ModelServiceDeepDiveContent({
-  content,
+  content: ssrContent,
+  make,
+  modelSlug,
+  serviceSlug,
   image,
   imageAlt,
-  breadcrumbs,
+  breadcrumbs: ssrBreadcrumbs,
   siblingServices,
   modelName,
   brandName,
 }: ModelServiceDeepDiveContentProps) {
+  const { lang } = useLanguage();
+  const copy = vehicleCopy(lang);
+  const content = getModelDeepDiveContent(make, modelSlug, serviceSlug, lang) ?? ssrContent;
+
+  const breadcrumbs: BreadcrumbItem[] =
+    lang === 'es'
+      ? [
+          { label: copy.hub.home, href: '/' },
+          { label: copy.hub.vehiclesCrumb, href: '/vehicles-we-service' },
+          ssrBreadcrumbs[2] ?? { label: `${brandName} ${modelName}` },
+          { label: content.serviceName },
+        ]
+      : ssrBreadcrumbs;
+
+  const localizedSiblings = siblingServices.map((service) => {
+    const slug = service.href.split('/').filter(Boolean).pop() ?? '';
+    const serviceId = parseServiceIdFromSlug(slug);
+    return {
+      href: service.href,
+      title: serviceId
+        ? localizedModelServiceTitle(modelName, serviceId, lang)
+        : service.title,
+    };
+  });
+
   return (
-    <div>
+    <div lang={lang}>
       <ServiceCinematicHero
         breadcrumbs={breadcrumbs}
         image={image}
@@ -50,7 +84,7 @@ export default function ModelServiceDeepDiveContent({
         title={content.heroTitle}
         description={content.heroDescription}
         primaryCta={{ href: '/contact', label: content.primaryCtaLabel }}
-        secondaryCta={{ href: BUSINESS.phoneHref, label: `Call ${BUSINESS.phone}` }}
+        secondaryCta={{ href: BUSINESS.phoneHref, label: copy.deepDive.call(BUSINESS.phone) }}
       />
 
       <ServiceRealityBand
@@ -96,7 +130,7 @@ export default function ModelServiceDeepDiveContent({
         intro={content.processIntro}
         steps={content.processSteps}
         bgImage={image}
-        bgImageAlt={`${content.heroEyebrow} service at RKC Automotive Englewood CO`}
+        bgImageAlt={copy.deepDive.processBgAlt(content.heroEyebrow)}
       />
 
       <ServiceChecklistGrid
@@ -109,12 +143,17 @@ export default function ModelServiceDeepDiveContent({
 
       <ServiceLaborBand title={content.laborTitle} description={content.laborDescription} />
 
-      <ServiceFAQSection title={content.faqTitle} intro={content.faqIntro} items={content.faqItems} />
+      <ServiceFAQSection
+        title={content.faqTitle}
+        intro={content.faqIntro}
+        items={content.faqItems}
+        serviceKey={content.relatedServiceSlug}
+      />
 
       <ModelSiblingServices
         modelName={modelName}
         brandName={brandName}
-        services={siblingServices}
+        services={localizedSiblings}
       />
       <RelatedServices slug={content.relatedServiceSlug} title={content.relatedTitle} />
       <ServiceAreaServed serviceLabel={content.serviceAreaLabel} />
@@ -122,7 +161,7 @@ export default function ModelServiceDeepDiveContent({
         title={content.finalCtaTitle}
         description={content.finalCtaDescription}
         primaryCta={{ href: BUSINESS.phoneHref, label: BUSINESS.phone }}
-        secondaryCta={{ href: '/contact', label: 'Schedule service' }}
+        secondaryCta={{ href: '/contact', label: copy.deepDive.scheduleService }}
         image={image}
         imageAlt={imageAlt}
       />

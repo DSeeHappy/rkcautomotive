@@ -32,6 +32,7 @@ import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { useLanguage } from '@/lib/language';
+import { serviceCopy } from '@/lib/i18n/serviceCopy';
 import { siteCopy } from '@/lib/siteCopy';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
@@ -148,6 +149,9 @@ export function ServiceCinematicHero({
   secondaryCta,
   breadcrumbs,
 }: ServiceHeroProps) {
+  const { lang } = useLanguage();
+  const crumbCopy = serviceCopy(lang).breadcrumbs;
+  const heroCopy = serviceCopy(lang).hero;
   const reduce = usePrefersReducedMotion();
   const trustPills = useLocalizedTrustPills();
   const { sectionRef, bgRef, contentRef } = useGsapParallax<HTMLElement>(reduce, {
@@ -158,6 +162,21 @@ export function ServiceCinematicHero({
   const titleRef = useGsapReveal<HTMLHeadingElement>({ delay: 0.06, y: 28, duration: 0.75 });
   const descriptionRef = useGsapReveal<HTMLParagraphElement>({ delay: 0.14, y: 16, duration: 0.6 });
   const ctasRef = useGsapReveal<HTMLDivElement>({ delay: 0.22, y: 12, duration: 0.5 });
+
+  const localizedBreadcrumbs = breadcrumbs?.map((crumb, index) => {
+    if (index === 0 && (crumb.label === 'Home' || crumb.label === 'Inicio')) {
+      return { ...crumb, label: crumbCopy.home };
+    }
+    if (index === 1 && (crumb.label === 'Services' || crumb.label === 'Servicios')) {
+      return { ...crumb, label: crumbCopy.services };
+    }
+    return crumb;
+  });
+
+  const localizedSecondary =
+    secondaryCta.label.startsWith('Call ') || secondaryCta.label.startsWith('Llamar ')
+      ? { ...secondaryCta, label: heroCopy.call(BUSINESS.phone) }
+      : secondaryCta;
 
   return (
     <section ref={sectionRef} className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]">
@@ -190,8 +209,8 @@ export function ServiceCinematicHero({
       >
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center pb-12 text-center sm:pb-16">
           <div className="mx-auto w-full max-w-3xl">
-            {breadcrumbs && breadcrumbs.length > 0 && (
-              <Breadcrumbs items={breadcrumbs} className="mb-6 flex justify-center" variant="light" />
+            {localizedBreadcrumbs && localizedBreadcrumbs.length > 0 && (
+              <Breadcrumbs items={localizedBreadcrumbs} className="mb-6 flex justify-center" variant="light" />
             )}
             <p
               ref={eyebrowRef}
@@ -216,9 +235,9 @@ export function ServiceCinematicHero({
                 <CalendarCheck className="size-5" />
                 {primaryCta.label}
               </Link>
-              <MotionAnchor href={secondaryCta.href} className="btn-ghost-light">
+              <MotionAnchor href={localizedSecondary.href} className="btn-ghost-light">
                 <Phone className="size-5" />
-                {secondaryCta.label}
+                {localizedSecondary.label}
               </MotionAnchor>
             </div>
           </div>
@@ -563,7 +582,17 @@ export function ServiceFinalCTA({
 }: ServiceFinalCTAProps) {
   const { lang } = useLanguage();
   const chrome = siteCopy(lang).serviceChrome;
+  const heroCopy = serviceCopy(lang).hero;
   const resolvedEyebrow = eyebrow ?? chrome.finalCtaEyebrow;
+  const localizedSecondaryLabel =
+    secondaryCta.label === 'Schedule service' ||
+    secondaryCta.label === 'Book service' ||
+    secondaryCta.label === 'Programar servicio' ||
+    secondaryCta.label === 'Agendar servicio'
+      ? secondaryCta.label.startsWith('Book') || secondaryCta.label.startsWith('Agendar')
+        ? heroCopy.bookService
+        : heroCopy.scheduleService
+      : secondaryCta.label;
 
   return (
     <section className="relative isolate overflow-hidden">
@@ -596,7 +625,7 @@ export function ServiceFinalCTA({
                 </MotionAnchor>
                 <Link href={secondaryCta.href} className="btn-ghost-light">
                   <CalendarCheck className="size-5" />
-                  {secondaryCta.label}
+                  {localizedSecondaryLabel}
                 </Link>
               </div>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm leading-relaxed text-white/75">
@@ -773,6 +802,8 @@ export type ServiceAreaServedProps = {
 };
 
 export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceAreaServedProps) {
+  const { lang } = useLanguage();
+  const copy = serviceCopy(lang).areaServed;
   const featuredAreas = getFeaturedServiceCities();
   const popularDeepDives = relatedServiceSlug
     ? getPopularDeepDivesForServicePage(relatedServiceSlug)
@@ -785,16 +816,17 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
     <section className="border-t border-[color:var(--line)] bg-[var(--background)] py-12 sm:py-16">
       <div className="wrap">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">Service area</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">
+            {copy.eyebrow}
+          </p>
           <h2 className="mt-3 font-display text-3xl tracking-wide text-foreground sm:text-4xl">
-            {serviceLabel} serving Englewood &amp; Denver metro
+            {copy.title(serviceLabel)}
           </h2>
           <p className="mt-4 max-w-3xl text-ink-muted">
-            RKC Automotive at {BUSINESS.address.full} provides {serviceLabel} for drivers across the south Denver metro.
-            We welcome customers from{' '}
+            {copy.bodyLead(BUSINESS.address.full, serviceLabel)}{' '}
             {featuredAreas.map((area, index) => (
               <span key={area.slug}>
-                {index > 0 && (index === featuredAreas.length - 1 ? ', and ' : ', ')}
+                {index > 0 && (index === featuredAreas.length - 1 ? copy.and : ', ')}
                 <Link href={area.href} className="font-semibold text-primary-blue hover:text-primary-green">
                   {area.name}
                 </Link>
@@ -802,7 +834,7 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
             ))}
             .{' '}
             <Link href="/areas-we-serve" className="font-semibold text-primary-blue hover:text-primary-green">
-              View all {SERVICE_AREAS_DATA.length} cities we serve
+              {copy.viewAll(SERVICE_AREAS_DATA.length)}
             </Link>
             .
           </p>
@@ -810,7 +842,7 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
 
         <FadeIn delay={0.1} className="mt-10">
           <h3 className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
-            {serviceLabel} near you
+            {copy.nearYou(serviceLabel)}
           </h3>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {featuredAreas.map((area) => (
@@ -820,9 +852,11 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
                   className="group block rounded-2xl border border-[color:var(--line)] bg-white px-5 py-4 transition hover:border-primary-green/40 hover:bg-primary-green/5"
                 >
                   <span className="font-semibold text-foreground group-hover:text-primary-green">
-                    {serviceLabel} for {area.name} drivers
+                    {copy.forDrivers(serviceLabel, area.name)}
                   </span>
-                  <span className="mt-1 block text-sm text-ink-muted">{area.distanceFromShop} from shop</span>
+                  <span className="mt-1 block text-sm text-ink-muted">
+                    {copy.fromShop(area.distanceFromShop)}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -832,7 +866,7 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
         {popularDeepDives.length > 0 ? (
           <FadeIn delay={0.14} className="mt-10">
             <h3 className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
-              Popular models we service
+              {copy.popularModels}
             </h3>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {popularDeepDives.map((link) => (
@@ -854,11 +888,9 @@ export function ServiceAreaServed({ serviceLabel, relatedServiceSlug }: ServiceA
         {platformDiagnostics.length > 0 ? (
           <FadeIn delay={0.18} className="mt-10">
             <h3 className="font-display text-2xl tracking-wide text-foreground sm:text-3xl">
-              Platform-specific diagnostics
+              {copy.platformHeading}
             </h3>
-            <p className="mt-3 max-w-3xl text-ink-muted">
-              Model-specific guides for Ford, Chevy, BMW, Jeep, Toyota, and Honda platforms we diagnose every week.
-            </p>
+            <p className="mt-3 max-w-3xl text-ink-muted">{copy.platformIntro}</p>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {platformDiagnostics.map((link) => (
                 <li key={link.href}>

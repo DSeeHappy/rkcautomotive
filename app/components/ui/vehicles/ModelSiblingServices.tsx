@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { useLanguage } from '@/lib/language';
+import { vehicleCopy } from '@/lib/i18n/vehicleCopy';
 
 export type ModelServiceLink = {
   href: string;
@@ -18,17 +20,18 @@ export default function ModelSiblingServices({
   brandName,
   services,
 }: ModelSiblingServicesProps) {
+  const { lang } = useLanguage();
+  const copy = vehicleCopy(lang).sibling;
+
   if (services.length === 0) return null;
 
   return (
     <section className="border-t border-[color:var(--line)] bg-[color:var(--accent-gray-light)] py-16 sm:py-20">
       <div className="wrap">
         <h2 className="font-display text-4xl tracking-wide text-foreground sm:text-5xl">
-          Other services for this {modelName}
+          {copy.title(modelName)}
         </h2>
-        <p className="mt-3 max-w-2xl text-ink-muted">
-          More {brandName} {modelName} repair guides from RKC Automotive — same ASE-certified crew and posted labor rate.
-        </p>
+        <p className="mt-3 max-w-2xl text-ink-muted">{copy.intro(brandName, modelName)}</p>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <li key={service.href}>

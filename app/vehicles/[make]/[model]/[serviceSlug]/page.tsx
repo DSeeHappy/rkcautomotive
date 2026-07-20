@@ -101,6 +101,9 @@ export default async function ModelServiceDeepDivePage({ params }: PageProps) {
       />
       <ModelServiceDeepDiveContent
         content={content}
+        make={make}
+        modelSlug={model}
+        serviceSlug={serviceSlug}
         image={image}
         imageAlt={imageAlt}
         breadcrumbs={breadcrumbs}
