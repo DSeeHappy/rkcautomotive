@@ -8,7 +8,7 @@ const EN = {
   intro:
     'Facts below come from RKC’s curated catalog and sourced image metadata. OEM horsepower, torque, and trim specs are not shown until verified — never fabricated.',
   pilotNote:
-    'Knowledge layer active — Phase 3 authority sections wired. Ownership populates only from model-specific shop notes when available.',
+    'Knowledge layer active — Phase 3 authority sections wired. Ownership populates from modelReliabilityNotes and brandFailureProfiles commonModels when available.',
   phase3Heading: 'Authority sections',
   phase3Intro:
     'Overview and Ownership show verified catalog identity and RKC shop observations. Engineering, Enthusiast, and Comparison stay empty until sourced — never fabricated.',
@@ -30,7 +30,7 @@ const ES = {
   intro:
     'Los datos siguientes provienen del catálogo curado de RKC y metadatos de imágenes con fuente. No mostramos caballos de fuerza, torque ni especificaciones por trim OEM hasta verificarlas — nunca inventadas.',
   pilotNote:
-    'Capa de conocimiento activa — secciones de autoridad Fase 3 conectadas. Propiedad se llena solo con notas del taller por modelo cuando existen.',
+    'Capa de conocimiento activa — secciones de autoridad Fase 3 conectadas. Propiedad se llena con notas del taller (modelReliabilityNotes y brandFailureProfiles) cuando existen.',
   phase3Heading: 'Secciones de autoridad',
   phase3Intro:
     'Resumen y Propiedad muestran identidad del catálogo y observaciones del taller RKC. Ingeniería, Entusiasta y Comparación permanecen vacías hasta tener fuentes — nunca inventadas.',

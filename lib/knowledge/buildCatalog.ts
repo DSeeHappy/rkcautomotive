@@ -12,9 +12,13 @@ import type {
   ModelRecord,
   ModelYearRecord,
 } from '@/lib/knowledge/types';
+import {
+  getModelIdsWithOwnershipClaims,
+  buildFailureProfileModelClaims,
+} from '@/lib/knowledge/mapFailureProfileClaims';
 import { buildVerifiedField } from '@/lib/knowledge/verified';
 
-const CATALOG_VERSION = 'phase2-multi-make-1';
+const CATALOG_VERSION = 'phase2-ownership-fp-1';
 
 function parseYearRange(range: string): { start: number; end: number | null } | null {
   const normalized = range.replace(/\u2013/g, '-').replace(/\u2014/g, '-');
@@ -207,6 +211,8 @@ function buildClaims(): ClaimRecord[] {
     }
   }
 
+  claims.push(...buildFailureProfileModelClaims(createdAt));
+
   return claims;
 }
 
@@ -222,3 +228,8 @@ export function buildKnowledgeCatalog(): KnowledgeCatalog {
 }
 
 export const KNOWLEDGE_CATALOG = buildKnowledgeCatalog();
+
+/** Models with ownership shop claims — modelReliabilityNotes and/or brandFailureProfiles commonModels. */
+export const KNOWLEDGE_OWNERSHIP_MODEL_IDS = getModelIdsWithOwnershipClaims(
+  KNOWLEDGE_CATALOG.claims,
+);

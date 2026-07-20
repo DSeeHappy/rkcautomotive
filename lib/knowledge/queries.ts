@@ -4,7 +4,7 @@ import {
   KNOWLEDGE_WIRED_BRAND_SLUGS,
   UNABLE_TO_VERIFY,
 } from '@/lib/knowledge/constants';
-import { KNOWLEDGE_CATALOG } from '@/lib/knowledge/buildCatalog';
+import { KNOWLEDGE_CATALOG, KNOWLEDGE_OWNERSHIP_MODEL_IDS } from '@/lib/knowledge/buildCatalog';
 import { buildPhase3Sections } from '@/lib/knowledge/phase3Sections';
 import { createEmptyVehicleSpecs, SPEC_CATEGORY_ORDER } from '@/lib/knowledge/specs';
 import { isDisplayableConfidence } from '@/lib/knowledge/verified';
@@ -50,7 +50,7 @@ export function isKnowledgePilotModel(modelId: string): boolean {
 }
 
 export function isKnowledgeModelWithClaims(modelId: string): boolean {
-  return (KNOWLEDGE_PILOT_MODEL_IDS as readonly string[]).includes(modelId);
+  return KNOWLEDGE_OWNERSHIP_MODEL_IDS.includes(modelId);
 }
 
 export function getClaimsForManufacturer(manufacturerId: string): ClaimRecord[] {
@@ -183,7 +183,7 @@ export function getKnowledgeCatalogStats() {
     modelsWithYearRange,
     modelsWithClaims,
     wiredBrands: KNOWLEDGE_WIRED_BRAND_SLUGS.length,
-    modelsWithShopClaims: KNOWLEDGE_PILOT_MODEL_IDS.length,
+    modelsWithShopClaims: KNOWLEDGE_OWNERSHIP_MODEL_IDS.length,
     wiredModels: KNOWLEDGE_CATALOG.models.filter((m) =>
       isKnowledgeWiredBrand(m.manufacturerId),
     ).length,

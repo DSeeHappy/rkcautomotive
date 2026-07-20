@@ -10,7 +10,11 @@ export type { KnowledgePilotModelId } from '@/lib/knowledge/constants';
 export { KNOWLEDGE_DB_SCHEMA } from '@/lib/knowledge/db-schema';
 export type { KnowledgeDbTable } from '@/lib/knowledge/db-schema';
 
-export { buildKnowledgeCatalog, KNOWLEDGE_CATALOG } from '@/lib/knowledge/buildCatalog';
+export {
+  buildKnowledgeCatalog,
+  KNOWLEDGE_CATALOG,
+  KNOWLEDGE_OWNERSHIP_MODEL_IDS,
+} from '@/lib/knowledge/buildCatalog';
 
 export {
   createEmptyVehicleSpecs,

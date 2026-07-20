@@ -1,0 +1,71 @@
+{
+  "startedAt": "2026-07-20T18:34:12.625Z",
+  "calls": [
+    {
+      "label": "p2-own-ping",
+      "ok": true,
+      "model": "vllm/smart",
+      "routingKey": "smart-spark",
+      "httpStatus": "200",
+      "latencyMs": 1103,
+      "usage": {
+        "prompt_tokens": 91,
+        "completion_tokens": 35,
+        "total_tokens": 126
+      },
+      "resFile": "scripts\\.spark-logs\\res-p2-own-ping-a1-vllm_smart-c1-2026-07-20T18-34-12-626Z.json",
+      "parsed": {
+        "ok": true,
+        "task": "phase2_ownership_audit_ping",
+        "proof": "bifrost-live"
+      }
+    },
+    {
+      "label": "p2-own-sources",
+      "ok": true,
+      "model": "vllm/smart",
+      "routingKey": "smart-spark",
+      "httpStatus": "200",
+      "latencyMs": 2576,
+      "usage": {
+        "prompt_tokens": 130,
+        "completion_tokens": 99,
+        "total_tokens": 229
+      },
+      "resFile": "scripts\\.spark-logs\\res-p2-own-sources-a1-vllm_smart-c2-2026-07-20T18-34-13-732Z.json",
+      "parsed": {
+        "audit_sources": {
+          "verified": [],
+          "modelOwnershipFrom": [
+            "modelReliabilityNotes",
+            "brandFailureProfiles.commonModels"
+          ],
+          "manufacturerFrom": [
+            "brandReliabilityNotes",
+            "brandFailureProfiles"
+          ],
+          "neverCopyBrandToModelOwnership": true,
+          "gapMessage": "Unable to verify with available data."
+        }
+      }
+    },
+    {
+      "label": "p2-own-map-toyota",
+      "ok": false,
+      "error": "Bifrost fail p2-own-map-toyota-a5: curl=56 http=000 err=undefined size=small"
+    },
+    {
+      "label": "p2-own-map-failure",
+      "ok": false,
+      "error": "Bifrost fail p2-own-map-failure-a4: curl=56 http=000 err=undefined size=large"
+    },
+    {
+      "label": "p2-own-promotion",
+      "ok": false,
+      "error": "Bifrost fail p2-own-promotion-a4: curl=56 http=000 err=undefined size=large"
+    }
+  ],
+  "finishedAt": "2026-07-20T18:38:55.091Z",
+  "okCount": 2,
+  "failCount": 3
+}
