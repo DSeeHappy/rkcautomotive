@@ -23,7 +23,8 @@ Core modules:
 | `verified.ts` | Field builders — never invent values |
 | `specs.ts` | Empty OEM spec scaffold (12 categories) |
 | `buildCatalog.ts` | Migrates existing static catalog at import time |
-| `mapFailureProfileClaims.ts` | Maps `brandFailureProfiles` commonModels → model `ClaimRecord`s |
+| `mapFailureProfileClaims.ts` | Maps `brandFailureProfiles` commonModels → model `ClaimRecord`s (model-scoped) |
+| `filterFailureProfiles.ts` | Longest-first model mention filter — stops TLX/RDX/MDX cross-contamination |
 | `queries.ts` | Read API + `getModelKnowledgeOverview()` |
 | `db-schema.ts` | Postgres DDL mirror for future migration |
 | `index.ts` | Public exports |
@@ -92,6 +93,21 @@ Decisions pipe: `scripts/.spark-logs/PHASE2_SPARK_DECISIONS.md`
 | `brandReliabilityNotes.ts` | manufacturer | ❌ no (manufacturer claims only) | reliablePicks + bullets — not copied to model Ownership |
 | `modelDeepDiveContent.ts` | model service pages | ❌ no | Reuses `brandFailureProfiles` inline; not duplicated into knowledge layer |
 | `vehicleBrands.coloradoNotes` | manufacturer marketing | ❌ no | General brand copy, not model ownership |
+
+### 6. Knowledge hub integrity fix (2026-07-20 urgent)
+
+| Fix | Detail |
+|---|---|
+| **Model-scoped ownership** | `filterFailureProfilesForModel()` — only failure modes that explicitly name the model (longest token match: TLX ≠ TLX Type S). Removed brand-wide `shop_observation` intro duplicate. |
+| **Deduped shop strip** | `buildShopObservationsSection()` excludes topics already in Phase 3 Ownership (`common-issues`, `colorado-angle`, `service-notes`). |
+| **Catalog years** | `buildCatalog.ts` uses RKC marketing catalog at **medium** confidence when image metadata absent — RDX/Integra no longer “Unable to verify” for year span. |
+| **OEM spec UX** | `ModelKnowledgeOverview` collapses 12 empty spec cards → single honest banner when `hasVerifiedSpecs === false`. |
+| **Vehicle images** | +19 `site-model-supplements.csv` rows merged → **126/127** catalog rows; **101/127** local WebP on disk; `resolveModelImageForHub()` hotlinks licensed Wikimedia when WebP pending; knowledge overview shows hero image + source caption. |
+| **Spark proof** | `spark-telemetry-live.mjs` PASS (smart + research, routingVerified); `spark-filter-failure-profiles.mjs` smart audit for Acura scoping. |
+
+**Image coverage (audit):** `101/127` local WebP files; remaining 26 pending download (Wikimedia rate limits) — hubs still render via `resolveModelImageForHub()` source URL fallback until sync completes.
+
+**Acura pilot after fix:** TLX Type S → transmission shudder only; MDX → oil consumption only; RDX → infotainment only; base TLX → no failure-profile stubs (honest empty ownership if no modelReliabilityNotes).
 
 ---
 

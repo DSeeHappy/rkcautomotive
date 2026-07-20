@@ -148,5 +148,7 @@ export type ModelKnowledgeOverview = {
   /** Phase 3 authority shells — Overview / Engineering / Ownership / Enthusiast / Comparison */
   phase3Sections: ModelOverviewSection[];
   specCategories: SpecCategory[];
+  /** False in Phase 2 — OEM spec grid collapsed until sourced rows exist. */
+  hasVerifiedSpecs: boolean;
   claims: ClaimRecord[];
 };

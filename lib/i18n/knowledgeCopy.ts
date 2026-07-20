@@ -15,6 +15,8 @@ const EN = {
   specScaffoldTitle: 'Specification categories (awaiting verified data)',
   specScaffoldIntro:
     'These categories are scaffolded for future OEM-sourced rows. Empty fields remain unavailable rather than invented.',
+  specScaffoldCollapsed:
+    'OEM horsepower, torque, MPG, and dimensions are not shown until verified against a licensed source — we never fabricate spec numbers.',
   unverifiedCategory: UNABLE_TO_VERIFY,
   badges: {
     verified: 'Catalog verified',
@@ -37,6 +39,8 @@ const ES = {
   specScaffoldTitle: 'Categorías de especificación (pendientes de datos verificados)',
   specScaffoldIntro:
     'Estas categorías están preparadas para filas OEM con fuente. Los campos vacíos permanecen no disponibles en lugar de inventarse.',
+  specScaffoldCollapsed:
+    'No mostramos caballos de fuerza, torque, MPG ni dimensiones OEM hasta verificarlos con una fuente con licencia — nunca inventamos cifras.',
   unverifiedCategory: 'No se puede verificar con los datos disponibles.',
   badges: {
     verified: 'Catálogo verificado',

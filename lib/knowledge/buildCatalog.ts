@@ -18,7 +18,7 @@ import {
 } from '@/lib/knowledge/mapFailureProfileClaims';
 import { buildVerifiedField } from '@/lib/knowledge/verified';
 
-const CATALOG_VERSION = 'phase2-ownership-fp-1';
+const CATALOG_VERSION = 'phase2-ownership-scoped-2';
 
 function parseYearRange(range: string): { start: number; end: number | null } | null {
   const normalized = range.replace(/\u2013/g, '-').replace(/\u2014/g, '-');
@@ -59,7 +59,11 @@ function buildModels(): ModelRecord[] {
   return VEHICLE_MODELS.map((vehicle) => {
     const modelSlug = slugifyModel(vehicle.model);
     const imageRecord = getVehicleImageRecord(vehicle.brand, vehicle.model);
-    const parsedRange = parseYearRange(imageRecord?.yearRange ?? vehicle.yearRange);
+    const parsedFromImage = imageRecord?.yearRange
+      ? parseYearRange(imageRecord.yearRange)
+      : null;
+    const parsedFromCatalog = parseYearRange(vehicle.yearRange);
+    const parsedRange = parsedFromImage ?? parsedFromCatalog;
     const yearRangeSources = imageRecord?.sourceUrl
       ? [
           {
@@ -69,18 +73,23 @@ function buildModels(): ModelRecord[] {
             license: imageRecord.license,
           },
         ]
-      : [];
+      : [
+          {
+            id: `catalog-${vehicle.slug}`,
+            label: 'RKC vehicle catalog',
+          },
+        ];
 
     const yearRange = buildVerifiedField<string>({
       value: parsedRange
         ? `${parsedRange.start}–${parsedRange.end ?? 'present'}`
         : vehicle.yearRange || null,
-      confidence: imageRecord?.sourceUrl ? 'medium' : 'low',
+      confidence: imageRecord?.sourceUrl ? 'medium' : 'medium',
       reviewStatus: imageRecord?.sourceUrl ? 'verified' : 'marketing_unverified',
       sources: yearRangeSources,
       notes: imageRecord?.sourceUrl
         ? 'Year span from curated image metadata — not trim-level OEM verification.'
-        : 'Year span from marketing catalog only.',
+        : 'Year span from RKC marketing catalog — not trim-level OEM verification.',
     });
 
     const generation: GenerationRecord = {

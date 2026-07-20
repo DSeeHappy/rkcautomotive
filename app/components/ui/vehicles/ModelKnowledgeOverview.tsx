@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { useLanguage } from '@/lib/language';
 import { knowledgeCopy } from '@/lib/i18n/knowledgeCopy';
@@ -12,6 +13,9 @@ type ModelKnowledgeOverviewProps = {
   overview: ModelKnowledgeOverviewData;
   brandName: string;
   modelName: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  imageSourceLabel?: string;
 };
 
 function reviewBadgeLabel(
@@ -92,9 +96,14 @@ export default function ModelKnowledgeOverview({
   overview,
   brandName,
   modelName,
+  imageSrc,
+  imageAlt,
+  imageSourceLabel,
 }: ModelKnowledgeOverviewProps) {
   const { lang } = useLanguage();
   const copy = knowledgeCopy(lang);
+  const resolvedAlt =
+    imageAlt ?? `${brandName} ${modelName} service at RKC Automotive Englewood CO`;
 
   return (
     <section
@@ -118,6 +127,27 @@ export default function ModelKnowledgeOverview({
           ) : null}
         </FadeIn>
 
+        {imageSrc ? (
+          <FadeIn className="mt-10">
+            <figure className="overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--accent-gray-light)]">
+              <div className="relative aspect-[16/9] w-full max-w-3xl">
+                <Image
+                  src={imageSrc}
+                  alt={resolvedAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                />
+              </div>
+              {imageSourceLabel ? (
+                <figcaption className="border-t border-[color:var(--line)] px-4 py-2 text-xs text-ink-muted">
+                  {imageSourceLabel}
+                </figcaption>
+              ) : null}
+            </figure>
+          </FadeIn>
+        ) : null}
+
         <div className="mt-10 space-y-8">
           {overview.phase3Sections.length > 0 ? (
             <div className="space-y-6">
@@ -137,7 +167,16 @@ export default function ModelKnowledgeOverview({
             <SectionBlock key={section.id} section={section} copy={copy} />
           ))}
 
-          {overview.specCategories.length > 0 ? (
+          {!overview.hasVerifiedSpecs && overview.specCategories.length > 0 ? (
+            <div className="rounded-2xl border border-dashed border-[color:var(--line)] bg-[color:var(--accent-gray-light)] p-6 sm:p-8">
+              <h3 className="font-display text-xl tracking-wide text-foreground">
+                {copy.specScaffoldTitle}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                {copy.specScaffoldCollapsed}
+              </p>
+            </div>
+          ) : overview.hasVerifiedSpecs ? (
             <div className="rounded-2xl border border-[color:var(--line)] bg-[color:var(--accent-gray-light)] p-6 sm:p-8">
               <h3 className="font-display text-2xl tracking-wide text-foreground">
                 {copy.specScaffoldTitle}

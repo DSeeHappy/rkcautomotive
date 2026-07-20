@@ -7,7 +7,9 @@ import { buildModelHubPath, getAllModelHubParams } from '@/lib/modelHubRoutes';
 import { getModelReliabilitySnapshot } from '@/lib/modelReliabilityNotes';
 import { createPageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createItemListSchema, createWebPageSchema } from '@/lib/seo';
-import { getModelsByBrand, resolveModelImage } from '@/lib/vehicleModels';
+import { getModelsByBrand } from '@/lib/vehicleModels';
+import { resolveModelImageForHub } from '@/lib/resolveModelImage.server';
+import { getVehicleImage, resolveVehicleImageAlt } from '@/lib/vehicleImages';
 import { slugifyModel } from '@/lib/modelCommonServices';
 import { getBrandBySlug } from '@/lib/vehicleBrands';
 
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }: PageProps) {
   }
 
   const path = buildModelHubPath(make, vehicle.model);
-  const image = resolveModelImage(vehicle);
+  const image = resolveModelImageForHub(vehicle);
 
   return createPageMetadata({
     title: `${vehicle.brandName} ${vehicle.model} Repair in Englewood, CO`,
@@ -56,11 +58,24 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
 
   const brand = getBrandBySlug(make);
   const hubPath = buildModelHubPath(make, vehicle.model);
-  const image = resolveModelImage(vehicle);
+  const image = resolveModelImageForHub(vehicle);
   const siblingModels = getModelsByBrand(make).filter((m) => m.slug !== vehicle.slug);
   const modelSnapshot = getModelReliabilitySnapshot(make, model);
   const heroDescription = modelSnapshot?.intro ?? vehicle.description;
   const knowledgeOverview = getModelKnowledgeOverview(make, model);
+  const vehicleImage = getVehicleImage(vehicle.brand, vehicle.brandName, vehicle.model);
+  const knowledgeImageSrc = resolveModelImageForHub(vehicle);
+  const knowledgeImageAlt = resolveVehicleImageAlt(
+    vehicleImage.record,
+    vehicle.brandName,
+    vehicle.model,
+  );
+  const knowledgeImageSource =
+    vehicleImage.record?.sourceUrl && vehicleImage.matchType === 'exact'
+      ? 'Vehicle image catalog (Wikimedia Commons, CC BY-SA where noted)'
+      : vehicleImage.matchType === 'make'
+        ? `Representative ${vehicle.brandName} image — exact ${vehicle.model} photo pending catalog`
+        : undefined;
 
   return (
     <div>
@@ -102,6 +117,9 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
           overview={knowledgeOverview}
           brandName={vehicle.brandName}
           modelName={vehicle.model}
+          imageSrc={knowledgeImageSrc}
+          imageAlt={knowledgeImageAlt}
+          imageSourceLabel={knowledgeImageSource}
         />
       ) : null}
     </div>

@@ -98,9 +98,19 @@ function buildIdentitySection(model: ModelRecord): ModelOverviewSection {
   };
 }
 
+/** Topics rendered in Phase 3 Ownership — omit from duplicate shop-observations strip. */
+const PHASE3_OWNERSHIP_TOPICS = new Set([
+  'common-issues',
+  'colorado-angle',
+  'service-notes',
+]);
+
 function buildShopObservationsSection(modelId: string): ModelOverviewSection | null {
   const claims = getClaimsForModel(modelId).filter(
-    (claim) => claim.reviewStatus === 'shop_observation' && claim.topic !== 'faq',
+    (claim) =>
+      claim.reviewStatus === 'shop_observation' &&
+      claim.topic !== 'faq' &&
+      !PHASE3_OWNERSHIP_TOPICS.has(claim.topic),
   );
   if (claims.length === 0) return null;
 
@@ -151,9 +161,10 @@ export function getModelKnowledgeOverview(
 
   const phase3Sections = isPilot ? buildPhase3Sections(model, modelClaims) : [];
 
-  // Scaffold empty category shells for UI (labels only) — values stay unverified.
+  // Phase 2: no verified OEM spec rows — collapse scaffold instead of 12 empty cards.
   const empty = createEmptyVehicleSpecs();
   const specCategories = SPEC_CATEGORY_ORDER.map((id) => empty[id]);
+  const hasVerifiedSpecs = false;
 
   return {
     modelId: model.id,
@@ -162,6 +173,7 @@ export function getModelKnowledgeOverview(
     sections,
     phase3Sections,
     specCategories,
+    hasVerifiedSpecs,
     claims: modelClaims,
   };
 }
