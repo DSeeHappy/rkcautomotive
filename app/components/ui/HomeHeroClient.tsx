@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import type { ReactNode } from 'react';
+import Image from 'next/image';
 import { AlertTriangle, Phone } from 'lucide-react';
-import { BUSINESS } from '@/lib/constants';
+import { BUSINESS, PHOTOS } from '@/lib/constants';
+import { HERO_IMAGE_SIZES } from '@/lib/photos';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import LanguageToggle from '@/app/components/ui/LanguageToggle';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
@@ -12,11 +13,7 @@ import { useGsapReveal } from '@/lib/useGsapReveal';
 import { useLanguage } from '@/lib/language';
 import { homeCopy } from '@/lib/homeCopy';
 
-type HomeHeroClientProps = {
-  background: ReactNode;
-};
-
-export default function HomeHeroClient({ background }: HomeHeroClientProps) {
+export default function HomeHeroClient() {
   const { lang } = useLanguage();
   const copy = homeCopy(lang);
   const reduce = usePrefersReducedMotion();
@@ -31,11 +28,37 @@ export default function HomeHeroClient({ background }: HomeHeroClientProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]"
+      className="relative isolate w-full min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]"
       lang={lang}
     >
-      <div ref={bgRef} className="hero-media-layer absolute inset-0">
-        {background}
+      <div ref={bgRef} className="hero-media-layer absolute inset-0 size-full">
+        <div className="relative size-full">
+          <Image
+            src={PHOTOS.heroMain}
+            alt="RKC Automotive green shop bay entrance in Englewood"
+            fill
+            priority
+            fetchPriority="high"
+            className={`object-cover object-[78%_56%] sm:object-[74%_53%] lg:object-[70%_50%] ${reduce ? '' : 'ken-burns'}`}
+            sizes={HERO_IMAGE_SIZES}
+          />
+        </div>
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(12, 18, 34, 0.42) 0%, rgba(12, 18, 34, 0.2) 40%, rgba(12, 18, 34, 0.72) 100%)',
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c1222]/88 via-[#0c1222]/14 to-transparent"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1222]/68 via-[#0c1222]/08 to-transparent lg:from-[#0c1222]/55 lg:via-transparent lg:to-transparent"
+          aria-hidden
+        />
       </div>
 
       <div

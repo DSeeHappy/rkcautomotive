@@ -183,17 +183,19 @@ export function ServiceCinematicHero({
       : secondaryCta;
 
   return (
-    <section ref={sectionRef} className="relative isolate min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]">
-      <div ref={bgRef} className="absolute inset-0">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          priority
-          fetchPriority="high"
-          className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
-          sizes={HERO_IMAGE_SIZES}
-        />
+    <section ref={sectionRef} className="relative isolate w-full min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]">
+      <div ref={bgRef} className="hero-media-layer absolute inset-0 size-full">
+        <div className="relative size-full">
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            priority
+            fetchPriority="high"
+            className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
+            sizes={HERO_IMAGE_SIZES}
+          />
+        </div>
         <div
           className="absolute inset-0"
           style={{

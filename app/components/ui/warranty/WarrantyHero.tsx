@@ -39,16 +39,18 @@ export default function WarrantyHero() {
   ] as const;
 
   return (
-    <section lang={lang} ref={sectionRef} className="relative isolate min-h-[70svh] overflow-hidden bg-[#0c1222] sm:min-h-[78svh]">
-      <div ref={bgRef} className="absolute inset-0">
-        <Image
-          src={PHOTOS.engineRebuild}
-          alt="ASE-certified technicians rebuilding an engine at RKC Automotive in Englewood, CO"
-          fill
-          priority
-          className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
-          sizes={HERO_IMAGE_SIZES}
-        />
+    <section lang={lang} ref={sectionRef} className="relative isolate w-full min-h-[70svh] overflow-hidden bg-[#0c1222] sm:min-h-[78svh]">
+      <div ref={bgRef} className="hero-media-layer absolute inset-0 size-full">
+        <div className="relative size-full">
+          <Image
+            src={PHOTOS.engineRebuild}
+            alt="ASE-certified technicians rebuilding an engine at RKC Automotive in Englewood, CO"
+            fill
+            priority
+            className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
+            sizes={HERO_IMAGE_SIZES}
+          />
+        </div>
         <div
           className="absolute inset-0"
           style={{

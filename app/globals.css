@@ -184,8 +184,13 @@ body {
   }
 }
 
-/* Chrome/WebKit: neutralize compositing bugs over large animated layers */
+/* Full-bleed hero background — explicit size so fill images never collapse to a thin strip */
 .hero-media-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;

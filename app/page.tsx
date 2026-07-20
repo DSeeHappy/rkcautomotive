@@ -21,7 +21,7 @@ export const metadata = createPageMetadata({
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="w-full">
       <JsonLd
         data={[
           // LocalBusiness/AutoRepair comes from root layout only — avoid a second
