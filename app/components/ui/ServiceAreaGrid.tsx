@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -6,6 +8,8 @@ import {
   type ServiceArea,
   type ServiceAreaNeighborhood,
 } from '@/lib/serviceAreas';
+import { useLanguage } from '@/lib/language';
+import { siteCopy } from '@/lib/siteCopy';
 
 type ServiceAreaGridProps = {
   /** Show all neighborhoods as tags; when false, show first 4 + count */
@@ -67,6 +71,9 @@ function ServiceAreaCard({
   index: number;
   showAllNeighborhoods: boolean;
 }) {
+  const { lang } = useLanguage();
+  const copy = siteCopy(lang).areaGrid;
+  const description = copy.descriptions[area.slug] ?? area.description;
   const visibleNeighborhoods = showAllNeighborhoods
     ? area.neighborhoods
     : area.neighborhoods.slice(0, 4);
@@ -107,10 +114,10 @@ function ServiceAreaCard({
             aria-hidden
           />
         </div>
-        <p className="mt-2 text-sm leading-relaxed text-white/85">{area.description}</p>
+        <p className="mt-2 text-sm leading-relaxed text-white/85">{description}</p>
         <div className="mt-4 flex flex-1 flex-col">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-green">
-            Neighborhoods served
+            {copy.neighborhoods}
           </p>
           <ul className="mt-2 flex flex-wrap gap-1.5">
             {visibleNeighborhoods.map((n) => (
@@ -118,13 +125,13 @@ function ServiceAreaCard({
             ))}
             {hiddenCount > 0 && (
               <li className="rounded-full bg-primary-green/35 px-2.5 py-0.5 text-xs font-semibold text-white">
-                +{hiddenCount} more
+                {copy.more(hiddenCount)}
               </li>
             )}
           </ul>
         </div>
         <p className="mt-4 text-xs font-semibold text-white/70 transition group-hover:text-primary-green">
-          View {area.name} auto repair →
+          {copy.viewRepair(area.name)}
         </p>
       </div>
     </Link>
@@ -136,6 +143,7 @@ export default function ServiceAreaGrid({
   columns = 3,
   className = '',
 }: ServiceAreaGridProps) {
+  const { lang } = useLanguage();
   const colClass =
     columns === 4
       ? 'sm:grid-cols-2 lg:grid-cols-4'
@@ -144,7 +152,7 @@ export default function ServiceAreaGrid({
         : 'sm:grid-cols-2 lg:grid-cols-3';
 
   return (
-    <div className={`grid gap-4 ${colClass} ${className}`}>
+    <div lang={lang} className={`grid gap-4 ${colClass} ${className}`}>
       {SERVICE_AREAS_DATA.map((area, i) => (
         <ServiceAreaCard
           key={area.slug}

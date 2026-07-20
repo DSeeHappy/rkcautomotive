@@ -1,21 +1,51 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { CheckCircle, Send } from 'lucide-react';
 import { ensureScrollTrigger, gsap } from '@/lib/gsap';
 import Link from 'next/link';
-import { BUSINESS } from '@/lib/constants';
+import { BUSINESS, SERVICES } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapHoverPress } from '@/lib/useGsapHoverPress';
+import { useLanguage } from '@/lib/language';
+import { localizedServiceName, siteCopy } from '@/lib/siteCopy';
+import {
+  persistSelectedService,
+  readPersistedSelectedService,
+  servicePageSlugFromKey,
+} from '@/lib/serviceDurations';
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [serviceSlug, setServiceSlug] = useState('');
   const reduce = usePrefersReducedMotion();
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
   const { ref: submitRef } = useGsapHoverPress<HTMLButtonElement>();
+  const { lang } = useLanguage();
+  const copy = siteCopy(lang).contactForm;
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromQuery = params.get('service');
+    if (fromQuery) {
+      const slug =
+        SERVICES.find((s) => s.slug === fromQuery)?.slug ??
+        servicePageSlugFromKey(fromQuery) ??
+        SERVICES.find((s) => s.name.toLowerCase() === fromQuery.toLowerCase())?.slug;
+      if (slug) {
+        setServiceSlug(slug);
+        persistSelectedService(slug);
+        return;
+      }
+      persistSelectedService(fromQuery);
+    }
+
+    const persistedSlug = servicePageSlugFromKey(readPersistedSelectedService());
+    if (persistedSlug) setServiceSlug(persistedSlug);
+  }, []);
 
   useGSAP(
     () => {
@@ -74,11 +104,16 @@ export default function ContactForm() {
     const phone = String(data.get('phone') || '');
     const email = String(data.get('email') || '');
     const vehicle = String(data.get('vehicle') || '');
+    const service = String(data.get('service') || '');
     const message = String(data.get('message') || '');
+    const serviceLabel =
+      SERVICES.find((s) => s.slug === service)?.name || service || 'Not specified';
+
+    if (service) persistSelectedService(service);
 
     const subject = encodeURIComponent(`Service Request from ${name}`);
     const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nVehicle: ${vehicle}\n\nMessage:\n${message}`,
+      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nVehicle: ${vehicle}\nService: ${serviceLabel}\n\nMessage:\n${message}`,
     );
     window.location.href = `mailto:${BUSINESS.email}?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -88,12 +123,13 @@ export default function ContactForm() {
     return (
       <div
         ref={successRef}
+        lang={lang}
         className="rounded-3xl border border-[color:var(--line)] bg-white p-10 text-center shadow-xl"
       >
         <CheckCircle className="mx-auto size-12 text-primary-green" />
-        <h3 className="mt-4 font-display text-4xl tracking-wide text-foreground">Thank you</h3>
+        <h3 className="mt-4 font-display text-4xl tracking-wide text-foreground">{copy.thankYou}</h3>
         <p className="mt-3 text-ink-muted">
-          Your email client should open shortly. Prefer to talk? Call{' '}
+          {copy.thankYouBody}{' '}
           <PhoneLink className="font-semibold text-primary-green hover:underline">
             {BUSINESS.phone}
           </PhoneLink>
@@ -106,24 +142,25 @@ export default function ContactForm() {
   return (
     <form
       ref={formRef}
+      lang={lang}
       onSubmit={handleSubmit}
       className="space-y-5 rounded-3xl border border-white/40 bg-white/95 p-7 shadow-2xl backdrop-blur-md sm:p-9"
     >
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-green">Message the bay</p>
-        <h2 className="mt-2 font-display text-4xl tracking-wide text-foreground">Tell us what&apos;s going on</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-green">{copy.eyebrow}</p>
+        <h2 className="mt-2 font-display text-4xl tracking-wide text-foreground">{copy.title}</h2>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-semibold text-foreground">
-            Full name *
+            {copy.name}
           </label>
           <input id="name" name="name" required className="field" placeholder="Jordan Smith" />
         </div>
         <div>
           <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-foreground">
-            Phone *
+            {copy.phone}
           </label>
           <input id="phone" name="phone" type="tel" required className="field" placeholder="(720) 555-0123" />
         </div>
@@ -132,21 +169,45 @@ export default function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="email" className="mb-2 block text-sm font-semibold text-foreground">
-            Email
+            {copy.email}
           </label>
           <input id="email" name="email" type="email" className="field" placeholder="you@email.com" />
         </div>
         <div>
           <label htmlFor="vehicle" className="mb-2 block text-sm font-semibold text-foreground">
-            Vehicle
+            {copy.vehicle}
           </label>
           <input id="vehicle" name="vehicle" className="field" placeholder="2018 Toyota Camry" />
         </div>
       </div>
 
       <div>
+        <label htmlFor="service" className="mb-2 block text-sm font-semibold text-foreground">
+          {copy.service}
+        </label>
+        <select
+          id="service"
+          name="service"
+          className="field"
+          value={serviceSlug}
+          onChange={(e) => {
+            const value = e.target.value;
+            setServiceSlug(value);
+            persistSelectedService(value || null);
+          }}
+        >
+          <option value="">{copy.notSure}</option>
+          {SERVICES.map((service) => (
+            <option key={service.slug} value={service.slug}>
+              {localizedServiceName(service.slug, lang, service.name)}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
         <label htmlFor="message" className="mb-2 block text-sm font-semibold text-foreground">
-          How can we help? *
+          {copy.message}
         </label>
         <textarea
           id="message"
@@ -154,30 +215,29 @@ export default function ContactForm() {
           required
           rows={5}
           className="field resize-none"
-          placeholder="Describe the issue, warning lights, or service you need…"
+          placeholder={copy.messagePlaceholder}
         />
       </div>
 
       <button ref={submitRef} type="submit" className="btn-green w-full sm:w-auto">
         <Send className="size-4" />
-        Send message
+        {copy.send}
       </button>
 
       <p className="text-xs leading-relaxed text-ink-muted">
-        By sending this message, you agree that RKC Automotive may use your contact details to
-        respond to your request. See our{' '}
+        {copy.privacy}{' '}
         <Link href="/privacy" className="font-semibold text-primary-green underline-offset-2 hover:underline">
-          Privacy Policy
+          {copy.privacyLink}
         </Link>
         .
       </p>
 
       <p className="text-sm text-ink-muted">
-        Or call{' '}
+        {copy.orCall}{' '}
         <PhoneLink className="font-semibold text-primary-green hover:underline">
           {BUSINESS.phone}
         </PhoneLink>{' '}
-        for same-day scheduling.
+        {copy.forScheduling}
       </p>
     </form>
   );

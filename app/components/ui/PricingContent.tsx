@@ -42,6 +42,8 @@ import PhoneLink from '@/app/components/ui/PhoneLink';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import { useGsapReveal } from '@/lib/useGsapReveal';
+import { useLanguage } from '@/lib/language';
+import { siteCopy } from '@/lib/siteCopy';
 
 const RKC_RATE = 120;
 const DEALER_RATE = 180;
@@ -71,13 +73,15 @@ function laborCost(hours: number, rate: number) {
 }
 
 export default function PricingContent() {
+  const { lang } = useLanguage();
+  const shell = siteCopy(lang).shells.pricing;
   const rateReveal = useGsapReveal<HTMLParagraphElement>({ y: 20, duration: 0.7 });
   const titleReveal = useGsapReveal<HTMLHeadingElement>({ delay: 0.08, y: 24, duration: 0.7 });
   const descReveal = useGsapReveal<HTMLParagraphElement>({ delay: 0.16, y: 16, duration: 0.6 });
   const ctaReveal = useGsapReveal<HTMLDivElement>({ delay: 0.24, y: 12, duration: 0.5 });
 
   return (
-    <div>
+    <div lang={lang}>
       {/* Hero — $120/hr anchor */}
       <section className="relative isolate min-h-[72svh] overflow-hidden bg-[#0c1222] pt-20 sm:min-h-[78svh]">
         <Image src={PHOTOS.teamCollab} alt="ASE-certified technicians collaborating at RKC Automotive in Englewood, CO" fill priority className="object-cover" sizes={HERO_IMAGE_SIZES} />
@@ -85,23 +89,21 @@ export default function PricingContent() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-16 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[
-              { label: 'Home', href: '/' },
-              { label: 'Pricing' },
+              { label: shell.home, href: '/' },
+              { label: shell.crumb },
             ]}
             className="mb-6"
             variant="light"
           />
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">Pricing</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green-light">{shell.eyebrow}</p>
           <p ref={rateReveal} className="mt-4 font-display text-[clamp(5rem,16vw,10rem)] leading-[0.85] tracking-wide text-primary-green-light">
             {LABOR_RATE}
           </p>
           <h1 ref={titleReveal} className="mt-1 max-w-4xl font-display text-4xl tracking-wide text-white sm:text-5xl lg:text-6xl">
-            Beat dealers on price and service.
+            {shell.title}
           </h1>
           <p ref={descReveal} className="mt-5 max-w-2xl text-lg text-white/80 sm:text-xl">
-            ASE-certified Englewood shop. Dealers charge $180–220/hr. National chains quote $140–160/hr in menu packages
-            with shop fees — but rarely post a flat rate. Typical local shops often charge {LOCAL_SHOP_RATE_RANGE} but
-            rarely publish it online. We charge {LABOR_RATE}, publish it here, and get you back on the road.
+            {shell.description(LOCAL_SHOP_RATE_RANGE, LABOR_RATE)}
           </p>
           <div ref={ctaReveal} className="mt-8 flex flex-wrap gap-3">
             <MotionAnchor href={BUSINESS.phoneHref} className="btn-green">
@@ -109,7 +111,7 @@ export default function PricingContent() {
               {BUSINESS.phone}
             </MotionAnchor>
             <Link href="/contact" className="btn-ghost-light">
-              Get estimate
+              {shell.getEstimate}
             </Link>
           </div>
         </div>
@@ -119,10 +121,10 @@ export default function PricingContent() {
       <section className="relative z-10 -mt-6 border-y border-[color:var(--line)] bg-white/95 backdrop-blur-md">
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-[color:var(--line)] lg:grid-cols-4">
           {[
-            { icon: Wrench, label: 'Labor rate', value: LABOR_RATE },
-            { icon: Shield, label: 'ASE certified', value: '30+ years', href: ASE_URL },
-            { icon: CheckCircle, label: 'Estimates', value: 'Written first' },
-            { icon: Clock, label: 'Hours', value: 'Mon–Fri 8–6' },
+            { icon: Wrench, label: shell.trustStrip[0].label, value: LABOR_RATE },
+            { icon: Shield, label: shell.trustStrip[1].label, value: shell.trustStrip[1].value!, href: ASE_URL },
+            { icon: CheckCircle, label: shell.trustStrip[2].label, value: shell.trustStrip[2].value! },
+            { icon: Clock, label: shell.trustStrip[3].label, value: shell.trustStrip[3].value! },
           ].map((item, i) => {
             const inner = (
               <>

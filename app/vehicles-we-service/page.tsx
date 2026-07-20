@@ -36,6 +36,7 @@ export default function VehiclesPage() {
         ]}
       />
       <PageHero
+        shell="vehicles"
         eyebrow="Vehicles"
         title="If it rolls into Englewood, we can help"
         description="From daily drivers to classics and European imports — ASE-certified tools and experience for every vehicle."

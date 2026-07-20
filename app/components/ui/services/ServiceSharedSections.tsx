@@ -31,17 +31,12 @@ import Breadcrumbs, { type BreadcrumbItem } from '@/app/components/ui/Breadcrumb
 import FadeIn, { Stagger, StaggerItem } from '@/app/components/ui/FadeIn';
 import FAQAccordion from '@/app/components/ui/FAQAccordion';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
+import { useLanguage } from '@/lib/language';
+import { siteCopy } from '@/lib/siteCopy';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapParallax } from '@/lib/useGsapParallax';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 import { SECTION_PAD, SECTION_HEADER, SECTION_HEADER_CENTER } from './servicesShared';
-
-export const TRUST_PILLS = [
-  { icon: Wrench, label: LABOR_RATE, sub: 'posted labor rate' },
-  { icon: Award, label: 'ASE', sub: 'certified techs', href: ASE_URL },
-  { icon: ClipboardCheck, label: 'Written', sub: 'estimates first' },
-  { icon: MapPin, label: 'Evans Ave', sub: 'Englewood shop' },
-] as const;
 
 export type HeroTrustPill = {
   icon: LucideIcon;
@@ -49,6 +44,35 @@ export type HeroTrustPill = {
   sub: string;
   href?: string;
 };
+
+const TRUST_PILL_ICONS = [Wrench, Award, ClipboardCheck, MapPin] as const;
+
+export function useLocalizedTrustPills(): HeroTrustPill[] {
+  const { lang } = useLanguage();
+  const pills = siteCopy(lang).serviceChrome.trustPills;
+  return [
+    { icon: TRUST_PILL_ICONS[0], label: LABOR_RATE, sub: pills[0].sub },
+    { icon: TRUST_PILL_ICONS[1], label: 'ASE', sub: pills[1].sub, href: ASE_URL },
+    {
+      icon: TRUST_PILL_ICONS[2],
+      label: 'label' in pills[2] ? pills[2].label! : 'Written',
+      sub: pills[2].sub,
+    },
+    {
+      icon: TRUST_PILL_ICONS[3],
+      label: 'label' in pills[3] ? pills[3].label! : 'Evans Ave',
+      sub: pills[3].sub,
+    },
+  ];
+}
+
+/** Static EN defaults — prefer useLocalizedTrustPills in UI */
+export const TRUST_PILLS = [
+  { icon: Wrench, label: LABOR_RATE, sub: 'posted labor rate' },
+  { icon: Award, label: 'ASE', sub: 'certified techs', href: ASE_URL },
+  { icon: ClipboardCheck, label: 'Written', sub: 'estimates first' },
+  { icon: MapPin, label: 'Evans Ave', sub: 'Englewood shop' },
+] as const;
 
 const HERO_PILL_CLASS =
   'flex items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] px-4 py-3 backdrop-blur-md transition-colors';
@@ -125,6 +149,7 @@ export function ServiceCinematicHero({
   breadcrumbs,
 }: ServiceHeroProps) {
   const reduce = usePrefersReducedMotion();
+  const trustPills = useLocalizedTrustPills();
   const { sectionRef, bgRef, contentRef } = useGsapParallax<HTMLElement>(reduce, {
     yPercent: 16,
     fadeTo: 0.4,
@@ -199,7 +224,7 @@ export function ServiceCinematicHero({
           </div>
 
           <div className="relative z-20 mt-10 w-full lg:mt-12">
-            <HeroTrustPills pills={TRUST_PILLS} className="flex flex-wrap justify-center gap-3" />
+            <HeroTrustPills pills={trustPills} className="flex flex-wrap justify-center gap-3" />
           </div>
         </div>
       </div>
@@ -215,7 +240,9 @@ export type ServiceRealityBandProps = {
   body: ReactNode;
 };
 
-export function ServiceRealityBand({ eyebrow = 'Reality check', quote, body }: ServiceRealityBandProps) {
+export function ServiceRealityBand({ eyebrow, quote, body }: ServiceRealityBandProps) {
+  const { lang } = useLanguage();
+  const resolvedEyebrow = eyebrow ?? siteCopy(lang).serviceChrome.realityCheck;
   return (
     <section className="relative overflow-hidden bg-[#0c1222] py-20 sm:py-24">
       <div
@@ -232,7 +259,7 @@ export function ServiceRealityBand({ eyebrow = 'Reality check', quote, body }: S
       />
       <div className="wrap relative">
         <FadeIn className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-primary-green-light">{resolvedEyebrow}</p>
           <blockquote className="mt-6 font-display text-[clamp(1.75rem,4.5vw,3.25rem)] leading-[1.05] tracking-wide text-white">
             &ldquo;{quote}&rdquo;
           </blockquote>
@@ -434,25 +461,19 @@ export type ServiceLaborBandProps = {
   items?: LaborBandItem[];
 };
 
-const DEFAULT_LABOR_ITEMS: LaborBandItem[] = [
-  {
-    icon: FileText,
-    title: 'Written estimates',
-    detail: 'Scope, labor hours, and parts documented before work begins.',
-  },
-  {
-    icon: ClipboardCheck,
-    title: 'Book-time baseline',
-    detail: 'AllData and Mitchell guides — not inflated hours padded into the quote.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Approval before repair',
-    detail: 'We call with photos if inspection findings change the plan.',
-  },
-];
+const LABOR_ICONS = [FileText, ClipboardCheck, ShieldCheck] as const;
 
-export function ServiceLaborBand({ title, description, items = DEFAULT_LABOR_ITEMS }: ServiceLaborBandProps) {
+export function ServiceLaborBand({ title, description, items }: ServiceLaborBandProps) {
+  const { lang } = useLanguage();
+  const localized = siteCopy(lang).serviceChrome.laborItems;
+  const resolvedItems =
+    items ??
+    localized.map((item, i) => ({
+      icon: LABOR_ICONS[i] ?? FileText,
+      title: item.title,
+      detail: item.detail,
+    }));
+
   return (
     <section className="relative overflow-hidden bg-[#0c1222] py-20 sm:py-24">
       <div
@@ -469,7 +490,7 @@ export function ServiceLaborBand({ title, description, items = DEFAULT_LABOR_ITE
         </FadeIn>
 
         <Stagger className="mt-14 grid gap-6 sm:grid-cols-3" stagger={0.08}>
-          {items.map((item) => {
+          {resolvedItems.map((item) => {
             const Icon = item.icon;
             return (
               <StaggerItem key={item.title}>
@@ -492,24 +513,29 @@ export type ServiceFAQSectionProps = {
   title: string;
   intro: string;
   items: FAQItem[];
+  /** Service page slug or short duration key — drives the repair-time FAQ. */
+  serviceKey?: string | null;
 };
 
 export function ServiceFAQSection({
-  eyebrow = 'FAQ',
+  eyebrow,
   title,
   intro,
   items,
+  serviceKey = null,
 }: ServiceFAQSectionProps) {
+  const { lang } = useLanguage();
+  const resolvedEyebrow = eyebrow ?? siteCopy(lang).serviceChrome.faq;
   return (
     <section className={`${SECTION_PAD} bg-[var(--background)]`}>
       <div className="wrap">
         <FadeIn className={SECTION_HEADER_CENTER}>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-green">{resolvedEyebrow}</p>
           <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground sm:text-6xl">{title}</h2>
           <p className="mt-4 text-lg text-ink-muted">{intro}</p>
         </FadeIn>
         <FadeIn delay={0.06} className="mx-auto max-w-3xl">
-          <FAQAccordion items={items} />
+          <FAQAccordion items={items} serviceKey={serviceKey} injectRepairTimeFaq />
         </FadeIn>
       </div>
     </section>
@@ -527,7 +553,7 @@ export type ServiceFinalCTAProps = {
 };
 
 export function ServiceFinalCTA({
-  eyebrow = 'Evans Ave · Englewood',
+  eyebrow,
   title,
   description,
   primaryCta,
@@ -535,6 +561,10 @@ export function ServiceFinalCTA({
   image = PHOTOS.exteriorBay,
   imageAlt = 'RKC Automotive shop bay in Englewood Colorado',
 }: ServiceFinalCTAProps) {
+  const { lang } = useLanguage();
+  const chrome = siteCopy(lang).serviceChrome;
+  const resolvedEyebrow = eyebrow ?? chrome.finalCtaEyebrow;
+
   return (
     <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0">
@@ -549,7 +579,7 @@ export function ServiceFinalCTA({
           <div className="divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-[#0c1222]/95 shadow-2xl backdrop-blur-md">
             <div className="px-5 py-6 text-center sm:px-8 sm:py-7">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-green-light sm:mb-4">
-                {eyebrow}
+                {resolvedEyebrow}
               </p>
               <h2 className="text-balance text-2xl font-bold leading-relaxed tracking-normal text-white sm:text-3xl lg:text-4xl">
                 {title}
@@ -577,7 +607,7 @@ export function ServiceFinalCTA({
                   className="inline-flex items-center gap-1.5 text-white/75 transition hover:text-white"
                 >
                   <MapPin className="size-4" />
-                  Get directions
+                  {chrome.getDirections}
                 </MotionAnchor>
               </div>
             </div>

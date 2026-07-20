@@ -51,6 +51,7 @@ export default function ServicesPage() {
         ]}
       />
       <PageHero
+        shell="services"
         eyebrow="Services"
         title="Every system. One Englewood shop."
         description="Engine rebuilds to oil changes — ASE-certified technicians, $120/hr posted labor, and written estimates before any wrench turns at 2120 W Evans Ave."

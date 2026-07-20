@@ -13,6 +13,8 @@ import JsonLd from './components/JsonLd';
 import { LanguageProvider } from '@/lib/language';
 import { rootOpenGraphDefaults, rootTwitterDefaults, SITE_URL } from '@/lib/og';
 import { createOrganizationSchema, createWebSiteSchema } from '@/lib/seo';
+import DocumentLang from './components/ui/DocumentLang';
+import SkipToContent from './components/ui/SkipToContent';
 
 const bebas = Bebas_Neue({
   weight: '400',
@@ -86,15 +88,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
-        <a
-          href="#main-content"
-          className="sr-only"
-        >
-          Skip to main content
-        </a>
         {/* Single sitewide AutoRepair/LocalBusiness NAP — pages must not emit a second org with a different telephone/image. */}
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
         <LanguageProvider>
+          <DocumentLang />
+          <SkipToContent />
           <GsapProvider>
             <SplashScreen>
               <Navigation />

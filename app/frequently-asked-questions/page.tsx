@@ -33,6 +33,7 @@ export default function FAQPage() {
       />
 
       <PageHero
+        shell="faq"
         eyebrow="FAQ"
         title="Answers before the wrench turns"
         description="Straight talk on scheduling, pricing, warranties, and what to expect at RKC Automotive."

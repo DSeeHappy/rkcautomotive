@@ -49,6 +49,7 @@ export default function AboutPage() {
         ]}
       />
       <PageHero
+        shell="about"
         eyebrow="About"
         title="Thirty years. One Englewood bay. Zero upsell theatre."
         description="Trusted automotive services for every make, model, and year — ASE-certified repairs at $120/hr with straight answers, fair pricing, and Hablamos Español."

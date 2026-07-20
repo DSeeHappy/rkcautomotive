@@ -26,6 +26,7 @@ import ServiceAreaGrid from './ServiceAreaGrid';
 import { MotionAnchor } from './MotionLink';
 import { useLanguage } from '@/lib/language';
 import { homeCopy } from '@/lib/homeCopy';
+import { localizedServiceDescription, localizedServiceName } from '@/lib/siteCopy';
 
 export default function HomeContent() {
   const { lang } = useLanguage();
@@ -80,8 +81,12 @@ export default function HomeContent() {
           <div className="space-y-5">
             {FEATURED_SERVICES.map((service, i) => {
               const reverse = i % 2 === 1;
-              const card =
-                copy.services.cards[service.slug as keyof typeof copy.services.cards] ?? service;
+              const name = localizedServiceName(service.slug, lang, service.name);
+              const description = localizedServiceDescription(
+                service.slug,
+                lang,
+                service.description,
+              );
               return (
                 <FadeIn key={service.href} delay={i * 0.04}>
                   <Link
@@ -105,9 +110,9 @@ export default function HomeContent() {
                         0{i + 1} · {copy.services.serviceLabel}
                       </p>
                       <h3 className="mt-3 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                        {card.name}
+                        {name}
                       </h3>
-                      <p className="mt-4 max-w-md text-base text-white/70">{card.description}</p>
+                      <p className="mt-4 max-w-md text-base text-white/70">{description}</p>
                       <span className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-primary-green-light transition group-hover:gap-3">
                         {copy.services.openService} <span aria-hidden>→</span>
                       </span>

@@ -8,7 +8,8 @@ import { getBrandReliabilitySnapshot } from '@/lib/brandReliabilityNotes';
 import { getBrandAccentGlow, getBrandPanelBackground, VEHICLE_BRANDS } from '@/lib/vehicleBrands';
 import { BUSINESS } from '@/lib/constants';
 import { useLanguage } from '@/lib/language';
-import { homeCopy } from '@/lib/homeCopy';
+import { siteCopy } from '@/lib/siteCopy';
+import { BRAND_CONTENT_ES } from '@/lib/i18n/brandContentEs';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import AnimatedBrandTabList from './AnimatedBrandTabList';
 import BrandLogo from './BrandLogo';
@@ -17,7 +18,7 @@ import FadeIn, { Stagger, StaggerItem } from './FadeIn';
 
 export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitles?: boolean }) {
   const { lang } = useLanguage();
-  const brandsCopy = homeCopy(lang).brands;
+  const brandsCopy = siteCopy(lang).brand;
 
   return (
     <FadeIn className="wrap pb-20 pt-12 sm:pb-24 sm:pt-16">
@@ -46,7 +47,7 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
               <Tab
                 key={brand.slug}
                 data-brand-tab
-                aria-label={`${brand.name} brand diagnostics`}
+                aria-label={brandsCopy.brandAria(brand.name)}
                 className="brand-tab group flex cursor-pointer items-center gap-2 rounded-full border border-[color:var(--line)] bg-white px-3 py-2 text-xs font-semibold text-ink-muted shadow-sm outline-none transition-colors sm:px-4 sm:py-2.5 sm:text-sm data-selected:border-transparent data-selected:bg-[#0c1222] data-selected:text-white data-hover:border-primary-green/40 data-hover:bg-white data-hover:text-foreground data-focus-visible:ring-2 data-focus-visible:ring-primary-green/30"
               >
                 <BrandLogo
@@ -65,12 +66,15 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
           {VEHICLE_BRANDS.map((brand) => {
             const profile = getBrandFailureProfile(brand.slug);
             const reliabilitySnapshot = getBrandReliabilitySnapshot(brand.slug);
+            const es = lang === 'es' ? BRAND_CONTENT_ES[brand.slug] : undefined;
+            const failureProfiles = es?.failureProfiles ?? profile?.failureProfiles ?? [];
+            const buyerWarning = es?.buyerWarning ?? profile?.buyerWarning ?? '';
+            const coloradoNotes = es?.coloradoNotes ?? profile?.coloradoNotes ?? '';
+            const brandName = profile?.name ?? brand.name;
 
             return (
               <TabPanel
                 key={brand.slug}
-                // Keep inactive panels in the DOM so mobile-first crawlers see all brand copy/links
-                // (Headless UI unmounts inactive panels by default).
                 unmount={false}
                 className="relative overflow-hidden rounded-[2rem] shadow-[0_32px_80px_-24px_rgba(12,18,34,0.55)]"
               >
@@ -105,15 +109,16 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
                   <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
-                        {brand.category === 'domestic' ? 'Domestic' : 'Import'} · Serviced at RKC Englewood
+                        {brand.category === 'domestic' ? brandsCopy.domestic : brandsCopy.import} ·{' '}
+                        {brandsCopy.servicedAt}
                       </p>
                       {plainPanelTitles ? (
                         <p className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                          {profile?.name ?? brand.name} Diagnostics
+                          {brandName} {brandsCopy.diagnostics}
                         </p>
                       ) : (
                         <h3 className="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
-                          {profile?.name ?? brand.name} Diagnostics
+                          {brandName} {brandsCopy.diagnostics}
                         </h3>
                       )}
                     </div>
@@ -121,7 +126,7 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
                       href="/vehicles-we-service#brands"
                       className="btn-ghost-light inline-flex shrink-0 items-center gap-2 self-start px-4 py-2 text-sm"
                     >
-                      All {brand.name} info
+                      {brandsCopy.allInfo(brand.name)}
                       <ChevronRight className="size-4" aria-hidden />
                     </Link>
                   </div>
@@ -129,7 +134,7 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
                   {profile ? (
                     <>
                       <p className="mt-10 text-sm font-semibold text-white/90 sm:text-base">
-                        {brand.name} — pick your model
+                        {brandsCopy.pickModel(brand.name)}
                       </p>
                       <Stagger className="mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
                         {reliabilitySnapshot ? (
@@ -138,10 +143,10 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
 
                         <StaggerItem className="rounded-2xl border border-white/20 bg-[#060a12]/45 p-5 backdrop-blur-sm">
                           <p className="text-sm font-bold uppercase tracking-[0.16em] text-white">
-                            Hyper-Specific Failure Profiles
+                            {brandsCopy.failureProfiles}
                           </p>
                           <div className="mt-4 space-y-5">
-                            {profile.failureProfiles.map((failure) => (
+                            {failureProfiles.map((failure) => (
                               <div key={failure.title}>
                                 <p className="text-sm font-bold leading-snug text-white">{failure.title}</p>
                                 <p className="mt-1.5 text-sm leading-relaxed text-white/85">{failure.description}</p>
@@ -165,11 +170,11 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
                                 <AlertTriangle className="size-5 text-amber-300" aria-hidden />
                               </span>
                               <p className="text-sm font-bold uppercase leading-snug tracking-[0.12em] text-amber-200">
-                                🚨 Buyer&apos;s Warning: What to Avoid / Inspect Before Buying
+                                🚨 {brandsCopy.buyerWarning}
                               </p>
                             </div>
                             <p className="relative mt-4 text-sm font-medium leading-relaxed text-white">
-                              {profile.buyerWarning}
+                              {buyerWarning}
                             </p>
                           </div>
                         </StaggerItem>
@@ -184,9 +189,9 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
                           >
                             <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-white">
                               <MapPin className="size-4 shrink-0" aria-hidden />
-                              Colorado Notes
+                              {brandsCopy.coloradoNotes}
                             </p>
-                            <p className="mt-4 text-sm font-medium leading-relaxed text-white">{profile.coloradoNotes}</p>
+                            <p className="mt-4 text-sm font-medium leading-relaxed text-white">{coloradoNotes}</p>
                           </div>
                         </StaggerItem>
                       </Stagger>
@@ -195,11 +200,11 @@ export default function BrandTabs({ plainPanelTitles = false }: { plainPanelTitl
 
                   <FadeIn delay={0.12} className="mt-8 flex flex-wrap gap-3">
                     <Link href="/contact" className="btn-green">
-                      Schedule {brand.name} Diagnostic
+                      {brandsCopy.scheduleDiagnostic(brand.name)}
                     </Link>
                     <PhoneLink className="btn-ghost-light inline-flex items-center gap-2">
                       <Phone className="size-4" aria-hidden />
-                      Call {BUSINESS.phone}
+                      {brandsCopy.call(BUSINESS.phone)}
                     </PhoneLink>
                   </FadeIn>
                 </div>

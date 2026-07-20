@@ -6,8 +6,15 @@ import { Dialog, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@head
 import { ChevronDown, Menu, Phone, Shield, Sparkles, X } from 'lucide-react';
 import { BUSINESS, NAV_LINKS, SERVICE_NAV_GROUPS, SERVICES } from '@/lib/constants';
 import AnimatedLogo from '@/app/components/ui/AnimatedLogo';
+import LanguageToggle from '@/app/components/ui/LanguageToggle';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import PhoneLink from '@/app/components/ui/PhoneLink';
+import { useLanguage } from '@/lib/language';
+import {
+  localizedServiceDescription,
+  localizedServiceName,
+  siteCopy,
+} from '@/lib/siteCopy';
 import { useGsapReveal } from '@/lib/useGsapReveal';
 
 const serviceBySlug = Object.fromEntries(SERVICES.map((s) => [s.slug, s]));
@@ -25,6 +32,8 @@ export default function Navigation() {
   // Opacity-only reveal — transform on fixed nav creates a stacking context that traps the dropdown under page layers in Chrome
   const navRef = useGsapReveal<HTMLElement>({ y: 0, duration: 0.55 });
   const links = NAV_LINKS.filter((l) => l.name !== 'Home');
+  const { lang } = useLanguage();
+  const copy = siteCopy(lang).nav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -57,6 +66,7 @@ export default function Navigation() {
   return (
     <nav
       ref={navRef}
+      lang={lang}
       className={`fixed inset-x-0 top-0 ${NAV_Z} overflow-visible ${
         scrolled
           ? 'glass-nav shadow-[0_8px_40px_-20px_rgba(12,18,34,0.35)]'
@@ -86,14 +96,14 @@ export default function Navigation() {
               >
                 <PopoverButton
                   ref={servicesButtonRef}
-                  aria-label="Services menu"
+                  aria-label={copy.servicesMenu}
                   className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold outline-none transition-colors ${
                     scrolled
                       ? 'text-foreground hover:bg-black/5 hover:text-primary-green'
                       : 'text-white/90 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  Services
+                  {copy.services}
                   <ChevronDown className="size-4 opacity-70" aria-hidden />
                 </PopoverButton>
                 <PopoverPanel
@@ -111,14 +121,14 @@ export default function Navigation() {
                           href="/services"
                           className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-green to-primary-blue px-4 py-3 text-sm font-semibold text-white transition hover:opacity-95"
                         >
-                          View all services →
+                          {copy.viewAll}
                         </Link>
                         <Link
                           href="/warranty"
                           className="inline-flex items-center gap-2 rounded-xl border border-primary-green/25 bg-white px-4 py-3 text-sm font-semibold text-primary-green transition-colors hover:bg-primary-green/8"
                         >
                           <Shield className="size-4" aria-hidden />
-                          Extended warranty
+                          {copy.extendedWarranty}
                         </Link>
                       </div>
                     </div>
@@ -127,7 +137,7 @@ export default function Navigation() {
                       {SERVICE_NAV_GROUPS.map((group) => (
                         <div key={group.label} className="p-2">
                           <p className="mb-2 px-2 text-[10px] font-bold uppercase tracking-[0.22em] text-ink-muted">
-                            {group.label}
+                            {copy.groups[group.label] ?? group.label}
                           </p>
                           <ul className="space-y-0.5">
                             {group.slugs.map((slug) => {
@@ -148,13 +158,13 @@ export default function Navigation() {
                                     </span>
                                     <span className="min-w-0">
                                       <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground group-hover:text-primary-green">
-                                        {service.name}
+                                        {localizedServiceName(slug, lang, service.name)}
                                         {isFeatured && (
-                                          <Sparkles className="size-3 text-primary-green" aria-label="Featured service" />
+                                          <Sparkles className="size-3 text-primary-green" aria-label={copy.featured} />
                                         )}
                                       </span>
                                       <span className="mt-0.5 block text-xs leading-snug text-ink-muted">
-                                        {service.description}
+                                        {localizedServiceDescription(slug, lang, service.description)}
                                       </span>
                                     </span>
                                   </Link>
@@ -181,9 +191,11 @@ export default function Navigation() {
                   : 'text-white/90 hover:bg-white/10 hover:text-white'
               }`}
             >
-              {link.name}
+              {copy.links[link.href] ?? link.name}
             </Link>
           ))}
+
+          <LanguageToggle variant="nav" scrolled={scrolled} className="ml-1" />
 
           <MotionAnchor
             href={BUSINESS.phoneHref}
@@ -194,14 +206,17 @@ export default function Navigation() {
           </MotionAnchor>
         </div>
 
-        <button
-          type="button"
-          className={`shrink-0 rounded-full p-2.5 lg:hidden ${scrolled ? 'text-foreground' : 'text-white'}`}
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
-        >
-          <Menu className="size-6" />
-        </button>
+        <div className="flex items-center gap-1.5 lg:hidden">
+          <LanguageToggle variant="nav" scrolled={scrolled} />
+          <button
+            type="button"
+            className={`shrink-0 rounded-full p-2.5 ${scrolled ? 'text-foreground' : 'text-white'}`}
+            onClick={() => setOpen(true)}
+            aria-label={copy.openMenu}
+          >
+            <Menu className="size-6" />
+          </button>
+        </div>
       </div>
 
       <Dialog open={open} onClose={setOpen} className="lg:hidden">
@@ -211,19 +226,19 @@ export default function Navigation() {
         >
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-4 sm:px-6 sm:py-5">
             <AnimatedLogo variant="nav" href="/" onDarkBackground />
-            <button type="button" onClick={() => setOpen(false)} className="p-2" aria-label="Close menu">
+            <button type="button" onClick={() => setOpen(false)} className="p-2" aria-label={copy.closeMenu}>
               <X className="size-6" />
             </button>
           </div>
           <div className="flex-1 space-y-1 px-3 py-6">
             <Link href="/" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5">
-              Home
+              {copy.home}
             </Link>
             <Link href="/services" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5">
-              All Services
+              {copy.allServices}
             </Link>
             <Link href="/warranty" onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-lg font-semibold text-primary-green-light hover:bg-white/5">
-              Extended Warranty
+              {copy.extendedWarranty}
             </Link>
             {links.map((link) => (
               <Link
@@ -232,12 +247,14 @@ export default function Navigation() {
                 onClick={() => setOpen(false)}
                 className="block rounded-xl px-4 py-3 text-lg font-semibold hover:bg-white/5"
               >
-                {link.name}
+                {copy.links[link.href] ?? link.name}
               </Link>
             ))}
             {SERVICE_NAV_GROUPS.map((group) => (
               <div key={group.label}>
-                <p className="mt-6 px-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">{group.label}</p>
+                <p className="mt-6 px-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
+                  {copy.groups[group.label] ?? group.label}
+                </p>
                 {group.slugs.map((slug) => {
                   const service = serviceBySlug[slug];
                   if (!service) return null;
@@ -248,7 +265,7 @@ export default function Navigation() {
                       onClick={() => setOpen(false)}
                       className="block rounded-xl px-4 py-2.5 text-sm text-white/70 hover:bg-white/5 hover:text-white"
                     >
-                      {service.name}
+                      {localizedServiceName(slug, lang, service.name)}
                     </Link>
                   );
                 })}
@@ -258,7 +275,7 @@ export default function Navigation() {
           <div className="border-t border-white/10 p-4">
             <PhoneLink className="btn-green w-full justify-center">
               <Phone className="size-5" aria-hidden />
-              Call {BUSINESS.phone}
+              {copy.call} {BUSINESS.phone}
             </PhoneLink>
           </div>
         </DialogPanel>
