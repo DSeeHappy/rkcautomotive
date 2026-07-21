@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
@@ -15,6 +16,7 @@ import {
 } from '@/lib/i18n/vehicleCopy';
 import { localizeReliabilitySnapshot } from '@/lib/i18n/reliabilitySnapshotsEs';
 import type { ModelReliabilitySnapshot } from '@/lib/modelReliabilityNotes';
+import type { ModelVideoSources } from '@/lib/photos';
 import type { VehicleModel } from '@/lib/vehicleModels';
 
 type ModelHubContentProps = {
@@ -24,6 +26,10 @@ type ModelHubContentProps = {
   siblingModels: VehicleModel[];
   modelSnapshot: ModelReliabilitySnapshot | null;
   heroDescription: string;
+  /** Optional per-model hero video override — poster stays LCP; reduced motion keeps poster */
+  heroVideo?: ModelVideoSources | null;
+  /** Former hero photo, relocated below when a video takes over the hero */
+  relocatedHeroImage?: string | null;
 };
 
 export default function ModelHubContent({
@@ -33,6 +39,8 @@ export default function ModelHubContent({
   siblingModels,
   modelSnapshot,
   heroDescription,
+  heroVideo = null,
+  relocatedHeroImage = null,
 }: ModelHubContentProps) {
   const { lang } = useLanguage();
   const copy = vehicleCopy(lang).hub;
@@ -45,6 +53,10 @@ export default function ModelHubContent({
   const resolvedHero =
     snapshot?.intro ??
     localizedVehicleDescription(vehicle.brandName, vehicle.model, vLabel, lang, heroDescription);
+  const heroImageAlt =
+    lang === 'es'
+      ? `Servicio ${vehicle.brandName} ${vehicle.model} en RKC Automotive Englewood CO`
+      : `${vehicle.brandName} ${vehicle.model} service at RKC Automotive Englewood CO`;
 
   return (
     <div lang={lang}>
@@ -53,11 +65,8 @@ export default function ModelHubContent({
         title={copy.repairTitle(vehicle.brandName, vehicle.model)}
         description={resolvedHero}
         imageSrc={image}
-        imageAlt={
-          lang === 'es'
-            ? `Servicio ${vehicle.brandName} ${vehicle.model} en RKC Automotive Englewood CO`
-            : `${vehicle.brandName} ${vehicle.model} service at RKC Automotive Englewood CO`
-        }
+        imageAlt={heroImageAlt}
+        video={heroVideo ?? undefined}
         breadcrumbs={[
           { label: copy.home, href: '/' },
           { label: copy.vehiclesCrumb, href: '/vehicles-we-service' },
@@ -102,6 +111,22 @@ export default function ModelHubContent({
               </li>
             ))}
           </ul>
+
+          {relocatedHeroImage ? (
+            <FadeIn className="mt-10">
+              <figure className="overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--accent-gray-light)]">
+                <div className="relative aspect-[16/9] w-full max-w-3xl">
+                  <Image
+                    src={relocatedHeroImage}
+                    alt={heroImageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 768px"
+                  />
+                </div>
+              </figure>
+            </FadeIn>
+          ) : null}
 
           <div className="mt-10 flex flex-wrap gap-3">
             <PhoneLink className="btn-green">{copy.call(BUSINESS.phone)}</PhoneLink>

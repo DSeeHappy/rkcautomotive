@@ -6,6 +6,11 @@ import { getModelKnowledgeOverview } from '@/lib/knowledge';
 import { buildModelHubPath, getAllModelHubParams } from '@/lib/modelHubRoutes';
 import { getModelReliabilitySnapshot } from '@/lib/modelReliabilityNotes';
 import { createPageMetadata } from '@/lib/og';
+import {
+  MODEL_HERO_PHOTO_RELOCATED,
+  MODEL_HERO_VIDEOS,
+  MODEL_KNOWLEDGE_VIDEOS,
+} from '@/lib/photos';
 import { createBreadcrumbSchema, createItemListSchema, createWebPageSchema } from '@/lib/seo';
 import { getModelsByBrand, resolveModelImageForHub } from '@/lib/vehicleModels';
 import { getVehicleImage, resolveVehicleImageAlt } from '@/lib/vehicleImages';
@@ -58,6 +63,11 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
   const brand = getBrandBySlug(make);
   const hubPath = buildModelHubPath(make, vehicle.model);
   const image = resolveModelImageForHub(vehicle);
+  const modelKey = `${make}/${model}`;
+  const heroVideo = MODEL_HERO_VIDEOS[modelKey] ?? null;
+  const knowledgeVideo = MODEL_KNOWLEDGE_VIDEOS[modelKey] ?? null;
+  const relocatedHeroImage =
+    heroVideo && MODEL_HERO_PHOTO_RELOCATED.has(modelKey) ? image : null;
   const siblingModels = getModelsByBrand(make).filter((m) => m.slug !== vehicle.slug);
   const modelSnapshot = getModelReliabilitySnapshot(make, model);
   const heroDescription = modelSnapshot?.intro ?? vehicle.description;
@@ -70,7 +80,7 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
     vehicle.model,
   );
   const knowledgeImageSource =
-    vehicleImage.record?.sourceUrl && vehicleImage.matchType === 'exact'
+    vehicleImage.record?.sourceUrl?.includes('wikimedia.org') && vehicleImage.matchType === 'exact'
       ? 'Vehicle image catalog (Wikimedia Commons, CC BY-SA where noted)'
       : vehicleImage.matchType === 'make'
         ? `Representative ${vehicle.brandName} image — exact ${vehicle.model} photo pending catalog`
@@ -109,6 +119,8 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
         siblingModels={siblingModels}
         modelSnapshot={modelSnapshot ?? null}
         heroDescription={heroDescription}
+        heroVideo={heroVideo}
+        relocatedHeroImage={relocatedHeroImage}
       />
 
       {knowledgeOverview?.isPilot ? (
@@ -119,6 +131,7 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
           imageSrc={knowledgeImageSrc}
           imageAlt={knowledgeImageAlt}
           imageSourceLabel={knowledgeImageSource}
+          video={knowledgeVideo}
         />
       ) : null}
     </div>

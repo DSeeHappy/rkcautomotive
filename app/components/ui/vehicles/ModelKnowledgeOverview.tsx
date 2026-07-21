@@ -4,7 +4,9 @@ import Image from 'next/image';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { useLanguage } from '@/lib/language';
 import { knowledgeCopy } from '@/lib/i18n/knowledgeCopy';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import OemSpecValue from '@/app/components/ui/vehicles/OemSpecValue';
+import type { ModelVideoSources } from '@/lib/photos';
 import type {
   DataSource,
   ModelKnowledgeOverview as ModelKnowledgeOverviewData,
@@ -19,6 +21,8 @@ type ModelKnowledgeOverviewProps = {
   imageSrc?: string;
   imageAlt?: string;
   imageSourceLabel?: string;
+  /** Optional looping video for the figure — poster stays LCP; reduced motion keeps poster */
+  video?: ModelVideoSources | null;
 };
 
 type SectionLayout = 'identity' | 'prose' | 'observations' | 'spec-grid';
@@ -291,11 +295,15 @@ export default function ModelKnowledgeOverview({
   imageSrc,
   imageAlt,
   imageSourceLabel,
+  video = null,
 }: ModelKnowledgeOverviewProps) {
   const { lang } = useLanguage();
   const copy = knowledgeCopy(lang);
+  const reduceMotion = usePrefersReducedMotion();
   const resolvedAlt =
     imageAlt ?? `${brandName} ${modelName} service at RKC Automotive Englewood CO`;
+  const figureSrc = video?.poster ?? imageSrc;
+  const showVideo = Boolean(video) && !reduceMotion;
 
   const displaySections = buildDisplaySections(overview);
   const pageSources = collectUniqueSources(displaySections);
@@ -322,17 +330,31 @@ export default function ModelKnowledgeOverview({
           ) : null}
         </FadeIn>
 
-        {imageSrc ? (
+        {figureSrc ? (
           <FadeIn className="mt-8 sm:mt-10">
             <figure className="overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--accent-gray-light)]">
               <div className="relative aspect-[16/9] w-full max-w-3xl">
                 <Image
-                  src={imageSrc}
+                  src={figureSrc}
                   alt={resolvedAlt}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 768px"
                 />
+                {showVideo && video ? (
+                  <video
+                    className="absolute inset-0 size-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-hidden
+                  >
+                    <source src={video.webm} type="video/webm" />
+                    <source src={video.mp4} type="video/mp4" />
+                  </video>
+                ) : null}
               </div>
               {imageSourceLabel ? (
                 <figcaption className="border-t border-[color:var(--line)] px-4 py-2 text-xs text-ink-muted">

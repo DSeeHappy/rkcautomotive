@@ -71,6 +71,61 @@ export const CHECK_ENGINE_HERO_VIDEO = {
   posterJpg: '/videos/check-engine-hero-poster.jpg',
 } as const;
 
+/** Shared shape for hero/figure video sources (poster stays LCP) */
+export type ModelVideoSources = {
+  webm: string;
+  mp4: string;
+  poster: string;
+  posterJpg: string;
+};
+
+/**
+ * Per-model hub hero video overrides, keyed by `${makeSlug}/${modelSlug}`.
+ * Mirrors the service heroVideo pattern — models not listed keep their photo hero.
+ */
+export const MODEL_HERO_VIDEOS: Record<string, ModelVideoSources> = {
+  'tesla/model-y': {
+    webm: '/videos/model-y-hero.webm',
+    mp4: '/videos/model-y-hero.mp4',
+    poster: '/videos/model-y-hero-poster.webp',
+    posterJpg: '/videos/model-y-hero-poster.jpg',
+  },
+  'tesla/model-3': {
+    webm: '/videos/model-3-hero.webm',
+    mp4: '/videos/model-3-hero.mp4',
+    poster: '/videos/model-3-hero-poster.webp',
+    posterJpg: '/videos/model-3-hero-poster.jpg',
+  },
+  'toyota/4runner': {
+    webm: '/videos/4runner-hero.webm',
+    mp4: '/videos/4runner-hero.mp4',
+    poster: '/videos/4runner-hero-poster.webp',
+    posterJpg: '/videos/4runner-hero-poster.jpg',
+  },
+  'ford/bronco': {
+    webm: '/videos/bronco-hero.webm',
+    mp4: '/videos/bronco-hero.mp4',
+    poster: '/videos/bronco-hero-poster.webp',
+    posterJpg: '/videos/bronco-hero-poster.jpg',
+  },
+};
+
+/** Per-model knowledge-overview figure video overrides, keyed by `${makeSlug}/${modelSlug}` */
+export const MODEL_KNOWLEDGE_VIDEOS: Record<string, ModelVideoSources> = {
+  'tesla/cybertruck': {
+    webm: '/videos/cybertruck-hero.webm',
+    mp4: '/videos/cybertruck-hero.mp4',
+    poster: '/videos/cybertruck-hero-poster.webp',
+    posterJpg: '/videos/cybertruck-hero-poster.jpg',
+  },
+};
+
+/**
+ * Models whose hero video displaced a photo the page should keep —
+ * the former hero photo relocates to the services section figure.
+ */
+export const MODEL_HERO_PHOTO_RELOCATED = new Set(['toyota/4runner', 'ford/bronco']);
+
 /** Full-bleed hero backgrounds — cap decoded width at 1920px for next/image */
 export const HERO_IMAGE_SIZES =
   '(max-width: 640px) 100vw, (max-width: 1200px) 100vw, 1920px';

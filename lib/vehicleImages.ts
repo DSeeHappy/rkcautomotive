@@ -1353,10 +1353,10 @@ export const VEHICLE_IMAGE_DATA: VehicleImageRecord[] = [
     modelSlug: 'model-3',
     yearRange: '2017–2026',
     imagePath: '/vehicles/tesla/model-3.webp',
-    sourceUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/2019_Tesla_Model_3_Long_Range_Dual_Motor_in_Red_Multi-Coat%2C_front_left%2C_2021-05-30.jpg',
+    sourceUrl: 'User-provided stock video frame (Storyblocks SBV-324626396)',
     alt: 'Tesla Model 3 high-voltage drivetrain service in Englewood CO',
     fallbackNeeded: false,
-    license: 'CC BY-SA 4.0',
+    license: 'Licensed stock footage (user-provided)',
     quality: 9,
   },
   {
@@ -1366,10 +1366,10 @@ export const VEHICLE_IMAGE_DATA: VehicleImageRecord[] = [
     modelSlug: 'model-y',
     yearRange: '2020–2026',
     imagePath: '/vehicles/tesla/model-y.webp',
-    sourceUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a4/2022_Tesla_Model_Y.jpg',
+    sourceUrl: 'User-provided stock video frame (Storyblocks SBV-353294714)',
     alt: 'Tesla Model Y factory maintenance service near Denver CO',
     fallbackNeeded: false,
-    license: 'CC BY-SA 4.0',
+    license: 'Licensed stock footage (user-provided)',
     quality: 9,
   },
   {
@@ -2601,10 +2601,10 @@ export const VEHICLE_IMAGE_DATA: VehicleImageRecord[] = [
     modelSlug: 'cybertruck',
     yearRange: '2024–2026',
     imagePath: '/vehicles/tesla/cybertruck.webp',
-    sourceUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/20191121-tesla-cybertruck-front-left-wheel.jpg',
+    sourceUrl: 'User-provided stock video frame (Storyblocks SBV-352865127)',
     alt: 'Tesla Cybertruck electric truck service in Englewood CO',
     fallbackNeeded: false,
-    license: 'CC BY-SA 4.0',
+    license: 'Licensed stock footage (user-provided)',
     quality: 8.5,
   }
 ];
