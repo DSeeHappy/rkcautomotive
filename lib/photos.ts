@@ -108,6 +108,12 @@ export const MODEL_HERO_VIDEOS: Record<string, ModelVideoSources> = {
     poster: '/videos/bronco-hero-poster.webp',
     posterJpg: '/videos/bronco-hero-poster.jpg',
   },
+  'ford/mustang': {
+    webm: '/videos/mustang-hero.webm',
+    mp4: '/videos/mustang-hero.mp4',
+    poster: '/videos/mustang-hero-poster.webp',
+    posterJpg: '/videos/mustang-hero-poster.jpg',
+  },
 };
 
 /** Per-model knowledge-overview figure video overrides, keyed by `${makeSlug}/${modelSlug}` */
@@ -124,7 +130,11 @@ export const MODEL_KNOWLEDGE_VIDEOS: Record<string, ModelVideoSources> = {
  * Models whose hero video displaced a photo the page should keep —
  * the former hero photo relocates to the services section figure.
  */
-export const MODEL_HERO_PHOTO_RELOCATED = new Set(['toyota/4runner', 'ford/bronco']);
+export const MODEL_HERO_PHOTO_RELOCATED = new Set([
+  'toyota/4runner',
+  'ford/bronco',
+  'ford/mustang',
+]);
 
 /** Full-bleed hero backgrounds — cap decoded width at 1920px for next/image */
 export const HERO_IMAGE_SIZES =
