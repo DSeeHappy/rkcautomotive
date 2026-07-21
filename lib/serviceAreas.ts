@@ -205,6 +205,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Downtown Englewood, Arapahoe Acres, and the Hampden corridor are all within a few minutes of our bay — many customers drop off on the way to work along S Broadway.',
       'If you live near Belleview Park or Broken Arrow, you can walk in for oil changes and brake checks when bays are open, or call ahead for same-day diagnostics.',
+      'Our bays sit on W Evans Ave just west of S Broadway, a few minutes from Swedish Medical Center and Craig Hospital, so dropping a car off before work or an appointment nearby is easy.',
+      'Englewood sees the same Front Range hail and freeze-thaw cycles as the rest of the south metro — we check batteries, coolant strength, and tire condition before winter and inspect for hail-related damage after spring storms.',
     ],
     'RKC Automotive is your Englewood auto repair shop at 2120 W Evans Ave. ASE-certified brakes, diagnostics, oil changes & more. Call (720) 749-3965.'
   ),
@@ -288,6 +290,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Drivers from Wash Park, Platt Park, and University Hills often reach us in under 15 minutes via S Broadway or Hampden — faster than fighting traffic to a dealer on the north side.',
       'Capitol Hill, Five Points, and RiNo commuters use RKC when they want a second opinion on check-engine codes without the dealership markup.',
+      'Daily I-25 and S Broadway commuting is classic severe service: short trips, cold starts, and stop-and-go heat that wear batteries, brakes, and fluids faster than the sticker schedule assumes.',
+      'From Harvey Park, Ruby Hill, and Athmar Park the quickest route is usually Federal Blvd north to W Evans Ave east; from Washington Park and Platt Park, S Broadway south runs straight to us.',
     ],
     'Auto repair for Denver neighborhoods near RKC Automotive in Englewood. Wash Park, Capitol Hill, Five Points, Highland & more. Call (720) 749-3965.'
   ),
@@ -325,6 +329,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Historic Main Street and Grant Ranch residents head north on Santa Fe or Broadway — our W Evans Ave shop is a straight shot from most Littleton neighborhoods.',
       'Ken Caryl and Columbine Hills families trust RKC for multi-vehicle maintenance because we explain every line on the estimate before work starts.',
+      'From downtown Littleton the drive is about 12–18 minutes: take S Santa Fe Dr (US-85) north and cut east on W Evans Ave, or stay on S Broadway the whole way. C-470 and Wadsworth work well from the Ken Caryl side.',
+      'Littleton sits in the south-metro hail corridor, and spring storms send us a wave of vehicles needing post-storm inspections. We also see plenty of high-mileage commuters from the Mineral Ave and Chatfield area that need suspension and brake attention.',
     ],
     'Auto repair serving Littleton, CO neighborhoods. RKC Automotive in nearby Englewood — brakes, oil changes, diagnostics. Call (720) 749-3965.'
   ),
@@ -360,6 +366,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Fort Logan and Hampden Heights are among our closest customers — many Sheridan drivers are here in under 10 minutes for brakes and oil changes.',
       'If you commute along Sheridan Boulevard or Federal, our shop is an easy stop before or after work on W Evans Ave.',
+      'From the Fort Logan area, take W Oxford Ave or W Hampden Ave (US-285) east to S Broadway, then south to W Evans — usually under 10 minutes outside rush hour.',
+      'Sheridan drivers deal with the same rough pavement and winter potholes along Federal Blvd and Sheridan Blvd that we do; we check alignments, tie rods, and tire wear patterns on every visit.',
     ],
     'Auto repair near Sheridan, CO. RKC Automotive on W Evans Ave in Englewood — minutes from Fort Logan & Hampden Heights. Call (720) 749-3965.'
   ),
@@ -397,6 +405,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Denver Tech Center and Orchard Hills professionals choose RKC for European and luxury vehicles — we diagnose root causes, not just dashboard codes.',
       'Belleview and Happy Canyon residents can take Belleview east to Broadway south or I-25 to Hampden west — both routes reach our bay in about 15 minutes.',
+      'DTC commuters rack up highway miles on I-25 quickly, which means tire rotations, alignments, and brake service come due sooner than the calendar suggests. We track intervals so nothing slips.',
+      'Many Greenwood Village customers drop off in the morning and take the light rail or a short rideshare back toward the office, then pick up after work.',
     ],
     'Auto repair serving Greenwood Village, CO — Orchard Hills, DTC & Belleview. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -433,6 +443,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Southglenn and Willow Creek commuters heading north on Broadway pass our Englewood shop daily — ideal for scheduled maintenance before the I-25 merge.',
       'Fox Ridge and Piney Creek families count on RKC for check-engine diagnostics and transmission fluid service without the dealership wait.',
+      'From Southglenn and the Streets at SouthGlenn area, S Broadway north is the direct route — about 15 minutes. Willow Creek and Cherry Knolls drivers often take University Blvd or Holly St to Hampden west.',
+      'Centennial sits squarely in the Front Range hail corridor, and we inspect roofs, hoods, and windshields for storm damage each spring alongside routine maintenance.',
     ],
     'Auto repair for Centennial, CO — Southglenn, Willow Creek, Cherry Knolls & more. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -469,6 +481,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Belmar and Green Mountain drivers take Hampden or Alameda east to W Evans — worth the trip when you want ASE-certified work and a posted labor rate.',
       'Bear Creek and Kendrick Lake residents choose RKC for suspension, steering, and alignment work that chain shops often refer out.',
+      'The usual route from Belmar is W Alameda Ave east to S Broadway south, or Hampden Ave (US-285) straight east — about 20 minutes from most of Lakewood. Green Mountain drivers can drop down to Hampden via Kipling or Wadsworth.',
+      'Lakewood vehicles that head into the foothills on weekends need brakes and cooling systems in good shape; we check both before summer road-trip season and before winter.',
     ],
     'Auto repair serving Lakewood, CO — Belmar, Green Mountain, Bear Creek & more. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -505,6 +519,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Southlands, Saddle Rock, and Heather Ridge drivers make the trip for honest second opinions — we test and verify before recommending parts.',
       'Before Colorado emissions season, Aurora customers visit for exhaust, catalytic converter, and OBD diagnostics with written estimates upfront.',
+      'East-metro Aurora is open country for hail, and we see the results every storm season — bring the car in after a storm and we will document damage for your insurance claim while it is on the lift.',
+      'Long commutes on I-225 and E-470 add miles fast; Aurora customers often bundle oil service with tire rotation and a brake check in one visit to keep the trip worthwhile.',
     ],
     'Auto repair for south Aurora, CO neighborhoods. RKC Automotive in Englewood — honest diagnostics & ASE-certified service. Call (720) 749-3965.'
   ),
@@ -538,6 +554,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Cherry Hills Country Club and Gallup Gardens residents appreciate our no-pressure approach — professional service for premium and daily drivers alike.',
       'We are minutes from Quincy Ave and the Greenwood Village border via Hampden or University — convenient for preventative maintenance between seasons.',
+      'From the Cherry Hills Country Club area, University Blvd north to Hampden west is the simplest route, about 10–12 minutes. Happy Canyon Rd and S Broadway also work from the south end of the Village.',
+      'We service the full range of vehicles Cherry Hills households keep, from European sedans to SUVs and trucks, with the same written-estimate process on every job.',
     ],
     'Auto repair near Cherry Hills Village, CO. RKC Automotive in Englewood — expert service for luxury & daily drivers. Call (720) 749-3965.'
   ),
@@ -575,6 +593,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Northridge, Backcountry, and Town Center families are regulars for oil changes and brake work — Broadway north is the most direct route to our bay.',
       'Wildcat Reserve and Eastridge commuters often schedule morning drop-offs and pick up after work thanks to our Englewood location.',
+      'The most direct route from Town Center and Northridge is S Broadway north — about 15–20 minutes. From Backcountry and the south end, C-470 to Santa Fe north and W Evans Ave east avoids I-25 traffic.',
+      'Highlands Ranch families put serious miles on daily drivers between school runs and I-25 or C-470 commutes, so we keep brake, tire, and fluid intervals on a schedule that matches real use.',
     ],
     'Auto repair serving Highlands Ranch, CO — Northridge, Backcountry, Town Center & more. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -609,6 +629,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'RidgeGate and Heritage Hills residents use I-25 north to Hampden or Broadway through Centennial — both routes reach RKC in about 15 minutes.',
       'Park Meadows and Lincoln Station workers stop in for quick oil changes and battery testing during lunch breaks when slots are open.',
+      'From RidgeGate, I-25 north to the Hampden Ave (US-285) exit and west to W Evans takes about 15 minutes outside rush hour. Lincoln Ave to S Broadway north is a good backup when the highway backs up.',
+      'Newer Lone Tree vehicles under factory maintenance plans are welcome — we follow the factory schedule and document everything so warranty coverage stays intact.',
     ],
     'Auto repair serving Lone Tree, CO — RidgeGate, Heritage Hills & Park Meadows area. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -642,6 +664,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Cherry Creek corridor and Colorado Blvd drivers are 10 minutes from our shop — popular for brake inspections and AC diagnostics.',
       'Village East and Creekside residents take Leetsdale west to Broadway south for full-service repair without crossing downtown.',
+      'From Infinity Park and the Colorado Blvd corridor, head south to Hampden Ave (US-285) and west to W Evans — about 10 minutes. Cherry Creek area drivers can also take S University Blvd south.',
+      'Glendale vehicles that live on short trips around Cherry Creek rarely reach full operating temperature, which is hard on oil and batteries; we adjust maintenance advice to how the car is actually driven.',
     ],
     'Auto repair near Glendale, CO and the Cherry Creek corridor. RKC Automotive on W Evans Ave — brakes, diagnostics, oil changes. Call (720) 749-3965.'
   ),
@@ -676,6 +700,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Applewood and Prospect Park drivers heading east on 38th or Alameda choose RKC over quick-lube chains for coolant flushes and winter prep.',
       'Crown Hill and Ranchland residents trust our electrical and charging system diagnostics before long commutes across the metro.',
+      'The typical route is Wadsworth Blvd south to Hampden Ave (US-285) east, about 25 minutes from the 38th Ave corridor. I-70 to I-25 south works when Wadsworth is slow.',
+      'Wheat Ridge has plenty of older, well-kept vehicles, and we are happy to maintain high-mileage cars and trucks that other shops write off — honest triage on what is worth fixing and what is not.',
     ],
     'Auto repair serving Wheat Ridge, CO — Applewood, Prospect Park & Bel Aire. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -709,6 +735,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Red Rocks and Bear Creek canyon drivers visit before mountain trips for brake, suspension, and pre-trip inspections.',
       'Mount Vernon Country Club and downtown Morrison residents take Hwy 285 east to Wadsworth — plan extra time on concert nights but routine service is quick.',
+      'Canyon driving on Bear Creek Rd and the climb toward Evergreen is hard on brakes and transmissions. Before Red Rocks season or a winter in the foothills, we check pad life, fluid condition, and cooling systems.',
+      'The drive from downtown Morrison to our shop runs about 25 minutes via US-285 (Hampden) east; many Morrison customers schedule a full inspection and oil service in one visit to make the trip count.',
     ],
     'Auto repair serving Morrison, CO — Bear Creek, Red Rocks & west metro. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -741,6 +769,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Bow Mar Lake and Bow Mar South homeowners are often here in under 10 minutes via Wadsworth or Broadway — one of our closest service areas.',
       'Grant Ranch border residents use RKC for scheduled maintenance without high-pressure upsells common at national chains.',
+      'From Bow Mar Lake, S Wadsworth Blvd north to W Evans Ave east is the quick route — often under 10 minutes. S Sheridan Blvd and W Bowles Ave also connect easily from the west side of the neighborhood.',
+      'Bow Mar households with multiple vehicles appreciate having one shop that knows the whole fleet; we keep service histories on file and flag upcoming maintenance before it becomes urgent.',
     ],
     'Auto repair near Bow Mar, CO and Bow Mar Lake. RKC Automotive in Englewood — ASE-certified maintenance minutes away. Call (720) 749-3965.'
   ),
@@ -775,6 +805,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Columbine Valley and Columbine Knolls neighbors are minutes away on Wadsworth or Pierce — many are repeat customers for brakes and tires.',
       'Ken Caryl border drivers choose RKC for family fleet maintenance because we post $120/hr online and explain every repair in writing.',
+      'From Columbine Knolls and Dutch Creek, Wadsworth Blvd or Pierce St north to W Evans Ave runs about 10 minutes. Drivers near Chatfield State Park can take Wadsworth straight up from C-470.',
+      'Weekend trips toward Chatfield and the foothills mean trailers, boats, and loaded SUVs; we inspect hitches, trailer wiring, and brake controllers as part of pre-season checks.',
     ],
     'Auto repair serving Columbine and Columbine Valley, CO. RKC Automotive in Englewood — ASE-certified, minutes away. Call (720) 749-3965.'
   ),
@@ -810,6 +842,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Olde Town Arvada and Ralston Valley drivers head east on Colfax or 58th to Wadsworth south — a reliable alternative to franchise shops.',
       'Candelas and Leyden Rock west-side commuters visit when they want thorough diagnostics on imports and domestic daily drivers.',
+      'From Olde Town Arvada, Wadsworth Blvd south to Hampden Ave east is the dependable route — about 30 minutes. I-70 east to I-25 south is an alternative during off-peak hours.',
+      'Arvada winters mean cold starts and short trips, which are rough on batteries and exhaust systems; we test both during fall inspections so you are not surprised in January.',
     ],
     'Auto repair serving Arvada, CO — Olde Town, Ralston Valley & west metro. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -844,6 +878,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Stonegate and The Pinery families drive north on Parker Rd or I-25 to our Englewood bay for transmission and engine diagnostics.',
       'Stroh Ranch and Meridian Village residents schedule preventative maintenance before school-year commutes intensify.',
+      'The usual route from Parker is Parker Rd (CO-83) north to Arapahoe Rd west, then I-25 north to Hampden west — about 30–35 minutes. E-470 to I-25 is faster when traffic cooperates.',
+      'Parker sits in one of the more hail-prone stretches of the Front Range, and spring storms regularly bring vehicles in for post-storm inspections. We document what we find so insurance claims go smoothly.',
     ],
     'Auto repair serving Parker, CO — Stonegate, The Pinery & Meridian Village. RKC Automotive in Englewood. Call (720) 749-3965.'
   ),
@@ -877,6 +913,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Downtown Golden and Coal Creek drivers take 6th or Colfax east to Wadsworth — RKC is a trusted stop before canyon and mountain driving.',
       'North Golden and Golden Gate Canyon commuters visit for brake and battery work before winter weather hits Lookout Mountain routes.',
+      'From downtown Golden, 6th Ave east to Wadsworth Blvd south, then Hampden Ave east reaches us in about 30 minutes. Many Golden customers combine service with errands along the Hampden corridor.',
+      'Mountain driving from Golden puts real heat into brakes and cooling systems on grades like Lookout Mountain and US-40; we inspect both before summer and ski seasons so canyon trips stay uneventful.',
     ],
     'Auto repair serving Golden, CO and west metro. RKC Automotive in Englewood — brakes, diagnostics & maintenance. Call (720) 749-3965.'
   ),
@@ -909,6 +947,8 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
     [
       'Sloans Lake border and 20th Ave corridor residents cross into Englewood in about 15 minutes via Sheridan or Alameda to Hampden.',
       'Edgewater drivers near Jefferson Park choose RKC for honest check-engine diagnostics without the Colfax quick-lube rush.',
+      'Sheridan Blvd south to W Evans Ave east is the simplest route, usually 15–20 minutes. From the 26th Ave corridor, Wadsworth south to Hampden east works just as well.',
+      "Edgewater's older housing stock means older driveways and older vehicles — we keep high-mileage daily drivers safe and reliable with prioritized, written estimates instead of pressure.",
     ],
     'Auto repair near Edgewater, CO and Sloans Lake. RKC Automotive in Englewood — brakes, diagnostics, oil changes. Call (720) 749-3965.'
   ),

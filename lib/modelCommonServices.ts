@@ -20,6 +20,12 @@ type ServiceDef = {
   name: string;
   href: string;
   describe: (ctx: ModelServiceContext) => string;
+  /**
+   * Alternate full descriptions for high-frequency services. Picked
+   * deterministically by seed so different model pages show different
+   * openers instead of the same blurb with only the model name swapped.
+   */
+  variants?: Array<(ctx: ModelServiceContext) => string>;
 };
 
 const LOCAL =
@@ -33,12 +39,15 @@ const LOCAL =
  * (labels local-line-v1..v6, routing smart-spark verified in TELEMETRY_LEDGER)
  * and human-reviewed. Do not add cities or claims not in the original.
  */
+// Six distinct phrasings of the same verified fact. The original templated
+// sentence (LOCAL) stays only as the build-time marker and is never rendered.
 const LOCAL_VARIANTS = [
-  LOCAL,
   'Drivers from south Denver, Littleton, Aurora, and Highlands Ranch come to RKC Automotive in Englewood.',
   'RKC Automotive in Englewood, Colorado, serves drivers from the south Denver metro, Littleton, Aurora, and Highlands Ranch.',
-  'RKC Automotive in Englewood, Colorado welcomes drivers from south Denver, Littleton, Aurora, and Highlands Ranch.',
+  'RKC Automotive in Englewood welcomes drivers from south Denver, Littleton, Aurora, and Highlands Ranch.',
   'South Denver, Littleton, Aurora, and Highlands Ranch drivers are served by RKC Automotive in Englewood.',
+  'From our Englewood shop, RKC Automotive looks after drivers coming from south Denver, Littleton, Aurora, and Highlands Ranch.',
+  'RKC Automotive works out of Englewood and regularly serves south Denver, Littleton, Aurora, and Highlands Ranch drivers.',
 ] as const;
 
 /** Small deterministic hash so the same page always renders the same wording. */
@@ -81,6 +90,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
               : `${ctx.brandName} ${ctx.model} 4WD and transfer case components need scheduled fluid service before Colorado winter.`;
       return `${platform} RKC drains and refills transfer case fluid, inspects front axle actuators and U-joints, and tests shift modes for grinding or delayed engagement. ${LOCAL}`;
     },
+    variants: [
+      (ctx) =>
+        `A ${ctx.brandName} ${ctx.model} that grinds going into 4WD or hesitates to engage usually needs transfer case service, not a new switch. RKC drains and refills the transfer case, inspects front axle actuators and U-joints, and verifies every shift mode before winter. ${LOCAL}`,
+      (ctx) =>
+        `Front Range winters are when ${ctx.brandName} ${ctx.model} owners find out whether their 4WD actually works. We service transfer case fluid on schedule, test engagement under load, and catch worn U-joints and actuator faults before the first snow. ${LOCAL}`,
+    ],
   },
   'ecoboost-diagnostics': {
     id: 'ecoboost-diagnostics',
@@ -115,6 +130,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
       }
       return `Before towing season, RKC inspects your ${ctx.brandName} ${ctx.model} hitch, wiring, transmission cooler lines, and rear suspension for sag and bushing wear. We verify brake bias, check differential fluid condition, and scan for powertrain codes that show up only under load — common when south Denver owners head to Summit County. A pre-trip inspection at our Englewood shop prevents breakdowns at elevation. ${LOCAL}`;
     },
+    variants: [
+      (ctx) =>
+        `Heading up I-70 with a trailer behind your ${ctx.brandName} ${ctx.model}? RKC's pre-trip inspection covers the hitch and wiring, transmission cooler lines, rear suspension, and brake bias, plus a scan for codes that only appear under load. Catching a weak component in Englewood beats a breakdown on Loveland Pass. ${LOCAL}`,
+      (ctx) =>
+        `Towing exposes the weak links in any ${ctx.brandName} ${ctx.model}: sagging rear suspension, tired differential fluid, marginal brakes. RKC inspects the full towing setup before the season starts and gives you a written list of what is ready and what needs work. ${LOCAL}`,
+    ],
   },
   'suspension-lift': {
     id: 'suspension-lift',
@@ -150,6 +171,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
               : 'AWD clutch packs, differentials, and transfer fluids';
       return `${ctx.brandName} ${ctx.model} ${system} needs fluid exchanges before ski season and after summer towing. RKC services rear differentials, inspects CV boots, and tests torque transfer under load. Neglected AWD fluid causes shudder, binding, and premature coupling wear — especially on stop-and-go I-25 commutes from Englewood. ${LOCAL}`;
     },
+    variants: [
+      (ctx) =>
+        `AWD shudder in tight turns and binding on dry pavement are early warnings on a ${ctx.brandName} ${ctx.model} with neglected drivetrain fluid. RKC exchanges differential and transfer fluids on schedule, checks CV boots for splits, and road-tests torque transfer so the system is ready for snow season. ${LOCAL}`,
+      (ctx) =>
+        `Ski trips and summer towing work the ${ctx.brandName} ${ctx.model} drivetrain hard, and AWD components rarely complain until the damage is done. At our Englewood shop we service differentials and couplings at factory intervals and catch torn CV boots before they fling grease and fail. ${LOCAL}`,
+    ],
   },
   'brake-service': {
     id: 'brake-service',
@@ -157,6 +184,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/brake-repair-englewood-co',
     describe: (ctx) =>
       `RKC services ${ctx.brandName} ${ctx.model} brakes with rotor measurement, pad compound matched to vehicle weight, and DOT-spec fluid flushes. Colorado's elevation changes and temperature swings accelerate brake fade and moisture contamination. Whether your ${ctx.model} is a daily Englewood commuter or a family ski-trip hauler, we restore quiet, confident stopping with quality parts and transparent pricing. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `Squeal, pulsation, or a soft pedal on your ${ctx.brandName} ${ctx.model} usually means worn pads, warped rotors, or moisture-heavy fluid. At our Englewood shop we measure rotor thickness and runout, match pad compound to the vehicle's weight, and flush brake fluid to DOT spec. Mountain descents and stop-and-go Hampden traffic are hard on brakes, so we verify the full hydraulic system before handing back the keys. ${LOCAL}`,
+      (ctx) =>
+        `Front Range driving is tough on ${ctx.brandName} ${ctx.model} braking systems: winter temperature swings pull moisture into the fluid, and downhill grades glaze pads fast. RKC inspects calipers, slides, and hoses, then installs quality pads and rotors sized for your ${ctx.model}. You get a written estimate at our posted labor rate before any work begins. ${LOCAL}`,
+    ],
   },
   'suspension-steering': {
     id: 'suspension-steering',
@@ -164,6 +197,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/suspension-steering-englewood-co',
     describe: (ctx) =>
       `Worn struts, control arm bushings, and tie rods show up as wandering steering and uneven tire wear on ${ctx.brandName} ${ctx.model} models driven on rough Front Range roads. RKC diagnoses suspension clunks, replaces worn components, and aligns to factory spec. Proper steering geometry protects tires and keeps your ${ctx.model} stable through winter ruts and canyon corners. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `If your ${ctx.brandName} ${ctx.model} wanders on the highway or wears tires unevenly, the cause is usually tired struts, bushings, or tie rods — all common on potholed Front Range streets. RKC pinpoints the worn component, replaces it with quality parts, and finishes with a factory-spec alignment. ${LOCAL}`,
+      (ctx) =>
+        `Clunks over bumps and a steering wheel that will not stay centered are familiar complaints on ${ctx.brandName} ${ctx.model} vehicles driven around Englewood. We inspect the full suspension and steering linkage, quote the repair in writing, and align the vehicle so your tires last. ${LOCAL}`,
+    ],
   },
   'check-engine': {
     id: 'check-engine',
@@ -171,6 +210,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/check-engine-light-englewood-co',
     describe: (ctx) =>
       `A check engine light on your ${ctx.brandName} ${ctx.model} can mean anything from a loose gas cap to a failing catalytic converter. RKC reads manufacturer-specific codes, performs bidirectional tests, and traces wiring — we do not just clear codes. Altitude and cold starts trigger sensor faults that are common on Denver metro ${ctx.model}s; we find root cause before recommending parts. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `When the check engine light comes on in a ${ctx.brandName} ${ctx.model}, the code is only the starting point. RKC pulls manufacturer-specific data, runs bidirectional tests, and traces wiring and vacuum issues before quoting any part. Cold starts and Denver elevation set off sensor faults that generic code readers misread, so we confirm the root cause first. ${LOCAL}`,
+      (ctx) =>
+        `Emissions-related faults, misfires, and EVAP leaks are the most common reasons a ${ctx.brandName} ${ctx.model} sets a check engine light around Englewood. Our technicians verify the fault with live data instead of clearing the code and hoping, then walk you through the findings and a written estimate. ${LOCAL}`,
+    ],
   },
   'pre-winter': {
     id: 'pre-winter',
@@ -178,6 +223,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/preventative-maintenance-englewood-co',
     describe: (ctx) =>
       `Before the first freeze, RKC inspects your ${ctx.brandName} ${ctx.model} battery, coolant strength, wiper blades, AWD function, and tire condition. Colorado winters punish weak batteries and neglected fluids — especially on vehicles parked outdoors in Englewood and Littleton. Our pre-winter inspection catches issues that strand drivers on I-25 and mountain corridors. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `A weak ${ctx.brandName} ${ctx.model} battery that starts fine in October can leave you stranded in a January cold snap. RKC's pre-winter inspection tests battery and charging output, checks coolant freeze protection, and looks over tires, wipers, and AWD engagement before the season turns. ${LOCAL}`,
+      (ctx) =>
+        `Colorado winter prep for a ${ctx.brandName} ${ctx.model} goes beyond an ice scraper: battery health, coolant strength, tire tread, and heater performance all matter once temperatures drop below freezing. RKC checks each item and gives you a written list of what needs attention now and what can wait. ${LOCAL}`,
+    ],
   },
   'oil-maintenance': {
     id: 'oil-maintenance',
@@ -185,6 +236,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/oil-changes-englewood-co',
     describe: (ctx) =>
       `RKC follows ${ctx.brandName} factory intervals for ${ctx.model} oil and filter service, using synthetic blends suited to turbo, GDI, and hybrid engines. We reset maintenance reminders, inspect undercarriage shields, and torque drain plugs to spec — avoiding stripped pans and collapsed filters. Consistent oil service protects your ${ctx.model} warranty and longevity on Colorado's hot summers and cold mornings. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `Oil service on a ${ctx.brandName} ${ctx.model} is simple, but the details matter: the right synthetic viscosity for turbo, GDI, or hybrid engines, a drain plug torqued to spec, and a filter that will not collapse between intervals. RKC follows the ${ctx.brandName} factory schedule, resets the maintenance reminder, and checks undercarriage shields while the car is on the lift. ${LOCAL}`,
+      (ctx) =>
+        `Cold Englewood mornings and hot summer traffic count as severe service for most ${ctx.brandName} ${ctx.model} engines, which is why we recommend sticking to factory oil intervals rather than stretching them. Every oil service at RKC includes the correct synthetic blend, a new filter, and a quick look at fluids and wear items so small issues surface early. ${LOCAL}`,
+    ],
   },
   'cvt-service': {
     id: 'cvt-service',
@@ -201,6 +258,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
               : 'CVT transmission';
       return `${ctx.brandName} ${ctx.model} ${brand} units are sensitive to fluid degradation and overheating on I-25 traffic. RKC performs manufacturer-spec fluid exchanges, inspects coolers, and scans for ratio-control codes before shudder becomes failure. Proactive CVT service on Englewood-area ${ctx.model}s avoids the cost of valve body and chain replacement. ${LOCAL}`;
     },
+    variants: [
+      (ctx) =>
+        `CVT shudder at light throttle is the warning sign ${ctx.brandName} ${ctx.model} owners notice first, and old fluid is usually behind it. RKC exchanges CVT fluid to manufacturer spec, inspects the cooler, and scans for ratio-control codes so a fluid service does not become a valve body job. ${LOCAL}`,
+      (ctx) =>
+        `Stop-and-go I-25 traffic cooks CVT fluid faster than most owners expect on a ${ctx.brandName} ${ctx.model}. Our Englewood shop performs manufacturer-spec fluid exchanges and verifies ratio control with scan data before recommending anything more. ${LOCAL}`,
+    ],
   },
   'transmission-service': {
     id: 'transmission-service',
@@ -208,6 +271,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/transmission-services-englewood-co',
     describe: (ctx) =>
       `Rough shifts, delayed engagement, and towing strain test ${ctx.brandName} ${ctx.model} transmissions harder at altitude. RKC inspects fluid condition, scans TCM codes, and services coolers and lines before summer hauling season. From 8-speed automatics to dual-clutch units, we diagnose with data — not parts cannon — at our Englewood shop. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `A ${ctx.brandName} ${ctx.model} that hesitates shifting on a cold Englewood morning or flares between gears under load is asking for transmission attention. RKC checks fluid condition, scans transmission control codes, and services coolers and lines — with a written estimate before any major work. ${LOCAL}`,
+      (ctx) =>
+        `Mountain grades and summer towing heat up ${ctx.brandName} ${ctx.model} transmissions fast, and degraded fluid is usually the first casualty. We service automatic and dual-clutch units to factory spec and verify shift quality with live data rather than guessing at parts. ${LOCAL}`,
+    ],
   },
   'ac-heating': {
     id: 'ac-heating',
@@ -215,6 +284,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/heating-ac-englewood-co',
     describe: (ctx) =>
       `Weak A/C and slow cabin heat are common ${ctx.brandName} ${ctx.model} complaints after Colorado summers and sub-zero Englewood mornings. RKC tests refrigerant charge, inspects compressors and blend doors, and verifies heater core flow. We restore comfortable cabin temps for daily commutes and mountain trips without dealership markups. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `If your ${ctx.brandName} ${ctx.model} blows warm air in July or takes forever to defrost in January, RKC can track down the cause. We test refrigerant charge and pressures, inspect the compressor and blend doors, and confirm heater core flow so the cabin stays comfortable year-round. ${LOCAL}`,
+      (ctx) =>
+        `Colorado's swing from hot afternoons to freezing mornings stresses ${ctx.brandName} ${ctx.model} climate systems in both directions. Our technicians diagnose A/C charge, compressor health, and heater performance, then quote the repair in writing before touching anything. ${LOCAL}`,
+    ],
   },
   'engine-diagnostics': {
     id: 'engine-diagnostics',
@@ -222,6 +297,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     href: '/services/engine-diagnostics-englewood-co',
     describe: (ctx) =>
       `Rough idle, hesitation, and fuel trim faults on the ${ctx.brandName} ${ctx.model} need systematic diagnosis — not random part swaps. RKC uses live data, smoke testing, and scope analysis to isolate intake leaks, sensor drift, and injector issues aggravated by Denver elevation. We explain findings in plain language before any repair on your ${ctx.model}. ${LOCAL}`,
+    variants: [
+      (ctx) =>
+        `Hesitation on on-ramps and a rough idle at stoplights are drivability symptoms RKC sees often on the ${ctx.brandName} ${ctx.model}. We work through live data, smoke tests, and scope readings to isolate intake leaks, sensor drift, or injector problems before quoting a repair. ${LOCAL}`,
+      (ctx) =>
+        `Denver's elevation leans out fuel mixtures and exposes weak sensors, which is why ${ctx.brandName} ${ctx.model} drivability faults need real diagnosis. RKC documents what we find, explains it in plain language, and prices the fix in writing first. ${LOCAL}`,
+    ],
   },
   'pre-purchase': {
     id: 'pre-purchase',
@@ -1443,10 +1524,13 @@ export function getModelCommonServices(
     .map((id) => {
       const def = SERVICE_CATALOG[id];
       if (!def) return null;
+      const seed = `${brandSlug}/${model}/${id}`;
+      const pool = def.variants ? [def.describe, ...def.variants] : [def.describe];
+      const describe = pool[seedIndex(seed, pool.length)];
       return {
         id: def.id,
         title: buildTitle(model, def.name),
-        description: withLocalityVariant(def.describe(ctx), `${brandSlug}/${model}/${id}`),
+        description: withLocalityVariant(describe(ctx), seed),
         href: buildModelServicePath(brandSlug, model, id),
       };
     })
