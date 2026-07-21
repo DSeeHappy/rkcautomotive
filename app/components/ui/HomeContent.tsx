@@ -24,8 +24,30 @@ import { useLanguage } from '@/lib/language';
 import { homeCopy } from '@/lib/homeCopy';
 import { localizedServiceDescription, localizedServiceName } from '@/lib/siteCopy';
 
-const BrandSection = dynamic(() => import('./BrandSection'), { ssr: true });
-const ReviewCards = dynamic(() => import('./ReviewCards'), { ssr: true });
+// Below-fold, non-keyword-critical sections are client-rendered after hydration
+// to keep them out of the initial HTML payload. Skeletons reserve layout to avoid CLS.
+const BrandSection = dynamic(() => import('./BrandSection'), {
+  ssr: false,
+  loading: () => (
+    <section id="brands" className="relative z-0 scroll-mt-28 bg-white">
+      <div className="wrap flex min-h-[480px] items-center justify-center py-24">
+        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-ink-muted" aria-hidden>
+          …
+        </span>
+      </div>
+    </section>
+  ),
+});
+const ReviewCards = dynamic(() => import('./ReviewCards'), {
+  ssr: false,
+  loading: () => (
+    <div className="grid min-h-[320px] gap-6 md:grid-cols-2 lg:grid-cols-3" aria-hidden>
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="rounded-3xl border border-[color:var(--line)] bg-white/60" />
+      ))}
+    </div>
+  ),
+});
 const ServiceAreaGrid = dynamic(() => import('./ServiceAreaGrid'), { ssr: true });
 const FAQAccordion = dynamic(() => import('./FAQAccordion'), { ssr: true });
 
@@ -191,16 +213,18 @@ export default function HomeContent() {
             </FadeIn>
           </div>
 
-          <Stagger className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4" stagger={0.08}>
-            {copy.competitive.map((item) => (
-              <StaggerItem key={item.title}>
-                <div className="h-full rounded-2xl border border-[color:var(--line)] bg-white p-6 sm:p-8">
-                  <h3 className="text-lg font-bold leading-snug text-primary-blue sm:text-xl">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">{item.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
+          {/* Comparison teaser — full "How we compare" lives on /pricing to avoid duplicate content */}
+          <FadeIn className="mt-16 max-w-3xl">
+            <p className="text-base leading-relaxed text-ink-muted sm:text-lg">
+              {copy.compareTeaser.body}
+            </p>
+            <Link
+              href="/pricing"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary-blue transition-colors hover:text-primary-green"
+            >
+              {copy.compareTeaser.linkLabel} <span aria-hidden>→</span>
+            </Link>
+          </FadeIn>
 
           <FadeIn className="mt-16 border-t border-[color:var(--line)] pt-12">
             <ul className="grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">

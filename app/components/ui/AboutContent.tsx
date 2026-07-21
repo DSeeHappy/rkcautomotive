@@ -25,7 +25,7 @@ import { useLanguage } from '@/lib/language';
 export default function AboutContent() {
   const { lang } = useLanguage();
   const copy = aboutCopy(lang);
-  const competitive = homeCopy(lang).competitive;
+  const compareTeaser = homeCopy(lang).compareTeaser;
   const trustBadges = homeCopy(lang).trustBadges;
 
   return (
@@ -193,16 +193,16 @@ export default function AboutContent() {
             <h2 className="mt-3 font-display text-5xl tracking-wide text-foreground">{copy.compare.title}</h2>
             <p className="mt-4 text-ink-muted">{copy.compare.intro}</p>
           </FadeIn>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {competitive.map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.08}>
-                <div className="h-full rounded-3xl border border-[color:var(--line)] bg-[var(--background)] p-8">
-                  <h3 className="text-xl font-bold text-primary-blue">{item.title}</h3>
-                  <p className="mt-3 text-ink-muted">{item.description}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          {/* Teaser only — full comparison lives on /pricing to avoid duplicate content */}
+          <FadeIn className="max-w-3xl">
+            <p className="text-base leading-relaxed text-ink-muted sm:text-lg">{compareTeaser.body}</p>
+            <Link
+              href="/pricing"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary-blue transition-colors hover:text-primary-green"
+            >
+              {compareTeaser.linkLabel} <span aria-hidden>→</span>
+            </Link>
+          </FadeIn>
         </div>
       </section>
 
