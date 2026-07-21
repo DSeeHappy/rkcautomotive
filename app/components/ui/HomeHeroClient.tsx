@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { AlertTriangle, Phone } from 'lucide-react';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
 import { HERO_IMAGE_SIZES } from '@/lib/photos';
+import CheckEngineHelpLink from '@/app/components/ui/CheckEngineHelpLink';
 import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import LanguageToggle from '@/app/components/ui/LanguageToggle';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
@@ -109,12 +110,7 @@ export default function HomeHeroClient() {
                     >
                       {copy.hero.emergency}: {BUSINESS.phone}
                     </MotionAnchor>
-                    <Link
-                      href="/services/check-engine-light-englewood-co"
-                      className="text-sm font-semibold text-white/80 underline-offset-4 hover:text-white hover:underline"
-                    >
-                      {copy.hero.checkEngineHelp}
-                    </Link>
+                    <CheckEngineHelpLink>{copy.hero.checkEngineHelp}</CheckEngineHelpLink>
                   </div>
                 </div>
               </div>

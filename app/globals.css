@@ -284,6 +284,39 @@ body {
   }
 }
 
+/* Check-engine MIL icon — hard on/off blink like a dashboard warning lamp */
+@keyframes cel-mil-blink {
+  0%,
+  38% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px rgb(251 191 36 / 0.95)) drop-shadow(0 0 6px rgb(251 191 36 / 0.55));
+  }
+  39%,
+  42% {
+    opacity: 0.14;
+    filter: none;
+  }
+  43%,
+  80% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px rgb(251 191 36 / 0.95)) drop-shadow(0 0 6px rgb(251 191 36 / 0.55));
+  }
+  81%,
+  84% {
+    opacity: 0.14;
+    filter: none;
+  }
+  85%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px rgb(251 191 36 / 0.95)) drop-shadow(0 0 6px rgb(251 191 36 / 0.55));
+  }
+}
+
+.cel-mil-icon {
+  animation: cel-mil-blink 2.1s linear infinite;
+}
+
 .brand-tab {
   position: relative;
   overflow: hidden;
@@ -365,10 +398,16 @@ body {
   .brand-tab[data-selected],
   .brand-tab[data-selected]::after,
   .brand-tab:hover .brand-tab-logo,
-  .brand-tab[data-selected] .brand-tab-logo {
+  .brand-tab[data-selected] .brand-tab-logo,
+  .cel-mil-icon {
     animation: none !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  .cel-mil-icon {
+    opacity: 1;
+    filter: none;
   }
 
   .brand-tab[data-selected]::after {
