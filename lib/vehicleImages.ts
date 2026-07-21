@@ -2601,10 +2601,10 @@ export const VEHICLE_IMAGE_DATA: VehicleImageRecord[] = [
     modelSlug: 'cybertruck',
     yearRange: '2024–2026',
     imagePath: '/vehicles/tesla/cybertruck.webp',
-    sourceUrl: 'User-provided stock video frame (Storyblocks SBV-352865127)',
+    sourceUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/20191121-tesla-cybertruck-front-left-wheel.jpg',
     alt: 'Tesla Cybertruck electric truck service in Englewood CO',
     fallbackNeeded: false,
-    license: 'Licensed stock footage (user-provided)',
+    license: 'CC BY-SA 4.0',
     quality: 8.5,
   }
 ];
