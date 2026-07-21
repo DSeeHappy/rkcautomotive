@@ -7,14 +7,26 @@ type CheckEngineHelpLinkProps = {
 };
 
 /**
- * Classic dashboard MIL (malfunction indicator lamp) engine silhouette:
- * filler-cap bump on top, slanted top-right, fan/pulley bar front-left,
- * outlet bar on the right, two mount feet below. Filled so it reads at small size.
+ * Classic dashboard MIL (malfunction indicator lamp), outline style:
+ * hollow engine block with chamfered left corners, T-shaped filler cap on top,
+ * separate pulley/fan bar front-left with connector stub, and a stepped
+ * two-arm claw with an angular notch on the right. Thick stroke so it reads at 20px.
  */
 function CheckEngineMilIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 26 18" fill="currentColor" className={className} aria-hidden>
-      <path d="M5 4H9V1H12V4H14L17 6H21V7H24V5H26V12H24V9H21V14H19V17H16V14H10V17H7V14H5V9.5H2V12H0V5H2V7.5H5Z" />
+    <svg
+      viewBox="0 0 34 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <path d="M11 5.5H19.5L22 8H28.5L30 9.5V11H27L25.5 13L27 15H30V17.5L28.5 19H23L21.5 20.5H11L8 17.5V8.5Z" />
+      <path d="M15 5.5V2.5M11.5 2H18.5" />
+      <path d="M4 8V18M4 13H8" />
     </svg>
   );
 }
