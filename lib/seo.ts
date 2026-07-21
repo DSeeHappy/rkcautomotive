@@ -120,11 +120,14 @@ export function getRoutesForSitemapShard(shardId: SitemapShardId): string[] {
  * see lib/i18n/localeSeo.ts and Google localized-versions (sitemap method).
  *
  * Google ignores `<priority>` and `<changefreq>` — omit them per Search Central.
- * Include only absolute canonical URLs; add lastmod only when verifiably accurate.
+ * Include only absolute canonical URLs; lastmod uses the build date (per-route
+ * dates are not tracked, so a single build-time value is the most accurate we have).
  */
 export function buildSitemapEntries(paths: string[]): MetadataRoute.Sitemap {
+  const lastModified = new Date();
   return paths.map((path) => ({
     url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
+    lastModified,
   }));
 }
 
