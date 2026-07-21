@@ -97,29 +97,7 @@ export default function Footer() {
 
         {/* Credits */}
         <div className="mt-14 border-t border-white/10 pt-10 text-center">
-          <a
-            href="https://molecule.work"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="molecule.work — Premium web design for Colorado businesses"
-            className="group mx-auto inline-flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 transition-colors hover:border-primary-green/40 hover:bg-primary-green/10"
-          >
-            <Image
-              src="/molecule-logo.png"
-              alt=""
-              aria-hidden
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-lg opacity-90 ring-1 ring-white/15 transition group-hover:opacity-100 group-hover:ring-primary-green/40"
-            />
-            <span className="text-sm font-semibold text-white/75 transition-colors group-hover:text-white sm:text-base">
-              {copy.websiteBy} <span className="text-primary-green-light">molecule.work</span>
-            </span>
-            <span className="text-xs text-white/50 transition-colors group-hover:text-white/65 sm:text-sm">
-              {copy.premiumDesign}
-            </span>
-          </a>
-          <p className="mt-6 text-sm text-white/40">{copy.rights(year, BUSINESS.name)}</p>
+          <p className="text-sm text-white/40">{copy.rights(year, BUSINESS.name)}</p>
         </div>
       </div>
     </footer>

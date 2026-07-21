@@ -14,9 +14,10 @@ const nextConfig: NextConfig = {
       "./data/**",
     ],
   },
-  // Preferred domain is apex (https://rkcautomotive.com). www currently returns
-  // Cloudflare 525 — once www SSL works, add a permanent www → apex redirect here
-  // (or in vercel.json). Do not flip BUSINESS.website / SITE_URL to www.
+  // Preferred domain is apex (https://rkcautomotive.com). A permanent www → apex
+  // redirect is in place below; it activates once www.rkcautomotive.com is attached
+  // to this Vercel project with valid SSL (currently Cloudflare 525). Do not flip
+  // BUSINESS.website / SITE_URL to www.
   async headers() {
     return [
       {
@@ -57,6 +58,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // www → apex canonical host (301)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.rkcautomotive.com' }],
+        destination: 'https://rkcautomotive.com/:path*',
+        permanent: true,
+      },
       {
         source: '/site.webmanifest',
         destination: '/manifest.webmanifest',

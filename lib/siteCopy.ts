@@ -55,8 +55,6 @@ export const SITE_COPY = {
         '/privacy': 'Privacy Policy',
         '/terms': 'Terms of Service',
       } as Record<string, string>,
-      websiteBy: 'Website built by',
-      premiumDesign: 'Premium web design for Colorado businesses',
       rights: (year: number, name: string) =>
         `© ${year} ${name}. All rights reserved. · ASE Certified · Englewood, Colorado`,
     },
@@ -411,8 +409,6 @@ export const SITE_COPY = {
         '/privacy': 'Política de privacidad',
         '/terms': 'Términos de servicio',
       } as Record<string, string>,
-      websiteBy: 'Sitio web creado por',
-      premiumDesign: 'Diseño web premium para negocios de Colorado',
       rights: (year: number, name: string) =>
         `© ${year} ${name}. Todos los derechos reservados. · Certificado ASE · Englewood, Colorado`,
     },
