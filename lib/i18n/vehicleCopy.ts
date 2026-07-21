@@ -18,7 +18,7 @@ export const VEHICLE_COPY = {
       home: 'Home',
       vehiclesCrumb: 'Vehicles We Service',
       modelServices: 'Model services',
-      servicesHeading: (brand: string, model: string) => `Servicios que realizamos en ${brand} ${model}`,
+      servicesHeading: (brand: string, model: string) => `${brand} ${model} services we perform`,
       servicesIntro: (yearRange: string, brand: string, model: string) =>
         `Every guide below is written for the ${yearRange} ${brand} ${model} — Colorado altitude, severe-service wear, and the failure patterns we see at our Englewood shop.`,
       call: (phone: string) => `Call ${phone}`,
