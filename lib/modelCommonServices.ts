@@ -1,4 +1,4 @@
-import type { VehicleType } from '@/lib/vehicleModels';
+import type { Powertrain, VehicleType } from '@/lib/vehicleModels';
 
 export type ModelCommonService = {
   id: string;
@@ -12,6 +12,7 @@ export type ModelServiceContext = {
   brandName: string;
   model: string;
   vehicleType: VehicleType;
+  powertrain: Powertrain;
 };
 
 type ServiceDef = {
@@ -77,8 +78,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     id: 'towing-prep',
     name: 'Towing & Hauling Prep Inspection',
     href: '/services/preventative-maintenance-englewood-co',
-    describe: (ctx) =>
-      `Before towing season, RKC inspects your ${ctx.brandName} ${ctx.model} hitch, wiring, transmission cooler lines, and rear suspension for sag and bushing wear. We verify brake bias, check differential fluid condition, and scan for powertrain codes that show up only under load — common when south Denver owners head to Summit County. A pre-trip inspection at our Englewood shop prevents breakdowns at elevation. ${LOCAL}`,
+    describe: (ctx) => {
+      if (ctx.powertrain === 'ev') {
+        return `RKC helps ${ctx.brandName} ${ctx.model} owners prepare for towing by ensuring the hitch and wiring are secure, the rear suspension can handle the weight without sagging, and the tires meet the necessary load ratings. We also check your brakes so they are ready for the extra stress of hauling. Keep in mind that towing significantly increases the thermal load on your battery, which will reduce your driving range — plan charging stops accordingly on I-70 grades. ${LOCAL}`;
+      }
+      return `Before towing season, RKC inspects your ${ctx.brandName} ${ctx.model} hitch, wiring, transmission cooler lines, and rear suspension for sag and bushing wear. We verify brake bias, check differential fluid condition, and scan for powertrain codes that show up only under load — common when south Denver owners head to Summit County. A pre-trip inspection at our Englewood shop prevents breakdowns at elevation. ${LOCAL}`;
+    },
   },
   'suspension-lift': {
     id: 'suspension-lift',
@@ -261,8 +266,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     id: 'european-diagnostics',
     name: 'European Import Diagnostics',
     href: '/services/engine-diagnostics-englewood-co',
-    describe: (ctx) =>
-      `${ctx.brandName} ${ctx.model} modules, sensors, and service resets require factory-level scan tools — not generic OBD readers. RKC diagnoses check engine, drivetrain, and comfort-system faults with bidirectional tests and wiring diagrams. European complexity meets honest Englewood pricing: we explain what your ${ctx.model} needs and why. ${LOCAL}`,
+    describe: (ctx) => {
+      if (ctx.powertrain === 'ev') {
+        return `RKC uses factory-level scan tools to diagnose the ${ctx.brandName} ${ctx.model} drive unit, charging system, and comfort and body modules — not generic OBD readers. This approach ensures accurate troubleshooting for European electric vehicles without guesswork. European complexity meets honest Englewood pricing: we explain what your ${ctx.model} needs and why. ${LOCAL}`;
+      }
+      return `${ctx.brandName} ${ctx.model} modules, sensors, and service resets require factory-level scan tools — not generic OBD readers. RKC diagnoses check engine, drivetrain, and comfort-system faults with bidirectional tests and wiring diagrams. European complexity meets honest Englewood pricing: we explain what your ${ctx.model} needs and why. ${LOCAL}`;
+    },
   },
   'cooling-system': {
     id: 'cooling-system',
@@ -303,8 +312,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     id: 'electrical-system',
     name: 'Electrical & Module Diagnostics',
     href: '/services/electrical-system-englewood-co',
-    describe: (ctx) =>
-      `Parasitic draws, alternator ripple, and module communication faults frustrate ${ctx.brandName} ${ctx.model} owners with intermittent warnings. RKC traces wiring, tests charging systems, and programs modules when replacements are required. Modern ${ctx.model} electrical systems need patience and data — not fuse swapping. ${LOCAL}`,
+    describe: (ctx) => {
+      if (ctx.powertrain === 'ev') {
+        return `RKC diagnoses complex electrical issues in your ${ctx.brandName} ${ctx.model}, including 12V auxiliary battery failures, DC-DC converter faults, and parasitic draw problems. We also resolve module communication errors so your vehicle's systems interact correctly. Modern ${ctx.model} electrical systems need patience and data — not fuse swapping. ${LOCAL}`;
+      }
+      return `Parasitic draws, alternator ripple, and module communication faults frustrate ${ctx.brandName} ${ctx.model} owners with intermittent warnings. RKC traces wiring, tests charging systems, and programs modules when replacements are required. Modern ${ctx.model} electrical systems need patience and data — not fuse swapping. ${LOCAL}`;
+    },
   },
   'quattro-awd': {
     id: 'quattro-awd',
@@ -403,14 +416,14 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     name: 'AFM/DFM Engine Diagnostics',
     href: '/services/camshaft-lifter-repair-englewood-co',
     describe: (ctx) =>
-      `Chevrolet ${ctx.model} Active Fuel Management and Dynamic Fuel Management disable cylinders under light load — stuck solenoids and collapsed lifters trigger misfires and cam wear. RKC diagnoses AFM-related tick and misfire before recommending lifter or cam repair. Common on Silverado, Tahoe, and Colorado trucks serving Englewood and mountain towing routes. ${LOCAL}`,
+      `${ctx.brandName} ${ctx.model} Active Fuel Management and Dynamic Fuel Management disable cylinders under light load — stuck solenoids and collapsed lifters trigger misfires and cam wear. RKC diagnoses AFM-related tick and misfire before recommending lifter or cam repair. Common on GM V8 trucks and SUVs serving Englewood and mountain towing routes. ${LOCAL}`,
   },
   'truck-maintenance': {
     id: 'truck-maintenance',
     name: 'Truck Maintenance & Repair',
     href: '/services/preventative-maintenance-englewood-co',
     describe: (ctx) =>
-      `Chevrolet ${ctx.model} trucks need interval fluid service, driveline inspection, and brake system attention beyond sedan schedules. RKC handles Silverado and Colorado maintenance with GM-spec fluids and honest recommendations. Keep your ${ctx.model} ready for job sites, ranch work, and I-70 towing from our Englewood bays. ${LOCAL}`,
+      `${ctx.brandName} ${ctx.model} trucks need interval fluid service, driveline inspection, and brake system attention beyond sedan schedules. RKC handles GM truck maintenance with GM-spec fluids and honest recommendations. Keep your ${ctx.model} ready for job sites, ranch work, and I-70 towing from our Englewood bays. ${LOCAL}`,
   },
   'mercedes-diagnostics': {
     id: 'mercedes-diagnostics',
@@ -423,8 +436,12 @@ const SERVICE_CATALOG: Record<string, ServiceDef> = {
     id: 'scheduled-maintenance',
     name: 'Scheduled Maintenance',
     href: '/services/preventative-maintenance-englewood-co',
-    describe: (ctx) =>
-      `RKC keeps ${ctx.brandName} ${ctx.model} on factory service intervals — oil, filters, fluids, and inspections — with documented visits for warranty compliance. We catch worn brakes, leaking gaskets, and aging batteries during routine Englewood appointments before they strand you on a mountain run. ${LOCAL}`,
+    describe: (ctx) => {
+      if (ctx.powertrain === 'ev') {
+        return `RKC handles the essential scheduled maintenance for your ${ctx.brandName} ${ctx.model} — tire rotation, brake fluid moisture testing, cabin filter replacement, and checks on your 12V battery and battery coolant level. Your ${ctx.model} skips oil changes, but these routine inspections are vital to keep an electric vehicle running safely and efficiently through Colorado seasons. ${LOCAL}`;
+      }
+      return `RKC keeps ${ctx.brandName} ${ctx.model} on factory service intervals — oil, filters, fluids, and inspections — with documented visits for warranty compliance. We catch worn brakes, leaking gaskets, and aging batteries during routine Englewood appointments before they strand you on a mountain run. ${LOCAL}`;
+    },
   },
   'cargo-hvac': {
     id: 'cargo-hvac',
@@ -492,6 +509,9 @@ const TYPE_SERVICE_IDS: Record<VehicleType, string[]> = {
     'thermal-management',
     'electrical-system',
     'scheduled-maintenance',
+    'brake-service',
+    'suspension-steering',
+    'ac-heating',
   ],
   performance: [
     'performance-brake',
@@ -668,6 +688,18 @@ const BRAND_TYPE_SERVICE_IDS: Record<string, Partial<Record<VehicleType, string[
       'check-engine',
       'pre-winter',
       'oil-maintenance',
+    ],
+  },
+  gmc: {
+    // GMC trucks run GM V8/AFM powertrains — never Ford EcoBoost templates.
+    truck: [
+      'truck-maintenance',
+      'afm-diagnostics',
+      'heavy-brake',
+      'towing-prep',
+      'four-wheel-drive',
+      'transmission-service',
+      'fleet-maintenance',
     ],
   },
   chevrolet: {
@@ -995,6 +1027,10 @@ const MODEL_SERVICE_IDS: Record<string, string[]> = {
     'thermal-management',
     'european-diagnostics',
     'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
+    'scheduled-maintenance',
   ],
   'ford-mustang': [
     'performance-brake',
@@ -1015,10 +1051,14 @@ const MODEL_SERVICE_IDS: Record<string, string[]> = {
   'audi-e-tron': [
     'ev-battery',
     'ev-charging',
-    'quattro-awd',
+    'regenerative-brake',
     'thermal-management',
     'brake-service',
     'european-diagnostics',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
+    'scheduled-maintenance',
   ],
   'subaru-wrx': [
     'performance-brake',
@@ -1060,6 +1100,9 @@ const MODEL_SERVICE_IDS: Record<string, string[]> = {
     'hybrid-ev-service',
     'thermal-management',
     'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
     'scheduled-maintenance',
   ],
   'kia-ev6': [
@@ -1068,14 +1111,21 @@ const MODEL_SERVICE_IDS: Record<string, string[]> = {
     'hybrid-ev-service',
     'thermal-management',
     'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
     'scheduled-maintenance',
   ],
   'volkswagen-id-4': [
     'ev-battery',
     'ev-charging',
+    'regenerative-brake',
     'thermal-management',
     'european-diagnostics',
     'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
     'scheduled-maintenance',
   ],
   'mercedes-sprinter': [
@@ -1100,6 +1150,72 @@ const MODEL_SERVICE_IDS: Record<string, string[]> = {
     'sliding-door',
     'brake-service',
     'engine-diagnostics',
+    'scheduled-maintenance',
+  ],
+  'acura-zdx': [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
+    'scheduled-maintenance',
+  ],
+  'tesla-model-3': [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
+    'scheduled-maintenance',
+  ],
+  'tesla-model-y': [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
+    'scheduled-maintenance',
+  ],
+  'tesla-model-s': [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
+    'scheduled-maintenance',
+  ],
+  'tesla-model-x': [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'brake-service',
+    'suspension-steering',
+    'ac-heating',
+    'electrical-system',
+    'scheduled-maintenance',
+  ],
+  'tesla-cybertruck': [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'brake-service',
+    'suspension-steering',
+    'electrical-system',
+    'towing-prep',
     'scheduled-maintenance',
   ],
   'honda-odyssey': [
@@ -1206,8 +1322,70 @@ export type ModelDeepDiveParam = {
   serviceSlug: string;
 };
 
+/**
+ * Services that can legitimately be offered on a pure battery-electric vehicle.
+ * Everything else (engine, oil, exhaust, transmission, turbo, fuel) is combustion-only
+ * and must never generate a page for an EV.
+ */
+const EV_ALLOWED_SERVICE_IDS = new Set<string>([
+  'ev-battery',
+  'ev-charging',
+  'regenerative-brake',
+  'thermal-management',
+  'electrical-system',
+  'scheduled-maintenance',
+  'brake-service',
+  'suspension-steering',
+  'ac-heating',
+  'towing-prep',
+  'hybrid-ev-service',
+  'european-diagnostics',
+]);
+
+/** Default page set for a pure EV that has no model-specific list (e.g. an EV typed as truck). */
+const EV_DEFAULT_SERVICE_IDS: Record<string, string[]> = {
+  truck: [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'electrical-system',
+    'towing-prep',
+    'scheduled-maintenance',
+    'brake-service',
+    'suspension-steering',
+  ],
+  default: [
+    'ev-battery',
+    'ev-charging',
+    'regenerative-brake',
+    'thermal-management',
+    'electrical-system',
+    'scheduled-maintenance',
+    'brake-service',
+    'suspension-steering',
+    'ac-heating',
+  ],
+};
+
+export function isServiceValidForPowertrain(serviceId: string, powertrain: Powertrain): boolean {
+  if (powertrain !== 'ev') return true;
+  return EV_ALLOWED_SERVICE_IDS.has(serviceId);
+}
+
 function resolveServiceIds(ctx: ModelServiceContext): string[] {
   const modelKey = `${ctx.brandSlug}-${slugifyModel(ctx.model)}`;
+
+  if (ctx.powertrain === 'ev') {
+    // Model-specific EV lists win; otherwise fall back to the EV defaults.
+    // Always filter through the EV allow-list — never emit combustion pages for an EV.
+    const ids =
+      MODEL_SERVICE_IDS[modelKey] ??
+      EV_DEFAULT_SERVICE_IDS[ctx.vehicleType] ??
+      EV_DEFAULT_SERVICE_IDS.default;
+    return ids.filter((id) => EV_ALLOWED_SERVICE_IDS.has(id));
+  }
+
   if (MODEL_SERVICE_IDS[modelKey]) return MODEL_SERVICE_IDS[modelKey];
 
   const brandTypeIds = BRAND_TYPE_SERVICE_IDS[ctx.brandSlug]?.[ctx.vehicleType];
@@ -1226,8 +1404,9 @@ export function getModelCommonServices(
   brandName: string,
   model: string,
   vehicleType: VehicleType,
+  powertrain: Powertrain,
 ): ModelCommonService[] {
-  const ctx: ModelServiceContext = { brandSlug, brandName, model, vehicleType };
+  const ctx: ModelServiceContext = { brandSlug, brandName, model, vehicleType, powertrain };
   const ids = resolveServiceIds(ctx);
   return ids
     .map((id) => {

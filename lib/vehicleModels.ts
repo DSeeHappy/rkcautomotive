@@ -6,6 +6,9 @@ export type { ModelCommonService };
 
 export type VehicleType = 'truck' | 'suv' | 'sedan' | 'hybrid' | 'ev' | 'performance' | 'van' | 'luxury';
 
+/** Powertrain drives which service pages are generated — never apply ICE services to a pure EV. */
+export type Powertrain = 'ev' | 'hybrid' | 'ice';
+
 export type MaintenanceInterval = {
   interval: string;
   items: string[];
@@ -20,6 +23,7 @@ export type VehicleModel = {
   slug: string;
   image: string;
   vehicleType: VehicleType;
+  powertrain: Powertrain;
   model3dCategory: Model3dCategory;
   model3dUrl?: string;
   yearRange: string;
@@ -347,6 +351,32 @@ function getModelType(brandSlug: string, model: string): VehicleType {
   return MODEL_TYPES[brandSlug]?.[model] ?? 'sedan';
 }
 
+/**
+ * Pure EVs whose body-style type is not 'ev' (e.g. Cybertruck renders as a truck
+ * but must never receive combustion-engine service content).
+ */
+const MODEL_POWERTRAIN_OVERRIDES: Record<string, Record<string, Powertrain>> = {
+  tesla: { Cybertruck: 'ev' },
+};
+
+function getModelPowertrain(brandSlug: string, model: string, vehicleType: VehicleType): Powertrain {
+  const override = MODEL_POWERTRAIN_OVERRIDES[brandSlug]?.[model];
+  if (override) return override;
+  if (vehicleType === 'ev') return 'ev';
+  if (vehicleType === 'hybrid') return 'hybrid';
+  return 'ice';
+}
+
+/**
+ * Year-range corrections where the image catalog range is wrong or generic.
+ * Only well-documented launch years — never invented.
+ */
+const MODEL_YEAR_RANGE_OVERRIDES: Record<string, string> = {
+  'audi-e-tron': '2019–2026',
+  'volkswagen-id-4': '2021–2026',
+  'tesla-cybertruck': '2023–2026',
+};
+
 function getOilInterval(type: VehicleType): string {
   if (type === 'ev') return 'Every 10,000 miles / 12 months';
   if (type === 'hybrid' || type === 'luxury' || type === 'performance') return 'Every 7,500 miles / 6 months';
@@ -354,26 +384,73 @@ function getOilInterval(type: VehicleType): string {
   return 'Every 5,000 miles / 6 months';
 }
 
+/** Battery-electric schedule — no engine oil, spark plugs, fuel system, exhaust, or timing components. */
+const EV_INTERVALS: MaintenanceInterval[] = [
+  {
+    interval: 'Every 10,000 miles / 12 months',
+    items: [
+      'Tire rotation & pressure check',
+      'Multi-point vehicle inspection',
+      'Brake pad & rotor inspection',
+      'Battery health scan',
+      'Cabin air filter check',
+      'Software & module update check',
+    ],
+  },
+  {
+    interval: 'Every 15,000 miles',
+    items: [
+      'Cabin air filter replacement',
+      'Brake system inspection',
+      'Steering & suspension check',
+      'Battery coolant level check',
+      'Brake fluid moisture test',
+      '12V auxiliary battery test',
+    ],
+  },
+  {
+    interval: 'Every 30,000 miles',
+    items: [
+      'Brake fluid flush',
+      'Battery thermal management service',
+      '12V auxiliary battery replacement check',
+      'Wheel alignment check',
+      'Charging port & cable inspection',
+    ],
+  },
+  {
+    interval: 'Every 60,000 miles',
+    items: [
+      'High-voltage system inspection',
+      'Reduction gear fluid service',
+      'Suspension bushing & joint inspection',
+      'Battery cooling loop pressure test',
+      'CV axle boot inspection',
+    ],
+  },
+  {
+    interval: 'Every 100,000 miles',
+    items: [
+      'Battery state-of-health benchmark',
+      'High-voltage cable & connector inspection',
+      'Drive unit inspection',
+      'Comprehensive suspension inspection',
+      'Full battery coolant service',
+    ],
+  },
+];
+
 function buildMaintenanceSchedule(type: VehicleType, brandName: string, model: string): MaintenanceInterval[] {
+  if (type === 'ev') {
+    return EV_INTERVALS.map((entry) => ({ interval: entry.interval, items: [...entry.items] }));
+  }
+
   const extras = TYPE_INTERVAL_EXTRAS[type];
   const schedule = BASE_INTERVALS.map((entry) => {
     const extraItems = extras[entry.interval] ?? [];
     const items = [...entry.items, ...extraItems];
-    if (entry.interval.startsWith('Every 5,000') && type !== 'ev') {
+    if (entry.interval.startsWith('Every 5,000')) {
       items[0] = `Engine oil & filter change (${getOilInterval(type).split(' / ')[0]})`;
-    }
-    if (type === 'ev' && entry.interval === 'Every 5,000 miles / 6 months') {
-      return {
-        interval: 'Every 10,000 miles / 12 months',
-        items: [
-          'Tire rotation & pressure check',
-          'Multi-point vehicle inspection',
-          'Brake pad & rotor inspection',
-          'Battery health scan',
-          'Cabin air filter check',
-          'Software & module update check',
-        ],
-      };
     }
     return { interval: entry.interval, items };
   });
@@ -412,6 +489,9 @@ function buildDescription(type: VehicleType, brandName: string, model: string): 
     van: 'van',
     luxury: 'luxury vehicle',
   };
+  if (type === 'ev') {
+    return `RKC Automotive in Englewood services ${brandName} ${model} electric vehicles with factory-schedule maintenance, honest diagnostics, and Colorado-ready inspections. From tire rotations and brake fluid service to battery health checks, our ASE-certified team keeps your ${model} reliable on I-25 and mountain roads.`;
+  }
   return `RKC Automotive in Englewood services ${brandName} ${model} ${typeLabel[type]}s with factory-schedule maintenance, honest diagnostics, and Colorado-ready inspections. From routine oil changes to major interval service, our ASE-certified team keeps your ${model} reliable on I-25 and mountain roads.`;
 }
 
@@ -425,9 +505,14 @@ function buildVehicleModel(
   model: string,
 ): VehicleModel {
   const vehicleType = getModelType(brandSlug, model);
+  const powertrain = getModelPowertrain(brandSlug, model, vehicleType);
   const modelSlug = slugify(model);
   const slug = `${brandSlug}-${modelSlug}`;
   const vehicleImage = getVehicleImage(brandSlug, brandName, model);
+  // Prefer the per-model catalog year range (exact image record) over the generic default.
+  const catalogYearRange =
+    vehicleImage.matchType === 'exact' ? vehicleImage.yearRange : undefined;
+  const yearRange = MODEL_YEAR_RANGE_OVERRIDES[slug] ?? catalogYearRange ?? '2015–2026';
 
   return {
     brand: brandSlug,
@@ -436,12 +521,17 @@ function buildVehicleModel(
     slug,
     image: resolveVehicleImageSrc(vehicleImage.record) ?? getModelImage(vehicleType),
     vehicleType,
+    powertrain,
     model3dCategory: vehicleType,
     model3dUrl: MODEL_3D_URLS[vehicleType],
-    yearRange: '2015–2026',
-    maintenanceSchedule: buildMaintenanceSchedule(vehicleType, brandName, model),
-    commonServices: getModelCommonServices(brandSlug, brandName, model, vehicleType),
-    description: buildDescription(vehicleType, brandName, model),
+    yearRange,
+    maintenanceSchedule: buildMaintenanceSchedule(
+      powertrain === 'ev' ? 'ev' : vehicleType,
+      brandName,
+      model,
+    ),
+    commonServices: getModelCommonServices(brandSlug, brandName, model, vehicleType, powertrain),
+    description: buildDescription(powertrain === 'ev' ? 'ev' : vehicleType, brandName, model),
   };
 }
 

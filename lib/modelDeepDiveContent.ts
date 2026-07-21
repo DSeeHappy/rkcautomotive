@@ -13,6 +13,7 @@ import type { Lang } from '@/lib/language';
 import {
   buildModelServicePath,
   getServiceCatalogEntry,
+  isServiceValidForPowertrain,
   parseServiceIdFromSlug,
   type ModelServiceContext,
 } from '@/lib/modelCommonServices';
@@ -70,6 +71,7 @@ const SERVICE_TEMPLATES: Record<string, ServiceTemplate> = {
     typeNotes: {
       truck: 'Truck towing prep includes frame hitch inspection, brake controller calibration, and trans temp strategy.',
       suv: 'SUV towing prep verifies factory tow ratings, trailer sway control, and rear differential fluid.',
+      ev: 'Electric truck towing prep verifies hitch wiring, brake condition, tire load ratings, and battery thermal readiness — towing cuts range, so plan charging stops.',
     },
   },
   'suspension-lift': {
@@ -539,6 +541,7 @@ const SERVICE_TEMPLATES: Record<string, ServiceTemplate> = {
     warning: 'Skipped maintenance shows up as stranded vehicles — not always warning lights first.',
     typeNotes: {
       sedan: 'Scheduled maintenance catches worn brakes and aging batteries during routine Englewood visits.',
+      ev: 'EV scheduled maintenance skips oil changes but still covers tires, brake fluid, cabin filters, 12V battery, and battery coolant checks.',
     },
   },
   'cargo-hvac': {
@@ -650,20 +653,78 @@ function vehicleLabel(type: VehicleType, lang: Lang = 'en'): string {
   return vehicleCopy(lang).deepDive.vehicleLabel[type] ?? type;
 }
 
-function resolveServiceTemplate(serviceId: string, lang: Lang) {
+/**
+ * EV-specific wording for services shared with combustion vehicles.
+ * Pure EVs have no transmission coolers, alternators, or engine codes —
+ * these overrides keep shared templates honest on EV pages.
+ */
+const EV_TEMPLATE_OVERRIDES: Record<
+  string,
+  Partial<Record<Lang, Partial<Pick<ServiceTemplate, 'focus' | 'warning' | 'realityQuote'>>>>
+> = {
+  'towing-prep': {
+    en: {
+      focus: 'hitch wiring, rear suspension sag, brake condition, tire load ratings, and battery thermal load under towing',
+      warning: 'Towing sharply raises battery thermal load and cuts range — plan charging stops before mountain grades.',
+      realityQuote: 'The battery does not complain until you are halfway up Loveland Pass with a trailer on the hitch.',
+    },
+    es: {
+      focus: 'cableado del enganche, hundimiento de suspensión trasera, condición de frenos, capacidad de carga de llantas y carga térmica de la batería al remolcar',
+      warning: 'Remolcar aumenta la carga térmica de la batería y reduce la autonomía — planifique paradas de carga antes de las pendientes.',
+    },
+  },
+  'electrical-system': {
+    en: {
+      focus: '12V auxiliary battery health, DC-DC converter output, parasitic draw testing, and module communication',
+      warning: 'A weak 12V auxiliary battery can shut down an EV even with a healthy main pack — test it first.',
+    },
+    es: {
+      focus: 'batería auxiliar de 12V, convertidor DC-DC, drenaje parásito y fallas de módulos',
+      warning: 'Una batería auxiliar de 12V débil puede apagar un EV aunque el paquete principal esté sano — pruébela primero.',
+    },
+  },
+  'scheduled-maintenance': {
+    en: {
+      focus: 'tire rotation, brake fluid moisture testing, cabin filter, 12V battery, and battery coolant level checks',
+    },
+    es: {
+      focus: 'rotación de llantas, prueba de humedad del líquido de frenos, filtro de cabina, batería de 12V y nivel de refrigerante de batería',
+    },
+  },
+  'european-diagnostics': {
+    en: {
+      focus: 'factory scan tools for the drive unit, charging system, and comfort and body modules',
+      warning: 'European EV faults span drive unit, charging, and comfort modules — read all domains, not just one code.',
+    },
+    es: {
+      focus: 'herramientas de escaneo de fábrica para la unidad motriz, el sistema de carga y los módulos de confort y carrocería',
+      warning: 'Las fallas de un EV europeo abarcan unidad motriz, carga y módulos de confort — lea todos los dominios.',
+    },
+  },
+};
+
+function resolveServiceTemplate(serviceId: string, lang: Lang, powertrain?: string) {
   const base = SERVICE_TEMPLATES[serviceId];
   if (!base) return null;
-  if (lang !== 'es') return base;
-  const es = getDeepDiveServiceEs(serviceId);
-  if (!es) return base;
-  return {
-    ...base,
-    serviceName: es.serviceName,
-    realityQuote: es.realityQuote,
-    focus: es.focus,
-    warning: es.warning,
-    typeNotes: es.typeNotes ?? base.typeNotes,
-  };
+  let template = base;
+  if (lang === 'es') {
+    const es = getDeepDiveServiceEs(serviceId);
+    if (es) {
+      template = {
+        ...base,
+        serviceName: es.serviceName,
+        realityQuote: es.realityQuote,
+        focus: es.focus,
+        warning: es.warning,
+        typeNotes: es.typeNotes ?? base.typeNotes,
+      };
+    }
+  }
+  if (powertrain === 'ev') {
+    const evOverride = EV_TEMPLATE_OVERRIDES[serviceId]?.[lang] ?? EV_TEMPLATE_OVERRIDES[serviceId]?.en;
+    if (evOverride) template = { ...template, ...evOverride };
+  }
+  return template;
 }
 
 function accentAt(index: number) {
@@ -707,7 +768,7 @@ function buildDeepDive(
   ctx: ModelServiceContext & { yearRange: string; serviceId: string; path: string },
   lang: Lang = 'en',
 ): ModelDeepDiveContent | null {
-  const template = resolveServiceTemplate(ctx.serviceId, lang);
+  const template = resolveServiceTemplate(ctx.serviceId, lang, ctx.powertrain);
   const catalog = getServiceCatalogEntry(ctx.serviceId);
   if (!template || !catalog) return null;
 
@@ -715,6 +776,7 @@ function buildDeepDive(
   const LOCAL = t.local;
   const vLabel = vehicleLabel(ctx.vehicleType, lang);
   const typeNote =
+    (ctx.powertrain === 'ev' ? template.typeNotes.ev : undefined) ??
     template.typeNotes[ctx.vehicleType] ??
     template.typeNotes.sedan ??
     t.typeNoteFallback(ctx.brandName, ctx.model, vLabel);
@@ -819,7 +881,10 @@ function buildDeepDive(
           },
           {
             title: 'Factores de servicio severo en Colorado',
-            body: `La altitud reduce la densidad del aire; refrigeración y combustión trabajan más. Los ciclos de congelación agrietan plásticos y endurecen el caucho. La sal acelera la corrosión en frenos y suspensión del ${ctx.model}. RKC ajusta la inspección a la realidad del Front Range.`,
+            body:
+              ctx.powertrain === 'ev'
+                ? `El frío extremo reduce la autonomía y exige más del sistema térmico de la batería. Los ciclos de congelación agrietan plásticos y endurecen el caucho. La sal acelera la corrosión en frenos y suspensión del ${ctx.model}. RKC ajusta la inspección a la realidad del Front Range.`
+                : `La altitud reduce la densidad del aire; refrigeración y combustión trabajan más. Los ciclos de congelación agrietan plásticos y endurecen el caucho. La sal acelera la corrosión en frenos y suspensión del ${ctx.model}. RKC ajusta la inspección a la realidad del Front Range.`,
             ...accentAt(1),
           },
           {
@@ -841,12 +906,18 @@ function buildDeepDive(
           },
           {
             title: 'Colorado severe-service factors',
-            body: `Altitude reduces air density; cooling and combustion systems work harder. Freeze-thaw cycles crack plastics and stiffen rubber. Road salt accelerates undercarriage corrosion on ${ctx.model} brake and suspension hardware. RKC adjusts inspection depth and fluid choices for Front Range reality — not generic shop defaults.`,
+            body:
+              ctx.powertrain === 'ev'
+                ? `Cold snaps cut range and work the battery thermal system harder. Freeze-thaw cycles crack plastics and stiffen rubber. Road salt accelerates undercarriage corrosion on ${ctx.model} brake and suspension hardware. RKC adjusts inspection depth and fluid choices for Front Range reality — not generic shop defaults.`
+                : `Altitude reduces air density; cooling and combustion systems work harder. Freeze-thaw cycles crack plastics and stiffen rubber. Road salt accelerates undercarriage corrosion on ${ctx.model} brake and suspension hardware. RKC adjusts inspection depth and fluid choices for Front Range reality — not generic shop defaults.`,
             ...accentAt(1),
           },
           {
             title: 'What deferred service costs',
-            body: `Skipping ${serviceLower} on a ${ctx.brandName} ${ctx.model} turns maintainable wear into cascade failures: contaminated fluid destroys bearings, small leaks overheat engines, and minor codes become catalyst and module replacements. Preventive service at our Englewood shop costs a fraction of tow-plus-repair after a highway failure.`,
+            body:
+              ctx.powertrain === 'ev'
+                ? `Skipping ${serviceLower} on a ${ctx.brandName} ${ctx.model} turns maintainable wear into cascade failures: moisture-contaminated brake fluid corrodes calipers, a neglected 12V battery strands an otherwise healthy EV, and degraded battery coolant limits charging and range. Preventive service at our Englewood shop costs a fraction of tow-plus-repair after a highway failure.`
+                : `Skipping ${serviceLower} on a ${ctx.brandName} ${ctx.model} turns maintainable wear into cascade failures: contaminated fluid destroys bearings, small leaks overheat engines, and minor codes become catalyst and module replacements. Preventive service at our Englewood shop costs a fraction of tow-plus-repair after a highway failure.`,
             ...accentAt(2),
           },
           {
@@ -1194,11 +1265,15 @@ export function getModelDeepDiveContent(
   const vehicle = resolveVehicle(make, modelSlug);
   if (!vehicle) return null;
 
+  // Fail closed: never render combustion-service content for a pure EV.
+  if (!isServiceValidForPowertrain(serviceId, vehicle.powertrain)) return null;
+
   const ctx = {
     brandSlug: vehicle.brand,
     brandName: vehicle.brandName,
     model: vehicle.model,
     vehicleType: vehicle.vehicleType,
+    powertrain: vehicle.powertrain,
     yearRange: vehicle.yearRange,
     serviceId,
     path: buildModelServicePath(vehicle.brand, vehicle.model, serviceId),
