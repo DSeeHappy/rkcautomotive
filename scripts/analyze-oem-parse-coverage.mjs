@@ -33,3 +33,10 @@ console.log(
 console.log(
   `Generation layout: ${report.generationLayout}/${report.totalFields} (${((report.generationLayout / report.totalFields) * 100).toFixed(1)}%)`,
 );
+const proseBlocks = report.multiClauseProse + report.singleClauseProse;
+console.log(
+  `Multi-clause prose blocks: ${report.multiClauseProse}/${proseBlocks} (${((report.multiClauseProse / proseBlocks) * 100).toFixed(1)}%)`,
+);
+console.log(
+  `Labeled clauses: ${report.labeledClauses}/${report.totalClauses} (${((report.labeledClauses / report.totalClauses) * 100).toFixed(1)}%)`,
+);

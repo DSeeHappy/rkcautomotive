@@ -8,6 +8,14 @@ export type OemSpecLineItem = {
   value: string;
 };
 
+/** One `;`/sentence-delimited clause of prose, with optional bold lead-in label. */
+export type OemProseClause = {
+  label?: string;
+  text: string;
+  unverified: boolean;
+  notes: string[];
+};
+
 export type OemSpecGeneration = {
   code: string;
   /** Display label, e.g. "XA40 (2013–2018)" when years are known from subtitle */
@@ -15,6 +23,7 @@ export type OemSpecGeneration = {
   yearRange?: string;
   body: string;
   lineItems: OemSpecLineItem[];
+  clauses: OemProseClause[];
   unverifiedNotes: string[];
   contentFormat: 'structured' | 'prose';
 };
@@ -29,6 +38,8 @@ export type ParsedOemSpecText = {
   /** structured when line items were extracted; prose otherwise */
   contentFormat: 'structured' | 'prose';
   lineItems: OemSpecLineItem[];
+  /** Prose broken into scannable clauses (prose layout only) */
+  clauses: OemProseClause[];
 };
 
 const UNVERIFIED_PATTERN =
@@ -85,6 +96,120 @@ export function extractUnverifiedNotes(text: string): { cleaned: string; notes: 
 function humanizeGenerationLabel(code: string, yearMap: Map<string, string>): string {
   const years = yearMap.get(code);
   return years ? `${code} (${years})` : code;
+}
+
+/** Abbreviations that should not end a sentence split (lowercase, no dots). */
+const NON_TERMINAL_ABBREVIATIONS = new Set(['vs', 'etc', 'eg', 'ie', 'ca', 'no', 'approx', 'incl', 'inc']);
+
+/**
+ * Split prose into clauses on top-level `;` and sentence boundaries.
+ * Parentheses are respected so "(sealer voids; stains)" stays intact.
+ */
+function splitProseClauses(text: string): string[] {
+  const parts: string[] = [];
+  let depth = 0;
+  let current = '';
+
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    if (ch === '(') depth += 1;
+    else if (ch === ')') depth = Math.max(0, depth - 1);
+
+    if (ch === ';' && depth === 0) {
+      parts.push(current);
+      current = '';
+      continue;
+    }
+
+    if (ch === '.' && depth === 0 && /^\s+[A-Z(0-9]/.test(text.slice(i + 1))) {
+      const prev = text[i - 1] ?? '';
+      const lastWord = current.match(/([A-Za-z]+)$/)?.[1]?.toLowerCase() ?? '';
+      const isAbbreviation =
+        /[A-Z]/.test(prev) || NON_TERMINAL_ABBREVIATIONS.has(lastWord) || lastWord.length === 1;
+      if (!isAbbreviation) {
+        current += ch;
+        parts.push(current);
+        current = '';
+        while (i + 1 < text.length && /\s/.test(text[i + 1])) i += 1;
+        continue;
+      }
+    }
+
+    current += ch;
+  }
+  if (current.trim()) parts.push(current);
+
+  return parts.map((p) => p.trim().replace(/^[;,]\s*/, '')).filter(Boolean);
+}
+
+const CLAUSE_LABEL_COLON = /^([^:.;]{2,48}?):\s+(\S.*)$/;
+/** Lead-in like "RWD (2021 Standard Range)", "320i", "2025 Long Range RWD" followed by a numeric value. */
+const CLAUSE_LABEL_LEAD =
+  /^([A-Za-z0-9][\w.+/&-]*(?:\s+[\w.+/&-]+){0,4}?(?:\s+\([^)]{1,48}\))?)\s+(?=[≈~]?\d)/;
+
+/** Sentence fillers — a lead-in containing these is prose, not a variant label. */
+const LABEL_STOPWORDS =
+  /\b(the|a|an|of|to|at|for|in|on|is|are|was|were|does|do|not|with|and|or|per|from|by|reported|uses?|has|have|had)\b/;
+
+/** Pure measurement tokens like "2.5L" or "18.1 kWh" are values, not labels. */
+const MEASUREMENT_LABEL = /^[\d.,]+\s*(?:L|kWh|kW|hp|mm|in|ft|lb|kg|mi|km|s|V|gal|qt)$/i;
+
+/**
+ * Value must look like a spec figure (unit-bearing number, oil viscosity,
+ * or MPG-style triple) for the lead-in to count as a variant label.
+ */
+const SPEC_VALUE_HINT =
+  /\d\s*(?:hp|lb-?ft|mpg|mpge|mi\b|km\b|kwh|kw\b|rpm|in\b|lbs?\b|kg\b|s\b|sec|yr|mo\b|psi|nm\b|volts?|kwh)|\dW-\d|\d+\/\d+\/\d+|%/i;
+
+function extractClauseLabel(clause: string): { label?: string; text: string } {
+  const colonMatch = clause.match(CLAUSE_LABEL_COLON);
+  if (colonMatch && colonMatch[1].length <= 40) {
+    return { label: colonMatch[1].trim(), text: colonMatch[2].trim() };
+  }
+
+  const leadMatch = clause.match(CLAUSE_LABEL_LEAD);
+  if (leadMatch) {
+    const label = leadMatch[1].trim();
+    const rest = clause.slice(leadMatch[0].length).trim();
+    if (
+      label.length <= 40 &&
+      rest.length >= 2 &&
+      !/^\d[\d,.–-]*$/.test(label) &&
+      !MEASUREMENT_LABEL.test(label) &&
+      !LABEL_STOPWORDS.test(label) &&
+      SPEC_VALUE_HINT.test(rest)
+    ) {
+      return { label, text: rest };
+    }
+  }
+
+  return { text: clause };
+}
+
+function cleanupClauseText(text: string): string {
+  return text
+    .replace(/\s*—\s*(?=\()/, ' ')
+    .replace(/\s*[—–-]\s*$/, '')
+    .replace(/\s*[:;,]\s*$/, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+/** Break prose into scannable clauses with per-clause labels and unverified flags. */
+export function parseProseClauses(body: string): OemProseClause[] {
+  const trimmed = body.trim();
+  if (!trimmed) return [];
+
+  return splitProseClauses(trimmed).map((raw) => {
+    const { cleaned, notes } = extractUnverifiedNotes(raw);
+    const { label, text } = extractClauseLabel(cleanupClauseText(cleaned));
+    return {
+      label,
+      text,
+      unverified: notes.length > 0,
+      notes,
+    };
+  });
 }
 
 /** Split on known generation codes from subtitle or common platform markers. */
@@ -155,6 +280,7 @@ function buildGenerationsFromMatches(
       yearRange: yearMap.get(matches[i].code),
       body: cleaned,
       lineItems,
+      clauses: lineItems.length > 0 ? [] : parseProseClauses(segment),
       unverifiedNotes: notes,
       contentFormat: lineItems.length > 0 ? 'structured' : 'prose',
     });
@@ -236,6 +362,7 @@ export function parseOemSpecText(text: string, subtitle?: string): ParsedOemSpec
       layout: 'prose',
       contentFormat: 'prose',
       lineItems: [],
+      clauses: [],
     };
   }
 
@@ -250,6 +377,7 @@ export function parseOemSpecText(text: string, subtitle?: string): ParsedOemSpec
       layout: 'generations',
       contentFormat: anyStructured ? 'structured' : 'prose',
       lineItems: [],
+      clauses: [],
     };
   }
 
@@ -263,6 +391,7 @@ export function parseOemSpecText(text: string, subtitle?: string): ParsedOemSpec
     layout: 'prose',
     contentFormat: lineItems.length > 0 ? 'structured' : 'prose',
     lineItems,
+    clauses: lineItems.length > 0 ? [] : parseProseClauses(raw),
   };
 }
 
@@ -272,6 +401,13 @@ export type OemParseCoverageReport = {
   proseLayout: number;
   structuredContent: number;
   proseContent: number;
+  /** Prose fields broken into 2+ scannable clauses */
+  multiClauseProse: number;
+  /** Prose fields left as a single paragraph */
+  singleClauseProse: number;
+  /** Clauses (across all prose fields) that gained a bold lead-in label */
+  labeledClauses: number;
+  totalClauses: number;
 };
 
 /** Summarize parse outcomes across the OEM pack (for sanity checks). */
@@ -283,6 +419,10 @@ export function analyzeOemParseCoverage(
   let proseLayout = 0;
   let structuredContent = 0;
   let proseContent = 0;
+  let multiClauseProse = 0;
+  let singleClauseProse = 0;
+  let labeledClauses = 0;
+  let totalClauses = 0;
 
   for (const model of Object.values(models)) {
     for (const field of Object.values(model.fields)) {
@@ -294,6 +434,18 @@ export function analyzeOemParseCoverage(
       else proseLayout += 1;
       if (parsed.contentFormat === 'structured') structuredContent += 1;
       else proseContent += 1;
+
+      const clauseGroups =
+        parsed.layout === 'generations'
+          ? parsed.generations.map((g) => g.clauses)
+          : [parsed.clauses.length > 0 ? parsed.clauses : parseProseClauses(parsed.raw)];
+      for (const clauses of clauseGroups) {
+        if (clauses.length === 0) continue;
+        if (clauses.length >= 2) multiClauseProse += 1;
+        else singleClauseProse += 1;
+        totalClauses += clauses.length;
+        labeledClauses += clauses.filter((c) => c.label).length;
+      }
     }
   }
 
@@ -303,5 +455,9 @@ export function analyzeOemParseCoverage(
     proseLayout,
     structuredContent,
     proseContent,
+    multiClauseProse,
+    singleClauseProse,
+    labeledClauses,
+    totalClauses,
   };
 }

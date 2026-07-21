@@ -1,7 +1,13 @@
 'use client';
 
 import { useId, useMemo, useState } from 'react';
-import { parseOemSpecText, type OemSpecGeneration, type OemSpecLineItem } from '@/lib/knowledge/parseOemSpecText';
+import {
+  parseOemSpecText,
+  parseProseClauses,
+  type OemProseClause,
+  type OemSpecGeneration,
+  type OemSpecLineItem,
+} from '@/lib/knowledge/parseOemSpecText';
 
 type OemSpecValueProps = {
   text: string;
@@ -29,32 +35,57 @@ function SpecLineItems({ items }: { items: OemSpecLineItem[] }) {
           <dt className="text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-ink-muted">
             {item.label}
           </dt>
-          <dd className="mt-0.5 text-sm leading-relaxed text-foreground">{item.value}</dd>
+          <dd className="mt-0.5 text-[0.9375rem] leading-relaxed text-foreground">{item.value}</dd>
         </div>
       ))}
     </dl>
   );
 }
 
-function ProseBody({ body }: { body: string }) {
-  const paragraphs = body
-    .split(/\.\s+(?=[A-Z(0-9])/)
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .map((part) => (part.endsWith('.') ? part : `${part}.`));
+/**
+ * Prose broken into stacked clause items — bold lead-in labels where
+ * detectable, per-item unverified badges, generous line spacing.
+ */
+function ClauseList({
+  clauses,
+  unverifiedLabel,
+}: {
+  clauses: OemProseClause[];
+  unverifiedLabel: string;
+}) {
+  if (clauses.length === 0) return null;
 
-  if (paragraphs.length <= 1) {
-    return <p className="text-sm leading-relaxed text-foreground">{body}</p>;
+  if (clauses.length === 1 && !clauses[0].label && !clauses[0].unverified) {
+    return (
+      <p className="max-w-2xl text-[0.9375rem] leading-relaxed text-foreground">
+        {clauses[0].text}
+      </p>
+    );
   }
 
   return (
-    <div className="space-y-2.5">
-      {paragraphs.map((paragraph, index) => (
-        <p key={index} className="text-sm leading-relaxed text-foreground">
-          {paragraph}
-        </p>
+    <ul className="max-w-2xl space-y-2.5">
+      {clauses.map((clause, index) => (
+        <li
+          key={index}
+          className="border-l-2 border-primary-green/25 pl-3.5 text-[0.9375rem] leading-relaxed text-foreground sm:pl-4"
+        >
+          {clause.label ? (
+            <span className="font-semibold text-foreground">{clause.label}</span>
+          ) : null}
+          {clause.label && clause.text ? <span aria-hidden> — </span> : null}
+          {clause.text ? <span className={clause.label ? 'text-ink-muted' : ''}>{clause.text}</span> : null}
+          {clause.unverified ? (
+            <span className="ml-2 inline-flex align-middle">
+              <UnverifiedBadge
+                note={clause.notes[0] ?? unverifiedLabel}
+                label={unverifiedLabel}
+              />
+            </span>
+          ) : null}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
@@ -65,22 +96,22 @@ function GenerationContent({
   generation: OemSpecGeneration;
   unverifiedLabel: string;
 }) {
-  return (
-    <div className="space-y-3">
-      {generation.unverifiedNotes.length > 0 ? (
-        <div className="flex flex-wrap gap-2">
-          {generation.unverifiedNotes.map((note) => (
-            <UnverifiedBadge key={note} note={note} label={unverifiedLabel} />
-          ))}
-        </div>
-      ) : null}
-      {generation.contentFormat === 'structured' && generation.lineItems.length > 0 ? (
+  if (generation.contentFormat === 'structured' && generation.lineItems.length > 0) {
+    return (
+      <div className="space-y-3">
+        {generation.unverifiedNotes.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {generation.unverifiedNotes.map((note) => (
+              <UnverifiedBadge key={note} note={note} label={unverifiedLabel} />
+            ))}
+          </div>
+        ) : null}
         <SpecLineItems items={generation.lineItems} />
-      ) : generation.body ? (
-        <ProseBody body={generation.body} />
-      ) : null}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  return <ClauseList clauses={generation.clauses} unverifiedLabel={unverifiedLabel} />;
 }
 
 function GenerationTabs({
@@ -165,6 +196,10 @@ export default function OemSpecValue({
   selectGenerationLabel,
 }: OemSpecValueProps) {
   const parsed = useMemo(() => parseOemSpecText(text, subtitle), [text, subtitle]);
+  const fallbackClauses = useMemo(
+    () => (parsed.clauses.length > 0 ? parsed.clauses : parseProseClauses(parsed.raw)),
+    [parsed],
+  );
 
   if (parsed.layout === 'generations' && parsed.generations.length >= 2) {
     return (
@@ -176,29 +211,20 @@ export default function OemSpecValue({
     );
   }
 
-  const proseBody =
-    parsed.unverifiedNotes.length > 0
-      ? parsed.generations.length === 0
-        ? parsed.raw.replace(UNVERIFIED_PATTERN, '').trim() || parsed.raw
-        : parsed.raw
-      : parsed.raw;
-
-  return (
-    <div className="space-y-3">
-      {parsed.unverifiedNotes.length > 0 ? (
-        <div className="flex flex-wrap gap-2">
-          {parsed.unverifiedNotes.map((note) => (
-            <UnverifiedBadge key={note} note={note} label={unverifiedLabel} />
-          ))}
-        </div>
-      ) : null}
-      {parsed.contentFormat === 'structured' && parsed.lineItems.length > 0 ? (
+  if (parsed.contentFormat === 'structured' && parsed.lineItems.length > 0) {
+    return (
+      <div className="space-y-3">
+        {parsed.unverifiedNotes.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {parsed.unverifiedNotes.map((note) => (
+              <UnverifiedBadge key={note} note={note} label={unverifiedLabel} />
+            ))}
+          </div>
+        ) : null}
         <SpecLineItems items={parsed.lineItems} />
-      ) : (
-        <ProseBody body={proseBody} />
-      )}
-    </div>
-  );
-}
+      </div>
+    );
+  }
 
-const UNVERIFIED_PATTERN = /\*{0,2}\s*Not verified\s*[—-]\s*needs OEM source\*{0,2}/gi;
+  return <ClauseList clauses={fallbackClauses} unverifiedLabel={unverifiedLabel} />;
+}
