@@ -63,6 +63,14 @@ export const VEHICLE_HERO_VIDEO = {
   posterJpg: '/videos/vehicles-hero-poster.jpg',
 } as const;
 
+/** Check engine light service hero — dashboard MIL loop (8s, muted) */
+export const CHECK_ENGINE_HERO_VIDEO = {
+  webm: '/videos/check-engine-hero.webm',
+  mp4: '/videos/check-engine-hero.mp4',
+  poster: '/videos/check-engine-hero-poster.webp',
+  posterJpg: '/videos/check-engine-hero-poster.jpg',
+} as const;
+
 /** Full-bleed hero backgrounds — cap decoded width at 1920px for next/image */
 export const HERO_IMAGE_SIZES =
   '(max-width: 640px) 100vw, (max-width: 1200px) 100vw, 1920px';

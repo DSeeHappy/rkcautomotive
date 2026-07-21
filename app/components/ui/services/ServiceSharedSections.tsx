@@ -132,6 +132,12 @@ export function HeroTrustPills({
 
 export type ServiceCta = { href: string; label: string };
 
+export type ServiceHeroVideoSources = {
+  webm: string;
+  mp4: string;
+  poster: string;
+};
+
 export type ServiceHeroProps = {
   image: string;
   imageAlt: string;
@@ -141,6 +147,8 @@ export type ServiceHeroProps = {
   primaryCta: ServiceCta;
   secondaryCta: ServiceCta;
   breadcrumbs?: BreadcrumbItem[];
+  /** When set, poster stays LCP; video plays over it unless reduced motion */
+  video?: ServiceHeroVideoSources;
 };
 
 export function ServiceCinematicHero({
@@ -152,6 +160,7 @@ export function ServiceCinematicHero({
   primaryCta,
   secondaryCta,
   breadcrumbs,
+  video,
 }: ServiceHeroProps) {
   const { lang } = useLanguage();
   const crumbCopy = serviceCopy(lang).breadcrumbs;
@@ -182,19 +191,36 @@ export function ServiceCinematicHero({
       ? { ...secondaryCta, label: heroCopy.call(BUSINESS.phone) }
       : secondaryCta;
 
+  const posterSrc = video?.poster ?? image;
+  const showVideo = Boolean(video) && !reduce;
+
   return (
     <section ref={sectionRef} className="relative isolate w-full min-h-[58svh] overflow-hidden bg-[#0c1222] sm:min-h-[65svh]">
       <div ref={bgRef} className="hero-media-layer absolute inset-0 size-full">
         <div className="relative size-full">
           <Image
-            src={image}
+            src={posterSrc}
             alt={imageAlt}
             fill
             priority
             fetchPriority="high"
-            className={`object-cover object-center ${reduce ? '' : 'ken-burns'}`}
+            className={`object-cover object-center ${showVideo || reduce ? '' : 'ken-burns'}`}
             sizes={HERO_IMAGE_SIZES}
           />
+          {showVideo && video && (
+            <video
+              className="absolute inset-0 size-full object-cover object-center"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-hidden
+            >
+              <source src={video.webm} type="video/webm" />
+              <source src={video.mp4} type="video/mp4" />
+            </video>
+          )}
         </div>
         <div
           className="absolute inset-0"
@@ -265,9 +291,11 @@ export type ServiceRealityBandProps = {
   eyebrow?: string;
   quote: string;
   body: ReactNode;
+  image?: string;
+  imageAlt?: string;
 };
 
-export function ServiceRealityBand({ eyebrow, quote, body }: ServiceRealityBandProps) {
+export function ServiceRealityBand({ eyebrow, quote, body, image, imageAlt }: ServiceRealityBandProps) {
   const { lang } = useLanguage();
   const resolvedEyebrow = eyebrow ?? siteCopy(lang).serviceChrome.realityCheck;
   return (
@@ -292,6 +320,21 @@ export function ServiceRealityBand({ eyebrow, quote, body }: ServiceRealityBandP
           </blockquote>
           <p className="mx-auto mt-5 max-w-2xl text-base text-white/65 sm:text-lg">{body}</p>
         </FadeIn>
+        {image && (
+          <FadeIn delay={0.1} className="mx-auto mt-12 max-w-3xl">
+            <figure className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+              <div className="relative aspect-[16/9]">
+                <Image
+                  src={image}
+                  alt={imageAlt ?? ''}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                />
+              </div>
+            </figure>
+          </FadeIn>
+        )}
       </div>
     </section>
   );

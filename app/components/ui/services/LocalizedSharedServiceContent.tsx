@@ -4,6 +4,7 @@ import type { LucideIcon } from 'lucide-react';
 import { BUSINESS } from '@/lib/constants';
 import {
   ServiceCinematicHero,
+  type ServiceHeroVideoSources,
   ServiceRealityBand,
   ServiceSymptomGrid,
   ServiceProcessTimeline,
@@ -88,6 +89,10 @@ type Props = {
   icons: LucideIcon[];
   image: string;
   processBgImage: string;
+  /** Optional hero video override — poster stays LCP; other service pages keep photos */
+  heroVideo?: ServiceHeroVideoSources;
+  /** Optional figure below the reality-check quote */
+  realityImage?: string;
 };
 
 export default function LocalizedSharedServiceContent({
@@ -95,6 +100,8 @@ export default function LocalizedSharedServiceContent({
   icons,
   image,
   processBgImage,
+  heroVideo,
+  realityImage,
 }: Props) {
   const { lang } = useLanguage();
   const t = bodyCopy(lang);
@@ -117,7 +124,7 @@ export default function LocalizedSharedServiceContent({
     <div lang={lang}>
       <ServiceCinematicHero
         breadcrumbs={getServiceBreadcrumbs(t.breadcrumb, lang)}
-        image={image}
+        image={heroVideo?.poster ?? image}
         imageAlt={t.hero.imageAlt}
         eyebrow={t.hero.eyebrow}
         title={t.hero.title}
@@ -127,9 +134,15 @@ export default function LocalizedSharedServiceContent({
           href: BUSINESS.phoneHref,
           label: `${t.hero.callPrefix} ${BUSINESS.phone}`,
         }}
+        video={heroVideo}
       />
 
-      <ServiceRealityBand quote={t.reality.quote} body={t.reality.body} />
+      <ServiceRealityBand
+        quote={t.reality.quote}
+        body={t.reality.body}
+        image={realityImage}
+        imageAlt={t.hero.imageAlt}
+      />
 
       <ServiceSymptomGrid
         eyebrow={t.symptoms.eyebrow}
