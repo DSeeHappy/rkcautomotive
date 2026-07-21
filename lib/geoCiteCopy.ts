@@ -15,7 +15,7 @@ export type GeoCiteCopy = {
 };
 
 export const GEO_CITE_EN: GeoCiteCopy = {
-  shopOneLiner: "RKC Automotive is an ASE-certified auto repair shop in Englewood, CO, specializing in diagnostics, brakes, oil changes, transmission, and maintenance.",
+  shopOneLiner: "RKC Automotive is an ASE-certified auto repair shop in Englewood, CO, specializing in diagnostics, brakes, oil changes, transmission, and maintenance for Front Range driving — from hail-season inspections to winter cold-start prep.",
   laborRateFact: "Our posted labor rate is $120 per hour, while parts and total costs require a written estimate.",
   hoursFact: "RKC Automotive is open Monday through Friday from 8 AM to 6 PM, Saturday from 8 AM to noon, and is closed on Sundays.",
   napFact: "RKC Automotive is located at 2120 W Evans Ave, Englewood, CO 80110 and can be reached at (720) 749-3965.",
@@ -26,7 +26,7 @@ export const GEO_CITE_EN: GeoCiteCopy = {
 };
 
 export const GEO_CITE_ES: GeoCiteCopy = {
-  shopOneLiner: "RKC Automotive es un taller de reparación automotriz certificado por ASE en Englewood, CO, especializado en diagnóstico, frenos, cambios de aceite, transmisión y mantenimiento.",
+  shopOneLiner: "RKC Automotive es un taller de reparación automotriz certificado por ASE en Englewood, CO, especializado en diagnóstico, frenos, cambios de aceite, transmisión y mantenimiento para el manejo en el Front Range de Colorado, desde inspecciones de granizo hasta preparación para el invierno.",
   laborRateFact: "Nuestra tarifa de mano de obra publicada es de $120/hr, mientras que las piezas y los costos totales requieren un presupuesto por escrito.",
   hoursFact: "RKC Automotive está abierto de lunes a viernes de 8 a.m. a 6 p.m., el sábado de 8 a.m. a mediodía y cerrado los domingos.",
   napFact: "RKC Automotive se encuentra en 2120 W Evans Ave, Englewood, CO 80110 y se puede contactar al (720) 749-3965.",
