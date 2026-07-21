@@ -4,10 +4,12 @@ import Image from 'next/image';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { useLanguage } from '@/lib/language';
 import { knowledgeCopy } from '@/lib/i18n/knowledgeCopy';
+import OemSpecValue from '@/app/components/ui/vehicles/OemSpecValue';
 import type {
   DataSource,
   ModelKnowledgeOverview as ModelKnowledgeOverviewData,
   ModelOverviewSection,
+  SpecCategory,
 } from '@/lib/knowledge/types';
 
 type ModelKnowledgeOverviewProps = {
@@ -149,27 +151,74 @@ function ObservationsBody({ section }: { section: ModelOverviewSection }) {
   );
 }
 
-function SpecGrid({ items }: { items: ModelOverviewSection['items'] }) {
+function OemSpecCategoryBlock({
+  category,
+  subtitle,
+  copy,
+}: {
+  category: SpecCategory;
+  subtitle?: string;
+  copy: ReturnType<typeof knowledgeCopy>;
+}) {
+  const populated = category.fields.filter((field) => field.verified.value !== null);
+  if (populated.length === 0) return null;
+
+  const primary = populated[0];
+  const displayText = primary.verified.displayValue ?? String(primary.verified.value ?? '');
+
   return (
-    <dl className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="py-6 first:pt-0 last:pb-0">
+      <h4 className="font-display text-lg tracking-wide text-foreground">{category.label}</h4>
+      <div className="mt-4">
+        <OemSpecValue
+          text={displayText}
+          subtitle={subtitle}
+          unverifiedLabel={copy.needsOemSource}
+          selectGenerationLabel={copy.selectGeneration}
+        />
+      </div>
+    </div>
+  );
+}
+
+function OemSpecsBody({
+  items,
+  subtitle,
+  copy,
+}: {
+  items: ModelOverviewSection['items'];
+  subtitle?: string;
+  copy: ReturnType<typeof knowledgeCopy>;
+}) {
+  return (
+    <div className="mt-5 space-y-8">
       {items.map((item) => (
         <div key={item.label}>
-          <dt className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">
+          <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-primary-green">
             {humanizeLabel(item.label)}
-          </dt>
-          <dd className="mt-1 text-sm leading-relaxed text-foreground">{item.value}</dd>
+          </h4>
+          <div className="mt-3">
+            <OemSpecValue
+              text={item.value}
+              subtitle={subtitle}
+              unverifiedLabel={copy.needsOemSource}
+              selectGenerationLabel={copy.selectGeneration}
+            />
+          </div>
         </div>
       ))}
-    </dl>
+    </div>
   );
 }
 
 function KnowledgeSection({
   section,
   copy,
+  oemSubtitle,
 }: {
   section: ModelOverviewSection;
   copy: ReturnType<typeof knowledgeCopy>;
+  oemSubtitle?: string;
 }) {
   const layout = getSectionLayout(section);
 
@@ -192,7 +241,7 @@ function KnowledgeSection({
         ) : layout === 'observations' ? (
           <ObservationsBody section={section} />
         ) : (
-          <SpecGrid items={section.items} />
+          <OemSpecsBody items={section.items} subtitle={oemSubtitle} copy={copy} />
         )
       ) : section.emptyMessage ? (
         <p className="mt-5 text-sm italic leading-relaxed text-ink-muted">{section.emptyMessage}</p>
@@ -297,7 +346,12 @@ export default function ModelKnowledgeOverview({
         {displaySections.length > 0 ? (
           <FadeIn className="mt-8 divide-y divide-[color:var(--line)] sm:mt-10">
             {displaySections.map((section) => (
-              <KnowledgeSection key={section.id} section={section} copy={copy} />
+              <KnowledgeSection
+                key={section.id}
+                section={section}
+                copy={copy}
+                oemSubtitle={overview.oemSubtitle}
+              />
             ))}
             <SourcesFooter sources={pageSources} label={copy.sourcesLabel} />
           </FadeIn>
@@ -321,31 +375,14 @@ export default function ModelKnowledgeOverview({
               {copy.specScaffoldIntroVerified}
             </p>
             <div className="mt-6 divide-y divide-[color:var(--line)]">
-              {overview.specCategories.map((category) => {
-                const populated = category.fields.filter(
-                  (field) => field.verified.value !== null,
-                );
-                if (populated.length === 0) return null;
-                return (
-                  <div key={category.category} className="py-6 first:pt-0 last:pb-0">
-                    <h4 className="font-display text-lg tracking-wide text-foreground">
-                      {category.label}
-                    </h4>
-                    <dl className="mt-4 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-                      {populated.map((field) => (
-                        <div key={field.key}>
-                          <dt className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">
-                            {field.label}
-                          </dt>
-                          <dd className="mt-1 text-sm leading-relaxed text-foreground">
-                            {field.verified.displayValue}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-                );
-              })}
+              {overview.specCategories.map((category) => (
+                <OemSpecCategoryBlock
+                  key={category.category}
+                  category={category}
+                  subtitle={overview.oemSubtitle}
+                  copy={copy}
+                />
+              ))}
             </div>
           </FadeIn>
         ) : null}

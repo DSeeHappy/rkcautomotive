@@ -144,6 +144,8 @@ export type ModelKnowledgeOverview = {
   isPilot: boolean;
   /** True when modelReliabilityNotes claims exist (ownership populated). */
   hasModelClaims: boolean;
+  /** OEM pack subtitle — used to humanize generation codes (year ranges when present). */
+  oemSubtitle?: string;
   sections: ModelOverviewSection[];
   /** Phase 3 authority shells — Overview / Engineering / Ownership / Enthusiast / Comparison */
   phase3Sections: ModelOverviewSection[];

@@ -22,6 +22,8 @@ const EN = {
     'OEM horsepower, torque, MPG, and dimensions are not shown until verified against a licensed source — we never fabricate spec numbers.',
   sourcesLabel: 'Sources',
   unverifiedCategory: UNABLE_TO_VERIFY,
+  needsOemSource: 'Not verified — needs OEM source',
+  selectGeneration: 'Select generation',
   badges: {
     verified: 'Catalog verified',
     shopObservation: 'Shop observation',
@@ -50,6 +52,8 @@ const ES = {
     'No mostramos caballos de fuerza, torque, MPG ni dimensiones OEM hasta verificarlos con una fuente con licencia — nunca inventamos cifras.',
   sourcesLabel: 'Fuentes',
   unverifiedCategory: 'No se puede verificar con los datos disponibles.',
+  needsOemSource: 'No verificado — requiere fuente OEM',
+  selectGeneration: 'Seleccionar generación',
   badges: {
     verified: 'Catálogo verificado',
     shopObservation: 'Observación del taller',

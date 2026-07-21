@@ -10,6 +10,7 @@ import {
   buildOemSpecOverviewItems,
   buildVehicleSpecsFromOem,
   countVerifiedSpecFields,
+  getOemModelRecord,
   getOemSources,
   hasOemModelData,
   mergeSpecCategoriesWithOem,
@@ -221,10 +222,13 @@ export function getModelKnowledgeOverview(
     : baseCategories;
   const hasVerifiedSpecs = oemSpecs ? countVerifiedSpecFields(oemSpecs) > 0 : false;
 
+  const oemRecord = getOemModelRecord(model.id);
+
   return {
     modelId: model.id,
     isPilot,
     hasModelClaims,
+    oemSubtitle: oemRecord?.subtitle,
     sections,
     phase3Sections,
     specCategories,
