@@ -72,28 +72,10 @@ export const HOME_COPY = {
         },
       },
     },
-    competitive: [
-      {
-        title: 'Rate you can see before you call',
-        description:
-          'National chains quote menu packages by ZIP code — labor rates and shop supply fees vary by location and rarely appear as a flat hourly rate online. RKC posts $120/hr so you can compare hours × rate + parts before you drive over.',
-      },
-      {
-        title: 'Same crew, not a rotating line',
-        description:
-          'High-volume chain stores run appointment queues with different technicians each visit. At RKC you talk to the same ASE-certified crew — Ray, Oscar, and the team who have been turning wrenches in this Englewood bay for 30+ years.',
-      },
-      {
-        title: 'Open until 6 PM weekdays',
-        description:
-          'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no online appointment form required.',
-      },
-      {
-        title: 'No oversell. Real diagnostics.',
-        description:
-          'Chain shops often bundle "free" inspections with coupon-driven add-ons — fluid flushes, filter packages, store credit offers. We diagnose the actual problem, explain what is urgent vs. what can wait, and fix only what you approve.',
-      },
-    ],
+    compareTeaser: {
+      body: 'National chains quote menu packages by ZIP code and rarely post a flat hourly rate online. RKC publishes $120/hr so you can compare hours × rate + parts before you drive over.',
+      linkLabel: 'See how we compare on pricing',
+    },
     trustBadges: [
       'ASE Certified',
       '$120/hr Posted Online',
@@ -287,28 +269,10 @@ export const HOME_COPY = {
         },
       },
     },
-    competitive: [
-      {
-        title: 'Tarifa que puede ver antes de llamar',
-        description:
-          'Las cadenas nacionales cotizan paquetes por código postal — las tarifas de mano de obra y cargos de taller varían por ubicación y rara vez aparecen como una tarifa fija por hora en línea. RKC publica $120/hr para que pueda comparar horas × tarifa + piezas antes de venir.',
-      },
-      {
-        title: 'El mismo equipo, no una fila rotativa',
-        description:
-          'Los talleres de alto volumen manejan citas con técnicos distintos en cada visita. En RKC habla con el mismo equipo certificado ASE — Ray, Oscar y el equipo que ha trabajado en esta bahía de Englewood por más de 30 años.',
-      },
-      {
-        title: 'Abiertos hasta las 6 PM entre semana',
-        description:
-          'Muchos talleres de Englewood cierran a las 5 PM entre semana. Nosotros estamos abiertos hasta las 6 PM de lunes a viernes y aceptamos visitas sin cita cuando hay espacio en la bahía — sin formulario de cita en línea obligatorio.',
-      },
-      {
-        title: 'Sin ventas excesivas. Diagnóstico real.',
-        description:
-          'Las cadenas a menudo agrupan inspecciones “gratis” con extras impulsados por cupones — lavados de fluidos, paquetes de filtros, crédito de tienda. Diagnosticamos el problema real, explicamos qué es urgente y qué puede esperar, y solo reparamos lo que usted aprueba.',
-      },
-    ],
+    compareTeaser: {
+      body: 'Las cadenas nacionales cotizan paquetes por código postal y rara vez publican una tarifa fija por hora en línea. RKC publica $120/hr para que pueda comparar horas × tarifa + piezas antes de venir.',
+      linkLabel: 'Vea cómo nos comparamos en precios',
+    },
     trustBadges: [
       'Certificado ASE',
       '$120/hr publicado en línea',
