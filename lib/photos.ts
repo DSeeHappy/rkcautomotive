@@ -114,10 +114,6 @@ export const MODEL_HERO_VIDEOS: Record<string, ModelVideoSources> = {
     poster: '/videos/mustang-hero-poster.webp',
     posterJpg: '/videos/mustang-hero-poster.jpg',
   },
-};
-
-/** Per-model knowledge-overview figure video overrides, keyed by `${makeSlug}/${modelSlug}` */
-export const MODEL_KNOWLEDGE_VIDEOS: Record<string, ModelVideoSources> = {
   'tesla/cybertruck': {
     webm: '/videos/cybertruck-hero.webm',
     mp4: '/videos/cybertruck-hero.mp4',
@@ -125,6 +121,14 @@ export const MODEL_KNOWLEDGE_VIDEOS: Record<string, ModelVideoSources> = {
     posterJpg: '/videos/cybertruck-hero-poster.jpg',
   },
 };
+
+/**
+ * Per-model knowledge-overview figure video overrides, keyed by `${makeSlug}/${modelSlug}`.
+ * Keep a model out of here if its clip already plays in the hero — the same
+ * footage looping twice on one page reads as a mistake (knowledge figures fall
+ * back to the static model image).
+ */
+export const MODEL_KNOWLEDGE_VIDEOS: Record<string, ModelVideoSources> = {};
 
 /**
  * Models whose hero video displaced a photo the page should keep —
