@@ -36,7 +36,6 @@ import { useGsapReveal } from '@/lib/useGsapReveal';
 import { useLanguage } from '@/lib/language';
 import { siteCopy } from '@/lib/siteCopy';
 import { pricingCopy } from '@/lib/i18n/pricingCopy';
-import { homeCopy } from '@/lib/homeCopy';
 
 const RKC_RATE = 120;
 const DEALER_RATE = 180;
@@ -69,7 +68,7 @@ export default function PricingContent() {
   const { lang } = useLanguage();
   const shell = siteCopy(lang).shells.pricing;
   const body = pricingCopy(lang);
-  const competitive = homeCopy(lang).competitive;
+  const competitive = body.why.cards;
   const rateReveal = useGsapReveal<HTMLParagraphElement>({ y: 20, duration: 0.7 });
   const titleReveal = useGsapReveal<HTMLHeadingElement>({ delay: 0.08, y: 24, duration: 0.7 });
   const descReveal = useGsapReveal<HTMLParagraphElement>({ delay: 0.16, y: 16, duration: 0.6 });
