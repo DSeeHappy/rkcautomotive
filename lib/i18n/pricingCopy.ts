@@ -90,6 +90,28 @@ export const PRICING_COPY = {
       title: 'Transparency you can verify',
       intro: (rate: string) =>
         `Plenty of Front Range shops advertise honest pricing — then ask you to request a quote before sharing their hourly rate. RKC puts ${rate} on the page so you can compare the full estimate upfront.`,
+      cards: [
+        {
+          title: 'Rate you can see before you call',
+          description:
+            'National chains quote menu packages by ZIP code — labor rates and shop supply fees vary by location and rarely appear as a flat hourly rate online. RKC posts $120/hr so you can compare hours × rate + parts before you drive over.',
+        },
+        {
+          title: 'Same crew, not a rotating line',
+          description:
+            'High-volume chain stores run appointment queues with different technicians each visit. At RKC you talk to the same ASE-certified crew — Ray, Oscar, and the team who have been turning wrenches in this Englewood bay for 30+ years.',
+        },
+        {
+          title: 'Open until 6 PM weekdays',
+          description:
+            'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no online appointment form required.',
+        },
+        {
+          title: 'No oversell. Real diagnostics.',
+          description:
+            'Chain shops often bundle "free" inspections with coupon-driven add-ons — fluid flushes, filter packages, store credit offers. We diagnose the actual problem, explain what is urgent vs. what can wait, and fix only what you approve.',
+        },
+      ],
     },
     math: {
       eyebrow: 'Real math',
@@ -323,6 +345,28 @@ export const PRICING_COPY = {
       title: 'Transparencia que puede verificar',
       intro: (rate: string) =>
         `Muchos talleres del Front Range anuncian precios honestos — y luego piden una cotización antes de compartir su tarifa por hora. RKC pone ${rate} en la página para que compare el presupuesto completo de antemano.`,
+      cards: [
+        {
+          title: 'Tarifa que puede ver antes de llamar',
+          description:
+            'Las cadenas nacionales cotizan paquetes por código postal — las tarifas de mano de obra y cargos de taller varían por ubicación y rara vez aparecen como una tarifa fija por hora en línea. RKC publica $120/hr para que pueda comparar horas × tarifa + piezas antes de venir.',
+        },
+        {
+          title: 'El mismo equipo, no una fila rotativa',
+          description:
+            'Los talleres de alto volumen manejan citas con técnicos distintos en cada visita. En RKC habla con el mismo equipo certificado ASE — Ray, Oscar y el equipo que ha trabajado en esta bahía de Englewood por más de 30 años.',
+        },
+        {
+          title: 'Abiertos hasta las 6 PM entre semana',
+          description:
+            'Muchos talleres de Englewood cierran a las 5 PM entre semana. Nosotros estamos abiertos hasta las 6 PM de lunes a viernes y aceptamos visitas sin cita cuando hay espacio en la bahía — sin formulario de cita en línea obligatorio.',
+        },
+        {
+          title: 'Sin ventas excesivas. Diagnóstico real.',
+          description:
+            'Las cadenas a menudo agrupan inspecciones “gratis” con extras impulsados por cupones — lavados de fluidos, paquetes de filtros, crédito de tienda. Diagnosticamos el problema real, explicamos qué es urgente y qué puede esperar, y solo reparamos lo que usted aprueba.',
+        },
+      ],
     },
     math: {
       eyebrow: 'Matemática real',
