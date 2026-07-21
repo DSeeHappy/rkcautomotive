@@ -6,8 +6,9 @@ import {
 import JsonLd from '@/app/components/JsonLd';
 import AreaSlugContent from '@/app/components/ui/areas/AreaSlugContent';
 import { PHOTOS } from '@/lib/constants';
-import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
+import { createBreadcrumbSchema, createFAQPageSchema, createLocalBusinessSchema } from '@/lib/seo';
 import { createPageMetadata } from '@/lib/og';
+import { getAreaFaqs } from '@/lib/areaFaqs';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -56,6 +57,8 @@ export default async function CityServiceAreaPage({ params }: Props) {
             { name: 'Areas We Serve', path: '/areas-we-serve' },
             { name: `${area.name}, CO`, path: area.href },
           ]),
+          // Mirrors the visible city FAQ accordion (English SSR copy from verified data).
+          createFAQPageSchema(getAreaFaqs(slug, area, 'en'), area.href),
         ]}
       />
 

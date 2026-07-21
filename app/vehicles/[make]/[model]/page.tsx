@@ -11,7 +11,12 @@ import {
   MODEL_HERO_VIDEOS,
   MODEL_KNOWLEDGE_VIDEOS,
 } from '@/lib/photos';
-import { createBreadcrumbSchema, createItemListSchema, createWebPageSchema } from '@/lib/seo';
+import {
+  createBreadcrumbSchema,
+  createFAQPageSchema,
+  createItemListSchema,
+  createWebPageSchema,
+} from '@/lib/seo';
 import { getModelsByBrand, resolveModelImageForHub } from '@/lib/vehicleModels';
 import { getVehicleImage, resolveVehicleImageAlt } from '@/lib/vehicleImages';
 import { slugifyModel } from '@/lib/modelCommonServices';
@@ -109,6 +114,10 @@ export default async function VehicleModelHubPage({ params }: PageProps) {
             { name: 'Vehicles We Service', path: '/vehicles-we-service' },
             { name: `${vehicle.brandName} ${vehicle.model}`, path: hubPath },
           ]),
+          // Mirror the on-page model FAQ accordion exactly (English SSR copy) — no invented Q&A.
+          ...(modelSnapshot && modelSnapshot.faqs.length > 0
+            ? [createFAQPageSchema(modelSnapshot.faqs, hubPath)]
+            : []),
         ]}
       />
 

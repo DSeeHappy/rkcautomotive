@@ -168,6 +168,29 @@ body {
   @apply w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3.5 text-foreground outline-none transition focus:border-primary-green focus:ring-2 focus:ring-primary-green/20;
 }
 
+/* Repeated-element utilities — these render 100+ times per page (brand model chips,
+   neighborhood chips), so long literal class lists inflate HTML size significantly.
+   Keeping them here dedupes ~90KB of homepage HTML without visual change. */
+.model-chip {
+  @apply inline-flex items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#060a12] active:scale-[0.98] sm:text-sm;
+}
+
+.model-chip-icon {
+  @apply size-3.5 shrink-0 text-white/50 transition duration-200 group-hover:translate-x-0.5 group-hover:text-white/90;
+}
+
+.pick-link {
+  @apply font-medium text-emerald-200 underline decoration-emerald-400/40 underline-offset-2 transition hover:text-white hover:decoration-emerald-300/70;
+}
+
+.hood-chip {
+  @apply flex items-center gap-1.5 rounded-full border border-white/25 bg-black/55 px-2.5 py-0.5 text-xs font-medium text-white;
+}
+
+.hood-chip-flag {
+  @apply relative size-4 shrink-0 overflow-hidden rounded-sm ring-1 ring-white/20;
+}
+
 .glass-nav {
   /* Solid frosted look — avoid backdrop-filter over Ken Burns / GSAP layers (Chrome GPU smear) */
   background: rgba(247, 248, 250, 0.97);

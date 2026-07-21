@@ -46,8 +46,8 @@ function usesContainedFlagBackground(flagPath: string): boolean {
 
 function NeighborhoodChip({ neighborhood }: { neighborhood: ServiceAreaNeighborhood }) {
   return (
-    <li className="flex items-center gap-1.5 rounded-full border border-white/25 bg-black/55 px-2.5 py-0.5 text-xs font-medium text-white">
-      <span className="relative size-4 shrink-0 overflow-hidden rounded-sm ring-1 ring-white/20">
+    <li className="hood-chip">
+      <span className="hood-chip-flag">
         <Image
           src={neighborhood.flag}
           alt={`${neighborhood.name} neighborhood flag`}

@@ -11,8 +11,9 @@ export const SITE_HOST = new URL(SITE_URL).host;
  * Served as plain text so Clean-param is preserved (MetadataRoute.Robots cannot emit it).
  */
 export function buildRobotsTxt(): string {
+  // Single canonical sitemap declaration. /sitemap.xml rewrites to the sharded
+  // /sitemap-index route (next.config.ts), so a second Sitemap line is redundant.
   const sitemapIndex = `${SITE_URL}/sitemap.xml`;
-  const sitemapShards = `${SITE_URL}/sitemap-index`;
 
   const lines: string[] = [
     '# RKC Automotive — multi-engine + AI citation policy',
@@ -119,7 +120,6 @@ export function buildRobotsTxt(): string {
     '',
     `Host: ${SITE_HOST}`,
     `Sitemap: ${sitemapIndex}`,
-    `Sitemap: ${sitemapShards}`,
     '',
   ];
 

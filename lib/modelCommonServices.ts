@@ -25,6 +25,37 @@ type ServiceDef = {
 const LOCAL =
   'RKC Automotive in Englewood serves south Denver, Littleton, Aurora, and Highlands Ranch drivers.';
 
+/**
+ * Truthful rephrasings of LOCAL — same verified fact (shop in Englewood; serves
+ * south Denver, Littleton, Aurora, Highlands Ranch), varied wording so the exact
+ * sentence isn't stamped verbatim on every service card across ~1000 pages
+ * (SEO audit: cross-page boilerplate). Generated via Bifrost Spark vllm/smart
+ * (labels local-line-v1..v6, routing smart-spark verified in TELEMETRY_LEDGER)
+ * and human-reviewed. Do not add cities or claims not in the original.
+ */
+const LOCAL_VARIANTS = [
+  LOCAL,
+  'Drivers from south Denver, Littleton, Aurora, and Highlands Ranch come to RKC Automotive in Englewood.',
+  'RKC Automotive in Englewood, Colorado, serves drivers from the south Denver metro, Littleton, Aurora, and Highlands Ranch.',
+  'RKC Automotive in Englewood, Colorado welcomes drivers from south Denver, Littleton, Aurora, and Highlands Ranch.',
+  'South Denver, Littleton, Aurora, and Highlands Ranch drivers are served by RKC Automotive in Englewood.',
+] as const;
+
+/** Small deterministic hash so the same page always renders the same wording. */
+function seedIndex(seed: string, modulo: number): number {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) {
+    h = (h * 31 + seed.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h) % modulo;
+}
+
+/** Replace a trailing LOCAL sentence with a seeded truthful variant. */
+export function withLocalityVariant(text: string, seed: string): string {
+  if (!text.endsWith(LOCAL)) return text;
+  return text.slice(0, text.length - LOCAL.length) + LOCAL_VARIANTS[seedIndex(seed, LOCAL_VARIANTS.length)];
+}
+
 function truckName(ctx: ModelServiceContext): string {
   if (ctx.vehicleType === 'truck' || ctx.model === 'Ridgeline' || ctx.model === 'Gladiator') {
     return 'truck';
@@ -1415,7 +1446,7 @@ export function getModelCommonServices(
       return {
         id: def.id,
         title: buildTitle(model, def.name),
-        description: def.describe(ctx),
+        description: withLocalityVariant(def.describe(ctx), `${brandSlug}/${model}/${id}`),
         href: buildModelServicePath(brandSlug, model, id),
       };
     })

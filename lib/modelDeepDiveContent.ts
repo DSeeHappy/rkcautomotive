@@ -15,6 +15,7 @@ import {
   getServiceCatalogEntry,
   isServiceValidForPowertrain,
   parseServiceIdFromSlug,
+  withLocalityVariant,
   type ModelServiceContext,
 } from '@/lib/modelCommonServices';
 import { getModelsByBrand, type VehicleType } from '@/lib/vehicleModels';
@@ -784,7 +785,7 @@ function buildDeepDive(
   const catalogDesc =
     lang === 'es'
       ? `RKC inspecciona y repara ${template.focus} en su ${ctx.brandName} ${ctx.model} con presupuestos por escrito en Englewood.`
-      : catalog.describe(ctx);
+      : withLocalityVariant(catalog.describe(ctx), `${ctx.brandSlug}/${ctx.model}/${ctx.serviceId}`);
   const serviceLower = template.serviceName.toLowerCase();
 
   const heroTitle = t.heroTitle(ctx.model, template.serviceName);

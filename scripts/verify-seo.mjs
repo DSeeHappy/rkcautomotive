@@ -187,8 +187,12 @@ function checkRobotsAndSitemap() {
   } else {
     const robots = read('lib/robotsTxt.ts');
     if (!robots.includes('Sitemap:')) errors.push('lib/robotsTxt.ts missing Sitemap lines');
-    if (!robots.includes('sitemap-index')) {
-      errors.push('lib/robotsTxt.ts must advertise the sharded sitemap index');
+    const sitemapLines = robots.match(/`Sitemap: /g) ?? [];
+    if (sitemapLines.length !== 1) {
+      errors.push('lib/robotsTxt.ts must declare exactly one Sitemap (/sitemap.xml → sharded index)');
+    }
+    if (!robots.includes('/sitemap.xml')) {
+      errors.push('lib/robotsTxt.ts must advertise /sitemap.xml (rewritten to the sharded sitemap index)');
     }
     if (!robots.includes('OAI-SearchBot')) {
       errors.push('lib/robotsTxt.ts must allow OAI-SearchBot (ChatGPT search citations)');

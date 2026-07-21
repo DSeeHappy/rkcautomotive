@@ -56,10 +56,7 @@ export default function BrandModelPicker({ brand, reliabilitySnapshot }: BrandMo
                 aria-hidden
               />
               {href ? (
-                <Link
-                  href={href}
-                  className="font-medium text-emerald-200 underline decoration-emerald-400/40 underline-offset-2 transition hover:text-white hover:decoration-emerald-300/70"
-                >
+                <Link href={href} className="pick-link">
                   {pick}
                 </Link>
               ) : (
@@ -102,13 +99,10 @@ export default function BrandModelPicker({ brand, reliabilitySnapshot }: BrandMo
               <Link
                 href={buildModelHubPath(brand.slug, model)}
                 aria-label={brandsCopy.viewModelServices(brand.name, model)}
-                className="group inline-flex items-center gap-1 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition duration-200 hover:scale-[1.03] hover:border-white/45 hover:bg-white/20 hover:shadow-[0_4px_16px_-4px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#060a12] active:scale-[0.98] sm:text-sm"
+                className="group model-chip"
               >
                 <span>{model}</span>
-                <ChevronRight
-                  className="size-3.5 shrink-0 text-white/50 transition duration-200 group-hover:translate-x-0.5 group-hover:text-white/90"
-                  aria-hidden
-                />
+                <ChevronRight className="model-chip-icon" aria-hidden />
               </Link>
             </li>
           ))}

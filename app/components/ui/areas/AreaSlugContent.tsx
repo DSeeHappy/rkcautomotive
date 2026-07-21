@@ -9,6 +9,8 @@ import { BUSINESS, PHOTOS, TOP_AREA_SERVICES } from '@/lib/constants';
 import PageHero from '@/app/components/ui/PageHero';
 import FadeIn from '@/app/components/ui/FadeIn';
 import { CrossCityServiceLinks, NearbyCityLinks } from '@/app/components/ui/seo/AdjacentSeoLinks';
+import FAQAccordion from '@/app/components/ui/FAQAccordion';
+import { getAreaFaqs } from '@/lib/areaFaqs';
 import { useLanguage } from '@/lib/language';
 import { areaCopy } from '@/lib/i18n/areaCopy';
 import { areaBodyCopy } from '@/lib/i18n/areaBodies';
@@ -187,6 +189,27 @@ export default function AreaSlugContent({ area, slug }: AreaSlugContentProps) {
                 <MapPin className="size-5" />
                 {copy.getDirections}
               </a>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20" aria-labelledby="area-faq-heading">
+        <div className="wrap">
+          <FadeIn className="max-w-3xl">
+            <h2
+              id="area-faq-heading"
+              className="font-display text-4xl tracking-wide text-foreground"
+            >
+              {copy.faqHeading(area.name)}
+            </h2>
+            {/* adaptRepairTimeFaq off — visible answers must exactly match the FAQPage JSON-LD */}
+            <div className="mt-8">
+              <FAQAccordion
+                items={getAreaFaqs(slug, area, lang)}
+                adaptRepairTimeFaq={false}
+                defaultOpenFirst
+              />
             </div>
           </FadeIn>
         </div>
