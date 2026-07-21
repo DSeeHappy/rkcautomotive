@@ -18,7 +18,7 @@ export const VEHICLE_COPY = {
       home: 'Home',
       vehiclesCrumb: 'Vehicles We Service',
       modelServices: 'Model services',
-      servicesHeading: (brand: string, model: string) => `${brand} ${model} services we perform`,
+      servicesHeading: (brand: string, model: string) => `Servicios que realizamos en ${brand} ${model}`,
       servicesIntro: (yearRange: string, brand: string, model: string) =>
         `Every guide below is written for the ${yearRange} ${brand} ${model} — Colorado altitude, severe-service wear, and the failure patterns we see at our Englewood shop.`,
       call: (phone: string) => `Call ${phone}`,
@@ -248,7 +248,32 @@ export function localizedModelServiceTitle(
   return VEHICLE_COPY.es.hub.serviceTitle(model, esName);
 }
 
-/** Short hub-card description — full catalog.describe stays EN for SEO; ES uses template. */
+/** Deterministic hash so the same page always renders the same wording. */
+function seedIndex(seed: string, modulo: number): number {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) {
+    h = (h * 31 + seed.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h) % modulo;
+}
+
+/**
+ * ES hub-card templates — same verified facts (RKC inspects/repairs in
+ * Englewood, written estimates, Colorado-ready service), varied so the exact
+ * sentence is not stamped verbatim on every Spanish card across ~1000 pages.
+ */
+const ES_SERVICE_CARD_TEMPLATES: Array<(brand: string, model: string, focus: string) => string> = [
+  (brand, model, focus) =>
+    `RKC inspecciona y repara ${focus} en su ${brand} ${model} con presupuestos por escrito en Englewood. Diagnóstico honesto y servicio listo para Colorado.`,
+  (brand, model, focus) =>
+    `En nuestro taller de Englewood, RKC atiende ${focus} de su ${brand} ${model} con estimados por escrito y técnicos certificados ASE.`,
+  (brand, model, focus) =>
+    `¿Problemas con ${focus} en su ${brand} ${model}? RKC Automotive en Englewood diagnostica la causa real y le da un presupuesto por escrito antes de reparar.`,
+  (brand, model, focus) =>
+    `RKC Automotive da servicio a ${focus} del ${brand} ${model} en Englewood, con diagnóstico verificado y precios transparentes para el manejo en Colorado.`,
+];
+
+/** Short hub-card description — full catalog.describe stays EN for SEO; ES uses seeded templates. */
 export function localizedModelServiceDescription(
   brandName: string,
   model: string,
@@ -259,7 +284,11 @@ export function localizedModelServiceDescription(
   if (lang !== 'es') return fallback;
   const es = getDeepDiveServiceEs(serviceId);
   const focus = es?.focus ?? es?.serviceName ?? serviceId;
-  return `RKC inspecciona y repara ${focus} en su ${brandName} ${model} con presupuestos por escrito en Englewood. Diagnóstico honesto y servicio listo para Colorado.`;
+  const template =
+    ES_SERVICE_CARD_TEMPLATES[
+      seedIndex(`${brandName}/${model}/${serviceId}`, ES_SERVICE_CARD_TEMPLATES.length)
+    ];
+  return template(brandName, model, focus);
 }
 
 /** Hub hero / vehicle blurb when no reliability snapshot intro. */
@@ -271,5 +300,13 @@ export function localizedVehicleDescription(
   fallback: string,
 ): string {
   if (lang !== 'es') return fallback;
-  return `RKC Automotive en Englewood atiende ${brandName} ${model} (${vehicleTypeLabel}) con mantenimiento según agenda de fábrica, diagnósticos honestos e inspecciones listas para Colorado. Del cambio de aceite a servicios de intervalo mayor, nuestro equipo certificado ASE mantiene su ${model} confiable en I-25 y en la montaña.`;
+  const templates: Array<() => string> = [
+    () =>
+      `RKC Automotive en Englewood atiende ${brandName} ${model} (${vehicleTypeLabel}) con mantenimiento según agenda de fábrica, diagnósticos honestos e inspecciones listas para Colorado. Del cambio de aceite a servicios de intervalo mayor, nuestro equipo certificado ASE mantiene su ${model} confiable en I-25 y en la montaña.`,
+    () =>
+      `En RKC Automotive de Englewood, su ${brandName} ${model} (${vehicleTypeLabel}) recibe mantenimiento de fábrica, diagnósticos verificados y presupuestos por escrito. Nuestro equipo certificado ASE lo mantiene confiable en la ciudad y en la montaña.`,
+    () =>
+      `Su ${brandName} ${model} (${vehicleTypeLabel}) está en buenas manos en RKC Automotive: taller en Englewood con técnicos certificados ASE, mantenimiento según agenda de fábrica e inspecciones pensadas para el clima y la altura de Colorado.`,
+  ];
+  return templates[seedIndex(`${brandName}/${model}/hero`, templates.length)]();
 }
