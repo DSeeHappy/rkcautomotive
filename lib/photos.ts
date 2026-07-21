@@ -55,6 +55,14 @@ export const PHOTOS = {
   ],
 } as const;
 
+/** Vehicles hub hero — classic sports car steady-cam loop (8s, muted) */
+export const VEHICLE_HERO_VIDEO = {
+  webm: '/videos/vehicles-hero.webm',
+  mp4: '/videos/vehicles-hero.mp4',
+  poster: '/videos/vehicles-hero-poster.webp',
+  posterJpg: '/videos/vehicles-hero-poster.jpg',
+} as const;
+
 /** Full-bleed hero backgrounds — cap decoded width at 1920px for next/image */
 export const HERO_IMAGE_SIZES =
   '(max-width: 640px) 100vw, (max-width: 1200px) 100vw, 1920px';

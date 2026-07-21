@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import { BUSINESS, PHOTOS } from '@/lib/constants';
-import { HERO_IMAGE_SIZES } from '@/lib/photos';
+import { HERO_IMAGE_SIZES, VEHICLE_HERO_VIDEO } from '@/lib/photos';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import PageHero from '@/app/components/ui/PageHero';
 import VehicleCategoryCards from '@/app/components/ui/VehicleCategoryCards';
@@ -22,8 +22,8 @@ export default function VehiclesPageContent() {
         eyebrow="Vehicles"
         title="If it rolls into Englewood, we can help"
         description="From daily drivers to classics and European imports — ASE-certified tools and experience for every vehicle."
-        imageSrc={PHOTOS.classicLift}
-        imageAlt="Classic vehicle on lift at RKC Automotive in Englewood, CO"
+        video={VEHICLE_HERO_VIDEO}
+        imageAlt="Classic sports car service bay footage at RKC Automotive in Englewood, CO"
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Vehicles We Service' },

@@ -10,6 +10,13 @@ import { MotionAnchor } from '@/app/components/ui/MotionLink';
 import { useLanguage } from '@/lib/language';
 import { siteCopy, type SiteShellKey } from '@/lib/siteCopy';
 import { useGsapReveal } from '@/lib/useGsapReveal';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
+
+type HeroVideoSources = {
+  webm: string;
+  mp4: string;
+  poster: string;
+};
 
 type PageHeroProps = {
   title: string;
@@ -18,6 +25,8 @@ type PageHeroProps = {
   eyebrow?: string;
   imageSrc?: string;
   imageAlt?: string;
+  /** When set, poster stays LCP; video plays over it unless reduced motion */
+  video?: HeroVideoSources;
   /** When set, ES mode swaps hero chrome from siteCopy.shells */
   shell?: Extract<SiteShellKey, 'about' | 'faq' | 'areas' | 'vehicles' | 'services'>;
   /** Extra args for shells whose description is a function (e.g. areas) */
@@ -31,10 +40,12 @@ export default function PageHero({
   eyebrow,
   imageSrc = PHOTOS.interior,
   imageAlt,
+  video,
   shell,
   shellArgs,
 }: PageHeroProps) {
   const { lang } = useLanguage();
+  const reduceMotion = usePrefersReducedMotion();
   const chrome = siteCopy(lang);
   const shellCopy = shell ? chrome.shells[shell] : null;
 
@@ -57,21 +68,39 @@ export default function PageHero({
     : breadcrumbs;
 
   const heroAlt = imageAlt ?? `${resolvedTitle} — RKC Automotive in Englewood, CO`;
+  const posterSrc = video?.poster ?? imageSrc;
+  const showVideo = Boolean(video) && !reduceMotion;
   const heading = useGsapReveal<HTMLHeadingElement>({ y: 24, duration: 0.7 });
   const desc = useGsapReveal<HTMLParagraphElement>({ delay: 0.1, y: 16, duration: 0.6 });
   const ctas = useGsapReveal<HTMLDivElement>({ delay: 0.2, y: 12, duration: 0.5 });
 
   return (
     <section lang={lang} className="relative z-0 overflow-hidden bg-[#0c1222] pt-20 min-h-[58svh] sm:min-h-[64svh] xl:pt-24">
-      <Image
-        src={imageSrc}
-        alt={heroAlt}
-        fill
-        priority
-        fetchPriority="high"
-        className="object-cover"
-        sizes={HERO_IMAGE_SIZES}
-      />
+      <div className="absolute inset-0">
+        <Image
+          src={posterSrc}
+          alt={heroAlt}
+          fill
+          priority
+          fetchPriority="high"
+          className="object-cover"
+          sizes={HERO_IMAGE_SIZES}
+        />
+        {showVideo && video && (
+          <video
+            className="absolute inset-0 size-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden
+          >
+            <source src={video.webm} type="video/webm" />
+            <source src={video.mp4} type="video/mp4" />
+          </video>
+        )}
+      </div>
       <div className="photo-veil absolute inset-0" />
 
       <div className="relative mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-20 sm:px-6 sm:pb-20 lg:px-8">
