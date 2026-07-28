@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Clock, MapPin, Phone } from 'lucide-react';
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { BUSINESS, FOOTER_LINKS, PHOTOS, SERVICES } from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import SocialLinks from '@/app/components/ui/SocialLinks';
@@ -35,7 +35,7 @@ export default function Footer() {
           </PhoneLink>
         </div>
 
-        {/* Visit + Explore */}
+        {/* Visit + Explore — NAP block (name nearby, address, phone, email, hours) for citation scrapers */}
         <div className="mt-12 grid gap-10 border-b border-white/10 pb-12 sm:grid-cols-2 lg:gap-12">
           <div>
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-primary-green-light">{copy.visit}</p>
@@ -44,6 +44,18 @@ export default function Footer() {
                 <MapPin className="mt-0.5 size-4 shrink-0 text-primary-blue-light" />
                 <a href={BUSINESS.directionsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
                   {BUSINESS.address.full}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone className="mt-0.5 size-4 shrink-0 text-primary-blue-light" />
+                <a href={BUSINESS.phoneHref} className="hover:text-white">
+                  {BUSINESS.phone}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="mt-0.5 size-4 shrink-0 text-primary-blue-light" />
+                <a href={`mailto:${BUSINESS.email}`} className="hover:text-white">
+                  {BUSINESS.email}
                 </a>
               </li>
               <li className="flex items-start gap-3">
