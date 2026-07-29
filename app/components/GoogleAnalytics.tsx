@@ -1,11 +1,13 @@
 import Script from 'next/script';
 
+const RKC_GA_ID = 'G-RKV1HQ9L0E';
+
 /**
  * Optional GA4 — set NEXT_PUBLIC_GA_ID (e.g. G-XXXXXXXX) in Vercel env.
  * Site analytics already ship via @vercel/analytics in root layout.
  */
 export default function GoogleAnalytics() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim();
+  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || RKC_GA_ID;
   if (!gaId || !/^G-[A-Z0-9]+$/i.test(gaId)) return null;
 
   return (
