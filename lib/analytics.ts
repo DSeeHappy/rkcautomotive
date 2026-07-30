@@ -9,18 +9,22 @@ type Gtag = (
   parameters?: AnalyticsEventParameters,
 ) => void;
 
+type Clarity = (command: 'event', eventName: string) => void;
+
 declare global {
   interface Window {
     gtag?: Gtag;
+    clarity?: Clarity;
   }
 }
 
-/** Send a GA4 event when Analytics is available without blocking the user's action. */
+/** Send a conversion event to Clarity and GA4 without blocking the user's action. */
 export function trackAnalyticsEvent(
   eventName: string,
   parameters: AnalyticsEventParameters = {},
 ) {
-  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+  if (typeof window === 'undefined') return;
 
-  window.gtag('event', eventName, parameters);
+  window.clarity?.('event', eventName);
+  window.gtag?.('event', eventName, parameters);
 }

@@ -10,6 +10,14 @@ function linkEvent(href: string) {
 
   try {
     const url = new URL(href, window.location.href);
+    if (url.origin === window.location.origin && url.pathname === '/contact') {
+      return { name: 'contact_intent', method: 'contact_page' };
+    }
+
+    if (url.origin === window.location.origin && url.pathname.startsWith('/services/')) {
+      return { name: 'service_interest', method: 'service_page' };
+    }
+
     const isDirections =
       url.hostname === 'share.google' ||
       (url.hostname.includes('google.com') &&
