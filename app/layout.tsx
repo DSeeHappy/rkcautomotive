@@ -9,6 +9,7 @@ import FloatingCallButton from './components/ui/FloatingCallButton';
 import GsapProvider from './components/ui/GsapProvider';
 import SplashScreen from './components/ui/SplashScreen';
 import GoogleAnalytics from './components/GoogleAnalytics';
+import GoogleAnalyticsEvents from './components/GoogleAnalyticsEvents';
 import JsonLd from './components/JsonLd';
 import { LanguageProvider } from '@/lib/language';
 import { CRAWLABLE_HTML_LANG } from '@/lib/i18n/localeSeo';
@@ -120,6 +121,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </LanguageProvider>
         <Analytics />
         <GoogleAnalytics />
+        <GoogleAnalyticsEvents />
       </body>
     </html>
   );

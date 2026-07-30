@@ -1,40 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RKC Automotive
 
-## Getting Started
+Production website for [RKC Automotive](https://rkcautomotive.com), built with
+Next.js and deployed through Vercel.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in a browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Before shipping changes, run:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+npm run verify:seo
+```
 
-## Learn More
+## Search and analytics
 
-To learn more about Next.js, take a look at the following resources:
+- Canonical host: `https://rkcautomotive.com`
+- Search Console property: `sc-domain:rkcautomotive.com`
+- Sitemap: `https://rkcautomotive.com/sitemap.xml`
+- GA4 measurement ID: `G-RKV1HQ9L0E`
+- `NEXT_PUBLIC_GA_ID` may override the production measurement ID.
+- Sitewide GA4 events include `click_to_call`, `click_to_text`,
+  `click_to_email`, `get_directions`, and `generate_lead`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Never place Google account credentials or API secrets in the repository.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Cloudflare production setting
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Cloudflare (production)
-
-If the site is proxied through Cloudflare, **disable Email Address Obfuscation** under Scrape Shield. It rewrites `tel:` links to `about:invalid#zCSafez` and breaks click-to-call in nav, hero, and footer. Phone links use `data-cfemail="false"` and a client-side `tel:` restore as a fallback, but turning obfuscation off is the reliable fix.
+If the site is proxied through Cloudflare, disable **Email Address
+Obfuscation** under Scrape Shield. It rewrites `tel:` links to
+`about:invalid#zCSafez` and breaks click-to-call in the navigation, hero, and
+footer. Phone links use `data-cfemail="false"` and a client-side `tel:` restore
+as a fallback, but turning obfuscation off is the reliable fix.

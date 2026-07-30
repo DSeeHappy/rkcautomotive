@@ -11,6 +11,7 @@ import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { useGsapHoverPress } from '@/lib/useGsapHoverPress';
 import { useLanguage } from '@/lib/language';
 import { localizedServiceName, siteCopy } from '@/lib/siteCopy';
+import { trackAnalyticsEvent } from '@/lib/analytics';
 import {
   persistSelectedService,
   readPersistedSelectedService,
@@ -128,6 +129,14 @@ export default function ContactForm() {
       SERVICES.find((s) => s.slug === service)?.name || service || 'Not specified';
 
     if (service) persistSelectedService(service);
+
+    trackAnalyticsEvent('generate_lead', {
+      method: 'email_form',
+      service: serviceLabel,
+      page_path: window.location.pathname,
+      value: 1,
+      currency: 'USD',
+    });
 
     const subject = encodeURIComponent(`Service Request from ${name}`);
     const body = encodeURIComponent(
