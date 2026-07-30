@@ -20,9 +20,9 @@ import { createPageMetadata } from '@/lib/og';
 import { createBreadcrumbSchema, createLocalBusinessSchema } from '@/lib/seo';
 
 export const metadata = createPageMetadata({
-  title: 'Englewood CO Auto Repair | RKC Automotive Location',
+  title: 'RKC Automotive Location, Hours & Directions | Englewood, CO',
   description:
-    'Visit RKC Automotive at 2120 W Evans Ave, Englewood, CO 80110. ASE-certified auto repair for Denver south metro. Mon–Fri 8AM–6PM, Sat 8AM–12PM. Call (720) 749-3965.',
+    'Find RKC Automotive at 2120 W Evans Ave, Englewood, CO 80110. View shop hours, phone number, directions, service areas, and verified reviews.',
   path: '/englewood-co-auto-repair',
   titleAbsolute: true,
   image: PHOTOS.exterior,

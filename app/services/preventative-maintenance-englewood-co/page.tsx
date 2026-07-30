@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Preventative Maintenance in Englewood, CO | RKC Automotive",
-  "Preventative maintenance in Englewood, CO — scheduled service that prevents costly breakdowns across the Denver south metro. $120/hr. Call (720) 749-3965.",
+  "Preventative maintenance and timing belt replacement in Englewood, CO — VIN-specific 30k/60k/90k service, fluids, belts, and water pumps. Call today.",
   "preventative-maintenance-englewood-co",
   PHOTOS.brandedBay,
   "Preventative Maintenance at RKC Automotive Englewood CO",
@@ -21,7 +21,7 @@ export default function PreventativeMaintenancePage() {
         data={[
           createServiceSchema(
             "Preventative Maintenance",
-            "Preventative maintenance in Englewood, CO. Scheduled service keeps your vehicle reliable and prevents costly repairs across the Denver south metro. Call (720) 749-3965.",
+            "Preventative maintenance and timing belt replacement in Englewood, CO. VIN-specific scheduled service prevents costly repairs across the Denver south metro.",
             SERVICE_PATH,
           ),
           createFAQPageSchema(PREVENTATIVE_MAINTENANCE_PAGE_FAQ, '/services/preventative-maintenance-englewood-co'),

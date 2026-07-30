@@ -30,10 +30,20 @@ export async function generateMetadata({ params }: Props) {
     };
   }
 
+  const isEnglewood = slug === 'englewood-co';
+  const isSheridan = slug === 'sheridan-co';
+
   return createPageMetadata({
-    title: `Auto Repair in ${area.name}, CO`,
-    description: area.metaDescription,
+    title: isEnglewood
+      ? 'Englewood Neighborhoods We Serve | RKC Automotive'
+      : isSheridan
+        ? 'Auto Repair Shop Near Sheridan, CO | RKC Automotive'
+        : `Auto Repair in ${area.name}, CO`,
+    description: isEnglewood
+      ? 'Neighborhood coverage and driving directions to RKC Automotive from Downtown Englewood, Arapahoe Acres, Belleview Park, Broadway, and Hampden.'
+      : area.metaDescription,
     path: area.href,
+    titleAbsolute: isEnglewood || isSheridan,
     image: PHOTOS.exterior,
     imageAlt: `Auto repair serving ${area.name}, CO from RKC Automotive in Englewood`,
   });

@@ -6,7 +6,7 @@ import { createBreadcrumbSchema, createFAQPageSchema, createServiceSchema } from
 
 export const metadata = createServicePageMetadata(
   "Suspension & Steering Repair in Englewood, CO | RKC Automotive",
-  "ASE suspension and steering repair in Englewood, CO — shocks, struts, ball joints, and alignment. Denver south metro. $120/hr. Call (720) 749-3965.",
+  "Suspension, steering, and CV axle repair in Englewood, CO — shocks, struts, ball joints, boots, wheel bearings, and alignment. Call (720) 749-3965.",
   "suspension-steering-englewood-co",
   PHOTOS.techCloseup,
   "Suspension & Steering at RKC Automotive Englewood CO",
@@ -21,7 +21,7 @@ export default function SuspensionSteeringPage() {
         data={[
           createServiceSchema(
             "Suspension and Steering Repair",
-            "Suspension and steering repair in Englewood, CO — shocks, struts, ball joints, and alignment from ASE-certified techs. Serving Denver south metro. Call (720) 749-3965.",
+            "Suspension, steering, and CV axle repair in Englewood, CO — shocks, struts, ball joints, boots, wheel bearings, and alignment from ASE-certified technicians.",
             SERVICE_PATH,
           ),
           createFAQPageSchema(SUSPENSION_STEERING_PAGE_FAQ, '/services/suspension-steering-englewood-co'),

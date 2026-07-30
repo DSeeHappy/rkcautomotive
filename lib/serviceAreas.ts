@@ -352,7 +352,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       ARAPAHOE_COUNTY_SOURCE,
       'Sheridan'
     ),
-    'Sheridan sits right next door to our shop — Fort Logan and Hampden Heights residents are often here in under 10 minutes.',
+    'Need an auto repair shop near Sheridan? RKC Automotive is at 2120 W Evans Ave in neighboring Englewood — often under 10 minutes from Fort Logan, Hampden Heights, and central Sheridan.',
     SHERIDAN,
     SHERIDAN_SOURCE,
     '2–5 miles',
@@ -369,7 +369,7 @@ export const SERVICE_AREAS_DATA: ServiceArea[] = [
       'From the Fort Logan area, take W Oxford Ave or W Hampden Ave (US-285) east to S Broadway, then south to W Evans — usually under 10 minutes outside rush hour.',
       'Sheridan drivers deal with the same rough pavement and winter potholes along Federal Blvd and Sheridan Blvd that we do; we check alignments, tie rods, and tire wear patterns on every visit.',
     ],
-    'Auto repair near Sheridan, CO. RKC Automotive on W Evans Ave in Englewood — minutes from Fort Logan & Hampden Heights. Call (720) 749-3965.'
+    'Auto repair shop near Sheridan, CO — ASE-certified diagnostics, brakes, maintenance, and engine repair about 2–5 miles away. Call (720) 749-3965.'
   ),
   area(
     'Greenwood Village',

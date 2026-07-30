@@ -8,7 +8,7 @@ export const SUSPENSION_STEERING_BODY = {
     "imageAlt": "Suspension & Steering at RKC Automotive Englewood CO",
     "eyebrow": "Ride & handling · Englewood, CO",
     "title": "Suspension & Steering Repair in Englewood, CO",
-    "description": "Clunks over bumps, wandering on I-25, or uneven tire wear? We inspect shocks, struts, ball joints, tie rods, and steering racks — then align and road-test with a written estimate first.",
+    "description": "Clunks over bumps, clicking in turns, wandering on I-25, or uneven tire wear? We inspect CV axles, shocks, struts, ball joints, tie rods, and steering racks — then road-test with a written estimate first.",
     "primaryCta": "Suspension Inspection",
     "callPrefix": "Call"
   },
@@ -141,7 +141,7 @@ export const SUSPENSION_STEERING_BODY = {
         "items": [
           "Struts, shocks, and coil springs",
           "Ball joints, tie rods, and sway-bar links",
-          "Control-arm bushings and wheel bearings"
+          "CV axles, torn CV boots, control-arm bushings, and wheel bearings"
         ]
       },
       {
@@ -205,6 +205,10 @@ export const SUSPENSION_STEERING_BODY = {
     {
       "question": "Can bad suspension cause vibration when braking?",
       "answer": "Warped rotors cause brake pulsation, but worn control-arm bushings and loose tie rods also transmit vibration through the steering wheel. We separate brake vs. suspension causes during road test so you do not replace rotors when bushings are the real issue."
+    },
+    {
+      "question": "Do you repair CV axles in Englewood?",
+      "answer": "Yes. We diagnose clicking during turns, vibration under acceleration, torn CV boots, and grease thrown around the wheel well. We inspect the axle joints, boots, wheel bearings, and related suspension parts before recommending a CV axle replacement."
     },
     {
       "question": "How much does suspension repair cost at RKC?",

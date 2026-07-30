@@ -8,7 +8,7 @@ export const PREVENTATIVE_MAINTENANCE_BODY = {
     "imageAlt": "Preventative Maintenance at RKC Automotive Englewood CO",
     "eyebrow": "Scheduled care · Englewood, CO",
     "title": "Preventative Maintenance in Englewood, CO",
-    "description": "Factory-interval service done honestly — oil, fluids, filters, belts, and milestone inspections at 30k/60k/90k — with a written plan that fixes what is due, not everything on a generic menu.",
+    "description": "Factory-interval service and timing belt replacement done honestly — oil, fluids, filters, belts, water pumps, and 30k/60k/90k inspections with a written plan.",
     "primaryCta": "Plan My Service",
     "callPrefix": "Call"
   },
