@@ -2,7 +2,7 @@ import { buildRobotsTxt } from '@/lib/robotsTxt';
 
 export const dynamic = 'force-static';
 
-/** Plain-text robots.txt — required for Yandex Clean-param (not in MetadataRoute.Robots). */
+/** Plain-text robots.txt with one shared policy for search and AI crawlers. */
 export function GET() {
   return new Response(buildRobotsTxt(), {
     headers: {

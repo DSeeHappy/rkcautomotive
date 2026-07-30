@@ -44,7 +44,7 @@ export default function PrivacyPage() {
       <section className="py-20">
         <div className="wrap prose prose-neutral max-w-3xl">
           <FadeIn className="space-y-6 text-ink-muted">
-            <p className="text-sm text-ink-muted">Last updated: July 8, 2026</p>
+            <p className="text-sm text-ink-muted">Last updated: July 29, 2026</p>
 
             <h2 className="font-display text-3xl tracking-wide text-foreground">Information we collect</h2>
             <p>
@@ -60,9 +60,12 @@ export default function PrivacyPage() {
 
             <h2 className="font-display text-3xl tracking-wide text-foreground">Third-party services</h2>
             <p>
-              Our website may use analytics and hosting providers (such as Vercel Analytics) that collect standard
-              technical data like page views and device type. Review links on our site may direct you to Google,
-              Facebook, or other platforms with their own privacy policies.
+              Our website uses analytics and hosting providers, including Vercel Analytics, Google Analytics, and
+              Microsoft Clarity. These services may collect technical and usage data such as page views, referring
+              pages, approximate location, device and browser information, clicks, scrolling, and navigation patterns.
+              Microsoft Clarity may provide aggregated heatmaps and session replays; sensitive form content is masked.
+              These providers may use cookies or similar technologies according to their own privacy policies. Review
+              links on our site may direct you to Google, Facebook, or other platforms with their own privacy policies.
             </p>
 
             <h2 className="font-display text-3xl tracking-wide text-foreground">Contact us</h2>

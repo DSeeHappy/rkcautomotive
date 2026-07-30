@@ -74,7 +74,7 @@ function NavMarkImage({
   return (
     <Image
       src={src}
-      alt={decorative ? '' : 'RKC Automotive'}
+      alt={decorative ? 'RKC Automotive logo' : 'RKC Automotive'}
       aria-hidden={decorative || undefined}
       width={RKC_LOGO_ANIMATED_SIZE}
       height={RKC_LOGO_ANIMATED_SIZE}
@@ -118,7 +118,7 @@ function LogoImage({
   return (
     <Image
       src={src}
-      alt={decorative ? '' : 'RKC Automotive'}
+      alt={decorative ? 'RKC Automotive logo' : 'RKC Automotive'}
       aria-hidden={decorative || undefined}
       width={width}
       height={height}

@@ -1,0 +1,21 @@
+import Script from 'next/script';
+
+const RKC_CLARITY_PROJECT_ID = 'xud66x0h8d';
+
+/**
+ * Microsoft Clarity session analytics.
+ *
+ * NEXT_PUBLIC_MICROSOFT_CLARITY_ID can override the production project for
+ * preview or migration environments.
+ */
+export default function MicrosoftClarity() {
+  const projectId =
+    process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID?.trim() || RKC_CLARITY_PROJECT_ID;
+  if (!projectId || !/^[a-z0-9]+$/i.test(projectId)) return null;
+
+  return (
+    <Script id="microsoft-clarity" strategy="afterInteractive">
+      {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","${projectId}");`}
+    </Script>
+  );
+}

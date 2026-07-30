@@ -30,6 +30,8 @@ export const FINDGLOCAL_URL =
   'https://www.findglocal.com/US/Englewood/110566205285143/RKC-Automotive';
 export const DNB_URL =
   'https://www.dandb.com/businessdirectory/rkcautomotive-englewood-co-5042885.html';
+export const MERCHANTCIRCLE_URL =
+  'https://www.merchantcircle.com/rkc-automotive-denver-co';
 export const ASE_URL = 'https://www.ase.com/';
 export const ASE_ARIA_LABEL =
   'ASE — National Institute for Automotive Service Excellence (opens in new tab)';
@@ -46,6 +48,7 @@ export const DIRECTORY_LINKS = [
   { name: 'Chamber of Commerce', href: CHAMBER_OF_COMMERCE_URL, label: 'Chamber of Commerce' },
   { name: 'FindGlocal', href: FINDGLOCAL_URL, label: 'FindGlocal' },
   { name: 'Dun & Bradstreet', href: DNB_URL, label: 'Dun & Bradstreet' },
+  { name: 'MerchantCircle', href: MERCHANTCIRCLE_URL, label: 'MerchantCircle' },
 ] as const;
 
 export const SAME_AS = [
@@ -57,6 +60,7 @@ export const SAME_AS = [
   CHAMBER_OF_COMMERCE_URL,
   FINDGLOCAL_URL,
   DNB_URL,
+  MERCHANTCIRCLE_URL,
 ] as const;
 
 export const BUSINESS = {

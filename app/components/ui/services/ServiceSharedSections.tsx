@@ -326,7 +326,7 @@ export function ServiceRealityBand({ eyebrow, quote, body, image, imageAlt }: Se
               <div className="relative aspect-[16/9]">
                 <Image
                   src={image}
-                  alt={imageAlt ?? ''}
+                  alt={imageAlt ?? 'Automotive service inspection at RKC Automotive in Englewood, Colorado'}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 768px"
@@ -436,8 +436,7 @@ export function ServiceProcessTimeline({
         <div className="absolute inset-0 opacity-25">
           <Image
             src={bgImage}
-            alt={bgImageAlt ?? ''}
-            aria-hidden={bgImageAlt ? undefined : true}
+            alt={bgImageAlt ?? `${title} service process at RKC Automotive`}
             fill
             className="object-cover"
             sizes={HERO_IMAGE_SIZES}

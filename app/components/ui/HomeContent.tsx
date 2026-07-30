@@ -392,7 +392,14 @@ export default function HomeContent() {
       {/* CTA band with photo */}
       <section className="relative isolate overflow-hidden" aria-labelledby="home-cta-heading">
         <div className="absolute inset-0">
-          <Image src={PHOTOS.exterior} alt="" fill className="object-cover" sizes="100vw" aria-hidden />
+          <Image
+            src={PHOTOS.exterior}
+            alt="RKC Automotive shop exterior in Englewood, Colorado"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            aria-hidden
+          />
           <div className="photo-veil-deep absolute inset-0" />
         </div>
         <div className="relative wrap py-28 text-center sm:py-36">

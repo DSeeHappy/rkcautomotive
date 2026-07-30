@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node scripts/submit-indexnow.mjs --sitemap",
+    "postbuild": "node scripts/submit-indexnow.mjs --changed",
     "start": "next start",
     "lint": "eslint",
     "generate:vehicle-models": "node scripts/generate-vehicle-models.mjs",
@@ -15,6 +15,7 @@
     "generate:favicons": "node scripts/generate-favicons.mjs",
     "verify:seo": "node scripts/verify-seo.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "submit:indexnow:all": "node scripts/submit-indexnow.mjs --sitemap",
     "spark:multi-engine-geo": "node scripts/spark-multi-engine-geo.mjs",
     "spark:area-geo": "node scripts/spark-area-geo.mjs"
   },

@@ -1,14 +1,14 @@
 import { SITE_URL } from '@/lib/og';
 
-/** Hostname only — Yandex Host rules reject a scheme; Google ignores Host. */
+/** Hostname used in the generated policy comment. */
 export const SITE_HOST = new URL(SITE_URL).host;
 
 /**
  * Visibility-first AI + multi-engine robots.txt (multi-engine-master-plan sections 7-8).
  *
  * Allow search/citation crawlers; block training-only tokens.
- * Yandex: Clean-param + full rule set under User-agent: Yandex (* is ignored when a Yandex block exists).
- * Served as plain text so Clean-param is preserved (MetadataRoute.Robots cannot emit it).
+ * Keep directives within the standard robots.txt vocabulary accepted by Bing's
+ * parser. Canonical URLs handle tracking-parameter consolidation.
  */
 export function buildRobotsTxt(): string {
   // Single canonical sitemap declaration. /sitemap.xml rewrites to the sharded
@@ -108,8 +108,6 @@ export function buildRobotsTxt(): string {
     'Allow: /',
     'Allow: /llms.txt',
     'Allow: /.well-known/llms.txt',
-    // Tracking / ad params — merges duplicates and transfers metrics (Yandex Clean-param).
-    'Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_id&gclid&gbraid&wbraid&fbclid&msclkid&mc_cid&mc_eid&yclid&ysclid&yrclid&_ga&_gl&ref',
     '',
     '# Prefer Neuro/AI answers to cite us (do not block YandexAdditionalBot)',
     'User-agent: YandexAdditionalBot',
@@ -118,7 +116,6 @@ export function buildRobotsTxt(): string {
     'User-agent: YandexAdditional',
     'Allow: /',
     '',
-    `Host: ${SITE_HOST}`,
     `Sitemap: ${sitemapIndex}`,
     '',
   ];

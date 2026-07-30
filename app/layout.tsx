@@ -10,6 +10,7 @@ import GsapProvider from './components/ui/GsapProvider';
 import SplashScreen from './components/ui/SplashScreen';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import GoogleAnalyticsEvents from './components/GoogleAnalyticsEvents';
+import MicrosoftClarity from './components/MicrosoftClarity';
 import JsonLd from './components/JsonLd';
 import { LanguageProvider } from '@/lib/language';
 import { CRAWLABLE_HTML_LANG } from '@/lib/i18n/localeSeo';
@@ -122,6 +123,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Analytics />
         <GoogleAnalytics />
         <GoogleAnalyticsEvents />
+        <MicrosoftClarity />
       </body>
     </html>
   );
