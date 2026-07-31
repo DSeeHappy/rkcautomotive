@@ -4,7 +4,7 @@ import { BUSINESS } from './constants';
 
 /**
  * Preferred host for canonicals, sitemaps, and OG URLs: apex HTTPS.
- * When www SSL is fixed, redirect www → apex — do not flip SITE_URL to www.
+ * The canonical production host is www; all generated SEO URLs must use it.
  * @see next.config.ts
  */
 export const SITE_URL = BUSINESS.website;

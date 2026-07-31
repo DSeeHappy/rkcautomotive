@@ -16,6 +16,7 @@ export const SITE_COPY = {
       featured: 'Featured service',
       links: {
         '/about': 'About',
+        '/reviews': 'Reviews',
         '/pricing': 'Pricing',
         '/contact': 'Contact',
         '/areas-we-serve': 'Areas',
@@ -370,6 +371,7 @@ export const SITE_COPY = {
       featured: 'Servicio destacado',
       links: {
         '/about': 'Nosotros',
+        '/reviews': 'Reseñas',
         '/pricing': 'Precios',
         '/contact': 'Contacto',
         '/areas-we-serve': 'Áreas',

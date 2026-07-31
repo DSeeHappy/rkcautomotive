@@ -222,6 +222,7 @@ export type { ServiceArea } from './serviceAreas';
 export const NAV_LINKS = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
+  { name: 'Reviews', href: '/reviews' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Contact', href: '/contact' },
   { name: 'Areas', href: '/areas-we-serve' },
@@ -232,6 +233,7 @@ export const NAV_LINKS = [
 export const FOOTER_LINKS = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
+  { name: 'Reviews', href: '/reviews' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Contact', href: '/contact' },
   { name: 'Extended Warranty', href: '/warranty' },

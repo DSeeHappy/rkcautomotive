@@ -3,7 +3,7 @@ import { SITE_URL } from './og';
 /** IndexNow API key — hosted at /{key}.txt in public/ */
 export const INDEXNOW_KEY = '97fad61e97c347309a1f078e4f810086';
 
-export const INDEXNOW_HOST = 'rkcautomotive.com';
+export const INDEXNOW_HOST = new URL(SITE_URL).host;
 
 const INDEXNOW_API = 'https://api.indexnow.org/indexnow';
 

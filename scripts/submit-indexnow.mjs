@@ -7,7 +7,7 @@
  *   node scripts/submit-indexnow.mjs --changed          # changed static pages (production deploys)
  *   node scripts/submit-indexnow.mjs --sitemap          # all sitemap URLs (batched)
  *   node scripts/submit-indexnow.mjs --changed --dry-run
- *   node scripts/submit-indexnow.mjs https://rkcautomotive.com/about
+ *   node scripts/submit-indexnow.mjs https://www.rkcautomotive.com/about
  */
 import path from 'path';
 import { execFileSync } from 'child_process';
@@ -18,8 +18,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
 const INDEXNOW_KEY = '97fad61e97c347309a1f078e4f810086';
-const SITE_URL = 'https://rkcautomotive.com';
-const INDEXNOW_HOST = 'rkcautomotive.com';
+const SITE_URL = 'https://www.rkcautomotive.com';
+const INDEXNOW_HOST = 'www.rkcautomotive.com';
 const INDEXNOW_API = 'https://api.indexnow.org/indexnow';
 const BATCH_SIZE = 10_000;
 
