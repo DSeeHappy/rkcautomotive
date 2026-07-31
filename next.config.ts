@@ -58,13 +58,6 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // www → apex canonical host (301)
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.rkcautomotive.com' }],
-        destination: 'https://rkcautomotive.com/:path*',
-        permanent: true,
-      },
       {
         source: '/site.webmanifest',
         destination: '/manifest.webmanifest',

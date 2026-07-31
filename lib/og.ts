@@ -64,6 +64,23 @@ function resolveDisplayTitle(title: string, titleAbsolute?: boolean): string {
   return `${title} | ${SITE_NAME}`;
 }
 
+/** Keep titles within the range search results and audit tools reliably display. */
+export function fitTitle(title: string, max = 60): string {
+  const trimmed = title.trim().replace(/\s+/g, ' ');
+  if (trimmed.length <= max) return trimmed;
+
+  const brandSuffix = ` | ${SITE_NAME}`;
+  if (trimmed.endsWith(brandSuffix)) {
+    const withoutSuffix = trimmed.slice(0, -brandSuffix.length);
+    if (withoutSuffix.length <= max) return withoutSuffix;
+  }
+
+  const slice = trimmed.slice(0, max - 1);
+  const lastSpace = slice.lastIndexOf(' ');
+  const base = lastSpace > 35 ? slice.slice(0, lastSpace) : slice;
+  return `${base.replace(/[|,;:.!?—-]+$/, '')}…`;
+}
+
 /**
  * Soft-clamp meta descriptions for SERP-friendly length (~140–160).
  * Pattern adapted from molecule-work `fitDescription` — truncates on word boundary.
@@ -88,7 +105,7 @@ export function createPageMetadata({
   robots,
 }: PageMetadataOptions): Metadata {
   const url = absoluteUrl(path);
-  const ogTitle = resolveDisplayTitle(title, titleAbsolute);
+  const displayTitle = fitTitle(resolveDisplayTitle(title, titleAbsolute));
   const resolvedDescription = fitDescription(description);
   const images = ogImage(image, imageAlt);
   // Only when HAS_LOCALE_URL_SEGMENTS and paths differ — never hreflang two langs to one URL.
@@ -105,7 +122,8 @@ export function createPageMetadata({
       : undefined;
 
   return {
-    title: titleAbsolute || title.includes(SITE_NAME) ? { absolute: title } : title,
+    // Absolute prevents the root template from silently pushing titles past 60 chars.
+    title: { absolute: displayTitle },
     description: resolvedDescription,
     ...(robots ? { robots } : {}),
     alternates: {
@@ -113,7 +131,7 @@ export function createPageMetadata({
       ...(languages ? { languages } : {}),
     },
     openGraph: {
-      title: ogTitle,
+      title: displayTitle,
       description: resolvedDescription,
       url,
       type,
@@ -123,7 +141,7 @@ export function createPageMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: ogTitle,
+      title: displayTitle,
       description: resolvedDescription,
       images: [absoluteUrl(image)],
     },
