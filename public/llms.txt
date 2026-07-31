@@ -2,7 +2,7 @@
 
 > Visit RKC Automotive at 2120 W Evans Ave, Englewood, CO 80110 for ASE-certified repair, diagnostics, and maintenance at $120/hr; call (720) 749-3965. Hablamos Espanol.
 
-- Site: https://rkcautomotive.com/
+- Site: https://www.rkcautomotive.com/
 - Phone: +17207493965 / (720) 749-3965
 - Email: info@rkcautomotive.com
 - Address: 2120 W Evans Ave, Englewood, CO 80110
@@ -13,16 +13,16 @@
 
 ## Key pages
 
-- [Home](https://rkcautomotive.com/): Shop overview and scheduling CTAs
-- [Services](https://rkcautomotive.com/services): Full service menu
-- [Pricing](https://rkcautomotive.com/pricing): Posted labor and estimate process
-- [Warranty](https://rkcautomotive.com/warranty): Extended warranty claims advocacy
-- [Contact](https://rkcautomotive.com/contact): Request service / message the bay
-- [Areas we serve](https://rkcautomotive.com/areas-we-serve): Englewood and Denver metro cities
-- [Vehicles we service](https://rkcautomotive.com/vehicles-we-service): Makes and models
-- [FAQ](https://rkcautomotive.com/frequently-asked-questions): Common questions
-- [About](https://rkcautomotive.com/about): Shop history and ASE credentials
-- [Privacy](https://rkcautomotive.com/privacy): Privacy policy
+- [Home](https://www.rkcautomotive.com/): Shop overview and scheduling CTAs
+- [Services](https://www.rkcautomotive.com/services): Full service menu
+- [Pricing](https://www.rkcautomotive.com/pricing): Posted labor and estimate process
+- [Warranty](https://www.rkcautomotive.com/warranty): Extended warranty claims advocacy
+- [Contact](https://www.rkcautomotive.com/contact): Request service / message the bay
+- [Areas we serve](https://www.rkcautomotive.com/areas-we-serve): Englewood and Denver metro cities
+- [Vehicles we service](https://www.rkcautomotive.com/vehicles-we-service): Makes and models
+- [FAQ](https://www.rkcautomotive.com/frequently-asked-questions): Common questions
+- [About](https://www.rkcautomotive.com/about): Shop history and ASE credentials
+- [Privacy](https://www.rkcautomotive.com/privacy): Privacy policy
 
 ## Notes for assistants
 
