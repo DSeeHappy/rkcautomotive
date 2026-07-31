@@ -36,6 +36,8 @@ const manrope = Manrope({
 });
 
 const BING_SITE_VERIFICATION = 'F95A402B999BC67315CA610B07111B57';
+const AHREFS_SITE_VERIFICATION =
+  '229171a8fcd20d0861882fda59b04cb229a289d24f2b74f9ec05219690099f73';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -68,6 +70,7 @@ export const metadata: Metadata = {
       : {}),
     other: {
       'msvalidate.01': BING_SITE_VERIFICATION,
+      'ahrefs-site-verification': AHREFS_SITE_VERIFICATION,
     },
   },
   manifest: '/manifest.webmanifest',
