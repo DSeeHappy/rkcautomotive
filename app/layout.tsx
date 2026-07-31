@@ -11,7 +11,6 @@ import SplashScreen from './components/ui/SplashScreen';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import GoogleAnalyticsEvents from './components/GoogleAnalyticsEvents';
 import MicrosoftClarity from './components/MicrosoftClarity';
-import AhrefsWebAnalytics from './components/AhrefsWebAnalytics';
 import JsonLd from './components/JsonLd';
 import { LanguageProvider } from '@/lib/language';
 import { CRAWLABLE_HTML_LANG } from '@/lib/i18n/localeSeo';
@@ -38,6 +37,7 @@ const manrope = Manrope({
 const BING_SITE_VERIFICATION = 'F95A402B999BC67315CA610B07111B57';
 const AHREFS_SITE_VERIFICATION =
   '229171a8fcd20d0861882fda59b04cb229a289d24f2b74f9ec05219690099f73';
+const AHREFS_ANALYTICS_KEY = 's/R6840LdZTWtq9ViqrCYg';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -101,6 +101,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang={CRAWLABLE_HTML_LANG}>
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key={AHREFS_ANALYTICS_KEY}
+          async
+        />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
         {/* Single sitewide AutoRepair/LocalBusiness NAP — pages must not emit a second org with a different telephone/image. */}
@@ -128,7 +133,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <GoogleAnalytics />
         <GoogleAnalyticsEvents />
         <MicrosoftClarity />
-        <AhrefsWebAnalytics />
       </body>
     </html>
   );
