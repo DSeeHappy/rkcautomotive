@@ -1,16 +1,22 @@
 'use client';
 
-import { useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import Script from 'next/script';
 import { useGSAP } from '@gsap/react';
-import { CheckCircle, Send } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import { ensureScrollTrigger, gsap } from '@/lib/gsap';
 import Link from 'next/link';
-import { BUSINESS, SERVICES } from '@/lib/constants';
+import {
+  BUSINESS,
+  SERVICES,
+  TALLY_CONTACT_FORM_ID,
+  TALLY_CONTACT_FORM_ID_ES,
+  TALLY_CONTACT_FORM_URL,
+} from '@/lib/constants';
 import PhoneLink from '@/app/components/ui/PhoneLink';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
-import { useGsapHoverPress } from '@/lib/useGsapHoverPress';
 import { useLanguage } from '@/lib/language';
-import { localizedServiceName, siteCopy } from '@/lib/siteCopy';
+import { siteCopy } from '@/lib/siteCopy';
 import { trackAnalyticsEvent } from '@/lib/analytics';
 import {
   persistSelectedService,
@@ -19,6 +25,15 @@ import {
 } from '@/lib/serviceDurations';
 
 const CONTACT_SERVICE_CHANGE = 'rkc-contact-service-change';
+const TALLY_FORM_ID_RE = /^[a-zA-Z0-9]{4,32}$/;
+
+declare global {
+  interface Window {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  }
+}
 
 function subscribeContactService(onStoreChange: () => void) {
   window.addEventListener(CONTACT_SERVICE_CHANGE, onStoreChange);
@@ -47,6 +62,30 @@ function resolveContactServiceSlug(): string {
   return servicePageSlugFromKey(readPersistedSelectedService()) ?? '';
 }
 
+function resolveContactVehicle(): string {
+  return new URLSearchParams(window.location.search).get('vehicle')?.trim() || '';
+}
+
+function isTallyFormSubmittedMessage(data: unknown): boolean {
+  if (typeof data === 'string') return data.includes('Tally.FormSubmitted');
+  if (data && typeof data === 'object' && 'event' in data) {
+    return (data as { event?: unknown }).event === 'Tally.FormSubmitted';
+  }
+  return false;
+}
+
+function buildTallyEmbedSrc(formId: string, prefill: Record<string, string>) {
+  const url = new URL(`https://tally.so/embed/${formId}`);
+  url.searchParams.set('alignLeft', '1');
+  url.searchParams.set('hideTitle', '1');
+  url.searchParams.set('transparentBackground', '1');
+  url.searchParams.set('dynamicHeight', '1');
+  for (const [key, value] of Object.entries(prefill)) {
+    if (value) url.searchParams.set(key, value);
+  }
+  return url.toString();
+}
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const serviceSlug = useSyncExternalStore(
@@ -54,31 +93,46 @@ export default function ContactForm() {
     resolveContactServiceSlug,
     () => '',
   );
+  const vehicle = useSyncExternalStore(
+    subscribeContactService,
+    resolveContactVehicle,
+    () => '',
+  );
   const reduce = usePrefersReducedMotion();
-  const formRef = useRef<HTMLFormElement>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
-  const { ref: submitRef } = useGsapHoverPress<HTMLButtonElement>();
   const { lang } = useLanguage();
   const copy = siteCopy(lang).contactForm;
 
-  function updateServiceSlug(value: string) {
-    persistSelectedService(value || null);
-    window.dispatchEvent(new Event(CONTACT_SERVICE_CHANGE));
-  }
+  const formId = lang === 'es' ? TALLY_CONTACT_FORM_ID_ES : TALLY_CONTACT_FORM_ID;
+  const formConfigured = TALLY_FORM_ID_RE.test(formId);
+
+  const serviceLabel =
+    SERVICES.find((s) => s.slug === serviceSlug)?.name || serviceSlug || '';
+
+  const embedSrc = useMemo(() => {
+    if (!formConfigured) return '';
+    return buildTallyEmbedSrc(formId, {
+      vehicle,
+      // Prefill works when the Tally field key matches; label matches the published dropdown.
+      service: serviceLabel,
+      'Service needed': serviceLabel,
+    });
+  }, [formConfigured, formId, vehicle, serviceLabel]);
 
   useGSAP(
     () => {
-      if (reduce || !formRef.current) return;
+      if (reduce || !shellRef.current) return;
 
       let cancelled = false;
       const ctx = gsap.context(() => {});
 
       void ensureScrollTrigger().then(() => {
-        if (cancelled || !formRef.current) return;
+        if (cancelled || !shellRef.current) return;
 
         ctx.add(() => {
           gsap.fromTo(
-            formRef.current,
+            shellRef.current,
             { opacity: 0, y: 20, willChange: 'transform, opacity' },
             {
               opacity: 1,
@@ -87,12 +141,14 @@ export default function ContactForm() {
               ease: 'power2.out',
               immediateRender: false,
               scrollTrigger: {
-                trigger: formRef.current,
+                trigger: shellRef.current,
                 start: 'top 90%',
                 once: true,
               },
               onComplete: () => {
-                if (formRef.current) gsap.set(formRef.current, { clearProps: 'willChange,opacity,transform' });
+                if (shellRef.current) {
+                  gsap.set(shellRef.current, { clearProps: 'willChange,opacity,transform' });
+                }
               },
             },
           );
@@ -104,7 +160,7 @@ export default function ContactForm() {
         ctx.revert();
       };
     },
-    { scope: formRef, dependencies: [reduce] },
+    { scope: shellRef, dependencies: [reduce] },
   );
 
   useGSAP(
@@ -115,35 +171,39 @@ export default function ContactForm() {
     { scope: successRef, dependencies: [reduce, submitted] },
   );
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const name = String(data.get('name') || '');
-    const phone = String(data.get('phone') || '');
-    const email = String(data.get('email') || '');
-    const vehicle = String(data.get('vehicle') || '');
-    const service = String(data.get('service') || '');
-    const message = String(data.get('message') || '');
-    const serviceLabel =
-      SERVICES.find((s) => s.slug === service)?.name || service || 'Not specified';
+  useEffect(() => {
+    function onMessage(event: MessageEvent) {
+      if (event.origin !== 'https://tally.so') return;
+      if (!isTallyFormSubmittedMessage(event.data)) return;
 
-    if (service) persistSelectedService(service);
+      if (serviceSlug) persistSelectedService(serviceSlug);
 
-    trackAnalyticsEvent('generate_lead', {
-      method: 'email_form',
-      service: serviceLabel,
-      page_path: window.location.pathname,
-      value: 1,
-      currency: 'USD',
-    });
+      trackAnalyticsEvent('generate_lead', {
+        method: 'tally_form',
+        service: serviceLabel || 'Not specified',
+        page_path: window.location.pathname,
+        value: 1,
+        currency: 'USD',
+      });
+      trackAnalyticsEvent('contact_intent', {
+        method: 'tally_form',
+        page_path: window.location.pathname,
+      });
 
-    const subject = encodeURIComponent(`Service Request from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nVehicle: ${vehicle}\nService: ${serviceLabel}\n\nMessage:\n${message}`,
-    );
-    window.location.href = `mailto:${BUSINESS.email}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+      setSubmitted(true);
+    }
+
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [serviceSlug, serviceLabel]);
+
+  useEffect(() => {
+    if (!embedSrc) return;
+    window.Tally?.loadEmbeds();
+  }, [embedSrc]);
+
+  function loadTallyEmbeds() {
+    window.Tally?.loadEmbeds();
   }
 
   if (submitted) {
@@ -167,10 +227,9 @@ export default function ContactForm() {
   }
 
   return (
-    <form
-      ref={formRef}
+    <div
+      ref={shellRef}
       lang={lang}
-      onSubmit={handleSubmit}
       className="space-y-5 rounded-3xl border border-white/40 bg-white/95 p-7 shadow-2xl backdrop-blur-md sm:p-9"
     >
       <div>
@@ -178,74 +237,39 @@ export default function ContactForm() {
         <h2 className="mt-2 font-display text-4xl tracking-wide text-foreground">{copy.title}</h2>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className="mb-2 block text-sm font-semibold text-foreground">
-            {copy.name}
-          </label>
-          <input id="name" name="name" required className="field" placeholder="Jordan Smith" />
+      {formConfigured ? (
+        <>
+          <iframe
+            key={embedSrc}
+            data-tally-src={embedSrc}
+            loading="lazy"
+            width="100%"
+            height={520}
+            frameBorder={0}
+            marginHeight={0}
+            marginWidth={0}
+            title={copy.embedTitle}
+            className="w-full border-0 bg-transparent"
+          />
+          <Script
+            src="https://tally.so/widgets/embed.js"
+            strategy="afterInteractive"
+            onLoad={loadTallyEmbeds}
+          />
+        </>
+      ) : (
+        <div className="space-y-4 rounded-2xl border border-[color:var(--line)] bg-[var(--background)] p-5">
+          <p className="text-sm text-ink-muted">{copy.missingForm}</p>
+          <a
+            href={TALLY_CONTACT_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-green inline-flex"
+          >
+            {copy.openForm}
+          </a>
         </div>
-        <div>
-          <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-foreground">
-            {copy.phone}
-          </label>
-          <input id="phone" name="phone" type="tel" required className="field" placeholder="(720) 555-0123" />
-        </div>
-      </div>
-
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-semibold text-foreground">
-            {copy.email}
-          </label>
-          <input id="email" name="email" type="email" className="field" placeholder="you@email.com" />
-        </div>
-        <div>
-          <label htmlFor="vehicle" className="mb-2 block text-sm font-semibold text-foreground">
-            {copy.vehicle}
-          </label>
-          <input id="vehicle" name="vehicle" className="field" placeholder="2018 Toyota Camry" />
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="service" className="mb-2 block text-sm font-semibold text-foreground">
-          {copy.service}
-        </label>
-        <select
-          id="service"
-          name="service"
-          className="field"
-          value={serviceSlug}
-          onChange={(e) => updateServiceSlug(e.target.value)}
-        >
-          <option value="">{copy.notSure}</option>
-          {SERVICES.map((service) => (
-            <option key={service.slug} value={service.slug}>
-              {localizedServiceName(service.slug, lang, service.name)}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="message" className="mb-2 block text-sm font-semibold text-foreground">
-          {copy.message}
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={5}
-          className="field resize-none"
-          placeholder={copy.messagePlaceholder}
-        />
-      </div>
-
-      <button ref={submitRef} type="submit" className="btn-green w-full sm:w-auto">
-        <Send className="size-4" />
-        {copy.send}
-      </button>
+      )}
 
       <p className="text-xs leading-relaxed text-ink-muted">
         {copy.privacy}{' '}
@@ -262,6 +286,6 @@ export default function ContactForm() {
         </PhoneLink>{' '}
         {copy.forScheduling}
       </p>
-    </form>
+    </div>
   );
 }

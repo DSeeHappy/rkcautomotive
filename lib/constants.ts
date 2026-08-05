@@ -96,6 +96,18 @@ export const BUSINESS = {
   facebookReviewCount: 3,
 } as const;
 
+/**
+ * Tally.so contact form (Share → Embed ID).
+ * Override with NEXT_PUBLIC_TALLY_CONTACT_FORM_ID / _ES in Vercel env.
+ * Form: https://tally.so/r/2EYvPD
+ */
+export const TALLY_CONTACT_FORM_ID_DEFAULT = '2EYvPD';
+export const TALLY_CONTACT_FORM_ID =
+  process.env.NEXT_PUBLIC_TALLY_CONTACT_FORM_ID?.trim() || TALLY_CONTACT_FORM_ID_DEFAULT;
+export const TALLY_CONTACT_FORM_ID_ES =
+  process.env.NEXT_PUBLIC_TALLY_CONTACT_FORM_ID_ES?.trim() || TALLY_CONTACT_FORM_ID;
+export const TALLY_CONTACT_FORM_URL = `https://tally.so/r/${TALLY_CONTACT_FORM_ID}` as const;
+
 export const OPENING_HOURS_SCHEMA = [
   {
     '@type': 'OpeningHoursSpecification',

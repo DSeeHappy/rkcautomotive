@@ -24,12 +24,24 @@ function linkEvent(href: string) {
         (url.pathname.includes('/maps') || url.searchParams.has('destination')));
 
     if (isDirections) return { name: 'get_directions', method: 'google_maps' };
+
+    const host = url.hostname.replace(/^www\./, '');
+    if (
+      host === 'facebook.com' ||
+      host.endsWith('.facebook.com') ||
+      host === 'instagram.com' ||
+      host.endsWith('.instagram.com')
+    ) {
+      return { name: 'social_click', method: host.includes('instagram') ? 'instagram' : 'facebook' };
+    }
   } catch {
     return null;
   }
 
   return null;
 }
+
+const SCROLL_DEPTH_MARKS = [50, 75, 90] as const;
 
 /** Measures high-intent actions across all current and future site links. */
 export default function GoogleAnalyticsEvents() {
@@ -51,8 +63,29 @@ export default function GoogleAnalyticsEvents() {
       });
     }
 
+    const fired = new Set<number>();
+    function handleScroll() {
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const pct = Math.round((window.scrollY / scrollable) * 100);
+      for (const mark of SCROLL_DEPTH_MARKS) {
+        if (pct >= mark && !fired.has(mark)) {
+          fired.add(mark);
+          trackAnalyticsEvent('scroll_depth', {
+            percent: mark,
+            page_path: window.location.pathname,
+          });
+        }
+      }
+    }
+
     document.addEventListener('click', handleClick, { capture: true });
-    return () => document.removeEventListener('click', handleClick, { capture: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      document.removeEventListener('click', handleClick, { capture: true });
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return null;

@@ -8,7 +8,7 @@ import MobileStickyBar from './components/ui/MobileStickyBar';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import GsapProvider from './components/ui/GsapProvider';
 import SplashScreen from './components/ui/SplashScreen';
-import GoogleAnalytics from './components/GoogleAnalytics';
+import GoogleTagManager from './components/GoogleTagManager';
 import GoogleAnalyticsEvents from './components/GoogleAnalyticsEvents';
 import MicrosoftClarity from './components/MicrosoftClarity';
 import JsonLd from './components/JsonLd';
@@ -108,6 +108,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body className={`${bebas.variable} ${manrope.variable} font-sans antialiased`}>
+        <GoogleTagManager />
         {/* Single sitewide AutoRepair/LocalBusiness NAP — pages must not emit a second org with a different telephone/image. */}
         <JsonLd data={[createOrganizationSchema(), createWebSiteSchema()]} />
         <LanguageProvider>
@@ -130,7 +131,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </GsapProvider>
         </LanguageProvider>
         <Analytics />
-        <GoogleAnalytics />
         <GoogleAnalyticsEvents />
         <MicrosoftClarity />
       </body>

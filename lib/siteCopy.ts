@@ -354,7 +354,11 @@ export const SITE_COPY = {
       orCall: 'Or call',
       forScheduling: 'for same-day scheduling.',
       thankYou: 'Thank you',
-      thankYouBody: 'Your email client should open shortly. Prefer to talk? Call',
+      thankYouBody: "We've received your message and will follow up soon. Prefer to talk? Call",
+      embedTitle: 'Contact RKC Automotive',
+      missingForm:
+        'The contact form is not configured yet. Set NEXT_PUBLIC_TALLY_CONTACT_FORM_ID, or call us.',
+      openForm: 'Open contact form',
     },
   },
   es: {
@@ -709,7 +713,11 @@ export const SITE_COPY = {
       orCall: 'O llame al',
       forScheduling: 'para agendar el mismo día.',
       thankYou: 'Gracias',
-      thankYouBody: 'Su cliente de correo debería abrirse en breve. ¿Prefiere hablar? Llame al',
+      thankYouBody: 'Recibimos su mensaje y le responderemos pronto. ¿Prefiere hablar? Llame al',
+      embedTitle: 'Contactar RKC Automotive',
+      missingForm:
+        'El formulario de contacto aún no está configurado. Defina NEXT_PUBLIC_TALLY_CONTACT_FORM_ID, o llámenos.',
+      openForm: 'Abrir formulario de contacto',
     },
   },
 } as const;
