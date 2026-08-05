@@ -27,7 +27,7 @@ export const HOME_COPY = {
       },
       {
         title: '$120/hr Posted Online',
-        detail: 'Mon–Fri 8 AM–6 PM · Written estimates before any work',
+        detail: 'Mon–Fri 8 AM–5 PM · Written estimates before any work',
       },
     ],
     stats: [
@@ -224,7 +224,7 @@ export const HOME_COPY = {
       },
       {
         title: '$120/hr publicado en línea',
-        detail: 'Lun–Vie 8 AM–6 PM · Presupuestos por escrito antes de cualquier trabajo',
+        detail: 'Lun–Vie 8 AM–5 PM · Presupuestos por escrito antes de cualquier trabajo',
       },
     ],
     stats: [

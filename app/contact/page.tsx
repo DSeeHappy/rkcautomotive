@@ -9,7 +9,7 @@ import { createBreadcrumbSchema, createContactPageSchema } from '@/lib/seo';
 export const metadata = createPageMetadata({
   title: 'Contact RKC Automotive | Englewood, CO Auto Repair',
   description:
-    'Contact RKC Automotive for auto repair in Englewood, CO. Call (720) 749-3965 or visit 2120 W Evans Ave. Mon–Fri 8AM–6PM, Sat 8AM–12PM. Walk-ins welcome.',
+    'Contact RKC Automotive for auto repair in Englewood, CO. Call (720) 749-3965 or visit 2120 W Evans Ave. Mon–Fri 8AM–5PM, Sat 8AM–12PM. Walk-ins welcome.',
   path: '/contact',
   image: PHOTOS.exterior,
   imageAlt: 'RKC Automotive shop exterior at 2120 W Evans Ave, Englewood, CO',

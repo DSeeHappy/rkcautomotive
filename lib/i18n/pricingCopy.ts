@@ -80,7 +80,7 @@ export const PRICING_COPY = {
           estimate: 'Written estimate before any wrench turns',
           shopFees: 'None — posted rate is the rate',
           technicianContinuity: 'Same ASE-certified crew every visit',
-          weekdayHours: 'Mon–Fri until 6 PM · Sat 8–12',
+          weekdayHours: 'Mon–Fri until 5 PM · Sat 8–12',
           highlight: true,
         },
       ],
@@ -102,9 +102,9 @@ export const PRICING_COPY = {
             'High-volume chain stores run appointment queues with different technicians each visit. At RKC you talk to the same ASE-certified crew — Ray, Oscar, and the team who have been turning wrenches in this Englewood bay for 30+ years.',
         },
         {
-          title: 'Open until 6 PM weekdays',
+          title: 'Walk-ins, not appointment queues',
           description:
-            'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no online appointment form required.',
+            'Chains and dealerships push you into an online appointment queue before anyone looks at your car. We are open Monday through Friday 8 AM to 5 PM plus Saturday mornings, and we take walk-ins when the bay has room — no online appointment form required.',
         },
         {
           title: 'No oversell. Real diagnostics.',
@@ -335,7 +335,7 @@ export const PRICING_COPY = {
           estimate: 'Presupuesto por escrito antes de tocar una herramienta',
           shopFees: 'Ninguno — la tarifa publicada es la tarifa',
           technicianContinuity: 'El mismo equipo certificado ASE en cada visita',
-          weekdayHours: 'Lun–Vie hasta 6 PM · Sáb 8–12',
+          weekdayHours: 'Lun–Vie hasta 5 PM · Sáb 8–12',
           highlight: true,
         },
       ],
@@ -357,9 +357,9 @@ export const PRICING_COPY = {
             'Los talleres de alto volumen manejan citas con técnicos distintos en cada visita. En RKC habla con el mismo equipo certificado ASE — Ray, Oscar y el equipo que ha trabajado en esta bahía de Englewood por más de 30 años.',
         },
         {
-          title: 'Abiertos hasta las 6 PM entre semana',
+          title: 'Sin cita previa, sin filas de citas',
           description:
-            'Muchos talleres de Englewood cierran a las 5 PM entre semana. Nosotros estamos abiertos hasta las 6 PM de lunes a viernes y aceptamos visitas sin cita cuando hay espacio en la bahía — sin formulario de cita en línea obligatorio.',
+            'Las cadenas y los concesionarios lo obligan a pasar por un formulario de cita en línea antes de que alguien vea su carro. Estamos abiertos de lunes a viernes de 8 AM a 5 PM y los sábados por la mañana, y aceptamos visitas sin cita cuando hay espacio en la bahía — sin formulario de cita en línea obligatorio.',
         },
         {
           title: 'Sin ventas excesivas. Diagnóstico real.',

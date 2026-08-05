@@ -75,7 +75,7 @@ const POSTAL_ADDRESS = {
   addressCountry: 'US',
 };
 
-const SCHEMA_OPENING_HOURS = ['Mo-Fr 08:00-18:00', 'Sa 08:00-12:00'] as const;
+const SCHEMA_OPENING_HOURS = ['Mo-Fr 08:00-17:00', 'Sa 08:00-12:00'] as const;
 
 const DEFAULT_AREA_SERVED = SERVICE_AREAS.map((name) => ({
   '@type': 'City' as const,

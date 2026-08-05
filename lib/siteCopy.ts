@@ -38,7 +38,7 @@ export const SITE_COPY = {
       services: 'Services',
       connect: 'Connect & reviews',
       hours: {
-        weekdays: 'Mon–Fri: 8:00 AM – 6:00 PM',
+        weekdays: 'Mon–Fri: 8:00 AM – 5:00 PM',
         saturday: 'Sat: 8:00 AM – 12:00 PM',
         sunday: 'Sun: Closed',
       },
@@ -304,7 +304,7 @@ export const SITE_COPY = {
           { label: 'Labor rate' },
           { label: 'ASE certified', value: '30+ years' },
           { label: 'Estimates', value: 'Written first' },
-          { label: 'Hours', value: 'Mon–Fri 8–6' },
+          { label: 'Hours', value: 'Mon–Fri 8–5' },
         ],
       },
       warranty: {
@@ -397,7 +397,7 @@ export const SITE_COPY = {
       services: 'Servicios',
       connect: 'Conectar y reseñas',
       hours: {
-        weekdays: 'Lun–Vie: 8:00 AM – 6:00 PM',
+        weekdays: 'Lun–Vie: 8:00 AM – 5:00 PM',
         saturday: 'Sáb: 8:00 AM – 12:00 PM',
         sunday: 'Dom: Cerrado',
       },
@@ -663,7 +663,7 @@ export const SITE_COPY = {
           { label: 'Tarifa de mano de obra' },
           { label: 'Certificado ASE', value: 'Más de 30 años' },
           { label: 'Presupuestos', value: 'Por escrito primero' },
-          { label: 'Horario', value: 'Lun–Vie 8–6' },
+          { label: 'Horario', value: 'Lun–Vie 8–5' },
         ],
       },
       warranty: {

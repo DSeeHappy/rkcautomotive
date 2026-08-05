@@ -60,7 +60,7 @@ const out = {
     ),
     aHours: ask(
       'faq-es-a-hours',
-      'Traduce al español (usted) esta respuesta de horario, manteniendo días y horas exactos: "We are open Monday through Friday 8:00 AM to 6:00 PM and Saturday 8:00 AM to 12:00 PM; we are closed Sunday." Devuelve solo la oración.',
+      'Traduce al español (usted) esta respuesta de horario, manteniendo días y horas exactos: "We are open Monday through Friday 8:00 AM to 5:00 PM and Saturday 8:00 AM to 12:00 PM; we are closed Sunday." Devuelve solo la oración.',
       'Traduce.',
     ),
   },

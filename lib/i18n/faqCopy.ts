@@ -144,7 +144,7 @@ export const FAQ_CATEGORIES_ES: { title: string; items: FAQItem[] }[] = [
       {
         question: '¿Cuál es su horario?',
         answer:
-          'Lunes a viernes de 8:00 AM a 6:00 PM y sábado de 8:00 AM a 12:00 PM. Cerrado los domingos.',
+          'Lunes a viernes de 8:00 AM a 5:00 PM y sábado de 8:00 AM a 12:00 PM. Cerrado los domingos.',
       },
       {
         question: '¿Tienen área de espera?',

@@ -83,7 +83,7 @@ export const BUSINESS = {
   // Keep canonicals, sitemaps, social metadata, and schema on one final host.
   website: 'https://www.rkcautomotive.com',
   hours: {
-    weekdays: 'Mon–Fri: 8:00 AM – 6:00 PM',
+    weekdays: 'Mon–Fri: 8:00 AM – 5:00 PM',
     saturday: 'Sat: 8:00 AM – 12:00 PM',
     sunday: 'Sun: Closed',
   },
@@ -113,7 +113,7 @@ export const OPENING_HOURS_SCHEMA = [
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     opens: '08:00',
-    closes: '18:00',
+    closes: '17:00',
   },
   {
     '@type': 'OpeningHoursSpecification',
@@ -959,7 +959,7 @@ export const PRICING_COMPARISON = [
     estimate: 'Written estimate before any wrench turns',
     shopFees: 'None — posted rate is the rate',
     technicianContinuity: 'Same ASE-certified crew every visit',
-    weekdayHours: 'Mon–Fri until 6 PM · Sat 8–12',
+    weekdayHours: 'Mon–Fri until 5 PM · Sat 8–12',
     highlight: true,
   },
 ] as const;
@@ -1054,9 +1054,9 @@ export const COMPETITIVE_POSITIONING = [
       'High-volume chain stores run appointment queues with different technicians each visit. At RKC you talk to the same ASE-certified crew — Ray, Oscar, and the team who have been turning wrenches in this Englewood bay for 30+ years.',
   },
   {
-    title: 'Open until 6 PM weekdays',
+    title: 'Walk-ins, not appointment queues',
     description:
-      'Typical Englewood shops close at 5 PM on weekdays. We stay open until 6 PM Monday through Friday and take walk-ins when the bay has room — no online appointment form required.',
+      'Chains and dealerships push you into an online appointment queue before anyone looks at your car. We are open Monday through Friday 8 AM to 5 PM plus Saturday mornings, and we take walk-ins when the bay has room — no online appointment form required.',
   },
   {
     title: 'No oversell. Real diagnostics.',
@@ -1986,7 +1986,7 @@ export const FAQ_CATEGORIES: { title: string; items: FAQItem[] }[] = [
       {
         question: 'What are your hours of operation?',
         answer:
-          'Monday through Friday from 8:00 AM to 6:00 PM and Saturday from 8:00 AM to 12:00 PM. Closed Sundays.',
+          'Monday through Friday from 8:00 AM to 5:00 PM and Saturday from 8:00 AM to 12:00 PM. Closed Sundays.',
       },
       {
         question: 'Do you have a waiting area?',
